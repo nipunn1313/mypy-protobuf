@@ -9,7 +9,7 @@ proto files are namespaced under dropbox/)
 To build the plugin:
   1. Configure GOPATH to point to the `go` directory of this repo.
   2. Configure GOROOT (if your go compiler is before 1.8)
-  3. Clone github.com/gogo/protobuf to go/src/github.com/gogo/protobuf/
+  3. `git clone https://github.com/gogo/protobuf.git go/src/github.com/gogo/protobuf`
   4. `go build go/src/protoc-gen-mypy/main.go`
 
 The plugin can be used by adding the built target to the command line
