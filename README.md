@@ -15,6 +15,26 @@ To build the plugin:
 The plugin can be used by adding the built target to the command line
 when running `protoc` (in addition to the normal plugin for output languages).
 
+There is a python implementation in the plugin in `python/protoc-gen-mypy`. On windows
+you will have to use `python/protoc_gen_mypy.bat` for the executable.
+
+The plugin can be installed with
+```
+pip install mypy-protobuf
+```
+On posix, ensure that the protoc-gen-mypy script installed onto your $PATH. Then run.
+```
+protoc --python_out=output/location --mypy_out=output/location
+```
+Alternately, you can explicitly provide the path:
+```
+protoc --plugin=protoc-gen-mypy=path/to/protoc-gen-mypy --python_out=output/location --mypy_out=output/location
+```
+On windows, provide the bat file:
+```
+protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/location --mypy_out=output/location
+```
+
 Licence etc.
 ------------
 

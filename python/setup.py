@@ -12,5 +12,5 @@ setup(
     url='https://github.com/dropbox/mypy-protobuf',
     download_url='https://github.com/dropbox/mypy-protobuf/tarball/1.0',
 
-    scripts=['generate_proto_mypy_stubs.py', 'generate_proto_mypy_stubs.bat'],
+    scripts=['protoc-gen-mypy', 'protoc_gen_mypy.bat'],
 )
