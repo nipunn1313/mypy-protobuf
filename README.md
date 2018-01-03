@@ -1,6 +1,7 @@
 mypy-protobuf: Generate mypy stub files from protobuf specs
 ===========================================================
 
+## Go Implementation
 There is a go implementation of the plugin in `go/src/protoc-gen-mypy`.
 The import sort order can be customized to split between stdlib and project protos
 by changing the `project` const at the top of the file (we use dropbox since our
@@ -15,7 +16,8 @@ To build the plugin:
 The plugin can be used by adding the built target to the command line
 when running `protoc` (in addition to the normal plugin for output languages).
 
-There is a python implementation in the plugin in `python/protoc-gen-mypy`. On windows
+## Python Implementation
+There is a python implementation of the plugin in `python/protoc-gen-mypy`. On windows
 you will have to use `python/protoc_gen_mypy.bat` for the executable.
 
 The plugin can be installed with
