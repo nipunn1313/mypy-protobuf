@@ -307,7 +307,11 @@ def main():
     output = response.SerializeToString()
 
     # Write to stdout
-    sys.stdout.write(output)
+    if six.PY3:
+        sys.stdout.buffer.write(output)
+    else:
+        sys.stdout.write(output)
+
 
 if __name__ == '__main__':
     main()
