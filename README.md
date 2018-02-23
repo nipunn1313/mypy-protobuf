@@ -38,9 +38,13 @@ protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/
 ```
 
 ## Contributors
+
+### Dropboxers
 - [@nipunn1313](https://github.com/nipunn1313)
 - [@dzbarsky](https://github.com/dzbarsky)
 - [@gvanrossum](https://github.com/gvanrossum)
+
+### Others
 - [@Ketouem](https://github.com/Ketouem)
 - [@peterlvilim](https://github.com/peterlvilim)
 
