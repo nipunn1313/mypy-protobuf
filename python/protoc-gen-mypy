@@ -179,11 +179,11 @@ class PkgWriter(object):
         l = self._write_line
 
         for service in services:
-            l("class {}({}):", service.name + "_Stub", self._import("google.protobuf.service", "Service"))
+            # The service definition interface
+            l("class {}({}, metaclass={}):", service.name, self._import("google.protobuf.service", "Service"), self._import("abc", "ABCMeta"))
             with self._indent():
-                l("def __init__(self, rpc_channel: {}) -> None: ...",
-                  self._import("google.protobuf.service", "RpcChannel"))
                 for method in service.method:
+                    l("@{}", self._import("abc", "abstractmethod"))
                     l("def {}(self,", method.name)
                     with self._indent():
                         l("rpc_controller: {},", self._import("google.protobuf.service", "RpcController"))
@@ -193,6 +193,12 @@ class PkgWriter(object):
                           self._import("typing", "Callable"),
                           self._import_message(method.output_type))
                     l(") -> {}[{}]: ...", self._import("concurrent.futures", "Future"), self._import_message(method.output_type))
+
+            # The stub client
+            l("class {}({}):", service.name + "_Stub", service.name)
+            with self._indent():
+                l("def __init__(self, rpc_channel: {}) -> None: ...",
+                  self._import("google.protobuf.service", "RpcChannel"))
 
     def python_type(self, field):
         # type: (d.FieldDescriptorProto) -> Text
