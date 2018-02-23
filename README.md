@@ -37,6 +37,13 @@ On windows, provide the bat file:
 protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/location --mypy_out=output/location
 ```
 
+## Contributors
+- [@nipunn1313](https://github.com/nipunn1313)
+- [@dzbarsky](https://github.com/dzbarsky)
+- [@gvanrossum](https://github.com/gvanrossum)
+- [@Ketouem](https://github.com/Ketouem)
+- [@peterlvilim](https://github.com/peterlvilim)
+
 Licence etc.
 ------------
 
