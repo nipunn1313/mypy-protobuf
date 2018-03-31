@@ -137,7 +137,7 @@ class PkgWriter(object):
                 # Scalar fields
                 for field in [f for f in desc.field if is_scalar(f)]:
                     if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                        container = self._import("mypy", "RepeatedScalarFieldContainer")
+                        container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
                         l("{} = ... # type: {}[{}]", field.name, container, self.python_type(field))
                     else:
                         l("{} = ... # type: {}", field.name, self.python_type(field))
@@ -147,7 +147,7 @@ class PkgWriter(object):
                 for field in [f for f in desc.field if not is_scalar(f)]:
                     l("@property")
                     if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                        container = self._import("mypy", "RepeatedScalarFieldContainer")
+                        container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
                         l("def {}(self) -> {}[{}]: ...", field.name, container, self.python_type(field))
                     else:
                         l("def {}(self) -> {}: ...", field.name, self.python_type(field))
