@@ -153,7 +153,7 @@ class PkgWriter(object):
                             container = self._import("typing", "MutableMapping")
                             l("def {}(self) -> {}[{}, {}]: ...", field.name, container, self.python_type(msg.field[0]), self.python_type(msg.field[1]))
                         else:
-                            container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
+                            container = self._import("google.protobuf.internal.containers", "RepeatedCompositeFieldContainer")
                             l("def {}(self) -> {}[{}]: ...", field.name, container, self.python_type(field))
                     else:
                         l("def {}(self) -> {}: ...", field.name, self.python_type(field))
