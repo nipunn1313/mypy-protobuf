@@ -147,8 +147,14 @@ class PkgWriter(object):
                 for field in [f for f in desc.field if not is_scalar(f)]:
                     l("@property")
                     if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                        container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
-                        l("def {}(self) -> {}[{}]: ...", field.name, container, self.python_type(field))
+                        msg = self.descriptors.messages[field.type_name]
+                        if msg.options.map_entry:
+                            # map generates a special Entry wrapper message
+                            container = self._import("google.protobuf.internal.containers", "MutableMapping")
+                            l("def {}(self) -> {}[{}, {}]: ...", field.name, container, self.python_type(msg.field[0]), self.python_type(msg.field[1]))
+                        else:
+                            container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
+                            l("def {}(self) -> {}[{}]: ...", field.name, container, self.python_type(field))
                     else:
                         l("def {}(self) -> {}: ...", field.name, self.python_type(field))
                     l("")
@@ -270,7 +276,7 @@ class Descriptors(object):
         to_generate = {n: files[n] for n in request.file_to_generate}
         self.files = files  # type: Dict[Text, d.FileDescriptorProto]
         self.to_generate = to_generate  # type: Dict[Text, d.FileDescriptorProto]
-
+        self.messages = {} # type: Dict[Text, d.DescriptorProto]
         self.message_to_fd = {}  # type: Dict[Text, d.FileDescriptorProto]
 
         def _add_enums(enums, prefix, fd):
@@ -281,6 +287,7 @@ class Descriptors(object):
         def _add_messages(messages, prefix, fd):
             # type: (d.DescriptorProto, Text) -> None
             for message in messages:
+                self.messages[prefix + message.name] = message
                 self.message_to_fd[prefix + message.name] = fd
                 sub_prefix = prefix + message.name + "."
                 _add_messages(message.nested_type, sub_prefix, fd)
