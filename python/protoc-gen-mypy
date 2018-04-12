@@ -150,7 +150,7 @@ class PkgWriter(object):
                         msg = self.descriptors.messages[field.type_name]
                         if msg.options.map_entry:
                             # map generates a special Entry wrapper message
-                            container = self._import("google.protobuf.internal.containers", "MutableMapping")
+                            container = self._import("typing", "MutableMapping")
                             l("def {}(self) -> {}[{}, {}]: ...", field.name, container, self.python_type(msg.field[0]), self.python_type(msg.field[1]))
                         else:
                             container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
@@ -167,8 +167,13 @@ class PkgWriter(object):
                         l("{} : {},", field.name, self.python_type(field))
                     for field in [f for f in desc.field if f.label != d.FieldDescriptorProto.LABEL_REQUIRED]:
                         if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                            l("{} : {}[{}] = None,", field.name,
-                              self._import("typing", "Iterable"), self.python_type(field))
+                            if field.type_name != '' and self.descriptors.messages[field.type_name].options.map_entry:
+                                msg = self.descriptors.messages[field.type_name]
+                                l("{} : {}[{}, {}] = None,", field.name,
+                                    self._import("typing", "Mapping"), self.python_type(msg.field[0]), self.python_type(msg.field[1]))
+                            else:
+                                l("{} : {}[{}] = None,", field.name,
+                                  self._import("typing", "Iterable"), self.python_type(field))
                         else:
                             l("{} : {} = None,", field.name, self.python_type(field))
                     l(") -> None: ...")
