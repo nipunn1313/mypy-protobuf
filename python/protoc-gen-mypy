@@ -234,7 +234,7 @@ class PkgWriter(object):
         imports = []
         for pkg, items in six.iteritems(self.imports):
             imports.append(u"from {} import (".format(pkg))
-            for item in items:
+            for item in sorted(items):
                 imports.append(u"    {},".format(item))
             imports.append(u")\n")
 
