@@ -258,7 +258,7 @@ def generate_mypy_stubs(descriptors, response):
         assert name == fd.name
         assert fd.name.endswith('.proto')
         output = response.file.add()
-        output.name = fd.name[:-6] + '_pb2.pyi'
+        output.name = fd.name[:-6].replace('-', '_') + '_pb2.pyi'
         output.content = HEADER + pkg_writer.write()
         print("Writing mypy to", output.name, file=sys.stderr)
 
