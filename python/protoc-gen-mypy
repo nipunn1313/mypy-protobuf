@@ -240,12 +240,14 @@ class PkgWriter(object):
 
         return "\n".join(imports + self.lines)
 
+
 def is_scalar(fd):
     # type: (d.FileDescriptorProto) -> bool
     return not (
         fd.type == d.FieldDescriptorProto.TYPE_MESSAGE or
         fd.type == d.FieldDescriptorProto.TYPE_GROUP
     )
+
 
 def generate_mypy_stubs(descriptors, response):
     # type: (Descriptors, plugin.CodeGeneratorResponse) -> plugin.CodeGeneratorResponse
@@ -290,6 +292,7 @@ class Descriptors(object):
             start_prefix = "." + fd.package + "."
             _add_messages(fd.message_type, start_prefix, fd)
             _add_enums(fd.enum_type, start_prefix, fd)
+
 
 def main():
     # type: () -> None
