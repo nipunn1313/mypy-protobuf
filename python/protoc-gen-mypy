@@ -18,12 +18,20 @@ MYPY = False
 if MYPY:
     from typing import (
         Any,
+        Callable,
         Dict,
         Generator,
         List,
         Set,
         Text,
+        cast,
     )
+else:
+    # Provide minimal mypy identifiers to make code run without typing module present
+    Text = None
+
+    def cast(type, value):
+        return value
 
 # Hax to get around fact that google protobuf libraries aren't in typeshed yet
 d = d_typed  # type: Any
@@ -57,7 +65,7 @@ class PkgWriter(object):
     def _import_message(self, type_name):
         # type: (d.FieldDescriptorProto) -> Text
         """Import a referenced message and return a handle"""
-        name = type_name
+        name = cast(Text, type_name)
         if name[0] == '.' and name[1].isupper():
             # Message defined in this file
             return name[1:]
@@ -65,17 +73,17 @@ class PkgWriter(object):
         message_fd = self.descriptors.message_to_fd[name]
         if message_fd.name == self.fd.name:
             # message defined in this package
-            split = type_name.split('.')
+            split = name.split('.')
             for i, segment in enumerate(split):
                 if segment and segment[0].isupper():
                     return ".".join(split[i:])
 
         # Not in package. Must import
-        split = type_name.split(".")
+        split = name.split(".")
         for i, segment in enumerate(split):
             if segment and segment[0].isupper():
                 assert message_fd.name.endswith('.proto')
-                import_name = self._import(message_fd.name[:-6] + "_pb2", segment)
+                import_name = self._import(message_fd.name[:-6].replace('-', '_') + "_pb2", segment)
                 remains = ".".join(split[i + 1:])
                 if not remains:
                     return import_name
@@ -235,7 +243,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(field.type_name),
-        }
+        }  # type: Dict[int, Callable[[], Text]]
 
         assert field.type in mapping, "Unrecognized type: " + field.type
         return mapping[field.type]()
@@ -245,11 +253,12 @@ class PkgWriter(object):
         imports = []
         for pkg, items in six.iteritems(self.imports):
             imports.append(u"from {} import (".format(pkg))
-            for item in items:
+            for item in sorted(items):
                 imports.append(u"    {},".format(item))
             imports.append(u")\n")
 
         return "\n".join(imports + self.lines)
+
 
 def is_scalar(fd):
     # type: (d.FileDescriptorProto) -> bool
@@ -258,8 +267,9 @@ def is_scalar(fd):
         fd.type == d.FieldDescriptorProto.TYPE_GROUP
     )
 
+
 def generate_mypy_stubs(descriptors, response):
-    # type: (Descriptors, plugin.CodeGeneratorResponse) -> plugin.CodeGeneratorResponse
+    # type: (Descriptors, plugin.CodeGeneratorResponse) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_enums(fd.enum_type)
@@ -269,7 +279,7 @@ def generate_mypy_stubs(descriptors, response):
         assert name == fd.name
         assert fd.name.endswith('.proto')
         output = response.file.add()
-        output.name = fd.name[:-6] + '_pb2.pyi'
+        output.name = fd.name[:-6].replace('-', '_') + '_pb2.pyi'
         output.content = HEADER + pkg_writer.write()
         print("Writing mypy to", output.name, file=sys.stderr)
 
@@ -285,12 +295,12 @@ class Descriptors(object):
         self.message_to_fd = {}  # type: Dict[Text, d.FileDescriptorProto]
 
         def _add_enums(enums, prefix, fd):
-            # type: (d.EnumDescriptorProto, Text) -> None
+            # type: (d.EnumDescriptorProto, d.FileDescriptorProto) -> None
             for enum in enums:
                 self.message_to_fd[prefix + enum.name] = fd
 
         def _add_messages(messages, prefix, fd):
-            # type: (d.DescriptorProto, Text) -> None
+            # type: (d.DescriptorProto, d.FileDescriptorProto) -> None
             for message in messages:
                 self.messages[prefix + message.name] = message
                 self.message_to_fd[prefix + message.name] = fd
@@ -302,6 +312,7 @@ class Descriptors(object):
             start_prefix = "." + fd.package + "."
             _add_messages(fd.message_type, start_prefix, fd)
             _add_enums(fd.enum_type, start_prefix, fd)
+
 
 def main():
     # type: () -> None
