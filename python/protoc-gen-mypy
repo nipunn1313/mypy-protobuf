@@ -177,13 +177,14 @@ class PkgWriter(object):
                         if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
                             if field.type_name != '' and self.descriptors.messages[field.type_name].options.map_entry:
                                 msg = self.descriptors.messages[field.type_name]
-                                l("{} : {}[{}, {}] = None,", field.name,
+                                l("{} : {}[{}[{}, {}]] = None,", field.name, self._import("typing", "Optional"),
                                     self._import("typing", "Mapping"), self.python_type(msg.field[0]), self.python_type(msg.field[1]))
                             else:
-                                l("{} : {}[{}] = None,", field.name,
+                                l("{} : {}[{}[{}]] = None,", field.name, self._import("typing", "Optional"),
                                   self._import("typing", "Iterable"), self.python_type(field))
                         else:
-                            l("{} : {} = None,", field.name, self.python_type(field))
+                            l("{} : {}[{}] = None,", field.name, self._import("typing", "Optional"),
+                              self.python_type(field))
                     l(") -> None: ...")
 
                 # Standard message methods
