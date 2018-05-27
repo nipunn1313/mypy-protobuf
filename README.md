@@ -49,6 +49,9 @@ protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/
 - [@Ketouem](https://github.com/Ketouem)
 - [@nmiculinic](https://github.com/nmiculinic)
 - [@onto](https://github.com/onto)
+- [@jcppkkk](https://github.com/jcppkkk)
+- [@drather19](https://github.com/drather19)
+- [@smessmer](https://github.com/smessmer)
 
 Licence etc.
 ------------
