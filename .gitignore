@@ -1,3 +1,6 @@
 /go/src/github.com
 /main
 .*.swp
+__pycache__/
+.cache
+/test/output/*.pyi

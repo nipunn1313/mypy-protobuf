@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum OuterEnum3 {
+  UNKNOWN = 0;
+  FOO3 = 1;
+  BAR3 = 2;
+}

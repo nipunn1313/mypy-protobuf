@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+enum OuterEnum {
+  FOO = 1;
+  BAR = 2;
+}
+
+message Simple1 {
+  required string a_string = 1;
+  repeated string a_repeated_string = 2;
+  optional bool a_boolean = 3;
+  optional uint32 a_uint32 = 4;
+}
