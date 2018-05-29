@@ -9,7 +9,7 @@ matrix:
 before_install:
     - sudo add-apt-repository ppa:maarten-fonville/protobuf -y
     - sudo apt-get update -qq
-    - sudo apt-get install -qq protobuf-compiler
+    - sudo apt-get install -qq protobuf-compiler python-protobuf python3-protobuf
 before_script:
     - cd test
 script:
