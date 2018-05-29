@@ -252,7 +252,7 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
-        for pkg, items in six.iteritems(self.imports):
+        for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for item in sorted(items):
                 imports.append(u"    {},".format(item))
