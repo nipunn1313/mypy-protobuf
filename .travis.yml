@@ -1,0 +1,12 @@
+# Config file for automatic testing at travis-ci.org
+language: python
+
+matrix:
+    include:
+        - python: 2.7
+        - python: 3.5
+
+before_script:
+    - cd test
+script:
+    - py.test
