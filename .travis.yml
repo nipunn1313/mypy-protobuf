@@ -11,4 +11,4 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq protobuf-compiler python-protobuf python3-protobuf
 script:
-    - run_test.sh
+    - ./run_test.sh
