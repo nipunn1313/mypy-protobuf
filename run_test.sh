@@ -2,7 +2,7 @@
 
 (
     # Create virtualenv + Install requirements for mypy-protobuf
-    python -m pip install virtualenv
+    python -m pip install --user virtualenv
     python -m virtualenv env
     source env/bin/activate
     python -m pip install -r requirements.txt
@@ -21,7 +21,7 @@
     #pyenv shell 3.5.5
 
     # Create virtualenv
-    python3 -m pip install virtualenv
+    python3 -m pip install --user virtualenv
     python3 -m virtualenv mypy_env
     source mypy_env/bin/activate
     python3 -m pip install -U setuptools
