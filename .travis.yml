@@ -10,5 +10,6 @@ before_install:
     - sudo add-apt-repository ppa:maarten-fonville/protobuf -y
     - sudo apt-get update -qq
     - sudo apt-get install -qq protobuf-compiler python-protobuf python3-protobuf
+    - python3 -m pip install -U mypy
 script:
     - ./run_test.sh
