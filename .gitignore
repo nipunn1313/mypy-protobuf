@@ -4,3 +4,5 @@
 __pycache__/
 .cache
 /test/output/*.pyi
+.mypy_cache/
+*.pyc

@@ -1,19 +1,10 @@
 import glob
 import os
-import subprocess
 
 def test_generate_mypy_matches():
     # type: () -> None
     proto_files = glob.glob('proto/**.proto')
     assert len(proto_files) == 2  # Just a sanity check that all the files show up
-
-    # Generate files into output directory
-    subprocess.check_call([
-        'protoc',
-        '--mypy_out=output/',
-        '--plugin=protoc-gen-mypy=../python/protoc-gen-mypy',
-        '--proto_path=proto/',
-    ] + proto_files)
 
     for fn in proto_files:
         fn_split = fn.split(os.sep)  # Eg. [proto, test.proto]
