@@ -1,4 +1,4 @@
-mypy-protobuf: Generate mypy stub files from protobuf specs [![Build Status](https://travis-ci.org/dropbox/stopwatch.svg?branch=master)](https://travis-ci.org/dropbox/stopwatch)
+mypy-protobuf: Generate mypy stub files from protobuf specs [![Build Status](https://travis-ci.org/dropbox/mypy-protobuf.svg?branch=master)](https://travis-ci.org/dropbox/mypy-protobuf)
 ===========================================================
 
 ## Go Implementation
