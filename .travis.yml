@@ -5,8 +5,9 @@ matrix:
     include:
         - python: 2.7
           env: PY=2.7
-        - python: 3.5
-          env: PY=3.5
+        # This doesn't work yet due to missing google.protobuf in typeshed for py3
+        # - python: 3.5
+        # env: PY=3.5
 
 before_install:
     - sudo add-apt-repository ppa:maarten-fonville/protobuf -y
