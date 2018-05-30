@@ -7,19 +7,24 @@ import (
 	"strings"
 
 	"proto/mypy"
+
 	"github.com/gogo/protobuf/proto"
 	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
-	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	plugin "github.com/gogo/protobuf/protoc-gen-gogo/plugin"
 	"github.com/gogo/protobuf/vanity/command"
 )
 
 // Note: This const is used to group imports between project and stdlib. Replace as appropriate.
 const project = "dropbox"
 
-const mypyPkg = "proto/mypy"
+const protoContainersPkg = "google/protobuf/internal/containers"
 
+// these are reserved names.
 var (
+	// If a class has exactly this name, we will prefix the class name
+	// with _, then create an alias to it, to avoid collision when referencing it
+	reservedNames       = []string{"Name", "Value"}
 	reservedMethodNames = map[string]struct{}{
 		"Close": struct{}{},
 	}
@@ -171,7 +176,7 @@ func (m *PythonPkgMap) String() string {
 	}
 
 	m.writeImports(hdr, projects)
-	if len(project) > 0 {
+	if len(projects) > 0 {
 		l("")
 	}
 
@@ -421,36 +426,49 @@ func (w *pkgWriter) RegisterLocal(name string) {
 	w.pkgs.RegisterLocal(name)
 }
 
-func (w *pkgWriter) WriteEnums(enums []*descriptor.EnumDescriptorProto) {
+func (w *pkgWriter) isReservedName(name string) bool {
+	for _, reserved := range reservedNames {
+		if name == reserved {
+			return true
+		}
+	}
+	return false
+}
+
+func (w *pkgWriter) WriteEnums(enums []*descriptor.EnumDescriptorProto, prefix string) {
 	l := w.Line
 	push := w.PushIndent
 	pop := w.PopIndent
 	name := w.Name
 
+	text := w.Name("typing", "Text")
 	for i, enumType := range enums {
 		// Protobuf enums are instances of EnumWrapperType which is not a proper Python
 		// enum. In order to type check properly we create a custom class for each enum with
 		// the same interface as EnumWrapperType but extending int.
+		qualifiedName := prefix + enumType.GetName()
 		l("class %s(int):", enumType.GetName())
 		push()
 		l("@classmethod")
+		// intentionally using int for `number` here, as we don't necessarily know if
+		// the number is a valid enum
 		l("def Name(cls, number: int) -> str: ...")
 		l("@classmethod")
-		l("def Value(cls, name: str) -> int: ...")
+		l("def Value(cls, name: %s) -> %s: ...", text, qualifiedName)
 		l("@classmethod")
-		l("def keys(cls) -> %s[str]: ...",
-			name("typing", "List"))
+		l("def keys(cls) -> %s[%s]: ...",
+			name("typing", "List"), text)
 		l("@classmethod")
-		l("def values(cls) -> %s[int]: ...",
-			name("typing", "List"))
+		l("def values(cls) -> %s[%s]: ...",
+			name("typing", "List"), qualifiedName)
 		l("@classmethod")
-		l("def items(cls) -> %s[%s[str, int]]: ...",
+		l("def items(cls) -> %s[%s[%s, %s]]: ...",
 			name("typing", "List"),
-			name("typing", "Tuple"))
+			name("typing", "Tuple"),
+			text, qualifiedName)
 		pop()
 		for _, val := range enumType.Value {
-			l("%s = %s(%s, %d)", val.GetName(), name("typing", "cast"),
-				enumType.GetName(), val.GetNumber())
+			l("%s: %s", val.GetName(), enumType.GetName())
 		}
 		if i < len(enums)-1 {
 			l("")
@@ -468,12 +486,16 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 	messageClass := name("google.protobuf.message", "Message")
 
 	for i, desc := range messages {
-		w.RegisterLocal(desc.GetName())
-		qualifiedName := prefix + desc.GetName()
-		l("class %s(%s):", desc.GetName(), messageClass)
+		clsName := desc.GetName()
+		if w.isReservedName(clsName) && prefix == "" {
+			clsName = "_" + clsName
+		}
+		w.RegisterLocal(clsName)
+		qualifiedName := prefix + clsName
+		l("class %s(%s):", clsName, messageClass)
 
 		push()
-		w.WriteEnums(desc.EnumType)
+		w.WriteEnums(desc.EnumType, qualifiedName+".")
 		w.WriteMessages(desc.NestedType, qualifiedName+".")
 
 		// Write types of each scalar field.
@@ -482,10 +504,10 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 				continue
 			}
 			if field.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REPEATED {
-				container := name(mypyPkg, "RepeatedScalarFieldContainer")
-				l("%s = ... # type: %s[%s]", field.GetName(), container, w.pythonType(field))
+				container := name(protoContainersPkg, "RepeatedScalarFieldContainer")
+				l("%s: %s[%s]", field.GetName(), container, w.pythonType(field))
 			} else {
-				l("%s = ... # type: %s", field.GetName(), w.pythonType(field))
+				l("%s: %s", field.GetName(), w.pythonType(field))
 			}
 		}
 
@@ -514,7 +536,7 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 						w.pythonType(msg.Descriptor.Field[0]),
 						w.pythonType(msg.Descriptor.Field[1]))
 				} else {
-					container := name(mypyPkg, "RepeatedCompositeFieldContainer")
+					container := name(protoContainersPkg, "RepeatedCompositeFieldContainer")
 					l("def %s(self) -> %s[%s]: ...", field.GetName(), container, w.pythonType(field))
 				}
 			} else {
@@ -538,6 +560,8 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 				continue
 			}
 
+			// Non-required arguments need to be Optional.
+			optional := w.Name("typing", "Optional")
 			if field.GetLabel() == descriptor.FieldDescriptorProto_LABEL_REPEATED {
 				typename := field.GetTypeName()
 				if len(typename) > 0 && typename[0] == '.' && isASCIIUpper(typename[1]) {
@@ -549,28 +573,38 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 				if ok && msg.Descriptor.GetOptions().GetMapEntry() {
 					// map generates a special Entry wrapper message.
 					container := name("typing", "Mapping")
-					l("%s : %s[%s, %s] = None,",
-						field.GetName(), container,
+					l("%s : %s[%s[%s, %s]] = ...,",
+						field.GetName(),
+						optional,
+						container,
 						w.pythonType(msg.Descriptor.Field[0]),
 						w.pythonType(msg.Descriptor.Field[1]))
 				} else {
-					l("%s : %s[%s] = None,", field.GetName(),
+					l("%s : %s[%s[%s]] = ...,",
+						field.GetName(),
+						optional,
 						name("typing", "Iterable"),
 						w.pythonType(field))
 				}
 			} else {
-				l("%s : %s = None,", field.GetName(), w.pythonType(field))
+				// Optional fields are optional.
+				l("%s : %s[%s] = ...,",
+					field.GetName(),
+					optional,
+					w.pythonType(field))
 			}
 		}
 		l(") -> None: ...")
 		pop()
 
 		// Write standard message methods.
-		l("@classmethod")
-		l("def FromString(cls, s: str) -> %s: ...", qualifiedName)
-		l("def MergeFrom(self, other_msg: %s) -> None: ...", messageClass)
-		l("def CopyFrom(self, other_msg: %s) -> None: ...", messageClass)
+		l("@staticmethod")
+		l("def FromString(s: bytes) -> %s: ...", qualifiedName)
 		pop()
+		if desc.GetName() != clsName {
+			l("")
+			l("%s = %s", desc.GetName(), clsName)
+		}
 		if i < len(messages)-1 {
 			l("")
 		}
@@ -613,7 +647,7 @@ func (w *pkgWriter) pythonType(fd *descriptor.FieldDescriptorProto) interface{} 
 	case descriptor.FieldDescriptorProto_TYPE_STRING:
 		return w.Name("typing", "Text")
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
-		return "str"
+		return "bytes"
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE,
 		descriptor.FieldDescriptorProto_TYPE_GROUP:
 		return w.ImportMessage(fd)
@@ -676,7 +710,7 @@ func generateMypyStubs(
 	files := []*plugin.CodeGeneratorResponse_File{}
 	for _, fd := range descriptors.ToGenerate {
 		mypyStubs := newPkgWriter(fd, descriptors)
-		mypyStubs.WriteEnums(fd.EnumType)
+		mypyStubs.WriteEnums(fd.EnumType, "")
 		mypyStubs.WriteMessages(fd.MessageType, "")
 
 		pathName := strings.TrimSuffix(fd.GetName(), ".proto") + "_pb2.pyi"
