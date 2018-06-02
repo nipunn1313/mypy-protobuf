@@ -6,6 +6,7 @@ def test_generate_mypy_matches():
     proto_files = glob.glob('proto/**.proto')
     assert len(proto_files) == 2  # Just a sanity check that all the files show up
 
+    failures = []
     for fn in proto_files:
         fn_split = fn.split(os.sep)  # Eg. [proto, test.proto]
         fn_split[0] = 'output'  # Eg [output, test.proto]
@@ -23,4 +24,10 @@ def test_generate_mypy_matches():
 
         output_contents = open(output).read()
         expected_contents = open(expected).read()
-        assert output_contents == expected_contents
+
+        if output_contents != expected_contents:
+            open(expected, "w").write(output_contents)
+            failures.append(("%s doesn't match %s. This test will copy it over." % (output, expected)))
+
+    if failures:
+        raise Exception(str(failures))

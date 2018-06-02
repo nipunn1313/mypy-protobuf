@@ -19,11 +19,13 @@
     #eval "$(pyenv init -)"
     #pyenv shell 3.5.5
 
+    : ${PY:=2.7}
+
     # Create virtualenv
     python3 -m virtualenv mypy_env
     source mypy_env/bin/activate
-    python3 -m pip install -U setuptools
-    python3 -m pip install -U git+git://github.com/python/mypy.git
+    python3 -m pip install setuptools
+    python3 -m pip install git+git://github.com/python/mypy.git
 
     # Run mypy
     mypy --python-version=$PY python/protoc-gen-mypy test/
