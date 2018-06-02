@@ -7,7 +7,7 @@
     python -m pip install -r requirements.txt
 
     # Generate protos
-    protoc --python_out=test/output/ --mypy_out=test/output/ --plugin=protoc-gen-mypy=python/protoc-gen-mypy --proto_path=test/proto/ `find test/proto -name "*.proto"`
+    protoc --python_out=. --mypy_out=. --plugin=protoc-gen-mypy=python/protoc-gen-mypy --proto_path=proto/ `find proto/test -name "*.proto"`
 
     # Run unit tests
     py.test

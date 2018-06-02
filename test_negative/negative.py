@@ -3,7 +3,7 @@ This code is intended to have mypy failures which we will ensure
 show up in the output.
 """
 
-from test.output.test_pb2 import Simple1
+from test.proto.test_pb2 import Simple1
 
 s = Simple1()
 s.a_string = "Hello"

@@ -12,23 +12,26 @@ a file that should have failures.
 import glob
 import os
 
-from test.output.test_pb2 import Simple1
+from test.proto.test_pb2 import Simple1
 
 def test_generate_mypy_matches():
     # type: () -> None
-    proto_files = glob.glob('test/proto/**.proto')
-    assert len(proto_files) == 2  # Just a sanity check that all the files show up
+    proto_files = (
+        glob.glob('proto/test/proto/*.proto') +
+        glob.glob('proto/test/proto/*/*.proto')
+    )
+    assert len(proto_files) == 3  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
-        fn_split = fn.split(os.sep)  # Eg. [test, proto, test.proto]
-        fn_split[1] = 'output'  # Eg [test, output, test.proto]
+        fn_split = fn.split(os.sep)  # Eg. [proto, test, proto, test.proto]
+        fn_split = fn_split[1:]  # Eg. [test, proto, test.proto]
         assert fn_split[-1].endswith('.proto')
-        fn_split[-1] = fn_split[-1][:-len('.proto')] + '_pb2.pyi'  # Eg [test, output, test_pb2.proto]
+        fn_split[-1] = fn_split[-1][:-len('.proto')] + '_pb2.pyi'  # Eg [test, proto, test_pb2.proto]
 
         output = os.path.join(*fn_split)
 
-        fn_split[-1] += '.expected'  # Eg [test, output, test_pb2.proto.expected]
+        fn_split[-1] += '.expected'  # Eg [test, proto, test_pb2.proto.expected]
 
         expected = os.path.join(*fn_split)
 

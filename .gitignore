@@ -3,10 +3,12 @@
 .*.swp
 __pycache__/
 .cache
-/test/output/*.pyi
 .mypy_cache/
 /env/
 /mypy_env/
 *.pyc
-/test/output/*.py
+/test/proto/*.py
+/test/proto/*.pyi
+/test/proto/*/*.py
+/test/proto/*/*.pyi
 .pytest_cache

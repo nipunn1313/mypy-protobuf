@@ -2,7 +2,8 @@ syntax = "proto2";
 
 package test;
 
-import "test3.proto";
+import "test/proto/nested/nested.proto";
+import "test/proto/test3.proto";
 
 enum OuterEnum {
   FOO = 1;
@@ -16,6 +17,7 @@ message Simple1 {
   optional uint32 a_uint32 = 4;
   optional OuterEnum a_enum = 5;
   optional test3.OuterEnum a_external_enum = 6;
+  optional nested.Nested a_nested = 7;
 }
 
 message Simple2 {
