@@ -322,7 +322,7 @@ class Descriptors(object):
                 _add_enums(message.enum_type, sub_prefix, fd)
 
         for fd in request.proto_file:
-            start_prefix = "." + fd.package + "."
+            start_prefix = "." + fd.package + "." if fd.package else "."
             _add_messages(fd.message_type, start_prefix, fd)
             _add_enums(fd.enum_type, start_prefix, fd)
 
