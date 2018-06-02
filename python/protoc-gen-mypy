@@ -26,6 +26,7 @@ if MYPY:
         Text,
         cast,
     )
+    from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 else:
     # Provide minimal mypy identifiers to make code run without typing module present
     Text = None
@@ -186,7 +187,7 @@ class PkgWriter(object):
                         l("{} : {},", field.name, self.python_type(field))
                     for field in [f for f in desc.field if f.label != d.FieldDescriptorProto.LABEL_REQUIRED]:
                         if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                            if field.type_name != '' and self.descriptors.messages[field.type_name].options.map_entry:
+                            if field.type_name in self.descriptors.messages and self.descriptors.messages[field.type_name].options.map_entry:
                                 msg = self.descriptors.messages[field.type_name]
                                 l("{} : {}[{}[{}, {}]] = None,", field.name, self._import("typing", "Optional"),
                                     self._import("typing", "Mapping"), self.python_type(msg.field[0]), self.python_type(msg.field[1]))
@@ -307,12 +308,12 @@ class Descriptors(object):
         self.message_to_fd = {}  # type: Dict[Text, d.FileDescriptorProto]
 
         def _add_enums(enums, prefix, fd):
-            # type: (d.EnumDescriptorProto, d.FileDescriptorProto) -> None
+            # type: (RepeatedCompositeFieldContainer[d.EnumDescriptorProto], Text, d.FileDescriptorProto) -> None
             for enum in enums:
                 self.message_to_fd[prefix + enum.name] = fd
 
         def _add_messages(messages, prefix, fd):
-            # type: (d.DescriptorProto, d.FileDescriptorProto) -> None
+            # type: (RepeatedCompositeFieldContainer[d.DescriptorProto], Text, d.FileDescriptorProto) -> None
             for message in messages:
                 self.messages[prefix + message.name] = message
                 self.message_to_fd[prefix + message.name] = fd
