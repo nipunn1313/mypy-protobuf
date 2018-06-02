@@ -11,3 +11,10 @@ message Simple1 {
   optional bool a_boolean = 3;
   optional uint32 a_uint32 = 4;
 }
+
+message Simple2 {}
+
+option py_generic_services = true;
+service TestService {
+    rpc Echo(Simple1) returns (Simple2) {}
+}

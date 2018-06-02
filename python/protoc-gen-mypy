@@ -58,6 +58,10 @@ class PkgWriter(object):
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Optional") -> "Optional"
         """
+        if path == "google.protobuf.service":
+            # Return this until typeshed adds support (issue #25)
+            return self._import("typing", "Any")
+
         imp = path.replace('/', '.')
         self.imports[imp].add(name)
         return name
@@ -101,7 +105,10 @@ class PkgWriter(object):
 
     def _write_line(self, line, *args):
         # type: (Text, *Text) -> None
-        self.lines.append(self.indent + line.format(*args))
+        if line == "":
+            self.lines.append(line)
+        else:
+            self.lines.append(self.indent + line.format(*args))
 
     def write_enums(self, enums):
         # type: (List[d.EnumDescriptorProto]) -> None
