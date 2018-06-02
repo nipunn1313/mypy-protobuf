@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+// Intentionally don't set a package - just to make sure we can handle it.
+
+message NoPackage {}
+message NoPackage2 {
+  NoPackage np = 1;
+  repeated NoPackage np_rep = 2;
+}
