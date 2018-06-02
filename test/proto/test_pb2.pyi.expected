@@ -22,15 +22,46 @@ FOO = typing.cast(OuterEnum, 1)
 BAR = typing.cast(OuterEnum, 2)
 
 class Simple1(google.protobuf.message.Message):
+    class InnerEnum(int):
+        @classmethod
+        def Name(cls, number: int) -> str: ...
+        @classmethod
+        def Value(cls, name: str) -> int: ...
+        @classmethod
+        def keys(cls) -> typing.List[str]: ...
+        @classmethod
+        def values(cls) -> typing.List[int]: ...
+        @classmethod
+        def items(cls) -> typing.List[typing.Tuple[str, int]]: ...
+    INNER1 = typing.cast(InnerEnum, 1)
+    INNER2 = typing.cast(InnerEnum, 2)
+
+    class InnerMessage(google.protobuf.message.Message):
+
+        def __init__(self,
+            ) -> None: ...
+        @classmethod
+        def FromString(cls, s: bytes) -> Simple1.InnerMessage: ...
+        def MergeFrom(self, other_msg: google.protobuf.message.Message) -> None: ...
+        def CopyFrom(self, other_msg: google.protobuf.message.Message) -> None: ...
+
     a_string = ... # type: typing.Text
     a_repeated_string = ... # type: google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]
     a_boolean = ... # type: bool
     a_uint32 = ... # type: int
     a_enum = ... # type: OuterEnum
     a_external_enum = ... # type: test.proto.test3_pb2.OuterEnum
+    inner_enum = ... # type: Simple1.InnerEnum
+    rep_inner_enum = ... # type: google.protobuf.internal.containers.RepeatedScalarFieldContainer[Simple1.InnerEnum]
 
     @property
     def a_nested(self) -> test.proto.nested.nested_pb2.Nested: ...
+
+    @property
+    def inner_message(self) -> Simple1.InnerMessage: ...
+
+    @property
+    def rep_inner_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Simple1.InnerMessage]: ...
 
     def __init__(self,
         a_string : typing.Optional[typing.Text] = None,
@@ -40,6 +71,10 @@ class Simple1(google.protobuf.message.Message):
         a_enum : typing.Optional[OuterEnum] = None,
         a_external_enum : typing.Optional[test.proto.test3_pb2.OuterEnum] = None,
         a_nested : typing.Optional[test.proto.nested.nested_pb2.Nested] = None,
+        inner_enum : typing.Optional[Simple1.InnerEnum] = None,
+        rep_inner_enum : typing.Optional[typing.Iterable[Simple1.InnerEnum]] = None,
+        inner_message : typing.Optional[Simple1.InnerMessage] = None,
+        rep_inner_message : typing.Optional[typing.Iterable[Simple1.InnerMessage]] = None,
         ) -> None: ...
     @classmethod
     def FromString(cls, s: bytes) -> Simple1: ...

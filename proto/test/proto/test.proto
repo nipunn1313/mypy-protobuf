@@ -11,6 +11,12 @@ enum OuterEnum {
 }
 
 message Simple1 {
+  enum InnerEnum {
+    INNER1 = 1;
+    INNER2 = 2;
+  }
+  message InnerMessage {}
+
   optional string a_string = 1;
   repeated string a_repeated_string = 2;
   optional bool a_boolean = 3;
@@ -18,6 +24,10 @@ message Simple1 {
   optional OuterEnum a_enum = 5;
   optional test3.OuterEnum a_external_enum = 6;
   optional nested.Nested a_nested = 7;
+  optional InnerEnum inner_enum = 8;
+  repeated InnerEnum rep_inner_enum = 9;
+  optional InnerMessage inner_message = 10;
+  repeated InnerMessage rep_inner_message = 11;
 }
 
 message Simple2 {
