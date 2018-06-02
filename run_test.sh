@@ -10,7 +10,6 @@
     protoc --python_out=test/output/ --mypy_out=test/output/ --plugin=protoc-gen-mypy=python/protoc-gen-mypy --proto_path=test/proto/ `find test/proto -name "*.proto"`
 
     # Run unit tests
-    cd test
     py.test
 )
 
@@ -25,8 +24,10 @@
     python3 -m virtualenv mypy_env
     source mypy_env/bin/activate
     python3 -m pip install setuptools
-    python3 -m pip install git+git://github.com/python/mypy.git
+    python3 -m pip install git+git://github.com/python/mypy.git@eb1bb064d707ce05735ff6795df82126e75ea6ea
 
     # Run mypy
     mypy --python-version=$PY python/protoc-gen-mypy test/
+
+    diff <(mypy --python-version=$PY python/protoc-gen-mypy test_negative/) test_negative/output.expected
 )

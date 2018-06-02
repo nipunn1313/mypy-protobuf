@@ -48,7 +48,7 @@ class Simple1(Message):
     a_uint32 = ... # type: int
 
     def __init__(self,
-        a_string : Text,
+        a_string : Optional[Text] = None,
         a_repeated_string : Optional[Iterable[Text]] = None,
         a_boolean : Optional[bool] = None,
         a_uint32 : Optional[int] = None,
@@ -59,8 +59,10 @@ class Simple1(Message):
     def CopyFrom(self, other_msg: Message) -> None: ...
 
 class Simple2(Message):
+    a_string = ... # type: Text
 
     def __init__(self,
+        a_string : Text,
         ) -> None: ...
     @classmethod
     def FromString(cls, s: bytes) -> Simple2: ...
