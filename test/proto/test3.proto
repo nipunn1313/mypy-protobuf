@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-enum OuterEnum3 {
+package test3;
+
+enum OuterEnum {
   UNKNOWN = 0;
   FOO3 = 1;
   BAR3 = 2;

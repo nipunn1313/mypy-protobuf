@@ -1,5 +1,9 @@
 syntax = "proto2";
 
+package test;
+
+import "test3.proto";
+
 enum OuterEnum {
   FOO = 1;
   BAR = 2;
@@ -10,6 +14,8 @@ message Simple1 {
   repeated string a_repeated_string = 2;
   optional bool a_boolean = 3;
   optional uint32 a_uint32 = 4;
+  optional OuterEnum a_enum = 5;
+  optional test3.OuterEnum a_external_enum = 6;
 }
 
 message Simple2 {
