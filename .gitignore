@@ -4,8 +4,9 @@
 __pycache__/
 .cache
 /test/output/*.pyi
-/.mypy_cache/
+.mypy_cache/
 /env/
 /mypy_env/
 *.pyc
 /test/output/*.py
+.pytest_cache

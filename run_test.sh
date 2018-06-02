@@ -10,7 +10,6 @@
     protoc --python_out=test/output/ --mypy_out=test/output/ --plugin=protoc-gen-mypy=python/protoc-gen-mypy --proto_path=test/proto/ `find test/proto -name "*.proto"`
 
     # Run unit tests
-    cd test
     py.test
 )
 
