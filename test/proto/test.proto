@@ -6,13 +6,15 @@ enum OuterEnum {
 }
 
 message Simple1 {
-  required string a_string = 1;
+  optional string a_string = 1;
   repeated string a_repeated_string = 2;
   optional bool a_boolean = 3;
   optional uint32 a_uint32 = 4;
 }
 
-message Simple2 {}
+message Simple2 {
+  required string a_string = 1;
+}
 
 option py_generic_services = true;
 service TestService {

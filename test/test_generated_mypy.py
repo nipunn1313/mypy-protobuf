@@ -1,3 +1,14 @@
+"""
+This file serves two purposes
+1) Run a test which ensures that mypy is producing the expected output. For
+developer convenience, in the case which it doesn't, it'll copy over the
+output to the expected output, so you can view the output diff in your
+code reviews. This will fail in CI if there is any inconsistency.
+
+2) This is a file which should mypy with success. See test_negative for
+a file that should have failures.
+"""
+
 import glob
 import os
 
@@ -35,8 +46,12 @@ def test_generate_mypy_matches():
         raise Exception(str(failures))
 
 def test_func():
+    # type: () -> None
+    s = Simple1(a_string="hello")
+
     s = Simple1()
     s.a_string = "Hello"
+    s.a_repeated_string.append("Hello")
 
     s2 = Simple1.FromString(s.SerializeToString())
     assert s2.a_string == "Hello"

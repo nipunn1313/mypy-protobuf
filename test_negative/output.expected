@@ -1,0 +1,2 @@
+test_negative/negative.py:11: error: "Simple1" has no attribute "SerializeToStringg"
+test_negative/negative.py:19: error: Argument 1 to "CopyFrom" of "Simple1" has incompatible type "str"; expected "Message"
