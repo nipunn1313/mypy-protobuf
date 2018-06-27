@@ -12,3 +12,5 @@ __pycache__/
 /test/proto/*/*.py
 /test/proto/*/*.pyi
 .pytest_cache
+/python/dist/
+*.egg-info

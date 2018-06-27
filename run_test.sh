@@ -29,5 +29,5 @@
     # Run mypy
     mypy --python-version=$PY python/protoc-gen-mypy test/
 
-    diff <(mypy --python-version=$PY python/protoc-gen-mypy test_negative/) test_negative/output.expected
+    diff <(mypy --python-version=$PY python/protoc-gen-mypy test_negative/) test_negative/output.expected.$PY
 )
