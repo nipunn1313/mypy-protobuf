@@ -10,7 +10,7 @@ setup(
     author_email='nipunn@dropbox.com',
     py_modules=[],
     url='https://github.com/dropbox/mypy-protobuf',
-    download_url='https://github.com/dropbox/mypy-protobuf/tarball/1.6',
+    download_url='https://github.com/dropbox/mypy-protobuf/archive/v1.6.tar.gz',
 
     scripts=['protoc-gen-mypy', 'protoc_gen_mypy.bat'],
 )
