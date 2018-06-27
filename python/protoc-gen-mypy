@@ -287,8 +287,8 @@ def is_scalar(fd):
     )
 
 
-def generate_mypy_stubs(descriptors, response):
-    # type: (Descriptors, plugin.CodeGeneratorResponse) -> None
+def generate_mypy_stubs(descriptors, response, quiet):
+    # type: (Descriptors, plugin.CodeGeneratorResponse, bool) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_enums(fd.enum_type)
@@ -300,7 +300,8 @@ def generate_mypy_stubs(descriptors, response):
         output = response.file.add()
         output.name = fd.name[:-6].replace('-', '_') + '_pb2.pyi'
         output.content = HEADER + pkg_writer.write()
-        print("Writing mypy to", output.name, file=sys.stderr)
+        if not quiet:
+            print("Writing mypy to", output.name, file=sys.stderr)
 
 class Descriptors(object):
 
@@ -349,7 +350,7 @@ def main():
     response = plugin.CodeGeneratorResponse()
 
     # Generate mypy
-    generate_mypy_stubs(Descriptors(request), response)
+    generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)
 
     # Serialise response message
     output = response.SerializeToString()

@@ -21,6 +21,10 @@ On windows, provide the bat file:
 ```
 protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/location --mypy_out=output/location
 ```
+To suppress output, you can run
+```
+protoc --python_out=output/location --mypy_out=quiet:output/location
+```
 
 ## Go Implementation
 There is a go implementation of the plugin in `go/src/protoc-gen-mypy`.
