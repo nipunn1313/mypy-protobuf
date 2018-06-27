@@ -206,31 +206,37 @@ class PkgWriter(object):
                 l("def CopyFrom(self, other_msg: {}) -> None: ...", message_class)
             l("")
 
+    def write_methods(self, service, is_abstract):
+        # type: (d.ServiceDescriptorProto, bool) -> None
+        l = self._write_line
+        for method in service.method:
+            if is_abstract:
+                l("@{}", self._import("abc", "abstractmethod"))
+            l("def {}(self,", method.name)
+            with self._indent():
+                l("rpc_controller: {},", self._import("google.protobuf.service", "RpcController"))
+                l("request: {},", self._import_message(method.input_type))
+                l("done: {}[{}[[{}], None]],",
+                  self._import("typing", "Optional"),
+                  self._import("typing", "Callable"),
+                  self._import_message(method.output_type))
+            l(") -> {}[{}]: ...", self._import("concurrent.futures", "Future"), self._import_message(method.output_type))
+
     def write_services(self, services):
         # type: (d.ServiceDescriptorProto) -> None
         l = self._write_line
-
         for service in services:
             # The service definition interface
             l("class {}({}, metaclass={}):", service.name, self._import("google.protobuf.service", "Service"), self._import("abc", "ABCMeta"))
             with self._indent():
-                for method in service.method:
-                    l("@{}", self._import("abc", "abstractmethod"))
-                    l("def {}(self,", method.name)
-                    with self._indent():
-                        l("rpc_controller: {},", self._import("google.protobuf.service", "RpcController"))
-                        l("request: {},", self._import_message(method.input_type))
-                        l("done: {}[{}[[{}], None]],",
-                          self._import("typing", "Optional"),
-                          self._import("typing", "Callable"),
-                          self._import_message(method.output_type))
-                    l(") -> {}[{}]: ...", self._import("concurrent.futures", "Future"), self._import_message(method.output_type))
+                self.write_methods(service, is_abstract=True)
 
             # The stub client
             l("class {}({}):", service.name + "_Stub", service.name)
             with self._indent():
                 l("def __init__(self, rpc_channel: {}) -> None: ...",
                   self._import("google.protobuf.service", "RpcChannel"))
+                self.write_methods(service, is_abstract=False)
 
     def python_type(self, field):
         # type: (d.FieldDescriptorProto) -> Text
