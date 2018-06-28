@@ -54,6 +54,7 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@dzbarsky](https://github.com/dzbarsky)
 - [@gvanrossum](https://github.com/gvanrossum)
 - [@peterlvilim](https://github.com/peterlvilim)
+- [@msullivan](https://github.com/msullivan)
 
 ### Others
 - [@Ketouem](https://github.com/Ketouem)
