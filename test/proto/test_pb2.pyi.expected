@@ -3,6 +3,7 @@ import abc
 import concurrent.futures
 import google.protobuf.internal.containers
 import google.protobuf.message
+import test.proto.inner.inner_pb2
 import test.proto.nested.nested_pb2
 import test.proto.test3_pb2
 import typing
@@ -55,6 +56,9 @@ class Simple1(google.protobuf.message.Message):
     rep_inner_enum = ... # type: google.protobuf.internal.containers.RepeatedScalarFieldContainer[Simple1.InnerEnum]
 
     @property
+    def a_inner(self) -> test.proto.inner.inner_pb2.Inner: ...
+
+    @property
     def a_nested(self) -> test.proto.nested.nested_pb2.Nested: ...
 
     @property
@@ -70,6 +74,7 @@ class Simple1(google.protobuf.message.Message):
         a_uint32 : typing.Optional[int] = None,
         a_enum : typing.Optional[OuterEnum] = None,
         a_external_enum : typing.Optional[test.proto.test3_pb2.OuterEnum] = None,
+        a_inner : typing.Optional[test.proto.inner.inner_pb2.Inner] = None,
         a_nested : typing.Optional[test.proto.nested.nested_pb2.Nested] = None,
         inner_enum : typing.Optional[Simple1.InnerEnum] = None,
         rep_inner_enum : typing.Optional[typing.Iterable[Simple1.InnerEnum]] = None,
