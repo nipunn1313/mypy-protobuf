@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package test.nested_package;
+package inner;
 
 import "test/proto/test3.proto";
 
-message Nested {
+message Inner {
     test3.OuterEnum a = 1;
 }
