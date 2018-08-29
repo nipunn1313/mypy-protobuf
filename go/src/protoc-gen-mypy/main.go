@@ -443,6 +443,7 @@ func (w *pkgWriter) WriteEnums(enums []*descriptor.EnumDescriptorProto, prefix s
 
 	text := w.Name("typing", "Text")
 	for i, enumType := range enums {
+		w.RegisterLocal(enumType.GetName())
 		// Protobuf enums are instances of EnumWrapperType which is not a proper Python
 		// enum. In order to type check properly we create a custom class for each enum with
 		// the same interface as EnumWrapperType but extending int.
