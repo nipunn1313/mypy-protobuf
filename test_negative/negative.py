@@ -3,6 +3,11 @@ This code is intended to have mypy failures which we will ensure
 show up in the output.
 """
 
+from typing import (
+    List,
+    Text,
+)
+
 from test.proto.test_pb2 import Simple1
 
 s = Simple1()
@@ -18,3 +23,8 @@ assert s3.a_string == "Hello"
 s4 = Simple1()
 s4.CopyFrom(s.SerializeToString())  # failure
 assert s4.a_string == "Hello"
+
+s5 = Simple1()
+s5.a_repeated_string.append("World")
+l = []  # type: List[int]
+l.extend(s5.a_repeated_string)
