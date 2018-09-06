@@ -24,6 +24,7 @@ if MYPY:
         List,
         Set,
         Text,
+        Tuple,
         cast,
     )
     from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
@@ -50,7 +51,8 @@ class PkgWriter(object):
         self.lines = []  # type: List[Text]
         self.indent = ""
 
-        self.imports = set()  # type: Set[Text]
+        # dictionary of x->(y,z) for `from {x} import {y} as {z}`
+        self.imports = defaultdict(set)  # type: Dict[Text, Set[Tuple[Text, Text]]]
         self.locals = set()  # type: Set[Text]
 
     def _import(self, path, name):
@@ -63,13 +65,9 @@ class PkgWriter(object):
             return self._import("typing", "Any")
 
         imp = path.replace('/', '.')
-        self.imports.add(imp)
-
-        # Eg .sibling_pkg.Msg should import as `from . import sibling_pkg` and
-        # be referenced as `sibling_pkg.Msg`
-        if imp[0] == '.':
-            imp = imp[1:]
-        return imp + "." + name
+        mangled_name = imp.replace('.', '___') + '___' + name
+        self.imports[imp].add((name, mangled_name))
+        return mangled_name
 
     def _import_message(self, type_name):
         # type: (d.FieldDescriptorProto) -> Text
@@ -270,11 +268,11 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
-        for pkg in sorted(self.imports):
-            if pkg[0] == '.':
-                imports.append(u"from . import {}".format(pkg[1:]))
-            else:
-                imports.append(u"import {}".format(pkg))
+        for pkg, items in sorted(six.iteritems(self.imports)):
+            imports.append(u"from {} import (".format(pkg))
+            for (name, mangled_name) in sorted(items):
+                imports.append(u"    {} as {},".format(name, mangled_name))
+            imports.append(u")\n")
         imports.append("")
         return "\n".join(imports + self.lines)
 
