@@ -7,9 +7,12 @@
     python -m pip install -r requirements.txt
 
     # Generate protos
+    protoc --version
     protoc --python_out=. --mypy_out=. --plugin=protoc-gen-mypy=python/protoc-gen-mypy --proto_path=proto/ `find proto/test -name "*.proto"`
 
     # Run unit tests
+    python --version
+    py.test --version
     py.test
 )
 
