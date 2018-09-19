@@ -1,6 +1,11 @@
 mypy-protobuf: Generate mypy stub files from protobuf specs [![Build Status](https://travis-ci.org/dropbox/mypy-protobuf.svg?branch=master)](https://travis-ci.org/dropbox/mypy-protobuf)
 ===========================================================
 
+## Requirements
+protoc 3.0.0 or greater
+python 2.7 or 3.5
+Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
+
 ## Python Implementation
 There is a python implementation of the plugin in `python/protoc-gen-mypy`. On windows
 you will have to use `python/protoc_gen_mypy.bat` for the executable.
