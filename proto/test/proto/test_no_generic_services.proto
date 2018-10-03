@@ -1,0 +1,9 @@
+package test;
+
+message Simple3 {
+  required string a_string = 1;
+}
+
+service TestService2 {
+    rpc Echo(Simple3) returns (Simple3) {}
+}

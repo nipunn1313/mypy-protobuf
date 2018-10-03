@@ -20,7 +20,7 @@ def test_generate_mypy_matches():
         glob.glob('proto/test/proto/*.proto') +
         glob.glob('proto/test/proto/*/*.proto')
     )
-    assert len(proto_files) == 5  # Just a sanity check that all the files show up
+    assert len(proto_files) == 6  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
@@ -36,10 +36,9 @@ def test_generate_mypy_matches():
         expected = os.path.join(*fn_split)
 
         assert os.path.exists(output)
-        assert os.path.exists(expected)
 
         output_contents = open(output).read()
-        expected_contents = open(expected).read()
+        expected_contents = open(expected).read() if os.path.exists(expected) else None
 
         if output_contents != expected_contents:
             open(expected, "w").write(output_contents)
