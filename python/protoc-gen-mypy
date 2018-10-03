@@ -287,7 +287,8 @@ def generate_mypy_stubs(descriptors, response, quiet):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_enums(fd.enum_type)
         pkg_writer.write_messages(fd.message_type, "")
-        pkg_writer.write_services(fd.service)
+        if fd.options.py_generic_services:
+            pkg_writer.write_services(fd.service)
 
         assert name == fd.name
         assert fd.name.endswith('.proto')
