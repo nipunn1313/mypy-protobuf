@@ -17,6 +17,12 @@ from google.protobuf.message import (
     Message as google___protobuf___message___Message,
 )
 
+from google.protobuf.service import (
+    RpcChannel as google___protobuf___service___RpcChannel,
+    RpcController as google___protobuf___service___RpcController,
+    Service as google___protobuf___service___Service,
+)
+
 from test.proto.inner.inner_pb2 import (
     Inner as test___proto___inner___inner_pb2___Inner,
 )
@@ -30,7 +36,6 @@ from test.proto.test3_pb2 import (
 )
 
 from typing import (
-    Any as typing___Any,
     Callable as typing___Callable,
     Iterable as typing___Iterable,
     List as typing___List,
@@ -130,17 +135,17 @@ class Simple2(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
 
-class TestService(typing___Any, metaclass=abc___ABCMeta):
+class TestService(google___protobuf___service___Service, metaclass=abc___ABCMeta):
     @abc___abstractmethod
     def Echo(self,
-        rpc_controller: typing___Any,
+        rpc_controller: google___protobuf___service___RpcController,
         request: Simple1,
         done: typing___Optional[typing___Callable[[Simple2], None]],
     ) -> concurrent___futures___Future[Simple2]: ...
 class TestService_Stub(TestService):
-    def __init__(self, rpc_channel: typing___Any) -> None: ...
+    def __init__(self, rpc_channel: google___protobuf___service___RpcChannel) -> None: ...
     def Echo(self,
-        rpc_controller: typing___Any,
+        rpc_controller: google___protobuf___service___RpcController,
         request: Simple1,
         done: typing___Optional[typing___Callable[[Simple2], None]],
     ) -> concurrent___futures___Future[Simple2]: ...

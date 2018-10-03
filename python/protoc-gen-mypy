@@ -60,10 +60,6 @@ class PkgWriter(object):
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Optional") -> "Optional"
         """
-        if path == "google.protobuf.service":
-            # Return this until typeshed adds support (issue #25)
-            return self._import("typing", "Any")
-
         imp = path.replace('/', '.')
         mangled_name = imp.replace('.', '___') + '___' + name
         self.imports[imp].add((name, mangled_name))
