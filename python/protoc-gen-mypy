@@ -69,19 +69,17 @@ class PkgWriter(object):
         # type: (d.FieldDescriptorProto) -> Text
         """Import a referenced message and return a handle"""
         name = cast(Text, type_name)
-        if name[0] == '.' and name[1].isupper():
-            # Message defined in this file
-            return name[1:]
-
         message_fd = self.descriptors.message_to_fd[name]
+
+        # Message defined in this file.
         if message_fd.name == self.fd.name:
-            # message defined in this package
             split = name.split('.')
             for i, segment in enumerate(split):
                 if segment and segment[0].isupper():
                     return ".".join(split[i:])
+            raise AssertionError("Could not parse local name " + name)
 
-        # Not in package. Must import
+        # Not in file. Must import
         split = name.split(".")
         for i, segment in enumerate(split):
             if segment and segment[0].isupper():

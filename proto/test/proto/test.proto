@@ -4,6 +4,7 @@ package test;
 
 import "test/proto/inner/inner.proto";
 import "test/proto/nested/nested.proto";
+import "test/proto/nopackage.proto";
 import "test/proto/test3.proto";
 
 enum OuterEnum {
@@ -32,6 +33,8 @@ message Simple1 {
   repeated InnerEnum rep_inner_enum = 9;
   optional InnerMessage inner_message = 10;
   repeated InnerMessage rep_inner_message = 11;
+
+  optional NoPackage no_package = 13;
 }
 
 message Simple2 {
