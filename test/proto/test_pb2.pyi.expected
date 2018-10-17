@@ -31,6 +31,10 @@ from test.proto.nested.nested_pb2 import (
     Nested as test___proto___nested___nested_pb2___Nested,
 )
 
+from test.proto.nopackage_pb2 import (
+    NoPackage as test___proto___nopackage_pb2___NoPackage,
+)
+
 from test.proto.test3_pb2 import (
     OuterEnum as test___proto___test3_pb2___OuterEnum,
 )
@@ -105,6 +109,9 @@ class Simple1(google___protobuf___message___Message):
     @property
     def rep_inner_message(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[Simple1.InnerMessage]: ...
 
+    @property
+    def no_package(self) -> test___proto___nopackage_pb2___NoPackage: ...
+
     def __init__(self,
         a_string : typing___Optional[typing___Text] = None,
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = None,
@@ -118,6 +125,7 @@ class Simple1(google___protobuf___message___Message):
         rep_inner_enum : typing___Optional[typing___Iterable[Simple1.InnerEnum]] = None,
         inner_message : typing___Optional[Simple1.InnerMessage] = None,
         rep_inner_message : typing___Optional[typing___Iterable[Simple1.InnerMessage]] = None,
+        no_package : typing___Optional[test___proto___nopackage_pb2___NoPackage] = None,
         ) -> None: ...
     @classmethod
     def FromString(cls, s: bytes) -> Simple1: ...
