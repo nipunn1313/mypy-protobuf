@@ -69,6 +69,7 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@jcppkkk](https://github.com/jcppkkk)
 - [@drather19](https://github.com/drather19)
 - [@smessmer](https://github.com/smessmer)
+- [@pcorpet](https://github.com/pcorpet)
 
 Licence etc.
 ------------

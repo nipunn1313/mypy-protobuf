@@ -80,6 +80,8 @@ class PkgWriter(object):
             raise AssertionError("Could not parse local name " + name)
 
         # Not in file. Must import
+        # Python generated code ignores proto packages, so the only relevant factor is
+        # whether it is in the file or not.
         split = name.split(".")
         for i, segment in enumerate(split):
             if segment and segment[0].isupper():
