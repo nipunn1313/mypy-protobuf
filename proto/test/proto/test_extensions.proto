@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package test;
+
+extend google.protobuf.FieldOptions {
+  string test_field_extension = 50000;
+}
+
+extend google.protobuf.MessageOptions {
+  string test_message_option = 51234;
+}

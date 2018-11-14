@@ -200,6 +200,16 @@ class PkgWriter(object):
                 l("def CopyFrom(self, other_msg: {}) -> None: ...", message_class)
             l("")
 
+    def write_extensions(self, extensions):
+        # type: (List[d.FieldDescriptorProto]) -> None
+        if not extensions:
+            return
+        l = self._write_line
+        field_descriptor_class = self._import("google.protobuf.descriptor", "FieldDescriptor")
+        for extension in extensions:
+            l("{} = ... # type: {}", extension.name, field_descriptor_class)
+            l("")
+
     def write_methods(self, service, is_abstract):
         # type: (d.ServiceDescriptorProto, bool) -> None
         l = self._write_line
@@ -287,6 +297,7 @@ def generate_mypy_stubs(descriptors, response, quiet):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_enums(fd.enum_type)
         pkg_writer.write_messages(fd.message_type, "")
+        pkg_writer.write_extensions(fd.extension)
         if fd.options.py_generic_services:
             pkg_writer.write_services(fd.service)
 
