@@ -13,6 +13,7 @@ from contextlib import contextmanager
 import google.protobuf.descriptor_pb2 as d_typed
 import six
 from google.protobuf.compiler import plugin_pb2 as plugin
+from google.protobuf import descriptor
 
 MYPY = False
 if MYPY:
@@ -115,6 +116,8 @@ class PkgWriter(object):
         for enum in enums:
             l("class {}(int):", enum.name)
             with self._indent():
+                l("DESCRIPTOR: {} = ...",
+                    self._import("google.protobuf.descriptor", "EnumDescriptor"))
                 l("@classmethod")
                 l("def Name(cls, number: int) -> str: ...")
                 l("@classmethod")

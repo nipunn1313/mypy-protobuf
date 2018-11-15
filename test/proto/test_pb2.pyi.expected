@@ -8,6 +8,10 @@ from concurrent.futures import (
     Future as concurrent___futures___Future,
 )
 
+from google.protobuf.descriptor import (
+    EnumDescriptor as google___protobuf___descriptor___EnumDescriptor,
+)
+
 from google.protobuf.internal.containers import (
     RepeatedCompositeFieldContainer as google___protobuf___internal___containers___RepeatedCompositeFieldContainer,
     RepeatedScalarFieldContainer as google___protobuf___internal___containers___RepeatedScalarFieldContainer,
@@ -47,6 +51,7 @@ from typing import (
 
 
 class OuterEnum(int):
+    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
     @classmethod
     def Name(cls, number: int) -> str: ...
     @classmethod
@@ -62,6 +67,7 @@ BAR = typing___cast(OuterEnum, 2)
 
 class Simple1(google___protobuf___message___Message):
     class InnerEnum(int):
+        DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
         @classmethod
         def Name(cls, number: int) -> str: ...
         @classmethod
