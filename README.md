@@ -70,6 +70,7 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@drather19](https://github.com/drather19)
 - [@smessmer](https://github.com/smessmer)
 - [@pcorpet](https://github.com/pcorpet)
+- [@zozoens31](https://github.com/zozoens31)
 
 Licence etc.
 ------------
