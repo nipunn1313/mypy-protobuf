@@ -35,6 +35,8 @@ message Simple1 {
   repeated InnerMessage rep_inner_message = 11;
 
   optional NoPackage no_package = 13;
+  optional test.nested_package.AnotherNested.NestedEnum nested_enum = 14;
+  optional test.nested_package.AnotherNested.NestedMessage nested_message = 15;
 }
 
 message Simple2 {
