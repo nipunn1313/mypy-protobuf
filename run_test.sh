@@ -27,8 +27,7 @@
     python3 -m virtualenv mypy_env
     source mypy_env/bin/activate
     python3 -m pip install setuptools
-    # Git rev from 08/18/2018. Prefer a tag (eg @v0.620) once a lter one is released
-    python3 -m pip install git+git://github.com/python/mypy.git@402d734c4b8ceffdc04478eb49fc196dd2a3a785
+    python3 -m pip install git+https://github.com/python/mypy.git@v0.641
 
     # Run mypy
     mypy --python-version=$PY python/protoc-gen-mypy test/
