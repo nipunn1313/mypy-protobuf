@@ -12,7 +12,7 @@ a file that should have failures.
 import glob
 import os
 
-from test.proto.test_pb2 import Simple1
+from test.proto.test_pb2 import FOO, OuterEnum, Simple1
 
 def test_generate_mypy_matches():
     # type: () -> None
@@ -65,3 +65,6 @@ def test_func():
     s4 = Simple1()
     s4.CopyFrom(s)
     assert s4.a_string == "Hello"
+
+    e = FOO
+    e = OuterEnum.Value('BAR')

@@ -8,7 +8,7 @@ from typing import (
     Text,
 )
 
-from test.proto.test_pb2 import Simple1
+from test.proto.test_pb2 import FOO, Simple1
 
 s = Simple1()
 s.a_string = "Hello"
@@ -28,3 +28,6 @@ s5 = Simple1()
 s5.a_repeated_string.append("World")
 l = []  # type: List[int]
 l.extend(s5.a_repeated_string)
+
+e = FOO
+e = 3  # failure

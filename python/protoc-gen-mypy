@@ -110,8 +110,8 @@ class PkgWriter(object):
         else:
             self.lines.append(self.indent + line.format(*args))
 
-    def write_enums(self, enums):
-        # type: (List[d.EnumDescriptorProto]) -> None
+    def write_enums(self, enums, prefix=''):
+        # type: (List[d.EnumDescriptorProto], str) -> None
         l = self._write_line
         for enum in enums:
             l("class {}(int):", enum.name)
@@ -121,17 +121,19 @@ class PkgWriter(object):
                 l("@classmethod")
                 l("def Name(cls, number: int) -> str: ...")
                 l("@classmethod")
-                l("def Value(cls, name: str) -> int: ...")
+                l("def Value(cls, name: str) -> {}: ...", prefix + enum.name)
                 l("@classmethod")
                 l("def keys(cls) -> {}[str]: ...",
                     self._import("typing", "List"))
                 l("@classmethod")
-                l("def values(cls) -> {}[int]: ...",
-                    self._import("typing", "List"))
-                l("@classmethod")
-                l("def items(cls) -> {}[{}[str, int]]: ...",
+                l("def values(cls) -> {}[{}]: ...",
                     self._import("typing", "List"),
-                    self._import("typing", "Tuple"))
+                    prefix + enum.name)
+                l("@classmethod")
+                l("def items(cls) -> {}[{}[str, {}]]: ...",
+                    self._import("typing", "List"),
+                    self._import("typing", "Tuple"),
+                    prefix + enum.name)
 
             for val in enum.value:
                 l("{} = {}({}, {})", val.name, self._import("typing", "cast"), enum.name, val.number)
@@ -148,7 +150,7 @@ class PkgWriter(object):
             l("class {}({}):", desc.name, message_class)
             with self._indent():
                 # Nested enums/messages
-                self.write_enums(desc.enum_type)
+                self.write_enums(desc.enum_type, qualified_name + ".")
                 self.write_messages(desc.nested_type, qualified_name + ".")
 
                 # Scalar fields
