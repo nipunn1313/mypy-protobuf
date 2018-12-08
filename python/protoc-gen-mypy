@@ -91,6 +91,8 @@ class PkgWriter(object):
                 remains = ".".join(split[i + 1:])
                 if not remains:
                     return import_name
+                # remains could either be a direct import of a nested enum or message
+                # from another package.
                 return import_name + "." + remains
         raise AssertionError("Could not parse local name " + name)
 
