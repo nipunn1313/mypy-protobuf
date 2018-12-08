@@ -14,3 +14,6 @@ __pycache__/
 .pytest_cache
 /python/dist/
 *.egg-info
+.idea/
+*.DS_Store
+*venv*

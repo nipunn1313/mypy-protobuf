@@ -91,9 +91,9 @@ class PkgWriter(object):
                 remains = ".".join(split[i + 1:])
                 if not remains:
                     return import_name
-                raise AssertionError("Don't support nested imports yet")
-                # return new_nested_import(import_name, remains)
-
+                # remains could either be a direct import of a nested enum or message
+                # from another package.
+                return import_name + "." + remains
         raise AssertionError("Could not parse local name " + name)
 
     @contextmanager

@@ -32,6 +32,7 @@ from test.proto.inner.inner_pb2 import (
 )
 
 from test.proto.nested.nested_pb2 import (
+    AnotherNested as test___proto___nested___nested_pb2___AnotherNested,
     Nested as test___proto___nested___nested_pb2___Nested,
 )
 
@@ -102,6 +103,7 @@ class Simple1(google___protobuf___message___Message):
     a_external_enum = ... # type: test___proto___test3_pb2___OuterEnum
     inner_enum = ... # type: Simple1.InnerEnum
     rep_inner_enum = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[Simple1.InnerEnum]
+    nested_enum = ... # type: test___proto___nested___nested_pb2___AnotherNested.NestedEnum
 
     @property
     def a_inner(self) -> test___proto___inner___inner_pb2___Inner: ...
@@ -118,6 +120,9 @@ class Simple1(google___protobuf___message___Message):
     @property
     def no_package(self) -> test___proto___nopackage_pb2___NoPackage: ...
 
+    @property
+    def nested_message(self) -> test___proto___nested___nested_pb2___AnotherNested.NestedMessage: ...
+
     def __init__(self,
         a_string : typing___Optional[typing___Text] = None,
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = None,
@@ -132,6 +137,8 @@ class Simple1(google___protobuf___message___Message):
         inner_message : typing___Optional[Simple1.InnerMessage] = None,
         rep_inner_message : typing___Optional[typing___Iterable[Simple1.InnerMessage]] = None,
         no_package : typing___Optional[test___proto___nopackage_pb2___NoPackage] = None,
+        nested_enum : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedEnum] = None,
+        nested_message : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedMessage] = None,
         ) -> None: ...
     @classmethod
     def FromString(cls, s: bytes) -> Simple1: ...
