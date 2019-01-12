@@ -71,30 +71,31 @@ class PkgWriter(object):
         """Import a referenced message and return a handle"""
         name = cast(Text, type_name)
         message_fd = self.descriptors.message_to_fd[name]
+        assert message_fd.name.endswith('.proto')
+
+        # Strip off package name
+        if message_fd.package:
+            assert name.startswith("." + message_fd.package + '.')
+            name = name[len('.' + message_fd.package + '.'):]
+        else:
+            assert name.startswith(".")
+            name = name[1:]
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
-            split = name.split('.')
-            for i, segment in enumerate(split):
-                if segment and segment[0].isupper():
-                    return ".".join(split[i:])
-            raise AssertionError("Could not parse local name " + name)
+            return name
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
         split = name.split(".")
-        for i, segment in enumerate(split):
-            if segment and segment[0].isupper():
-                assert message_fd.name.endswith('.proto')
-                import_name = self._import(message_fd.name[:-6].replace('-', '_') + "_pb2", segment)
-                remains = ".".join(split[i + 1:])
-                if not remains:
-                    return import_name
-                # remains could either be a direct import of a nested enum or message
-                # from another package.
-                return import_name + "." + remains
-        raise AssertionError("Could not parse local name " + name)
+        import_name = self._import(message_fd.name[:-6].replace('-', '_') + "_pb2", split[0])
+        remains = ".".join(split[1:])
+        if not remains:
+            return import_name
+        # remains could either be a direct import of a nested enum or message
+        # from another package.
+        return import_name + "." + remains
 
     @contextmanager
     def _indent(self):
