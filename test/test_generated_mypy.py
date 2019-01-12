@@ -13,6 +13,7 @@ import glob
 import os
 
 from test.proto.test_pb2 import FOO, OuterEnum, Simple1
+from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 def test_generate_mypy_matches():
     # type: () -> None
@@ -20,7 +21,7 @@ def test_generate_mypy_matches():
         glob.glob('proto/test/proto/*.proto') +
         glob.glob('proto/test/proto/*/*.proto')
     )
-    assert len(proto_files) == 7  # Just a sanity check that all the files show up
+    assert len(proto_files) == 8  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
@@ -68,3 +69,7 @@ def test_func():
 
     e = FOO
     e = OuterEnum.Value('BAR')
+
+    l = lower2()
+    l.upper.Lower.a = 2
+    assert l == lower2(upper=Upper(Lower=lower(a=2)))

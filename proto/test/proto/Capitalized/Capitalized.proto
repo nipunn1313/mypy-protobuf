@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package Capitalized;
+
+message lower {
+    int64 a = 1;
+}
+
+message Upper {
+    lower Lower = 1;
+}
+
+message lower2 {
+    Upper upper = 1;
+}
