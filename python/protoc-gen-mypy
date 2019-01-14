@@ -10,10 +10,9 @@ import sys
 from collections import defaultdict
 from contextlib import contextmanager
 
-import google.protobuf.descriptor_pb2 as d_typed
+import google.protobuf.descriptor_pb2 as d
 import six
-from google.protobuf.compiler import plugin_pb2 as plugin
-from google.protobuf import descriptor
+from google.protobuf.compiler import plugin_pb2 as plugin_pb2
 
 MYPY = False
 if MYPY:
@@ -22,8 +21,10 @@ if MYPY:
         Callable,
         Dict,
         Generator,
+        Iterable,
         List,
         Set,
+        Sequence,
         Text,
         Tuple,
         cast,
@@ -35,9 +36,6 @@ else:
 
     def cast(type, value):
         return value
-
-# Hax to get around fact that google protobuf libraries aren't in typeshed yet
-d = d_typed  # type: Any
 
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
 HEADER = "# {} by generate_proto_mypy_stubs.py.  Do not edit!\n".format(GENERATED)
@@ -66,10 +64,9 @@ class PkgWriter(object):
         self.imports[imp].add((name, mangled_name))
         return mangled_name
 
-    def _import_message(self, type_name):
-        # type: (d.FieldDescriptorProto) -> Text
+    def _import_message(self, name):
+        # type: (Text) -> Text
         """Import a referenced message and return a handle"""
-        name = cast(Text, type_name)
         message_fd = self.descriptors.message_to_fd[name]
         assert message_fd.name.endswith('.proto')
 
@@ -105,14 +102,14 @@ class PkgWriter(object):
         self.indent = self.indent[:-4]
 
     def _write_line(self, line, *args):
-        # type: (Text, *Text) -> None
+        # type: (Text, *Any) -> None
         if line == "":
             self.lines.append(line)
         else:
             self.lines.append(self.indent + line.format(*args))
 
     def write_enums(self, enums, prefix=''):
-        # type: (List[d.EnumDescriptorProto], str) -> None
+        # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
         for enum in enums:
             l("class {}(int):", enum.name)
@@ -141,7 +138,7 @@ class PkgWriter(object):
             l("")
 
     def write_messages(self, messages, prefix):
-        # type: (List[d.DescriptorProto], Text) -> None
+        # type: (Iterable[d.DescriptorProto], Text) -> None
         l = self._write_line
         message_class = self._import("google.protobuf.message", "Message")
 
@@ -207,7 +204,7 @@ class PkgWriter(object):
             l("")
 
     def write_extensions(self, extensions):
-        # type: (List[d.FieldDescriptorProto]) -> None
+        # type: (Sequence[d.FieldDescriptorProto]) -> None
         if not extensions:
             return
         l = self._write_line
@@ -233,7 +230,7 @@ class PkgWriter(object):
             l(") -> {}[{}]: ...", self._import("concurrent.futures", "Future"), self._import_message(method.output_type))
 
     def write_services(self, services):
-        # type: (d.ServiceDescriptorProto) -> None
+        # type: (Iterable[d.ServiceDescriptorProto]) -> None
         l = self._write_line
         for service in services:
             # The service definition interface
@@ -272,9 +269,9 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(field.type_name),
-        }  # type: Dict[int, Callable[[], Text]]
+        }  # type: Dict[d.FieldDescriptorProto.Type, Callable[[], Text]]
 
-        assert field.type in mapping, "Unrecognized type: " + field.type
+        assert field.type in mapping, "Unrecognized type: " + repr(field.type)
         return mapping[field.type]()
 
     def write(self):
@@ -290,7 +287,7 @@ class PkgWriter(object):
 
 
 def is_scalar(fd):
-    # type: (d.FileDescriptorProto) -> bool
+    # type: (d.FieldDescriptorProto) -> bool
     return not (
         fd.type == d.FieldDescriptorProto.TYPE_MESSAGE or
         fd.type == d.FieldDescriptorProto.TYPE_GROUP
@@ -298,7 +295,7 @@ def is_scalar(fd):
 
 
 def generate_mypy_stubs(descriptors, response, quiet):
-    # type: (Descriptors, plugin.CodeGeneratorResponse, bool) -> None
+    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_enums(fd.enum_type)
@@ -318,7 +315,7 @@ def generate_mypy_stubs(descriptors, response, quiet):
 class Descriptors(object):
 
     def __init__(self, request):
-        # type: (plugin.CodeGeneratorRequest) -> None
+        # type: (plugin_pb2.CodeGeneratorRequest) -> None
         files = {f.name: f for f in request.proto_file}
         to_generate = {n: files[n] for n in request.file_to_generate}
         self.files = files  # type: Dict[Text, d.FileDescriptorProto]
@@ -355,11 +352,11 @@ def main():
         data = sys.stdin.read()
 
     # Parse request
-    request = plugin.CodeGeneratorRequest()
+    request = plugin_pb2.CodeGeneratorRequest()
     request.ParseFromString(data)
 
     # Create response
-    response = plugin.CodeGeneratorResponse()
+    response = plugin_pb2.CodeGeneratorResponse()
 
     # Generate mypy
     generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)
