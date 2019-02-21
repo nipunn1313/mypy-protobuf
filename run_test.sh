@@ -2,7 +2,9 @@
 
 (
     # Create virtualenv + Install requirements for mypy-protobuf
-    python -m virtualenv env
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e env ]]; then
+        python -m virtualenv env
+    fi
     source env/bin/activate
     python -m pip install -r requirements.txt
 
@@ -24,10 +26,14 @@
     : ${PY:=2.7}
 
     # Create virtualenv
-    python3 -m virtualenv mypy_env
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
+        python3 -m virtualenv mypy_env
+    fi
     source mypy_env/bin/activate
-    python3 -m pip install setuptools
-    python3 -m pip install git+https://github.com/python/mypy.git@v0.641
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
+        python3 -m pip install setuptools
+        python3 -m pip install git+https://github.com/python/mypy.git@69a0560b471e8682cbed782997d140694c841cc2
+    fi
 
     # Run mypy
     mypy --python-version=$PY python/protoc-gen-mypy test/

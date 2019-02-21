@@ -201,7 +201,45 @@ class PkgWriter(object):
                 l("def FromString(cls, s: bytes) -> {}: ...", qualified_name)
                 l("def MergeFrom(self, other_msg: {}) -> None: ...", message_class)
                 l("def CopyFrom(self, other_msg: {}) -> None: ...", message_class)
+
+                self.write_stringly_typed_fields(desc)
+
             l("")
+
+    def write_stringly_typed_fields(self, desc):
+        # type: (d.DescriptorProto) -> None
+        """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
+        l = self._write_line
+        hf_fields = ",".join('u"{}"'.format(f.name) for f in desc.field)
+        # cf_fields = ",".join('u"{}"'.format(f.name) for f in desc.field)
+        hf_fields_py2 = ",".join('u"{}",b"{}"'.format(f.name, f.name) for f in desc.field)
+        # cf_fields_py2 = ",".join('u"{}",b"{}"'.format(f.name, f.name) for f in desc.field)
+
+        if not hf_fields: # and not cf_fields:
+            return
+
+        l("if {} >= (3,):", "sys.version_info")
+        with self._indent():
+            if hf_fields:
+                l("def HasField(self, field_name: {}[{}]) -> bool: ...",
+                    self._import("typing_extensions", "Literal"),
+                    hf_fields)
+            # if cf_fields:
+            #    l("def ClearField(self, field_name: {}[{}]) -> None: ...",
+            #        self._import("typing_extensions", "Literal"),
+            #        cf_fields)
+            # l("def WhichOneof(self, oneof_group: {}) -> {}: ...", self._import("typing", "Any"), self._import("typing", "Any"))
+        l("else:")
+        with self._indent():
+            if hf_fields:
+                l("def HasField(self, field_name: {}[{}]) -> bool: ...",
+                    self._import("typing_extensions", "Literal"),
+                    hf_fields_py2)
+            #if cf_fields:
+            #    l("def ClearField(self, field_name: {}[{}]) -> None: ...",
+            #        self._import("typing_extensions", "Literal"),
+            #        cf_fields_py2)
+            # l("def WhichOneof(self, oneof_group: {}) -> {}: ...", self._import("typing", "Any"), self._import("typing", "Any"))
 
     def write_extensions(self, extensions):
         # type: (Sequence[d.FieldDescriptorProto]) -> None
@@ -277,6 +315,7 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
+        imports.append(u"import sys")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):
