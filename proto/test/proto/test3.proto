@@ -7,3 +7,14 @@ enum OuterEnum {
   FOO3 = 1;
   BAR3 = 2;
 }
+
+message OuterMessage3 {
+  bool a_bool = 1;
+}
+
+message SimpleProto3 {
+  string a_string = 1;
+  repeated string a_repeated_string = 2;
+  OuterEnum outer_enum = 3;
+  OuterMessage3 outer_message = 4;
+}

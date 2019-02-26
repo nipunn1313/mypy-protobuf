@@ -11,9 +11,14 @@ a file that should have failures.
 
 import glob
 import os
+import pytest
+import six
 
 from test.proto.test_pb2 import FOO, OuterEnum, Simple1
+from test.proto.test3_pb2 import SimpleProto3
 from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
+
+from typing import Any
 
 def test_generate_mypy_matches():
     # type: () -> None
@@ -73,3 +78,44 @@ def test_func():
     l = lower2()
     l.upper.Lower.a = 2
     assert l == lower2(upper=Upper(Lower=lower(a=2)))
+
+def test_has_field_proto2():
+    # type: () -> None
+    """For HasField, ClearField, and WhichOneOf - which are typed with Literal"""
+    s = Simple1()
+    s.a_string = "Hello"
+
+    # Proto2 tests
+    assert s.HasField(u"a_string")
+    assert s.HasField("a_string")
+    assert not s.HasField("a_inner")
+
+    # Erase the types to verify that incorrect inputs fail at runtime
+    # Each test here should be duplicated in test_negative to ensure mypy fails it too
+    s_untyped = s  # type: Any
+    with pytest.raises(ValueError, match="Unknown field garbage."):
+        s_untyped.HasField("garbage")
+    with pytest.raises(ValueError, match='Protocol message has no singular "a_repeated_string" field'):
+        s_untyped.HasField("a_repeated_string")
+    if six.PY3:
+        with pytest.raises(TypeError, match='bad argument type for built-in operation'):
+            s_untyped.HasField(b"a_string")
+
+def test_has_field_proto3():
+    # type: () -> None
+    s = SimpleProto3()
+    assert not s.HasField(u"outer_message")
+    assert not s.HasField("outer_message")
+
+    # Erase the types to verify that incorrect inputs fail at runtime
+    # Each test here should be duplicated in test_negative to ensure mypy fails it too
+    s_untyped = s  # type: Any
+    with pytest.raises(ValueError, match="Unknown field garbage."):
+        s_untyped.HasField(u"garbage")
+    with pytest.raises(ValueError, match='Can\'t test non-submessage field "a_string" for presence in proto3.'):
+        s_untyped.HasField(u"a_string")
+    with pytest.raises(ValueError, match='Protocol message has no singular "a_repeated_string" field'):
+        s_untyped.HasField(u"a_repeated_string")
+    if six.PY3:
+        with pytest.raises(TypeError, match='bad argument type for built-in operation'):
+            s_untyped.HasField(b"outer_message")
