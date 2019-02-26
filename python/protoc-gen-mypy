@@ -220,7 +220,10 @@ class PkgWriter(object):
             f.name for f in desc.field
             if f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE)
         ]
+        hf_fields.extend(oneof.name for oneof in desc.oneof_decl)
         cf_fields = [f.name for f in desc.field]
+        cf_fields.extend(oneof.name for oneof in desc.oneof_decl)
+
         hf_fields_py3 = ",".join('u"{}"'.format(name) for name in hf_fields)
         cf_fields_py3 = ",".join('u"{}"'.format(name) for name in cf_fields)
         hf_fields_py2 = ",".join('u"{}",b"{}"'.format(name, name) for name in hf_fields)

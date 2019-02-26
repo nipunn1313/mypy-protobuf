@@ -108,6 +108,7 @@ def test_has_field_proto2():
     assert s.HasField("a_string")
     assert not s.HasField("a_inner")
     assert not s.HasField("a_enum")
+    assert not s.HasField("a_oneof")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
@@ -125,6 +126,7 @@ def test_has_field_proto3():
     s = SimpleProto3()
     assert not s.HasField(u"outer_message")
     assert not s.HasField("outer_message")
+    assert not s.HasField("a_oneof")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
@@ -155,6 +157,7 @@ def test_clear_field_proto2():
     s.ClearField("a_string")
     s.ClearField("a_inner")
     s.ClearField("a_repeated_string")
+    s.ClearField("a_oneof")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
@@ -183,6 +186,7 @@ def test_clear_field_proto3():
     s.ClearField("outer_enum")
     s.ClearField("outer_message")
     s.ClearField("a_repeated_string")
+    s.ClearField("a_oneof")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too

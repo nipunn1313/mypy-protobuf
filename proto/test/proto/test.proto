@@ -37,6 +37,11 @@ message Simple1 {
   optional NoPackage no_package = 13;
   optional test.nested_package.AnotherNested.NestedEnum nested_enum = 14;
   optional test.nested_package.AnotherNested.NestedMessage nested_message = 15;
+
+  oneof a_oneof {
+      string a_oneof_1 = 16;
+      string a_oneof_2 = 17;
+  }
 }
 
 message Simple2 {
