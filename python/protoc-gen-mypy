@@ -210,10 +210,21 @@ class PkgWriter(object):
         # type: (d.DescriptorProto) -> None
         """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
         l = self._write_line
-        hf_fields = ",".join('u"{}"'.format(f.name) for f in desc.field)
-        # cf_fields = ",".join('u"{}"'.format(f.name) for f in desc.field)
-        hf_fields_py2 = ",".join('u"{}",b"{}"'.format(f.name, f.name) for f in desc.field)
-        # cf_fields_py2 = ",".join('u"{}",b"{}"'.format(f.name, f.name) for f in desc.field)
+        # HasField accepts bytes/unicode in PY2, but only unicode in PY3
+        # ClearField accepts bytes in PY2 and unicode in PY3
+        #
+        # HasField only supports singular. ClearField supports repeated as well
+        #
+        # In proto3, HasField only supports message fields
+        hf_fields = [
+            f.name for f in desc.field
+            if f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE)
+        ]
+        cf_fields = [f.name for f in desc.field]
+        hf_fields_py3 = ",".join('u"{}"'.format(name) for name in hf_fields)
+        cf_fields_py3 = ",".join('u"{}"'.format(name) for name in cf_fields)
+        hf_fields_py2 = ",".join('u"{}",b"{}"'.format(name, name) for name in hf_fields)
+        cf_fields_py2 = ",".join('b"{}"'.format(name, name) for name in cf_fields)
 
         if not hf_fields: # and not cf_fields:
             return
@@ -223,23 +234,23 @@ class PkgWriter(object):
             if hf_fields:
                 l("def HasField(self, field_name: {}[{}]) -> bool: ...",
                     self._import("typing_extensions", "Literal"),
-                    hf_fields)
-            # if cf_fields:
-            #    l("def ClearField(self, field_name: {}[{}]) -> None: ...",
-            #        self._import("typing_extensions", "Literal"),
-            #        cf_fields)
-            # l("def WhichOneof(self, oneof_group: {}) -> {}: ...", self._import("typing", "Any"), self._import("typing", "Any"))
+                    hf_fields_py3)
+            if cf_fields:
+                l("def ClearField(self, field_name: {}[{}]) -> None: ...",
+                    self._import("typing_extensions", "Literal"),
+                    cf_fields_py3)
+            #l("def WhichOneof(self, oneof_group: {}) -> {}: ...", self._import("typing", "Any"), self._import("typing", "Any"))
         l("else:")
         with self._indent():
             if hf_fields:
                 l("def HasField(self, field_name: {}[{}]) -> bool: ...",
                     self._import("typing_extensions", "Literal"),
                     hf_fields_py2)
-            #if cf_fields:
-            #    l("def ClearField(self, field_name: {}[{}]) -> None: ...",
-            #        self._import("typing_extensions", "Literal"),
-            #        cf_fields_py2)
-            # l("def WhichOneof(self, oneof_group: {}) -> {}: ...", self._import("typing", "Any"), self._import("typing", "Any"))
+            if cf_fields:
+                l("def ClearField(self, field_name: {}[{}]) -> None: ...",
+                    self._import("typing_extensions", "Literal"),
+                    cf_fields_py2)
+             #l("def WhichOneof(self, oneof_group: {}) -> {}: ...", self._import("typing", "Any"), self._import("typing", "Any"))
 
     def write_extensions(self, extensions):
         # type: (Sequence[d.FieldDescriptorProto]) -> None
