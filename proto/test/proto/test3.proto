@@ -17,4 +17,9 @@ message SimpleProto3 {
   repeated string a_repeated_string = 2;
   OuterEnum outer_enum = 3;
   OuterMessage3 outer_message = 4;
+
+  oneof a_oneof {
+      string a_oneof_1 = 5;
+      string a_oneof_2 = 6;
+  }
 }
