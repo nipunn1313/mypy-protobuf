@@ -11,19 +11,14 @@
     # Generate protos
     protoc --version
     protoc --python_out=. --mypy_out=. --plugin=protoc-gen-mypy=python/protoc-gen-mypy --proto_path=proto/ `find proto/test -name "*.proto"`
-
-    # Run unit tests
-    python --version
-    py.test --version
-    py.test
 )
 
 (
+    # Run mypy
+
     # Uncomment these to run on mac
     # eval "$(pyenv init -)"
     # pyenv shell 3.5.5
-
-    : ${PY:=2.7}
 
     # Create virtualenv
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
@@ -36,7 +31,22 @@
     fi
 
     # Run mypy
-    mypy --python-version=$PY python/protoc-gen-mypy test/
+    for PY in 2.7 3.5; do
+        mypy --python-version=$PY python/protoc-gen-mypy test/
+        if ! diff <(mypy --python-version=$PY python/protoc-gen-mypy test_negative/) test_negative/output.expected.$PY; then
+            echo "test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun"
+            for PY in 2.7 3.5; do
+                mypy --python-version=$PY python/protoc-gen-mypy test_negative/ > test_negative/output.expected.$PY || true
+            done
+            exit 1
+        fi
+    done
+)
 
-    diff <(mypy --python-version=$PY python/protoc-gen-mypy test_negative/) test_negative/output.expected.$PY
+(
+    # Run unit tests. These tests generate .expected files
+    source env/bin/activate
+    python --version
+    py.test --version
+    py.test
 )
