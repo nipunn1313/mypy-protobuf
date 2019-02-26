@@ -14,3 +14,7 @@ test_negative/negative.py:50: error: Argument 1 to "ClearField" of "Simple1" has
 test_negative/negative.py:55: error: Argument 1 to "ClearField" of "Simple1" has incompatible type "Literal[b'a_string']"; expected <union: 18 items>
 test_negative/negative.py:58: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_string'], Literal['a_repeated_string'], Literal['outer_enum'], Literal['outer_message'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['a_oneof']]"
 test_negative/negative.py:63: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal[b'a_string']"; expected "Union[Literal['a_string'], Literal['a_repeated_string'], Literal['outer_enum'], Literal['outer_message'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['a_oneof']]"
+test_negative/negative.py:66: error: Argument 1 to "WhichOneof" of "Simple1" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal[b'a_oneof']]"
+test_negative/negative.py:68: error: Incompatible types in assignment (expression has type "str", variable has type "int")
+test_negative/negative.py:71: error: Argument 1 to "WhichOneof" of "SimpleProto3" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal[b'a_oneof']]"
+test_negative/negative.py:72: error: Incompatible types in assignment (expression has type "str", variable has type "int")

@@ -61,3 +61,12 @@ if six.PY2:
     s6.ClearField(u"a_string")  # E:2.7
 else:
     s6.ClearField(b"a_string")  # E:3.5
+
+# Proto2 WhichOneof
+s.WhichOneof("garbage")  # E:2.7 E:3.5
+a = 5
+a = s.WhichOneof("a_oneof")  # E:2.7 E:3.5
+
+# Proto3 WhichOneof
+s6.WhichOneof("garbage")  # E:2.7 E:3.5
+a = s6.WhichOneof("a_oneof")  # E:2.7 E:3.5

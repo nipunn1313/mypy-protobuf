@@ -199,3 +199,35 @@ def test_clear_field_proto3():
             s_untyped.ClearField(u"a_string")
         else:
             s_untyped.ClearField(b"a_string")
+
+def test_which_oneof_proto2():
+    # type: () -> None
+    s = Simple1()
+
+    assert s.WhichOneof("a_oneof") is None
+    s.a_oneof_1 = "hello"
+    assert s.WhichOneof("a_oneof") == "a_oneof_1"
+    assert s.WhichOneof(u"a_oneof") == "a_oneof_1"
+    assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
+
+    # Erase the types to verify that incorrect inputs fail at runtime
+    # Each test here should be duplicated in test_negative to ensure mypy fails it too
+    s_untyped = s  # type: Any
+    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
+        s_untyped.WhichOneof("garbage")
+
+def test_which_oneof_proto3():
+    # type: () -> None
+    s = SimpleProto3()
+
+    assert s.WhichOneof("a_oneof") is None
+    s.a_oneof_1 = "hello"
+    assert s.WhichOneof("a_oneof") == "a_oneof_1"
+    assert s.WhichOneof(u"a_oneof") == "a_oneof_1"
+    assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
+
+    # Erase the types to verify that incorrect inputs fail at runtime
+    # Each test here should be duplicated in test_negative to ensure mypy fails it too
+    s_untyped = s  # type: Any
+    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
+        s_untyped.WhichOneof("garbage")
