@@ -12,10 +12,6 @@ from typing import (
     Optional as typing___Optional,
 )
 
-from typing_extensions import (
-    Literal as typing_extensions___Literal,
-)
-
 
 class Inner(google___protobuf___message___Message):
     a = ... # type: test___proto___test3_pb2___OuterEnum
@@ -27,7 +23,3 @@ class Inner(google___protobuf___message___Message):
     def FromString(cls, s: bytes) -> Inner: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    if sys.version_info >= (3,):
-        def HasField(self, field_name: typing_extensions___Literal[u"a"]) -> bool: ...
-    else:
-        def HasField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> bool: ...

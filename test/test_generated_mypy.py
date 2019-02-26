@@ -81,7 +81,7 @@ def test_func():
 
 def test_has_field_proto2():
     # type: () -> None
-    """For HasField, ClearField, and WhichOneOf - which are typed with Literal"""
+    """For HasField which is typed with Literal"""
     s = Simple1()
     s.a_string = "Hello"
 
@@ -89,6 +89,7 @@ def test_has_field_proto2():
     assert s.HasField(u"a_string")
     assert s.HasField("a_string")
     assert not s.HasField("a_inner")
+    assert not s.HasField("a_enum")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
@@ -114,8 +115,65 @@ def test_has_field_proto3():
         s_untyped.HasField(u"garbage")
     with pytest.raises(ValueError, match='Can\'t test non-submessage field "a_string" for presence in proto3.'):
         s_untyped.HasField(u"a_string")
+    with pytest.raises(ValueError, match='Can\'t test non-submessage field "outer_enum" for presence in proto3.'):
+        s_untyped.HasField("outer_enum")
     with pytest.raises(ValueError, match='Protocol message has no singular "a_repeated_string" field'):
         s_untyped.HasField(u"a_repeated_string")
     if six.PY3:
         with pytest.raises(TypeError, match='bad argument type for built-in operation'):
             s_untyped.HasField(b"outer_message")
+
+def test_clear_field_proto2():
+    # type: () -> None
+    """For ClearField which is typed with Literal"""
+    s = Simple1()
+    s.a_string = "Hello"
+
+    # Proto2 tests
+    if six.PY3:
+        s.ClearField(u"a_string")
+    else:
+        s.ClearField(b"a_string")
+    s.ClearField("a_string")
+    s.ClearField("a_inner")
+    s.ClearField("a_repeated_string")
+
+    # Erase the types to verify that incorrect inputs fail at runtime
+    # Each test here should be duplicated in test_negative to ensure mypy fails it too
+    s_untyped = s  # type: Any
+    with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
+        s_untyped.ClearField("garbage")
+    # This error message is very inconsistent w/ how HasField works
+    with pytest.raises(TypeError, match='field name must be a string'):
+        if six.PY2:
+            s_untyped.ClearField(u"a_string")
+        else:
+            s_untyped.ClearField(b"a_string")
+
+def test_clear_field_proto3():
+    # type: () -> None
+    """For ClearField which is typed with Literal"""
+    s = SimpleProto3()
+    s.a_string = "Hello"
+
+    # Proto2 tests
+    if six.PY3:
+        s.ClearField(u"a_string")
+    else:
+        s.ClearField(b"a_string")
+    s.ClearField("a_string")
+    s.ClearField("outer_enum")
+    s.ClearField("outer_message")
+    s.ClearField("a_repeated_string")
+
+    # Erase the types to verify that incorrect inputs fail at runtime
+    # Each test here should be duplicated in test_negative to ensure mypy fails it too
+    s_untyped = s  # type: Any
+    with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
+        s_untyped.ClearField("garbage")
+    # This error message is very inconsistent w/ how HasField works
+    with pytest.raises(TypeError, match='field name must be a string'):
+        if six.PY2:
+            s_untyped.ClearField(u"a_string")
+        else:
+            s_untyped.ClearField(b"a_string")

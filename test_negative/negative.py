@@ -35,14 +35,33 @@ l.extend(s5.a_repeated_string)
 e = FOO
 e = 3  # failure
 
+# Proto2
 s.HasField("garbage")
 s.HasField("a_repeated_string")
 if six.PY3:
     s.HasField(b"a_string")
 
+# Proto3
 s6 = SimpleProto3()
 s6.HasField(u"garbage")
 s6.HasField(u"a_string")
+s6.HasField(u"outer_enum")
 s6.HasField(u"a_repeated_string")
 if six.PY3:
     s6.HasField(b"outer_message")
+
+# Proto2
+s.ClearField("garbage")
+# This error message is very inconsistent w/ how HasField works
+if six.PY2:
+    s.ClearField(u"a_string")
+else:
+    s.ClearField(b"a_string")
+
+# Proto3
+s6.ClearField("garbage")
+# This error message is very inconsistent w/ how HasField works
+if six.PY2:
+    s6.ClearField(u"a_string")
+else:
+    s6.ClearField(b"a_string")
