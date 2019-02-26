@@ -16,52 +16,48 @@ from test.proto.test3_pb2 import SimpleProto3
 s = Simple1()
 s.a_string = "Hello"
 
-s2 = Simple1.FromString(s.SerializeToStringg())  # failure
-assert s2.a_string == "Hello"
+s2 = Simple1.FromString(s.SerializeToStringg())  # E:2.7 E:3.5
 
 s3 = Simple1()
 s3.ParseFromString(s)  # will be a failure once typeshed marks this as taking `bytes`
-assert s3.a_string == "Hello"
 
 s4 = Simple1()
-s4.CopyFrom(s.SerializeToString())  # failure
-assert s4.a_string == "Hello"
+s4.CopyFrom(s.SerializeToString())  # E:2.7 E:3.5
 
 s5 = Simple1()
-s5.a_repeated_string.append("World")
 l = []  # type: List[int]
-l.extend(s5.a_repeated_string)
+l.extend(s5.a_repeated_string)  # E:2.7 E:3.5
 
 e = FOO
-e = 3  # failure
+e = 3  # E:2.7 E:3.5
 
 # Proto2
-s.HasField("garbage")
-s.HasField("a_repeated_string")
+s.HasField("garbage")  # E:2.7 E:3.5
+s.HasField("a_repeated_string")  # E:2.7 E:3.5
 if six.PY3:
-    s.HasField(b"a_string")
+    s.HasField(b"a_string")  # E:3.5
 
 # Proto3
 s6 = SimpleProto3()
-s6.HasField(u"garbage")
-s6.HasField(u"a_string")
-s6.HasField(u"outer_enum")
-s6.HasField(u"a_repeated_string")
+s6.HasField(u"garbage")  # E:2.7 E:3.5
+s6.HasField(u"a_string")  # E:2.7 E:3.5
+s6.HasField(u"outer_enum")  # E:2.7 E:3.5
+s6.HasField(u"a_repeated_string")  # E:2.7 E:3.5
 if six.PY3:
-    s6.HasField(b"outer_message")
+    s6.HasField(b"outer_message")  # E:3.5
 
 # Proto2
-s.ClearField("garbage")
+s.ClearField("garbage")  # E:2.7 E:3.5
 # This error message is very inconsistent w/ how HasField works
 if six.PY2:
-    s.ClearField(u"a_string")
+    s.ClearField(u"a_string")  # E:2.7
 else:
-    s.ClearField(b"a_string")
+    s.ClearField(b"a_string")  # E:3.5
 
 # Proto3
-s6.ClearField("garbage")
+s6.ClearField("garbage")  # E:2.7 E:3.5
 # This error message is very inconsistent w/ how HasField works
 if six.PY2:
-    s6.ClearField(u"a_string")
+    s6.ClearField(u"a_string")  # E:2.7
 else:
-    s6.ClearField(b"a_string")
+    s6.ClearField(b"a_string")  # E:3.5

@@ -53,6 +53,24 @@ def test_generate_mypy_matches():
     if failures:
         raise Exception(str(failures))
 
+def test_generate_negative_matches():
+    # type: () -> None
+    """Confirm that the test_negative expected file matches an error for each line"""
+    test_negative_lines = open('test_negative/negative.py').readlines()
+    errors_27 = open('test_negative/output.expected.2.7').readlines()
+    errors_35 = open('test_negative/output.expected.3.5').readlines()
+
+    expected_errors_27 = [idx + 1 for idx, line in enumerate(test_negative_lines) if 'E:2.7' in line]
+    expected_errors_35 = [idx + 1 for idx, line in enumerate(test_negative_lines) if 'E:3.5' in line]
+
+    for err, exp_err_idx in zip(errors_27, expected_errors_27):
+        assert err.startswith('test_negative/negative.py:%d' % exp_err_idx)
+    for err, exp_err_idx in zip(errors_35, expected_errors_35):
+        assert err.startswith('test_negative/negative.py:%d' % exp_err_idx)
+
+    assert len(expected_errors_27) == len(errors_27)
+    assert len(expected_errors_35) == len(errors_35)
+
 def test_func():
     # type: () -> None
     s = Simple1(a_string="hello")
