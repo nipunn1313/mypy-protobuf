@@ -22,4 +22,9 @@ message SimpleProto3 {
       string a_oneof_1 = 5;
       string a_oneof_2 = 6;
   }
+
+  oneof b_oneof {
+      string b_oneof_1 = 7;
+      string b_oneof_2 = 8;
+  }
 }
