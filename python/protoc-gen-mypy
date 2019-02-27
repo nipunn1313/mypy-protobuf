@@ -217,22 +217,27 @@ class PkgWriter(object):
         # HasField only supports singular. ClearField supports repeated as well
         #
         # In proto3, HasField only supports message fields
+        #
+        # HasField always supports oneof fields
         hf_fields = [
             f.name for f in desc.field
-            if f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE)
+            if f.HasField("oneof_index") or
+                (f.label != d.FieldDescriptorProto.LABEL_REPEATED and
+                    (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE))
         ]
         cf_fields = [f.name for f in desc.field]
-        wo_fields = [oneof.name for oneof in desc.oneof_decl]
+        wo_fields = {
+            oneof.name: [f.name for f in desc.field if f.HasField("oneof_index") and f.oneof_index == idx]
+            for idx, oneof in enumerate(desc.oneof_decl)
+        }
 
-        hf_fields.extend(wo_fields)
-        cf_fields.extend(wo_fields)
+        hf_fields.extend(wo_fields.keys())
+        cf_fields.extend(wo_fields.keys())
 
-        hf_fields_py3 = ",".join('u"{}"'.format(name) for name in hf_fields)
-        cf_fields_py3 = ",".join('u"{}"'.format(name) for name in cf_fields)
-        hf_fields_py2 = ",".join('u"{}",b"{}"'.format(name, name) for name in hf_fields)
-        cf_fields_py2 = ",".join('b"{}"'.format(name, name) for name in cf_fields)
-
-        wo_fields_py23 = ",".join('u"{}",b"{}"'.format(name, name) for name in wo_fields)
+        hf_fields_py3 = ",".join(sorted('u"{}"'.format(name) for name in hf_fields))
+        cf_fields_py3 = ",".join(sorted('u"{}"'.format(name) for name in cf_fields))
+        hf_fields_py2 = ",".join(sorted('u"{}",b"{}"'.format(name, name) for name in hf_fields))
+        cf_fields_py2 = ",".join(sorted('b"{}"'.format(name, name) for name in cf_fields))
 
         if not hf_fields and not cf_fields and not wo_fields:
             return
@@ -257,11 +262,16 @@ class PkgWriter(object):
                 l("def ClearField(self, field_name: {}[{}]) -> None: ...",
                     self._import("typing_extensions", "Literal"),
                     cf_fields_py2)
-        if wo_fields:
-            l("def WhichOneof(self, oneof_group: {}[{}]) -> {}: ...",
+        for wo_field, members in sorted(wo_fields.items()):
+            if len(wo_fields) > 1:
+                l("@{}", self._import("typing", "overload"))
+            l("def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}]: ...",
                 self._import("typing_extensions", "Literal"),
-                wo_fields_py23,
-                self._import("typing", "Text"))
+                # Accepts both unicode and bytes in both py2 and py3
+                'u"{}",b"{}"'.format(wo_field, wo_field),
+                self._import("typing_extensions", "Literal"),
+                # Returns `str` in both py2 and py3 (bytes in py2, unicode in py3)
+                ",".join('"{}"'.format(m) for m in members))
 
     def write_extensions(self, extensions):
         # type: (Sequence[d.FieldDescriptorProto]) -> None

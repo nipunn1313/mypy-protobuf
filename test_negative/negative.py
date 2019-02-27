@@ -10,7 +10,7 @@ from typing import (
     Text,
 )
 
-from test.proto.test_pb2 import FOO, Simple1
+from test.proto.test_pb2 import FOO, Simple1, Simple2
 from test.proto.test3_pb2 import SimpleProto3
 
 s = Simple1()
@@ -66,7 +66,18 @@ else:
 s.WhichOneof("garbage")  # E:2.7 E:3.5
 a = 5
 a = s.WhichOneof("a_oneof")  # E:2.7 E:3.5
+b = s.WhichOneof("a_oneof")
+s.HasField(b)  # allowed
+simple2 = Simple2(a_string="abc")
+simple2.HasField(b)  # E:2.7 E:3.5
 
 # Proto3 WhichOneof
 s6.WhichOneof("garbage")  # E:2.7 E:3.5
 a = s6.WhichOneof("a_oneof")  # E:2.7 E:3.5
+b = s6.WhichOneof("a_oneof")
+s6.HasField(b)  # allowed
+simple2.HasField(b)  # E:2.7 E:3.5  - it's a text but not one of the literals
+
+# Overload WhichOneof
+c = s6.WhichOneof("a_oneof")
+c = s6.WhichOneof("b_oneof")  # E:2.7 E:3.5
