@@ -16,10 +16,6 @@
 (
     # Run mypy
 
-    # Uncomment these to run on mac
-    # eval "$(pyenv init -)"
-    # pyenv shell 3.5.5
-
     # Create virtualenv
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
         python3 -m virtualenv mypy_env
