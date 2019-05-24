@@ -36,6 +36,7 @@ class NoPackage2(google___protobuf___message___Message):
     def np_rep(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[NoPackage]: ...
 
     def __init__(self,
+        *,
         np : typing___Optional[NoPackage] = None,
         np_rep : typing___Optional[typing___Iterable[NoPackage]] = None,
         ) -> None: ...

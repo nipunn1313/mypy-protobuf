@@ -179,6 +179,10 @@ class PkgWriter(object):
                 # Constructor
                 l("def __init__(self,")
                 with self._indent():
+                    if len(desc.field) > 0:
+                        # Only positional args allowed
+                        # See https://github.com/dropbox/mypy-protobuf/issues/71
+                        l("*,")
                     # Required args
                     for field in [f for f in desc.field if f.label == d.FieldDescriptorProto.LABEL_REQUIRED]:
                         l("{} : {},", field.name, self.python_type(field))

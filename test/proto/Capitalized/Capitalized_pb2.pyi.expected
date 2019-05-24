@@ -17,6 +17,7 @@ class lower(google___protobuf___message___Message):
     a = ... # type: int
 
     def __init__(self,
+        *,
         a : typing___Optional[int] = None,
         ) -> None: ...
     @classmethod
@@ -34,6 +35,7 @@ class Upper(google___protobuf___message___Message):
     def Lower(self) -> lower: ...
 
     def __init__(self,
+        *,
         Lower : typing___Optional[lower] = None,
         ) -> None: ...
     @classmethod
@@ -53,6 +55,7 @@ class lower2(google___protobuf___message___Message):
     def upper(self) -> Upper: ...
 
     def __init__(self,
+        *,
         upper : typing___Optional[Upper] = None,
         ) -> None: ...
     @classmethod

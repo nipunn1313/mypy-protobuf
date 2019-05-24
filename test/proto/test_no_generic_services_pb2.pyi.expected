@@ -17,6 +17,7 @@ class Simple3(google___protobuf___message___Message):
     a_string = ... # type: typing___Text
 
     def __init__(self,
+        *,
         a_string : typing___Text,
         ) -> None: ...
     @classmethod

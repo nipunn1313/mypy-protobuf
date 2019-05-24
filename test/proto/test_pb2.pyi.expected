@@ -131,6 +131,7 @@ class Simple1(google___protobuf___message___Message):
     def nested_message(self) -> test___proto___nested___nested_pb2___AnotherNested.NestedMessage: ...
 
     def __init__(self,
+        *,
         a_string : typing___Optional[typing___Text] = None,
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = None,
         a_boolean : typing___Optional[bool] = None,
@@ -165,6 +166,7 @@ class Simple2(google___protobuf___message___Message):
     a_string = ... # type: typing___Text
 
     def __init__(self,
+        *,
         a_string : typing___Text,
         ) -> None: ...
     @classmethod
