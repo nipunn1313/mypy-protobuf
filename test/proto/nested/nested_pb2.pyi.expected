@@ -29,6 +29,7 @@ class Nested(google___protobuf___message___Message):
     a = ... # type: test___proto___test3_pb2___OuterEnum
 
     def __init__(self,
+        *,
         a : typing___Optional[test___proto___test3_pb2___OuterEnum] = None,
         ) -> None: ...
     @classmethod
@@ -80,6 +81,7 @@ class AnotherNested(google___protobuf___message___Message):
         ne2 = ... # type: AnotherNested.NestedMessage.NestedEnum2
 
         def __init__(self,
+            *,
             s : typing___Optional[typing___Text] = None,
             b : typing___Optional[bool] = None,
             ne : typing___Optional[AnotherNested.NestedEnum] = None,
