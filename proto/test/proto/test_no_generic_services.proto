@@ -6,6 +6,6 @@ message Simple3 {
   required string a_string = 1;
 }
 
-service TestService2 {
+service ATestService2 {
     rpc Echo(Simple3) returns (Simple3) {}
 }

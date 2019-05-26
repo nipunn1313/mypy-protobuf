@@ -11,16 +11,16 @@ test_negative/negative.py:44: error: Argument 1 to "HasField" of "SimpleProto3" 
 test_negative/negative.py:45: error: Argument 1 to "HasField" of "SimpleProto3" has incompatible type "Literal['a_repeated_string']"; expected "Union[Literal['a_oneof'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['b_oneof'], Literal['b_oneof_1'], Literal['b_oneof_2'], Literal['outer_message']]"
 test_negative/negative.py:47: error: Argument 1 to "HasField" of "SimpleProto3" has incompatible type "Literal[b'outer_message']"; expected "Union[Literal['a_oneof'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['b_oneof'], Literal['b_oneof_1'], Literal['b_oneof_2'], Literal['outer_message']]"
 test_negative/negative.py:50: error: Argument 1 to "ClearField" of "Simple1" has incompatible type "Literal['garbage']"; expected <union: 18 items>
-test_negative/negative.py:55: error: Argument 1 to "ClearField" of "Simple1" has incompatible type "Literal[b'a_string']"; expected <union: 18 items>
-test_negative/negative.py:58: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['a_repeated_string'], Literal['a_string'], Literal['b_oneof'], Literal['b_oneof_1'], Literal['b_oneof_2'], Literal['outer_enum'], Literal['outer_message']]"
-test_negative/negative.py:63: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal[b'a_string']"; expected "Union[Literal['a_oneof'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['a_repeated_string'], Literal['a_string'], Literal['b_oneof'], Literal['b_oneof_1'], Literal['b_oneof_2'], Literal['outer_enum'], Literal['outer_message']]"
-test_negative/negative.py:66: error: Argument 1 to "WhichOneof" of "Simple1" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal[b'a_oneof']]"
-test_negative/negative.py:68: error: Incompatible types in assignment (expression has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]", variable has type "int")
-test_negative/negative.py:72: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]"; expected "Literal['a_string']"
-test_negative/negative.py:75: error: No overload variant of "WhichOneof" of "SimpleProto3" matches argument type "str"
-test_negative/negative.py:75: note: Possible overload variants:
-test_negative/negative.py:75: note:     def WhichOneof(self, oneof_group: Union[Literal['a_oneof'], Literal[b'a_oneof']]) -> Union[Literal['a_oneof_1'], Literal['a_oneof_2']]
-test_negative/negative.py:75: note:     def WhichOneof(self, oneof_group: Union[Literal['b_oneof'], Literal[b'b_oneof']]) -> Union[Literal['b_oneof_1'], Literal['b_oneof_2']]
-test_negative/negative.py:76: error: Incompatible types in assignment (expression has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]", variable has type "int")
-test_negative/negative.py:79: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]"; expected "Literal['a_string']"
-test_negative/negative.py:83: error: Incompatible types in assignment (expression has type "Union[Literal['b_oneof_1'], Literal['b_oneof_2']]", variable has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]")
+test_negative/negative.py:53: error: Argument 1 to "ClearField" of "Simple1" has incompatible type "Literal[b'a_string']"; expected <union: 18 items>
+test_negative/negative.py:56: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['a_repeated_string'], Literal['a_string'], Literal['b_oneof'], Literal['b_oneof_1'], Literal['b_oneof_2'], Literal['outer_enum'], Literal['outer_message']]"
+test_negative/negative.py:59: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal[b'a_string']"; expected "Union[Literal['a_oneof'], Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['a_repeated_string'], Literal['a_string'], Literal['b_oneof'], Literal['b_oneof_1'], Literal['b_oneof_2'], Literal['outer_enum'], Literal['outer_message']]"
+test_negative/negative.py:62: error: Argument 1 to "WhichOneof" of "Simple1" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal[b'a_oneof']]"
+test_negative/negative.py:64: error: Incompatible types in assignment (expression has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]", variable has type "int")
+test_negative/negative.py:68: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]"; expected "Literal['a_string']"
+test_negative/negative.py:71: error: No overload variant of "WhichOneof" of "SimpleProto3" matches argument type "str"
+test_negative/negative.py:71: note: Possible overload variants:
+test_negative/negative.py:71: note:     def WhichOneof(self, oneof_group: Union[Literal['a_oneof'], Literal[b'a_oneof']]) -> Union[Literal['a_oneof_1'], Literal['a_oneof_2']]
+test_negative/negative.py:71: note:     def WhichOneof(self, oneof_group: Union[Literal['b_oneof'], Literal[b'b_oneof']]) -> Union[Literal['b_oneof_1'], Literal['b_oneof_2']]
+test_negative/negative.py:72: error: Incompatible types in assignment (expression has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]", variable has type "int")
+test_negative/negative.py:75: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]"; expected "Literal['a_string']"
+test_negative/negative.py:79: error: Incompatible types in assignment (expression has type "Union[Literal['b_oneof_1'], Literal['b_oneof_2']]", variable has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2']]")
