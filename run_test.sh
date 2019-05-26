@@ -18,12 +18,13 @@
 
     # Create virtualenv
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
+        python3 --version
         python3 -m virtualenv mypy_env
     fi
     source mypy_env/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@69a0560b471e8682cbed782997d140694c841cc2
+        python3 -m pip install git+https://github.com/python/mypy.git@v0.701
     fi
 
     # Run mypy

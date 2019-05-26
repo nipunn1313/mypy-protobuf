@@ -1,12 +1,12 @@
 # Config file for automatic testing at travis-ci.org
+dist: xenial
 language: python
 
-matrix:
-    include:
-        - python: 2.7
-          env: PY=2.7
-        - python: 3.5
-          env: PY=3.5
+python:
+    - "2.7"
+    - "3.5"
+    - "3.6"
+    - "3.7"
 
 before_install:
     - sudo add-apt-repository ppa:maarten-fonville/protobuf -y
@@ -14,7 +14,6 @@ before_install:
     # We have to install protoc, and python libs for both python and python3, since mypy runs py3
     - sudo apt-get install -qq protobuf-compiler python-protobuf python3-protobuf python3 python3-pip
     - python -m pip install virtualenv
-    # I would use --user, but travisCI doesn't like that when building with the py3 environment
-    - sudo python3 -m pip install virtualenv
+    - python3 -m pip install virtualenv
 script:
     - ./run_test.sh
