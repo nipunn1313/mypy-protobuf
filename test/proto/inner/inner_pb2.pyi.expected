@@ -18,11 +18,11 @@ from typing_extensions import (
 
 
 class Inner(google___protobuf___message___Message):
-    a = ... # type: test___proto___test3_pb2___OuterEnum
+    a = ... # type: test___proto___test3_pb2___OuterEnum.ClosedValueType
 
     def __init__(self,
         *,
-        a : typing___Optional[test___proto___test3_pb2___OuterEnum] = None,
+        a : typing___Optional[test___proto___test3_pb2___OuterEnum.ClosedValueType] = None,
         ) -> None: ...
     @classmethod
     def FromString(cls, s: bytes) -> Inner: ...
