@@ -40,6 +40,42 @@ else:
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
 HEADER = "# {} by generate_proto_mypy_stubs.py.  Do not edit!\n".format(GENERATED)
 
+# See https://github.com/dropbox/mypy-protobuf/issues/73 for details
+PYTHON_RESERVED = set([
+	'False',
+	'None',
+	'True',
+	'and',
+	'as',
+	'assert',
+	'break',
+	'continue',
+	'def',
+	'del',
+	'elif',
+	'else',
+	'except',
+	'finally',
+	'for',
+	'from',
+	'global',
+	'if',
+	'import',
+	'in',
+	'is',
+	'lambda',
+	'nonlocal',
+	'not',
+	'or',
+	'pass',
+	'raise',
+	'return',
+	'try',
+	'while',
+	'with',
+	'yield'
+])
+
 class PkgWriter(object):
     """Writes a single pyi file"""
 
@@ -111,7 +147,7 @@ class PkgWriter(object):
     def write_enums(self, enums, prefix=''):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
-        for enum in enums:
+        for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
             l("class {}(int):", enum.name)
             with self._indent():
                 l("DESCRIPTOR: {} = ...",
@@ -142,7 +178,7 @@ class PkgWriter(object):
         l = self._write_line
         message_class = self._import("google.protobuf.message", "Message")
 
-        for desc in messages:
+        for desc in [m for m in messages if m.name not in PYTHON_RESERVED]:
             self.locals.add(desc.name)
             qualified_name = prefix + desc.name
             l("class {}({}):", desc.name, message_class)
@@ -150,9 +186,10 @@ class PkgWriter(object):
                 # Nested enums/messages
                 self.write_enums(desc.enum_type, qualified_name + ".")
                 self.write_messages(desc.nested_type, qualified_name + ".")
+                fields = [f for f in desc.field if f.name not in PYTHON_RESERVED]
 
                 # Scalar fields
-                for field in [f for f in desc.field if is_scalar(f)]:
+                for field in [f for f in fields if is_scalar(f)]:
                     if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
                         container = self._import("google.protobuf.internal.containers", "RepeatedScalarFieldContainer")
                         l("{} = ... # type: {}[{}]", field.name, container, self.python_type(field))
@@ -161,7 +198,7 @@ class PkgWriter(object):
                 l("")
 
                 # Getters for non-scalar fields
-                for field in [f for f in desc.field if not is_scalar(f)]:
+                for field in [f for f in fields if not is_scalar(f)]:
                     l("@property")
                     if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
                         msg = self.descriptors.messages[field.type_name]
@@ -179,14 +216,14 @@ class PkgWriter(object):
                 # Constructor
                 l("def __init__(self,")
                 with self._indent():
-                    if len(desc.field) > 0:
+                    if len(fields) > 0:
                         # Only positional args allowed
                         # See https://github.com/dropbox/mypy-protobuf/issues/71
                         l("*,")
                     # Required args
-                    for field in [f for f in desc.field if f.label == d.FieldDescriptorProto.LABEL_REQUIRED]:
+                    for field in [f for f in fields if f.label == d.FieldDescriptorProto.LABEL_REQUIRED]:
                         l("{} : {},", field.name, self.python_type(field))
-                    for field in [f for f in desc.field if f.label != d.FieldDescriptorProto.LABEL_REQUIRED]:
+                    for field in [f for f in fields if f.label != d.FieldDescriptorProto.LABEL_REQUIRED]:
                         if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
                             if field.type_name in self.descriptors.messages and self.descriptors.messages[field.type_name].options.map_entry:
                                 msg = self.descriptors.messages[field.type_name]
@@ -290,7 +327,10 @@ class PkgWriter(object):
     def write_methods(self, service, is_abstract):
         # type: (d.ServiceDescriptorProto, bool) -> None
         l = self._write_line
-        for method in service.method:
+        methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
+        if not methods:
+            l("pass")
+        for method in methods:
             if is_abstract:
                 l("@{}", self._import("abc", "abstractmethod"))
             l("def {}(self,", method.name)
@@ -306,7 +346,7 @@ class PkgWriter(object):
     def write_services(self, services):
         # type: (Iterable[d.ServiceDescriptorProto]) -> None
         l = self._write_line
-        for service in services:
+        for service in [s for s in services if s.name not in PYTHON_RESERVED]:
             # The service definition interface
             l("class {}({}, metaclass={}):", service.name, self._import("google.protobuf.service", "Service"), self._import("abc", "ABCMeta"))
             with self._indent():

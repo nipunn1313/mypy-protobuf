@@ -48,6 +48,54 @@ message Simple2 {
   required string a_string = 1;
 }
 
+message PythonReservedKeywords {
+  enum finally {
+      continue = 1;
+  }
+  // protoc python generator actually generates invalid code for this, so not testing
+  //message lambda {
+  //    optional int64 continue = 1;
+  //}
+
+  required int64 from = 1;
+  optional Simple2 in = 2;
+  optional finally is = 3;
+  optional int64 for = 5;
+  optional int64 try = 6;
+  optional int64 def = 7;
+  optional int64 nonlocal = 8;
+  optional int64 while = 9;
+  optional int64 and = 10;
+  optional int64 del = 11;
+  optional int64 global = 12;
+  optional int64 not = 13;
+  optional int64 with = 14;
+  optional int64 as = 15;
+  optional int64 elif = 16;
+  optional int64 if = 17;
+  optional int64 or = 18;
+  optional int64 yield = 19;
+  optional int64 assert = 20;
+  optional int64 else = 21;
+  optional int64 import = 22;
+  optional int64 pass = 23;
+  optional int64 break = 24;
+  optional int64 except = 25;
+  optional int64 raise = 26;
+  optional int64 False = 27;
+  optional int64 None = 28;
+  optional int64 True = 29;
+}
+
+// Do one with just one arg - to make sure it's syntactically correct
+message PythonReservedKeywordsSmall {
+  required int64 from = 1;
+}
+
+service PythonReservedKeywordsService {
+    rpc lambda(Simple1) returns (Simple2) {}
+}
+
 option py_generic_services = true;
 service ATestService {
     rpc Echo(Simple1) returns (Simple2) {}
