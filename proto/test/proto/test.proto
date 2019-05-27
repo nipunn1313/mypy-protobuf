@@ -49,6 +49,6 @@ message Simple2 {
 }
 
 option py_generic_services = true;
-service TestService {
+service ATestService {
     rpc Echo(Simple1) returns (Simple2) {}
 }

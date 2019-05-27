@@ -49,17 +49,13 @@ if six.PY3:
 # Proto2
 s.ClearField("garbage")  # E:2.7 E:3.5
 # This error message is very inconsistent w/ how HasField works
-if six.PY2:
-    s.ClearField(u"a_string")  # E:2.7
-else:
+if six.PY3:
     s.ClearField(b"a_string")  # E:3.5
 
 # Proto3
 s6.ClearField("garbage")  # E:2.7 E:3.5
 # This error message is very inconsistent w/ how HasField works
-if six.PY2:
-    s6.ClearField(u"a_string")  # E:2.7
-else:
+if six.PY3:
     s6.ClearField(b"a_string")  # E:3.5
 
 # Proto2 WhichOneof

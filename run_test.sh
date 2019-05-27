@@ -1,11 +1,15 @@
 #!/bin/bash -ex
 
+PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
+VENV=venv_$PY_VERSION
+MYPY_VENV=venv_mypy
+
 (
     # Create virtualenv + Install requirements for mypy-protobuf
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e env ]]; then
-        python -m virtualenv env
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+        python -m virtualenv $VENV
     fi
-    source env/bin/activate
+    source $VENV/bin/activate
     python -m pip install -r requirements.txt
 
     # Generate protos
@@ -14,15 +18,15 @@
 )
 
 (
-    # Run mypy
+    # Run mypy (always under python3)
 
     # Create virtualenv
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 --version
-        python3 -m virtualenv mypy_env
+        python3 -m virtualenv $MYPY_VENV
     fi
-    source mypy_env/bin/activate
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e mypy_env ]]; then
+    source $MYPY_VENV/bin/activate
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
         python3 -m pip install git+https://github.com/python/mypy.git@v0.701
     fi
@@ -42,7 +46,7 @@
 
 (
     # Run unit tests. These tests generate .expected files
-    source env/bin/activate
+    source $VENV/bin/activate
     python --version
     py.test --version
     py.test
