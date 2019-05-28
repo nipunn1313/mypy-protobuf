@@ -18,3 +18,10 @@ before_install:
     - python3 -m pip install virtualenv
 script:
     - ./run_test.sh
+
+
+jobs:
+    include:
+        - python: 3.6
+          before_install: python3 -m pip install black
+          script: black --check python/ test/
