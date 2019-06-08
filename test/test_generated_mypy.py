@@ -80,6 +80,9 @@ def test_func():
     s.a_repeated_string.append("Hello")
     s.a_enum = FOO
     assert s.a_enum == FOO
+    if False:  # requires Protobuf >=3.8
+        s.a_enum = OuterEnum.FOO
+        assert s.a_enum == FOO
     s.a_enum = 1
     assert s.a_enum == FOO
     assert FOO == 1
