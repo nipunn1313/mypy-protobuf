@@ -146,6 +146,13 @@ class PkgWriter(object):
         else:
             self.lines.append(self.indent + line.format(*args))
 
+    def write_enum_values(self, enum, prefix):
+        for val in enum.value:
+            if val.name in PYTHON_RESERVED:
+                continue
+
+            self._write_line("{}: {}[{}]", val.name, self._import("typing_extensions", "Literal"), val.number)
+
     def write_enums(self, enums, prefix=''):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
@@ -171,8 +178,10 @@ class PkgWriter(object):
                     self._import("typing", "List"),
                     self._import("typing", "Tuple"))
 
-            for val in enum.value:
-                l("{}: {}[{}]", val.name, self._import("typing_extensions", "Literal"), val.number)
+                self.write_enum_values(enum, prefix)
+
+            self.write_enum_values(enum, prefix)
+
             l("")
 
     def write_messages(self, messages, prefix):

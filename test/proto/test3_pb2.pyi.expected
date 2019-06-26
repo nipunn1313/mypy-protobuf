@@ -41,6 +41,9 @@ class OuterEnum(object):
     def values(cls) -> typing___List[ClosedValueType]: ...
     @classmethod
     def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
+    UNKNOWN: typing_extensions___Literal[0]
+    FOO3: typing_extensions___Literal[1]
+    BAR3: typing_extensions___Literal[2]
 UNKNOWN: typing_extensions___Literal[0]
 FOO3: typing_extensions___Literal[1]
 BAR3: typing_extensions___Literal[2]

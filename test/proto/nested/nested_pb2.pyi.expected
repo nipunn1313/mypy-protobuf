@@ -56,6 +56,9 @@ class AnotherNested(google___protobuf___message___Message):
         def values(cls) -> typing___List[ClosedValueType]: ...
         @classmethod
         def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
+        INVALID: typing_extensions___Literal[0]
+        ONE: typing_extensions___Literal[1]
+        TWO: typing_extensions___Literal[2]
     INVALID: typing_extensions___Literal[0]
     ONE: typing_extensions___Literal[1]
     TWO: typing_extensions___Literal[2]
@@ -75,6 +78,9 @@ class AnotherNested(google___protobuf___message___Message):
             def values(cls) -> typing___List[ClosedValueType]: ...
             @classmethod
             def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
+            UNDEFINED: typing_extensions___Literal[0]
+            NESTED_ENUM1: typing_extensions___Literal[1]
+            NESTED_ENUM2: typing_extensions___Literal[2]
         UNDEFINED: typing_extensions___Literal[0]
         NESTED_ENUM1: typing_extensions___Literal[1]
         NESTED_ENUM2: typing_extensions___Literal[2]

@@ -74,6 +74,8 @@ class OuterEnum(object):
     def values(cls) -> typing___List[ClosedValueType]: ...
     @classmethod
     def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
+    FOO: typing_extensions___Literal[1]
+    BAR: typing_extensions___Literal[2]
 FOO: typing_extensions___Literal[1]
 BAR: typing_extensions___Literal[2]
 
@@ -92,6 +94,8 @@ class Simple1(google___protobuf___message___Message):
         def values(cls) -> typing___List[ClosedValueType]: ...
         @classmethod
         def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
+        INNER1: typing_extensions___Literal[1]
+        INNER2: typing_extensions___Literal[2]
     INNER1: typing_extensions___Literal[1]
     INNER2: typing_extensions___Literal[2]
 
