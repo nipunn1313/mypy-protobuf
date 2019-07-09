@@ -28,7 +28,7 @@ MYPY_VENV=venv_mypy
     source $MYPY_VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@v0.701
+        python3 -m pip install git+https://github.com/python/mypy.git@v0.711
     fi
 
     # Run mypy
