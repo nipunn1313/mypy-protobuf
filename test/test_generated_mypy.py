@@ -78,14 +78,6 @@ def test_func():
     s = Simple1()
     s.a_string = "Hello"
     s.a_repeated_string.append("Hello")
-    s.a_enum = FOO
-    assert s.a_enum == FOO
-    if False:  # requires Protobuf >=3.8
-        s.a_enum = OuterEnum.FOO
-        assert s.a_enum == FOO
-    s.a_enum = 1
-    assert s.a_enum == FOO
-    assert FOO == 1
 
     s2 = Simple1.FromString(s.SerializeToString())
     assert s2.a_string == "Hello"
@@ -98,8 +90,8 @@ def test_func():
     s4.CopyFrom(s)
     assert s4.a_string == "Hello"
 
-    e = OuterEnum.Value('BAR')
     e = FOO
+    e = OuterEnum.Value('BAR')
 
     l = lower2()
     l.upper.Lower.a = 2

@@ -52,7 +52,7 @@ from typing import (
     Optional as typing___Optional,
     Text as typing___Text,
     Tuple as typing___Tuple,
-    Union as typing___Union,
+    cast as typing___cast,
 )
 
 from typing_extensions import (
@@ -60,44 +60,40 @@ from typing_extensions import (
 )
 
 
-class OuterEnum(object):
-    ClosedKeyType = typing___Union[typing_extensions___Literal['FOO'],typing_extensions___Literal['BAR']]
-    ClosedValueType = typing___Union[typing_extensions___Literal[1],typing_extensions___Literal[2]]
+class OuterEnum(int):
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
     @classmethod
-    def Name(cls, number: ClosedValueType) -> str: ...
+    def Name(cls, number: int) -> str: ...
     @classmethod
-    def Value(cls, name: ClosedKeyType) -> ClosedValueType: ...
+    def Value(cls, name: str) -> OuterEnum: ...
     @classmethod
-    def keys(cls) -> typing___List[ClosedKeyType]: ...
+    def keys(cls) -> typing___List[str]: ...
     @classmethod
-    def values(cls) -> typing___List[ClosedValueType]: ...
+    def values(cls) -> typing___List[OuterEnum]: ...
     @classmethod
-    def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
-    FOO: typing_extensions___Literal[1]
-    BAR: typing_extensions___Literal[2]
-FOO: typing_extensions___Literal[1]
-BAR: typing_extensions___Literal[2]
+    def items(cls) -> typing___List[typing___Tuple[str, OuterEnum]]: ...
+    FOO = typing___cast(OuterEnum, 1)
+    BAR = typing___cast(OuterEnum, 2)
+FOO = typing___cast(OuterEnum, 1)
+BAR = typing___cast(OuterEnum, 2)
 
 class Simple1(google___protobuf___message___Message):
-    class InnerEnum(object):
-        ClosedKeyType = typing___Union[typing_extensions___Literal['INNER1'],typing_extensions___Literal['INNER2']]
-        ClosedValueType = typing___Union[typing_extensions___Literal[1],typing_extensions___Literal[2]]
+    class InnerEnum(int):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
         @classmethod
-        def Name(cls, number: ClosedValueType) -> str: ...
+        def Name(cls, number: int) -> str: ...
         @classmethod
-        def Value(cls, name: ClosedKeyType) -> ClosedValueType: ...
+        def Value(cls, name: str) -> Simple1.InnerEnum: ...
         @classmethod
-        def keys(cls) -> typing___List[ClosedKeyType]: ...
+        def keys(cls) -> typing___List[str]: ...
         @classmethod
-        def values(cls) -> typing___List[ClosedValueType]: ...
+        def values(cls) -> typing___List[Simple1.InnerEnum]: ...
         @classmethod
-        def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
-        INNER1: typing_extensions___Literal[1]
-        INNER2: typing_extensions___Literal[2]
-    INNER1: typing_extensions___Literal[1]
-    INNER2: typing_extensions___Literal[2]
+        def items(cls) -> typing___List[typing___Tuple[str, Simple1.InnerEnum]]: ...
+        INNER1 = typing___cast(Simple1.InnerEnum, 1)
+        INNER2 = typing___cast(Simple1.InnerEnum, 2)
+    INNER1 = typing___cast(Simple1.InnerEnum, 1)
+    INNER2 = typing___cast(Simple1.InnerEnum, 2)
 
     class InnerMessage(google___protobuf___message___Message):
 
@@ -112,11 +108,11 @@ class Simple1(google___protobuf___message___Message):
     a_repeated_string = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
     a_boolean = ... # type: bool
     a_uint32 = ... # type: int
-    a_enum = ... # type: OuterEnum.ClosedValueType
-    a_external_enum = ... # type: test___proto___test3_pb2___OuterEnum.ClosedValueType
-    inner_enum = ... # type: Simple1.InnerEnum.ClosedValueType
-    rep_inner_enum = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[Simple1.InnerEnum.ClosedValueType]
-    nested_enum = ... # type: test___proto___nested___nested_pb2___AnotherNested.NestedEnum.ClosedValueType
+    a_enum = ... # type: OuterEnum
+    a_external_enum = ... # type: test___proto___test3_pb2___OuterEnum
+    inner_enum = ... # type: Simple1.InnerEnum
+    rep_inner_enum = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[Simple1.InnerEnum]
+    nested_enum = ... # type: test___proto___nested___nested_pb2___AnotherNested.NestedEnum
     a_oneof_1 = ... # type: typing___Text
     a_oneof_2 = ... # type: typing___Text
 
@@ -144,16 +140,16 @@ class Simple1(google___protobuf___message___Message):
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = None,
         a_boolean : typing___Optional[bool] = None,
         a_uint32 : typing___Optional[int] = None,
-        a_enum : typing___Optional[OuterEnum.ClosedValueType] = None,
-        a_external_enum : typing___Optional[test___proto___test3_pb2___OuterEnum.ClosedValueType] = None,
+        a_enum : typing___Optional[OuterEnum] = None,
+        a_external_enum : typing___Optional[test___proto___test3_pb2___OuterEnum] = None,
         a_inner : typing___Optional[test___proto___inner___inner_pb2___Inner] = None,
         a_nested : typing___Optional[test___proto___nested___nested_pb2___Nested] = None,
-        inner_enum : typing___Optional[Simple1.InnerEnum.ClosedValueType] = None,
-        rep_inner_enum : typing___Optional[typing___Iterable[Simple1.InnerEnum.ClosedValueType]] = None,
+        inner_enum : typing___Optional[Simple1.InnerEnum] = None,
+        rep_inner_enum : typing___Optional[typing___Iterable[Simple1.InnerEnum]] = None,
         inner_message : typing___Optional[Simple1.InnerMessage] = None,
         rep_inner_message : typing___Optional[typing___Iterable[Simple1.InnerMessage]] = None,
         no_package : typing___Optional[test___proto___nopackage_pb2___NoPackage] = None,
-        nested_enum : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedEnum.ClosedValueType] = None,
+        nested_enum : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedEnum] = None,
         nested_message : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedMessage] = None,
         a_oneof_1 : typing___Optional[typing___Text] = None,
         a_oneof_2 : typing___Optional[typing___Text] = None,

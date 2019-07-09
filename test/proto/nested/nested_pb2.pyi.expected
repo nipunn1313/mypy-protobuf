@@ -17,7 +17,7 @@ from typing import (
     Optional as typing___Optional,
     Text as typing___Text,
     Tuple as typing___Tuple,
-    Union as typing___Union,
+    cast as typing___cast,
 )
 
 from typing_extensions import (
@@ -26,11 +26,11 @@ from typing_extensions import (
 
 
 class Nested(google___protobuf___message___Message):
-    a = ... # type: test___proto___test3_pb2___OuterEnum.ClosedValueType
+    a = ... # type: test___proto___test3_pb2___OuterEnum
 
     def __init__(self,
         *,
-        a : typing___Optional[test___proto___test3_pb2___OuterEnum.ClosedValueType] = None,
+        a : typing___Optional[test___proto___test3_pb2___OuterEnum] = None,
         ) -> None: ...
     @classmethod
     def FromString(cls, s: bytes) -> Nested: ...
@@ -42,60 +42,56 @@ class Nested(google___protobuf___message___Message):
         def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 
 class AnotherNested(google___protobuf___message___Message):
-    class NestedEnum(object):
-        ClosedKeyType = typing___Union[typing_extensions___Literal['INVALID'],typing_extensions___Literal['ONE'],typing_extensions___Literal['TWO']]
-        ClosedValueType = typing___Union[typing_extensions___Literal[0],typing_extensions___Literal[1],typing_extensions___Literal[2]]
+    class NestedEnum(int):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
         @classmethod
-        def Name(cls, number: ClosedValueType) -> str: ...
+        def Name(cls, number: int) -> str: ...
         @classmethod
-        def Value(cls, name: ClosedKeyType) -> ClosedValueType: ...
+        def Value(cls, name: str) -> AnotherNested.NestedEnum: ...
         @classmethod
-        def keys(cls) -> typing___List[ClosedKeyType]: ...
+        def keys(cls) -> typing___List[str]: ...
         @classmethod
-        def values(cls) -> typing___List[ClosedValueType]: ...
+        def values(cls) -> typing___List[AnotherNested.NestedEnum]: ...
         @classmethod
-        def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
-        INVALID: typing_extensions___Literal[0]
-        ONE: typing_extensions___Literal[1]
-        TWO: typing_extensions___Literal[2]
-    INVALID: typing_extensions___Literal[0]
-    ONE: typing_extensions___Literal[1]
-    TWO: typing_extensions___Literal[2]
+        def items(cls) -> typing___List[typing___Tuple[str, AnotherNested.NestedEnum]]: ...
+        INVALID = typing___cast(AnotherNested.NestedEnum, 0)
+        ONE = typing___cast(AnotherNested.NestedEnum, 1)
+        TWO = typing___cast(AnotherNested.NestedEnum, 2)
+    INVALID = typing___cast(AnotherNested.NestedEnum, 0)
+    ONE = typing___cast(AnotherNested.NestedEnum, 1)
+    TWO = typing___cast(AnotherNested.NestedEnum, 2)
 
     class NestedMessage(google___protobuf___message___Message):
-        class NestedEnum2(object):
-            ClosedKeyType = typing___Union[typing_extensions___Literal['UNDEFINED'],typing_extensions___Literal['NESTED_ENUM1'],typing_extensions___Literal['NESTED_ENUM2']]
-            ClosedValueType = typing___Union[typing_extensions___Literal[0],typing_extensions___Literal[1],typing_extensions___Literal[2]]
+        class NestedEnum2(int):
             DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
             @classmethod
-            def Name(cls, number: ClosedValueType) -> str: ...
+            def Name(cls, number: int) -> str: ...
             @classmethod
-            def Value(cls, name: ClosedKeyType) -> ClosedValueType: ...
+            def Value(cls, name: str) -> AnotherNested.NestedMessage.NestedEnum2: ...
             @classmethod
-            def keys(cls) -> typing___List[ClosedKeyType]: ...
+            def keys(cls) -> typing___List[str]: ...
             @classmethod
-            def values(cls) -> typing___List[ClosedValueType]: ...
+            def values(cls) -> typing___List[AnotherNested.NestedMessage.NestedEnum2]: ...
             @classmethod
-            def items(cls) -> typing___List[typing___Tuple[ClosedKeyType, ClosedValueType]]: ...
-            UNDEFINED: typing_extensions___Literal[0]
-            NESTED_ENUM1: typing_extensions___Literal[1]
-            NESTED_ENUM2: typing_extensions___Literal[2]
-        UNDEFINED: typing_extensions___Literal[0]
-        NESTED_ENUM1: typing_extensions___Literal[1]
-        NESTED_ENUM2: typing_extensions___Literal[2]
+            def items(cls) -> typing___List[typing___Tuple[str, AnotherNested.NestedMessage.NestedEnum2]]: ...
+            UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 0)
+            NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 1)
+            NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 2)
+        UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 0)
+        NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 1)
+        NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 2)
 
         s = ... # type: typing___Text
         b = ... # type: bool
-        ne = ... # type: AnotherNested.NestedEnum.ClosedValueType
-        ne2 = ... # type: AnotherNested.NestedMessage.NestedEnum2.ClosedValueType
+        ne = ... # type: AnotherNested.NestedEnum
+        ne2 = ... # type: AnotherNested.NestedMessage.NestedEnum2
 
         def __init__(self,
             *,
             s : typing___Optional[typing___Text] = None,
             b : typing___Optional[bool] = None,
-            ne : typing___Optional[AnotherNested.NestedEnum.ClosedValueType] = None,
-            ne2 : typing___Optional[AnotherNested.NestedMessage.NestedEnum2.ClosedValueType] = None,
+            ne : typing___Optional[AnotherNested.NestedEnum] = None,
+            ne2 : typing___Optional[AnotherNested.NestedMessage.NestedEnum2] = None,
             ) -> None: ...
         @classmethod
         def FromString(cls, s: bytes) -> AnotherNested.NestedMessage: ...

@@ -151,37 +151,38 @@ class PkgWriter(object):
             if val.name in PYTHON_RESERVED:
                 continue
 
-            self._write_line("{}: {}[{}]", val.name, self._import("typing_extensions", "Literal"), val.number)
+            # MyPy does not support referencing the enum by the unqualified name *inside* nested enums
+            full_name = prefix + enum.name
+            self._write_line("{} = {}({}, {})", val.name, self._import("typing", "cast"), full_name, val.number)
 
     def write_enums(self, enums, prefix=''):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            l("class {}(object):", enum.name)
+            l("class {}(int):", enum.name)
             with self._indent():
-                all_keys = ",".join("{}['{}']".format(self._import("typing_extensions", "Literal"), val.name) for val in enum.value)
-                all_values = ",".join("{}[{}]".format(self._import("typing_extensions", "Literal"), val.number) for val in enum.value)
-                l("ClosedKeyType = {}[{}]", self._import("typing", "Union"), all_keys)
-                l("ClosedValueType = {}[{}]", self._import("typing", "Union"), all_values)
                 l("DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "EnumDescriptor"))
                 l("@classmethod")
-                l("def Name(cls, number: ClosedValueType) -> str: ...")
+                l("def Name(cls, number: int) -> str: ...")
                 l("@classmethod")
-                l("def Value(cls, name: ClosedKeyType) -> ClosedValueType: ...")
+                l("def Value(cls, name: str) -> {}: ...", prefix + enum.name)
                 l("@classmethod")
-                l("def keys(cls) -> {}[ClosedKeyType]: ...", self._import("typing", "List"))
+                l("def keys(cls) -> {}[str]: ...",
+                    self._import("typing", "List"))
                 l("@classmethod")
-                l("def values(cls) -> {}[ClosedValueType]: ...", self._import("typing", "List"))
-                l("@classmethod")
-                l("def items(cls) -> {}[{}[ClosedKeyType, ClosedValueType]]: ...",
+                l("def values(cls) -> {}[{}]: ...",
                     self._import("typing", "List"),
-                    self._import("typing", "Tuple"))
+                    prefix + enum.name)
+                l("@classmethod")
+                l("def items(cls) -> {}[{}[str, {}]]: ...",
+                    self._import("typing", "List"),
+                    self._import("typing", "Tuple"),
+                    prefix + enum.name)
 
                 self.write_enum_values(enum, prefix)
 
             self.write_enum_values(enum, prefix)
-
             l("")
 
     def write_messages(self, messages, prefix):
@@ -391,7 +392,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
             d.FieldDescriptorProto.TYPE_BYTES: lambda: "bytes",
 
-            d.FieldDescriptorProto.TYPE_ENUM: lambda: "{}.ClosedValueType".format(self._import_message(field.type_name)),
+            d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(field.type_name),
         }  # type: Dict[d.FieldDescriptorProto.Type, Callable[[], Text]]
