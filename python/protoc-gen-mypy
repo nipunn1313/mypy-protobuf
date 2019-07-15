@@ -274,9 +274,9 @@ class PkgWriter(object):
         # HasField always supports oneof fields
         hf_fields = [
             f.name for f in desc.field
-            if f.name not in PYTHON_RESERVED and f.HasField("oneof_index") or
+            if f.name not in PYTHON_RESERVED and (f.HasField("oneof_index") or
                 (f.label != d.FieldDescriptorProto.LABEL_REPEATED and
-                    (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE))
+                    (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE)))
         ]
         cf_fields = [f.name for f in desc.field if f.name not in PYTHON_RESERVED]
         wo_fields = {
