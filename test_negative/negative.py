@@ -12,6 +12,7 @@ from typing import (
 
 from test.proto.test_pb2 import FOO, Simple1, Simple2
 from test.proto.test3_pb2 import SimpleProto3
+from test.proto.dot.com.test_pb2 import TestMessage
 
 s = Simple1()
 s.a_string = "Hello"
@@ -27,6 +28,8 @@ s4.CopyFrom(s.SerializeToString())  # E:2.7 E:3.5
 s5 = Simple1()
 l = []  # type: List[int]
 l.extend(s5.a_repeated_string)  # E:2.7 E:3.5
+
+tm = TestMessage(foo=55)  # E:2.7 E:3.5
 
 e = FOO
 e = 3  # E:2.7 E:3.5
