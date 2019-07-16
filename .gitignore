@@ -11,9 +11,13 @@ __pycache__/
 /test/proto/*.pyi
 /test/proto/*/*.py
 /test/proto/*/*.pyi
+/test/proto/*/*/*.py
+/test/proto/*/*/*.pyi
 .pytest_cache
+/python/build/
 /python/dist/
 *.egg-info
 .idea/
 *.DS_Store
 *venv*
+/runenv

@@ -26,20 +26,23 @@ def test_generate_mypy_matches():
         glob.glob('proto/test/proto/*.proto') +
         glob.glob('proto/test/proto/*/*.proto')
     )
-    assert len(proto_files) == 8  # Just a sanity check that all the files show up
+    assert len(proto_files) == 9  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
-        fn_split = fn.split(os.sep)  # Eg. [proto, test, proto, test.proto]
-        fn_split = fn_split[1:]  # Eg. [test, proto, test.proto]
+        assert fn.endswith('.proto')
+        fn_split = fn.split(os.sep)  # Eg. [proto, test, proto, test.com, test.proto]
         assert fn_split[-1].endswith('.proto')
-        fn_split[-1] = fn_split[-1][:-len('.proto')] + '_pb2.pyi'  # Eg [test, proto, test_pb2.proto]
+        last = fn_split[-1][:-len('.proto')] + '_pb2.pyi'  # Eg [test_pb2.proto]
+        components = fn_split[1:-1]  # Eg. [test, proto, test.com]
+        components = [c.replace('.', os.sep) for c in components]  # Eg. [test, proto, test/com]
+        components.append(last)  # Eg. [test, proto, test/com, test_pb2.proto]
 
-        output = os.path.join(*fn_split)
+        output = os.path.join(*components)
 
-        fn_split[-1] += '.expected'  # Eg [test, proto, test_pb2.proto.expected]
+        components[-1] += '.expected'  # Eg [test, proto, test/com, test_pb2.proto.expected]
 
-        expected = os.path.join(*fn_split)
+        expected = os.path.join(*components)
 
         assert os.path.exists(output)
 
@@ -68,8 +71,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 19
-    assert len(errors_35) == 23
+    assert len(errors_27) == 20
+    assert len(errors_35) == 24
 
 def test_func():
     # type: () -> None
