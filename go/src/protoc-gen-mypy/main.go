@@ -441,6 +441,8 @@ func (w *pkgWriter) WriteEnums(enums []*descriptor.EnumDescriptorProto, prefix s
 	pop := w.PopIndent
 	name := w.Name
 
+	descriptorClass := name("google.protobuf.descriptor", "EnumDescriptor")
+
 	text := w.Name("typing", "Text")
 	for i, enumType := range enums {
 		w.RegisterLocal(enumType.GetName())
@@ -450,6 +452,7 @@ func (w *pkgWriter) WriteEnums(enums []*descriptor.EnumDescriptorProto, prefix s
 		qualifiedName := prefix + enumType.GetName()
 		l("class %s(int):", enumType.GetName())
 		push()
+		l("DESCRIPTOR: %s = ...", descriptorClass)
 		l("@classmethod")
 		// intentionally using int for `number` here, as we don't necessarily know if
 		// the number is a valid enum
@@ -485,6 +488,7 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 	name := w.Name
 
 	messageClass := name("google.protobuf.message", "Message")
+	descriptorClass := name("google.protobuf.descriptor", "Descriptor")
 
 	for i, desc := range messages {
 		clsName := desc.GetName()
@@ -496,6 +500,8 @@ func (w *pkgWriter) WriteMessages(messages []*descriptor.DescriptorProto, prefix
 		l("class %s(%s):", clsName, messageClass)
 
 		push()
+		l("DESCRIPTOR: %s = ...", descriptorClass)
+
 		w.WriteEnums(desc.EnumType, qualifiedName+".")
 		w.WriteMessages(desc.NestedType, qualifiedName+".")
 
