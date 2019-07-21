@@ -11,7 +11,7 @@ from typing import (
 )
 
 from test.proto.test_pb2 import FOO, Simple1, Simple2
-from test.proto.test3_pb2 import SimpleProto3
+from test.proto.test3_pb2 import OuterEnum, SimpleProto3
 from test.proto.dot.com.test_pb2 import TestMessage
 
 s = Simple1()
@@ -80,3 +80,11 @@ simple2.HasField(b)  # E:2.7 E:3.5  - it's a text but not one of the literals
 # Overload WhichOneof
 c = s6.WhichOneof("a_oneof")
 c = s6.WhichOneof("b_oneof")  # E:2.7 E:3.5
+
+# Message DESCRIPTOR should detect invalid access via instance or class:
+SimpleProto3.DESCRIPTOR.Garbage()  # E:2.7 E:3.5
+SimpleProto3().DESCRIPTOR.Garbage()  # E:2.7 E:3.5
+
+# Enum DESCRIPTOR should detect invalid access:
+OuterEnum.DESCRIPTOR.Garbage()  # E:2.7 E:3.5
+

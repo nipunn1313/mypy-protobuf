@@ -195,6 +195,9 @@ class PkgWriter(object):
             qualified_name = prefix + desc.name
             l("class {}({}):", desc.name, message_class)
             with self._indent():
+                l("DESCRIPTOR: {} = ...",
+                    self._import("google.protobuf.descriptor", "Descriptor"))
+
                 # Nested enums/messages
                 self.write_enums(desc.enum_type, qualified_name + ".")
                 self.write_messages(desc.nested_type, qualified_name + ".")

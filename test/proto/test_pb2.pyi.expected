@@ -10,6 +10,7 @@ from concurrent.futures import (
 )
 
 from google.protobuf.descriptor import (
+    Descriptor as google___protobuf___descriptor___Descriptor,
     EnumDescriptor as google___protobuf___descriptor___EnumDescriptor,
 )
 
@@ -78,6 +79,7 @@ FOO = typing___cast(OuterEnum, 1)
 BAR = typing___cast(OuterEnum, 2)
 
 class Simple1(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     class InnerEnum(int):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
         @classmethod
@@ -96,6 +98,7 @@ class Simple1(google___protobuf___message___Message):
     INNER2 = typing___cast(Simple1.InnerEnum, 2)
 
     class InnerMessage(google___protobuf___message___Message):
+        DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
 
         def __init__(self,
             ) -> None: ...
@@ -167,6 +170,7 @@ class Simple1(google___protobuf___message___Message):
     def WhichOneof(self, oneof_group: typing_extensions___Literal[u"a_oneof",b"a_oneof"]) -> typing_extensions___Literal["a_oneof_1","a_oneof_2"]: ...
 
 class Simple2(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     a_string = ... # type: typing___Text
 
     def __init__(self,
@@ -185,6 +189,7 @@ class Simple2(google___protobuf___message___Message):
         def ClearField(self, field_name: typing_extensions___Literal[u"a_string",b"a_string"]) -> None: ...
 
 class PythonReservedKeywords(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
 
     def __init__(self,
         ) -> None: ...
@@ -200,6 +205,7 @@ class PythonReservedKeywords(google___protobuf___message___Message):
         def ClearField(self, field_name: typing_extensions___Literal[u"False",b"False",u"None",b"None",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> None: ...
 
 class PythonReservedKeywordsSmall(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
 
     def __init__(self,
         ) -> None: ...

@@ -71,8 +71,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 20
-    assert len(errors_35) == 24
+    assert len(errors_27) == 23
+    assert len(errors_35) == 27
 
 def test_func():
     # type: () -> None
@@ -238,3 +238,14 @@ def test_which_oneof_proto3():
     s_untyped = s  # type: Any
     with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
         s_untyped.WhichOneof("garbage")
+
+def test_message_descriptor_proto2():
+    assert Simple1().DESCRIPTOR.full_name == "test.Simple1"
+    assert Simple1.DESCRIPTOR.full_name == "test.Simple1"
+
+def test_message_descriptor_proto3():
+    assert SimpleProto3().DESCRIPTOR.full_name == "test3.SimpleProto3"
+    assert SimpleProto3.DESCRIPTOR.full_name == "test3.SimpleProto3"
+
+def test_enum_descriptor():
+    assert OuterEnum.DESCRIPTOR.name == "OuterEnum"
