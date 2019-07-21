@@ -77,6 +77,7 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@abhishekrb19](https://github.com/abhishekrb19)
 - [@jaens](https://github.com/jaens)
 - [@arussellsaw](https://github.com/arussellsaw)
+- [@shabbyrobe](https://github.com/shabbyrobe)
 
 Licence etc.
 ------------

@@ -21,3 +21,6 @@ test_negative/negative.py:74: note:     def WhichOneof(self, oneof_group: Union[
 test_negative/negative.py:75: error: Incompatible types in assignment (expression has type "Union[Literal[u'a_oneof_1'], Literal[u'a_oneof_2']]", variable has type "int")
 test_negative/negative.py:78: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Union[Literal[u'a_oneof_1'], Literal[u'a_oneof_2']]"; expected "Union[Literal[u'a_string'], Literal['a_string']]"
 test_negative/negative.py:82: error: Incompatible types in assignment (expression has type "Union[Literal[u'b_oneof_1'], Literal[u'b_oneof_2']]", variable has type "Union[Literal[u'a_oneof_1'], Literal[u'a_oneof_2']]")
+test_negative/negative.py:85: error: "Descriptor" has no attribute "Garbage"
+test_negative/negative.py:86: error: "Descriptor" has no attribute "Garbage"
+test_negative/negative.py:89: error: "EnumDescriptor" has no attribute "Garbage"
