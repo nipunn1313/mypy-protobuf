@@ -51,6 +51,7 @@ PYTHON_RESERVED = set([
     'await',
     'assert',
     'break',
+    'class',
     'continue',
     'def',
     'del',
