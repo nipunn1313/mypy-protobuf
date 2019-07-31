@@ -85,6 +85,7 @@ message PythonReservedKeywords {
   optional int64 False = 27;
   optional int64 None = 28;
   optional int64 True = 29;
+  optional int64 class = 30;
 }
 
 // Do one with just one arg - to make sure it's syntactically correct
