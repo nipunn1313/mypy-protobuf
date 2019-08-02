@@ -41,7 +41,7 @@ GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is gener
 HEADER = "# {} by generate_proto_mypy_stubs.py.  Do not edit!\n".format(GENERATED)
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
-PYTHON_RESERVED = set([
+PYTHON_RESERVED = {
     'False',
     'None',
     'True',
@@ -76,8 +76,9 @@ PYTHON_RESERVED = set([
     'try',
     'while',
     'with',
-    'yield'
-])
+    'yield',
+}
+
 
 class PkgWriter(object):
     """Writes a single pyi file"""
@@ -467,6 +468,7 @@ def generate_mypy_stubs(descriptors, response, quiet):
         if not quiet:
             print("Writing mypy to", output.name, file=sys.stderr)
 
+
 class Descriptors(object):
 
     def __init__(self, request):
@@ -478,19 +480,19 @@ class Descriptors(object):
         self.messages = {} # type: Dict[Text, d.DescriptorProto]
         self.message_to_fd = {}  # type: Dict[Text, d.FileDescriptorProto]
 
-        def _add_enums(enums, prefix, fd):
+        def _add_enums(enums, prefix, _fd):
             # type: (RepeatedCompositeFieldContainer[d.EnumDescriptorProto], Text, d.FileDescriptorProto) -> None
             for enum in enums:
-                self.message_to_fd[prefix + enum.name] = fd
+                self.message_to_fd[prefix + enum.name] = _fd
 
-        def _add_messages(messages, prefix, fd):
+        def _add_messages(messages, prefix, _fd):
             # type: (RepeatedCompositeFieldContainer[d.DescriptorProto], Text, d.FileDescriptorProto) -> None
             for message in messages:
                 self.messages[prefix + message.name] = message
-                self.message_to_fd[prefix + message.name] = fd
+                self.message_to_fd[prefix + message.name] = _fd
                 sub_prefix = prefix + message.name + "."
-                _add_messages(message.nested_type, sub_prefix, fd)
-                _add_enums(message.enum_type, sub_prefix, fd)
+                _add_messages(message.nested_type, sub_prefix, _fd)
+                _add_enums(message.enum_type, sub_prefix, _fd)
 
         for fd in request.proto_file:
             start_prefix = "." + fd.package + "." if fd.package else "."
