@@ -92,6 +92,7 @@ class PkgWriter(object):
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         self.imports = defaultdict(set)  # type: Dict[Text, Set[Tuple[Text, Text]]]
         self.locals = set()  # type: Set[Text]
+        self.builtin_vars = set()  # type: Set[Text]
 
     def _import(self, path, name):
         # type: (Text, Text) -> Text
@@ -133,6 +134,14 @@ class PkgWriter(object):
         # from another package.
         return import_name + "." + remains
 
+    def _builtin(self, name):
+        self.builtin_vars.add(name)
+        return self._mangle_builtin(name)
+
+    @staticmethod
+    def _mangle_builtin(name):
+        return 'builtin___{}'.format(name)
+
     @contextmanager
     def _indent(self):
         # type: () -> Generator
@@ -160,25 +169,26 @@ class PkgWriter(object):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            l("class {}(int):", enum.name)
+            l("class {}({}):", enum.name, self._builtin('int'))
             with self._indent():
                 l("DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "EnumDescriptor"))
                 l("@classmethod")
-                l("def Name(cls, number: int) -> str: ...")
+                l("def Name(cls, number: {}) -> {}: ...", self._builtin('int'), self._builtin('str'))
                 l("@classmethod")
-                l("def Value(cls, name: str) -> {}: ...", prefix + enum.name)
+                l("def Value(cls, name: {}) -> {}: ...", self._builtin('str'), prefix + enum.name)
                 l("@classmethod")
-                l("def keys(cls) -> {}[str]: ...",
-                    self._import("typing", "List"))
+                l("def keys(cls) -> {}[{}]: ...",
+                    self._import("typing", "List"), self._builtin('str'))
                 l("@classmethod")
                 l("def values(cls) -> {}[{}]: ...",
                     self._import("typing", "List"),
                     prefix + enum.name)
                 l("@classmethod")
-                l("def items(cls) -> {}[{}[str, {}]]: ...",
+                l("def items(cls) -> {}[{}[{}, {}]]: ...",
                     self._import("typing", "List"),
                     self._import("typing", "Tuple"),
+                    self._builtin('str'),
                     prefix + enum.name)
 
                 self.write_enum_values(enum, prefix)
@@ -255,7 +265,7 @@ class PkgWriter(object):
 
                 # Standard message methods
                 l("@classmethod")
-                l("def FromString(cls, s: bytes) -> {}: ...", qualified_name)
+                l("def FromString(cls, s: {}) -> {}: ...", self._builtin('bytes'), qualified_name)
                 l("def MergeFrom(self, other_msg: {}) -> None: ...", message_class)
                 l("def CopyFrom(self, other_msg: {}) -> None: ...", message_class)
 
@@ -302,9 +312,10 @@ class PkgWriter(object):
         l("if {} >= (3,):", "sys.version_info")
         with self._indent():
             if hf_fields:
-                l("def HasField(self, field_name: {}[{}]) -> bool: ...",
+                l("def HasField(self, field_name: {}[{}]) -> {}: ...",
                     self._import("typing_extensions", "Literal"),
-                    hf_fields_py3)
+                    hf_fields_py3,
+                    self._builtin('bool'))
             if cf_fields:
                 l("def ClearField(self, field_name: {}[{}]) -> None: ...",
                     self._import("typing_extensions", "Literal"),
@@ -312,9 +323,10 @@ class PkgWriter(object):
         l("else:")
         with self._indent():
             if hf_fields:
-                l("def HasField(self, field_name: {}[{}]) -> bool: ...",
+                l("def HasField(self, field_name: {}[{}]) -> {}: ...",
                     self._import("typing_extensions", "Literal"),
-                    hf_fields_py2)
+                    hf_fields_py2,
+                    self._builtin('bool'))
             if cf_fields:
                 l("def ClearField(self, field_name: {}[{}]) -> None: ...",
                     self._import("typing_extensions", "Literal"),
@@ -377,24 +389,29 @@ class PkgWriter(object):
 
     def python_type(self, field):
         # type: (d.FieldDescriptorProto) -> Text
+        b_float = self._builtin('float')
+        b_int = self._builtin('int')
+        b_bool = self._builtin('bool')
+        b_bytes = self._builtin('bytes')
+
         mapping = {
-            d.FieldDescriptorProto.TYPE_DOUBLE: lambda: "float",
-            d.FieldDescriptorProto.TYPE_FLOAT: lambda: "float",
+            d.FieldDescriptorProto.TYPE_DOUBLE: lambda: b_float,
+            d.FieldDescriptorProto.TYPE_FLOAT: lambda: b_float,
 
-            d.FieldDescriptorProto.TYPE_INT64: lambda: "int",
-            d.FieldDescriptorProto.TYPE_UINT64: lambda: "int",
-            d.FieldDescriptorProto.TYPE_FIXED64: lambda: "int",
-            d.FieldDescriptorProto.TYPE_SFIXED64: lambda: "int",
-            d.FieldDescriptorProto.TYPE_SINT64: lambda: "int",
-            d.FieldDescriptorProto.TYPE_INT32: lambda: "int",
-            d.FieldDescriptorProto.TYPE_UINT32: lambda: "int",
-            d.FieldDescriptorProto.TYPE_FIXED32: lambda: "int",
-            d.FieldDescriptorProto.TYPE_SFIXED32: lambda: "int",
-            d.FieldDescriptorProto.TYPE_SINT32: lambda: "int",
+            d.FieldDescriptorProto.TYPE_INT64: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_UINT64: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_FIXED64: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_SFIXED64: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_SINT64: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_INT32: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_UINT32: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_FIXED32: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_SFIXED32: lambda: b_int,
+            d.FieldDescriptorProto.TYPE_SINT32: lambda: b_int,
 
-            d.FieldDescriptorProto.TYPE_BOOL: lambda: "bool",
+            d.FieldDescriptorProto.TYPE_BOOL: lambda: b_bool,
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
-            d.FieldDescriptorProto.TYPE_BYTES: lambda: "bytes",
+            d.FieldDescriptorProto.TYPE_BYTES: lambda: b_bytes,
 
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(field.type_name),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(field.type_name),
@@ -414,7 +431,14 @@ class PkgWriter(object):
                 imports.append(u"    {} as {},".format(name, mangled_name))
             imports.append(u")\n")
         imports.append("")
-        return "\n".join(imports + self.lines)
+
+        aliases = []
+        for var in sorted(self.builtin_vars):
+            aliases.append(u'{} = {}'.format(self._mangle_builtin(var), var))
+        if aliases:
+            aliases.append('\n')
+
+        return "\n".join(imports + aliases + self.lines)
 
 
 def is_scalar(fd):
