@@ -80,6 +80,17 @@ PYTHON_RESERVED = {
 }
 
 
+
+FORWARD_REFERENCE_STRING_LITERAL = True
+
+
+def forward_ref(name):
+    if FORWARD_REFERENCE_STRING_LITERAL:
+        return "'{}'".format(name)
+    else:
+        return name
+
+
 class PkgWriter(object):
     """Writes a single pyi file"""
 
@@ -157,19 +168,20 @@ class PkgWriter(object):
         else:
             self.lines.append(self.indent + line.format(*args))
 
-    def write_enum_values(self, enum, prefix):
+    def write_enum_values(self, enum, enum_full_name):
         for val in enum.value:
             if val.name in PYTHON_RESERVED:
                 continue
 
-            # MyPy does not support referencing the enum by the unqualified name *inside* nested enums
-            full_name = prefix + enum.name
-            self._write_line("{} = {}({}, {})", val.name, self._import("typing", "cast"), full_name, val.number)
+            self._write_line("{} = {}({}, {})", val.name, self._import("typing", "cast"), enum_full_name, val.number)
 
     def write_enums(self, enums, prefix=''):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
+            # MyPy does not support referencing the enum by the unqualified name *inside* nested enums
+            enum_full_name = forward_ref(prefix + enum.name)
+
             l("class {}({}):", enum.name, self._builtin('int'))
             with self._indent():
                 l("DESCRIPTOR: {} = ...",
@@ -177,24 +189,24 @@ class PkgWriter(object):
                 l("@classmethod")
                 l("def Name(cls, number: {}) -> {}: ...", self._builtin('int'), self._builtin('str'))
                 l("@classmethod")
-                l("def Value(cls, name: {}) -> {}: ...", self._builtin('str'), prefix + enum.name)
+                l("def Value(cls, name: {}) -> {}: ...", self._builtin('str'), enum_full_name)
                 l("@classmethod")
                 l("def keys(cls) -> {}[{}]: ...",
                     self._import("typing", "List"), self._builtin('str'))
                 l("@classmethod")
                 l("def values(cls) -> {}[{}]: ...",
                     self._import("typing", "List"),
-                    prefix + enum.name)
+                    enum_full_name)
                 l("@classmethod")
                 l("def items(cls) -> {}[{}[{}, {}]]: ...",
                     self._import("typing", "List"),
                     self._import("typing", "Tuple"),
                     self._builtin('str'),
-                    prefix + enum.name)
+                    enum_full_name)
 
-                self.write_enum_values(enum, prefix)
+                self.write_enum_values(enum, enum_full_name)
 
-            self.write_enum_values(enum, prefix)
+            self.write_enum_values(enum, enum_full_name)
             l("")
 
     def write_messages(self, messages, prefix):

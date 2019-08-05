@@ -57,19 +57,19 @@ class AnotherNested(google___protobuf___message___Message):
         @classmethod
         def Name(cls, number: builtin___int) -> builtin___str: ...
         @classmethod
-        def Value(cls, name: builtin___str) -> AnotherNested.NestedEnum: ...
+        def Value(cls, name: builtin___str) -> 'AnotherNested.NestedEnum': ...
         @classmethod
         def keys(cls) -> typing___List[builtin___str]: ...
         @classmethod
-        def values(cls) -> typing___List[AnotherNested.NestedEnum]: ...
+        def values(cls) -> typing___List['AnotherNested.NestedEnum']: ...
         @classmethod
-        def items(cls) -> typing___List[typing___Tuple[builtin___str, AnotherNested.NestedEnum]]: ...
-        INVALID = typing___cast(AnotherNested.NestedEnum, 0)
-        ONE = typing___cast(AnotherNested.NestedEnum, 1)
-        TWO = typing___cast(AnotherNested.NestedEnum, 2)
-    INVALID = typing___cast(AnotherNested.NestedEnum, 0)
-    ONE = typing___cast(AnotherNested.NestedEnum, 1)
-    TWO = typing___cast(AnotherNested.NestedEnum, 2)
+        def items(cls) -> typing___List[typing___Tuple[builtin___str, 'AnotherNested.NestedEnum']]: ...
+        INVALID = typing___cast('AnotherNested.NestedEnum', 0)
+        ONE = typing___cast('AnotherNested.NestedEnum', 1)
+        TWO = typing___cast('AnotherNested.NestedEnum', 2)
+    INVALID = typing___cast('AnotherNested.NestedEnum', 0)
+    ONE = typing___cast('AnotherNested.NestedEnum', 1)
+    TWO = typing___cast('AnotherNested.NestedEnum', 2)
 
     class NestedMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -78,19 +78,19 @@ class AnotherNested(google___protobuf___message___Message):
             @classmethod
             def Name(cls, number: builtin___int) -> builtin___str: ...
             @classmethod
-            def Value(cls, name: builtin___str) -> AnotherNested.NestedMessage.NestedEnum2: ...
+            def Value(cls, name: builtin___str) -> 'AnotherNested.NestedMessage.NestedEnum2': ...
             @classmethod
             def keys(cls) -> typing___List[builtin___str]: ...
             @classmethod
-            def values(cls) -> typing___List[AnotherNested.NestedMessage.NestedEnum2]: ...
+            def values(cls) -> typing___List['AnotherNested.NestedMessage.NestedEnum2']: ...
             @classmethod
-            def items(cls) -> typing___List[typing___Tuple[builtin___str, AnotherNested.NestedMessage.NestedEnum2]]: ...
-            UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 0)
-            NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 1)
-            NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 2)
-        UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 0)
-        NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 1)
-        NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2, 2)
+            def items(cls) -> typing___List[typing___Tuple[builtin___str, 'AnotherNested.NestedMessage.NestedEnum2']]: ...
+            UNDEFINED = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 0)
+            NESTED_ENUM1 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 1)
+            NESTED_ENUM2 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 2)
+        UNDEFINED = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 0)
+        NESTED_ENUM1 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 1)
+        NESTED_ENUM2 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 2)
 
         s = ... # type: typing___Text
         b = ... # type: builtin___bool
