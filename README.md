@@ -78,6 +78,8 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@jaens](https://github.com/jaens)
 - [@arussellsaw](https://github.com/arussellsaw)
 - [@shabbyrobe](https://github.com/shabbyrobe)
+- [@reorx](https://github.com/reorx)
+
 
 Licence etc.
 ------------
