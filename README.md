@@ -79,6 +79,7 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@arussellsaw](https://github.com/arussellsaw)
 - [@shabbyrobe](https://github.com/shabbyrobe)
 - [@reorx](https://github.com/reorx)
+- [@zifter](https://github.com/zifter)
 
 
 Licence etc.
