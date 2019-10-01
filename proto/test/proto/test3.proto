@@ -27,4 +27,6 @@ message SimpleProto3 {
       string b_oneof_1 = 7;
       string b_oneof_2 = 8;
   }
+
+  OuterMessage3 bool = 9;
 }
