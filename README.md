@@ -40,11 +40,7 @@ The import sort order can be customized to split between stdlib and project prot
 by changing the `project` const at the top of the file (we use dropbox since our
 proto files are namespaced under dropbox/)
 
-To build the plugin:
-  1. Configure GOPATH to point to the `go` directory of this repo.
-  2. Configure GOROOT (if your go compiler is before 1.8)
-  3. `git clone https://github.com/gogo/protobuf.git go/src/github.com/gogo/protobuf`
-  4. `go build go/src/protoc-gen-mypy/main.go`
+To build the plugin: `go get github.com/dropbox/mypy-protobuf/go/src/protoc-gen-mypy`.
 
 The plugin can be used by adding the built target to the command line
 when running `protoc` (in addition to the normal plugin for output languages).
