@@ -79,6 +79,11 @@ PYTHON_RESERVED = {
     'yield',
 }
 
+PY2_ONLY_BUILTINS = {
+    'buffer',
+    'unicode',
+}
+
 
 
 FORWARD_REFERENCE_STRING_LITERAL = True
@@ -105,6 +110,7 @@ class PkgWriter(object):
         self.imports = defaultdict(set)  # type: Dict[Text, Set[Tuple[Text, Text]]]
         self.locals = set()  # type: Set[Text]
         self.builtin_vars = set()  # type: Set[Text]
+        self.py2_builtin_vars = set()  # type: Set[Text]
 
     def _import(self, path, name):
         # type: (Text, Text) -> Text
@@ -147,7 +153,10 @@ class PkgWriter(object):
         return import_name + "." + remains
 
     def _builtin(self, name):
-        self.builtin_vars.add(name)
+        if name in PY2_ONLY_BUILTINS:
+            self.py2_builtin_vars.add(name)
+        else:
+            self.builtin_vars.add(name)
         return self._mangle_builtin(name)
 
     @staticmethod
@@ -277,8 +286,16 @@ class PkgWriter(object):
                     l(") -> None: ...")
 
                 # Standard message methods
-                l("@classmethod")
-                l("def FromString(cls, s: {}) -> {}: ...", self._builtin('bytes'), qualified_name)
+                l("if {} >= (3,):", "sys.version_info")
+                with self._indent():
+                    l("@classmethod")
+                    l("def FromString(cls, s: {}) -> {}: ...", self._builtin('bytes'), qualified_name)
+                l("else:")
+                with self._indent():
+                    l("@classmethod")
+                    l("def FromString(cls, s: {}[{}, {}, {}]) -> {}: ...",
+                        self._import("typing", "Union"), self._builtin('bytes'), self._builtin('buffer'),
+                        self._builtin('unicode'), qualified_name)
                 l("def MergeFrom(self, other_msg: {}) -> None: ...", message_class)
                 l("def CopyFrom(self, other_msg: {}) -> None: ...", message_class)
 
@@ -448,6 +465,10 @@ class PkgWriter(object):
         aliases = []
         for var in sorted(self.builtin_vars):
             aliases.append(u'{} = {}'.format(self._mangle_builtin(var), var))
+        if self.py2_builtin_vars:
+            aliases.append(u'if sys.version_info < (3,):')
+            for var in sorted(self.py2_builtin_vars):
+                aliases.append(u'    {} = {}'.format(self._mangle_builtin(var), var))
         if aliases:
             aliases.append('\n')
 

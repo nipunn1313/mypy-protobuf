@@ -18,6 +18,7 @@ from typing import (
     Optional as typing___Optional,
     Text as typing___Text,
     Tuple as typing___Tuple,
+    Union as typing___Union,
     cast as typing___cast,
 )
 
@@ -31,6 +32,9 @@ builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
 builtin___str = str
+if sys.version_info < (3,):
+    builtin___buffer = buffer
+    builtin___unicode = unicode
 
 
 class Nested(google___protobuf___message___Message):
@@ -41,8 +45,12 @@ class Nested(google___protobuf___message___Message):
         *,
         a : typing___Optional[test___proto___test3_pb2___OuterEnum] = None,
         ) -> None: ...
-    @classmethod
-    def FromString(cls, s: builtin___bytes) -> Nested: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> Nested: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Nested: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     if sys.version_info >= (3,):
@@ -104,8 +112,12 @@ class AnotherNested(google___protobuf___message___Message):
             ne : typing___Optional[AnotherNested.NestedEnum] = None,
             ne2 : typing___Optional[AnotherNested.NestedMessage.NestedEnum2] = None,
             ) -> None: ...
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> AnotherNested.NestedMessage: ...
+        if sys.version_info >= (3,):
+            @classmethod
+            def FromString(cls, s: builtin___bytes) -> AnotherNested.NestedMessage: ...
+        else:
+            @classmethod
+            def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnotherNested.NestedMessage: ...
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         if sys.version_info >= (3,):
@@ -116,7 +128,11 @@ class AnotherNested(google___protobuf___message___Message):
 
     def __init__(self,
         ) -> None: ...
-    @classmethod
-    def FromString(cls, s: builtin___bytes) -> AnotherNested: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> AnotherNested: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnotherNested: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...

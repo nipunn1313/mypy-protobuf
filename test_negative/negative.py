@@ -20,7 +20,7 @@ s.a_string = "Hello"
 s2 = Simple1.FromString(s.SerializeToStringg())  # E:2.7 E:3.5
 
 s3 = Simple1()
-s3.ParseFromString(s)  # will be a failure once typeshed marks this as taking `bytes`
+s3.ParseFromString(s)  # E:2.7 E:3.5
 
 s4 = Simple1()
 s4.CopyFrom(s.SerializeToString())  # E:2.7 E:3.5
