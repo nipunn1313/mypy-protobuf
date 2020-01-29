@@ -15,6 +15,7 @@ from google.protobuf.message import (
 from typing import (
     Iterable as typing___Iterable,
     Optional as typing___Optional,
+    Union as typing___Union,
 )
 
 from typing_extensions import (
@@ -26,6 +27,9 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
+if sys.version_info < (3,):
+    builtin___buffer = buffer
+    builtin___unicode = unicode
 
 
 class NoPackage(google___protobuf___message___Message):
@@ -33,8 +37,12 @@ class NoPackage(google___protobuf___message___Message):
 
     def __init__(self,
         ) -> None: ...
-    @classmethod
-    def FromString(cls, s: builtin___bytes) -> NoPackage: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> NoPackage: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> NoPackage: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
 
@@ -52,8 +60,12 @@ class NoPackage2(google___protobuf___message___Message):
         np : typing___Optional[NoPackage] = None,
         np_rep : typing___Optional[typing___Iterable[NoPackage]] = None,
         ) -> None: ...
-    @classmethod
-    def FromString(cls, s: builtin___bytes) -> NoPackage2: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> NoPackage2: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> NoPackage2: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     if sys.version_info >= (3,):

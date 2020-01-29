@@ -20,6 +20,12 @@ from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import Any
 
+
+def _is_summary(l):
+    # type: (str) -> bool
+    """Checks if the line is the summary line 'Found X errors in Y files (checked Z source files)'"""
+    return l.startswith('Found ') and l.endswith('source files)\n')
+
 def test_generate_mypy_matches():
     # type: () -> None
     proto_files = (
@@ -61,8 +67,8 @@ def test_generate_negative_matches():
     """Confirm that the test_negative expected file matches an error for each line"""
     test_negative_lines = open('test_negative/negative.py').readlines()
     # Grab the line number of the failures
-    errors_27 = set(int(l.split(":")[1]) for l in open('test_negative/output.expected.2.7').readlines())
-    errors_35 = set(int(l.split(":")[1]) for l in open('test_negative/output.expected.3.5').readlines())
+    errors_27 = set(int(l.split(":")[1]) for l in open('test_negative/output.expected.2.7').readlines() if not _is_summary(l))
+    errors_35 = set(int(l.split(":")[1]) for l in open('test_negative/output.expected.3.5').readlines() if not _is_summary(l))
 
     expected_errors_27 = set(idx + 1 for idx, line in enumerate(test_negative_lines) if 'E:2.7' in line)
     expected_errors_35 = set(idx + 1 for idx, line in enumerate(test_negative_lines) if 'E:3.5' in line)
@@ -71,8 +77,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 23
-    assert len(errors_35) == 27
+    assert len(errors_27) == 24
+    assert len(errors_35) == 28
 
 def test_func():
     # type: () -> None

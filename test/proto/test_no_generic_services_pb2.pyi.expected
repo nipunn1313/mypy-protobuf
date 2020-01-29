@@ -10,6 +10,7 @@ from google.protobuf.message import (
 
 from typing import (
     Text as typing___Text,
+    Union as typing___Union,
 )
 
 from typing_extensions import (
@@ -21,6 +22,9 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
+if sys.version_info < (3,):
+    builtin___buffer = buffer
+    builtin___unicode = unicode
 
 
 class Simple3(google___protobuf___message___Message):
@@ -31,8 +35,12 @@ class Simple3(google___protobuf___message___Message):
         *,
         a_string : typing___Text,
         ) -> None: ...
-    @classmethod
-    def FromString(cls, s: builtin___bytes) -> Simple3: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> Simple3: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Simple3: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     if sys.version_info >= (3,):
