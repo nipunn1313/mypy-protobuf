@@ -8,10 +8,14 @@ setup(
     license='Apache License 2.0',
     author='Nipunn Koorapati',
     author_email='nipunn@dropbox.com',
-    py_modules=[],
+    py_modules=['mypy_protobuf'],
     url='https://github.com/dropbox/mypy-protobuf',
     download_url='https://github.com/dropbox/mypy-protobuf/archive/v1.17.tar.gz',
     install_requires=['protobuf>=3.6.0'],
-
-    scripts=['protoc-gen-mypy', 'protoc_gen_mypy.bat'],
+    entry_points={
+        "console_scripts": [
+            'protoc-gen-mypy = mypy_protobuf:main'
+        ]
+    },
+    scripts=['protoc_gen_mypy.bat'],
 )
