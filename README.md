@@ -78,6 +78,7 @@ contribution to improve quality/testing to bring both implementations to parity.
 - [@zifter](https://github.com/zifter)
 - [@juzna](https://github.com/juzna)
 - [@mikolajz](https://github.com/mikolajz)
+- [@chadrik](https://github.com/chadrik)
 
 
 Licence etc.
