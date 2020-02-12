@@ -23,6 +23,7 @@ MYPY_VENV=venv_mypy
     # Create virtualenv
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 --version
+        python3 -m pip --version
         python3 -m virtualenv $MYPY_VENV
     fi
     source $MYPY_VENV/bin/activate
