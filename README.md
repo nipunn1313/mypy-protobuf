@@ -3,7 +3,7 @@ mypy-protobuf: Generate mypy stub files from protobuf specs [![Build Status](htt
 
 ## Requirements
 protoc 3.0.0 or greater  
-python 2.7, 3.5, 3.6, 3.7  
+python 2.7, 3.5, 3.6, 3.7 3.8
 [python-protobuf >= 3.11.3](https://pypi.org/project/protobuf/3.7.1/)  
 [mypy >= v0.761](https://pypi.org/project/mypy)
 
