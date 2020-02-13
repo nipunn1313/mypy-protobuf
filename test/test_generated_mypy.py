@@ -78,7 +78,7 @@ def test_generate_negative_matches():
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
     assert len(errors_27) == 24
-    assert len(errors_35) == 28
+    assert len(errors_35) == 24
 
 def test_func():
     # type: () -> None
@@ -170,16 +170,13 @@ def test_clear_field_proto2():
     s.ClearField("a_inner")
     s.ClearField("a_repeated_string")
     s.ClearField("a_oneof")
+    s.ClearField(b"a_string")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
     with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
         s_untyped.ClearField("garbage")
-    # This error message is very inconsistent w/ how HasField works
-    if six.PY3:
-        with pytest.raises(TypeError, match='field name must be a string'):
-            s_untyped.ClearField(b"a_string")
 
 def test_clear_field_proto3():
     # type: () -> None
@@ -196,16 +193,13 @@ def test_clear_field_proto3():
     s.ClearField("outer_message")
     s.ClearField("a_repeated_string")
     s.ClearField("a_oneof")
+    s.ClearField(b"a_string")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
     with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
         s_untyped.ClearField("garbage")
-    # This error message is very inconsistent w/ how HasField works
-    if six.PY3:
-        with pytest.raises(TypeError, match='field name must be a string'):
-            s_untyped.ClearField(b"a_string")
 
 def test_which_oneof_proto2():
     # type: () -> None

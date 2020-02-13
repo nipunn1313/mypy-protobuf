@@ -37,8 +37,6 @@ e = 3  # E:2.7 E:3.5
 # Proto2
 s.HasField("garbage")  # E:2.7 E:3.5
 s.HasField("a_repeated_string")  # E:2.7 E:3.5
-if six.PY3:
-    s.HasField(b"a_string")  # E:3.5
 
 # Proto3
 s6 = SimpleProto3()
@@ -46,20 +44,12 @@ s6.HasField(u"garbage")  # E:2.7 E:3.5
 s6.HasField(u"a_string")  # E:2.7 E:3.5
 s6.HasField(u"outer_enum")  # E:2.7 E:3.5
 s6.HasField(u"a_repeated_string")  # E:2.7 E:3.5
-if six.PY3:
-    s6.HasField(b"outer_message")  # E:3.5
 
 # Proto2
 s.ClearField("garbage")  # E:2.7 E:3.5
-# This error message is very inconsistent w/ how HasField works
-if six.PY3:
-    s.ClearField(b"a_string")  # E:3.5
 
 # Proto3
 s6.ClearField("garbage")  # E:2.7 E:3.5
-# This error message is very inconsistent w/ how HasField works
-if six.PY3:
-    s6.ClearField(b"a_string")  # E:3.5
 
 # Proto2 WhichOneof
 s.WhichOneof("garbage")  # E:2.7 E:3.5
