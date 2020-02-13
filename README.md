@@ -2,10 +2,10 @@ mypy-protobuf: Generate mypy stub files from protobuf specs [![Build Status](htt
 ===========================================================
 
 ## Requirements
-protoc 3.0.0 or greater
-python 2.7, 3.5, 3.6, 3.7
-[python-protobuf >= 3.7.1](https://pypi.org/project/protobuf/3.7.1/)
-[mypy >= v0.701](https://pypi.org/project/mypy)
+protoc 3.0.0 or greater  
+python 2.7, 3.5, 3.6, 3.7  
+[python-protobuf >= 3.7.1](https://pypi.org/project/protobuf/3.7.1/)  
+[mypy >= v0.761](https://pypi.org/project/mypy)
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
 
