@@ -190,7 +190,7 @@ class Simple2(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a_string : typing___Text,
+        a_string : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
