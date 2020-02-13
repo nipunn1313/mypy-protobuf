@@ -331,36 +331,22 @@ class PkgWriter(object):
         hf_fields.extend(wo_fields.keys())
         cf_fields.extend(wo_fields.keys())
 
-        hf_fields_py3 = ",".join(sorted('u"{}"'.format(name) for name in hf_fields))
-        cf_fields_py3 = ",".join(sorted('u"{}"'.format(name) for name in cf_fields))
-        hf_fields_py2 = ",".join(sorted('u"{}",b"{}"'.format(name, name) for name in hf_fields))
-        cf_fields_py2 = ",".join(sorted('u"{}",b"{}"'.format(name, name) for name in cf_fields))
+        hf_fields_text = ",".join(sorted('u"{}",b"{}"'.format(name, name) for name in hf_fields))
+        cf_fields_text = ",".join(sorted('u"{}",b"{}"'.format(name, name) for name in cf_fields))
 
         if not hf_fields and not cf_fields and not wo_fields:
             return
 
-        l("if {} >= (3,):", "sys.version_info")
-        with self._indent():
-            if hf_fields:
-                l("def HasField(self, field_name: {}[{}]) -> {}: ...",
-                    self._import("typing_extensions", "Literal"),
-                    hf_fields_py3,
-                    self._builtin('bool'))
-            if cf_fields:
-                l("def ClearField(self, field_name: {}[{}]) -> None: ...",
-                    self._import("typing_extensions", "Literal"),
-                    cf_fields_py3)
-        l("else:")
-        with self._indent():
-            if hf_fields:
-                l("def HasField(self, field_name: {}[{}]) -> {}: ...",
-                    self._import("typing_extensions", "Literal"),
-                    hf_fields_py2,
-                    self._builtin('bool'))
-            if cf_fields:
-                l("def ClearField(self, field_name: {}[{}]) -> None: ...",
-                    self._import("typing_extensions", "Literal"),
-                    cf_fields_py2)
+        if hf_fields:
+            l("def HasField(self, field_name: {}[{}]) -> {}: ...",
+                self._import("typing_extensions", "Literal"),
+                hf_fields_text,
+                self._builtin('bool'))
+        if cf_fields:
+            l("def ClearField(self, field_name: {}[{}]) -> None: ...",
+                self._import("typing_extensions", "Literal"),
+                cf_fields_text)
+
         for wo_field, members in sorted(wo_fields.items()):
             if len(wo_fields) > 1:
                 l("@{}", self._import("typing", "overload"))

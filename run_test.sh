@@ -38,7 +38,7 @@ MYPY_VENV=venv_mypy
         if ! diff <(mypy --python-version=$PY python/mypy_protobuf.py test_negative/) test_negative/output.expected.$PY; then
             echo "test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun"
             for PY in 2.7 3.5; do
-                mypy --python-version=$PY mypy_protobuf.py test_negative/ > test_negative/output.expected.$PY || true
+                mypy --python-version=$PY python/mypy_protobuf.py test_negative/ > test_negative/output.expected.$PY || true
             done
             exit 1
         fi

@@ -1,4 +1,4 @@
-protobuf==3.7.1
+protobuf==3.11.3
 six
 pytest
 typing
