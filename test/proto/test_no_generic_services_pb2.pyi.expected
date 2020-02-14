@@ -9,6 +9,7 @@ from google.protobuf.message import (
 )
 
 from typing import (
+    Optional as typing___Optional,
     Text as typing___Text,
     Union as typing___Union,
 )
@@ -33,7 +34,7 @@ class Simple3(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a_string : typing___Text,
+        a_string : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod

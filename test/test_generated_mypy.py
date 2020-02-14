@@ -14,7 +14,7 @@ import os
 import pytest
 import six
 
-from test.proto.test_pb2 import FOO, OuterEnum, Simple1
+from test.proto.test_pb2 import FOO, OuterEnum, Simple1, Simple2
 from test.proto.test3_pb2 import SimpleProto3
 from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
@@ -239,13 +239,24 @@ def test_which_oneof_proto3():
     with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
         s_untyped.WhichOneof("garbage")
 
+def test_constructor_proto2():
+    # type: () -> None
+    x = Simple2()  # It's OK to omit a required field from the constructor.
+    assert not x.HasField('a_string')
+
+    x = Simple2(a_string=None)  # It's OK to pass None for a required field.
+    assert not x.HasField('a_string')
+
 def test_message_descriptor_proto2():
+    # type: () -> None
     assert Simple1().DESCRIPTOR.full_name == "test.Simple1"
     assert Simple1.DESCRIPTOR.full_name == "test.Simple1"
 
 def test_message_descriptor_proto3():
+    # type: () -> None
     assert SimpleProto3().DESCRIPTOR.full_name == "test3.SimpleProto3"
     assert SimpleProto3.DESCRIPTOR.full_name == "test3.SimpleProto3"
 
 def test_enum_descriptor():
+    # type: () -> None
     assert OuterEnum.DESCRIPTOR.name == "OuterEnum"

@@ -268,10 +268,7 @@ class PkgWriter(object):
                         # Only positional args allowed
                         # See https://github.com/dropbox/mypy-protobuf/issues/71
                         l("*,")
-                    # Required args
-                    for field in [f for f in fields if f.label == d.FieldDescriptorProto.LABEL_REQUIRED]:
-                        l("{} : {},", field.name, self.python_type(field))
-                    for field in [f for f in fields if f.label != d.FieldDescriptorProto.LABEL_REQUIRED]:
+                    for field in [f for f in fields]:
                         if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
                             if field.type_name in self.descriptors.messages and self.descriptors.messages[field.type_name].options.map_entry:
                                 msg = self.descriptors.messages[field.type_name]
