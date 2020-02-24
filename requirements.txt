@@ -2,3 +2,6 @@ protobuf==3.11.3
 six
 pytest
 typing
+
+# For python2. See https://github.com/pypa/virtualenv/issues/1493
+setuptools<45.0.0
