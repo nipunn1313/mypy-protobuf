@@ -90,6 +90,7 @@ FORWARD_REFERENCE_STRING_LITERAL = True
 
 
 def forward_ref(name):
+    # type: (Text) -> Text
     if FORWARD_REFERENCE_STRING_LITERAL:
         return "'{}'".format(name)
     else:
@@ -153,6 +154,7 @@ class PkgWriter(object):
         return import_name + "." + remains
 
     def _builtin(self, name):
+        # type: (Text) -> Text
         if name in PY2_ONLY_BUILTINS:
             self.py2_builtin_vars.add(name)
         else:
@@ -161,6 +163,7 @@ class PkgWriter(object):
 
     @staticmethod
     def _mangle_builtin(name):
+        # type: (Text) -> Text
         return 'builtin___{}'.format(name)
 
     @contextmanager
@@ -178,6 +181,7 @@ class PkgWriter(object):
             self.lines.append(self.indent + line.format(*args))
 
     def write_enum_values(self, enum, enum_full_name):
+        # type: (d.EnumDescriptorProto, Text) -> None
         for val in enum.value:
             if val.name in PYTHON_RESERVED:
                 continue
