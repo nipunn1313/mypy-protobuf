@@ -50,5 +50,5 @@ MYPY_VENV=venv_mypy
     source $VENV/bin/activate
     python --version
     py.test --version
-    py.test
+    py.test --ignore=test/proto
 )
