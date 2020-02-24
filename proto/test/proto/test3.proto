@@ -15,7 +15,7 @@ message OuterMessage3 {
 message SimpleProto3 {
   string a_string = 1;
   repeated string a_repeated_string = 2;
-  OuterEnum outer_enum = 3;
+  OuterEnum a_outer_enum = 3;
   OuterMessage3 outer_message = 4;
 
   oneof a_oneof {
@@ -29,4 +29,8 @@ message SimpleProto3 {
   }
 
   OuterMessage3 bool = 9;
+
+  // Test having fieldname match messagename
+  OuterEnum OuterEnum = 10;
+  OuterMessage3 OuterMessage3 = 11;
 }

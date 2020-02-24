@@ -148,8 +148,8 @@ def test_has_field_proto3():
         s_untyped.HasField(u"garbage")
     with pytest.raises(ValueError, match='Can\'t test non-submessage field "SimpleProto3.a_string" for presence in proto3.'):
         s_untyped.HasField(u"a_string")
-    with pytest.raises(ValueError, match='Can\'t test non-submessage field "SimpleProto3.outer_enum" for presence in proto3.'):
-        s_untyped.HasField("outer_enum")
+    with pytest.raises(ValueError, match='Can\'t test non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.'):
+        s_untyped.HasField("a_outer_enum")
     with pytest.raises(ValueError, match='Protocol message SimpleProto3 has no singular "a_repeated_string" field'):
         s_untyped.HasField(u"a_repeated_string")
     if six.PY3:
@@ -189,7 +189,7 @@ def test_clear_field_proto3():
     if six.PY2:
         s.ClearField(b"a_string")
     s.ClearField("a_string")
-    s.ClearField("outer_enum")
+    s.ClearField("a_outer_enum")
     s.ClearField("outer_message")
     s.ClearField("a_repeated_string")
     s.ClearField("a_oneof")
