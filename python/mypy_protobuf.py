@@ -89,12 +89,20 @@ PY2_ONLY_BUILTINS = {
 FORWARD_REFERENCE_STRING_LITERAL = True
 
 
-def forward_ref(name):
+def _forward_ref(name):
     # type: (Text) -> Text
     if FORWARD_REFERENCE_STRING_LITERAL:
         return "'{}'".format(name)
     else:
         return name
+
+def _mangle_builtin(name):
+    # type: (Text) -> Text
+    return 'builtin___{}'.format(name)
+
+def _mangle_global(name):
+    # type: (Text) -> Text
+    return 'global___{}'.format(name)
 
 
 class PkgWriter(object):
@@ -139,7 +147,7 @@ class PkgWriter(object):
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
-            return self._mangle_global(name)
+            return _mangle_global(name)
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
@@ -159,17 +167,7 @@ class PkgWriter(object):
             self.py2_builtin_vars.add(name)
         else:
             self.builtin_vars.add(name)
-        return self._mangle_builtin(name)
-
-    @staticmethod
-    def _mangle_builtin(name):
-        # type: (Text) -> Text
-        return 'builtin___{}'.format(name)
-
-    @staticmethod
-    def _mangle_global(name):
-        # type: (Text) -> Text
-        return 'global___{}'.format(name)
+        return _mangle_builtin(name)
 
     @contextmanager
     def _indent(self):
@@ -198,7 +196,7 @@ class PkgWriter(object):
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
             # MyPy does not support referencing the enum by the unqualified name *inside* nested enums
-            enum_full_name = forward_ref(prefix + enum.name)
+            enum_full_name = _forward_ref(prefix + enum.name)
 
             l("class {}({}):", enum.name, self._builtin('int'))
             with self._indent():
@@ -225,7 +223,7 @@ class PkgWriter(object):
                 self.write_enum_values(enum, enum_full_name)
 
             self.write_enum_values(enum, enum_full_name)
-            l("{} = {}", self._mangle_global(enum.name), enum.name)
+            l("{} = {}", _mangle_global(enum.name), enum.name)
             l("")
 
     def write_messages(self, messages, prefix):
@@ -308,7 +306,7 @@ class PkgWriter(object):
 
                 self.write_stringly_typed_fields(desc)
 
-            l("{} = {}", self._mangle_global(desc.name), desc.name)
+            l("{} = {}", _mangle_global(desc.name), desc.name)
             l("")
 
     def write_stringly_typed_fields(self, desc):
@@ -458,11 +456,11 @@ class PkgWriter(object):
 
         aliases = []
         for var in sorted(self.builtin_vars):
-            aliases.append(u'{} = {}'.format(self._mangle_builtin(var), var))
+            aliases.append(u'{} = {}'.format(_mangle_builtin(var), var))
         if self.py2_builtin_vars:
             aliases.append(u'if sys.version_info < (3,):')
             for var in sorted(self.py2_builtin_vars):
-                aliases.append(u'    {} = {}'.format(self._mangle_builtin(var), var))
+                aliases.append(u'    {} = {}'.format(_mangle_builtin(var), var))
         if aliases:
             aliases.append('\n')
 
