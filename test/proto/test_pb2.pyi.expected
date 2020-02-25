@@ -88,6 +88,7 @@ class OuterEnum(builtin___int):
     BAR = typing___cast('OuterEnum', 2)
 FOO = typing___cast('OuterEnum', 1)
 BAR = typing___cast('OuterEnum', 2)
+global___OuterEnum = OuterEnum
 
 class Simple1(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -107,6 +108,7 @@ class Simple1(google___protobuf___message___Message):
         INNER2 = typing___cast('Simple1.InnerEnum', 2)
     INNER1 = typing___cast('Simple1.InnerEnum', 1)
     INNER2 = typing___cast('Simple1.InnerEnum', 2)
+    global___InnerEnum = InnerEnum
 
     class InnerMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -121,15 +123,16 @@ class Simple1(google___protobuf___message___Message):
             def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Simple1.InnerMessage: ...
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    global___InnerMessage = InnerMessage
 
     a_string = ... # type: typing___Text
     a_repeated_string = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
     a_boolean = ... # type: builtin___bool
     a_uint32 = ... # type: builtin___int
-    a_enum = ... # type: OuterEnum
+    a_enum = ... # type: global___OuterEnum
     a_external_enum = ... # type: test___proto___test3_pb2___OuterEnum
-    inner_enum = ... # type: Simple1.InnerEnum
-    rep_inner_enum = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[Simple1.InnerEnum]
+    inner_enum = ... # type: global___Simple1.InnerEnum
+    rep_inner_enum = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[global___Simple1.InnerEnum]
     nested_enum = ... # type: test___proto___nested___nested_pb2___AnotherNested.NestedEnum
     a_oneof_1 = ... # type: typing___Text
     a_oneof_2 = ... # type: typing___Text
@@ -141,10 +144,10 @@ class Simple1(google___protobuf___message___Message):
     def a_nested(self) -> test___proto___nested___nested_pb2___Nested: ...
 
     @property
-    def inner_message(self) -> Simple1.InnerMessage: ...
+    def inner_message(self) -> global___Simple1.InnerMessage: ...
 
     @property
-    def rep_inner_message(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[Simple1.InnerMessage]: ...
+    def rep_inner_message(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___Simple1.InnerMessage]: ...
 
     @property
     def no_package(self) -> test___proto___nopackage_pb2___NoPackage: ...
@@ -158,14 +161,14 @@ class Simple1(google___protobuf___message___Message):
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = None,
         a_boolean : typing___Optional[builtin___bool] = None,
         a_uint32 : typing___Optional[builtin___int] = None,
-        a_enum : typing___Optional[OuterEnum] = None,
+        a_enum : typing___Optional[global___OuterEnum] = None,
         a_external_enum : typing___Optional[test___proto___test3_pb2___OuterEnum] = None,
         a_inner : typing___Optional[test___proto___inner___inner_pb2___Inner] = None,
         a_nested : typing___Optional[test___proto___nested___nested_pb2___Nested] = None,
-        inner_enum : typing___Optional[Simple1.InnerEnum] = None,
-        rep_inner_enum : typing___Optional[typing___Iterable[Simple1.InnerEnum]] = None,
-        inner_message : typing___Optional[Simple1.InnerMessage] = None,
-        rep_inner_message : typing___Optional[typing___Iterable[Simple1.InnerMessage]] = None,
+        inner_enum : typing___Optional[global___Simple1.InnerEnum] = None,
+        rep_inner_enum : typing___Optional[typing___Iterable[global___Simple1.InnerEnum]] = None,
+        inner_message : typing___Optional[global___Simple1.InnerMessage] = None,
+        rep_inner_message : typing___Optional[typing___Iterable[global___Simple1.InnerMessage]] = None,
         no_package : typing___Optional[test___proto___nopackage_pb2___NoPackage] = None,
         nested_enum : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedEnum] = None,
         nested_message : typing___Optional[test___proto___nested___nested_pb2___AnotherNested.NestedMessage] = None,
@@ -183,6 +186,7 @@ class Simple1(google___protobuf___message___Message):
     def HasField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"inner_enum",b"inner_enum",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"inner_enum",b"inner_enum",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"rep_inner_enum",b"rep_inner_enum",u"rep_inner_message",b"rep_inner_message"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions___Literal[u"a_oneof",b"a_oneof"]) -> typing_extensions___Literal["a_oneof_1","a_oneof_2"]: ...
+global___Simple1 = Simple1
 
 class Simple2(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -202,6 +206,7 @@ class Simple2(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"a_string",b"a_string"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a_string",b"a_string"]) -> None: ...
+global___Simple2 = Simple2
 
 class PythonReservedKeywords(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -218,6 +223,7 @@ class PythonReservedKeywords(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"False",b"False",u"None",b"None",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"False",b"False",u"None",b"None",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> None: ...
+global___PythonReservedKeywords = PythonReservedKeywords
 
 class PythonReservedKeywordsSmall(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -234,6 +240,7 @@ class PythonReservedKeywordsSmall(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"from",b"from"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"from",b"from"]) -> None: ...
+global___PythonReservedKeywordsSmall = PythonReservedKeywordsSmall
 
 class PythonReservedKeywordsService(google___protobuf___service___Service, metaclass=abc___ABCMeta):
     pass
@@ -244,13 +251,13 @@ class ATestService(google___protobuf___service___Service, metaclass=abc___ABCMet
     @abc___abstractmethod
     def Echo(self,
         rpc_controller: google___protobuf___service___RpcController,
-        request: Simple1,
-        done: typing___Optional[typing___Callable[[Simple2], None]],
-    ) -> concurrent___futures___Future[Simple2]: ...
+        request: global___Simple1,
+        done: typing___Optional[typing___Callable[[global___Simple2], None]],
+    ) -> concurrent___futures___Future[global___Simple2]: ...
 class ATestService_Stub(ATestService):
     def __init__(self, rpc_channel: google___protobuf___service___RpcChannel) -> None: ...
     def Echo(self,
         rpc_controller: google___protobuf___service___RpcController,
-        request: Simple1,
-        done: typing___Optional[typing___Callable[[Simple2], None]],
-    ) -> concurrent___futures___Future[Simple2]: ...
+        request: global___Simple1,
+        done: typing___Optional[typing___Callable[[global___Simple2], None]],
+    ) -> concurrent___futures___Future[global___Simple2]: ...

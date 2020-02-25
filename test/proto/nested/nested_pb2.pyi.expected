@@ -54,6 +54,7 @@ class Nested(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
+global___Nested = Nested
 
 class AnotherNested(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -75,6 +76,7 @@ class AnotherNested(google___protobuf___message___Message):
     INVALID = typing___cast('AnotherNested.NestedEnum', 0)
     ONE = typing___cast('AnotherNested.NestedEnum', 1)
     TWO = typing___cast('AnotherNested.NestedEnum', 2)
+    global___NestedEnum = NestedEnum
 
     class NestedMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -96,18 +98,19 @@ class AnotherNested(google___protobuf___message___Message):
         UNDEFINED = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 0)
         NESTED_ENUM1 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 1)
         NESTED_ENUM2 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 2)
+        global___NestedEnum2 = NestedEnum2
 
         s = ... # type: typing___Text
         b = ... # type: builtin___bool
-        ne = ... # type: AnotherNested.NestedEnum
-        ne2 = ... # type: AnotherNested.NestedMessage.NestedEnum2
+        ne = ... # type: global___AnotherNested.NestedEnum
+        ne2 = ... # type: global___AnotherNested.NestedMessage.NestedEnum2
 
         def __init__(self,
             *,
             s : typing___Optional[typing___Text] = None,
             b : typing___Optional[builtin___bool] = None,
-            ne : typing___Optional[AnotherNested.NestedEnum] = None,
-            ne2 : typing___Optional[AnotherNested.NestedMessage.NestedEnum2] = None,
+            ne : typing___Optional[global___AnotherNested.NestedEnum] = None,
+            ne2 : typing___Optional[global___AnotherNested.NestedMessage.NestedEnum2] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
@@ -118,6 +121,7 @@ class AnotherNested(google___protobuf___message___Message):
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def ClearField(self, field_name: typing_extensions___Literal[u"b",b"b",u"ne",b"ne",u"ne2",b"ne2",u"s",b"s"]) -> None: ...
+    global___NestedMessage = NestedMessage
 
 
     def __init__(self,
@@ -130,3 +134,4 @@ class AnotherNested(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnotherNested: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+global___AnotherNested = AnotherNested

@@ -139,7 +139,7 @@ class PkgWriter(object):
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
-            return name
+            return self._mangle_global(name)
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
@@ -165,6 +165,11 @@ class PkgWriter(object):
     def _mangle_builtin(name):
         # type: (Text) -> Text
         return 'builtin___{}'.format(name)
+
+    @staticmethod
+    def _mangle_global(name):
+        # type: (Text) -> Text
+        return 'global___{}'.format(name)
 
     @contextmanager
     def _indent(self):
@@ -220,6 +225,7 @@ class PkgWriter(object):
                 self.write_enum_values(enum, enum_full_name)
 
             self.write_enum_values(enum, enum_full_name)
+            l("{} = {}", self._mangle_global(enum.name), enum.name)
             l("")
 
     def write_messages(self, messages, prefix):
@@ -302,6 +308,7 @@ class PkgWriter(object):
 
                 self.write_stringly_typed_fields(desc)
 
+            l("{} = {}", self._mangle_global(desc.name), desc.name)
             l("")
 
     def write_stringly_typed_fields(self, desc):
