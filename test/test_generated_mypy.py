@@ -24,29 +24,33 @@ from typing import Any
 def _is_summary(l):
     # type: (str) -> bool
     """Checks if the line is the summary line 'Found X errors in Y files (checked Z source files)'"""
-    return l.startswith('Found ') and l.endswith('source files)\n')
+    return l.startswith("Found ") and l.endswith("source files)\n")
+
 
 def test_generate_mypy_matches():
     # type: () -> None
-    proto_files = (
-        glob.glob('proto/test/proto/*.proto') +
-        glob.glob('proto/test/proto/*/*.proto')
+    proto_files = glob.glob("proto/test/proto/*.proto") + glob.glob(
+        "proto/test/proto/*/*.proto"
     )
     assert len(proto_files) == 9  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
-        assert fn.endswith('.proto')
+        assert fn.endswith(".proto")
         fn_split = fn.split(os.sep)  # Eg. [proto, test, proto, test.com, test.proto]
-        assert fn_split[-1].endswith('.proto')
-        last = fn_split[-1][:-len('.proto')] + '_pb2.pyi'  # Eg [test_pb2.proto]
+        assert fn_split[-1].endswith(".proto")
+        last = fn_split[-1][: -len(".proto")] + "_pb2.pyi"  # Eg [test_pb2.proto]
         components = fn_split[1:-1]  # Eg. [test, proto, test.com]
-        components = [c.replace('.', os.sep) for c in components]  # Eg. [test, proto, test/com]
+        components = [
+            c.replace(".", os.sep) for c in components
+        ]  # Eg. [test, proto, test/com]
         components.append(last)  # Eg. [test, proto, test/com, test_pb2.proto]
 
         output = os.path.join(*components)
 
-        components[-1] += '.expected'  # Eg [test, proto, test/com, test_pb2.proto.expected]
+        components[
+            -1
+        ] += ".expected"  # Eg [test, proto, test/com, test_pb2.proto.expected]
 
         expected = os.path.join(*components)
 
@@ -57,21 +61,39 @@ def test_generate_mypy_matches():
 
         if output_contents != expected_contents:
             open(expected, "w").write(output_contents)
-            failures.append(("%s doesn't match %s. This test will copy it over." % (output, expected)))
+            failures.append(
+                (
+                    "%s doesn't match %s. This test will copy it over."
+                    % (output, expected)
+                )
+            )
 
     if failures:
         raise Exception(str(failures))
 
+
 def test_generate_negative_matches():
     # type: () -> None
     """Confirm that the test_negative expected file matches an error for each line"""
-    test_negative_lines = open('test_negative/negative.py').readlines()
+    test_negative_lines = open("test_negative/negative.py").readlines()
     # Grab the line number of the failures
-    errors_27 = set(int(l.split(":")[1]) for l in open('test_negative/output.expected.2.7').readlines() if not _is_summary(l))
-    errors_35 = set(int(l.split(":")[1]) for l in open('test_negative/output.expected.3.5').readlines() if not _is_summary(l))
+    errors_27 = set(
+        int(l.split(":")[1])
+        for l in open("test_negative/output.expected.2.7").readlines()
+        if not _is_summary(l)
+    )
+    errors_35 = set(
+        int(l.split(":")[1])
+        for l in open("test_negative/output.expected.3.5").readlines()
+        if not _is_summary(l)
+    )
 
-    expected_errors_27 = set(idx + 1 for idx, line in enumerate(test_negative_lines) if 'E:2.7' in line)
-    expected_errors_35 = set(idx + 1 for idx, line in enumerate(test_negative_lines) if 'E:3.5' in line)
+    expected_errors_27 = set(
+        idx + 1 for idx, line in enumerate(test_negative_lines) if "E:2.7" in line
+    )
+    expected_errors_35 = set(
+        idx + 1 for idx, line in enumerate(test_negative_lines) if "E:3.5" in line
+    )
 
     assert errors_27 == expected_errors_27
     assert errors_35 == expected_errors_35
@@ -79,6 +101,7 @@ def test_generate_negative_matches():
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
     assert len(errors_27) == 24
     assert len(errors_35) == 24
+
 
 def test_func():
     # type: () -> None
@@ -100,11 +123,12 @@ def test_func():
     assert s4.a_string == "Hello"
 
     e = FOO
-    e = OuterEnum.Value('BAR')
+    e = OuterEnum.Value("BAR")
 
     l = lower2()
     l.upper.Lower.a = 2
     assert l == lower2(upper=Upper(Lower=lower(a=2)))
+
 
 def test_has_field_proto2():
     # type: () -> None
@@ -124,13 +148,19 @@ def test_has_field_proto2():
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
-    with pytest.raises(ValueError, match="Protocol message Simple1 has no field garbage."):
+    with pytest.raises(
+        ValueError, match="Protocol message Simple1 has no field garbage."
+    ):
         s_untyped.HasField("garbage")
-    with pytest.raises(ValueError, match='Protocol message Simple1 has no singular "a_repeated_string" field'):
+    with pytest.raises(
+        ValueError,
+        match='Protocol message Simple1 has no singular "a_repeated_string" field',
+    ):
         s_untyped.HasField("a_repeated_string")
     if six.PY3:
-        with pytest.raises(TypeError, match='bad argument type for built-in operation'):
+        with pytest.raises(TypeError, match="bad argument type for built-in operation"):
             s_untyped.HasField(b"a_string")
+
 
 def test_has_field_proto3():
     # type: () -> None
@@ -144,17 +174,29 @@ def test_has_field_proto3():
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
-    with pytest.raises(ValueError, match="Protocol message SimpleProto3 has no field garbage."):
+    with pytest.raises(
+        ValueError, match="Protocol message SimpleProto3 has no field garbage."
+    ):
         s_untyped.HasField(u"garbage")
-    with pytest.raises(ValueError, match='Can\'t test non-submessage field "SimpleProto3.a_string" for presence in proto3.'):
+    with pytest.raises(
+        ValueError,
+        match='Can\'t test non-submessage field "SimpleProto3.a_string" for presence in proto3.',
+    ):
         s_untyped.HasField(u"a_string")
-    with pytest.raises(ValueError, match='Can\'t test non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.'):
+    with pytest.raises(
+        ValueError,
+        match='Can\'t test non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
+    ):
         s_untyped.HasField("a_outer_enum")
-    with pytest.raises(ValueError, match='Protocol message SimpleProto3 has no singular "a_repeated_string" field'):
+    with pytest.raises(
+        ValueError,
+        match='Protocol message SimpleProto3 has no singular "a_repeated_string" field',
+    ):
         s_untyped.HasField(u"a_repeated_string")
     if six.PY3:
-        with pytest.raises(TypeError, match='bad argument type for built-in operation'):
+        with pytest.raises(TypeError, match="bad argument type for built-in operation"):
             s_untyped.HasField(b"outer_message")
+
 
 def test_clear_field_proto2():
     # type: () -> None
@@ -177,6 +219,7 @@ def test_clear_field_proto2():
     s_untyped = s  # type: Any
     with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
         s_untyped.ClearField("garbage")
+
 
 def test_clear_field_proto3():
     # type: () -> None
@@ -201,6 +244,7 @@ def test_clear_field_proto3():
     with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
         s_untyped.ClearField("garbage")
 
+
 def test_which_oneof_proto2():
     # type: () -> None
     s = Simple1()
@@ -216,8 +260,11 @@ def test_which_oneof_proto2():
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
-    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
+    with pytest.raises(
+        ValueError, match='Protocol message has no oneof "garbage" field.'
+    ):
         s_untyped.WhichOneof("garbage")
+
 
 def test_which_oneof_proto3():
     # type: () -> None
@@ -236,26 +283,32 @@ def test_which_oneof_proto3():
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
-    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
+    with pytest.raises(
+        ValueError, match='Protocol message has no oneof "garbage" field.'
+    ):
         s_untyped.WhichOneof("garbage")
+
 
 def test_constructor_proto2():
     # type: () -> None
     x = Simple2()  # It's OK to omit a required field from the constructor.
-    assert not x.HasField('a_string')
+    assert not x.HasField("a_string")
 
     x = Simple2(a_string=None)  # It's OK to pass None for a required field.
-    assert not x.HasField('a_string')
+    assert not x.HasField("a_string")
+
 
 def test_message_descriptor_proto2():
     # type: () -> None
     assert Simple1().DESCRIPTOR.full_name == "test.Simple1"
     assert Simple1.DESCRIPTOR.full_name == "test.Simple1"
 
+
 def test_message_descriptor_proto3():
     # type: () -> None
     assert SimpleProto3().DESCRIPTOR.full_name == "test3.SimpleProto3"
     assert SimpleProto3.DESCRIPTOR.full_name == "test3.SimpleProto3"
+
 
 def test_enum_descriptor():
     # type: () -> None

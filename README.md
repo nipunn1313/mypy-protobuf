@@ -51,6 +51,14 @@ However, the go implementation here is a code drop from the Dropbox internal imp
 re-upstreams. As a result, the python implementation will get more timely support. We encourage community
 contribution to improve quality/testing to bring both implementations to parity.
 
+## Contributing
+Contributions to the implementations are welcome. Please run tests using `./run_test.sh`.
+Ensure code is formatted using black.
+```
+pip3 install black
+black python/ test/
+```
+
 ## Contributors
 
 ### Dropboxers
