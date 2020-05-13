@@ -39,7 +39,7 @@ if sys.version_info < (3,):
 
 class Nested(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    a = ... # type: test___proto___test3_pb2___OuterEnum
+    a: test___proto___test3_pb2___OuterEnum = ...
 
     def __init__(self,
         *,
@@ -100,10 +100,10 @@ class AnotherNested(google___protobuf___message___Message):
         NESTED_ENUM2 = typing___cast('AnotherNested.NestedMessage.NestedEnum2', 2)
         global___NestedEnum2 = NestedEnum2
 
-        s = ... # type: typing___Text
-        b = ... # type: builtin___bool
-        ne = ... # type: global___AnotherNested.NestedEnum
-        ne2 = ... # type: global___AnotherNested.NestedMessage.NestedEnum2
+        s: typing___Text = ...
+        b: builtin___bool = ...
+        ne: global___AnotherNested.NestedEnum = ...
+        ne2: global___AnotherNested.NestedMessage.NestedEnum2 = ...
 
         def __init__(self,
             *,

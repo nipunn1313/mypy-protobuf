@@ -30,7 +30,7 @@ if sys.version_info < (3,):
 
 class TestMessage(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    foo = ... # type: typing___Text
+    foo: typing___Text = ...
 
     def __init__(self,
         *,
