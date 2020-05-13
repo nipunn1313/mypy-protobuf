@@ -62,10 +62,11 @@ simple2.HasField(b)  # E:2.7 E:3.5
 
 # Proto3 WhichOneof
 s6.WhichOneof("garbage")  # E:2.7 E:3.5
-a = s6.WhichOneof("a_oneof")  # E:2.7 E:3.5
-b = s6.WhichOneof("a_oneof")
-s6.HasField(b)  # allowed
-simple2.HasField(b)  # E:2.7 E:3.5  - it's a text but not one of the literals
+a3 = 5
+a3 = s6.WhichOneof("a_oneof")  # E:2.7 E:3.5
+b3 = s6.WhichOneof("a_oneof")
+s6.HasField(b3)  # allowed
+simple2.HasField(b3)  # E:2.7 E:3.5  - it's a text but not one of the literals
 
 # Overload WhichOneof
 c = s6.WhichOneof("a_oneof")
