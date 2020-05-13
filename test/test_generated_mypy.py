@@ -122,12 +122,20 @@ def test_func():
     s4.CopyFrom(s)
     assert s4.a_string == "Hello"
 
-    e = FOO
-    e = OuterEnum.Value("BAR")
-
     l = lower2()
     l.upper.Lower.a = 2
     assert l == lower2(upper=Upper(Lower=lower(a=2)))
+
+
+def test_enum():
+    # type: () -> None
+    e = FOO
+    e = OuterEnum.Value("BAR")
+    assert OuterEnum.Value("BAR") == 2
+    assert OuterEnum.Name(e) == "BAR"
+    assert OuterEnum.keys() == ["FOO", "BAR"]
+    assert OuterEnum.values() == [1, 2]
+    assert OuterEnum.items() == [("FOO", 1), ("BAR", 2)]
 
 
 def test_has_field_proto2():

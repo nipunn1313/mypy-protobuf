@@ -232,39 +232,32 @@ class PkgWriter(object):
             l("{} = {}", _mangle_message(enum_value_type), enum_value_type)
             enum_value_full_type = prefix + enum_value_type
 
-            l("class {}(object):", enum.name)
+            l("{}: {}", enum.name, "_" + enum.name)
+            l(
+                "class {}({}[{}]):",
+                "_" + enum.name,
+                self._import(
+                    "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
+                ),
+                enum_value_full_type,
+            )
             with self._indent():
                 l(
                     "DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "EnumDescriptor"),
                 )
-                l("@classmethod")
                 l(
-                    "def Name(cls, number: {}) -> {}: ...",
-                    self._builtin("int"),
+                    "def Name(self, number: {}) -> {}: ...",
+                    enum_value_full_type,
                     self._builtin("str"),
                 )
-                l("@classmethod")
                 l(
-                    "def Value(cls, name: {}) -> {}: ...",
+                    "def Value(self, name: {}) -> {}: ...",
                     self._builtin("str"),
                     enum_value_full_type,
                 )
-                l("@classmethod")
                 l(
-                    "def keys(cls) -> {}[{}]: ...",
-                    self._import("typing", "List"),
-                    self._builtin("str"),
-                )
-                l("@classmethod")
-                l(
-                    "def values(cls) -> {}[{}]: ...",
-                    self._import("typing", "List"),
-                    enum_value_full_type,
-                )
-                l("@classmethod")
-                l(
-                    "def items(cls) -> {}[{}[{}, {}]]: ...",
+                    "def items(self) -> {}[{}[{}, {}]]: ...",
                     self._import("typing", "List"),
                     self._import("typing", "Tuple"),
                     self._builtin("str"),
