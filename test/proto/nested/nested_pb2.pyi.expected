@@ -55,12 +55,12 @@ class Nested(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
-global___Nested = Nested
+type___Nested = Nested
 
 class AnotherNested(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     NestedEnumValue = typing___NewType('NestedEnumValue', builtin___int)
-    global___NestedEnumValue = NestedEnumValue
+    type___NestedEnumValue = NestedEnumValue
     class NestedEnum(object):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
         @classmethod
@@ -79,12 +79,12 @@ class AnotherNested(google___protobuf___message___Message):
     INVALID = typing___cast(AnotherNested.NestedEnumValue, 0)
     ONE = typing___cast(AnotherNested.NestedEnumValue, 1)
     TWO = typing___cast(AnotherNested.NestedEnumValue, 2)
-    global___NestedEnum = NestedEnum
+    type___NestedEnum = NestedEnum
 
     class NestedMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
         NestedEnum2Value = typing___NewType('NestedEnum2Value', builtin___int)
-        global___NestedEnum2Value = NestedEnum2Value
+        type___NestedEnum2Value = NestedEnum2Value
         class NestedEnum2(object):
             DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
             @classmethod
@@ -103,19 +103,19 @@ class AnotherNested(google___protobuf___message___Message):
         UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 0)
         NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 1)
         NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 2)
-        global___NestedEnum2 = NestedEnum2
+        type___NestedEnum2 = NestedEnum2
 
         s: typing___Text = ...
         b: builtin___bool = ...
-        ne: global___AnotherNested.NestedEnumValue = ...
-        ne2: global___AnotherNested.NestedMessage.NestedEnum2Value = ...
+        ne: type___AnotherNested.NestedEnumValue = ...
+        ne2: type___AnotherNested.NestedMessage.NestedEnum2Value = ...
 
         def __init__(self,
             *,
             s : typing___Optional[typing___Text] = None,
             b : typing___Optional[builtin___bool] = None,
-            ne : typing___Optional[global___AnotherNested.NestedEnumValue] = None,
-            ne2 : typing___Optional[global___AnotherNested.NestedMessage.NestedEnum2Value] = None,
+            ne : typing___Optional[type___AnotherNested.NestedEnumValue] = None,
+            ne2 : typing___Optional[type___AnotherNested.NestedMessage.NestedEnum2Value] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
@@ -126,7 +126,7 @@ class AnotherNested(google___protobuf___message___Message):
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def ClearField(self, field_name: typing_extensions___Literal[u"b",b"b",u"ne",b"ne",u"ne2",b"ne2",u"s",b"s"]) -> None: ...
-    global___NestedMessage = NestedMessage
+    type___NestedMessage = NestedMessage
 
 
     def __init__(self,
@@ -139,4 +139,4 @@ class AnotherNested(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnotherNested: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-global___AnotherNested = AnotherNested
+type___AnotherNested = AnotherNested
