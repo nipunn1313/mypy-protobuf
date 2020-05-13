@@ -63,7 +63,7 @@ def test_generate_mypy_matches():
             open(expected, "w").write(output_contents)
             failures.append(
                 (
-                    "%s doesn't match %s. This test will copy it over."
+                    "%s doesn't match %s. This test will copy it over. Please rerun"
                     % (output, expected)
                 )
             )
@@ -99,8 +99,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 24
-    assert len(errors_35) == 24
+    assert len(errors_27) == 25
+    assert len(errors_35) == 25
 
 
 def test_func():
