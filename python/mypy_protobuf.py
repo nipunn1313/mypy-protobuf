@@ -97,14 +97,21 @@ def _forward_ref(name):
         return name
 
 
+# Identifiers are mangled so that they don't conflict with
+# field names.
+
+
 def _mangle_builtin(name):
     # type: (Text) -> Text
+    """Enum variant `int` might conflict with the int identifier"""
     return "builtin___{}".format(name)
 
 
-def _mangle_global(name):
+def _mangle_message(name):
     # type: (Text) -> Text
-    return "global___{}".format(name)
+    """Enum variant `Name` might conflict with a message or enum named `Name`, so
+    mangle it with a type__ prefix for internal references"""
+    return "type___{}".format(name)
 
 
 class PkgWriter(object):
@@ -149,7 +156,7 @@ class PkgWriter(object):
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
-            return _mangle_global(name)
+            return _mangle_message(name)
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
@@ -213,7 +220,7 @@ class PkgWriter(object):
                 enum_value_type,
                 self._builtin("int"),
             )
-            l("{} = {}", _mangle_global(enum_value_type), enum_value_type)
+            l("{} = {}", _mangle_message(enum_value_type), enum_value_type)
             enum_value_full_type = prefix + enum_value_type
 
             l("class {}(object):", enum.name)
@@ -258,7 +265,7 @@ class PkgWriter(object):
                 self.write_enum_values(enum, enum_value_full_type)
 
             self.write_enum_values(enum, enum_value_full_type)
-            l("{} = {}", _mangle_global(enum.name), enum.name)
+            l("{} = {}", _mangle_message(enum.name), enum.name)
             l("")
 
     def write_messages(self, messages, prefix):
@@ -398,7 +405,7 @@ class PkgWriter(object):
 
                 self.write_stringly_typed_fields(desc)
 
-            l("{} = {}", _mangle_global(desc.name), desc.name)
+            l("{} = {}", _mangle_message(desc.name), desc.name)
             l("")
 
     def write_stringly_typed_fields(self, desc):
