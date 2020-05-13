@@ -5,6 +5,7 @@
 - Split EnumValue from EnumTypeWrapper to fix message typing. Enforces that constructing
 an enum value must happen via a NewType wrapper to the int.
 - Use inline-style rather than comment-style typing in the pyi file
+- Remove MergeFrom/CopyFrom from generated code as it is in the Message superclass
 
 ## 1.20
 

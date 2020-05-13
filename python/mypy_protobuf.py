@@ -409,8 +409,6 @@ class PkgWriter(object):
                         self._builtin("unicode"),
                         qualified_name,
                     )
-                l("def MergeFrom(self, other_msg: {}) -> None: ...", message_class)
-                l("def CopyFrom(self, other_msg: {}) -> None: ...", message_class)
 
                 self.write_stringly_typed_fields(desc)
 
