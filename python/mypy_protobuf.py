@@ -205,10 +205,18 @@ class PkgWriter(object):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            # MyPy does not support referencing the enum by the unqualified name *inside* nested enums
-            enum_full_name = _forward_ref(prefix + enum.name)
+            enum_value_type = enum.name + "Value"
+            l(
+                "{} = {}('{}', {})",
+                enum_value_type,
+                self._import("typing", "NewType"),
+                enum_value_type,
+                self._builtin("int"),
+            )
+            l("{} = {}", _mangle_global(enum_value_type), enum_value_type)
+            enum_value_full_type = prefix + enum_value_type
 
-            l("class {}({}):", enum.name, self._builtin("int"))
+            l("class {}(object):", enum.name)
             with self._indent():
                 l(
                     "DESCRIPTOR: {} = ...",
@@ -224,7 +232,7 @@ class PkgWriter(object):
                 l(
                     "def Value(cls, name: {}) -> {}: ...",
                     self._builtin("str"),
-                    enum_full_name,
+                    enum_value_full_type,
                 )
                 l("@classmethod")
                 l(
@@ -236,7 +244,7 @@ class PkgWriter(object):
                 l(
                     "def values(cls) -> {}[{}]: ...",
                     self._import("typing", "List"),
-                    enum_full_name,
+                    enum_value_full_type,
                 )
                 l("@classmethod")
                 l(
@@ -244,12 +252,12 @@ class PkgWriter(object):
                     self._import("typing", "List"),
                     self._import("typing", "Tuple"),
                     self._builtin("str"),
-                    enum_full_name,
+                    enum_value_full_type,
                 )
 
-                self.write_enum_values(enum, enum_full_name)
+                self.write_enum_values(enum, enum_value_full_type)
 
-            self.write_enum_values(enum, enum_full_name)
+            self.write_enum_values(enum, enum_value_full_type)
             l("{} = {}", _mangle_global(enum.name), enum.name)
             l("")
 
@@ -555,7 +563,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
             d.FieldDescriptorProto.TYPE_BYTES: lambda: b_bytes,
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(
-                field.type_name
+                field.type_name + "Value"
             ),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(
                 field.type_name
@@ -633,6 +641,7 @@ class Descriptors(object):
             # type: (RepeatedCompositeFieldContainer[d.EnumDescriptorProto], Text, d.FileDescriptorProto) -> None
             for enum in enums:
                 self.message_to_fd[prefix + enum.name] = _fd
+                self.message_to_fd[prefix + enum.name + "Value"] = _fd
 
         def _add_messages(messages, prefix, _fd):
             # type: (RepeatedCompositeFieldContainer[d.DescriptorProto], Text, d.FileDescriptorProto) -> None

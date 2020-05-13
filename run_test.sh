@@ -4,6 +4,9 @@ PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
 VENV=venv_$PY_VERSION
 MYPY_VENV=venv_mypy
 
+RED="\033[0;31m"
+NC='\033[0m'
+
 (
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
@@ -36,7 +39,7 @@ MYPY_VENV=venv_mypy
     for PY in 2.7 3.5; do
         mypy --python-version=$PY python/mypy_protobuf.py test/
         if ! diff <(mypy --python-version=$PY python/mypy_protobuf.py test_negative/) test_negative/output.expected.$PY; then
-            echo "test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun"
+            echo -e "${RED}test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun${NC}"
             for PY in 2.7 3.5; do
                 mypy --python-version=$PY python/mypy_protobuf.py test_negative/ > test_negative/output.expected.$PY || true
             done
