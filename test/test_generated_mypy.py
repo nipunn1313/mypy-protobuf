@@ -14,7 +14,7 @@ import os
 import pytest
 import six
 
-from test.proto.test_pb2 import FOO, OuterEnum, Simple1, Simple2
+from test.proto.test_pb2 import DESCRIPTOR, FOO, OuterEnum, Simple1, Simple2
 from test.proto.test3_pb2 import SimpleProto3
 from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
@@ -99,8 +99,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 25
-    assert len(errors_35) == 25
+    assert len(errors_27) == 26
+    assert len(errors_35) == 26
 
 
 def test_func():
@@ -313,3 +313,8 @@ def test_message_descriptor_proto3():
 def test_enum_descriptor():
     # type: () -> None
     assert OuterEnum.DESCRIPTOR.name == "OuterEnum"
+
+
+def test_module_descriptor():
+    # type: () -> None
+    assert DESCRIPTOR.name == "test/proto/test.proto"

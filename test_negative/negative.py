@@ -10,7 +10,7 @@ from typing import (
     Text,
 )
 
-from test.proto.test_pb2 import FOO, Simple1, Simple2
+from test.proto.test_pb2 import DESCRIPTOR, FOO, Simple1, Simple2
 from test.proto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
 from test.proto.dot.com.test_pb2 import TestMessage
 
@@ -78,6 +78,9 @@ SimpleProto3().DESCRIPTOR.Garbage()  # E:2.7 E:3.5
 
 # Enum DESCRIPTOR should detect invalid access:
 OuterEnum.DESCRIPTOR.Garbage()  # E:2.7 E:3.5
+
+# Module DESCRIPTOR should detect invalid access:
+DESCRIPTOR.Garbage()  # E:2.7 E:3.5
 
 # Enum value type should be an EnumValueType convertible to int
 enum = OuterEnumValue(5)
