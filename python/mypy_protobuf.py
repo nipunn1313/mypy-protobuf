@@ -208,6 +208,15 @@ class PkgWriter(object):
                 val.number,
             )
 
+    def write_module_attributes(self):
+        # type: () -> None
+        l = self._write_line
+        l(
+            "DESCRIPTOR: {} = ...",
+            self._import("google.protobuf.descriptor", "FileDescriptor"),
+        )
+        l("")
+
     def write_enums(self, enums, prefix=""):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
@@ -619,6 +628,7 @@ def generate_mypy_stubs(descriptors, response, quiet):
     # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors)
+        pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type)
         pkg_writer.write_messages(fd.message_type, "")
         pkg_writer.write_extensions(fd.extension)
