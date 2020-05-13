@@ -30,7 +30,7 @@ if sys.version_info < (3,):
 
 class Simple3(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    a_string = ... # type: typing___Text
+    a_string: typing___Text = ...
 
     def __init__(self,
         *,

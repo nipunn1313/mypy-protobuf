@@ -9,6 +9,6 @@ from google.protobuf.message import (
 )
 
 
-test_field_extension = ... # type: google___protobuf___descriptor___FieldDescriptor
+test_field_extension: google___protobuf___descriptor___FieldDescriptor = ...
 
-test_message_option = ... # type: google___protobuf___descriptor___FieldDescriptor
+test_message_option: google___protobuf___descriptor___FieldDescriptor = ...

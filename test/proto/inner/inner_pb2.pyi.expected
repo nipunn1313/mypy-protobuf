@@ -33,7 +33,7 @@ if sys.version_info < (3,):
 
 class Inner(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    a = ... # type: test___proto___test3_pb2___OuterEnum
+    a: test___proto___test3_pb2___OuterEnum = ...
 
     def __init__(self,
         *,

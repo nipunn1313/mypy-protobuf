@@ -29,7 +29,7 @@ if sys.version_info < (3,):
 
 class lower(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    a = ... # type: builtin___int
+    a: builtin___int = ...
 
     def __init__(self,
         *,

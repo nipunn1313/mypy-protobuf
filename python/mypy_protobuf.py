@@ -281,13 +281,13 @@ class PkgWriter(object):
                             "RepeatedScalarFieldContainer",
                         )
                         l(
-                            "{} = ... # type: {}[{}]",
+                            "{}: {}[{}] = ...",
                             field.name,
                             container,
                             self.python_type(field),
                         )
                     else:
-                        l("{} = ... # type: {}", field.name, self.python_type(field))
+                        l("{}: {} = ...", field.name, self.python_type(field))
                 l("")
 
                 # Getters for non-scalar fields
@@ -477,7 +477,7 @@ class PkgWriter(object):
             "google.protobuf.descriptor", "FieldDescriptor"
         )
         for extension in extensions:
-            l("{} = ... # type: {}", extension.name, field_descriptor_class)
+            l("{}: {} = ...", extension.name, field_descriptor_class)
             l("")
 
     def write_methods(self, service, is_abstract):
