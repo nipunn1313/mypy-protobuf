@@ -37,11 +37,11 @@ NC='\033[0m'
 
     # Run mypy
     for PY in 2.7 3.5; do
-        mypy --python-version=$PY python/mypy_protobuf.py test/
-        if ! diff <(mypy --python-version=$PY python/mypy_protobuf.py test_negative/) test_negative/output.expected.$PY; then
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test/
+        if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/) test_negative/output.expected.$PY; then
             echo -e "${RED}test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun${NC}"
             for PY in 2.7 3.5; do
-                mypy --python-version=$PY python/mypy_protobuf.py test_negative/ > test_negative/output.expected.$PY || true
+                mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ > test_negative/output.expected.$PY || true
             done
             exit 1
         fi
