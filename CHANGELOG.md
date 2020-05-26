@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 1.21
+
 - Support for module descriptor.
 - Update mangling from `global__` to `message__`
 - Split EnumValue from EnumTypeWrapper to fix message typing. Enforces that constructing
