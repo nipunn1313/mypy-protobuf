@@ -1,6 +1,14 @@
 ## Upcoming
 
-- Update required mypy version to 0.780 (picks up new typeshed annotations)
+- Update required mypy version to 0.780 (picks up new typeshed annotations). Includes improved typing/error messages on Message
+Before:
+```
+test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Message"
+```
+After:
+```
+test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Simple1"
+```
 - Update generated EnumTypeWrapper to be instances of EnumTypeWrapper - for more consistency
 with generated python code. Most caller code should not require mypy type changes. Egh
 `ProtoEnum.Value('first')` should work either way.
