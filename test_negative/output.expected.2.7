@@ -1,6 +1,6 @@
 test_negative/negative.py:20: error: "Simple1" has no attribute "SerializeToStringg"
 test_negative/negative.py:23: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "Union[str, buffer, unicode]"
-test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Message"
+test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Simple1"
 test_negative/negative.py:30: error: Argument 1 to "extend" of "list" has incompatible type "RepeatedScalarFieldContainer[unicode]"; expected "Iterable[int]"
 test_negative/negative.py:32: error: Argument "foo" to "TestMessage" has incompatible type "int"; expected "Optional[unicode]"
 test_negative/negative.py:35: error: Incompatible types in assignment (expression has type "int", variable has type "OuterEnumValue")
