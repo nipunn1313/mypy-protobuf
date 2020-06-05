@@ -1,6 +1,23 @@
 ## Upcoming
 
 - Update required mypy version to 0.780 (picks up new typeshed annotations)
+- Update generated EnumTypeWrapper to be instances of EnumTypeWrapper - for more consistency
+with generated python code. Most caller code should not require mypy type changes. Egh
+`ProtoEnum.Value('first')` should work either way.
+
+Generated Before (in 1.21)
+```
+class ProtoEnum(object):
+    @classmethod
+    def Value(cls, name: str) -> ProtoEnumValue
+```
+
+Generated After (in 1.22)
+```
+ProtoEnum: _ProtoEnum
+class _ProtoEnum(google.protobuf.EnumTypeWrapper):
+    def Value(self, name: str) -> ProtoEnumValue
+```
 
 ## 1.21
 
