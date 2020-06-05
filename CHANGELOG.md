@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Update required mypy version to 0.780 (picks up new typeshed annotations)
+
 ## 1.21
 
 - Support for module descriptor.
