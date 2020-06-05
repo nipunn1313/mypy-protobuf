@@ -1,11 +1,12 @@
 ## Upcoming
 
-- Update required mypy version to 0.780 (picks up new typeshed annotations). Includes improved typing/error messages on Message
-Before:
+- Update tested/required mypy version to 0.780 (picks up new typeshed annotations). Includes improved typing/error messages on Message.
+
+Before (mypy < 0.780):
 ```
 test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Message"
 ```
-After:
+After (mypy >= 0.780:
 ```
 test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Simple1"
 ```
@@ -45,7 +46,7 @@ mesage ProtoMsg {
     ProtoEnum enum = 1;
 }
 ```
-Generated Before:
+Generated Before (in 1.20):
 ```
 class ProtoEnum(object):
     @classmethod
@@ -54,7 +55,7 @@ class ProtoEnum(object):
 class ProtoMsg(Message):
     def __init__(self, enum: ProtoEnum) -> None
 ```
-Generated After:
+Generated After (in 1.21):
 ```
 ProtoEnumValue = NewType('ProtoEnumValue', int)
 class ProtoEnum(object):
@@ -65,7 +66,8 @@ class ProtoMsg(Message):
     def __init__(self, enum: ProtoEnumValue) -> None
 ```
 Migration Guide (with example calling code)
-Before
+
+Before (with 1.20)
 ```
 from msg_pb2 import ProtoEnum, ProtoMsg
 
@@ -73,7 +75,7 @@ def make_proto_msg(enum: ProtoEnum) -> ProtoMsg:
     return ProtoMsg(enum)
 make_proto_msg(ProtoMsg.FIRST)
 ```
-After
+After (with 1.21)
 ```
 from msg_pb2 import ProtoEnum, ProtoMsg
 
