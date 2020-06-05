@@ -8,6 +8,55 @@
 - Update mangling from `global__` to `message__`
 - Split EnumValue from EnumTypeWrapper to fix message typing. Enforces that constructing
 an enum value must happen via a NewType wrapper to the int.
+
+Example:
+```
+enum ProtoEnum {
+    FIRST = 1;
+    SECOND = 2;
+}
+
+mesage ProtoMsg {
+    ProtoEnum enum = 1;
+}
+```
+Generated Before:
+```
+class ProtoEnum(object):
+    @classmethod
+    def Value(cls, name: str) -> ProtoEnum
+
+class ProtoMsg(Message):
+    def __init__(self, enum: ProtoEnum) -> None
+```
+Generated After:
+```
+ProtoEnumValue = NewType('ProtoEnumValue', int)
+class ProtoEnum(object):
+    @classmethod
+    def Value(cls, name: str) -> ProtoEnumValue
+    
+class ProtoMsg(Message):
+    def __init__(self, enum: ProtoEnumValue) -> None
+```
+Migration Guide (with example calling code)
+Before
+```
+from msg_pb2 import ProtoEnum, ProtoMsg
+
+def make_proto_msg(enum: ProtoEnum) -> ProtoMsg:
+    return ProtoMsg(enum)
+make_proto_msg(ProtoMsg.FIRST)
+```
+After
+```
+from msg_pb2 import ProtoEnum, ProtoMsg
+
+def make_proto_msg(enum: 'msg_pb2.ProtoEnumValue') -> ProtoMsg:
+    return ProtoMsg(enum)
+make_proto_msg(ProtoMsg.FIRST)
+```
+
 - Use inline-style rather than comment-style typing in the pyi file
 - Remove MergeFrom/CopyFrom from generated code as it is in the Message superclass
 
