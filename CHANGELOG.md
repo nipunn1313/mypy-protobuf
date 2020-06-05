@@ -6,7 +6,7 @@
 
 - Support for module descriptor.
 - Update mangling from `global__` to `message__`
-- Split EnumValue from EnumTypeWrapper to fix message typing. Enforces that constructing
+- Fix bug in message typing for nested enums. Split EnumValue from EnumTypeWrapper. Enforces that constructing
 an enum value must happen via a NewType wrapper to the int.
 
 Example:
