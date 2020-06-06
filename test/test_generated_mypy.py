@@ -14,11 +14,16 @@ import os
 import pytest
 import six
 
+import test.proto.test_pb2 as test_pb2
 from test.proto.test_pb2 import DESCRIPTOR, FOO, OuterEnum, Simple1, Simple2
 from test.proto.test3_pb2 import SimpleProto3
 from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import Any
+
+MYPY = False
+if MYPY:
+    from test.proto.test_pb2 import OuterEnumValue
 
 
 def _is_summary(l):
@@ -136,6 +141,14 @@ def test_enum():
     assert OuterEnum.keys() == ["FOO", "BAR"]
     assert OuterEnum.values() == [1, 2]
     assert OuterEnum.items() == [("FOO", 1), ("BAR", 2)]
+
+    # Make sure we can assure typing with a couple of techniques
+    e2 = OuterEnum.Value("BAR")  # type: test_pb2.OuterEnumValue
+    assert OuterEnum.Name(e2) == "BAR"
+    e3 = OuterEnum.Value("BAR")  # type: OuterEnumValue
+    assert OuterEnum.Name(e3) == "BAR"
+    e4 = OuterEnum.Value("BAR")  # type: int
+    assert OuterEnum.Name(e2) == "BAR"
 
 
 def test_has_field_proto2():
