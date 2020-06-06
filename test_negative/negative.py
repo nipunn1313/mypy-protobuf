@@ -88,3 +88,13 @@ enum = s6.a_outer_enum
 as_int = 5
 as_int = s6.a_outer_enum
 s6.a_outer_enum.FOO  # E:2.7 E:3.5
+
+# Name/Value/items should inherit value type from _EnumTypeWrapper
+OuterEnum.Name(OuterEnumValue(5))
+OuterEnum.Name(5)  # E:2.7 E:3.5
+OuterEnum.Name(OuterEnum.Value("BAR"))
+OuterEnum.Name(SimpleProto3.InnerEnum.Value("BAR"))  # E:2.7 E:3.5
+OuterEnum.Name(OuterEnum.values()[0])
+OuterEnum.Name(SimpleProto3.InnerEnum.values()[0])  # E:2.7 E:3.5
+OuterEnum.Name(OuterEnum.items()[0][1])
+OuterEnum.Name(SimpleProto3.InnerEnum.items()[0][1])  # E:2.7 E:3.5

@@ -19,11 +19,9 @@ from test.proto.test3_pb2 import (
 )
 
 from typing import (
-    List as typing___List,
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    Tuple as typing___Tuple,
     Union as typing___Union,
     cast as typing___cast,
 )
@@ -37,7 +35,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-builtin___str = str
 if sys.version_info < (3,):
     builtin___buffer = buffer
     builtin___unicode = unicode
@@ -69,9 +66,6 @@ class AnotherNested(google___protobuf___message___Message):
     NestedEnum: _NestedEnum
     class _NestedEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[AnotherNested.NestedEnumValue]):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-        def Name(self, number: AnotherNested.NestedEnumValue) -> builtin___str: ...
-        def Value(self, name: builtin___str) -> AnotherNested.NestedEnumValue: ...
-        def items(self) -> typing___List[typing___Tuple[builtin___str, AnotherNested.NestedEnumValue]]: ...
         INVALID = typing___cast(AnotherNested.NestedEnumValue, 0)
         ONE = typing___cast(AnotherNested.NestedEnumValue, 1)
         TWO = typing___cast(AnotherNested.NestedEnumValue, 2)
@@ -87,9 +81,6 @@ class AnotherNested(google___protobuf___message___Message):
         NestedEnum2: _NestedEnum2
         class _NestedEnum2(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[AnotherNested.NestedMessage.NestedEnum2Value]):
             DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-            def Name(self, number: AnotherNested.NestedMessage.NestedEnum2Value) -> builtin___str: ...
-            def Value(self, name: builtin___str) -> AnotherNested.NestedMessage.NestedEnum2Value: ...
-            def items(self) -> typing___List[typing___Tuple[builtin___str, AnotherNested.NestedMessage.NestedEnum2Value]]: ...
             UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 0)
             NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 1)
             NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 2)

@@ -246,24 +246,6 @@ class PkgWriter(object):
                     "DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "EnumDescriptor"),
                 )
-                l(
-                    "def Name(self, number: {}) -> {}: ...",
-                    enum_value_full_type,
-                    self._builtin("str"),
-                )
-                l(
-                    "def Value(self, name: {}) -> {}: ...",
-                    self._builtin("str"),
-                    enum_value_full_type,
-                )
-                l(
-                    "def items(self) -> {}[{}[{}, {}]]: ...",
-                    self._import("typing", "List"),
-                    self._import("typing", "Tuple"),
-                    self._builtin("str"),
-                    enum_value_full_type,
-                )
-
                 self.write_enum_values(enum, enum_value_full_type)
 
             self.write_enum_values(enum, enum_value_full_type)
