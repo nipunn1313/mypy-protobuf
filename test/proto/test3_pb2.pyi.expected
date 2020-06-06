@@ -20,11 +20,9 @@ from google.protobuf.message import (
 
 from typing import (
     Iterable as typing___Iterable,
-    List as typing___List,
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    Tuple as typing___Tuple,
     Union as typing___Union,
     cast as typing___cast,
     overload as typing___overload,
@@ -39,7 +37,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-builtin___str = str
 if sys.version_info < (3,):
     builtin___buffer = buffer
     builtin___unicode = unicode
@@ -52,9 +49,6 @@ type___OuterEnumValue = OuterEnumValue
 OuterEnum: _OuterEnum
 class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[OuterEnumValue]):
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-    def Name(self, number: OuterEnumValue) -> builtin___str: ...
-    def Value(self, name: builtin___str) -> OuterEnumValue: ...
-    def items(self) -> typing___List[typing___Tuple[builtin___str, OuterEnumValue]]: ...
     UNKNOWN = typing___cast(OuterEnumValue, 0)
     FOO3 = typing___cast(OuterEnumValue, 1)
     BAR3 = typing___cast(OuterEnumValue, 2)
@@ -87,9 +81,6 @@ class SimpleProto3(google___protobuf___message___Message):
     InnerEnum: _InnerEnum
     class _InnerEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[SimpleProto3.InnerEnumValue]):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-        def Name(self, number: SimpleProto3.InnerEnumValue) -> builtin___str: ...
-        def Value(self, name: builtin___str) -> SimpleProto3.InnerEnumValue: ...
-        def items(self) -> typing___List[typing___Tuple[builtin___str, SimpleProto3.InnerEnumValue]]: ...
         INNER1 = typing___cast(SimpleProto3.InnerEnumValue, 0)
         INNER2 = typing___cast(SimpleProto3.InnerEnumValue, 1)
     INNER1 = typing___cast(SimpleProto3.InnerEnumValue, 0)

@@ -27,4 +27,8 @@ test_negative/negative.py:77: error: "Descriptor" has no attribute "Garbage"
 test_negative/negative.py:80: error: "EnumDescriptor" has no attribute "Garbage"
 test_negative/negative.py:83: error: "FileDescriptor" has no attribute "Garbage"
 test_negative/negative.py:90: error: "OuterEnumValue" has no attribute "FOO"
-Found 26 errors in 1 file (checked 3 source files)
+test_negative/negative.py:94: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "int"; expected "OuterEnumValue"
+test_negative/negative.py:96: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:98: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:100: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+Found 30 errors in 1 file (checked 3 source files)

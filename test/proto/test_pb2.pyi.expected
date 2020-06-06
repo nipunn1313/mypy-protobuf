@@ -54,11 +54,9 @@ from test.proto.test3_pb2 import (
 from typing import (
     Callable as typing___Callable,
     Iterable as typing___Iterable,
-    List as typing___List,
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    Tuple as typing___Tuple,
     Union as typing___Union,
     cast as typing___cast,
 )
@@ -72,7 +70,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-builtin___str = str
 if sys.version_info < (3,):
     builtin___buffer = buffer
     builtin___unicode = unicode
@@ -85,9 +82,6 @@ type___OuterEnumValue = OuterEnumValue
 OuterEnum: _OuterEnum
 class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[OuterEnumValue]):
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-    def Name(self, number: OuterEnumValue) -> builtin___str: ...
-    def Value(self, name: builtin___str) -> OuterEnumValue: ...
-    def items(self) -> typing___List[typing___Tuple[builtin___str, OuterEnumValue]]: ...
     FOO = typing___cast(OuterEnumValue, 1)
     BAR = typing___cast(OuterEnumValue, 2)
 FOO = typing___cast(OuterEnumValue, 1)
@@ -101,9 +95,6 @@ class Simple1(google___protobuf___message___Message):
     InnerEnum: _InnerEnum
     class _InnerEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[Simple1.InnerEnumValue]):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-        def Name(self, number: Simple1.InnerEnumValue) -> builtin___str: ...
-        def Value(self, name: builtin___str) -> Simple1.InnerEnumValue: ...
-        def items(self) -> typing___List[typing___Tuple[builtin___str, Simple1.InnerEnumValue]]: ...
         INNER1 = typing___cast(Simple1.InnerEnumValue, 1)
         INNER2 = typing___cast(Simple1.InnerEnumValue, 2)
     INNER1 = typing___cast(Simple1.InnerEnumValue, 1)
