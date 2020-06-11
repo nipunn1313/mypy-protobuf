@@ -158,12 +158,20 @@ class PkgWriter(object):
         if message_fd.name == self.fd.name:
             return _mangle_message(name)
 
+        module_name = message_fd.name
+        # Message defined in another module of same package
+        package_name = '/'.join(self.fd.name.split('/')[:-1])
+        if message_fd.name.startswith(package_name):
+            module_name = module_name[len(package_name):]
+
+        module_name = module_name[:-6].replace("-", "_") + "_pb2"
+
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
         split = name.split(".")
         import_name = self._import(
-            message_fd.name[:-6].replace("-", "_") + "_pb2", split[0]
+            module_name, split[0]
         )
         remains = ".".join(split[1:])
         if not remains:
