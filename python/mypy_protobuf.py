@@ -534,8 +534,7 @@ class PkgWriter(object):
         result = self._import_message(method.output_type)
         if method.server_streaming:
             result = "{}[{}, None, None]".format(
-                self._import("typing", "Generator"),
-                result,
+                self._import("typing", "Generator"), result,
             )
         return result
 
@@ -553,8 +552,7 @@ class PkgWriter(object):
                 l("request: {},", self._import_message(method.input_type))
                 l("context: {},", self._import("grpc", "ServicerContext"))
             l(
-                ") -> {}: ...",
-                self._output_type(method),
+                ") -> {}: ...", self._output_type(method),
             )
             l("")
 
@@ -570,8 +568,7 @@ class PkgWriter(object):
             with self._indent():
                 l("request: {},", self._import_message(method.input_type))
             l(
-                ") -> {}: ...",
-                self._output_type(method),
+                ") -> {}: ...", self._output_type(method),
             )
             l("")
 
@@ -581,9 +578,7 @@ class PkgWriter(object):
         for service in [s for s in services if s.name not in PYTHON_RESERVED]:
             # The service definition interface
             l(
-                "class {}(metaclass={}):",
-                service.name,
-                self._import("abc", "ABCMeta"),
+                "class {}(metaclass={}):", service.name, self._import("abc", "ABCMeta"),
             )
             with self._indent():
                 self.write_grpc_methods(service)
@@ -761,6 +756,7 @@ def wrap_code_generator(func):
             sys.stdout.buffer.write(output)
         else:
             sys.stdout.write(output)
+
     return wrapper
 
 
@@ -775,7 +771,9 @@ def main(request, response):
 def grpc(request, response):
     # type: (plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse) -> None
     # Generate grpc mypy
-    generate_mypy_grpc_stubs(Descriptors(request), response, "quiet" in request.parameter)
+    generate_mypy_grpc_stubs(
+        Descriptors(request), response, "quiet" in request.parameter
+    )
 
 
 if __name__ == "__main__":
