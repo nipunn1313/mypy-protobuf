@@ -160,9 +160,9 @@ class PkgWriter(object):
 
         module_name = message_fd.name
         # Message defined in another module of same package
-        package_name = '/'.join(self.fd.name.split('/')[:-1])
+        package_name = "/".join(self.fd.name.split("/")[:-1])
         if message_fd.name.startswith(package_name):
-            module_name = module_name[len(package_name):]
+            module_name = module_name[len(package_name) :]
 
         module_name = module_name[:-6].replace("-", "_") + "_pb2"
 
@@ -170,9 +170,7 @@ class PkgWriter(object):
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
         split = name.split(".")
-        import_name = self._import(
-            module_name, split[0]
-        )
+        import_name = self._import(module_name, split[0])
         remains = ".".join(split[1:])
         if not remains:
             return import_name
