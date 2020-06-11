@@ -575,6 +575,11 @@ class PkgWriter(object):
     def write_grpc_services(self, services):
         # type: (Iterable[d.ServiceDescriptorProto]) -> None
         l = self._write_line
+        l(
+            "from .{} import *",
+            self.fd.name.rsplit('/', 1)[1][:-6].replace("-", "_") + "_pb2",
+        )
+
         for service in [s for s in services if s.name not in PYTHON_RESERVED]:
             # The service definition interface
             l(
