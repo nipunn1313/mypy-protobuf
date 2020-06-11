@@ -530,6 +530,7 @@ class PkgWriter(object):
                 self.write_methods(service, is_abstract=False)
 
     def _output_type(self, method):
+        # type: (d.MethodDescriptorProto) -> Text
         result = self._import_message(method.output_type)
         if method.server_streaming:
             result = "{}[{}, None, None]".format(
@@ -539,7 +540,7 @@ class PkgWriter(object):
         return result
 
     def write_grpc_methods(self, service):
-        # type: (d.ServiceDescriptorProto, bool) -> None
+        # type: (d.ServiceDescriptorProto) -> None
         l = self._write_line
         methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -558,7 +559,7 @@ class PkgWriter(object):
             l("")
 
     def write_grpc_stub_methods(self, service):
-        # type: (d.ServiceDescriptorProto, bool) -> None
+        # type: (d.ServiceDescriptorProto) -> None
         l = self._write_line
         methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -733,6 +734,7 @@ class Descriptors(object):
 
 
 def wrap_code_generator(func):
+    # type: (Callable[[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None]) -> Callable[[], None]
     @wraps(func)
     def wrapper():
         # type: () -> None
@@ -764,12 +766,14 @@ def wrap_code_generator(func):
 
 @wrap_code_generator
 def main(request, response):
+    # type: (plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse) -> None
     # Generate mypy
     generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)
 
 
 @wrap_code_generator
 def grpc(request, response):
+    # type: (plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse) -> None
     # Generate grpc mypy
     generate_mypy_grpc_stubs(Descriptors(request), response, "quiet" in request.parameter)
 
