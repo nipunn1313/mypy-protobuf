@@ -9,6 +9,7 @@ from __future__ import (
 import sys
 from collections import defaultdict
 from contextlib import contextmanager
+from functools import wraps
 
 import google.protobuf.descriptor_pb2 as d
 import six
@@ -528,6 +529,74 @@ class PkgWriter(object):
                 )
                 self.write_methods(service, is_abstract=False)
 
+    def _output_type(self, method):
+        result = self._import_message(method.output_type)
+        if method.server_streaming:
+            result = "{}[{}, None, None]".format(
+                self._import("typing", "Generator"),
+                result,
+            )
+        return result
+
+    def write_grpc_methods(self, service):
+        # type: (d.ServiceDescriptorProto, bool) -> None
+        l = self._write_line
+        methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
+        if not methods:
+            l("pass")
+            l("")
+        for method in methods:
+            l("@{}", self._import("abc", "abstractmethod"))
+            l("def {}(self,", method.name)
+            with self._indent():
+                l("request: {},", self._import_message(method.input_type))
+                l("context: {},", self._import("grpc", "ServicerContext"))
+            l(
+                ") -> {}: ...",
+                self._output_type(method),
+            )
+            l("")
+
+    def write_grpc_stub_methods(self, service):
+        # type: (d.ServiceDescriptorProto, bool) -> None
+        l = self._write_line
+        methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
+        if not methods:
+            l("pass")
+            l("")
+        for method in methods:
+            l("def {}(self,", method.name)
+            with self._indent():
+                l("request: {},", self._import_message(method.input_type))
+            l(
+                ") -> {}: ...",
+                self._output_type(method),
+            )
+            l("")
+
+    def write_grpc_services(self, services):
+        # type: (Iterable[d.ServiceDescriptorProto]) -> None
+        l = self._write_line
+        for service in [s for s in services if s.name not in PYTHON_RESERVED]:
+            # The service definition interface
+            l(
+                "class {}(metaclass={}):",
+                service.name,
+                self._import("abc", "ABCMeta"),
+            )
+            with self._indent():
+                self.write_grpc_methods(service)
+            l("")
+            # The stub client
+            l("class {}:", service.name + "Stub")
+            with self._indent():
+                l(
+                    "def __init__(self, channel: {}) -> None: ...",
+                    self._import("grpc", "Channel"),
+                )
+                self.write_grpc_stub_methods(service)
+            l("")
+
     def python_type(self, field):
         # type: (d.FieldDescriptorProto) -> Text
         b_float = self._builtin("float")
@@ -617,6 +686,21 @@ def generate_mypy_stubs(descriptors, response, quiet):
             print("Writing mypy to", output.name, file=sys.stderr)
 
 
+def generate_mypy_grpc_stubs(descriptors, response, quiet):
+    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
+    for name, fd in six.iteritems(descriptors.to_generate):
+        pkg_writer = PkgWriter(fd, descriptors)
+        pkg_writer.write_grpc_services(fd.service)
+
+        assert name == fd.name
+        assert fd.name.endswith(".proto")
+        output = response.file.add()
+        output.name = fd.name[:-6].replace("-", "_").replace(".", "/") + "_pb2_grpc.pyi"
+        output.content = HEADER + pkg_writer.write()
+        if not quiet:
+            print("Writing mypy to", output.name, file=sys.stderr)
+
+
 class Descriptors(object):
     def __init__(self, request):
         # type: (plugin_pb2.CodeGeneratorRequest) -> None
@@ -648,32 +732,46 @@ class Descriptors(object):
             _add_enums(fd.enum_type, start_prefix, fd)
 
 
-def main():
-    # type: () -> None
-    # Read request message from stdin
-    if six.PY3:
-        data = sys.stdin.buffer.read()
-    else:
-        data = sys.stdin.read()
+def wrap_code_generator(func):
+    @wraps(func)
+    def wrapper():
+        # type: () -> None
+        # Read request message from stdin
+        if six.PY3:
+            data = sys.stdin.buffer.read()
+        else:
+            data = sys.stdin.read()
 
-    # Parse request
-    request = plugin_pb2.CodeGeneratorRequest()
-    request.ParseFromString(data)
+        # Parse request
+        request = plugin_pb2.CodeGeneratorRequest()
+        request.ParseFromString(data)
 
-    # Create response
-    response = plugin_pb2.CodeGeneratorResponse()
+        # Create response
+        response = plugin_pb2.CodeGeneratorResponse()
 
+        func(request, response)
+
+        # Serialise response message
+        output = response.SerializeToString()
+
+        # Write to stdout
+        if six.PY3:
+            sys.stdout.buffer.write(output)
+        else:
+            sys.stdout.write(output)
+    return wrapper
+
+
+@wrap_code_generator
+def main(request, response):
     # Generate mypy
     generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)
 
-    # Serialise response message
-    output = response.SerializeToString()
 
-    # Write to stdout
-    if six.PY3:
-        sys.stdout.buffer.write(output)
-    else:
-        sys.stdout.write(output)
+@wrap_code_generator
+def grpc(request, response):
+    # Generate grpc mypy
+    generate_mypy_grpc_stubs(Descriptors(request), response, "quiet" in request.parameter)
 
 
 if __name__ == "__main__":
