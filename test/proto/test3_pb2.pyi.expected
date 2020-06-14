@@ -23,7 +23,6 @@ from typing import (
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    Union as typing___Union,
     cast as typing___cast,
     overload as typing___overload,
 )
@@ -37,9 +36,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-if sys.version_info < (3,):
-    builtin___buffer = buffer
-    builtin___unicode = unicode
 
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
@@ -65,12 +61,6 @@ class OuterMessage3(google___protobuf___message___Message):
         *,
         a_bool : typing___Optional[builtin___bool] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> OuterMessage3: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> OuterMessage3: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a_bool",b"a_bool"]) -> None: ...
 type___OuterMessage3 = OuterMessage3
 
@@ -129,12 +119,6 @@ class SimpleProto3(google___protobuf___message___Message):
         OuterEnum : typing___Optional[type___OuterEnumValue] = None,
         OuterMessage3 : typing___Optional[type___OuterMessage3] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> SimpleProto3: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> SimpleProto3: ...
     def HasField(self, field_name: typing_extensions___Literal[u"OuterMessage3",b"OuterMessage3",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"OuterEnum",b"OuterEnum",u"OuterMessage3",b"OuterMessage3",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_outer_enum",b"a_outer_enum",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> None: ...
     @typing___overload

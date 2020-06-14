@@ -364,27 +364,6 @@ class PkgWriter(object):
                             )
                     l(") -> None: ...")
 
-                # Standard message methods
-                l("if {} >= (3,):", "sys.version_info")
-                with self._indent():
-                    l("@classmethod")
-                    l(
-                        "def FromString(cls, s: {}) -> {}: ...",
-                        self._builtin("bytes"),
-                        qualified_name,
-                    )
-                l("else:")
-                with self._indent():
-                    l("@classmethod")
-                    l(
-                        "def FromString(cls, s: {}[{}, {}, {}]) -> {}: ...",
-                        self._import("typing", "Union"),
-                        self._builtin("bytes"),
-                        self._builtin("buffer"),
-                        self._builtin("unicode"),
-                        qualified_name,
-                    )
-
                 self.write_stringly_typed_fields(desc)
 
             l("{} = {}", _mangle_message(desc.name), desc.name)

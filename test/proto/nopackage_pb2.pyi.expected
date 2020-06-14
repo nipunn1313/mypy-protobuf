@@ -16,7 +16,6 @@ from google.protobuf.message import (
 from typing import (
     Iterable as typing___Iterable,
     Optional as typing___Optional,
-    Union as typing___Union,
 )
 
 from typing_extensions import (
@@ -28,9 +27,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-if sys.version_info < (3,):
-    builtin___buffer = buffer
-    builtin___unicode = unicode
 
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
@@ -40,12 +36,6 @@ class NoPackage(google___protobuf___message___Message):
 
     def __init__(self,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> NoPackage: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> NoPackage: ...
 type___NoPackage = NoPackage
 
 class NoPackage2(google___protobuf___message___Message):
@@ -62,12 +52,6 @@ class NoPackage2(google___protobuf___message___Message):
         np : typing___Optional[type___NoPackage] = None,
         np_rep : typing___Optional[typing___Iterable[type___NoPackage]] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> NoPackage2: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> NoPackage2: ...
     def HasField(self, field_name: typing_extensions___Literal[u"np",b"np"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"np",b"np",u"np_rep",b"np_rep"]) -> None: ...
 type___NoPackage2 = NoPackage2
