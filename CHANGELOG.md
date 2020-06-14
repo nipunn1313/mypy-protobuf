@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 1.22
+
 - Update tested/required mypy version to 0.780 (picks up new typeshed annotations). Includes improved typing/error messages on Message.
 
 Before (mypy < 0.780):
