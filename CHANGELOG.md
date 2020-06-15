@@ -1,5 +1,8 @@
 ## Upcoming
 
+- Inherit FromString from superclass Message - rather than re-generating here. Fixes bug
+in python2 usage `google/protobuf/type_pb2.pyi:92: error: Argument 1 of "FromString" is incompatible with supertype "Message"; supertype defines the argument type as "ByteString"  [override]`
+
 ## 1.22
 
 - Update tested/required mypy version to 0.780 (picks up new typeshed annotations). Includes improved typing/error messages on Message.
