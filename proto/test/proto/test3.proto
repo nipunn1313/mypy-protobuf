@@ -42,4 +42,7 @@ message SimpleProto3 {
   // Test having fieldname match messagename
   OuterEnum OuterEnum = 10;
   OuterMessage3 OuterMessage3 = 11;
+
+  // Test generation of map
+  map<int32, string> map_field = 16;
 }
