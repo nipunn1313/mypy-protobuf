@@ -88,7 +88,7 @@ black python/ test/
 - [@mikolajz](https://github.com/mikolajz)
 - [@chadrik](https://github.com/chadrik)
 - [@EPronovost](https://github.com/EPronovost)
-
+- [@chrislawlor](https://github.com/chrislawlor)
 
 Licence etc.
 ------------

@@ -29,7 +29,7 @@ from testproto.test_pb2 import (
     Simple1,
     Simple2,
 )
-from testproto.test3_pb2 import SimpleProto3
+from testproto.test3_pb2 import SimpleProto3, OuterMessage3
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import Any, Optional
@@ -124,8 +124,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 39
-    assert len(errors_35) == 39
+    assert len(errors_27) == 44
+    assert len(errors_35) == 44
 
 
 def test_func():
@@ -396,3 +396,17 @@ def test_enum_descriptor():
 def test_module_descriptor():
     # type: () -> None
     assert DESCRIPTOR.name == "testproto/test.proto"
+
+
+def test_mapping_type():
+    # type: () -> None
+    s = SimpleProto3()
+    s.map_scalar[5] = "abcd"
+    assert s.map_scalar[5] == "abcd"
+
+    s.map_message[5].a_bool = True
+    assert s.map_message[5] == OuterMessage3(a_bool=True)
+
+    assert s.map_message.get_or_create(6) == OuterMessage3()
+    assert s.map_message[6] == OuterMessage3()
+    assert s.map_message.get_or_create(6) == OuterMessage3()
