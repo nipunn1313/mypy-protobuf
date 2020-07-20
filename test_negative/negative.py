@@ -10,9 +10,9 @@ from typing import (
     Text,
 )
 
-from test.proto.test_pb2 import DESCRIPTOR, FOO, Simple1, Simple2
-from test.proto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
-from test.proto.dot.com.test_pb2 import TestMessage
+from testproto.test_pb2 import DESCRIPTOR, FOO, Simple1, Simple2
+from testproto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
+from testproto.dot.com.test_pb2 import TestMessage
 
 s = Simple1()
 s.a_string = "Hello"

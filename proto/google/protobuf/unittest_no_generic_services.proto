@@ -28,25 +28,27 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+// Author: kenton@google.com (Kenton Varda)
 
-package google.protobuf;
+syntax = "proto2";
+package protobuf_unittest.no_generic_services_test;
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
-option cc_enable_arenas = true;
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+// *_generic_services are false by default.
+
+message TestMessage {
+  optional int32 a = 1;
+  extensions 1000 to max;
+}
+
+enum TestEnum {
+  FOO = 1;
+}
+
+extend TestMessage {
+  optional int32 test_extension = 1000;
+}
+
+service TestService {
+  rpc Foo(TestMessage) returns(TestMessage);
+}

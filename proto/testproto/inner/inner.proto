@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package inner;
 
-import "test/proto/test3.proto";
+import "testproto/test3.proto";
 
 message Inner {
     test3.OuterEnum a = 1;

@@ -28,25 +28,46 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+// Author: kenton@google.com (Kenton Varda)
+//  Based on original Protocol Buffers design by
+//  Sanjay Ghemawat, Jeff Dean, and others.
+//
+// A proto file which is imported by unittest.proto to test importing.
 
-package google.protobuf;
+syntax = "proto2";
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
+// We don't put this in a package within proto2 because we need to make sure
+// that the generated code doesn't depend on being in the proto2 namespace.
+// In test_util.h we do
+// "using namespace unittest_import = protobuf_unittest_import".
+package protobuf_unittest_import;
+
+option optimize_for = SPEED;
 option cc_enable_arenas = true;
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+// Exercise the java_package option.
+option java_package = "com.google.protobuf.test";
+
+// Do not set a java_outer_classname here to verify that Proto2 works without
+// one.
+
+// Test public import
+import public "google/protobuf/unittest_import_public.proto";
+
+message ImportMessage {
+  optional int32 d = 1;
+}
+
+enum ImportEnum {
+  IMPORT_FOO = 7;
+  IMPORT_BAR = 8;
+  IMPORT_BAZ = 9;
+}
+
+
+// To use an enum in a map, it must has the first value as 0.
+enum ImportEnumForMap {
+  UNKNOWN = 0;
+  FOO = 1;
+  BAR = 2;
+}

@@ -14,8 +14,8 @@ from google.protobuf.message import (
     Message as google___protobuf___message___Message,
 )
 
-from test.proto.test3_pb2 import (
-    OuterEnumValue as test___proto___test3_pb2___OuterEnumValue,
+from testproto.test3_pb2 import (
+    OuterEnumValue as testproto___test3_pb2___OuterEnumValue,
 )
 
 from typing import (
@@ -40,11 +40,11 @@ DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
 
 class Nested(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    a: test___proto___test3_pb2___OuterEnumValue = ...
+    a: testproto___test3_pb2___OuterEnumValue = ...
 
     def __init__(self,
         *,
-        a : typing___Optional[test___proto___test3_pb2___OuterEnumValue] = None,
+        a : typing___Optional[testproto___test3_pb2___OuterEnumValue] = None,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___Nested = Nested

@@ -28,25 +28,40 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
-
-package google.protobuf;
-
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
-option cc_enable_arenas = true;
-
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
+// Author: kenton@google.com (Kenton Varda)
+//  Based on original Protocol Buffers design by
+//  Sanjay Ghemawat, Jeff Dean, and others.
 //
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+// A proto file which uses optimize_for = CODE_SIZE.
+
+syntax = "proto2";
+import "google/protobuf/unittest.proto";
+
+package protobuf_unittest;
+
+option optimize_for = CODE_SIZE;
+
+message TestOptimizedForSize {
+  optional int32 i = 1;
+  optional ForeignMessage msg = 19;
+
+  extensions 1000 to max;
+
+  extend TestOptimizedForSize {
+    optional int32 test_extension = 1234;
+    optional TestRequiredOptimizedForSize test_extension2 = 1235;
+  }
+
+  oneof foo {
+    int32 integer_field = 2;
+    string string_field = 3;
+  }
+}
+
+message TestRequiredOptimizedForSize {
+  required int32 x = 1;
+}
+
+message TestOptionalOptimizedForSize {
+  optional TestRequiredOptimizedForSize o = 1;
+}

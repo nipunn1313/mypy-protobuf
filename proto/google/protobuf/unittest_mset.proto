@@ -28,25 +28,57 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+// Author: kenton@google.com (Kenton Varda)
+//  Based on original Protocol Buffers design by
+//  Sanjay Ghemawat, Jeff Dean, and others.
+//
+// This file is similar to unittest_mset_wire_format.proto, but does not
+// have a TestMessageSet, so it can be downgraded to proto1.
 
-package google.protobuf;
+syntax = "proto2";
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
+import "google/protobuf/unittest_mset_wire_format.proto";
+
+package protobuf_unittest;
+
 option cc_enable_arenas = true;
+option optimize_for = SPEED;
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+message TestMessageSetContainer {
+  optional proto2_wireformat_unittest.TestMessageSet message_set = 1;
+}
+
+message TestMessageSetExtension1 {
+  extend proto2_wireformat_unittest.TestMessageSet {
+    optional TestMessageSetExtension1 message_set_extension = 1545008;
+  }
+  optional int32 i = 15;
+  optional proto2_wireformat_unittest.TestMessageSet recursive = 16;
+  optional string test_aliasing = 17 [ctype = STRING_PIECE];
+}
+
+message TestMessageSetExtension2 {
+  extend proto2_wireformat_unittest.TestMessageSet {
+    optional TestMessageSetExtension2 message_set_extension = 1547769;
+  }
+  optional string str = 25;
+}
+
+// This message was used to generate
+// //net/proto2/python/internal/testdata/message_set_message, but is commented
+// out since it must not actually exist in code, to simulate an "unknown"
+// extension.
+// message TestMessageSetUnknownExtension {
+//   extend TestMessageSet {
+//     optional TestMessageSetUnknownExtension message_set_extension = 56141421;
+//   }
+//   optional int64 a = 1;
+// }
+
+// MessageSet wire format is equivalent to this.
+message RawMessageSet {
+  repeated group Item = 1 {
+    required int32 type_id = 2;
+    required bytes message = 3;
+  }
+}

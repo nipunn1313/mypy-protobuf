@@ -28,25 +28,23 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
-package google.protobuf;
+package proto2_preserve_unknown_enum_unittest;
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
-option cc_enable_arenas = true;
+enum MyEnum {
+  FOO = 0;
+  BAR = 1;
+  BAZ = 2;
+}
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+message MyMessage {
+  optional MyEnum e = 1;
+  repeated MyEnum repeated_e = 2;
+  repeated MyEnum repeated_packed_e = 3 [packed=true];
+  repeated MyEnum repeated_packed_unexpected_e = 4;  // not packed
+  oneof o {
+    MyEnum oneof_e_1 = 5;
+    MyEnum oneof_e_2 = 6;
+  }
+}

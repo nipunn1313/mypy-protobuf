@@ -30,23 +30,42 @@
 
 syntax = "proto3";
 
-package google.protobuf;
+package proto3_preserve_unknown_enum_unittest;
+option objc_class_prefix = "UnknownEnums";
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
-option cc_enable_arenas = true;
+option csharp_namespace = "Google.Protobuf.TestProtos";
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+enum MyEnum {
+  FOO = 0;
+  BAR = 1;
+  BAZ = 2;
+}
+
+enum MyEnumPlusExtra {
+  E_FOO = 0;
+  E_BAR = 1;
+  E_BAZ = 2;
+  E_EXTRA = 3;
+}
+
+message MyMessage {
+  MyEnum e = 1;
+  repeated MyEnum repeated_e = 2;
+  repeated MyEnum repeated_packed_e = 3 [packed=true];
+  repeated MyEnumPlusExtra repeated_packed_unexpected_e = 4;  // not packed
+  oneof o {
+    MyEnum oneof_e_1 = 5;
+    MyEnum oneof_e_2 = 6;
+  }
+}
+
+message MyMessagePlusExtra {
+  MyEnumPlusExtra e = 1;
+  repeated MyEnumPlusExtra repeated_e = 2;
+  repeated MyEnumPlusExtra repeated_packed_e = 3 [packed=true];
+  repeated MyEnumPlusExtra repeated_packed_unexpected_e = 4 [packed=true];
+  oneof o {
+    MyEnumPlusExtra oneof_e_1 = 5;
+    MyEnumPlusExtra oneof_e_2 = 6;
+  }
+}
