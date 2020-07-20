@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package test.nested_package;
 
-import "test/proto/test3.proto";
+import "testproto/test3.proto";
 
 message Nested {
     test3.OuterEnum a = 1;

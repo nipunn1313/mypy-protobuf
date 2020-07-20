@@ -28,25 +28,34 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+// Author: trafacz@google.com (Todd Rafacz)
+//  Based on original Protocol Buffers design by
+//  Sanjay Ghemawat, Jeff Dean, and others.
+//
+// A proto file we will use for unit testing.
 
-package google.protobuf;
+syntax = "proto2";
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
+// Some generic_services option(s) added automatically.
+// See:  http://go/proto2-generic-services-default
+option cc_generic_services = true;   // auto-added
+option java_generic_services = true; // auto-added
+option py_generic_services = true;   // auto-added
 option cc_enable_arenas = true;
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+// We don't put this in a package within proto2 because we need to make sure
+// that the generated code doesn't depend on being in the proto2 namespace.
+// In test_util.h we do "using namespace unittest = protobuf_unittest".
+package protobuf_unittest.lazy_imports;
+
+// Protos optimized for SPEED use a strict superset of the generated code
+// of equivalent ones optimized for CODE_SIZE, so we should optimize all our
+// tests for speed unless explicitly testing code size optimization.
+option optimize_for = SPEED;
+
+option java_outer_classname = "UnittestLazyImportsEnumProto";
+
+enum LazyEnum {
+  LAZY_ENUM_0 = 0;
+  LAZY_ENUM_1 = 1;
+}

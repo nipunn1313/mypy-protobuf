@@ -14,16 +14,16 @@ import os
 import pytest
 import six
 
-import test.proto.test_pb2 as test_pb2
-from test.proto.test_pb2 import DESCRIPTOR, FOO, OuterEnum, Simple1, Simple2
-from test.proto.test3_pb2 import SimpleProto3
-from test.proto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
+import testproto.test_pb2 as test_pb2
+from testproto.test_pb2 import DESCRIPTOR, FOO, OuterEnum, Simple1, Simple2
+from testproto.test3_pb2 import SimpleProto3
+from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import Any
 
 MYPY = False
 if MYPY:
-    from test.proto.test_pb2 import OuterEnumValue
+    from testproto.test_pb2 import OuterEnumValue
 
 
 def _is_summary(l):
@@ -34,30 +34,30 @@ def _is_summary(l):
 
 def test_generate_mypy_matches():
     # type: () -> None
-    proto_files = glob.glob("proto/test/proto/*.proto") + glob.glob(
-        "proto/test/proto/*/*.proto"
+    proto_files = glob.glob("proto/testproto/*.proto") + glob.glob(
+        "proto/testproto/*/*.proto"
     )
     assert len(proto_files) == 9  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
         assert fn.endswith(".proto")
-        fn_split = fn.split(os.sep)  # Eg. [proto, test, proto, test.com, test.proto]
+        fn_split = fn.split(os.sep)  # Eg. [proto, testproto, dot.com, test.proto]
         assert fn_split[-1].endswith(".proto")
         last = fn_split[-1][: -len(".proto")] + "_pb2.pyi"  # Eg [test_pb2.proto]
-        components = fn_split[1:-1]  # Eg. [test, proto, test.com]
+        components = fn_split[1:-1]  # Eg. [testproto, dot.com]
         components = [
             c.replace(".", os.sep) for c in components
-        ]  # Eg. [test, proto, test/com]
-        components.append(last)  # Eg. [test, proto, test/com, test_pb2.proto]
+        ]  # Eg. [testproto, dot/com]
+        components.append(last)  # Eg. [testproto, dot/com, test_pb2.proto]
 
-        output = os.path.join(*components)
+        output = os.path.join("generated", *components)
 
         components[
             -1
         ] += ".expected"  # Eg [test, proto, test/com, test_pb2.proto.expected]
 
-        expected = os.path.join(*components)
+        expected = os.path.join("generated", *components)
 
         assert os.path.exists(output)
 
@@ -338,4 +338,4 @@ def test_enum_descriptor():
 
 def test_module_descriptor():
     # type: () -> None
-    assert DESCRIPTOR.name == "test/proto/test.proto"
+    assert DESCRIPTOR.name == "testproto/test.proto"

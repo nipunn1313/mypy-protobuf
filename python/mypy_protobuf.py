@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-)
+from __future__ import absolute_import, division, print_function
 
 import sys
 from collections import defaultdict
@@ -80,10 +76,7 @@ PYTHON_RESERVED = {
     "yield",
 }
 
-PY2_ONLY_BUILTINS = {
-    "buffer",
-    "unicode",
-}
+PY2_ONLY_BUILTINS = {"buffer", "unicode"}
 
 
 FORWARD_REFERENCE_STRING_LITERAL = True

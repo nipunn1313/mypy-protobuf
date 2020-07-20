@@ -30,23 +30,29 @@
 
 syntax = "proto3";
 
-package google.protobuf;
+package unittest_drop_unknown_fields;
+option objc_class_prefix = "DropUnknowns";
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-option go_package = "github.com/golang/protobuf/ptypes/empty";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "EmptyProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
-option cc_enable_arenas = true;
+option csharp_namespace = "Google.Protobuf.TestProtos";
 
-// A generic empty message that you can re-use to avoid defining duplicated
-// empty messages in your APIs. A typical example is to use it as the request
-// or the response type of an API method. For instance:
-//
-//     service Foo {
-//       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-//     }
-//
-// The JSON representation for `Empty` is empty JSON object `{}`.
-message Empty {}
+message Foo {
+  enum NestedEnum {
+    FOO = 0;
+    BAR = 1;
+    BAZ = 2;
+  }
+  int32 int32_value = 1;
+  NestedEnum enum_value = 2;
+}
+
+message FooWithExtraFields {
+  enum NestedEnum {
+    FOO = 0;
+    BAR = 1;
+    BAZ = 2;
+    QUX = 3;
+  }
+  int32 int32_value = 1;
+  NestedEnum enum_value = 2;
+  int32 extra_int32_value = 3;
+}

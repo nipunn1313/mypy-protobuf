@@ -2,10 +2,10 @@ syntax = "proto2";
 
 package test;
 
-import "test/proto/inner/inner.proto";
-import "test/proto/nested/nested.proto";
-import "test/proto/nopackage.proto";
-import "test/proto/test3.proto";
+import "testproto/inner/inner.proto";
+import "testproto/nested/nested.proto";
+import "testproto/nopackage.proto";
+import "testproto/test3.proto";
 
 enum OuterEnum {
   FOO = 1;
