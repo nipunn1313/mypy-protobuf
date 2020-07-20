@@ -35,7 +35,7 @@ else:
 
 
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
-HEADER = "# {} by generate_proto_mypy_stubs.py.  Do not edit!\n".format(GENERATED)
+HEADER = "# {} by mypy-protobuf.  Do not edit manually!\n".format(GENERATED)
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
