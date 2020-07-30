@@ -230,7 +230,7 @@ class PkgWriter(object):
                 "class {}({}[{}]):",
                 "_" + enum.name,
                 self._import(
-                    "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
+                    "google.protobuf.internal.enum_type_wrapper", "EnumTypeWrapper"
                 ),
                 enum_value_full_type,
             )
