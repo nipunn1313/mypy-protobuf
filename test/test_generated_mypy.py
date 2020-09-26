@@ -7,6 +7,8 @@ code reviews. This will fail in CI if there is any inconsistency.
 
 2) This is a file which should mypy with success. See test_negative for
 a file that should have failures.
+
+Both of these tests are run by the run_test.sh script.
 """
 
 import glob
@@ -15,7 +17,15 @@ import pytest
 import six
 
 import testproto.test_pb2 as test_pb2
-from testproto.test_pb2 import DESCRIPTOR, FOO, OuterEnum, Simple1, Simple2
+from testproto.test_pb2 import (
+    DESCRIPTOR,
+    Extensions1,
+    Extensions2,
+    FOO,
+    OuterEnum,
+    Simple1,
+    Simple2,
+)
 from testproto.test3_pb2 import SimpleProto3
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
@@ -308,6 +318,17 @@ def test_which_oneof_proto3():
         ValueError, match='Protocol message has no oneof "garbage" field.'
     ):
         s_untyped.WhichOneof("garbage")
+
+
+def test_extensions_proto2():
+    # type: () -> None
+    s = Simple1()
+
+    e1 = s.Extensions[Extensions1.ext]  # type: Extensions1
+    e1.ext1_string = "first extension"
+
+    e2 = s.Extensions[Extensions2.foo]  # Will be type cast as an Any.
+    e2.flag = True
 
 
 def test_constructor_proto2():

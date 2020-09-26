@@ -316,6 +316,14 @@ class PkgWriter(object):
                         )
                     l("")
 
+                for ext in desc.extension:
+                    l(
+                        "{}: {} = ...",
+                        ext.name,
+                        self._import("google.protobuf.descriptor", "FieldDescriptor"),
+                    )
+                    l("")
+
                 # Constructor
                 l("def __init__(self,")
                 with self._indent():

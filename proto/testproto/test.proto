@@ -45,10 +45,24 @@ message Simple1 {
       OuterEnum outer_enum_in_oneof = 19;
       InnerEnum inner_enum_in_oneof = 20;
   }
+
+  extensions 1000 to max;
 }
 
 message Simple2 {
   required string a_string = 1;
+}
+
+message Extensions1 {
+  extend Simple1 { optional Extensions1 ext = 1000; }
+
+  optional string ext1_string = 1;
+}
+
+message Extensions2 {
+  extend Simple1 { optional Extensions2 foo = 2020; }
+
+  optional bool flag = 1;
 }
 
 message PythonReservedKeywords {
