@@ -242,7 +242,6 @@ class PkgWriter(object):
                 self.write_enum_values(enum, enum_value_full_type)
 
             self.write_enum_values(enum, enum_value_full_type)
-            l("{} = {}", _mangle_message(enum.name), enum.name)
             l("")
 
     def write_messages(self, messages, prefix):
