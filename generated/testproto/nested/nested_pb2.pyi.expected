@@ -67,7 +67,6 @@ class AnotherNested(google___protobuf___message___Message):
     INVALID = typing___cast(AnotherNested.NestedEnumValue, 0)
     ONE = typing___cast(AnotherNested.NestedEnumValue, 1)
     TWO = typing___cast(AnotherNested.NestedEnumValue, 2)
-    type___NestedEnum = NestedEnum
 
     class NestedMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -83,7 +82,6 @@ class AnotherNested(google___protobuf___message___Message):
         UNDEFINED = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 0)
         NESTED_ENUM1 = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 1)
         NESTED_ENUM2 = typing___cast(AnotherNested.NestedMessage.NestedEnum2Value, 2)
-        type___NestedEnum2 = NestedEnum2
 
         s: typing___Text = ...
         b: builtin___bool = ...
