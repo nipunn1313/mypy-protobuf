@@ -19,19 +19,16 @@ if MYPY:
         Generator,
         Iterable,
         List,
+        Optional,
         Set,
         Sequence,
         Text,
         Tuple,
-        cast,
     )
     from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 else:
     # Provide minimal mypy identifiers to make code run without typing module present
     Text = None
-
-    def cast(type, value):
-        return value
 
 
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
@@ -80,6 +77,12 @@ PY2_ONLY_BUILTINS = {"buffer", "unicode"}
 
 
 FORWARD_REFERENCE_STRING_LITERAL = True
+# Class name for a generic version of FieldDescriptor used for proto2 extensions.
+EXTENSION_FIELD_DESCRIPTOR = "_ExtensionFieldDescriptor"
+# Class name for an overwrite of ExtensionDict from the official protobuf typeshed.
+EXTENSION_DICT = "_ExtensionDict"
+# Filename for typeshed overwrites used by mypy-protobuf.
+TYPESHED_NAME = "_typeshed_mypy_protobuf"
 
 
 def _forward_ref(name):
@@ -111,7 +114,7 @@ class PkgWriter(object):
     """Writes a single pyi file"""
 
     def __init__(self, fd, descriptors):
-        # type: (d.FileDescriptorProto, Descriptors) -> None
+        # type: (Optional[d.FileDescriptorProto], Descriptors) -> None
         self.fd = fd
         self.descriptors = descriptors
         self.lines = []  # type: List[Text]
@@ -148,7 +151,7 @@ class PkgWriter(object):
             name = name[1:]
 
         # Message defined in this file.
-        if message_fd.name == self.fd.name:
+        if self.fd and message_fd.name == self.fd.name:
             return _mangle_message(name)
 
         # Not in file. Must import
@@ -259,6 +262,13 @@ class PkgWriter(object):
                     "DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "Descriptor"),
                 )
+                # Overwrite the definition of Extensions from the standard
+                # protobuf typeshed.
+                l(
+                    "Extensions: {}[{}] = ...  # type: ignore[assignment]",
+                    self._import(TYPESHED_NAME, EXTENSION_DICT),
+                    prefix + desc.name,
+                )
 
                 # Nested enums/messages
                 self.write_enums(desc.enum_type, qualified_name + ".")
@@ -318,9 +328,11 @@ class PkgWriter(object):
 
                 for ext in desc.extension:
                     l(
-                        "{}: {} = ...",
+                        "{}: {}[{}, {}] = ...",
                         ext.name,
-                        self._import("google.protobuf.descriptor", "FieldDescriptor"),
+                        self._import(TYPESHED_NAME, EXTENSION_FIELD_DESCRIPTOR),
+                        self._import_message(ext.extendee),
+                        self.python_type(ext),
                     )
                     l("")
 
@@ -383,6 +395,8 @@ class PkgWriter(object):
         # In proto3, HasField only supports message fields
         #
         # HasField always supports oneof fields
+        assert self.fd is not None
+
         hf_fields = [
             f.name
             for f in desc.field
@@ -545,10 +559,57 @@ class PkgWriter(object):
         assert field.type in mapping, "Unrecognized type: " + repr(field.type)
         return mapping[field.type]()
 
+    def write_typeshed(self):
+        # type: () -> None
+        """
+        Writes the standard base classes used for all messages.
+        Should only be used when self.fd is None.
+        """
+        assert self.fd is None
+
+        typevar = self._import("typing", "TypeVar")
+        fd = self._import("google.protobuf.descriptor", "FieldDescriptor")
+        generic = self._import("typing", "Generic")
+        message = self._import("google.protobuf.message", "Message")
+        container = "_ContainerMessageT"
+        extender = "_ExtenderMessageT"
+
+        l = self._write_line
+
+        for name in (container, extender):
+            l("{} = {}('{}', bound={})", name, typevar, name, message)
+        l("")
+
+        l(
+            "class {}({}, {}[{}, {}]):",
+            EXTENSION_FIELD_DESCRIPTOR,
+            fd,
+            generic,
+            container,
+            extender,
+        )
+        with self._indent():
+            l("pass")
+        l("")
+
+        l("class {}({}[{}]):", EXTENSION_DICT, generic, container)
+        with self._indent():
+            for def_template in (
+                "def __getitem__(self, extension_handle: {}) -> {}: ...",
+                "def __setitem__(self, extension_handle: {}, value: {}) -> None: ...",
+            ):
+                l(
+                    def_template,
+                    "{}[{}, {}]".format(
+                        EXTENSION_FIELD_DESCRIPTOR, container, extender
+                    ),
+                    extender,
+                )
+                l("")
+
     def write(self):
         # type: () -> Text
         imports = []
-        imports.append(u"import sys")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):
@@ -579,6 +640,10 @@ def is_scalar(fd):
 
 def generate_mypy_stubs(descriptors, response, quiet):
     # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
+
+    if not descriptors.to_generate:
+        return
+
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_module_attributes()
@@ -595,6 +660,15 @@ def generate_mypy_stubs(descriptors, response, quiet):
         output.content = HEADER + pkg_writer.write()
         if not quiet:
             print("Writing mypy to", output.name, file=sys.stderr)
+
+    # Generate global definitions to overwrite typeshed.
+    pkg_writer = PkgWriter(None, descriptors)
+    pkg_writer.write_typeshed()
+    output = response.file.add()
+    output.name = "{}.pyi".format(TYPESHED_NAME)
+    output.content = HEADER + pkg_writer.write()
+    if not quiet:
+        print("Writing mypy to", output.name, file=sys.stderr)
 
 
 class Descriptors(object):

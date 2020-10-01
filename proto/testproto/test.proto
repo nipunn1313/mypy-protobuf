@@ -51,6 +51,8 @@ message Simple1 {
 
 message Simple2 {
   required string a_string = 1;
+
+  extensions 1000 to max;
 }
 
 message Extensions1 {
