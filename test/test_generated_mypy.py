@@ -126,8 +126,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 36
-    assert len(errors_35) == 36
+    assert len(errors_27) == 39
+    assert len(errors_35) == 39
 
 
 def test_func():
@@ -353,6 +353,16 @@ def test_extensions_proto2():
     e3.flag = True
     assert isinstance(e3, SeparateFileExtension)
 
+    del s1.Extensions[Extensions2.foo]
+
+    for x in s1.Extensions:
+        assert isinstance(x, FieldDescriptor)
+        y = s1.Extensions[x]
+        assert y.ext1_string == "first extension"
+
+    assert Extensions1.ext in s1.Extensions
+
+    assert len(s2.Extensions) == 1
 
 def test_constructor_proto2():
     # type: () -> None

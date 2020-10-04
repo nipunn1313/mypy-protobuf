@@ -1,0 +1,35 @@
+# Standard types used by mypy_protobuf generated stubs.
+# The placeholders extension_field_descriptor and extension_dict are replaced
+# with names defined in stub_gen.py
+
+from google.protobuf.descriptor import FieldDescriptor
+
+from google.protobuf.message import Message
+
+from typing import Any, Generic, Iterator, Optional, TypeVar
+
+_ContainerMessageT = TypeVar('_ContainerMessageT', bound=Message)
+_ExtenderMessageT = TypeVar('_ExtenderMessageT', bound=Message)
+
+class _AnyMessage(Message, Any):
+    pass
+
+class {extension_field_descriptor}(FieldDescriptor, Generic[_ContainerMessageT, _ExtenderMessageT]):
+    pass
+
+class {extension_dict}(Generic[_ContainerMessageT]):
+    """
+    Matches actual object defined at
+    https://github.com/protocolbuffers/protobuf/blob/e667bf6eaaa2fb1ba2987c6538df81f88500d030/python/google/protobuf/internal/extension_dict.py#L63
+    """
+    def __getitem__(self, extension_handle: {extension_field_descriptor}[_ContainerMessageT, _ExtenderMessageT]) -> _ExtenderMessageT: ...
+
+    def __setitem__(self, extension_handle: {extension_field_descriptor}[_ContainerMessageT, _ExtenderMessageT], value: _ExtenderMessageT) -> None: ...
+
+    def __len__(self) -> int: ...
+
+    def __delitem__(self, extension_handle: {extension_field_descriptor}[_ContainerMessageT, _ExtenderMessageT]) -> None: ...
+
+    def __contains__(self, extension_handle: {extension_field_descriptor}[_ContainerMessageT, _ExtenderMessageT]) -> bool: ...
+
+    def __iter__(self) -> Iterator[{extension_field_descriptor}[_ContainerMessageT, _AnyMessage]]: ...

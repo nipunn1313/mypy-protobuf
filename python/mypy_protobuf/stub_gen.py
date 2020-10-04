@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
 from __future__ import absolute_import, division, print_function
+import os
 
 import sys
 from collections import defaultdict
@@ -558,54 +559,6 @@ class PkgWriter(object):
         assert field.type in mapping, "Unrecognized type: " + repr(field.type)
         return mapping[field.type]()
 
-    def write_typeshed(self):
-        # type: () -> None
-        """
-        Writes the standard base classes used for all messages.
-        Should only be used when self.fd is None.
-        """
-        assert self.fd is None
-
-        typevar = self._import("typing", "TypeVar")
-        fd = self._import("google.protobuf.descriptor", "FieldDescriptor")
-        generic = self._import("typing", "Generic")
-        message = self._import("google.protobuf.message", "Message")
-        container = "_ContainerMessageT"
-        extender = "_ExtenderMessageT"
-
-        l = self._write_line
-
-        for name in (container, extender):
-            l("{} = {}('{}', bound={})", name, typevar, name, message)
-        l("")
-
-        l(
-            "class {}({}, {}[{}, {}]):",
-            EXTENSION_FIELD_DESCRIPTOR,
-            fd,
-            generic,
-            container,
-            extender,
-        )
-        with self._indent():
-            l("pass")
-        l("")
-
-        l("class {}({}[{}]):", EXTENSION_DICT, generic, container)
-        with self._indent():
-            for def_template in (
-                "def __getitem__(self, extension_handle: {}) -> {}: ...",
-                "def __setitem__(self, extension_handle: {}, value: {}) -> None: ...",
-            ):
-                l(
-                    def_template,
-                    "{}[{}, {}]".format(
-                        EXTENSION_FIELD_DESCRIPTOR, container, extender
-                    ),
-                    extender,
-                )
-                l("")
-
     def write(self):
         # type: () -> Text
         imports = []
@@ -661,11 +614,18 @@ def generate_mypy_stubs(descriptors, response, quiet):
             print("Writing mypy to", output.name, file=sys.stderr)
 
     # Generate global definitions to overwrite typeshed.
-    pkg_writer = PkgWriter(None, descriptors)
-    pkg_writer.write_typeshed()
+    typeshed_src = os.path.join(os.path.dirname(__file__), "typeshed.pyi.tmpl")
+    print(typeshed_src, file=sys.stderr)
+    print(__file__, file=sys.stderr)
+    print(os.listdir(os.path.dirname(__file__)), file=sys.stderr)
+    assert os.path.exists(typeshed_src)
+    with open(typeshed_src) as f:
+        typeshed_tmpl = f.read()
+    typeshed_content = typeshed_tmpl.format(extension_field_descriptor=EXTENSION_FIELD_DESCRIPTOR, extension_dict=EXTENSION_DICT)
+
     output = response.file.add()
     output.name = "{}.pyi".format(TYPESHED_NAME)
-    output.content = HEADER + pkg_writer.write()
+    output.content = HEADER + typeshed_content
     if not quiet:
         print("Writing mypy to", output.name, file=sys.stderr)
 
@@ -728,6 +688,3 @@ def main():
     else:
         sys.stdout.write(output)
 
-
-if __name__ == "__main__":
-    main()

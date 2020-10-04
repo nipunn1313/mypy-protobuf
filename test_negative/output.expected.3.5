@@ -27,14 +27,17 @@ test_negative/negative.py:84: error: "Extensions1" has no attribute "foo"
 test_negative/negative.py:85: error: Incompatible types in assignment (expression has type "Extensions2", variable has type "Extensions1")
 test_negative/negative.py:86: error: Invalid index type "str" for "_ExtensionDict[Simple1]"; expected type "_ExtensionFieldDescriptor[Simple1, <nothing>]"
 test_negative/negative.py:87: error: Invalid index type "_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]" for "_ExtensionDict[Simple1]"; expected type "_ExtensionFieldDescriptor[Simple1, SeparateFileExtension]"
-test_negative/negative.py:91: error: Incompatible types in assignment (expression has type "Union[Literal['b_oneof_1'], Literal['b_oneof_2']]", variable has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['outer_message_in_oneof'], Literal['outer_enum_in_oneof'], Literal['inner_enum_in_oneof']]")
-test_negative/negative.py:94: error: "Descriptor" has no attribute "Garbage"
-test_negative/negative.py:95: error: "Descriptor" has no attribute "Garbage"
-test_negative/negative.py:98: error: "EnumDescriptor" has no attribute "Garbage"
-test_negative/negative.py:101: error: "FileDescriptor" has no attribute "Garbage"
-test_negative/negative.py:108: error: "OuterEnumValue" has no attribute "FOO"
-test_negative/negative.py:112: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "int"; expected "OuterEnumValue"
-test_negative/negative.py:114: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-test_negative/negative.py:116: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-test_negative/negative.py:118: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-Found 36 errors in 1 file (checked 20 source files)
+test_negative/negative.py:88: error: Unsupported operand types for in ("_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]" and "_ExtensionDict[Simple1]")
+test_negative/negative.py:89: error: Argument 1 to "__delitem__" of "_ExtensionDict" has incompatible type "_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]"; expected "_ExtensionFieldDescriptor[Simple1, SeparateFileExtension]"
+test_negative/negative.py:93: error: Incompatible types in assignment (expression has type "int", variable has type "_ExtensionFieldDescriptor[Simple1, _AnyMessage]")
+test_negative/negative.py:97: error: Incompatible types in assignment (expression has type "Union[Literal['b_oneof_1'], Literal['b_oneof_2']]", variable has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['outer_message_in_oneof'], Literal['outer_enum_in_oneof'], Literal['inner_enum_in_oneof']]")
+test_negative/negative.py:100: error: "Descriptor" has no attribute "Garbage"
+test_negative/negative.py:101: error: "Descriptor" has no attribute "Garbage"
+test_negative/negative.py:104: error: "EnumDescriptor" has no attribute "Garbage"
+test_negative/negative.py:107: error: "FileDescriptor" has no attribute "Garbage"
+test_negative/negative.py:114: error: "OuterEnumValue" has no attribute "FOO"
+test_negative/negative.py:118: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "int"; expected "OuterEnumValue"
+test_negative/negative.py:120: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:122: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:124: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+Found 39 errors in 1 file (checked 20 source files)
