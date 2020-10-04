@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+import "testproto/test.proto";
+
+package test;
+
+message SeparateFileExtension {
+  extend Simple2 { optional SeparateFileExtension ext = 1001; }
+
+  optional bool flag = 1;
+}

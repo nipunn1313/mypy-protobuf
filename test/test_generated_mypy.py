@@ -7,6 +7,8 @@ code reviews. This will fail in CI if there is any inconsistency.
 
 2) This is a file which should mypy with success. See test_negative for
 a file that should have failures.
+
+Both of these tests are run by the run_test.sh script.
 """
 
 import glob
@@ -14,12 +16,23 @@ import os
 import pytest
 import six
 
+from google.protobuf.descriptor import FieldDescriptor
+
 import testproto.test_pb2 as test_pb2
-from testproto.test_pb2 import DESCRIPTOR, FOO, OuterEnum, Simple1, Simple2
+from testproto.test_extensions2_pb2 import SeparateFileExtension
+from testproto.test_pb2 import (
+    DESCRIPTOR,
+    Extensions1,
+    Extensions2,
+    FOO,
+    OuterEnum,
+    Simple1,
+    Simple2,
+)
 from testproto.test3_pb2 import SimpleProto3
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
-from typing import Any
+from typing import Any, Optional
 
 MYPY = False
 if MYPY:
@@ -32,12 +45,36 @@ def _is_summary(l):
     return l.startswith("Found ") and l.endswith("source files)\n")
 
 
+def compare_pyi_to_expected(output_path):
+    # type: (str) -> Optional[str]
+    expected_path = output_path + ".expected"
+    assert os.path.exists(output_path)
+
+    with open(output_path) as f:
+        output_contents = f.read()
+
+    expected_contents = None  # type: Optional[str]
+    if os.path.exists(expected_path):
+        with open(expected_path) as f:
+            expected_contents = f.read()
+
+    if output_contents != expected_contents:
+        with open(expected_path, "w") as f:
+            f.write(output_contents)
+
+        return "{} doesn't match {}. This test will copy it over. Please rerun".format(
+            output_path, expected_path
+        )
+    else:
+        return None
+
+
 def test_generate_mypy_matches():
     # type: () -> None
     proto_files = glob.glob("proto/testproto/*.proto") + glob.glob(
         "proto/testproto/*/*.proto"
     )
-    assert len(proto_files) == 9  # Just a sanity check that all the files show up
+    assert len(proto_files) == 10  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
@@ -53,28 +90,11 @@ def test_generate_mypy_matches():
 
         output = os.path.join("generated", *components)
 
-        components[
-            -1
-        ] += ".expected"  # Eg [test, proto, test/com, test_pb2.proto.expected]
+        failures.append(compare_pyi_to_expected(output))
 
-        expected = os.path.join("generated", *components)
-
-        assert os.path.exists(output)
-
-        output_contents = open(output).read()
-        expected_contents = open(expected).read() if os.path.exists(expected) else None
-
-        if output_contents != expected_contents:
-            open(expected, "w").write(output_contents)
-            failures.append(
-                (
-                    "%s doesn't match %s. This test will copy it over. Please rerun"
-                    % (output, expected)
-                )
-            )
-
-    if failures:
-        raise Exception(str(failures))
+    real_failures = ["\n\t" + f for f in failures if f]
+    if real_failures:
+        raise Exception("".join(real_failures))
 
 
 def test_generate_negative_matches():
@@ -104,8 +124,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 30
-    assert len(errors_35) == 30
+    assert len(errors_27) == 33
+    assert len(errors_35) == 33
 
 
 def test_func():
@@ -308,6 +328,41 @@ def test_which_oneof_proto3():
         ValueError, match='Protocol message has no oneof "garbage" field.'
     ):
         s_untyped.WhichOneof("garbage")
+
+
+def test_extensions_proto2():
+    # type: () -> None
+    s1 = Simple1()
+    s2 = Simple2()
+
+    assert isinstance(Extensions1.ext, FieldDescriptor)
+    assert isinstance(Extensions2.foo, FieldDescriptor)
+    assert isinstance(SeparateFileExtension.ext, FieldDescriptor)
+
+    e1 = s1.Extensions[Extensions1.ext]
+    e1.ext1_string = "first extension"
+    assert isinstance(e1, Extensions1)
+
+    e2 = s1.Extensions[Extensions2.foo]
+    e2.flag = True
+    assert isinstance(e2, Extensions2)
+
+    e3 = s2.Extensions[SeparateFileExtension.ext]
+    e3.flag = True
+    assert isinstance(e3, SeparateFileExtension)
+
+    # Currently any extension is typed as an Any.
+    e3 = s1.Extensions[Extensions1.ext]
+    e3 = 3.1415
+
+    # Currently we don't check that the extension is being applied to the
+    # correct base model. This fails at runtime but passes mypy.
+
+    with pytest.raises(
+        KeyError,
+        match="Field 'test.SeparateFileExtension.ext' does not belong to message 'test.Simple1'",
+    ):
+        _ = s1.Extensions[SeparateFileExtension.ext]
 
 
 def test_constructor_proto2():
