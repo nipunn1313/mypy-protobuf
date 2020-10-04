@@ -23,15 +23,11 @@ if MYPY:
         Sequence,
         Text,
         Tuple,
-        cast,
     )
     from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 else:
     # Provide minimal mypy identifiers to make code run without typing module present
     Text = None
-
-    def cast(type, value):
-        return value
 
 
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
@@ -315,6 +311,14 @@ class PkgWriter(object):
                         )
                     l("")
 
+                for ext in desc.extension:
+                    l(
+                        "{}: {} = ...",
+                        ext.name,
+                        self._import("google.protobuf.descriptor", "FieldDescriptor"),
+                    )
+                    l("")
+
                 # Constructor
                 l("def __init__(self,")
                 with self._indent():
@@ -539,7 +543,6 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
-        imports.append(u"import sys")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):
