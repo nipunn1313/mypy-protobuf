@@ -357,12 +357,13 @@ def test_extensions_proto2():
 
     for x in s1.Extensions:
         assert isinstance(x, FieldDescriptor)
-        y = s1.Extensions[x]
+        y = s1.Extensions[x]  # y should be typed as an AnyMessage
         assert y.ext1_string == "first extension"
 
     assert Extensions1.ext in s1.Extensions
 
     assert len(s2.Extensions) == 1
+
 
 def test_constructor_proto2():
     # type: () -> None

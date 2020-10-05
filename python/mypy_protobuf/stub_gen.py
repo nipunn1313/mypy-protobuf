@@ -20,7 +20,6 @@ if MYPY:
         Generator,
         Iterable,
         List,
-        Optional,
         Set,
         Sequence,
         Text,
@@ -115,7 +114,7 @@ class PkgWriter(object):
     """Writes a single pyi file"""
 
     def __init__(self, fd, descriptors):
-        # type: (Optional[d.FileDescriptorProto], Descriptors) -> None
+        # type: (d.FileDescriptorProto, Descriptors) -> None
         self.fd = fd
         self.descriptors = descriptors
         self.lines = []  # type: List[Text]
@@ -152,7 +151,7 @@ class PkgWriter(object):
             name = name[1:]
 
         # Message defined in this file.
-        if self.fd and message_fd.name == self.fd.name:
+        if message_fd.name == self.fd.name:
             return _mangle_message(name)
 
         # Not in file. Must import
@@ -265,7 +264,7 @@ class PkgWriter(object):
                 # Overwrite the definition of Extensions from the standard
                 # protobuf typeshed.
                 l(
-                    "Extensions: {}[{}] = ...  # type: ignore[assignment]",
+                    "Extensions: {}[{}] = ...",
                     self._import(TYPESHED_NAME, EXTENSION_DICT),
                     prefix + desc.name,
                 )
@@ -395,8 +394,6 @@ class PkgWriter(object):
         # In proto3, HasField only supports message fields
         #
         # HasField always supports oneof fields
-        assert self.fd is not None
-
         hf_fields = [
             f.name
             for f in desc.field
@@ -615,13 +612,13 @@ def generate_mypy_stubs(descriptors, response, quiet):
 
     # Generate global definitions to overwrite typeshed.
     typeshed_src = os.path.join(os.path.dirname(__file__), "typeshed.pyi.tmpl")
-    print(typeshed_src, file=sys.stderr)
-    print(__file__, file=sys.stderr)
-    print(os.listdir(os.path.dirname(__file__)), file=sys.stderr)
     assert os.path.exists(typeshed_src)
     with open(typeshed_src) as f:
         typeshed_tmpl = f.read()
-    typeshed_content = typeshed_tmpl.format(extension_field_descriptor=EXTENSION_FIELD_DESCRIPTOR, extension_dict=EXTENSION_DICT)
+    typeshed_content = typeshed_tmpl.format(
+        extension_field_descriptor=EXTENSION_FIELD_DESCRIPTOR,
+        extension_dict=EXTENSION_DICT,
+    )
 
     output = response.file.add()
     output.name = "{}.pyi".format(TYPESHED_NAME)
@@ -687,4 +684,3 @@ def main():
         sys.stdout.buffer.write(output)
     else:
         sys.stdout.write(output)
-
