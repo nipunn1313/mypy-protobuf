@@ -77,12 +77,6 @@ PY2_ONLY_BUILTINS = {"buffer", "unicode"}
 
 
 FORWARD_REFERENCE_STRING_LITERAL = True
-# Class name for a generic version of FieldDescriptor used for proto2 extensions.
-EXTENSION_FIELD_DESCRIPTOR = "_ExtensionFieldDescriptor"
-# Class name for an overwrite of ExtensionDict from the official protobuf typeshed.
-EXTENSION_DICT = "_ExtensionDict"
-# Filename for typeshed overwrites used by mypy-protobuf.
-TYPESHED_NAME = "_typeshed_mypy_protobuf"
 
 
 def _forward_ref(name):
@@ -261,13 +255,6 @@ class PkgWriter(object):
                     "DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "Descriptor"),
                 )
-                # Overwrite the definition of Extensions from the standard
-                # protobuf typeshed.
-                l(
-                    "Extensions: {}[{}] = ...",
-                    self._import(TYPESHED_NAME, EXTENSION_DICT),
-                    prefix + desc.name,
-                )
 
                 # Nested enums/messages
                 self.write_enums(desc.enum_type, qualified_name + ".")
@@ -329,7 +316,10 @@ class PkgWriter(object):
                     l(
                         "{}: {}[{}, {}] = ...",
                         ext.name,
-                        self._import(TYPESHED_NAME, EXTENSION_FIELD_DESCRIPTOR),
+                        self._import(
+                            "google.protobuf.internal.extension_dict",
+                            "_ExtensionFieldDescriptor",
+                        ),
                         self._import_message(ext.extendee),
                         self.python_type(ext),
                     )
@@ -589,10 +579,6 @@ def is_scalar(fd):
 
 def generate_mypy_stubs(descriptors, response, quiet):
     # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
-
-    if not descriptors.to_generate:
-        return
-
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors)
         pkg_writer.write_module_attributes()
@@ -609,22 +595,6 @@ def generate_mypy_stubs(descriptors, response, quiet):
         output.content = HEADER + pkg_writer.write()
         if not quiet:
             print("Writing mypy to", output.name, file=sys.stderr)
-
-    # Generate global definitions to overwrite typeshed.
-    typeshed_src = os.path.join(os.path.dirname(__file__), "typeshed.pyi.tmpl")
-    assert os.path.exists(typeshed_src)
-    with open(typeshed_src) as f:
-        typeshed_tmpl = f.read()
-    typeshed_content = typeshed_tmpl.format(
-        extension_field_descriptor=EXTENSION_FIELD_DESCRIPTOR,
-        extension_dict=EXTENSION_DICT,
-    )
-
-    output = response.file.add()
-    output.name = "{}.pyi".format(TYPESHED_NAME)
-    output.content = HEADER + typeshed_content
-    if not quiet:
-        print("Writing mypy to", output.name, file=sys.stderr)
 
 
 class Descriptors(object):

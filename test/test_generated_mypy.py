@@ -92,8 +92,6 @@ def test_generate_mypy_matches():
 
         failures.append(compare_pyi_to_expected(output))
 
-    failures.append(compare_pyi_to_expected("generated/_typeshed_mypy_protobuf.pyi"))
-
     real_failures = ["\n\t" + f for f in failures if f]
     if real_failures:
         raise Exception("".join(real_failures))

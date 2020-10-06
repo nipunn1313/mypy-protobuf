@@ -29,7 +29,7 @@ test_negative/negative.py:86: error: Invalid index type "str" for "_ExtensionDic
 test_negative/negative.py:87: error: Invalid index type "_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]" for "_ExtensionDict[Simple1]"; expected type "_ExtensionFieldDescriptor[Simple1, SeparateFileExtension]"
 test_negative/negative.py:88: error: Unsupported operand types for in ("_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]" and "_ExtensionDict[Simple1]")
 test_negative/negative.py:89: error: Argument 1 to "__delitem__" of "_ExtensionDict" has incompatible type "_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]"; expected "_ExtensionFieldDescriptor[Simple1, SeparateFileExtension]"
-test_negative/negative.py:93: error: Incompatible types in assignment (expression has type "int", variable has type "_ExtensionFieldDescriptor[Simple1, _AnyMessage]")
+test_negative/negative.py:93: error: Incompatible types in assignment (expression has type "int", variable has type "_ExtensionFieldDescriptor[Simple1, Any]")
 test_negative/negative.py:97: error: Incompatible types in assignment (expression has type "Union[Literal[u'b_oneof_1'], Literal[u'b_oneof_2']]", variable has type "Union[Literal[u'a_oneof_1'], Literal[u'a_oneof_2'], Literal[u'outer_message_in_oneof'], Literal[u'outer_enum_in_oneof'], Literal[u'inner_enum_in_oneof']]")
 test_negative/negative.py:100: error: "Descriptor" has no attribute "Garbage"
 test_negative/negative.py:101: error: "Descriptor" has no attribute "Garbage"
@@ -40,4 +40,4 @@ test_negative/negative.py:118: error: Argument 1 to "Name" of "_EnumTypeWrapper"
 test_negative/negative.py:120: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
 test_negative/negative.py:122: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
 test_negative/negative.py:124: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-Found 39 errors in 1 file (checked 20 source files)
+Found 39 errors in 1 file (checked 19 source files)
