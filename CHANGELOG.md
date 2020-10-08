@@ -4,6 +4,7 @@
 - Reorganize mypy-protobuf testsuite files to more closely match autogeneration into a `generated` directory
 - Remove incorrect `type___` prefixed alias for inner enum type wrappers
 - Add support for extension fields in proto2 messages
+- Overwrite typing for `Message.Extensions` mapping to support better type inference for proto2 message extensions
 
 ## 1.23
 

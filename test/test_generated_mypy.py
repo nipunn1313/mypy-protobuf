@@ -124,8 +124,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 33
-    assert len(errors_35) == 33
+    assert len(errors_27) == 39
+    assert len(errors_35) == 39
 
 
 def test_func():
@@ -351,18 +351,16 @@ def test_extensions_proto2():
     e3.flag = True
     assert isinstance(e3, SeparateFileExtension)
 
-    # Currently any extension is typed as an Any.
-    e3 = s1.Extensions[Extensions1.ext]
-    e3 = 3.1415
+    del s1.Extensions[Extensions2.foo]
 
-    # Currently we don't check that the extension is being applied to the
-    # correct base model. This fails at runtime but passes mypy.
+    for x in s1.Extensions:
+        assert isinstance(x, FieldDescriptor)
+        y = s1.Extensions[x]  # y should be typed as an AnyMessage
+        assert y.ext1_string == "first extension"
 
-    with pytest.raises(
-        KeyError,
-        match="Field 'test.SeparateFileExtension.ext' does not belong to message 'test.Simple1'",
-    ):
-        _ = s1.Extensions[SeparateFileExtension.ext]
+    assert Extensions1.ext in s1.Extensions
+
+    assert len(s2.Extensions) == 1
 
 
 def test_constructor_proto2():

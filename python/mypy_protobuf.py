@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
 from __future__ import absolute_import, division, print_function
+import os
 
 import sys
 from collections import defaultdict
@@ -313,9 +314,14 @@ class PkgWriter(object):
 
                 for ext in desc.extension:
                     l(
-                        "{}: {} = ...",
+                        "{}: {}[{}, {}] = ...",
                         ext.name,
-                        self._import("google.protobuf.descriptor", "FieldDescriptor"),
+                        self._import(
+                            "google.protobuf.internal.extension_dict",
+                            "_ExtensionFieldDescriptor",
+                        ),
+                        self._import_message(ext.extendee),
+                        self.python_type(ext),
                     )
                     l("")
 
@@ -648,7 +654,3 @@ def main():
         sys.stdout.buffer.write(output)
     else:
         sys.stdout.write(output)
-
-
-if __name__ == "__main__":
-    main()

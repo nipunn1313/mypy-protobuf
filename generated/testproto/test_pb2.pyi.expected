@@ -11,7 +11,6 @@ from concurrent.futures import (
 from google.protobuf.descriptor import (
     Descriptor as google___protobuf___descriptor___Descriptor,
     EnumDescriptor as google___protobuf___descriptor___EnumDescriptor,
-    FieldDescriptor as google___protobuf___descriptor___FieldDescriptor,
     FileDescriptor as google___protobuf___descriptor___FileDescriptor,
 )
 
@@ -22,6 +21,10 @@ from google.protobuf.internal.containers import (
 
 from google.protobuf.internal.enum_type_wrapper import (
     _EnumTypeWrapper as google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper,
+)
+
+from google.protobuf.internal.extension_dict import (
+    _ExtensionFieldDescriptor as google___protobuf___internal___extension_dict____ExtensionFieldDescriptor,
 )
 
 from google.protobuf.message import (
@@ -181,7 +184,7 @@ class Extensions1(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     ext1_string: typing___Text = ...
 
-    ext: google___protobuf___descriptor___FieldDescriptor = ...
+    ext: google___protobuf___internal___extension_dict____ExtensionFieldDescriptor[type___Simple1, type___Extensions1] = ...
 
     def __init__(self,
         *,
@@ -195,7 +198,7 @@ class Extensions2(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     flag: builtin___bool = ...
 
-    foo: google___protobuf___descriptor___FieldDescriptor = ...
+    foo: google___protobuf___internal___extension_dict____ExtensionFieldDescriptor[type___Simple1, type___Extensions2] = ...
 
     def __init__(self,
         *,
