@@ -33,7 +33,7 @@ NC='\033[0m'
     source $MYPY_VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@v0.780
+        python3 -m pip install git+https://github.com/python/mypy.git@7273e9ab1664b59a74d9bd1d2361bbeb9864b7ab
     fi
 
     # Run mypy
