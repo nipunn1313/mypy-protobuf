@@ -221,12 +221,12 @@ def test_has_field_proto3():
         s_untyped.HasField(u"garbage")
     with pytest.raises(
         ValueError,
-        match='Can\'t test non-submessage field "SimpleProto3.a_string" for presence in proto3.',
+        match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_string" for presence in proto3.',
     ):
         s_untyped.HasField(u"a_string")
     with pytest.raises(
         ValueError,
-        match='Can\'t test non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
+        match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
     ):
         s_untyped.HasField("a_outer_enum")
     with pytest.raises(
