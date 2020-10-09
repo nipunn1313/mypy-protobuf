@@ -5,6 +5,7 @@
 - Remove incorrect `type___` prefixed alias for inner enum type wrappers
 - Add support for extension fields in proto2 messages
 - Overwrite typing for `Message.Extensions` mapping to support better type inference for proto2 message extensions
+- Bump python-protobuf from 3.11.3 to 3.13.0
 
 ## 1.23
 
