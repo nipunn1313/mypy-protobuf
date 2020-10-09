@@ -122,3 +122,14 @@ OuterEnum.Name(OuterEnum.values()[0])
 OuterEnum.Name(SimpleProto3.InnerEnum.values()[0])  # E:2.7 E:3.5
 OuterEnum.Name(OuterEnum.items()[0][1])
 OuterEnum.Name(SimpleProto3.InnerEnum.items()[0][1])  # E:2.7 E:3.5
+
+# Map field does not have get_or_create when mapping to a scalar type
+s7 = SimpleProto3()
+s7.map_scalar.get_or_create(0)  # E:2.7 E:3.5
+# Incorrect key type should error
+s7.map_scalar.get("abcd")  # E:2.7 E:3.5
+s7.map_message.get("abcd")  # E:2.7 E:3.5
+# Incorrect value type should error
+map_val = 5
+map_val = s7.map_scalar.get(0)  # E:2.7 E:3.5
+map_val = s7.map_message.get(0)  # E:2.7 E:3.5

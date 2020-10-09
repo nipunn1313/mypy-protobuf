@@ -6,7 +6,9 @@ from google.protobuf.descriptor import (
 )
 
 from google.protobuf.internal.containers import (
+    MessageMap as google___protobuf___internal___containers___MessageMap,
     RepeatedScalarFieldContainer as google___protobuf___internal___containers___RepeatedScalarFieldContainer,
+    ScalarMap as google___protobuf___internal___containers___ScalarMap,
 )
 
 from google.protobuf.internal.enum_type_wrapper import (
@@ -20,7 +22,6 @@ from google.protobuf.message import (
 from typing import (
     Iterable as typing___Iterable,
     Mapping as typing___Mapping,
-    MutableMapping as typing___MutableMapping,
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
@@ -76,7 +77,7 @@ class SimpleProto3(google___protobuf___message___Message):
     INNER1 = typing___cast(SimpleProto3.InnerEnumValue, 0)
     INNER2 = typing___cast(SimpleProto3.InnerEnumValue, 1)
 
-    class MapFieldEntry(google___protobuf___message___Message):
+    class MapScalarEntry(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
         key: builtin___int = ...
         value: typing___Text = ...
@@ -87,7 +88,23 @@ class SimpleProto3(google___protobuf___message___Message):
             value : typing___Optional[typing___Text] = None,
             ) -> None: ...
         def ClearField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> None: ...
-    type___MapFieldEntry = MapFieldEntry
+    type___MapScalarEntry = MapScalarEntry
+
+    class MapMessageEntry(google___protobuf___message___Message):
+        DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+        key: builtin___int = ...
+
+        @property
+        def value(self) -> type___OuterMessage3: ...
+
+        def __init__(self,
+            *,
+            key : typing___Optional[builtin___int] = None,
+            value : typing___Optional[type___OuterMessage3] = None,
+            ) -> None: ...
+        def HasField(self, field_name: typing_extensions___Literal[u"value",b"value"]) -> builtin___bool: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> None: ...
+    type___MapMessageEntry = MapMessageEntry
 
     a_string: typing___Text = ...
     a_repeated_string: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text] = ...
@@ -114,7 +131,10 @@ class SimpleProto3(google___protobuf___message___Message):
     def OuterMessage3(self) -> type___OuterMessage3: ...
 
     @property
-    def map_field(self) -> typing___MutableMapping[builtin___int, typing___Text]: ...
+    def map_scalar(self) -> google___protobuf___internal___containers___ScalarMap[builtin___int, typing___Text]: ...
+
+    @property
+    def map_message(self) -> google___protobuf___internal___containers___MessageMap[builtin___int, type___OuterMessage3]: ...
 
     def __init__(self,
         *,
@@ -133,10 +153,11 @@ class SimpleProto3(google___protobuf___message___Message):
         bool : typing___Optional[type___OuterMessage3] = None,
         OuterEnum : typing___Optional[type___OuterEnumValue] = None,
         OuterMessage3 : typing___Optional[type___OuterMessage3] = None,
-        map_field : typing___Optional[typing___Mapping[builtin___int, typing___Text]] = None,
+        map_scalar : typing___Optional[typing___Mapping[builtin___int, typing___Text]] = None,
+        map_message : typing___Optional[typing___Mapping[builtin___int, type___OuterMessage3]] = None,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"OuterMessage3",b"OuterMessage3",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"OuterEnum",b"OuterEnum",u"OuterMessage3",b"OuterMessage3",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_outer_enum",b"a_outer_enum",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"map_field",b"map_field",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"OuterEnum",b"OuterEnum",u"OuterMessage3",b"OuterMessage3",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_outer_enum",b"a_outer_enum",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"map_message",b"map_message",u"map_scalar",b"map_scalar",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> None: ...
     @typing___overload
     def WhichOneof(self, oneof_group: typing_extensions___Literal[u"a_oneof",b"a_oneof"]) -> typing_extensions___Literal["a_oneof_1","a_oneof_2","outer_message_in_oneof","outer_enum_in_oneof","inner_enum_in_oneof"]: ...
     @typing___overload
