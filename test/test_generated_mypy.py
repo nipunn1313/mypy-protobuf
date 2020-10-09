@@ -353,9 +353,13 @@ def test_extensions_proto2():
 
     del s1.Extensions[Extensions2.foo]
 
+    # Using __iter__, x is a FieldDescriptor but the type of the message that
+    # s1.Extensions[x] yields is unknown (it could be any of the extension messages).
+    # Hence, s1.Extensions[x] is typed as Any.
     for x in s1.Extensions:
         assert isinstance(x, FieldDescriptor)
-        y = s1.Extensions[x]  # y should be typed as an AnyMessage
+        assert x.is_extension
+        y = s1.Extensions[x]
         assert y.ext1_string == "first extension"
 
     assert Extensions1.ext in s1.Extensions
