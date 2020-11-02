@@ -60,5 +60,5 @@ PROTOC=${PROTOC:=protoc}
     source $VENV/bin/activate
     python --version
     py.test --version
-    py.test --ignore=test/proto
+    PYTHONPATH=generated py.test --ignore=generated
 )
