@@ -39,7 +39,7 @@ PROTOC=${PROTOC:=protoc}
     source $MYPY_VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@7273e9ab1664b59a74d9bd1d2361bbeb9864b7ab
+        python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
     fi
 
     # Run mypy

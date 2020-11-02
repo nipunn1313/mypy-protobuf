@@ -8,6 +8,7 @@ before releasing 1.24
 - Remove incorrect `type___` prefixed alias for inner enum type wrappers
 - Add support for extension fields in proto2 messages
 - Overwrite typing for `Message.Extensions` mapping to support better type inference for proto2 message extensions
+- Support `Message.HasExtension` and `Message.ClearExtension`
 - Bump python-protobuf from 3.11.3 to 3.13.0
 - Support ScalarMap and MessageMap generated types for map types in proto.  This will allow us to support `get_or_create`
 
