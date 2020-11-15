@@ -388,7 +388,7 @@ class PkgWriter(object):
         #
         # HasField only supports singular. ClearField supports repeated as well
         #
-        # In proto3, HasField only supports message fields
+        # In proto3, HasField only supports message fields and optional fields
         #
         # HasField always supports oneof fields
         hf_fields = [
@@ -400,6 +400,7 @@ class PkgWriter(object):
                 and (
                     self.fd.syntax != "proto3"
                     or f.type == d.FieldDescriptorProto.TYPE_MESSAGE
+                    or f.proto3_optional
                 )
             )
         ]
@@ -649,6 +650,11 @@ def main():
 
     # Create response
     response = plugin_pb2.CodeGeneratorResponse()
+
+    # Declare support for optional proto3 fields
+    response.supported_features |= (
+        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL
+    )
 
     # Generate mypy
     generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)

@@ -212,6 +212,10 @@ def test_has_field_proto3():
         assert not s.HasField(b"outer_message")
     assert not s.HasField("a_oneof")
 
+    assert not s.HasField("an_optional_string")
+    # synthetic oneof from optional field, see https://github.com/protocolbuffers/protobuf/blob/v3.12.0/docs/implementing_proto3_presence.md#updating-a-code-generator
+    assert not s.HasField("_an_optional_string")
+
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped = s  # type: Any
@@ -278,6 +282,9 @@ def test_clear_field_proto3():
     s.ClearField("a_repeated_string")
     s.ClearField("a_oneof")
     s.ClearField(b"a_string")
+    s.ClearField("an_optional_string")
+    # synthetic oneof from optional field
+    s.ClearField("_an_optional_string")
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
@@ -320,6 +327,11 @@ def test_which_oneof_proto3():
     assert type(s.WhichOneof("a_oneof")) == str
     assert s.HasField(s.WhichOneof("a_oneof"))
     assert s.HasField(s.WhichOneof("b_oneof"))
+
+    # synthetic oneof from optional field
+    assert s.WhichOneof("_an_optional_string") is None
+    s.an_optional_string = "foo"
+    assert s.HasField(s.WhichOneof("_an_optional_string"))
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too

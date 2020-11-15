@@ -46,4 +46,6 @@ message SimpleProto3 {
   // Test generation of map
   map<int32, string> map_scalar = 16;
   map<int32, OuterMessage3> map_message = 17;
+
+  optional string an_optional_string = 18;
 }
