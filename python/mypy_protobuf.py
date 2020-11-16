@@ -400,7 +400,7 @@ class PkgWriter(object):
                 and (
                     self.fd.syntax != "proto3"
                     or f.type == d.FieldDescriptorProto.TYPE_MESSAGE
-                    or f.proto3_optional
+                    or f.proto3_optional  # type: ignore[attr-defined] # https://github.com/dropbox/mypy-protobuf/issues/158
                 )
             )
         ]
@@ -652,8 +652,8 @@ def main():
     response = plugin_pb2.CodeGeneratorResponse()
 
     # Declare support for optional proto3 fields
-    response.supported_features |= (
-        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL
+    response.supported_features |= (  # type: ignore[attr-defined]  # https://github.com/dropbox/mypy-protobuf/issues/158
+        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL  # type: ignore[attr-defined]
     )
 
     # Generate mypy
