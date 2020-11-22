@@ -8,6 +8,9 @@ RED="\033[0;31m"
 NC='\033[0m'
 PROTOC=${PROTOC:=protoc}
 
+# Clean out generated/ directory - except for .generated / __init__.py
+find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
+
 (
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
