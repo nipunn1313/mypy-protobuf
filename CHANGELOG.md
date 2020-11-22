@@ -10,6 +10,7 @@ before releasing 1.24
 - Overwrite typing for `Message.Extensions` mapping to support better type inference for proto2 message extensions
 - Support `Message.HasExtension` and `Message.ClearExtension`
 - Bump python-protobuf from 3.11.3 to 3.13.0
+- Add support for optional proto3 fields
 - Support ScalarMap and MessageMap generated types for map types in proto.  This will allow us to support `get_or_create`
 
 ```

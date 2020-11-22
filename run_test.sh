@@ -23,8 +23,8 @@ PROTOC=${PROTOC:=protoc}
         echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
         exit 1
     fi
-    $PROTOC --mypy_out=generated --proto_path=proto/ `find proto/ -name "*.proto"`
-    $PROTOC --python_out=generated --proto_path=proto/ `find proto/testproto -name "*.proto"`
+    $PROTOC --mypy_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/ -name "*.proto"`
+    $PROTOC --python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto -name "*.proto"`
 )
 
 (
