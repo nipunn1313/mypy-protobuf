@@ -20,6 +20,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     python -m pip install python/ -r requirements.txt
 
     # Generate protos
+    python --version
     $PROTOC --version
     expected="libprotoc 3.13.0"
     if [[ $($PROTOC --version) != $expected ]]; then
