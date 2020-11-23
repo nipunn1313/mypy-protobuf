@@ -31,8 +31,15 @@ else:
     Text = None
 
 
-GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
-HEADER = "# {} by mypy-protobuf.  Do not edit manually!\n".format(GENERATED)
+# So phabricator doesn't think mypy_protobuf.py is generated
+GENERATED = "@ge" + "nerated"
+HEADER = """\"\"\"
+{} by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+\"\"\"
+""".format(
+    GENERATED
+)
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
