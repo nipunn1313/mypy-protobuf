@@ -11,27 +11,35 @@ on:
 
 jobs:
   run_test:
-    # The type of runner that the job will run on
+    name: Test on python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: [2.7, 3.9]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
     steps:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
           version: '3.13.0'
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - run: ./run_test.sh
+      - name: Set up python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run Tests (./run_test.sh)
+        run: |
+          python --version
+          python -m pip install virtualenv
+          python3 -m pip install virtualenv
+          ./run_test.sh
+
   black:
     name: Check formatting with black
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: |
+      - name: Run black
+        run: |
           pip3 install black
           black --check python/ test/
