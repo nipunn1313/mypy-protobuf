@@ -1,4 +1,4 @@
-mypy-protobuf: Generate mypy stub files from protobuf specs [![Build Status](https://travis-ci.org/dropbox/mypy-protobuf.svg?branch=master)](https://travis-ci.org/dropbox/mypy-protobuf)
+mypy-protobuf: Generate mypy stub files from protobuf specs ![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)
 ===========================================================
 
 ## Requirements
