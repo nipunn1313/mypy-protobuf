@@ -87,6 +87,9 @@ e1 = s.Extensions[Extensions2.foo]  # E:2.7 E:3.5
 # changes to typeshed a few months after the 1.24 release
 # See https://github.com/python/typeshed/pull/4833
 _ = s.Extensions["foo"]  # E:2.7 E:3.5
+# TODO - these will give errors once again once we are able to
+# revert https://github.com/python/typeshed/pull/4833 later on
+# a few months after 1.24 releases
 _ = s.Extensions[SeparateFileExtension.ext]
 _ = SeparateFileExtension.ext in s.Extensions
 del s.Extensions[SeparateFileExtension.ext]

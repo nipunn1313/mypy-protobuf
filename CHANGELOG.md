@@ -2,6 +2,7 @@
 
 - Support for `grpcio` stubs generation
 - Allow `mypy_protobuf.py` to be run directly as a script
+- Add support for proto's [`well_known_types`](https://developers.google.com/protocol-buffers/docs/reference/python-generated#wkt)
 
 ## 1.24
 
