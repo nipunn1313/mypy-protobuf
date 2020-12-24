@@ -11,7 +11,6 @@ from google.protobuf.message import (
 
 from typing import (
     Optional as typing___Optional,
-    Union as typing___Union,
 )
 
 from typing_extensions import (
@@ -23,9 +22,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-if sys.version_info < (3,):
-    builtin___buffer = buffer
-    builtin___unicode = unicode
 
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
@@ -38,12 +34,6 @@ class lower(google___protobuf___message___Message):
         *,
         a : typing___Optional[builtin___int] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> lower: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> lower: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___lower = lower
 
@@ -57,12 +47,6 @@ class Upper(google___protobuf___message___Message):
         *,
         Lower : typing___Optional[type___lower] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> Upper: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Upper: ...
     def HasField(self, field_name: typing_extensions___Literal[u"Lower",b"Lower"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"Lower",b"Lower"]) -> None: ...
 type___Upper = Upper
@@ -77,12 +61,6 @@ class lower2(google___protobuf___message___Message):
         *,
         upper : typing___Optional[type___Upper] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> lower2: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> lower2: ...
     def HasField(self, field_name: typing_extensions___Literal[u"upper",b"upper"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"upper",b"upper"]) -> None: ...
 type___lower2 = lower2

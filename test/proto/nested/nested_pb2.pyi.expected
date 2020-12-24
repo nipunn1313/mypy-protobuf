@@ -22,7 +22,6 @@ from typing import (
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    Union as typing___Union,
     cast as typing___cast,
 )
 
@@ -35,9 +34,6 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
-if sys.version_info < (3,):
-    builtin___buffer = buffer
-    builtin___unicode = unicode
 
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
@@ -50,12 +46,6 @@ class Nested(google___protobuf___message___Message):
         *,
         a : typing___Optional[test___proto___test3_pb2___OuterEnumValue] = None,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> Nested: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Nested: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___Nested = Nested
 
@@ -101,22 +91,10 @@ class AnotherNested(google___protobuf___message___Message):
             ne : typing___Optional[type___AnotherNested.NestedEnumValue] = None,
             ne2 : typing___Optional[type___AnotherNested.NestedMessage.NestedEnum2Value] = None,
             ) -> None: ...
-        if sys.version_info >= (3,):
-            @classmethod
-            def FromString(cls, s: builtin___bytes) -> AnotherNested.NestedMessage: ...
-        else:
-            @classmethod
-            def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnotherNested.NestedMessage: ...
         def ClearField(self, field_name: typing_extensions___Literal[u"b",b"b",u"ne",b"ne",u"ne2",b"ne2",u"s",b"s"]) -> None: ...
     type___NestedMessage = NestedMessage
 
 
     def __init__(self,
         ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> AnotherNested: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnotherNested: ...
 type___AnotherNested = AnotherNested
