@@ -1,0 +1,122 @@
+syntax = "proto2";
+
+package test;
+
+import "testproto/inner/inner.proto";
+import "testproto/nested/nested.proto";
+import "testproto/nopackage.proto";
+import "testproto/test3.proto";
+
+enum OuterEnum {
+  FOO = 1;
+  BAR = 2;
+}
+
+message Simple1 {
+  enum InnerEnum {
+    INNER1 = 1;
+    INNER2 = 2;
+  }
+  message InnerMessage {}
+
+  optional string a_string = 1;
+  repeated string a_repeated_string = 2;
+  optional bool a_boolean = 3;
+  optional uint32 a_uint32 = 4;
+  optional OuterEnum a_enum = 5;
+  optional test3.OuterEnum a_external_enum = 6;
+
+  optional inner.Inner a_inner = 7;
+  optional test.nested_package.Nested a_nested = 12;
+
+  optional InnerEnum inner_enum = 8;
+  repeated InnerEnum rep_inner_enum = 9;
+  optional InnerMessage inner_message = 10;
+  repeated InnerMessage rep_inner_message = 11;
+
+  optional NoPackage no_package = 13;
+  optional test.nested_package.AnotherNested.NestedEnum nested_enum = 14;
+  optional test.nested_package.AnotherNested.NestedMessage nested_message = 15;
+
+  oneof a_oneof {
+      string a_oneof_1 = 16;
+      string a_oneof_2 = 17;
+      Simple2 outer_message_in_oneof = 18;
+      OuterEnum outer_enum_in_oneof = 19;
+      InnerEnum inner_enum_in_oneof = 20;
+  }
+
+  extensions 1000 to max;
+}
+
+message Simple2 {
+  required string a_string = 1;
+
+  extensions 1000 to max;
+}
+
+message Extensions1 {
+  extend Simple1 { optional Extensions1 ext = 1000; }
+
+  optional string ext1_string = 1;
+}
+
+message Extensions2 {
+  extend Simple1 { optional Extensions2 foo = 2020; }
+
+  optional bool flag = 1;
+}
+
+message PythonReservedKeywords {
+  enum finally {
+      continue = 1;
+  }
+  // protoc python generator actually generates invalid code for this, so not testing
+  //message lambda {
+  //    optional int64 continue = 1;
+  //}
+
+  required int64 from = 1;
+  optional Simple2 in = 2;
+  optional finally is = 3;
+  optional int64 for = 5;
+  optional int64 try = 6;
+  optional int64 def = 7;
+  optional int64 nonlocal = 8;
+  optional int64 while = 9;
+  optional int64 and = 10;
+  optional int64 del = 11;
+  optional int64 global = 12;
+  optional int64 not = 13;
+  optional int64 with = 14;
+  optional int64 as = 15;
+  optional int64 elif = 16;
+  optional int64 if = 17;
+  optional int64 or = 18;
+  optional int64 yield = 19;
+  optional int64 assert = 20;
+  optional int64 else = 21;
+  optional int64 import = 22;
+  optional int64 pass = 23;
+  optional int64 break = 24;
+  optional int64 except = 25;
+  optional int64 raise = 26;
+  optional int64 False = 27;
+  optional int64 None = 28;
+  optional int64 True = 29;
+  optional int64 class = 30;
+}
+
+// Do one with just one arg - to make sure it's syntactically correct
+message PythonReservedKeywordsSmall {
+  required int64 from = 1;
+}
+
+service PythonReservedKeywordsService {
+    rpc lambda(Simple1) returns (Simple2) {}
+}
+
+option py_generic_services = true;
+service ATestService {
+    rpc Echo(Simple1) returns (Simple2) {}
+}

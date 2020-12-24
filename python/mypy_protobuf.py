@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-)
+from __future__ import absolute_import, division, print_function
+import os
 
 import sys
 from collections import defaultdict
@@ -27,19 +24,22 @@ if MYPY:
         Sequence,
         Text,
         Tuple,
-        cast,
     )
     from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 else:
     # Provide minimal mypy identifiers to make code run without typing module present
     Text = None
 
-    def cast(type, value):
-        return value
 
-
-GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
-HEADER = "# {} by generate_proto_mypy_stubs.py.  Do not edit!\n".format(GENERATED)
+# So phabricator doesn't think mypy_protobuf.py is generated
+GENERATED = "@ge" + "nerated"
+HEADER = """\"\"\"
+{} by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+\"\"\"
+""".format(
+    GENERATED
+)
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
@@ -80,10 +80,7 @@ PYTHON_RESERVED = {
     "yield",
 }
 
-PY2_ONLY_BUILTINS = {
-    "buffer",
-    "unicode",
-}
+PY2_ONLY_BUILTINS = {"buffer", "unicode"}
 
 
 FORWARD_REFERENCE_STRING_LITERAL = True
@@ -255,7 +252,6 @@ class PkgWriter(object):
                 self.write_enum_values(enum, enum_value_full_type)
 
             self.write_enum_values(enum, enum_value_full_type)
-            l("{} = {}", _mangle_message(enum.name), enum.name)
             l("")
 
     def write_messages(self, messages, prefix):
@@ -302,7 +298,14 @@ class PkgWriter(object):
                         msg = self.descriptors.messages[field.type_name]
                         if msg.options.map_entry:
                             # map generates a special Entry wrapper message
-                            container = self._import("typing", "MutableMapping")
+                            if is_scalar(msg.field[1]):
+                                container = self._import(
+                                    "google.protobuf.internal.containers", "ScalarMap"
+                                )
+                            else:
+                                container = self._import(
+                                    "google.protobuf.internal.containers", "MessageMap"
+                                )
                             l(
                                 "def {}(self) -> {}[{}, {}]: ...",
                                 field.name,
@@ -327,6 +330,19 @@ class PkgWriter(object):
                             field.name,
                             self.python_type(field),
                         )
+                    l("")
+
+                for ext in desc.extension:
+                    l(
+                        "{}: {}[{}, {}] = ...",
+                        ext.name,
+                        self._import(
+                            "google.protobuf.internal.extension_dict",
+                            "_ExtensionFieldDescriptor",
+                        ),
+                        self._import_message(ext.extendee),
+                        self.python_type(ext),
+                    )
                     l("")
 
                 # Constructor
@@ -370,27 +386,6 @@ class PkgWriter(object):
                             )
                     l(") -> None: ...")
 
-                # Standard message methods
-                l("if {} >= (3,):", "sys.version_info")
-                with self._indent():
-                    l("@classmethod")
-                    l(
-                        "def FromString(cls, s: {}) -> {}: ...",
-                        self._builtin("bytes"),
-                        qualified_name,
-                    )
-                l("else:")
-                with self._indent():
-                    l("@classmethod")
-                    l(
-                        "def FromString(cls, s: {}[{}, {}, {}]) -> {}: ...",
-                        self._import("typing", "Union"),
-                        self._builtin("bytes"),
-                        self._builtin("buffer"),
-                        self._builtin("unicode"),
-                        qualified_name,
-                    )
-
                 self.write_stringly_typed_fields(desc)
 
             l("{} = {}", _mangle_message(desc.name), desc.name)
@@ -406,7 +401,7 @@ class PkgWriter(object):
         #
         # HasField only supports singular. ClearField supports repeated as well
         #
-        # In proto3, HasField only supports message fields
+        # In proto3, HasField only supports message fields and optional fields
         #
         # HasField always supports oneof fields
         hf_fields = [
@@ -418,6 +413,7 @@ class PkgWriter(object):
                 and (
                     self.fd.syntax != "proto3"
                     or f.type == d.FieldDescriptorProto.TYPE_MESSAGE
+                    or f.proto3_optional  # type: ignore[attr-defined] # https://github.com/dropbox/mypy-protobuf/issues/158
                 )
             )
         ]
@@ -574,7 +570,6 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
-        imports.append(u"import sys")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):
@@ -669,6 +664,11 @@ def main():
     # Create response
     response = plugin_pb2.CodeGeneratorResponse()
 
+    # Declare support for optional proto3 fields
+    response.supported_features |= (  # type: ignore[attr-defined]  # https://github.com/dropbox/mypy-protobuf/issues/158
+        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL  # type: ignore[attr-defined]
+    )
+
     # Generate mypy
     generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)
 
@@ -680,7 +680,3 @@ def main():
         sys.stdout.buffer.write(output)
     else:
         sys.stdout.write(output)
-
-
-if __name__ == "__main__":
-    main()

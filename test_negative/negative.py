@@ -10,9 +10,17 @@ from typing import (
     Text,
 )
 
-from test.proto.test_pb2 import DESCRIPTOR, FOO, Simple1, Simple2
-from test.proto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
-from test.proto.dot.com.test_pb2 import TestMessage
+from testproto.test_extensions2_pb2 import SeparateFileExtension
+from testproto.test_pb2 import (
+    DESCRIPTOR,
+    Extensions1,
+    Extensions2,
+    FOO,
+    Simple1,
+    Simple2,
+)
+from testproto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
+from testproto.dot.com.test_pb2 import TestMessage
 
 s = Simple1()
 s.a_string = "Hello"
@@ -68,6 +76,25 @@ b3 = s6.WhichOneof("a_oneof")
 s6.HasField(b3)  # allowed
 simple2.HasField(b3)  # E:2.7 E:3.5  - it's a text but not one of the literals
 
+# Proto2 Extensions
+an_int = 5
+an_int = Extensions1.ext  # E:2.7 E:3.5
+_ = s.Extensions[Extensions1.bad]  # E:2.7 E:3.5
+e1 = s.Extensions[Extensions1.ext]
+e1.foo = 4  # E:2.7 E:3.5
+e1 = s.Extensions[Extensions2.foo]  # E:2.7 E:3.5
+_ = s.Extensions["foo"]  # E:2.7 E:3.5
+_ = s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
+_ = SeparateFileExtension.ext in s.Extensions # E:2.7 E:3.5
+del s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
+s.HasExtension(SeparateFileExtension.ext)  # E:2.7 E:3.5
+simple2.ClearExtension(Extensions1.ext)  # E:2.7 E:3.5
+
+
+for x in s.Extensions:
+    pass
+x = 4  # E:2.7 E:3.5
+
 # Overload WhichOneof
 c = s6.WhichOneof("a_oneof")
 c = s6.WhichOneof("b_oneof")  # E:2.7 E:3.5
@@ -98,3 +125,14 @@ OuterEnum.Name(OuterEnum.values()[0])
 OuterEnum.Name(SimpleProto3.InnerEnum.values()[0])  # E:2.7 E:3.5
 OuterEnum.Name(OuterEnum.items()[0][1])
 OuterEnum.Name(SimpleProto3.InnerEnum.items()[0][1])  # E:2.7 E:3.5
+
+# Map field does not have get_or_create when mapping to a scalar type
+s7 = SimpleProto3()
+s7.map_scalar.get_or_create(0)  # E:2.7 E:3.5
+# Incorrect key type should error
+s7.map_scalar.get("abcd")  # E:2.7 E:3.5
+s7.map_message.get("abcd")  # E:2.7 E:3.5
+# Incorrect value type should error
+map_val = 5
+map_val = s7.map_scalar.get(0)  # E:2.7 E:3.5
+map_val = s7.map_message.get(0)  # E:2.7 E:3.5

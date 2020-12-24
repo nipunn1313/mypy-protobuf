@@ -6,6 +6,10 @@ MYPY_VENV=venv_mypy
 
 RED="\033[0;31m"
 NC='\033[0m'
+PROTOC=${PROTOC:=protoc}
+
+# Clean out generated/ directory - except for .generated / __init__.py
+find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
 
 (
     # Create virtualenv + Install requirements for mypy-protobuf
@@ -16,8 +20,15 @@ NC='\033[0m'
     python -m pip install python/ -r requirements.txt
 
     # Generate protos
-    protoc --version
-    protoc --python_out=. --mypy_out=. --proto_path=proto/ `find proto/test -name "*.proto"`
+    python --version
+    $PROTOC --version
+    expected="libprotoc 3.13.0"
+    if [[ $($PROTOC --version) != $expected ]]; then
+        echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
+        exit 1
+    fi
+    $PROTOC --mypy_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/ -name "*.proto"`
+    $PROTOC --python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto -name "*.proto"`
 )
 
 (
@@ -32,16 +43,16 @@ NC='\033[0m'
     source $MYPY_VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@v0.780
+        python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
     fi
 
     # Run mypy
     for PY in 2.7 3.5; do
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test/
-        if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/) test_negative/output.expected.$PY; then
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
+        if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated/) test_negative/output.expected.$PY; then
             echo -e "${RED}test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun${NC}"
             for PY in 2.7 3.5; do
-                mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ > test_negative/output.expected.$PY || true
+                mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated/ > test_negative/output.expected.$PY || true
             done
             exit 1
         fi
@@ -53,5 +64,5 @@ NC='\033[0m'
     source $VENV/bin/activate
     python --version
     py.test --version
-    py.test --ignore=test/proto
+    PYTHONPATH=generated py.test --ignore=generated
 )
