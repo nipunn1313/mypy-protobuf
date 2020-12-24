@@ -732,6 +732,11 @@ def wrap_code_generator(func):
         # Create response
         response = plugin_pb2.CodeGeneratorResponse()
 
+        # Declare support for optional proto3 fields
+        response.supported_features |= (  # type: ignore[attr-defined]  # https://github.com/dropbox/mypy-protobuf/issues/158
+            plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL  # type: ignore[attr-defined]
+        )
+
         func(request, response)
 
         # Serialise response message
@@ -760,7 +765,3 @@ def grpc(request, response):
     generate_mypy_grpc_stubs(
         Descriptors(request), response, "quiet" in request.parameter
     )
-
-
-if __name__ == "__main__":
-    main()
