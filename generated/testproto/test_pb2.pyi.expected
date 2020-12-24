@@ -82,7 +82,6 @@ class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWra
     BAR = typing___cast(OuterEnumValue, 2)
 FOO = typing___cast(OuterEnumValue, 1)
 BAR = typing___cast(OuterEnumValue, 2)
-type___OuterEnum = OuterEnum
 
 class Simple1(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -95,7 +94,6 @@ class Simple1(google___protobuf___message___Message):
         INNER2 = typing___cast(Simple1.InnerEnumValue, 2)
     INNER1 = typing___cast(Simple1.InnerEnumValue, 1)
     INNER2 = typing___cast(Simple1.InnerEnumValue, 2)
-    type___InnerEnum = InnerEnum
 
     class InnerMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
