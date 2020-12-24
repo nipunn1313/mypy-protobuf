@@ -530,7 +530,8 @@ class PkgWriter(object):
         result = self._import_message(method.output_type)
         if method.server_streaming:
             result = "{}[{}, None, None]".format(
-                self._import("typing", "Generator"), result,
+                self._import("typing", "Generator"),
+                result,
             )
         return result
 
@@ -548,7 +549,8 @@ class PkgWriter(object):
                 l("request: {},", self._import_message(method.input_type))
                 l("context: {},", self._import("grpc", "ServicerContext"))
             l(
-                ") -> {}: ...", self._output_type(method),
+                ") -> {}: ...",
+                self._output_type(method),
             )
             l("")
 
@@ -564,7 +566,8 @@ class PkgWriter(object):
             with self._indent():
                 l("request: {},", self._import_message(method.input_type))
             l(
-                ") -> {}: ...", self._output_type(method),
+                ") -> {}: ...",
+                self._output_type(method),
             )
             l("")
 
