@@ -32,8 +32,15 @@ else:
     Text = None
 
 
-GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
-HEADER = "# {} by mypy-protobuf.  Do not edit manually!\n".format(GENERATED)
+# So phabricator doesn't think mypy_protobuf.py is generated
+GENERATED = "@ge" + "nerated"
+HEADER = """\"\"\"
+{} by mypy-protobuf.  Do not edit manually!
+isort:skip_file
+\"\"\"
+""".format(
+    GENERATED
+)
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
@@ -389,7 +396,7 @@ class PkgWriter(object):
         #
         # HasField only supports singular. ClearField supports repeated as well
         #
-        # In proto3, HasField only supports message fields
+        # In proto3, HasField only supports message fields and optional fields
         #
         # HasField always supports oneof fields
         hf_fields = [
@@ -401,6 +408,7 @@ class PkgWriter(object):
                 and (
                     self.fd.syntax != "proto3"
                     or f.type == d.FieldDescriptorProto.TYPE_MESSAGE
+                    or f.proto3_optional  # type: ignore[attr-defined] # https://github.com/dropbox/mypy-protobuf/issues/158
                 )
             )
         ]

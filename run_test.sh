@@ -8,6 +8,9 @@ RED="\033[0;31m"
 NC='\033[0m'
 PROTOC=${PROTOC:=protoc}
 
+# Clean out generated/ directory - except for .generated / __init__.py
+find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
+
 (
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
@@ -17,14 +20,15 @@ PROTOC=${PROTOC:=protoc}
     python -m pip install python/ -r requirements.txt
 
     # Generate protos
+    python --version
     $PROTOC --version
     expected="libprotoc 3.13.0"
     if [[ $($PROTOC --version) != $expected ]]; then
         echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
         exit 1
     fi
-    $PROTOC --mypy_out=generated --proto_path=proto/ `find proto/ -name "*.proto"`
-    $PROTOC --python_out=generated --proto_path=proto/ `find proto/testproto -name "*.proto"`
+    $PROTOC --mypy_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/ -name "*.proto"`
+    $PROTOC --python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto -name "*.proto"`
 )
 
 (
