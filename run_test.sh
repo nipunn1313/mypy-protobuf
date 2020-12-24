@@ -33,12 +33,12 @@ NC='\033[0m'
     source $MYPY_VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@v0.780
+        python3 -m pip install git+https://github.com/python/mypy.git@7273e9ab1664b59a74d9bd1d2361bbeb9864b7ab
     fi
 
     # Run mypy
     for PY in 2.7 3.5; do
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test/ generated/
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
         if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated/) test_negative/output.expected.$PY; then
             echo -e "${RED}test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun${NC}"
             for PY in 2.7 3.5; do

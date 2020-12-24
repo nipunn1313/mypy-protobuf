@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
 from __future__ import absolute_import, division, print_function
+import os
 
 import sys
 from collections import defaultdict
@@ -24,15 +25,11 @@ if MYPY:
         Sequence,
         Text,
         Tuple,
-        cast,
     )
     from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 else:
     # Provide minimal mypy identifiers to make code run without typing module present
     Text = None
-
-    def cast(type, value):
-        return value
 
 
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
@@ -314,6 +311,19 @@ class PkgWriter(object):
                             field.name,
                             self.python_type(field),
                         )
+                    l("")
+
+                for ext in desc.extension:
+                    l(
+                        "{}: {}[{}, {}] = ...",
+                        ext.name,
+                        self._import(
+                            "google.protobuf.internal.extension_dict",
+                            "_ExtensionFieldDescriptor",
+                        ),
+                        self._import_message(ext.extendee),
+                        self.python_type(ext),
+                    )
                     l("")
 
                 # Constructor
@@ -611,7 +621,6 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
-        imports.append(u"import sys")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):

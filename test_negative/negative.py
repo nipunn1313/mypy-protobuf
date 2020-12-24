@@ -10,7 +10,15 @@ from typing import (
     Text,
 )
 
-from testproto.test_pb2 import DESCRIPTOR, FOO, Simple1, Simple2
+from testproto.test_extensions2_pb2 import SeparateFileExtension
+from testproto.test_pb2 import (
+    DESCRIPTOR,
+    Extensions1,
+    Extensions2,
+    FOO,
+    Simple1,
+    Simple2,
+)
 from testproto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
 from testproto.dot.com.test_pb2 import TestMessage
 
@@ -67,6 +75,22 @@ a3 = s6.WhichOneof("a_oneof")  # E:2.7 E:3.5
 b3 = s6.WhichOneof("a_oneof")
 s6.HasField(b3)  # allowed
 simple2.HasField(b3)  # E:2.7 E:3.5  - it's a text but not one of the literals
+
+# Proto2 Extensions
+an_int = 5
+an_int = Extensions1.ext  # E:2.7 E:3.5
+_ = s.Extensions[Extensions1.bad]  # E:2.7 E:3.5
+e1 = s.Extensions[Extensions1.ext]
+e1.foo = 4  # E:2.7 E:3.5
+e1 = s.Extensions[Extensions2.foo]  # E:2.7 E:3.5
+_ = s.Extensions["foo"]  # E:2.7 E:3.5
+_ = s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
+_ = SeparateFileExtension.ext in s.Extensions # E:2.7 E:3.5
+del s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
+
+for x in s.Extensions:
+    pass
+x = 4  # E:2.7 E:3.5
 
 # Overload WhichOneof
 c = s6.WhichOneof("a_oneof")
