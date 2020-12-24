@@ -11,7 +11,7 @@ test_negative/negative.py:44: error: Argument 1 to "HasField" of "SimpleProto3" 
 test_negative/negative.py:45: error: Argument 1 to "HasField" of "SimpleProto3" has incompatible type "Literal['outer_enum']"; expected <union: 24 items>
 test_negative/negative.py:46: error: Argument 1 to "HasField" of "SimpleProto3" has incompatible type "Literal['a_repeated_string']"; expected <union: 24 items>
 test_negative/negative.py:49: error: Argument 1 to "ClearField" of "Simple1" has incompatible type "Literal['garbage']"; expected <union: 42 items>
-test_negative/negative.py:52: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal['garbage']"; expected <union: 34 items>
+test_negative/negative.py:52: error: Argument 1 to "ClearField" of "SimpleProto3" has incompatible type "Literal['garbage']"; expected <union: 36 items>
 test_negative/negative.py:55: error: Argument 1 to "WhichOneof" of "Simple1" has incompatible type "Literal['garbage']"; expected "Union[Literal['a_oneof'], Literal[b'a_oneof']]"
 test_negative/negative.py:57: error: Incompatible types in assignment (expression has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['outer_message_in_oneof'], Literal['outer_enum_in_oneof'], Literal['inner_enum_in_oneof']]", variable has type "int")
 test_negative/negative.py:61: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Union[Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['outer_message_in_oneof'], Literal['outer_enum_in_oneof'], Literal['inner_enum_in_oneof']]"; expected "Union[Literal['a_string'], Literal[b'a_string']]"
@@ -31,4 +31,4 @@ test_negative/negative.py:94: error: Argument 1 to "Name" of "_EnumTypeWrapper" 
 test_negative/negative.py:96: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
 test_negative/negative.py:98: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
 test_negative/negative.py:100: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-Found 30 errors in 1 file (checked 3 source files)
+Found 30 errors in 1 file (checked 18 source files)

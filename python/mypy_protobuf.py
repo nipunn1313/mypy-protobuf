@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-)
+from __future__ import absolute_import, division, print_function
 
 import sys
 from collections import defaultdict
@@ -40,7 +36,7 @@ else:
 
 
 GENERATED = "@ge" + "nerated"  # So phabricator doesn't think this file is generated
-HEADER = "# {} by generate_proto_mypy_stubs.py.  Do not edit!\n".format(GENERATED)
+HEADER = "# {} by mypy-protobuf.  Do not edit manually!\n".format(GENERATED)
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
@@ -81,10 +77,7 @@ PYTHON_RESERVED = {
     "yield",
 }
 
-PY2_ONLY_BUILTINS = {
-    "buffer",
-    "unicode",
-}
+PY2_ONLY_BUILTINS = {"buffer", "unicode"}
 
 
 FORWARD_REFERENCE_STRING_LITERAL = True

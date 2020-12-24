@@ -33,10 +33,7 @@ syntax = "proto3";
 package google.protobuf;
 
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
-// NOTE(patrick): the go pkg has been modified to point to dropbox's internal
-// version, which codegens MarshalTo and ProtoSize.
-//option go_package = "github.com/golang/protobuf/ptypes/empty";
-option go_package = "dropbox/proto/google/protobuf";
+option go_package = "github.com/golang/protobuf/ptypes/empty";
 option java_package = "com.google.protobuf";
 option java_outer_classname = "EmptyProto";
 option java_multiple_files = true;
