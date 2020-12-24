@@ -573,7 +573,7 @@ class PkgWriter(object):
         l = self._write_line
         l(
             "from .{} import *",
-            self.fd.name.rsplit('/', 1)[1][:-6].replace("-", "_") + "_pb2",
+            self.fd.name.rsplit("/", 1)[1][:-6].replace("-", "_") + "_pb2",
         )
 
         for service in [s for s in services if s.name not in PYTHON_RESERVED]:
