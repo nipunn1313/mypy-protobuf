@@ -286,7 +286,14 @@ class PkgWriter(object):
                         msg = self.descriptors.messages[field.type_name]
                         if msg.options.map_entry:
                             # map generates a special Entry wrapper message
-                            container = self._import("typing", "MutableMapping")
+                            if is_scalar(msg.field[1]):
+                                container = self._import(
+                                    "google.protobuf.internal.containers", "ScalarMap"
+                                )
+                            else:
+                                container = self._import(
+                                    "google.protobuf.internal.containers", "MessageMap"
+                                )
                             l(
                                 "def {}(self) -> {}[{}, {}]: ...",
                                 field.name,

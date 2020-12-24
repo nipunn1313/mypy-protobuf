@@ -29,7 +29,7 @@ from testproto.test_pb2 import (
     Simple1,
     Simple2,
 )
-from testproto.test3_pb2 import SimpleProto3
+from testproto.test3_pb2 import SimpleProto3, OuterMessage3
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import Any, Optional
@@ -124,8 +124,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 39
-    assert len(errors_35) == 39
+    assert len(errors_27) == 46
+    assert len(errors_35) == 46
 
 
 def test_func():
@@ -221,12 +221,12 @@ def test_has_field_proto3():
         s_untyped.HasField(u"garbage")
     with pytest.raises(
         ValueError,
-        match='Can\'t test non-submessage field "SimpleProto3.a_string" for presence in proto3.',
+        match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_string" for presence in proto3.',
     ):
         s_untyped.HasField(u"a_string")
     with pytest.raises(
         ValueError,
-        match='Can\'t test non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
+        match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
     ):
         s_untyped.HasField("a_outer_enum")
     with pytest.raises(
@@ -339,6 +339,9 @@ def test_extensions_proto2():
     assert isinstance(Extensions2.foo, FieldDescriptor)
     assert isinstance(SeparateFileExtension.ext, FieldDescriptor)
 
+    assert s1.HasExtension(Extensions1.ext) is False
+    s1.ClearExtension(Extensions1.ext)
+
     e1 = s1.Extensions[Extensions1.ext]
     e1.ext1_string = "first extension"
     assert isinstance(e1, Extensions1)
@@ -353,9 +356,13 @@ def test_extensions_proto2():
 
     del s1.Extensions[Extensions2.foo]
 
+    # Using __iter__, x is a FieldDescriptor but the type of the message that
+    # s1.Extensions[x] yields is unknown (it could be any of the extension messages).
+    # Hence, s1.Extensions[x] is typed as Any.
     for x in s1.Extensions:
         assert isinstance(x, FieldDescriptor)
-        y = s1.Extensions[x]  # y should be typed as an AnyMessage
+        assert x.is_extension
+        y = s1.Extensions[x]
         assert y.ext1_string == "first extension"
 
     assert Extensions1.ext in s1.Extensions
@@ -392,3 +399,17 @@ def test_enum_descriptor():
 def test_module_descriptor():
     # type: () -> None
     assert DESCRIPTOR.name == "testproto/test.proto"
+
+
+def test_mapping_type():
+    # type: () -> None
+    s = SimpleProto3()
+    s.map_scalar[5] = "abcd"
+    assert s.map_scalar[5] == "abcd"
+
+    s.map_message[5].a_bool = True
+    assert s.map_message[5] == OuterMessage3(a_bool=True)
+
+    assert s.map_message.get_or_create(6) == OuterMessage3()
+    assert s.map_message[6] == OuterMessage3()
+    assert s.map_message.get_or_create(6) == OuterMessage3()

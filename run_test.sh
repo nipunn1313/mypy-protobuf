@@ -6,6 +6,7 @@ MYPY_VENV=venv_mypy
 
 RED="\033[0;31m"
 NC='\033[0m'
+PROTOC=${PROTOC:=protoc}
 
 (
     # Create virtualenv + Install requirements for mypy-protobuf
@@ -16,9 +17,14 @@ NC='\033[0m'
     python -m pip install python/ -r requirements.txt
 
     # Generate protos
-    protoc --version
-    protoc --mypy_out=generated --proto_path=proto/ `find proto/ -name "*.proto"`
-    protoc --python_out=generated --proto_path=proto/ `find proto/testproto -name "*.proto"`
+    $PROTOC --version
+    expected="libprotoc 3.13.0"
+    if [[ $($PROTOC --version) != $expected ]]; then
+        echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
+        exit 1
+    fi
+    $PROTOC --mypy_out=generated --proto_path=proto/ `find proto/ -name "*.proto"`
+    $PROTOC --python_out=generated --proto_path=proto/ `find proto/testproto -name "*.proto"`
 )
 
 (
@@ -33,7 +39,7 @@ NC='\033[0m'
     source $MYPY_VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@7273e9ab1664b59a74d9bd1d2361bbeb9864b7ab
+        python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
     fi
 
     # Run mypy
@@ -54,5 +60,5 @@ NC='\033[0m'
     source $VENV/bin/activate
     python --version
     py.test --version
-    py.test --ignore=test/proto
+    PYTHONPATH=generated py.test --ignore=generated
 )
