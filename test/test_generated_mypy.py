@@ -34,14 +34,26 @@ from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import (
     Any,
+    NewType,
     Optional,
     Generator,
+    Text,
     Tuple,
 )
 
 MYPY = False
 if MYPY:
     from testproto.test_pb2 import OuterEnumValue
+
+
+UserId = NewType("UserId", int)
+
+
+class Email(Text):
+    def __new__(cls, val):
+        # type: (Text) -> Any
+        assert "@" in val, "Email is not valid"
+        return Text.__new__(cls, val)  # type: ignore
 
 
 def _is_summary(l):
@@ -133,8 +145,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 41
-    assert len(errors_35) == 53
+    assert len(errors_27) == 48
+    assert len(errors_35) == 60
 
 
 def test_func():
@@ -434,3 +446,17 @@ def test_mapping_type():
     assert s.map_message.get_or_create(6) == OuterMessage3()
     assert s.map_message[6] == OuterMessage3()
     assert s.map_message.get_or_create(6) == OuterMessage3()
+
+    s2 = SimpleProto3(
+        map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_bool=True)}
+    )
+
+
+def test_casttype():
+    # type: () -> None
+    s = Simple1()
+    s.user_id = UserId(33)
+    assert s.user_id == 33
+    s.email = Email("abcd@gmail.com")
+    assert s.email == "abcd@gmail.com"
+    s.email_by_uid[UserId(33)] = Email("abcd@gmail.com")

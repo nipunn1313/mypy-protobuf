@@ -34,6 +34,26 @@ To suppress output, you can run
 protoc --python_out=output/location --mypy_out=quiet:output/location
 ```
 
+## Features
+
+Supports generating type wrappers for fields and maps
+
+M.proto
+```
+message M {
+  uint32 user_id = 1 [(mypy_protobuf.casttype)="mymod.UserId"
+  map<uint32, string> email_by_uid = 2 [
+    (mypy_protobuf.keytype)="path/to/mymod.UserId",
+    (mypy_protobuf.valuetype)="path/to/mymod.Email"
+  ];
+}
+```
+mymod.py
+```
+UserId = NewType("UserId", int)
+Email = NewType("Email", Text)
+```
+
 ## GRPC
 
 This plugin provides stubs generation for grpcio generated code.

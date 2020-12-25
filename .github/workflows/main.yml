@@ -73,4 +73,4 @@ jobs:
       - name: Run black
         run: |
           pip3 install black
-          black --check python/ test/
+          black --check python/ test/ --exclude python/proto

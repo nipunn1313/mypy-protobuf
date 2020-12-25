@@ -21,6 +21,7 @@ from testproto.test_pb2 import (
 )
 from testproto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
 from testproto.dot.com.test_pb2 import TestMessage
+from test.test_generated_mypy import Email, UserId
 
 s = Simple1()
 s.a_string = "Hello"
@@ -142,3 +143,14 @@ s7.map_message.get("abcd")  # E:2.7 E:3.5
 map_val = 5
 map_val = s7.map_scalar.get(0)  # E:2.7 E:3.5
 map_val = s7.map_message.get(0)  # E:2.7 E:3.5
+# Incorrect constructor type should error
+s7 = SimpleProto3(map_scalar={"abcd": 5}, map_message={"abcd": "abcd"})  # E:2.7 E:3.5
+
+# Castable types are typed as their cast, not the base type
+s8 = Simple1()
+s8.user_id = 55  # E:2.7 E:3.5
+s8.email = "abcd@gmail.com"  # E:2.7 E:3.5
+s8.email_by_uid[55] = "abcd@gmail.com"  # E:2.7 E:3.5
+s8.email_by_uid[UserId(55)] = "abcd@gmail.com"  # E:2.7 E:3.5
+s8.email_by_uid[55] = Email("abcd@gmail.com")  # E:2.7 E:3.5
+s8 = Simple1(user_id=55, email="abcd@gmail.com", email_by_uid={55: "abcd@gmail.com"})  # E:2.7 E:3.5
