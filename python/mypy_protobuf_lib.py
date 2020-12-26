@@ -101,12 +101,6 @@ def _forward_ref(name):
 # field names.
 
 
-def _mangle_builtin(name):
-    # type: (Text) -> Text
-    """Enum variant `int` might conflict with the int identifier"""
-    return "builtin___{}".format(name)
-
-
 def _mangle_message(name):
     # type: (Text) -> Text
     """Enum variant `Name` might conflict with a message or enum named `Name`, so
@@ -178,7 +172,7 @@ class PkgWriter(object):
             self.py2_builtin_vars.add(name)
         else:
             self.builtin_vars.add(name)
-        return _mangle_builtin(name)
+        return "builtins.{}".format(name)
 
     @contextmanager
     def _indent(self):
@@ -654,31 +648,26 @@ class PkgWriter(object):
 
     def python_type(self, field):
         # type: (d.FieldDescriptorProto) -> Text
-        b_float = self._builtin("float")
-        b_int = self._builtin("int")
-        b_bool = self._builtin("bool")
-        b_bytes = self._builtin("bytes")
-
         casttype = field.options.Extensions[extensions_pb2.casttype]
         if casttype:
             return self._import_casttype(casttype)
 
         mapping = {
-            d.FieldDescriptorProto.TYPE_DOUBLE: lambda: b_float,
-            d.FieldDescriptorProto.TYPE_FLOAT: lambda: b_float,
-            d.FieldDescriptorProto.TYPE_INT64: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_UINT64: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_FIXED64: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_SFIXED64: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_SINT64: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_INT32: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_UINT32: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_FIXED32: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_SFIXED32: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_SINT32: lambda: b_int,
-            d.FieldDescriptorProto.TYPE_BOOL: lambda: b_bool,
+            d.FieldDescriptorProto.TYPE_DOUBLE: lambda: self._builtin("float"),
+            d.FieldDescriptorProto.TYPE_FLOAT: lambda: self._builtin("float"),
+            d.FieldDescriptorProto.TYPE_INT64: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_UINT64: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_FIXED64: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_SFIXED64: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_SINT64: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_INT32: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_UINT32: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_FIXED32: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_SFIXED32: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_SINT32: lambda: self._builtin("int"),
+            d.FieldDescriptorProto.TYPE_BOOL: lambda: self._builtin("bool"),
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
-            d.FieldDescriptorProto.TYPE_BYTES: lambda: b_bytes,
+            d.FieldDescriptorProto.TYPE_BYTES: lambda: self._builtin("bytes"),
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(
                 field.type_name + "Value"
             ),
@@ -696,6 +685,8 @@ class PkgWriter(object):
     def write(self):
         # type: () -> Text
         imports = []
+        if self.builtin_vars or self.py2_builtin_vars:
+            imports.append(u"import builtins")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):
@@ -703,17 +694,7 @@ class PkgWriter(object):
             imports.append(u")\n")
         imports.append("")
 
-        aliases = []
-        for var in sorted(self.builtin_vars):
-            aliases.append(u"{} = {}".format(_mangle_builtin(var), var))
-        if self.py2_builtin_vars:
-            aliases.append(u"if sys.version_info < (3,):")
-            for var in sorted(self.py2_builtin_vars):
-                aliases.append(u"    {} = {}".format(_mangle_builtin(var), var))
-        if aliases:
-            aliases.append("\n")
-
-        return "\n".join(imports + aliases + self.lines)
+        return "\n".join(imports + self.lines)
 
 
 def is_scalar(fd):

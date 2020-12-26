@@ -21,12 +21,6 @@ from typing_extensions import (
 )
 
 
-builtin___bool = bool
-builtin___bytes = bytes
-builtin___float = float
-builtin___int = int
-
-
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
 
 class DummyRequest(google___protobuf___message___Message):
