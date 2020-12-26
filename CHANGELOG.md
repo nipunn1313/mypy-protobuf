@@ -14,6 +14,7 @@ Other Changes
 - Import builtins library rather than mangling builtins
 - Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
 - Avoid importing google.protobuf.message.Message unless it's needed
+- Add support for nomangle parameter for mangle-free output code (in many cases this is good enough and easier to read)
 
 ## 1.24
 
