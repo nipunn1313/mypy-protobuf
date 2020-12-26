@@ -29,7 +29,7 @@ class TestMessage(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        foo : typing___Optional[typing___Text] = None,
+        foo : typing___Optional[typing___Text] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"foo",b"foo"]) -> None: ...
 type___TestMessage = TestMessage

@@ -29,7 +29,7 @@ class lower(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a : typing___Optional[builtins.int] = None,
+        a : typing___Optional[builtins.int] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___lower = lower
@@ -42,7 +42,7 @@ class Upper(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        Lower : typing___Optional[type___lower] = None,
+        Lower : typing___Optional[type___lower] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"Lower",b"Lower"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"Lower",b"Lower"]) -> None: ...
@@ -56,7 +56,7 @@ class lower2(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        upper : typing___Optional[type___Upper] = None,
+        upper : typing___Optional[type___Upper] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"upper",b"upper"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"upper",b"upper"]) -> None: ...
