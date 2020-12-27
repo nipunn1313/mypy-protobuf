@@ -74,7 +74,7 @@ def test_generate_mypy_matches():
     proto_files = glob.glob("proto/testproto/*.proto") + glob.glob(
         "proto/testproto/*/*.proto"
     )
-    assert len(proto_files) == 10  # Just a sanity check that all the files show up
+    assert len(proto_files) == 12  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
