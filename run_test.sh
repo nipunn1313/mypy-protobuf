@@ -7,7 +7,6 @@ MYPY_VENV=venv_mypy
 RED="\033[0;31m"
 NC='\033[0m'
 PROTOC=${PROTOC:=protoc}
-CAN_TEST_GRPC_OUTPUT=`python -c 'import sys;print(sys.version_info.major>=3 and sys.version_info.minor>=6)'`
 
 # Clean out generated/ directory - except for .generated / __init__.py
 find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
@@ -31,7 +30,8 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     $PROTOC --mypy_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/ -name "*.proto"`
     $PROTOC --python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto -name "*.proto"`
 
-    if [[ $CAN_TEST_GRPC_OUTPUT = "True" ]]; then
+    CAN_GENERATE_GRPC_OUTPUT=`python -c 'import sys;print(sys.version_info.major>=3 and sys.version_info.minor>=6)'`
+    if [[ $CAN_GENERATE_GRPC_OUTPUT = 'True' ]]; then
         $PROTOC --mypy_grpc_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto/grpc -name "*.proto"`
     fi
 )
@@ -46,9 +46,10 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
         python3 -m virtualenv $MYPY_VENV
     fi
     source $MYPY_VENV/bin/activate
+    CAN_TEST_GRPC_OUTPUT=`python -c 'import sys;print(sys.version_info.major>=3 and sys.version_info.minor>=6)'`
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 -m pip install setuptools
-        if [[ $CAN_TEST_GRPC_OUTPUT = "True" ]]; then
+        if [[ $CAN_TEST_GRPC_OUTPUT = 'True' ]]; then
             python3 -m pip install grpc-stubs
         fi
         python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
