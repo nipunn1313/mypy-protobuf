@@ -123,16 +123,12 @@ def test_generate_negative_matches():
     errors_27 = set(grab_errors("test_negative/output.expected.2.7"))
     errors_35 = set(grab_errors("test_negative/output.expected.3.5"))
 
-    expected_errors_27 = (
-        set(grab_expectations("test_negative/negative.py", "E:2.7"))
-        |
-        set(grab_expectations("test_negative/negative_2.7.py", "E:2.7"))
-    )
-    expected_errors_35 = (
-        set(grab_expectations("test_negative/negative.py", "E:3.5"))
-        |
-        set(grab_expectations("test_negative/negative_3.5.py", "E:3.5"))
-    )
+    expected_errors_27 = set(
+        grab_expectations("test_negative/negative.py", "E:2.7")
+    ) | set(grab_expectations("test_negative/negative_2.7.py", "E:2.7"))
+    expected_errors_35 = set(
+        grab_expectations("test_negative/negative.py", "E:3.5")
+    ) | set(grab_expectations("test_negative/negative_3.5.py", "E:3.5"))
 
     assert errors_27 == expected_errors_27
     assert errors_35 == expected_errors_35
