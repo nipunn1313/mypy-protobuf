@@ -136,27 +136,3 @@ s7.map_message.get("abcd")  # E:2.7 E:3.5
 map_val = 5
 map_val = s7.map_scalar.get(0)  # E:2.7 E:3.5
 map_val = s7.map_message.get(0)  # E:2.7 E:3.5
-
-if six.PY3:
-    from testproto.grpc.dummy_pb2_grpc import (
-        DummyRequest,
-        DummyReply,
-        DummyServiceServicer,
-        DummyServiceStub,
-    )
-    import grpc
-
-    stub0 = DummyServiceStub()  # E:3.5
-    channel = grpc.insecure_channel("127.0.0.1:8080")
-    stub1 = DummyServiceStub(channel)
-    request = DummyRequest()
-    response1 = stub1.UnaryUnary(request)
-    value = response1.value
-    value2 = response1.not_exists  # E:3.5
-    for result in stub1.UnaryUnary(request):  # E:3.5
-        pass
-    for result in stub1.UnaryStream(request):
-        value = result.value
-        value2 = result.not_exists  # E:3.5
-    response2 = stub1.UnaryStream(request)
-    value = response2.value  # E:3.5

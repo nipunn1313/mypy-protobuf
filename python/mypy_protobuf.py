@@ -525,12 +525,22 @@ class PkgWriter(object):
                 )
                 self.write_methods(service, is_abstract=False)
 
+    def _input_type(self, method):
+        # type: (d.MethodDescriptorProto) -> Text
+        result = self._import_message(method.input_type)
+        if method.client_streaming:
+            result = "{}[{}]".format(
+                self._import("typing", "Iterator"),
+                result,
+            )
+        return result
+
     def _output_type(self, method):
         # type: (d.MethodDescriptorProto) -> Text
         result = self._import_message(method.output_type)
         if method.server_streaming:
-            result = "{}[{}, None, None]".format(
-                self._import("typing", "Generator"),
+            result = "{}[{}]".format(
+                self._import("typing", "Iterator"),
                 result,
             )
         return result
@@ -546,7 +556,7 @@ class PkgWriter(object):
             l("@{}", self._import("abc", "abstractmethod"))
             l("def {}(self,", method.name)
             with self._indent():
-                l("request: {},", self._import_message(method.input_type))
+                l("request: {},", self._input_type(method))
                 l("context: {},", self._import("grpc", "ServicerContext"))
             l(
                 ") -> {}: ...",
@@ -564,7 +574,7 @@ class PkgWriter(object):
         for method in methods:
             l("def {}(self,", method.name)
             with self._indent():
-                l("request: {},", self._import_message(method.input_type))
+                l("request: {},", self._input_type(method))
             l(
                 ") -> {}: ...",
                 self._output_type(method),

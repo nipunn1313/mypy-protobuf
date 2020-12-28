@@ -62,12 +62,11 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     # Run mypy
     for PY in 2.7 3.5; do
         mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY --pretty --show-error-codes python/mypy_protobuf.py test/ generated_$PY/
-        if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated_$PY/) test_negative/output.expected.$PY; then
+        if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY.py generated_$PY/) test_negative/output.expected.$PY; then
             echo -e "${RED}test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun${NC}"
             for PY in 2.7 3.5; do
-                mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated_$PY/ > test_negative/output.expected.$PY || true
+                mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY.py generated_$PY/ > test_negative/output.expected.$PY || true
             done
-            cat test_negative/output.expected.$PY
             exit 1
         fi
     done

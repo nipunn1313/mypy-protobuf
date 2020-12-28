@@ -1,3 +1,25 @@
+test_negative/negative_3.5.py:17: error: Too few arguments for "DummyServiceStub"
+test_negative/negative_3.5.py:24: error: "DummyReply" has no attribute "not_exists"
+test_negative/negative_3.5.py:25: error: "DummyReply" has no attribute "__iter__" (not iterable)
+test_negative/negative_3.5.py:30: error: "DummyReply" has no attribute "not_exists"
+test_negative/negative_3.5.py:32: error: "Iterator[DummyReply]" has no attribute "value"
+test_negative/negative_3.5.py:39: error: Argument 1 to "StreamUnary" of "DummyServiceStub" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"
+test_negative/negative_3.5.py:41: error: "DummyReply" has no attribute "__iter__" (not iterable)
+test_negative/negative_3.5.py:41: error: Argument 1 to "StreamUnary" of "DummyServiceStub" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"
+test_negative/negative_3.5.py:44: error: Argument 1 to "StreamStream" of "DummyServiceStub" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"
+test_negative/negative_3.5.py:48: error: "DummyReply" has no attribute "not_exists"
+test_negative/negative_3.5.py:85: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"
+test_negative/negative_3.5.py:85: note: This violates the Liskov substitution principle
+test_negative/negative_3.5.py:85: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative_3.5.py:85: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"
+test_negative/negative_3.5.py:93: error: Argument 1 of "UnaryStream" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"
+test_negative/negative_3.5.py:93: note: This violates the Liskov substitution principle
+test_negative/negative_3.5.py:93: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative_3.5.py:93: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Iterator[DummyReply]" in supertype "DummyServiceServicer"
+test_negative/negative_3.5.py:102: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "Iterator[DummyRequest]"
+test_negative/negative_3.5.py:102: note: This violates the Liskov substitution principle
+test_negative/negative_3.5.py:102: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative_3.5.py:102: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"
 test_negative/negative.py:28: error: "Simple1" has no attribute "SerializeToStringg"
 test_negative/negative.py:31: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "ByteString"
 test_negative/negative.py:34: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "bytes"; expected "Simple1"
@@ -54,8 +76,4 @@ test_negative/negative.py:134: note:     def get(self, key: int) -> Optional[Out
 test_negative/negative.py:134: note:     <1 more non-matching overload not shown>
 test_negative/negative.py:137: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")
 test_negative/negative.py:138: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")
-test_negative/negative.py:149: error: Too few arguments for "DummyServiceStub"
-test_negative/negative.py:155: error: "DummyReply" has no attribute "not_exists"
-test_negative/negative.py:156: error: "DummyReply" has no attribute "__iter__" (not iterable)
-test_negative/negative.py:162: error: "Generator[DummyReply, None, None]" has no attribute "value"
-Found 50 errors in 1 file (checked 25 source files)
+Found 62 errors in 2 files (checked 25 source files)

@@ -32,7 +32,12 @@ from testproto.test_pb2 import (
 from testproto.test3_pb2 import SimpleProto3, OuterMessage3
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
-from typing import Any, Optional
+from typing import (
+    Any,
+    Optional,
+    Generator,
+    Tuple,
+)
 
 MYPY = False
 if MYPY:
@@ -100,24 +105,33 @@ def test_generate_mypy_matches():
 def test_generate_negative_matches():
     # type: () -> None
     """Confirm that the test_negative expected file matches an error for each line"""
-    test_negative_lines = open("test_negative/negative.py").readlines()
-    # Grab the line number of the failures
-    errors_27 = set(
-        int(l.split(":")[1])
-        for l in open("test_negative/output.expected.2.7").readlines()
-        if not _is_summary(l)
-    )
-    errors_35 = set(
-        int(l.split(":")[1])
-        for l in open("test_negative/output.expected.3.5").readlines()
-        if not _is_summary(l)
-    )
 
-    expected_errors_27 = set(
-        idx + 1 for idx, line in enumerate(test_negative_lines) if "E:2.7" in line
+    def grab_errors(filename):
+        # type: (str) -> Generator[Tuple[str, int], None, None]
+        for line in open(filename).readlines():
+            if _is_summary(line):
+                continue
+            parts = line.split(":")
+            yield parts[0], int(parts[1])
+
+    def grab_expectations(filename, marker):
+        # type: (str, str) -> Generator[Tuple[str, int], None, None]
+        for idx, line in enumerate(open(filename).readlines()):
+            if marker in line:
+                yield filename, idx + 1
+
+    errors_27 = set(grab_errors("test_negative/output.expected.2.7"))
+    errors_35 = set(grab_errors("test_negative/output.expected.3.5"))
+
+    expected_errors_27 = (
+        set(grab_expectations("test_negative/negative.py", "E:2.7"))
+        |
+        set(grab_expectations("test_negative/negative_2.7.py", "E:2.7"))
     )
-    expected_errors_35 = set(
-        idx + 1 for idx, line in enumerate(test_negative_lines) if "E:3.5" in line
+    expected_errors_35 = (
+        set(grab_expectations("test_negative/negative.py", "E:3.5"))
+        |
+        set(grab_expectations("test_negative/negative_3.5.py", "E:3.5"))
     )
 
     assert errors_27 == expected_errors_27
@@ -125,7 +139,7 @@ def test_generate_negative_matches():
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
     assert len(errors_27) == 46
-    assert len(errors_35) == 46
+    assert len(errors_35) == 58
 
 
 def test_func():
