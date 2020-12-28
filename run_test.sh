@@ -1,17 +1,23 @@
 #!/bin/bash -ex
 
-PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
-VENV=venv_$PY_VERSION
-MYPY_VENV=venv_mypy
-
 RED="\033[0;31m"
 NC='\033[0m'
 PROTOC=${PROTOC:=protoc}
+
+PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.8.6}
+PY_VER_MYPY=${PY_VER_MYPY:=3.8.6}
+PY_VER_MYPY_TARGET=${PY_VER_MYPY_TARGET:=3.5}
+PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.6}
 
 # Clean out generated/ directory - except for .generated / __init__.py
 find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
 
 (
+    eval "$(pyenv init -)"
+    pyenv shell $PY_VER_MYPY_PROTOBUF
+    PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
+    VENV=venv_$PY_VERSION
+
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
         rm -rf $VENV
@@ -23,7 +29,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     # Generate protos
     python --version
     $PROTOC --version
-    expected="libprotoc 3.13.0"
+    expected="libprotoc 3.14.0"
     if [[ $($PROTOC --version) != $expected ]]; then
         echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
         exit 1
@@ -34,17 +40,21 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 )
 
 (
-    # Run mypy (always under python3)
+    # Run mypy
+    eval "$(pyenv init -)"
+    pyenv shell $PY_VER_MYPY
+    PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
+    VENV=venv_$PY_VERSION
 
     # Create virtualenv
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
-        rm -rf $MYPY_VENV
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+        rm -rf $VENV
         python3 --version
         python3 -m pip --version
-        python3 -m virtualenv $MYPY_VENV
+        python3 -m virtualenv $VENV
     fi
-    source $MYPY_VENV/bin/activate
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
+    source $VENV/bin/activate
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
         python3 -m pip install setuptools
         python3 -m pip install --ignore-requires-python grpc-stubs
         python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
@@ -60,16 +70,12 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     find generated_2.7 -name '*grpc.pyi.expected' -exec rm {} \;
 
     # Run mypy
-    for PY in 2.7 3.5; do
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY --pretty --show-error-codes python/mypy_protobuf.py test/ generated_$PY/
-        if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY.py generated_$PY/) test_negative/output.expected.$PY; then
-            echo -e "${RED}test_negative/output.expected.$PY didnt match. Copying over for you. Now rerun${NC}"
-            for PY in 2.7 3.5; do
-                mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY.py generated_$PY/ > test_negative/output.expected.$PY || true
-            done
-            exit 1
-        fi
-    done
+    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
+    if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated_$PY_VER_MYPY_TARGET/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
+        echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated_$PY_VER_MYPY_TARGET/ > test_negative/output.expected.$PY_VER_MYPY_TARGET || true
+        exit 1
+    fi
 
     rm -rf generated_3.5
     rm -rf generated_2.7
@@ -77,7 +83,17 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 
 (
     # Run unit tests. These tests generate .expected files
+    eval "$(pyenv init -)"
+    pyenv shell $PY_VER_UNIT_TESTS
+    PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
+    VENV=venv_$PY_VERSION
+
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+        python -m virtualenv $VENV
+    fi
     source $VENV/bin/activate
+    python -m pip install -r requirements.txt
+
     python --version
     py.test --version
     PYTHONPATH=generated py.test --ignore=generated

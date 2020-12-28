@@ -1,40 +1,74 @@
 name: CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# Run on git push, PR, or manually from the Actions tab
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   run_test:
-    name: Test on python ${{ matrix.python-version }}
+    name: ${{ matrix.py-ver-mypy-protobuf }} / ${{matrix.py-ver-mypy-target}} / ${{matrix.py-ver-unit-tests}} protoc/mypytarget/unittests py versions
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
+        # Running mypy-protobuf itself
+        # py-ver-mypy-protobuf: []
+        # --python-version=X target passed into mypy
+        # py-ver-mypy-target: []
+        # Run unit tests - validating that correct typechecking usages
+        # of the google.protobuf library in various python versions
+        # also run at runtime
+        # py-ver-unit-tests: []
+
+        # Explicitly list out each part of the matrix we're using, rather
+        # than automatically multiplying the set in together, so we don't
+        # over-test combinations unnecessarily.
+        include:
+          # Include 3.5, 2.7 for the mypy-target
+          - py-ver-mypy-protobuf: 3.8.6
+            py-ver-mypy-target: 3.5
+            py-ver-unit-tests: 3.8.6
+          - py-ver-mypy-protobuf: 3.8.6
+            py-ver-mypy-target: 2.7
+            py-ver-unit-tests: 3.8.6
+
+          # Include py 2.7, 3.6 - 3.8 for mypy-protobuf runtime
+          - py-ver-mypy-protobuf: 3.6.12
+            py-ver-mypy-target: 3.5
+            py-ver-unit-tests: 3.8.6
+          - py-ver-mypy-protobuf: 3.7.9
+            py-ver-mypy-target: 3.5
+            py-ver-unit-tests: 3.8.6
+          - py-ver-mypy-protobuf: 2.7.18
+            py-ver-mypy-target: 3.5
+            py-ver-unit-tests: 3.8.6
+
+          # Include python runtime of google.protobuf in 2.7
+          - py-ver-mypy-protobuf: 3.8.6
+            py-ver-mypy-target: 3.5
+            py-ver-unit-tests: 2.7.18
     steps:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
-          version: '3.13.0'
+          version: '3.14.0'
       - uses: actions/checkout@v2
-      - name: Set up python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - name: Install pyenv
+        uses: gabrielfalcao/pyenv-action@v7
         with:
-          python-version: ${{ matrix.python-version }}
+          # Ideally - we could specify only the versions we need, but blocked
+          # on https://github.com/gabrielfalcao/pyenv-action/issues/135
+          # versions: ${{matrix.py-ver-mypy-protobuf}}, ${{matrix.py-ver-unit-tests}}, 3.8.6
+          versions: 3.7.9, 3.6.12, 2.7.18
+          default: 3.8.6
+          command: python -m pip install virtualenv
       - name: Run Tests (./run_test.sh)
-        run: |
-          python --version
-          python -m pip install virtualenv
-          python3 -m pip install virtualenv
-          ./run_test.sh
+        env:
+          PY_VER_MYPY_PROTOBUF: ${{matrix.py-ver-mypy-protobuf}}
+          PY_VER_MYPY_TARGET: ${{matrix.py-ver-mypy-target}}
+          PY_VER_UNIT_TESTS: ${{matrix.py-ver-unit-tests}}
+        run: ./run_test.sh
 
   black:
-    name: Check formatting with black
+    name: Black formatting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
