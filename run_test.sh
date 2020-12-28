@@ -74,6 +74,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
             for PY in 2.7 3.5; do
                 mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated_$PY/ > test_negative/output.expected.$PY || true
             done
+            cat test_negative/output.expected.$PY
             exit 1
         fi
     done
