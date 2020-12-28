@@ -54,4 +54,8 @@ test_negative/negative.py:134: note:     def get(self, key: int) -> Optional[Out
 test_negative/negative.py:134: note:     <1 more non-matching overload not shown>
 test_negative/negative.py:137: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")
 test_negative/negative.py:138: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")
-Found 46 errors in 1 file (checked 25 source files)
+test_negative/negative.py:149: error: Too few arguments for "DummyServiceStub"
+test_negative/negative.py:155: error: "DummyReply" has no attribute "not_exists"
+test_negative/negative.py:156: error: "DummyReply" has no attribute "__iter__" (not iterable)
+test_negative/negative.py:162: error: "Generator[DummyReply, None, None]" has no attribute "value"
+Found 50 errors in 1 file (checked 25 source files)
