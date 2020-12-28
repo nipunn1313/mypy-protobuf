@@ -36,7 +36,9 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     fi
     $PROTOC --mypy_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/ -name "*.proto"`
     $PROTOC --python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto -name "*.proto"`
-    $PROTOC --mypy_grpc_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto/grpc -name "*.proto"`
+    if [ $PY_VER_MYPY_TARGET = "3.5" ]; then
+        $PROTOC --mypy_grpc_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto/grpc -name "*.proto"`
+    fi
 )
 
 (
@@ -60,25 +62,13 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
         python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
     fi
 
-    # preparing isolated folder for testing mypy per python version
-    rm -rf generated_3.5
-    cp -R generated generated_3.5
-
-    rm -rf generated_2.7
-    cp -R generated generated_2.7
-    find generated_2.7 -name '*grpc.pyi' -exec rm {} \;
-    find generated_2.7 -name '*grpc.pyi.expected' -exec rm {} \;
-
     # Run mypy
-    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated_$PY_VER_MYPY_TARGET/
-    if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated_$PY_VER_MYPY_TARGET/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
+    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
+    if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated_$PY_VER_MYPY_TARGET/ > test_negative/output.expected.$PY_VER_MYPY_TARGET || true
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated/ > test_negative/output.expected.$PY_VER_MYPY_TARGET || true
         exit 1
     fi
-
-    rm -rf generated_3.5
-    rm -rf generated_2.7
 )
 
 (
