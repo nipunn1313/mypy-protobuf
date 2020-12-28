@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Support for `grpcio` stubs generation
+
 ## 1.24
 
 - Bump required mypy version to 0.800

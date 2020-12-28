@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+import "testproto/test.proto";
+import "google/protobuf/empty.proto";
+
+package test.grpc;
+
+service SimpleService {
+  rpc UnaryUnary (google.protobuf.Empty) returns (test.Simple1) {}
+  rpc UnaryStream (test.Simple1) returns (google.protobuf.Empty) {}
+}

@@ -2,6 +2,9 @@ protobuf==3.14.0
 six
 pytest == 4.6.11
 typing ; python_version<"3.5"
+grpcio==1.33.2 ; python_version>="3.0"
+grpcio-tools ; python_version>="3.0"
+grpc-stubs ; python_version>="3.0"
 
 # For python2. See https://github.com/pypa/virtualenv/issues/1493
 setuptools<45.0.0 ; python_version < '3.0'

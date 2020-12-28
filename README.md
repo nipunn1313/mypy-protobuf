@@ -34,6 +34,21 @@ To suppress output, you can run
 protoc --python_out=output/location --mypy_out=quiet:output/location
 ```
 
+## GRPC
+
+This plugin provides stubs generation for grpcio generated code.
+```
+protoc \
+    --python_out=output/location \
+    --mypy_out=output/location \
+    --grpc_out=output/location \
+    --mypy_grpc_out=output/location
+```
+
+Note that generated code for grpc will work only together with code for python and locations should be the same.
+If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs 
+
+
 ## Go Implementation
 There is a go implementation of the plugin in `go/src/protoc-gen-mypy`.
 The import sort order can be customized to split between stdlib and project protos
@@ -90,6 +105,7 @@ black python/ test/
 - [@EPronovost](https://github.com/EPronovost)
 - [@chrislawlor](https://github.com/chrislawlor)
 - [@henribru](https://github.com/henribru)
+- [@Evgenus](https://github.com/Evgenus)
 
 Licence etc.
 ------------

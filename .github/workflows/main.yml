@@ -22,29 +22,26 @@ jobs:
         # than automatically multiplying the set in together, so we don't
         # over-test combinations unnecessarily.
         include:
-          # Include 3.5, 2.7 for the mypy-target
-          - py-ver-mypy-protobuf: 3.8.6
-            py-ver-mypy-target: 3.5
-            py-ver-unit-tests: 3.8.6
+          # Include a full 2.7 run
+          - py-ver-mypy-protobuf: 2.7.18
+            py-ver-mypy-target: 2.7
+            py-ver-unit-tests: 2.7.18
+
+          # Include a python3 compile with mypy targeting 2.7 code
           - py-ver-mypy-protobuf: 3.8.6
             py-ver-mypy-target: 2.7
-            py-ver-unit-tests: 3.8.6
+            py-ver-unit-tests: 2.7.18
 
-          # Include py 2.7, 3.6 - 3.8 for mypy-protobuf runtime
+          # Include py 3.6 - 3.8 for mypy-protobuf runtime
           - py-ver-mypy-protobuf: 3.6.12
             py-ver-mypy-target: 3.5
             py-ver-unit-tests: 3.8.6
           - py-ver-mypy-protobuf: 3.7.9
             py-ver-mypy-target: 3.5
             py-ver-unit-tests: 3.8.6
-          - py-ver-mypy-protobuf: 2.7.18
-            py-ver-mypy-target: 3.5
-            py-ver-unit-tests: 3.8.6
-
-          # Include python runtime of google.protobuf in 2.7
           - py-ver-mypy-protobuf: 3.8.6
             py-ver-mypy-target: 3.5
-            py-ver-unit-tests: 2.7.18
+            py-ver-unit-tests: 3.8.6
     steps:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
