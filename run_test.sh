@@ -70,7 +70,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     find generated_2.7 -name '*grpc.pyi.expected' -exec rm {} \;
 
     # Run mypy
-    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
+    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated_$PY_VER_MYPY_TARGET/
     if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated_$PY_VER_MYPY_TARGET/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
         mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated_$PY_VER_MYPY_TARGET/ > test_negative/output.expected.$PY_VER_MYPY_TARGET || true
