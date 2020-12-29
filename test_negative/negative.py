@@ -85,7 +85,7 @@ e1.foo = 4  # E:2.7 E:3.5
 e1 = s.Extensions[Extensions2.foo]  # E:2.7 E:3.5
 _ = s.Extensions["foo"]  # E:2.7 E:3.5
 _ = s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
-_ = SeparateFileExtension.ext in s.Extensions # E:2.7 E:3.5
+_ = SeparateFileExtension.ext in s.Extensions  # E:2.7 E:3.5
 del s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
 s.HasExtension(SeparateFileExtension.ext)  # E:2.7 E:3.5
 simple2.ClearExtension(Extensions1.ext)  # E:2.7 E:3.5

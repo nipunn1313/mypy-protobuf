@@ -590,6 +590,15 @@ class PkgWriter(object):
         )
 
         for service in [s for s in services if s.name not in PYTHON_RESERVED]:
+            # The stub client
+            l("class {}Stub:", service.name)
+            with self._indent():
+                l(
+                    "def __init__(self, channel: {}) -> None: ...",
+                    self._import("grpc", "Channel"),
+                )
+                self.write_grpc_stub_methods(service)
+            l("")
             # The service definition interface
             l(
                 "class {}Servicer(metaclass={}):",
@@ -599,14 +608,12 @@ class PkgWriter(object):
             with self._indent():
                 self.write_grpc_methods(service)
             l("")
-            # The stub client
-            l("class {}Stub:", service.name)
-            with self._indent():
-                l(
-                    "def __init__(self, channel: {}) -> None: ...",
-                    self._import("grpc", "Channel"),
-                )
-                self.write_grpc_stub_methods(service)
+            l(
+                "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}) -> None: ...",
+                service.name,
+                service.name,
+                self._import("grpc", "Server"),
+            )
             l("")
 
     def python_type(self, field):

@@ -16,6 +16,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     eval "$(pyenv init -)"
     pyenv shell $PY_VER_MYPY_PROTOBUF
     PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
+
     VENV=venv_$PY_VERSION
 
     # Create virtualenv + Install requirements for mypy-protobuf
@@ -38,6 +39,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     $PROTOC --python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto -name "*.proto"`
     if [ $PY_VER_MYPY_TARGET = "3.5" ]; then
         $PROTOC --mypy_grpc_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto/grpc -name "*.proto"`
+        python -m grpc_tools.protoc --grpc_python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional  `find proto/testproto/grpc -name "*.proto"`
     fi
 )
 
@@ -76,6 +78,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     eval "$(pyenv init -)"
     pyenv shell $PY_VER_UNIT_TESTS
     PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
+    PY_MAJOR_VERSION=`python -c 'import sys; print(sys.version_info.major)'`
     VENV=venv_$PY_VERSION
 
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
@@ -86,5 +89,9 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 
     python --version
     py.test --version
-    PYTHONPATH=generated py.test --ignore=generated
+    if [ $PY_MAJOR_VERSION = "2" ]; then
+        PYTHONPATH=generated py.test -svvv --ignore=generated --ignore-glob=test/*grpc*
+    else
+        PYTHONPATH=generated py.test -svvv --ignore=generated
+    fi
 )
