@@ -95,8 +95,8 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     python --version
     py.test --version
 
-    # if we can generate grpc bindings (only in py3) and we can run them (also only in py3)
-    if [[ "$PY_VER_UNIT_TESTS" =~ ^3.* ]] && [[ "$PY_VER_MYPY_PROTOBUF" =~ ^3.* ]]; then
+    # if we can generate grpc bindings (only in py3 and only for 3.5 target) and we can run them (also only in py3)
+    if [[ "$PY_VER_MYPY_PROTOBUF" =~ ^3.* ]] && [[ $PY_VER_MYPY_TARGET = 3.5 ]] && [[ "$PY_VER_UNIT_TESTS" =~ ^3.* ]]; then
         PYTHONPATH=generated py.test -svvv --ignore=generated
     else
         PYTHONPATH=generated py.test -svvv --ignore=generated --ignore-glob=test/*grpc*
