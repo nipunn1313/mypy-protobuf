@@ -40,7 +40,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     if [[ $PY_VER_MYPY_TARGET = 3.5 ]]; then
         $PROTOC --mypy_grpc_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto/grpc -name "*.proto"`
         if [[ "$PY_VER_MYPY_PROTOBUF" =~ ^3.* ]]; then
-            python -m grpc_tools.protoc --grpc_python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional  `find proto/testproto/grpc -name "*.proto"`
+            python -m grpc_tools.protoc --grpc_python_out=generated --proto_path=proto/ --experimental_allow_proto3_optional `find proto/testproto/grpc -name "*.proto"`
         fi
     fi
 )
@@ -67,7 +67,11 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     fi
 
     # Run mypy
-    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
+    if [[ $PY_VER_MYPY_TARGET = 3.5 ]]; then
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py `find test \( -name "*.py" \)` generated/
+    else
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py `find test \( -name "*.py" -and -not -name "*grpc*.py" \)` generated/
+    fi
     if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
         mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/negative.py test_negative/negative_$PY_VER_MYPY_TARGET.py generated/ > test_negative/output.expected.$PY_VER_MYPY_TARGET || true
@@ -90,6 +94,8 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 
     python --version
     py.test --version
+
+    # if we can generate grpc bindings (only in py3) and we can run them (also only in py3)
     if [[ "$PY_VER_UNIT_TESTS" =~ ^3.* ]] && [[ "$PY_VER_MYPY_PROTOBUF" =~ ^3.* ]]; then
         PYTHONPATH=generated py.test -svvv --ignore=generated
     else
