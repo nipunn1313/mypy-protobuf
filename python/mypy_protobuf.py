@@ -750,54 +750,52 @@ class Descriptors(object):
             _add_enums(fd.enum_type, start_prefix, fd)
 
 
-def wrap_code_generator(func):
-    # type: (Callable[[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None]) -> Callable[[], None]
-    @wraps(func)
-    def wrapper():
-        # type: () -> None
-        # Read request message from stdin
-        if six.PY3:
-            data = sys.stdin.buffer.read()
-        else:
-            data = sys.stdin.read()
+@contextmanager
+def code_generation():
+    # type: () -> Generator[Tuple[Any, Any], None, None]
+    # Read request message from stdin
+    if six.PY3:
+        data = sys.stdin.buffer.read()
+    else:
+        data = sys.stdin.read()
 
-        # Parse request
-        request = plugin_pb2.CodeGeneratorRequest()
-        request.ParseFromString(data)
+    # Parse request
+    request = plugin_pb2.CodeGeneratorRequest()
+    request.ParseFromString(data)
 
-        # Create response
-        response = plugin_pb2.CodeGeneratorResponse()
+    # Create response
+    response = plugin_pb2.CodeGeneratorResponse()
 
-        # Declare support for optional proto3 fields
-        response.supported_features |= (  # type: ignore[attr-defined]  # https://github.com/dropbox/mypy-protobuf/issues/158
-            plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL  # type: ignore[attr-defined]
+    # Declare support for optional proto3 fields
+    response.supported_features |= (  # type: ignore[attr-defined]  # https://github.com/dropbox/mypy-protobuf/issues/158
+        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL  # type: ignore[attr-defined]
+    )
+
+    yield request, response
+
+    # Serialise response message
+    output = response.SerializeToString()
+
+    # Write to stdout
+    if six.PY3:
+        sys.stdout.buffer.write(output)
+    else:
+        sys.stdout.write(output)
+
+
+def main():
+    # type: () -> None
+    # Generate mypy
+    with code_generation() as (request, response):
+        generate_mypy_stubs(
+            Descriptors(request), response, "quiet" in request.parameter
         )
 
-        func(request, response)
 
-        # Serialise response message
-        output = response.SerializeToString()
-
-        # Write to stdout
-        if six.PY3:
-            sys.stdout.buffer.write(output)
-        else:
-            sys.stdout.write(output)
-
-    return wrapper
-
-
-@wrap_code_generator
-def main(request, response):
-    # type: (plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse) -> None
-    # Generate mypy
-    generate_mypy_stubs(Descriptors(request), response, "quiet" in request.parameter)
-
-
-@wrap_code_generator
-def grpc(request, response):
-    # type: (plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse) -> None
+def grpc():
+    # type: () -> None
     # Generate grpc mypy
-    generate_mypy_grpc_stubs(
-        Descriptors(request), response, "quiet" in request.parameter
-    )
+    with code_generation() as (request, response):
+        generate_mypy_grpc_stubs(
+            Descriptors(request), response, "quiet" in request.parameter
+        )
