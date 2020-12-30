@@ -61,7 +61,7 @@ from testproto.nopackage_pb2 import (
 )
 
 from testproto.test3_pb2 import (
-    OuterEnumValue as testproto___test3_pb2___OuterEnumValue,
+    OuterEnum as testproto___test3_pb2___OuterEnum,
 )
 
 from typing import (
@@ -71,7 +71,6 @@ from typing import (
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    cast as typing___cast,
 )
 
 from typing_extensions import (
@@ -81,27 +80,27 @@ from typing_extensions import (
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
 
-OuterEnumValue = typing___NewType('OuterEnumValue', builtins.int)
-type___OuterEnumValue = OuterEnumValue
-OuterEnum: _OuterEnum
-class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[OuterEnumValue]):
+type___OuterEnum = OuterEnum
+class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[OuterEnum.V], builtins.type):
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-    FOO = typing___cast(OuterEnumValue, 1)
-    BAR = typing___cast(OuterEnumValue, 2)
-FOO = typing___cast(OuterEnumValue, 1)
-BAR = typing___cast(OuterEnumValue, 2)
+    FOO = OuterEnum.V(1)
+    BAR = OuterEnum.V(2)
+class OuterEnum(metaclass=_OuterEnum):
+    V = typing___NewType('V', builtins.int)
+FOO = OuterEnum.V(1)
+BAR = OuterEnum.V(2)
 
 class Simple1(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    InnerEnumValue = typing___NewType('InnerEnumValue', builtins.int)
-    type___InnerEnumValue = InnerEnumValue
-    InnerEnum: _InnerEnum
-    class _InnerEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[Simple1.InnerEnumValue]):
+    type___InnerEnum = InnerEnum
+    class _InnerEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[InnerEnum.V], builtins.type):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-        INNER1 = typing___cast(Simple1.InnerEnumValue, 1)
-        INNER2 = typing___cast(Simple1.InnerEnumValue, 2)
-    INNER1 = typing___cast(Simple1.InnerEnumValue, 1)
-    INNER2 = typing___cast(Simple1.InnerEnumValue, 2)
+        INNER1 = Simple1.InnerEnum.V(1)
+        INNER2 = Simple1.InnerEnum.V(2)
+    class InnerEnum(metaclass=_InnerEnum):
+        V = typing___NewType('V', builtins.int)
+    INNER1 = Simple1.InnerEnum.V(1)
+    INNER2 = Simple1.InnerEnum.V(2)
 
     class InnerMessage(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -128,15 +127,15 @@ class Simple1(google___protobuf___message___Message):
     a_repeated_string: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text] = ...
     a_boolean: builtins.bool = ...
     a_uint32: builtins.int = ...
-    a_enum: type___OuterEnumValue = ...
-    a_external_enum: testproto___test3_pb2___OuterEnumValue = ...
-    inner_enum: type___Simple1.InnerEnumValue = ...
-    rep_inner_enum: google___protobuf___internal___containers___RepeatedScalarFieldContainer[type___Simple1.InnerEnumValue] = ...
-    nested_enum: testproto___nested___nested_pb2___AnotherNested.NestedEnumValue = ...
+    a_enum: type___OuterEnum.V = ...
+    a_external_enum: testproto___test3_pb2___OuterEnum.V = ...
+    inner_enum: type___Simple1.InnerEnum.V = ...
+    rep_inner_enum: google___protobuf___internal___containers___RepeatedScalarFieldContainer[type___Simple1.InnerEnum.V] = ...
+    nested_enum: testproto___nested___nested_pb2___AnotherNested.NestedEnum.V = ...
     a_oneof_1: typing___Text = ...
     a_oneof_2: typing___Text = ...
-    outer_enum_in_oneof: type___OuterEnumValue = ...
-    inner_enum_in_oneof: type___Simple1.InnerEnumValue = ...
+    outer_enum_in_oneof: type___OuterEnum.V = ...
+    inner_enum_in_oneof: type___Simple1.InnerEnum.V = ...
     user_id: test___test_generated_mypy___UserId = ...
     email: test___test_generated_mypy___Email = ...
 
@@ -170,22 +169,22 @@ class Simple1(google___protobuf___message___Message):
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = ...,
         a_boolean : typing___Optional[builtins.bool] = ...,
         a_uint32 : typing___Optional[builtins.int] = ...,
-        a_enum : typing___Optional[type___OuterEnumValue] = ...,
-        a_external_enum : typing___Optional[testproto___test3_pb2___OuterEnumValue] = ...,
+        a_enum : typing___Optional[type___OuterEnum.V] = ...,
+        a_external_enum : typing___Optional[testproto___test3_pb2___OuterEnum.V] = ...,
         a_inner : typing___Optional[testproto___inner___inner_pb2___Inner] = ...,
         a_nested : typing___Optional[testproto___nested___nested_pb2___Nested] = ...,
-        inner_enum : typing___Optional[type___Simple1.InnerEnumValue] = ...,
-        rep_inner_enum : typing___Optional[typing___Iterable[type___Simple1.InnerEnumValue]] = ...,
+        inner_enum : typing___Optional[type___Simple1.InnerEnum.V] = ...,
+        rep_inner_enum : typing___Optional[typing___Iterable[type___Simple1.InnerEnum.V]] = ...,
         inner_message : typing___Optional[type___Simple1.InnerMessage] = ...,
         rep_inner_message : typing___Optional[typing___Iterable[type___Simple1.InnerMessage]] = ...,
         no_package : typing___Optional[testproto___nopackage_pb2___NoPackage] = ...,
-        nested_enum : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedEnumValue] = ...,
+        nested_enum : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedEnum.V] = ...,
         nested_message : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedMessage] = ...,
         a_oneof_1 : typing___Optional[typing___Text] = ...,
         a_oneof_2 : typing___Optional[typing___Text] = ...,
         outer_message_in_oneof : typing___Optional[type___Simple2] = ...,
-        outer_enum_in_oneof : typing___Optional[type___OuterEnumValue] = ...,
-        inner_enum_in_oneof : typing___Optional[type___Simple1.InnerEnumValue] = ...,
+        outer_enum_in_oneof : typing___Optional[type___OuterEnum.V] = ...,
+        inner_enum_in_oneof : typing___Optional[type___Simple1.InnerEnum.V] = ...,
         user_id : typing___Optional[test___test_generated_mypy___UserId] = ...,
         email : typing___Optional[test___test_generated_mypy___Email] = ...,
         email_by_uid : typing___Optional[typing___Mapping[test___test_generated_mypy___UserId, test___test_generated_mypy___Email]] = ...,

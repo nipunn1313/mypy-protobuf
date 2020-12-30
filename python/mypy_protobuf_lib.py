@@ -188,17 +188,16 @@ class PkgWriter(object):
         else:
             self.lines.append(self.indent + line.format(*args))
 
-    def write_enum_values(self, enum, enum_full_name):
+    def write_enum_values(self, enum, value_type):
         # type: (d.EnumDescriptorProto, Text) -> None
         for val in enum.value:
             if val.name in PYTHON_RESERVED:
                 continue
 
             self._write_line(
-                "{} = {}({}, {})",
+                "{} = {}({})",
                 val.name,
-                self._import("typing", "cast"),
-                enum_full_name,
+                value_type,
                 val.number,
             )
 
@@ -215,34 +214,32 @@ class PkgWriter(object):
         # type: (Iterable[d.EnumDescriptorProto], Text) -> None
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            enum_value_type = enum.name + "Value"
+            l("{} = {}", _mangle_message(enum.name), enum.name)
             l(
-                "{} = {}('{}', {})",
-                enum_value_type,
-                self._import("typing", "NewType"),
-                enum_value_type,
-                self._builtin("int"),
-            )
-            l("{} = {}", _mangle_message(enum_value_type), enum_value_type)
-            enum_value_full_type = prefix + enum_value_type
-
-            l("{}: {}", enum.name, "_" + enum.name)
-            l(
-                "class {}({}[{}]):",
+                "class {}({}[{}], {}):",
                 "_" + enum.name,
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
                 ),
-                enum_value_full_type,
+                enum.name + ".V",
+                self._builtin("type"),
             )
             with self._indent():
                 l(
                     "DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "EnumDescriptor"),
                 )
-                self.write_enum_values(enum, enum_value_full_type)
+                self.write_enum_values(enum, prefix + enum.name + ".V")
 
-            self.write_enum_values(enum, enum_value_full_type)
+            l("class {}(metaclass={}):", enum.name, "_" + enum.name)
+            with self._indent():
+                l(
+                    "V = {}('V', {})",
+                    self._import("typing", "NewType"),
+                    self._builtin("int"),
+                )
+
+            self.write_enum_values(enum, prefix + enum.name + ".V")
             l("")
 
     def write_messages(self, messages, prefix):
@@ -669,7 +666,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
             d.FieldDescriptorProto.TYPE_BYTES: lambda: self._builtin("bytes"),
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(
-                field.type_name + "Value"
+                field.type_name + ".V"
             ),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(
                 field.type_name
@@ -754,7 +751,7 @@ class Descriptors(object):
             # type: (RepeatedCompositeFieldContainer[d.EnumDescriptorProto], Text, d.FileDescriptorProto) -> None
             for enum in enums:
                 self.message_to_fd[prefix + enum.name] = _fd
-                self.message_to_fd[prefix + enum.name + "Value"] = _fd
+                self.message_to_fd[prefix + enum.name + ".V"] = _fd
 
         def _add_messages(messages, prefix, _fd):
             # type: (RepeatedCompositeFieldContainer[d.DescriptorProto], Text, d.FileDescriptorProto) -> None

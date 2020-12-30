@@ -41,10 +41,6 @@ from typing import (
     Tuple,
 )
 
-MYPY = False
-if MYPY:
-    from testproto.test_pb2 import OuterEnumValue
-
 
 UserId = NewType("UserId", int)
 
@@ -184,9 +180,9 @@ def test_enum():
     assert OuterEnum.items() == [("FOO", 1), ("BAR", 2)]
 
     # Make sure we can assure typing with a couple of techniques
-    e2 = OuterEnum.Value("BAR")  # type: test_pb2.OuterEnumValue
+    e2 = OuterEnum.Value("BAR")  # type: test_pb2.OuterEnum.V
     assert OuterEnum.Name(e2) == "BAR"
-    e3 = OuterEnum.Value("BAR")  # type: OuterEnumValue
+    e3 = OuterEnum.Value("BAR")  # type: OuterEnum.V
     assert OuterEnum.Name(e3) == "BAR"
     e4 = OuterEnum.Value("BAR")  # type: int
     assert OuterEnum.Name(e2) == "BAR"
