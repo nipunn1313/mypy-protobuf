@@ -15,6 +15,7 @@ Other Changes
 - Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
 - Avoid importing google.protobuf.message.Message unless it's needed
 - Add support for nomangle parameter for mangle-free output code (in many cases this is good enough and easier to read)
+- Add support for `import public` proto imports - by reexporting in generated code
 
 ## 1.24
 
