@@ -7,10 +7,6 @@ from google.protobuf.descriptor import (
     FileDescriptor as google___protobuf___descriptor___FileDescriptor,
 )
 
-from google.protobuf.message import (
-    Message as google___protobuf___message___Message,
-)
-
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
 

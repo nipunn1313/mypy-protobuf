@@ -13,6 +13,7 @@ Other Changes
 - Add support for mypy-proto extensions `mypy_protobuf.casttype`, `mypy_protobuf.keytype`, and `mypy_protobuf.valuetype`
 - Import builtins library rather than mangling builtins
 - Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
+- Avoid importing google.protobuf.message.Message unless it's needed
 
 ## 1.24
 
