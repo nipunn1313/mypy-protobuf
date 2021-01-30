@@ -83,12 +83,15 @@ _ = s.Extensions[Extensions1.bad]  # E:2.7 E:3.5
 e1 = s.Extensions[Extensions1.ext]
 e1.foo = 4  # E:2.7 E:3.5
 e1 = s.Extensions[Extensions2.foo]  # E:2.7 E:3.5
+# The following 5 extension lines will error once we undo some compat
+# changes to typeshed a few months after the 1.24 release
+# See https://github.com/python/typeshed/pull/4833
 _ = s.Extensions["foo"]  # E:2.7 E:3.5
-_ = s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
-_ = SeparateFileExtension.ext in s.Extensions # E:2.7 E:3.5
-del s.Extensions[SeparateFileExtension.ext]  # E:2.7 E:3.5
-s.HasExtension(SeparateFileExtension.ext)  # E:2.7 E:3.5
-simple2.ClearExtension(Extensions1.ext)  # E:2.7 E:3.5
+_ = s.Extensions[SeparateFileExtension.ext]
+_ = SeparateFileExtension.ext in s.Extensions
+del s.Extensions[SeparateFileExtension.ext]
+s.HasExtension(SeparateFileExtension.ext)
+simple2.ClearExtension(Extensions1.ext)
 
 
 for x in s.Extensions:
