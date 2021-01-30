@@ -104,12 +104,12 @@ def test_generate_negative_matches():
     # Grab the line number of the failures
     errors_27 = set(
         int(l.split(":")[1])
-        for l in open("test_negative/output.expected.2.7").readlines()
+        for l in open("test_negative/output.expected.2.7.txt").readlines()
         if not _is_summary(l)
     )
     errors_35 = set(
         int(l.split(":")[1])
-        for l in open("test_negative/output.expected.3.5").readlines()
+        for l in open("test_negative/output.expected.3.5.txt").readlines()
         if not _is_summary(l)
     )
 

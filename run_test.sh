@@ -59,12 +59,12 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     # Run mypy
     mypy --version
     mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
-    if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/ generated/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
-        echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
+    if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/ generated/) test_negative/output.expected.$PY_VER_MYPY_TARGET.txt; then
+        echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET.txt didnt match. Copying over for you. Now rerun${NC}"
 
         # Copy over all the py targets for convenience for the developer - so they don't have to run it many times
         for PY in 2.7 3.5; do
-            mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated/ > test_negative/output.expected.$PY || true
+            mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated/ > test_negative/output.expected.$PY.txt || true
         done
         exit 1
     fi

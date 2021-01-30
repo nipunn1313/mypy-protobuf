@@ -26,30 +26,30 @@ test_negative/negative.py:81: error: Incompatible types in assignment (expressio
 test_negative/negative.py:82: error: "Type[Extensions1]" has no attribute "bad"
 test_negative/negative.py:84: error: "Extensions1" has no attribute "foo"
 test_negative/negative.py:85: error: Incompatible types in assignment (expression has type "Extensions2", variable has type "Extensions1")
-test_negative/negative.py:89: error: No overload variant of "__getitem__" of "_ExtensionDict" matches argument type "str"
-test_negative/negative.py:89: note: Possible overload variants:
-test_negative/negative.py:89: note:     def [_ExtenderMessageT <: Message] __getitem__(self, _ExtensionFieldDescriptor[Simple1, _ExtenderMessageT]) -> _ExtenderMessageT
-test_negative/negative.py:89: note:     def __getitem__(self, FieldDescriptor) -> Any
-test_negative/negative.py:99: error: Incompatible types in assignment (expression has type "int", variable has type "_ExtensionFieldDescriptor[Simple1, Any]")
-test_negative/negative.py:103: error: Incompatible types in assignment (expression has type "Union[Literal['b_oneof_1'], Literal['b_oneof_2']]", variable has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['outer_message_in_oneof'], Literal['outer_enum_in_oneof'], Literal['inner_enum_in_oneof']]")
-test_negative/negative.py:106: error: "Descriptor" has no attribute "Garbage"
+test_negative/negative.py:90: error: No overload variant of "__getitem__" of "_ExtensionDict" matches argument type "str"
+test_negative/negative.py:90: note: Possible overload variants:
+test_negative/negative.py:90: note:     def [_ExtenderMessageT <: Message] __getitem__(self, _ExtensionFieldDescriptor[Simple1, _ExtenderMessageT]) -> _ExtenderMessageT
+test_negative/negative.py:90: note:     def __getitem__(self, FieldDescriptor) -> Any
+test_negative/negative.py:100: error: Incompatible types in assignment (expression has type "int", variable has type "_ExtensionFieldDescriptor[Simple1, Any]")
+test_negative/negative.py:104: error: Incompatible types in assignment (expression has type "Union[Literal['b_oneof_1'], Literal['b_oneof_2']]", variable has type "Union[Literal['a_oneof_1'], Literal['a_oneof_2'], Literal['outer_message_in_oneof'], Literal['outer_enum_in_oneof'], Literal['inner_enum_in_oneof']]")
 test_negative/negative.py:107: error: "Descriptor" has no attribute "Garbage"
-test_negative/negative.py:110: error: "EnumDescriptor" has no attribute "Garbage"
-test_negative/negative.py:113: error: "FileDescriptor" has no attribute "Garbage"
-test_negative/negative.py:120: error: "OuterEnumValue" has no attribute "FOO"
-test_negative/negative.py:124: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "int"; expected "OuterEnumValue"
-test_negative/negative.py:126: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-test_negative/negative.py:128: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-test_negative/negative.py:130: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
-test_negative/negative.py:134: error: "ScalarMap[int, str]" has no attribute "get_or_create"
-test_negative/negative.py:136: error: No overload variant of "get" of "Mapping" matches argument type "str"
-test_negative/negative.py:136: note: Possible overload variant:
-test_negative/negative.py:136: note:     def get(self, key: int) -> Optional[str]
-test_negative/negative.py:136: note:     <1 more non-matching overload not shown>
+test_negative/negative.py:108: error: "Descriptor" has no attribute "Garbage"
+test_negative/negative.py:111: error: "EnumDescriptor" has no attribute "Garbage"
+test_negative/negative.py:114: error: "FileDescriptor" has no attribute "Garbage"
+test_negative/negative.py:121: error: "OuterEnumValue" has no attribute "FOO"
+test_negative/negative.py:125: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "int"; expected "OuterEnumValue"
+test_negative/negative.py:127: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:129: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:131: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "InnerEnumValue"; expected "OuterEnumValue"
+test_negative/negative.py:135: error: "ScalarMap[int, str]" has no attribute "get_or_create"
 test_negative/negative.py:137: error: No overload variant of "get" of "Mapping" matches argument type "str"
 test_negative/negative.py:137: note: Possible overload variant:
-test_negative/negative.py:137: note:     def get(self, key: int) -> Optional[OuterMessage3]
+test_negative/negative.py:137: note:     def get(self, key: int) -> Optional[str]
 test_negative/negative.py:137: note:     <1 more non-matching overload not shown>
-test_negative/negative.py:140: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")
-test_negative/negative.py:141: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")
+test_negative/negative.py:138: error: No overload variant of "get" of "Mapping" matches argument type "str"
+test_negative/negative.py:138: note: Possible overload variant:
+test_negative/negative.py:138: note:     def get(self, key: int) -> Optional[OuterMessage3]
+test_negative/negative.py:138: note:     <1 more non-matching overload not shown>
+test_negative/negative.py:141: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")
+test_negative/negative.py:142: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")
 Found 41 errors in 1 file (checked 20 source files)
