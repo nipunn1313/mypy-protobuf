@@ -1,7 +1,6 @@
 ## Upcoming
 
-NOTE: Need to wait for a mypy release and update `run_test.sh` to the release
-before releasing 1.24
+## 1.24
 
 - Bump required mypy version to 0.800
 - Bump required protobuf version to 3.14 (pi!!)
