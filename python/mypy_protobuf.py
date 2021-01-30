@@ -556,7 +556,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(
                 field.type_name
             ),
-        }  # type: Dict[d.FieldDescriptorProto.Type, Callable[[], Text]]
+        }  # type: Dict[d.FieldDescriptorProto.TypeValue, Callable[[], Text]]
 
         assert field.type in mapping, "Unrecognized type: " + repr(field.type)
         return mapping[field.type]()

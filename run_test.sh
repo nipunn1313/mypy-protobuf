@@ -53,14 +53,19 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     source $VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install git+https://github.com/python/mypy.git@985a20d87eb3a516ff4457041a77026b4c6bd784
+        python3 -m pip install mypy==0.800
     fi
 
     # Run mypy
+    mypy --version
     mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes python/mypy_protobuf.py test/ generated/
     if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/ generated/) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET python/mypy_protobuf.py test_negative/ generated/ > test_negative/output.expected.$PY_VER_MYPY_TARGET || true
+
+        # Copy over all the py targets for convenience for the developer - so they don't have to run it many times
+        for PY in 2.7 3.5; do
+            mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY python/mypy_protobuf.py test_negative/ generated/ > test_negative/output.expected.$PY || true
+        done
         exit 1
     fi
 )
