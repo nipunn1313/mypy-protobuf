@@ -48,21 +48,35 @@ jobs:
         with:
           version: '3.14.0'
       - uses: actions/checkout@v2
-      - name: Install pyenv
-        uses: gabrielfalcao/pyenv-action@v7
+      - name: Cache pyenv
+        uses: actions/cache@v2
         with:
-          # Ideally - we could specify only the versions we need, but blocked
-          # on https://github.com/gabrielfalcao/pyenv-action/issues/135
-          # versions: ${{matrix.py-ver-mypy-protobuf}}, ${{matrix.py-ver-unit-tests}}, 3.8.6
-          versions: 3.7.9, 3.6.12, 2.7.18
-          default: 3.8.6
-          command: python -m pip install virtualenv
+          path: ~/.pyenv
+          key: pyenv
+      - name: Install pyenv
+        run: |
+          if [ ! -e ~/.pyenv ]; then
+            curl https://pyenv.run | bash
+
+            export PATH="$HOME/.pyenv/bin:$PATH"
+            eval "$(pyenv init -)"
+            eval "$(pyenv virtualenv-init -)"
+            for PY in 2.7.18 3.6.12 3.7.9 3.8.6; do
+              pyenv install --skip-existing $PY
+              pyenv shell $PY
+              python -m pip install virtualenv
+            done
+          fi
       - name: Run Tests (./run_test.sh)
         env:
           PY_VER_MYPY_PROTOBUF: ${{matrix.py-ver-mypy-protobuf}}
           PY_VER_MYPY_TARGET: ${{matrix.py-ver-mypy-target}}
           PY_VER_UNIT_TESTS: ${{matrix.py-ver-unit-tests}}
-        run: ./run_test.sh
+        run: |
+          export PATH="$HOME/.pyenv/bin:$PATH"
+          eval "$(pyenv init -)"
+          eval "$(pyenv virtualenv-init -)"
+          ./run_test.sh
 
   black:
     name: Black formatting
