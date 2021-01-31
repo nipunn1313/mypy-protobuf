@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package mypy;
+package mypy_protobuf;
 
 import "google/protobuf/descriptor.proto";
 

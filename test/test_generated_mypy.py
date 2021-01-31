@@ -76,12 +76,9 @@ def compare_pyi_to_expected(output_path):
 
 def test_generate_mypy_matches():
     # type: () -> None
-    proto_files = (
-        glob.glob("proto/testproto/*.proto")
-        + glob.glob("proto/testproto/*/*.proto")
-        + glob.glob("proto/google/protobuf/*.proto")
-    )
-    assert len(proto_files) == 13  # Just a sanity check that all the files show up
+    # Once we're on python3, we can simplify this to glob.glob("proto/**/*.proto, recursive=True)
+    proto_files = glob.glob("proto/**/*.proto") + glob.glob("proto/*/*/*.proto")
+    assert len(proto_files) == 14  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
