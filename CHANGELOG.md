@@ -6,6 +6,7 @@
 - Rename extensions proto from `mypy/mypy.proto` to `mypy_protobuf/extensions.proto`
 - Support message fields named `self` - by renaming the constructor's `self` to `self_`
 - Add support for mypy-proto extensions `mypy_protobuf.casttype`, `mypy_protobuf.keytype`, and `mypy_protobuf.valuetype`
+- Import builtins library rather than mangling builtins
 
 ## 1.24
 
