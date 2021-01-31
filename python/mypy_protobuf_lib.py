@@ -111,10 +111,11 @@ def _mangle_message(name):
 class PkgWriter(object):
     """Writes a single pyi file"""
 
-    def __init__(self, fd, descriptors):
-        # type: (d.FileDescriptorProto, Descriptors) -> None
+    def __init__(self, fd, descriptors, nomangle):
+        # type: (d.FileDescriptorProto, Descriptors, bool) -> None
         self.fd = fd
         self.descriptors = descriptors
+        self.nomangle = nomangle
         self.lines = []  # type: List[Text]
         self.indent = ""
 
@@ -130,7 +131,10 @@ class PkgWriter(object):
         eg. self._import("typing", "Optional") -> "Optional"
         """
         imp = path.replace("/", ".")
-        mangled_name = imp.replace(".", "___") + "___" + name
+        if self.nomangle:
+            mangled_name = name
+        else:
+            mangled_name = imp.replace(".", "___") + "___" + name
         self.imports[imp].add((name, mangled_name))
         return mangled_name
 
@@ -687,7 +691,10 @@ class PkgWriter(object):
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
             for (name, mangled_name) in sorted(items):
-                imports.append(u"    {} as {},".format(name, mangled_name))
+                if name == mangled_name:
+                    imports.append(u"    {},".format(name))
+                else:
+                    imports.append(u"    {} as {},".format(name, mangled_name))
             imports.append(u")\n")
         imports.append("")
 
@@ -702,10 +709,10 @@ def is_scalar(fd):
     )
 
 
-def generate_mypy_stubs(descriptors, response, quiet):
-    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
+def generate_mypy_stubs(descriptors, response, quiet, nomangle):
+    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool, bool) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
-        pkg_writer = PkgWriter(fd, descriptors)
+        pkg_writer = PkgWriter(fd, descriptors, nomangle)
         pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type)
         pkg_writer.write_messages(fd.message_type, "")
@@ -722,10 +729,10 @@ def generate_mypy_stubs(descriptors, response, quiet):
             print("Writing mypy to", output.name, file=sys.stderr)
 
 
-def generate_mypy_grpc_stubs(descriptors, response, quiet):
-    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool) -> None
+def generate_mypy_grpc_stubs(descriptors, response, quiet, nomangle):
+    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool, bool) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
-        pkg_writer = PkgWriter(fd, descriptors)
+        pkg_writer = PkgWriter(fd, descriptors, nomangle)
         pkg_writer.write_grpc_services(fd.service)
 
         assert name == fd.name
@@ -806,7 +813,10 @@ def main():
     # Generate mypy
     with code_generation() as (request, response):
         generate_mypy_stubs(
-            Descriptors(request), response, "quiet" in request.parameter
+            Descriptors(request),
+            response,
+            "quiet" in request.parameter,
+            "nomangle" in request.parameter,
         )
 
 
@@ -815,7 +825,10 @@ def grpc():
     # Generate grpc mypy
     with code_generation() as (request, response):
         generate_mypy_grpc_stubs(
-            Descriptors(request), response, "quiet" in request.parameter
+            Descriptors(request),
+            response,
+            "quiet" in request.parameter,
+            "nomangle" in request.parameter,
         )
 
 
