@@ -11,6 +11,7 @@ from functools import wraps
 import google.protobuf.descriptor_pb2 as d
 import six
 from google.protobuf.compiler import plugin_pb2 as plugin_pb2
+from google.protobuf.internal.well_known_types import WKTBASES
 
 MYPY = False
 if MYPY:
@@ -257,7 +258,21 @@ class PkgWriter(object):
         for desc in [m for m in messages if m.name not in PYTHON_RESERVED]:
             self.locals.add(desc.name)
             qualified_name = prefix + desc.name
-            l("class {}({}):", desc.name, message_class)
+
+            # Reproduce some hardcoded logic from the protobuf implementation - where
+            # some specific "well_known_types" generated protos to have additional
+            # base classes
+            addl_base = u""
+            if self.fd.package + "." + desc.name in WKTBASES:
+                # chop off the .proto - and import the well known type
+                # eg `from google.protobuf.duration import Duration`
+                well_known_type = WKTBASES[self.fd.package + "." + desc.name]
+                addl_base = ", " + self._import(
+                    "google.protobuf.internal.well_known_types",
+                    well_known_type.__name__,
+                )
+
+            l("class {}({}{}):", desc.name, message_class, addl_base)
             with self._indent():
                 l(
                     "DESCRIPTOR: {} = ...",

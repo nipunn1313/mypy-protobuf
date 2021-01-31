@@ -112,5 +112,5 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     python --version
     py.test --version
     if [[ $PY_VER_UNIT_TESTS =~ ^2.* ]]; then IGNORE="--ignore=test/test_grpc_usage.py"; else IGNORE=""; fi
-    PYTHONPATH=generated py.test --ignore=generated $IGNORE
+    PYTHONPATH=generated py.test --ignore=generated $IGNORE -v
 )
