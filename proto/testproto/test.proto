@@ -2,6 +2,7 @@ syntax = "proto2";
 
 package test;
 
+import "mypy_protobuf/extensions.proto";
 import "testproto/inner/inner.proto";
 import "testproto/nested/nested.proto";
 import "testproto/nopackage.proto";
@@ -45,6 +46,13 @@ message Simple1 {
       OuterEnum outer_enum_in_oneof = 19;
       InnerEnum inner_enum_in_oneof = 20;
   }
+
+  optional uint32 user_id = 21 [(mypy_protobuf.casttype)="test/test_generated_mypy.UserId"];
+  optional string email = 22 [(mypy_protobuf.casttype)="test/test_generated_mypy.Email"];
+  map<uint32, string> email_by_uid = 23 [
+    (mypy_protobuf.keytype)="test/test_generated_mypy.UserId",
+    (mypy_protobuf.valuetype)="test/test_generated_mypy.Email"
+  ];
 
   extensions 1000 to max;
 }

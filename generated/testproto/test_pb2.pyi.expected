@@ -20,6 +20,7 @@ from google.protobuf.descriptor import (
 from google.protobuf.internal.containers import (
     RepeatedCompositeFieldContainer as google___protobuf___internal___containers___RepeatedCompositeFieldContainer,
     RepeatedScalarFieldContainer as google___protobuf___internal___containers___RepeatedScalarFieldContainer,
+    ScalarMap as google___protobuf___internal___containers___ScalarMap,
 )
 
 from google.protobuf.internal.enum_type_wrapper import (
@@ -38,6 +39,11 @@ from google.protobuf.service import (
     RpcChannel as google___protobuf___service___RpcChannel,
     RpcController as google___protobuf___service___RpcController,
     Service as google___protobuf___service___Service,
+)
+
+from test.test_generated_mypy import (
+    Email as test___test_generated_mypy___Email,
+    UserId as test___test_generated_mypy___UserId,
 )
 
 from testproto.inner.inner_pb2 import (
@@ -60,6 +66,7 @@ from testproto.test3_pb2 import (
 from typing import (
     Callable as typing___Callable,
     Iterable as typing___Iterable,
+    Mapping as typing___Mapping,
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
@@ -108,6 +115,20 @@ class Simple1(google___protobuf___message___Message):
             ) -> None: ...
     type___InnerMessage = InnerMessage
 
+    class EmailByUidEntry(google___protobuf___message___Message):
+        DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+        key: builtin___int = ...
+        value: typing___Text = ...
+
+        def __init__(self,
+            *,
+            key : typing___Optional[builtin___int] = None,
+            value : typing___Optional[typing___Text] = None,
+            ) -> None: ...
+        def HasField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> builtin___bool: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> None: ...
+    type___EmailByUidEntry = EmailByUidEntry
+
     a_string: typing___Text = ...
     a_repeated_string: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text] = ...
     a_boolean: builtin___bool = ...
@@ -121,6 +142,8 @@ class Simple1(google___protobuf___message___Message):
     a_oneof_2: typing___Text = ...
     outer_enum_in_oneof: type___OuterEnumValue = ...
     inner_enum_in_oneof: type___Simple1.InnerEnumValue = ...
+    user_id: test___test_generated_mypy___UserId = ...
+    email: test___test_generated_mypy___Email = ...
 
     @property
     def a_inner(self) -> testproto___inner___inner_pb2___Inner: ...
@@ -142,6 +165,9 @@ class Simple1(google___protobuf___message___Message):
 
     @property
     def outer_message_in_oneof(self) -> type___Simple2: ...
+
+    @property
+    def email_by_uid(self) -> google___protobuf___internal___containers___ScalarMap[test___test_generated_mypy___UserId, test___test_generated_mypy___Email]: ...
 
     def __init__(self,
         *,
@@ -165,9 +191,12 @@ class Simple1(google___protobuf___message___Message):
         outer_message_in_oneof : typing___Optional[type___Simple2] = None,
         outer_enum_in_oneof : typing___Optional[type___OuterEnumValue] = None,
         inner_enum_in_oneof : typing___Optional[type___Simple1.InnerEnumValue] = None,
+        user_id : typing___Optional[test___test_generated_mypy___UserId] = None,
+        email : typing___Optional[test___test_generated_mypy___Email] = None,
+        email_by_uid : typing___Optional[typing___Mapping[test___test_generated_mypy___UserId, test___test_generated_mypy___Email]] = None,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message_in_oneof",b"outer_message_in_oneof",u"rep_inner_enum",b"rep_inner_enum",u"rep_inner_message",b"rep_inner_message"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"email",b"email",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message_in_oneof",b"outer_message_in_oneof",u"user_id",b"user_id"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"email",b"email",u"email_by_uid",b"email_by_uid",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message_in_oneof",b"outer_message_in_oneof",u"rep_inner_enum",b"rep_inner_enum",u"rep_inner_message",b"rep_inner_message",u"user_id",b"user_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions___Literal[u"a_oneof",b"a_oneof"]) -> typing_extensions___Literal["a_oneof_1","a_oneof_2","outer_message_in_oneof","outer_enum_in_oneof","inner_enum_in_oneof"]: ...
 type___Simple1 = Simple1
 

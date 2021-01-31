@@ -12,6 +12,7 @@ import google.protobuf.descriptor_pb2 as d
 import six
 from google.protobuf.compiler import plugin_pb2 as plugin_pb2
 from google.protobuf.internal.well_known_types import WKTBASES
+from proto.mypy_protobuf import extensions_pb2
 
 MYPY = False
 if MYPY:
@@ -316,12 +317,15 @@ class PkgWriter(object):
                                 container = self._import(
                                     "google.protobuf.internal.containers", "MessageMap"
                                 )
+                            ktype, vtype = self._map_key_value_types(
+                                field, msg.field[0], msg.field[1]
+                            )
                             l(
                                 "def {}(self) -> {}[{}, {}]: ...",
                                 field.name,
                                 container,
-                                self.python_type(msg.field[0]),
-                                self.python_type(msg.field[1]),
+                                ktype,
+                                vtype,
                             )
                         else:
                             container = self._import(
@@ -372,13 +376,16 @@ class PkgWriter(object):
                                 ].options.map_entry
                             ):
                                 msg = self.descriptors.messages[field.type_name]
+                                ktype, vtype = self._map_key_value_types(
+                                    field, msg.field[0], msg.field[1]
+                                )
                                 l(
                                     "{} : {}[{}[{}, {}]] = None,",
                                     field.name,
                                     self._import("typing", "Optional"),
                                     self._import("typing", "Mapping"),
-                                    self.python_type(msg.field[0]),
-                                    self.python_type(msg.field[1]),
+                                    ktype,
+                                    vtype,
                                 )
                             else:
                                 l(
@@ -541,6 +548,31 @@ class PkgWriter(object):
                 )
                 self.write_methods(service, is_abstract=False)
 
+    def _import_casttype(self, casttype):
+        # type: (Text) -> Text
+        split = casttype.split(".")
+        assert (
+            len(split) == 2
+        ), "mypy_protobuf.[casttype,keytype,valuetype] is expected to be of format path/to/file.TypeInFile"
+        pkg = split[0].replace("/", ".")
+        return self._import(pkg, split[1])
+
+    def _map_key_value_types(self, map_field, key_field, value_field):
+        # type: (d.FieldDescriptorProto, d.FieldDescriptorProto, d.FieldDescriptorProto) -> Tuple[Text, Text]
+        key_casttype = map_field.options.Extensions[extensions_pb2.keytype]
+        ktype = (
+            self._import_casttype(key_casttype)
+            if key_casttype
+            else self.python_type(key_field)
+        )
+        value_casttype = map_field.options.Extensions[extensions_pb2.valuetype]
+        vtype = (
+            self._import_casttype(value_casttype)
+            if value_casttype
+            else self.python_type(value_field)
+        )
+        return ktype, vtype
+
     def _input_type(self, method):
         # type: (d.MethodDescriptorProto) -> Text
         result = self._import_message(method.input_type)
@@ -626,6 +658,10 @@ class PkgWriter(object):
         b_int = self._builtin("int")
         b_bool = self._builtin("bool")
         b_bytes = self._builtin("bytes")
+
+        casttype = field.options.Extensions[extensions_pb2.casttype]
+        if casttype:
+            return self._import_casttype(casttype)
 
         mapping = {
             d.FieldDescriptorProto.TYPE_DOUBLE: lambda: b_float,

@@ -9,6 +9,7 @@ __pycache__/
 *.pyc
 /generated/**/*.py
 /generated/**/*.pyi
+!/generated/**/__init__.py
 .pytest_cache
 /python/build/
 /python/dist/
