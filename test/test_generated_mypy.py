@@ -19,6 +19,7 @@ import six
 from google.protobuf.descriptor import FieldDescriptor
 
 import testproto.test_pb2 as test_pb2
+from testproto.reexport_pb2 import SimpleProto3 as ReexportedSimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
 from testproto.test_pb2 import (
     DESCRIPTOR,
@@ -86,7 +87,7 @@ def test_generate_mypy_matches():
     # type: () -> None
     # Once we're on python3, we can simplify this to glob.glob("proto/**/*.proto, recursive=True)
     proto_files = glob.glob("proto/**/*.proto") + glob.glob("proto/*/*/*.proto")
-    assert len(proto_files) == 14  # Just a sanity check that all the files show up
+    assert len(proto_files) == 15  # Just a sanity check that all the files show up
 
     failures = []
     for fn in proto_files:
@@ -141,8 +142,8 @@ def test_generate_negative_matches():
     assert errors_35 == expected_errors_35
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 48
-    assert len(errors_35) == 60
+    assert len(errors_27) == 49
+    assert len(errors_35) == 61
 
 
 def test_func():
@@ -418,6 +419,11 @@ def test_message_descriptor_proto3():
     # type: () -> None
     assert SimpleProto3().DESCRIPTOR.full_name == "test3.SimpleProto3"
     assert SimpleProto3.DESCRIPTOR.full_name == "test3.SimpleProto3"
+
+
+def test_reexport_identical():
+    # type: () -> None
+    assert SimpleProto3 is ReexportedSimpleProto3
 
 
 def test_enum_descriptor():

@@ -23,6 +23,7 @@ if MYPY:
         Generator,
         Iterable,
         List,
+        Optional,
         Set,
         Sequence,
         Text,
@@ -120,7 +121,10 @@ class PkgWriter(object):
         self.indent = ""
 
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
-        self.imports = defaultdict(set)  # type: Dict[Text, Set[Tuple[Text, Text]]]
+        # if {z} is None, then it shortens to `from {x} import {y}`
+        self.imports = defaultdict(
+            set
+        )  # type: Dict[Text, Set[Tuple[Text, Optional[Text]]]]
         self.locals = set()  # type: Set[Text]
         self.builtin_vars = set()  # type: Set[Text]
         self.py2_builtin_vars = set()  # type: Set[Text]
@@ -132,11 +136,12 @@ class PkgWriter(object):
         """
         imp = path.replace("/", ".")
         if self.nomangle:
-            mangled_name = name
+            self.imports[imp].add((name, None))
+            return name
         else:
             mangled_name = imp.replace(".", "___") + "___" + name
-        self.imports[imp].add((name, mangled_name))
-        return mangled_name
+            self.imports[imp].add((name, mangled_name))
+            return mangled_name
 
     def _import_message(self, name):
         # type: (Text) -> Text
@@ -408,14 +413,9 @@ class PkgWriter(object):
         # type: (d.DescriptorProto) -> None
         """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
         l = self._write_line
-        # HasField accepts bytes/unicode in PY2, but only unicode in PY3
-        # ClearField accepts bytes/unicode in PY2 and unicode in PY3
-        # WhichOneof accepts bytes/unicode in both PY2 and PY3
-        #
+        # HasField, ClearField, WhichOneof accepts both bytes/unicode
         # HasField only supports singular. ClearField supports repeated as well
-        #
         # In proto3, HasField only supports message fields and optional fields
-        #
         # HasField always supports oneof fields
         hf_fields = [
             f.name
@@ -685,16 +685,34 @@ class PkgWriter(object):
 
     def write(self):
         # type: () -> Text
+        for reexport_idx in self.fd.public_dependency:
+            reexport_file = self.fd.dependency[reexport_idx]
+            reexport_fd = self.descriptors.to_generate[reexport_file]
+            reexport_imp = (
+                reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
+            )
+            names = (
+                [m.name for m in reexport_fd.message_type]
+                + [m.name for m in reexport_fd.enum_type]
+                + [m.name for m in reexport_fd.extension]
+            )
+            if reexport_fd.options.py_generic_services:
+                names.extend(m.name for m in reexport_fd.service)
+
+            if names:
+                # n,n to force a reexport (from x import y as y)
+                self.imports[reexport_imp].update((n, n) for n in names)
+
         imports = []
         if self.builtin_vars or self.py2_builtin_vars:
             imports.append(u"import builtins")
         for pkg, items in sorted(six.iteritems(self.imports)):
             imports.append(u"from {} import (".format(pkg))
-            for (name, mangled_name) in sorted(items):
-                if name == mangled_name:
+            for (name, reexport_name) in sorted(items):
+                if reexport_name is None:
                     imports.append(u"    {},".format(name))
                 else:
-                    imports.append(u"    {} as {},".format(name, mangled_name))
+                    imports.append(u"    {} as {},".format(name, reexport_name))
             imports.append(u")\n")
         imports.append("")
 
@@ -713,7 +731,8 @@ def generate_mypy_stubs(descriptors, response, quiet, nomangle):
     # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool, bool) -> None
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors, nomangle)
-        pkg_writer.write_module_attributes()
+        if not fd.public_dependency:
+            pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type)
         pkg_writer.write_messages(fd.message_type, "")
         pkg_writer.write_extensions(fd.extension)
