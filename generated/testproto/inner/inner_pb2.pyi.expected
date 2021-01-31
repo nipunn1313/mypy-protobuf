@@ -12,7 +12,7 @@ from google.protobuf.message import (
 )
 
 from testproto.test3_pb2 import (
-    OuterEnumValue as testproto___test3_pb2___OuterEnumValue,
+    OuterEnum as testproto___test3_pb2___OuterEnum,
 )
 
 from typing import (
@@ -28,11 +28,11 @@ DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
 
 class Inner(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    a: testproto___test3_pb2___OuterEnumValue = ...
+    a: testproto___test3_pb2___OuterEnum.V = ...
 
     def __init__(self,
         *,
-        a : typing___Optional[testproto___test3_pb2___OuterEnumValue] = ...,
+        a : typing___Optional[testproto___test3_pb2___OuterEnum.V] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___Inner = Inner

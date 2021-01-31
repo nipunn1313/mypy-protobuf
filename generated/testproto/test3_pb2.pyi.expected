@@ -29,7 +29,6 @@ from typing import (
     NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
-    cast as typing___cast,
     overload as typing___overload,
 )
 
@@ -40,17 +39,17 @@ from typing_extensions import (
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
 
-OuterEnumValue = typing___NewType('OuterEnumValue', builtins.int)
-type___OuterEnumValue = OuterEnumValue
-OuterEnum: _OuterEnum
-class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[OuterEnumValue]):
+type___OuterEnum = OuterEnum
+class _OuterEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[OuterEnum.V], builtins.type):
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-    UNKNOWN = typing___cast(OuterEnumValue, 0)
-    FOO3 = typing___cast(OuterEnumValue, 1)
-    BAR3 = typing___cast(OuterEnumValue, 2)
-UNKNOWN = typing___cast(OuterEnumValue, 0)
-FOO3 = typing___cast(OuterEnumValue, 1)
-BAR3 = typing___cast(OuterEnumValue, 2)
+    UNKNOWN = OuterEnum.V(0)
+    FOO3 = OuterEnum.V(1)
+    BAR3 = OuterEnum.V(2)
+class OuterEnum(metaclass=_OuterEnum):
+    V = typing___NewType('V', builtins.int)
+UNKNOWN = OuterEnum.V(0)
+FOO3 = OuterEnum.V(1)
+BAR3 = OuterEnum.V(2)
 
 class OuterMessage3(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -65,15 +64,15 @@ type___OuterMessage3 = OuterMessage3
 
 class SimpleProto3(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    InnerEnumValue = typing___NewType('InnerEnumValue', builtins.int)
-    type___InnerEnumValue = InnerEnumValue
-    InnerEnum: _InnerEnum
-    class _InnerEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[SimpleProto3.InnerEnumValue]):
+    type___InnerEnum = InnerEnum
+    class _InnerEnum(google___protobuf___internal___enum_type_wrapper____EnumTypeWrapper[InnerEnum.V], builtins.type):
         DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-        INNER1 = typing___cast(SimpleProto3.InnerEnumValue, 0)
-        INNER2 = typing___cast(SimpleProto3.InnerEnumValue, 1)
-    INNER1 = typing___cast(SimpleProto3.InnerEnumValue, 0)
-    INNER2 = typing___cast(SimpleProto3.InnerEnumValue, 1)
+        INNER1 = SimpleProto3.InnerEnum.V(0)
+        INNER2 = SimpleProto3.InnerEnum.V(1)
+    class InnerEnum(metaclass=_InnerEnum):
+        V = typing___NewType('V', builtins.int)
+    INNER1 = SimpleProto3.InnerEnum.V(0)
+    INNER2 = SimpleProto3.InnerEnum.V(1)
 
     class MapScalarEntry(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -106,15 +105,15 @@ class SimpleProto3(google___protobuf___message___Message):
 
     a_string: typing___Text = ...
     a_repeated_string: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text] = ...
-    a_outer_enum: type___OuterEnumValue = ...
-    inner_enum: type___SimpleProto3.InnerEnumValue = ...
+    a_outer_enum: type___OuterEnum.V = ...
+    inner_enum: type___SimpleProto3.InnerEnum.V = ...
     a_oneof_1: typing___Text = ...
     a_oneof_2: typing___Text = ...
-    outer_enum_in_oneof: type___OuterEnumValue = ...
-    inner_enum_in_oneof: type___SimpleProto3.InnerEnumValue = ...
+    outer_enum_in_oneof: type___OuterEnum.V = ...
+    inner_enum_in_oneof: type___SimpleProto3.InnerEnum.V = ...
     b_oneof_1: typing___Text = ...
     b_oneof_2: typing___Text = ...
-    OuterEnum: type___OuterEnumValue = ...
+    OuterEnum: type___OuterEnum.V = ...
     an_optional_string: typing___Text = ...
 
     @property
@@ -139,18 +138,18 @@ class SimpleProto3(google___protobuf___message___Message):
         *,
         a_string : typing___Optional[typing___Text] = ...,
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = ...,
-        a_outer_enum : typing___Optional[type___OuterEnumValue] = ...,
+        a_outer_enum : typing___Optional[type___OuterEnum.V] = ...,
         outer_message : typing___Optional[type___OuterMessage3] = ...,
-        inner_enum : typing___Optional[type___SimpleProto3.InnerEnumValue] = ...,
+        inner_enum : typing___Optional[type___SimpleProto3.InnerEnum.V] = ...,
         a_oneof_1 : typing___Optional[typing___Text] = ...,
         a_oneof_2 : typing___Optional[typing___Text] = ...,
         outer_message_in_oneof : typing___Optional[type___OuterMessage3] = ...,
-        outer_enum_in_oneof : typing___Optional[type___OuterEnumValue] = ...,
-        inner_enum_in_oneof : typing___Optional[type___SimpleProto3.InnerEnumValue] = ...,
+        outer_enum_in_oneof : typing___Optional[type___OuterEnum.V] = ...,
+        inner_enum_in_oneof : typing___Optional[type___SimpleProto3.InnerEnum.V] = ...,
         b_oneof_1 : typing___Optional[typing___Text] = ...,
         b_oneof_2 : typing___Optional[typing___Text] = ...,
         bool : typing___Optional[type___OuterMessage3] = ...,
-        OuterEnum : typing___Optional[type___OuterEnumValue] = ...,
+        OuterEnum : typing___Optional[type___OuterEnum.V] = ...,
         OuterMessage3 : typing___Optional[type___OuterMessage3] = ...,
         map_scalar : typing___Optional[typing___Mapping[builtins.int, typing___Text]] = ...,
         map_message : typing___Optional[typing___Mapping[builtins.int, type___OuterMessage3]] = ...,

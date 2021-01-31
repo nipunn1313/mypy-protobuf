@@ -36,7 +36,41 @@ protoc --python_out=output/location --mypy_out=quiet:output/location
 
 ## Features
 
-Supports generating type wrappers for fields and maps
+### Types enum int values more strongly
+
+Enum int values produce stubs which wrap the int values in NewType
+```
+enum MyEnum {
+  FOO = 0;
+  BAR = 1;
+}
+```
+Will yield an [enum type wrapper](https://github.com/python/typeshed/blob/16ae4c61201cd8b96b8b22cdfb2ab9e89ba5bcf2/stubs/protobuf/google/protobuf/internal/enum_type_wrapper.pyi) whose methods type to `MyEnum.V` rather than `int`.
+This allows mypy to catch bugs where the wrong enum value is being used.
+
+mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
+
+```
+class _MyEnum(google.protobuf.internal.EnumTypeWrapper[MyEnum.V], builtins.type):
+    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+    FOO = MyEnum.V(0)
+    BAR = MyEnum.V(1)
+class MyEnum(metaclass=_OuterEnum):
+    V = typing___NewType('V', builtins.int)
+FOO = MyEnum.V(0)
+BAR = MyEnum.V(1)
+```
+
+You can type your calling code as follows. Note that the type of `x` must be quoted
+until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) supports `V`
+```
+def f(x: 'MyEnum.V'):
+    print(x)
+
+f(MyEnum.Value("FOO"))
+```
+
+### Supports generating type wrappers for fields and maps
 
 M.proto
 ```

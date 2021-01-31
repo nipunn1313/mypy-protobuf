@@ -19,7 +19,7 @@ from testproto.test_pb2 import (
     Simple1,
     Simple2,
 )
-from testproto.test3_pb2 import OuterEnum, OuterEnumValue, SimpleProto3
+from testproto.test3_pb2 import OuterEnum, SimpleProto3
 from testproto.dot.com.test_pb2 import TestMessage
 from test.test_generated_mypy import Email, UserId
 
@@ -117,14 +117,14 @@ OuterEnum.DESCRIPTOR.Garbage()  # E:2.7 E:3.5
 DESCRIPTOR.Garbage()  # E:2.7 E:3.5
 
 # Enum value type should be an EnumValueType convertible to int
-enum = OuterEnumValue(5)
+enum = OuterEnum.V(5)
 enum = s6.a_outer_enum
 as_int = 5
 as_int = s6.a_outer_enum
 s6.a_outer_enum.FOO  # E:2.7 E:3.5
 
 # Name/Value/items should inherit value type from _EnumTypeWrapper
-OuterEnum.Name(OuterEnumValue(5))
+OuterEnum.Name(OuterEnum.V(5))
 OuterEnum.Name(5)  # E:2.7 E:3.5
 OuterEnum.Name(OuterEnum.Value("BAR"))
 OuterEnum.Name(SimpleProto3.InnerEnum.Value("BAR"))  # E:2.7 E:3.5
