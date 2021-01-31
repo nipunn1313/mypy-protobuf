@@ -245,7 +245,6 @@ class PkgWriter(object):
     def write_messages(self, messages, prefix):
         # type: (Iterable[d.DescriptorProto], Text) -> None
         l = self._write_line
-        message_class = self._import("google.protobuf.message", "Message")
 
         for desc in [m for m in messages if m.name not in PYTHON_RESERVED]:
             self.locals.add(desc.name)
@@ -264,6 +263,7 @@ class PkgWriter(object):
                     well_known_type.__name__,
                 )
 
+            message_class = self._import("google.protobuf.message", "Message")
             l("class {}({}{}):", desc.name, message_class, addl_base)
             with self._indent():
                 l(
