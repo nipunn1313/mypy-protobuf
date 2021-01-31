@@ -120,3 +120,8 @@ option py_generic_services = true;
 service ATestService {
     rpc Echo(Simple1) returns (Simple2) {}
 }
+
+message SelfField {
+    // Field self -> must generate an __init__ method w/ different name
+    optional int64 self = 1;
+}

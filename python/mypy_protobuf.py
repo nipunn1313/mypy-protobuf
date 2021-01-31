@@ -356,7 +356,8 @@ class PkgWriter(object):
                     l("")
 
                 # Constructor
-                l("def __init__(self,")
+                self_arg = "self_" if any(f.name == "self" for f in fields) else "self"
+                l("def __init__({},", self_arg)
                 with self._indent():
                     if len(fields) > 0:
                         # Only positional args allowed
