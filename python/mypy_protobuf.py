@@ -529,20 +529,14 @@ class PkgWriter(object):
         # type: (d.MethodDescriptorProto) -> Text
         result = self._import_message(method.input_type)
         if method.client_streaming:
-            result = "{}[{}]".format(
-                self._import("typing", "Iterator"),
-                result,
-            )
+            result = "{}[{}]".format(self._import("typing", "Iterator"), result)
         return result
 
     def _output_type(self, method):
         # type: (d.MethodDescriptorProto) -> Text
         result = self._import_message(method.output_type)
         if method.server_streaming:
-            result = "{}[{}]".format(
-                self._import("typing", "Iterator"),
-                result,
-            )
+            result = "{}[{}]".format(self._import("typing", "Iterator"), result)
         return result
 
     def write_grpc_methods(self, service):
@@ -558,10 +552,7 @@ class PkgWriter(object):
             with self._indent():
                 l("request: {},", self._input_type(method))
                 l("context: {},", self._import("grpc", "ServicerContext"))
-            l(
-                ") -> {}: ...",
-                self._output_type(method),
-            )
+            l(") -> {}: ...", self._output_type(method))
             l("")
 
     def write_grpc_stub_methods(self, service):
@@ -575,10 +566,7 @@ class PkgWriter(object):
             l("def {}(self,", method.name)
             with self._indent():
                 l("request: {},", self._input_type(method))
-            l(
-                ") -> {}: ...",
-                self._output_type(method),
-            )
+            l(") -> {}: ...", self._output_type(method))
             l("")
 
     def write_grpc_services(self, services):
@@ -799,3 +787,7 @@ def grpc():
         generate_mypy_grpc_stubs(
             Descriptors(request), response, "quiet" in request.parameter
         )
+
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Support for `grpcio` stubs generation
+- Allow `mypy_protobuf.py` to be run directly as a script
 
 ## 1.24
 
