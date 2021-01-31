@@ -374,7 +374,7 @@ class PkgWriter(object):
                                     field, msg.field[0], msg.field[1]
                                 )
                                 l(
-                                    "{} : {}[{}[{}, {}]] = None,",
+                                    "{} : {}[{}[{}, {}]] = ...,",
                                     field.name,
                                     self._import("typing", "Optional"),
                                     self._import("typing", "Mapping"),
@@ -383,7 +383,7 @@ class PkgWriter(object):
                                 )
                             else:
                                 l(
-                                    "{} : {}[{}[{}]] = None,",
+                                    "{} : {}[{}[{}]] = ...,",
                                     field.name,
                                     self._import("typing", "Optional"),
                                     self._import("typing", "Iterable"),
@@ -391,7 +391,7 @@ class PkgWriter(object):
                                 )
                         else:
                             l(
-                                "{} : {}[{}] = None,",
+                                "{} : {}[{}] = ...,",
                                 field.name,
                                 self._import("typing", "Optional"),
                                 self.python_type(field),

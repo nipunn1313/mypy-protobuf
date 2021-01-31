@@ -117,8 +117,8 @@ class Simple1(google___protobuf___message___Message):
 
         def __init__(self,
             *,
-            key : typing___Optional[builtins.int] = None,
-            value : typing___Optional[typing___Text] = None,
+            key : typing___Optional[builtins.int] = ...,
+            value : typing___Optional[typing___Text] = ...,
             ) -> None: ...
         def HasField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> None: ...
@@ -166,29 +166,29 @@ class Simple1(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a_string : typing___Optional[typing___Text] = None,
-        a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = None,
-        a_boolean : typing___Optional[builtins.bool] = None,
-        a_uint32 : typing___Optional[builtins.int] = None,
-        a_enum : typing___Optional[type___OuterEnumValue] = None,
-        a_external_enum : typing___Optional[testproto___test3_pb2___OuterEnumValue] = None,
-        a_inner : typing___Optional[testproto___inner___inner_pb2___Inner] = None,
-        a_nested : typing___Optional[testproto___nested___nested_pb2___Nested] = None,
-        inner_enum : typing___Optional[type___Simple1.InnerEnumValue] = None,
-        rep_inner_enum : typing___Optional[typing___Iterable[type___Simple1.InnerEnumValue]] = None,
-        inner_message : typing___Optional[type___Simple1.InnerMessage] = None,
-        rep_inner_message : typing___Optional[typing___Iterable[type___Simple1.InnerMessage]] = None,
-        no_package : typing___Optional[testproto___nopackage_pb2___NoPackage] = None,
-        nested_enum : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedEnumValue] = None,
-        nested_message : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedMessage] = None,
-        a_oneof_1 : typing___Optional[typing___Text] = None,
-        a_oneof_2 : typing___Optional[typing___Text] = None,
-        outer_message_in_oneof : typing___Optional[type___Simple2] = None,
-        outer_enum_in_oneof : typing___Optional[type___OuterEnumValue] = None,
-        inner_enum_in_oneof : typing___Optional[type___Simple1.InnerEnumValue] = None,
-        user_id : typing___Optional[test___test_generated_mypy___UserId] = None,
-        email : typing___Optional[test___test_generated_mypy___Email] = None,
-        email_by_uid : typing___Optional[typing___Mapping[test___test_generated_mypy___UserId, test___test_generated_mypy___Email]] = None,
+        a_string : typing___Optional[typing___Text] = ...,
+        a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = ...,
+        a_boolean : typing___Optional[builtins.bool] = ...,
+        a_uint32 : typing___Optional[builtins.int] = ...,
+        a_enum : typing___Optional[type___OuterEnumValue] = ...,
+        a_external_enum : typing___Optional[testproto___test3_pb2___OuterEnumValue] = ...,
+        a_inner : typing___Optional[testproto___inner___inner_pb2___Inner] = ...,
+        a_nested : typing___Optional[testproto___nested___nested_pb2___Nested] = ...,
+        inner_enum : typing___Optional[type___Simple1.InnerEnumValue] = ...,
+        rep_inner_enum : typing___Optional[typing___Iterable[type___Simple1.InnerEnumValue]] = ...,
+        inner_message : typing___Optional[type___Simple1.InnerMessage] = ...,
+        rep_inner_message : typing___Optional[typing___Iterable[type___Simple1.InnerMessage]] = ...,
+        no_package : typing___Optional[testproto___nopackage_pb2___NoPackage] = ...,
+        nested_enum : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedEnumValue] = ...,
+        nested_message : typing___Optional[testproto___nested___nested_pb2___AnotherNested.NestedMessage] = ...,
+        a_oneof_1 : typing___Optional[typing___Text] = ...,
+        a_oneof_2 : typing___Optional[typing___Text] = ...,
+        outer_message_in_oneof : typing___Optional[type___Simple2] = ...,
+        outer_enum_in_oneof : typing___Optional[type___OuterEnumValue] = ...,
+        inner_enum_in_oneof : typing___Optional[type___Simple1.InnerEnumValue] = ...,
+        user_id : typing___Optional[test___test_generated_mypy___UserId] = ...,
+        email : typing___Optional[test___test_generated_mypy___Email] = ...,
+        email_by_uid : typing___Optional[typing___Mapping[test___test_generated_mypy___UserId, test___test_generated_mypy___Email]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"email",b"email",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message_in_oneof",b"outer_message_in_oneof",u"user_id",b"user_id"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a_boolean",b"a_boolean",u"a_enum",b"a_enum",u"a_external_enum",b"a_external_enum",u"a_inner",b"a_inner",u"a_nested",b"a_nested",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"a_uint32",b"a_uint32",u"email",b"email",u"email_by_uid",b"email_by_uid",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"inner_message",b"inner_message",u"nested_enum",b"nested_enum",u"nested_message",b"nested_message",u"no_package",b"no_package",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message_in_oneof",b"outer_message_in_oneof",u"rep_inner_enum",b"rep_inner_enum",u"rep_inner_message",b"rep_inner_message",u"user_id",b"user_id"]) -> None: ...
@@ -201,7 +201,7 @@ class Simple2(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a_string : typing___Optional[typing___Text] = None,
+        a_string : typing___Optional[typing___Text] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"a_string",b"a_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a_string",b"a_string"]) -> None: ...
@@ -215,7 +215,7 @@ class Extensions1(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        ext1_string : typing___Optional[typing___Text] = None,
+        ext1_string : typing___Optional[typing___Text] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"ext1_string",b"ext1_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"ext1_string",b"ext1_string"]) -> None: ...
@@ -229,7 +229,7 @@ class Extensions2(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        flag : typing___Optional[builtins.bool] = None,
+        flag : typing___Optional[builtins.bool] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"flag",b"flag"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"flag",b"flag"]) -> None: ...
@@ -259,7 +259,7 @@ class SelfField(google___protobuf___message___Message):
 
     def __init__(self_,
         *,
-        self : typing___Optional[builtins.int] = None,
+        self : typing___Optional[builtins.int] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"self",b"self"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"self",b"self"]) -> None: ...

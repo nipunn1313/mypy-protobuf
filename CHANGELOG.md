@@ -7,6 +7,7 @@
 - Support message fields named `self` - by renaming the constructor's `self` to `self_`
 - Add support for mypy-proto extensions `mypy_protobuf.casttype`, `mypy_protobuf.keytype`, and `mypy_protobuf.valuetype`
 - Import builtins library rather than mangling builtins
+- Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
 
 ## 1.24
 

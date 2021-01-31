@@ -46,8 +46,8 @@ class NoPackage2(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        np : typing___Optional[type___NoPackage] = None,
-        np_rep : typing___Optional[typing___Iterable[type___NoPackage]] = None,
+        np : typing___Optional[type___NoPackage] = ...,
+        np_rep : typing___Optional[typing___Iterable[type___NoPackage]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"np",b"np"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"np",b"np",u"np_rep",b"np_rep"]) -> None: ...

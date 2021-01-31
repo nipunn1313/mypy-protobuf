@@ -29,7 +29,7 @@ class DummyRequest(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        value : typing___Optional[typing___Text] = None,
+        value : typing___Optional[typing___Text] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"value",b"value"]) -> None: ...
 type___DummyRequest = DummyRequest
@@ -40,7 +40,7 @@ class DummyReply(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        value : typing___Optional[typing___Text] = None,
+        value : typing___Optional[typing___Text] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"value",b"value"]) -> None: ...
 type___DummyReply = DummyReply
