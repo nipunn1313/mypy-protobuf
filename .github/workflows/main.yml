@@ -22,11 +22,6 @@ jobs:
         # than automatically multiplying the set in together, so we don't
         # over-test combinations unnecessarily.
         include:
-          # Include a full 2.7 run
-          - py-ver-mypy-protobuf: 2.7.18
-            py-ver-mypy-target: 2.7
-            py-ver-unit-tests: 2.7.18
-
           # Include a python3 compile with mypy targeting 2.7 code
           - py-ver-mypy-protobuf: 3.8.6
             py-ver-mypy-target: 2.7

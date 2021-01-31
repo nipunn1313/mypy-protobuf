@@ -102,8 +102,7 @@ def _forward_ref(name):
 # field names.
 
 
-def _mangle_message(name):
-    # type: (Text) -> Text
+def _mangle_message(name: Text) -> Text:
     """Enum variant `Name` might conflict with a message or enum named `Name`, so
     mangle it with a type__ prefix for internal references"""
     return "type___{}".format(name)

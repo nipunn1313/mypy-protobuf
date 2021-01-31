@@ -45,13 +45,9 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     $PROTOC $PROTOC_ARGS --mypy_out=generated `find proto -name "*.proto"`
 
     # Compile GRPC
-    if [[ $PY_VER_MYPY_PROTOBUF =~ ^3.* ]]; then
-        GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
-        $PROTOC $PROTOC_ARGS --mypy_grpc_out=generated $GRPC_PROTOS
-        python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=generated $GRPC_PROTOS
-    fi
-
-
+    GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
+    $PROTOC $PROTOC_ARGS --mypy_grpc_out=generated $GRPC_PROTOS
+    python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=generated $GRPC_PROTOS
 )
 
 (
@@ -77,7 +73,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     # Run mypy
     mypy --version
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
-    FILES27="python/mypy_protobuf_lib.py $(find test -name "*.py" | grep -v grpc)  $(find generated -name "*.pyi" | grep -v grpc)"
+    FILES27="$(find test -name "*.py" | grep -v grpc)  $(find generated -name "*.pyi" | grep -v grpc)"
     FILES35="python/mypy_protobuf_lib.py test/ generated/"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         FILES=$FILES27
