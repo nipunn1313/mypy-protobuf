@@ -19,6 +19,7 @@ Output Format
 - Generate fully qualified references rather than mangling
 - Import builtins library rather than mangling builtins
 - Use fully qualified names rather than mangling imports
+- Only mangle-alias top-level identifiers w/ `global___` to avoid conflict w/ fields of same name [previously was mangling inner messages as well]
 - Add support for nomangle parameter for mangle-free output code (in many cases this is good enough and easier to read)
 - Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
 - Avoid importing google.protobuf.message.Message unless it's needed
