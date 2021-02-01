@@ -1,4 +1,4 @@
-mypy-protobuf: Generate mypy stub files from protobuf specs ![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)
+mypy-protobuf: Generate mypy stub files from protobuf specs ![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)![pypi](https://img.shields.io/pypi/v/mypy-protobuf)
 ===========================================================
 
 ## Requirements
