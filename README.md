@@ -137,6 +137,7 @@ black python/ test/
 - [@peterlvilim](https://github.com/peterlvilim)
 - [@msullivan](https://github.com/msullivan)
 - [@bradenaw](https://github.com/bradenaw)
+- [@ilevkivskyi](https://github.com/ilevkivskyi)
 
 ### Others
 - [@Ketouem](https://github.com/Ketouem)
