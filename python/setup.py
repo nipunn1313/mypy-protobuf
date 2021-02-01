@@ -23,4 +23,5 @@ setup(
         ],
     },
     scripts=["protoc_gen_mypy.bat"],
+    python_requires=">=3.6",
 )
