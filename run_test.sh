@@ -6,7 +6,7 @@ PROTOC=${PROTOC:=protoc}
 
 PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.8.6}
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.6}
-PY_VER_MYPY_TARGET=${PY_VER_MYPY_TARGET:=3.5}
+PY_VER_MYPY_TARGET=${PY_VER_MYPY_TARGET:=3.8}
 PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.6}
 
 # Clean out generated/ directory - except for .generated / __init__.py
@@ -74,22 +74,22 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     mypy --version
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
     FILES27="$(find test -name "*.py" | grep -v grpc)  $(find generated -name "*.pyi" | grep -v grpc)"
-    FILES35="python/mypy_protobuf_lib.py test/ generated/"
+    FILES38="python/mypy_protobuf_lib.py test/ generated/"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         FILES=$FILES27
     else
-        FILES=$FILES35
+        FILES=$FILES38
     fi
     mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
 
     # run mypy on negative-tests (expected failures)
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
     NEGATIVE_FILES_27="test_negative/negative.py test_negative/negative_2.7.py $FILES27"
-    NEGATIVE_FILES_35="test_negative/negative.py test_negative/negative_3.5.py $FILES35"
+    NEGATIVE_FILES_38="test_negative/negative.py test_negative/negative_3.8.py $FILES38"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         NEGATIVE_FILES=$NEGATIVE_FILES_27
     else
-        NEGATIVE_FILES=$NEGATIVE_FILES_35
+        NEGATIVE_FILES=$NEGATIVE_FILES_38
     fi
 
     if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET $NEGATIVE_FILES) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
@@ -97,7 +97,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 
         # Copy over all the py targets for convenience for the developer - so they don't have to run it many times
         mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=2.7 $NEGATIVE_FILES_27 > test_negative/output.expected.2.7 || true
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=3.5 $NEGATIVE_FILES_35 > test_negative/output.expected.3.5 || true
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=3.8 $NEGATIVE_FILES_38 > test_negative/output.expected.3.8 || true
         exit 1
     fi
 )
