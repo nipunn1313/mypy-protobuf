@@ -23,7 +23,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
         python -m virtualenv $VENV
     fi
     source $VENV/bin/activate
-    python -m pip install python/ -r requirements.txt
+    python -m pip install . -r requirements.txt
 
     # Generate protos
     python --version
@@ -40,8 +40,8 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 
     # Compile protoc -> mypy using mypy_protobuf
     # Prereq - create the mypy.proto python proto
-    $PROTOC $PROTOC_ARGS --python_out=python/proto `find proto/mypy_protobuf -name "*.proto"`
-    $PROTOC $PROTOC_ARGS --mypy_out=python/proto `find proto/mypy_protobuf -name "*.proto"`
+    $PROTOC $PROTOC_ARGS --python_out=. `find proto/mypy_protobuf -name "*.proto"`
+    $PROTOC $PROTOC_ARGS --mypy_out=. `find proto/mypy_protobuf -name "*.proto"`
     $PROTOC $PROTOC_ARGS --mypy_out=generated `find proto -name "*.proto"`
 
     # Compile GRPC
@@ -74,7 +74,7 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     mypy --version
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
     FILES27="$(find test -name "*.py" | grep -v grpc)  $(find generated -name "*.pyi" | grep -v grpc)"
-    FILES38="python/mypy_protobuf_lib.py test/ generated/"
+    FILES38="mypy_protobuf/main.py test/ generated/"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         FILES=$FILES27
     else
