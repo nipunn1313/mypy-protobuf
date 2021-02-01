@@ -24,6 +24,9 @@ pip install mypy-protobuf
 To install unreleased
 ```
 REV=master  # or whichever unreleased git rev you'd like
+pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV
+
+# Prior to directory structure flattening, you may need
 pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
 ```
 
@@ -131,7 +134,7 @@ Contributions to the implementation are welcome. Please run tests using `./run_t
 Ensure code is formatted using black.
 ```
 pip3 install black
-black python/ test/ --exclude python/proto
+black mypy_protobuf/main.py test/
 ```
 
 ## Contributors
