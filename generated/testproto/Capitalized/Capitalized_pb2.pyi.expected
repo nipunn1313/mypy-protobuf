@@ -29,7 +29,7 @@ class lower(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a : typing___Optional[builtins.int] = ...,
+        a : builtins.int = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___lower = lower

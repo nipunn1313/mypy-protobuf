@@ -402,6 +402,12 @@ class PkgWriter(object):
                                     self._import("typing", "Iterable"),
                                     self.python_type(field),
                                 )
+                        elif self.fd.syntax == "proto3" and is_scalar(field):
+                            l(
+                                "{} : {} = ...,",
+                                field.name,
+                                self.python_type(field),
+                            )
                         else:
                             l(
                                 "{} : {}[{}] = ...,",
