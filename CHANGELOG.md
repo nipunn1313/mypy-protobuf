@@ -18,6 +18,7 @@ Other Changes
 - Add support for nomangle parameter for mangle-free output code (in many cases this is good enough and easier to read)
 - Add support for `import public` proto imports - by reexporting in generated code
 - Update mypy-protobuf CI to target 3.8 rather than 3.5
+- Inline mypy annotations, eliminate six, and remove `__future__` import in `mypy_protobuf_lib.py`
 
 ## 1.24
 
