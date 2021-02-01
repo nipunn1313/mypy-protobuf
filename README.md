@@ -1,17 +1,18 @@
 mypy-protobuf: Generate mypy stub files from protobuf specs
+
 [![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/dropbox/mypy-protobuf/actions?query=branch%3Amaster)
 [![pypi](https://img.shields.io/pypi/v/mypy-protobuf?logo=Pypi)](https://pypi.org/project/mypy-protobuf/)
 [![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/master/LICENSE)
 ===========================================================
 
-## Requirements
-
 See [Changelog](CHANGELOG.md) for recent changes
 
+## Requirements
+
+[mypy >= v0.800](https://pypi.org/project/mypy)
 [protoc](https://github.com/protocolbuffers/protobuf/releases) 3.14.0 or greater
 [python-protobuf >= 3.14.0](https://pypi.org/project/protobuf/)
-python >= 3.6 - for running mypy-protobuf plugin. (It will generate stubs compatible back to python2)
-[mypy >= v0.800](https://pypi.org/project/mypy)
+[python >= 3.6](https://www.python.org/downloads/source/) - for running mypy-protobuf plugin. Generated stubs will compatible back to python2.
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
 
