@@ -129,11 +129,11 @@ class PkgWriter(object):
     """Writes a single pyi file"""
 
     def __init__(
-        self, fd: d.FileDescriptorProto, descriptors: Descriptors, nomangle: bool
+        self, fd: d.FileDescriptorProto, descriptors: Descriptors, readable_stubs: bool
     ) -> None:
         self.fd = fd
         self.descriptors = descriptors
-        self.nomangle = nomangle
+        self.readable_stubs = readable_stubs
         self.lines: List[str] = []
         self.indent = ""
 
@@ -149,7 +149,7 @@ class PkgWriter(object):
         eg. self._import("typing", "Optional") -> "Optional"
         """
         imp = path.replace("/", ".")
-        if self.nomangle:
+        if self.readable_stubs:
             self.from_imports[imp].add((name, None))
             return name
         else:
@@ -171,7 +171,7 @@ class PkgWriter(object):
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
-            return _mangle_global_identifier(name)
+            return name if self.readable_stubs else _mangle_global_identifier(name)
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
@@ -227,7 +227,7 @@ class PkgWriter(object):
     ) -> None:
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            if prefix == "":
+            if prefix == "" and not self.readable_stubs:
                 l("{} = {}", _mangle_global_identifier(enum.name), enum.name)
             l(
                 "class {}({}[{}], {}):",
@@ -418,7 +418,7 @@ class PkgWriter(object):
 
                 self.write_stringly_typed_fields(desc)
 
-            if prefix == "":
+            if prefix == "" and not self.readable_stubs:
                 l("{} = {}", _mangle_global_identifier(desc.name), desc.name)
             l("")
 
@@ -738,10 +738,10 @@ def generate_mypy_stubs(
     descriptors: Descriptors,
     response: plugin_pb2.CodeGeneratorResponse,
     quiet: bool,
-    nomangle: bool,
+    readable_stubs: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
-        pkg_writer = PkgWriter(fd, descriptors, nomangle)
+        pkg_writer = PkgWriter(fd, descriptors, readable_stubs)
         if not fd.public_dependency:
             pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type)
@@ -763,10 +763,10 @@ def generate_mypy_grpc_stubs(
     descriptors: Descriptors,
     response: plugin_pb2.CodeGeneratorResponse,
     quiet: bool,
-    nomangle: bool,
+    readable_stubs: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
-        pkg_writer = PkgWriter(fd, descriptors, nomangle)
+        pkg_writer = PkgWriter(fd, descriptors, readable_stubs)
         pkg_writer.write_grpc_services(fd.service)
 
         assert name == fd.name
@@ -813,7 +813,7 @@ def main() -> None:
             Descriptors(request),
             response,
             "quiet" in request.parameter,
-            "nomangle" in request.parameter,
+            "readable_stubs" in request.parameter,
         )
 
 
@@ -824,7 +824,7 @@ def grpc() -> None:
             Descriptors(request),
             response,
             "quiet" in request.parameter,
-            "nomangle" in request.parameter,
+            "readable_stubs" in request.parameter,
         )
 
 

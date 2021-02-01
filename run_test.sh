@@ -45,6 +45,11 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     # Prereq - create the mypy.proto python proto
     $PROTOC $PROTOC_ARGS --python_out=. `find proto/mypy_protobuf -name "*.proto"`
     $PROTOC $PROTOC_ARGS --mypy_out=. `find proto/mypy_protobuf -name "*.proto"`
+
+    # Sanity check that our flags work
+    $PROTOC $PROTOC_ARGS --mypy_out=quiet:test/generated `find proto -name "*.proto"`
+    $PROTOC $PROTOC_ARGS --mypy_out=readable_stubs:test/generated `find proto -name "*.proto"`
+    # Overwrite w/ run with mypy-protobuf without flags
     $PROTOC $PROTOC_ARGS --mypy_out=test/generated `find proto -name "*.proto"`
 
     # Compile GRPC

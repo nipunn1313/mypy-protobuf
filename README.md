@@ -109,6 +109,18 @@ Email = NewType("Email", Text)
 If `py_generic_services` is set in your proto file, then mypy-protobuf will
 generate service stubs. If you want GRPC stubs instead - use the GRPC instructions.
 
+### `readable_stubs`
+If `readable_stubs` is set, mypy-protobuf will generate easier-to-read stubs. The downside
+to this approach - is that it's possible to generate stubs which do not pass mypy - particularly
+in the case of name collisions. mypy-protobuf defaults to generating stubs with fully qualified
+imports and mangled global-level identifiers to defend against name collisions between global
+identifiers and field names.
+
+If you're ok with this risk, try it out!
+```
+protoc --python_out=output/location --mypy_out=readable_stubs:output/location
+```
+
 ### Output suppression
 To suppress output, you can run
 ```
