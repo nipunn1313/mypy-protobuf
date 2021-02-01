@@ -129,11 +129,16 @@ class PkgWriter(object):
     """Writes a single pyi file"""
 
     def __init__(
-        self, fd: d.FileDescriptorProto, descriptors: Descriptors, readable_stubs: bool
+        self,
+        fd: d.FileDescriptorProto,
+        descriptors: Descriptors,
+        readable_stubs: bool,
+        relax_strict_optional_primitives: bool,
     ) -> None:
         self.fd = fd
         self.descriptors = descriptors
         self.readable_stubs = readable_stubs
+        self.relax_strict_optional_primitives = relax_strict_optional_primitives
         self.lines: List[str] = []
         self.indent = ""
 
@@ -401,7 +406,11 @@ class PkgWriter(object):
                                     self._import("typing", "Iterable"),
                                     self.python_type(field),
                                 )
-                        elif self.fd.syntax == "proto3" and is_scalar(field):
+                        elif (
+                            self.fd.syntax == "proto3"
+                            and is_scalar(field)
+                            and not self.relax_strict_optional_primitives
+                        ):
                             l(
                                 "{} : {} = ...,",
                                 field.name,
@@ -739,9 +748,12 @@ def generate_mypy_stubs(
     response: plugin_pb2.CodeGeneratorResponse,
     quiet: bool,
     readable_stubs: bool,
+    relax_strict_optional_primitives: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
-        pkg_writer = PkgWriter(fd, descriptors, readable_stubs)
+        pkg_writer = PkgWriter(
+            fd, descriptors, readable_stubs, relax_strict_optional_primitives
+        )
         if not fd.public_dependency:
             pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type)
@@ -764,9 +776,12 @@ def generate_mypy_grpc_stubs(
     response: plugin_pb2.CodeGeneratorResponse,
     quiet: bool,
     readable_stubs: bool,
+    relax_strict_optional_primitives: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
-        pkg_writer = PkgWriter(fd, descriptors, readable_stubs)
+        pkg_writer = PkgWriter(
+            fd, descriptors, readable_stubs, relax_strict_optional_primitives
+        )
         pkg_writer.write_grpc_services(fd.service)
 
         assert name == fd.name
@@ -814,6 +829,7 @@ def main() -> None:
             response,
             "quiet" in request.parameter,
             "readable_stubs" in request.parameter,
+            "relax_strict_optional_primitives" in request.parameter,
         )
 
 
@@ -825,6 +841,7 @@ def grpc() -> None:
             response,
             "quiet" in request.parameter,
             "readable_stubs" in request.parameter,
+            "relax_strict_optional_primitives" in request.parameter,
         )
 
 
