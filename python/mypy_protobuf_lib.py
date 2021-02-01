@@ -7,32 +7,25 @@ import sys
 from collections import defaultdict
 from contextlib import contextmanager
 from functools import wraps
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Generator,
+    Iterable,
+    List,
+    Optional,
+    Set,
+    Sequence,
+    Tuple,
+)
 
 import google.protobuf.descriptor_pb2 as d
 import six
 from google.protobuf.compiler import plugin_pb2 as plugin_pb2
+from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 from google.protobuf.internal.well_known_types import WKTBASES
 from proto.mypy_protobuf import extensions_pb2
-
-MYPY = False
-if MYPY:
-    from typing import (
-        Any,
-        Callable,
-        Dict,
-        Generator,
-        Iterable,
-        List,
-        Optional,
-        Set,
-        Sequence,
-        Text,
-        Tuple,
-    )
-    from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
-else:
-    # Provide minimal mypy identifiers to make code run without typing module present
-    Text = None
 
 
 # So phabricator doesn't think mypy_protobuf.py is generated
@@ -87,49 +80,70 @@ PYTHON_RESERVED = {
 PY2_ONLY_BUILTINS = {"buffer", "unicode"}
 
 
-FORWARD_REFERENCE_STRING_LITERAL = True
-
-
-def _forward_ref(name):
-    # type: (Text) -> Text
-    if FORWARD_REFERENCE_STRING_LITERAL:
-        return "'{}'".format(name)
-    else:
-        return name
-
-
 # Identifiers are mangled so that they don't conflict with
 # field names.
-
-
-def _mangle_message(name: Text) -> Text:
+def _mangle_message(name: str) -> str:
     """Enum variant `Name` might conflict with a message or enum named `Name`, so
     mangle it with a type__ prefix for internal references"""
     return "type___{}".format(name)
 
 
+class Descriptors(object):
+    def __init__(self, request: plugin_pb2.CodeGeneratorRequest) -> None:
+        files = {f.name: f for f in request.proto_file}
+        to_generate = {n: files[n] for n in request.file_to_generate}
+        self.files: Dict[str, d.FileDescriptorProto] = files
+        self.to_generate: Dict[str, d.FileDescriptorProto] = to_generate
+        self.messages: Dict[str, d.DescriptorProto] = {}
+        self.message_to_fd: Dict[str, d.FileDescriptorProto] = {}
+
+        def _add_enums(
+            enums: "RepeatedCompositeFieldContainer[d.EnumDescriptorProto]",
+            prefix: str,
+            _fd: d.FileDescriptorProto,
+        ) -> None:
+            for enum in enums:
+                self.message_to_fd[prefix + enum.name] = _fd
+                self.message_to_fd[prefix + enum.name + ".V"] = _fd
+
+        def _add_messages(
+            messages: "RepeatedCompositeFieldContainer[d.DescriptorProto]",
+            prefix: str,
+            _fd: d.FileDescriptorProto,
+        ) -> None:
+            for message in messages:
+                self.messages[prefix + message.name] = message
+                self.message_to_fd[prefix + message.name] = _fd
+                sub_prefix = prefix + message.name + "."
+                _add_messages(message.nested_type, sub_prefix, _fd)
+                _add_enums(message.enum_type, sub_prefix, _fd)
+
+        for fd in request.proto_file:
+            start_prefix = "." + fd.package + "." if fd.package else "."
+            _add_messages(fd.message_type, start_prefix, fd)
+            _add_enums(fd.enum_type, start_prefix, fd)
+
+
 class PkgWriter(object):
     """Writes a single pyi file"""
 
-    def __init__(self, fd, descriptors, nomangle):
-        # type: (d.FileDescriptorProto, Descriptors, bool) -> None
+    def __init__(
+        self, fd: d.FileDescriptorProto, descriptors: Descriptors, nomangle: bool
+    ) -> None:
         self.fd = fd
         self.descriptors = descriptors
         self.nomangle = nomangle
-        self.lines = []  # type: List[Text]
+        self.lines: List[str] = []
         self.indent = ""
 
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
-        self.imports = defaultdict(
-            set
-        )  # type: Dict[Text, Set[Tuple[Text, Optional[Text]]]]
-        self.locals = set()  # type: Set[Text]
-        self.builtin_vars = set()  # type: Set[Text]
-        self.py2_builtin_vars = set()  # type: Set[Text]
+        self.imports: Dict[str, Set[Tuple[str, Optional[str]]]] = defaultdict(set)
+        self.locals: Set[str] = set()
+        self.builtin_vars: Set[str] = set()
+        self.py2_builtin_vars: Set[str] = set()
 
-    def _import(self, path, name):
-        # type: (Text, Text) -> Text
+    def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Optional") -> "Optional"
         """
@@ -142,8 +156,7 @@ class PkgWriter(object):
             self.imports[imp].add((name, mangled_name))
             return mangled_name
 
-    def _import_message(self, name):
-        # type: (Text) -> Text
+    def _import_message(self, name: str) -> str:
         """Import a referenced message and return a handle"""
         message_fd = self.descriptors.message_to_fd[name]
         assert message_fd.name.endswith(".proto")
@@ -174,8 +187,7 @@ class PkgWriter(object):
         # from another package.
         return import_name + "." + remains
 
-    def _builtin(self, name):
-        # type: (Text) -> Text
+    def _builtin(self, name: str) -> str:
         if name in PY2_ONLY_BUILTINS:
             self.py2_builtin_vars.add(name)
         else:
@@ -183,21 +195,18 @@ class PkgWriter(object):
         return "builtins.{}".format(name)
 
     @contextmanager
-    def _indent(self):
-        # type: () -> Generator
+    def _indent(self) -> Generator:
         self.indent = self.indent + "    "
         yield
         self.indent = self.indent[:-4]
 
-    def _write_line(self, line, *args):
-        # type: (Text, *Any) -> None
+    def _write_line(self, line: str, *args: Any) -> None:
         if line == "":
             self.lines.append(line)
         else:
             self.lines.append(self.indent + line.format(*args))
 
-    def write_enum_values(self, enum, value_type):
-        # type: (d.EnumDescriptorProto, Text) -> None
+    def write_enum_values(self, enum: d.EnumDescriptorProto, value_type: str) -> None:
         for val in enum.value:
             if val.name in PYTHON_RESERVED:
                 continue
@@ -209,8 +218,7 @@ class PkgWriter(object):
                 val.number,
             )
 
-    def write_module_attributes(self):
-        # type: () -> None
+    def write_module_attributes(self) -> None:
         l = self._write_line
         l(
             "DESCRIPTOR: {} = ...",
@@ -218,8 +226,9 @@ class PkgWriter(object):
         )
         l("")
 
-    def write_enums(self, enums, prefix=""):
-        # type: (Iterable[d.EnumDescriptorProto], Text) -> None
+    def write_enums(
+        self, enums: Iterable[d.EnumDescriptorProto], prefix: str = ""
+    ) -> None:
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
             l("{} = {}", _mangle_message(enum.name), enum.name)
@@ -250,8 +259,9 @@ class PkgWriter(object):
             self.write_enum_values(enum, prefix + enum.name + ".V")
             l("")
 
-    def write_messages(self, messages, prefix):
-        # type: (Iterable[d.DescriptorProto], Text) -> None
+    def write_messages(
+        self, messages: Iterable[d.DescriptorProto], prefix: str
+    ) -> None:
         l = self._write_line
 
         for desc in [m for m in messages if m.name not in PYTHON_RESERVED]:
@@ -408,8 +418,7 @@ class PkgWriter(object):
             l("{} = {}", _mangle_message(desc.name), desc.name)
             l("")
 
-    def write_stringly_typed_fields(self, desc):
-        # type: (d.DescriptorProto) -> None
+    def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:
         """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
         l = self._write_line
         # HasField, ClearField, WhichOneof accepts both bytes/unicode
@@ -425,7 +434,7 @@ class PkgWriter(object):
                 and (
                     self.fd.syntax != "proto3"
                     or f.type == d.FieldDescriptorProto.TYPE_MESSAGE
-                    or f.proto3_optional  # type: ignore[attr-defined] # https://github.com/dropbox/mypy-protobuf/issues/158
+                    or f.proto3_optional
                 )
             )
         ]
@@ -479,8 +488,7 @@ class PkgWriter(object):
                 ",".join('"{}"'.format(m) for m in members),
             )
 
-    def write_extensions(self, extensions):
-        # type: (Sequence[d.FieldDescriptorProto]) -> None
+    def write_extensions(self, extensions: Sequence[d.FieldDescriptorProto]) -> None:
         if not extensions:
             return
         l = self._write_line
@@ -491,8 +499,9 @@ class PkgWriter(object):
             l("{}: {} = ...", extension.name, field_descriptor_class)
             l("")
 
-    def write_methods(self, service, is_abstract):
-        # type: (d.ServiceDescriptorProto, bool) -> None
+    def write_methods(
+        self, service: d.ServiceDescriptorProto, is_abstract: bool
+    ) -> None:
         l = self._write_line
         methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -519,8 +528,7 @@ class PkgWriter(object):
                 self._import_message(method.output_type),
             )
 
-    def write_services(self, services):
-        # type: (Iterable[d.ServiceDescriptorProto]) -> None
+    def write_services(self, services: Iterable[d.ServiceDescriptorProto]) -> None:
         l = self._write_line
         for service in [s for s in services if s.name not in PYTHON_RESERVED]:
             # The service definition interface
@@ -542,8 +550,7 @@ class PkgWriter(object):
                 )
                 self.write_methods(service, is_abstract=False)
 
-    def _import_casttype(self, casttype):
-        # type: (Text) -> Text
+    def _import_casttype(self, casttype: str) -> str:
         split = casttype.split(".")
         assert (
             len(split) == 2
@@ -551,8 +558,12 @@ class PkgWriter(object):
         pkg = split[0].replace("/", ".")
         return self._import(pkg, split[1])
 
-    def _map_key_value_types(self, map_field, key_field, value_field):
-        # type: (d.FieldDescriptorProto, d.FieldDescriptorProto, d.FieldDescriptorProto) -> Tuple[Text, Text]
+    def _map_key_value_types(
+        self,
+        map_field: d.FieldDescriptorProto,
+        key_field: d.FieldDescriptorProto,
+        value_field: d.FieldDescriptorProto,
+    ) -> Tuple[str, str]:
         key_casttype = map_field.options.Extensions[extensions_pb2.keytype]
         ktype = (
             self._import_casttype(key_casttype)
@@ -567,22 +578,19 @@ class PkgWriter(object):
         )
         return ktype, vtype
 
-    def _input_type(self, method):
-        # type: (d.MethodDescriptorProto) -> Text
+    def _input_type(self, method: d.MethodDescriptorProto) -> str:
         result = self._import_message(method.input_type)
         if method.client_streaming:
             result = "{}[{}]".format(self._import("typing", "Iterator"), result)
         return result
 
-    def _output_type(self, method):
-        # type: (d.MethodDescriptorProto) -> Text
+    def _output_type(self, method: d.MethodDescriptorProto) -> str:
         result = self._import_message(method.output_type)
         if method.server_streaming:
             result = "{}[{}]".format(self._import("typing", "Iterator"), result)
         return result
 
-    def write_grpc_methods(self, service):
-        # type: (d.ServiceDescriptorProto) -> None
+    def write_grpc_methods(self, service: d.ServiceDescriptorProto) -> None:
         l = self._write_line
         methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -597,8 +605,7 @@ class PkgWriter(object):
             l(") -> {}: ...", self._output_type(method))
             l("")
 
-    def write_grpc_stub_methods(self, service):
-        # type: (d.ServiceDescriptorProto) -> None
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto) -> None:
         l = self._write_line
         methods = [m for m in service.method if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -611,8 +618,7 @@ class PkgWriter(object):
             l(") -> {}: ...", self._output_type(method))
             l("")
 
-    def write_grpc_services(self, services):
-        # type: (Iterable[d.ServiceDescriptorProto]) -> None
+    def write_grpc_services(self, services: Iterable[d.ServiceDescriptorProto]) -> None:
         l = self._write_line
         l(
             "from .{} import *",
@@ -646,13 +652,12 @@ class PkgWriter(object):
             )
             l("")
 
-    def python_type(self, field):
-        # type: (d.FieldDescriptorProto) -> Text
+    def python_type(self, field: d.FieldDescriptorProto) -> str:
         casttype = field.options.Extensions[extensions_pb2.casttype]
         if casttype:
             return self._import_casttype(casttype)
 
-        mapping = {
+        mapping: Dict[d.FieldDescriptorProto.TypeValue, Callable[[], str]] = {
             d.FieldDescriptorProto.TYPE_DOUBLE: lambda: self._builtin("float"),
             d.FieldDescriptorProto.TYPE_FLOAT: lambda: self._builtin("float"),
             d.FieldDescriptorProto.TYPE_INT64: lambda: self._builtin("int"),
@@ -677,13 +682,12 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(
                 field.type_name
             ),
-        }  # type: Dict[d.FieldDescriptorProto.TypeValue, Callable[[], Text]]
+        }
 
         assert field.type in mapping, "Unrecognized type: " + repr(field.type)
         return mapping[field.type]()
 
-    def write(self):
-        # type: () -> Text
+    def write(self) -> str:
         for reexport_idx in self.fd.public_dependency:
             reexport_file = self.fd.dependency[reexport_idx]
             reexport_fd = self.descriptors.to_generate[reexport_file]
@@ -718,16 +722,19 @@ class PkgWriter(object):
         return "\n".join(imports + self.lines)
 
 
-def is_scalar(fd):
-    # type: (d.FieldDescriptorProto) -> bool
+def is_scalar(fd: d.FieldDescriptorProto) -> bool:
     return not (
         fd.type == d.FieldDescriptorProto.TYPE_MESSAGE
         or fd.type == d.FieldDescriptorProto.TYPE_GROUP
     )
 
 
-def generate_mypy_stubs(descriptors, response, quiet, nomangle):
-    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool, bool) -> None
+def generate_mypy_stubs(
+    descriptors: Descriptors,
+    response: plugin_pb2.CodeGeneratorResponse,
+    quiet: bool,
+    nomangle: bool,
+) -> None:
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors, nomangle)
         if not fd.public_dependency:
@@ -747,8 +754,12 @@ def generate_mypy_stubs(descriptors, response, quiet, nomangle):
             print("Writing mypy to", output.name, file=sys.stderr)
 
 
-def generate_mypy_grpc_stubs(descriptors, response, quiet, nomangle):
-    # type: (Descriptors, plugin_pb2.CodeGeneratorResponse, bool, bool) -> None
+def generate_mypy_grpc_stubs(
+    descriptors: Descriptors,
+    response: plugin_pb2.CodeGeneratorResponse,
+    quiet: bool,
+    nomangle: bool,
+) -> None:
     for name, fd in six.iteritems(descriptors.to_generate):
         pkg_writer = PkgWriter(fd, descriptors, nomangle)
         pkg_writer.write_grpc_services(fd.service)
@@ -762,40 +773,10 @@ def generate_mypy_grpc_stubs(descriptors, response, quiet, nomangle):
             print("Writing mypy to", output.name, file=sys.stderr)
 
 
-class Descriptors(object):
-    def __init__(self, request):
-        # type: (plugin_pb2.CodeGeneratorRequest) -> None
-        files = {f.name: f for f in request.proto_file}
-        to_generate = {n: files[n] for n in request.file_to_generate}
-        self.files = files  # type: Dict[Text, d.FileDescriptorProto]
-        self.to_generate = to_generate  # type: Dict[Text, d.FileDescriptorProto]
-        self.messages = {}  # type: Dict[Text, d.DescriptorProto]
-        self.message_to_fd = {}  # type: Dict[Text, d.FileDescriptorProto]
-
-        def _add_enums(enums, prefix, _fd):
-            # type: (RepeatedCompositeFieldContainer[d.EnumDescriptorProto], Text, d.FileDescriptorProto) -> None
-            for enum in enums:
-                self.message_to_fd[prefix + enum.name] = _fd
-                self.message_to_fd[prefix + enum.name + ".V"] = _fd
-
-        def _add_messages(messages, prefix, _fd):
-            # type: (RepeatedCompositeFieldContainer[d.DescriptorProto], Text, d.FileDescriptorProto) -> None
-            for message in messages:
-                self.messages[prefix + message.name] = message
-                self.message_to_fd[prefix + message.name] = _fd
-                sub_prefix = prefix + message.name + "."
-                _add_messages(message.nested_type, sub_prefix, _fd)
-                _add_enums(message.enum_type, sub_prefix, _fd)
-
-        for fd in request.proto_file:
-            start_prefix = "." + fd.package + "." if fd.package else "."
-            _add_messages(fd.message_type, start_prefix, fd)
-            _add_enums(fd.enum_type, start_prefix, fd)
-
-
 @contextmanager
-def code_generation():
-    # type: () -> Generator[Tuple[Any, Any], None, None]
+def code_generation() -> Generator[
+    Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None, None
+]:
     # Read request message from stdin
     if six.PY3:
         data = sys.stdin.buffer.read()
@@ -810,8 +791,8 @@ def code_generation():
     response = plugin_pb2.CodeGeneratorResponse()
 
     # Declare support for optional proto3 fields
-    response.supported_features |= (  # type: ignore[attr-defined]  # https://github.com/dropbox/mypy-protobuf/issues/158
-        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL  # type: ignore[attr-defined]
+    response.supported_features |= (
+        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL
     )
 
     yield request, response
@@ -826,8 +807,7 @@ def code_generation():
         sys.stdout.write(output)
 
 
-def main():
-    # type: () -> None
+def main() -> None:
     # Generate mypy
     with code_generation() as (request, response):
         generate_mypy_stubs(
@@ -838,8 +818,7 @@ def main():
         )
 
 
-def grpc():
-    # type: () -> None
+def grpc() -> None:
     # Generate grpc mypy
     with code_generation() as (request, response):
         generate_mypy_grpc_stubs(
