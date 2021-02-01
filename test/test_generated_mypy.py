@@ -101,7 +101,7 @@ def test_generate_mypy_matches():
         ]  # Eg. [testproto, dot/com]
         components.append(last)  # Eg. [testproto, dot/com, test_pb2.proto]
 
-        output = os.path.join("generated", *components)
+        output = os.path.join("test", "generated", *components)
 
         failures.append(compare_pyi_to_expected(output))
 

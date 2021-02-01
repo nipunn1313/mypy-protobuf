@@ -10,7 +10,7 @@ PY_VER_MYPY_TARGET=${PY_VER_MYPY_TARGET:=3.8}
 PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.6}
 
 # Clean out generated/ directory - except for .generated / __init__.py
-find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
+find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
 
 (
     eval "$(pyenv init -)"
@@ -36,18 +36,18 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
 
     PROTOC_ARGS="--proto_path=proto/ --experimental_allow_proto3_optional"
     # Compile protoc -> python
-    $PROTOC $PROTOC_ARGS --python_out=generated `find proto -name "*.proto"`
+    $PROTOC $PROTOC_ARGS --python_out=test/generated `find proto -name "*.proto"`
 
     # Compile protoc -> mypy using mypy_protobuf
     # Prereq - create the mypy.proto python proto
     $PROTOC $PROTOC_ARGS --python_out=. `find proto/mypy_protobuf -name "*.proto"`
     $PROTOC $PROTOC_ARGS --mypy_out=. `find proto/mypy_protobuf -name "*.proto"`
-    $PROTOC $PROTOC_ARGS --mypy_out=generated `find proto -name "*.proto"`
+    $PROTOC $PROTOC_ARGS --mypy_out=test/generated `find proto -name "*.proto"`
 
     # Compile GRPC
     GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
-    $PROTOC $PROTOC_ARGS --mypy_grpc_out=generated $GRPC_PROTOS
-    python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=generated $GRPC_PROTOS
+    $PROTOC $PROTOC_ARGS --mypy_grpc_out=test/generated $GRPC_PROTOS
+    python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=test/generated $GRPC_PROTOS
 )
 
 (
@@ -73,8 +73,8 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     # Run mypy
     mypy --version
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
-    FILES27="$(find test -name "*.py" | grep -v grpc)  $(find generated -name "*.pyi" | grep -v grpc)"
-    FILES38="mypy_protobuf/main.py test/ generated/"
+    FILES27="$(ls test/*.py | grep -v grpc)  $(find test/generated -name "*.pyi" | grep -v grpc)"
+    FILES38="mypy_protobuf/main.py test/"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         FILES=$FILES27
     else
@@ -118,5 +118,5 @@ find generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -de
     python --version
     py.test --version
     if [[ $PY_VER_UNIT_TESTS =~ ^2.* ]]; then IGNORE="--ignore=test/test_grpc_usage.py"; else IGNORE=""; fi
-    PYTHONPATH=generated py.test --ignore=generated $IGNORE -v
+    PYTHONPATH=test/generated py.test --ignore=test/generated $IGNORE -v
 )
