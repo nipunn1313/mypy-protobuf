@@ -1,6 +1,6 @@
 mypy-protobuf: Generate mypy stub files from protobuf specs
 [![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/dropbox/mypy-protobuf/actions?query=branch%3Amaster)
-[![pypi](https://img.shields.io/pypi/v/mypy-protobuf)](https://pypi.org/project/mypy-protobuf/)
+[![pypi](https://img.shields.io/pypi/v/mypy-protobuf?logo=Pypi)](https://pypi.org/project/mypy-protobuf/)
 [![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/master/LICENSE)
 ===========================================================
 
