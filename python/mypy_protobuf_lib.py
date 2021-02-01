@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
-from __future__ import absolute_import, division, print_function
 import os
 
 import sys
@@ -21,7 +20,6 @@ from typing import (
 )
 
 import google.protobuf.descriptor_pb2 as d
-import six
 from google.protobuf.compiler import plugin_pb2 as plugin_pb2
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 from google.protobuf.internal.well_known_types import WKTBASES
@@ -709,7 +707,7 @@ class PkgWriter(object):
         imports = []
         if self.builtin_vars or self.py2_builtin_vars:
             imports.append(u"import builtins")
-        for pkg, items in sorted(six.iteritems(self.imports)):
+        for pkg, items in sorted(self.imports.items()):
             imports.append(u"from {} import (".format(pkg))
             for (name, reexport_name) in sorted(items):
                 if reexport_name is None:
@@ -735,7 +733,7 @@ def generate_mypy_stubs(
     quiet: bool,
     nomangle: bool,
 ) -> None:
-    for name, fd in six.iteritems(descriptors.to_generate):
+    for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(fd, descriptors, nomangle)
         if not fd.public_dependency:
             pkg_writer.write_module_attributes()
@@ -760,7 +758,7 @@ def generate_mypy_grpc_stubs(
     quiet: bool,
     nomangle: bool,
 ) -> None:
-    for name, fd in six.iteritems(descriptors.to_generate):
+    for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(fd, descriptors, nomangle)
         pkg_writer.write_grpc_services(fd.service)
 
@@ -778,10 +776,7 @@ def code_generation() -> Generator[
     Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None, None
 ]:
     # Read request message from stdin
-    if six.PY3:
-        data = sys.stdin.buffer.read()
-    else:
-        data = sys.stdin.read()
+    data = sys.stdin.buffer.read()
 
     # Parse request
     request = plugin_pb2.CodeGeneratorRequest()
@@ -801,10 +796,7 @@ def code_generation() -> Generator[
     output = response.SerializeToString()
 
     # Write to stdout
-    if six.PY3:
-        sys.stdout.buffer.write(output)
-    else:
-        sys.stdout.write(output)
+    sys.stdout.buffer.write(output)
 
 
 def main() -> None:
