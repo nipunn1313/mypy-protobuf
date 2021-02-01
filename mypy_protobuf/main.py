@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
+from __future__ import annotations
 import os
 
 import sys
@@ -94,7 +95,7 @@ class Descriptors(object):
         self.message_to_fd: Dict[str, d.FileDescriptorProto] = {}
 
         def _add_enums(
-            enums: "RepeatedCompositeFieldContainer[d.EnumDescriptorProto]",
+            enums: RepeatedCompositeFieldContainer[d.EnumDescriptorProto],
             prefix: str,
             _fd: d.FileDescriptorProto,
         ) -> None:
@@ -103,7 +104,7 @@ class Descriptors(object):
                 self.message_to_fd[prefix + enum.name + ".V"] = _fd
 
         def _add_messages(
-            messages: "RepeatedCompositeFieldContainer[d.DescriptorProto]",
+            messages: RepeatedCompositeFieldContainer[d.DescriptorProto],
             prefix: str,
             _fd: d.FileDescriptorProto,
         ) -> None:
