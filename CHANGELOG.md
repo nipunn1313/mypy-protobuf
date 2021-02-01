@@ -6,6 +6,7 @@ Non Backward Compatible Changes
 allowing the caller to import `MyEnum` rather than conditionally importing `MyEnumValue`
 - Rename extensions proto from `mypy/mypy.proto` to `mypy_protobuf/extensions.proto`
 - Disallow `None` as argument for primitive fields of constructors in proto3.
+- Deprecate and delete the go/ implementation
 
 Other Changes
 - Support for `grpcio` stubs generation
