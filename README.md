@@ -4,14 +4,15 @@ mypy-protobuf: Generate mypy stub files from protobuf specs ![CI](https://github
 ## Requirements
 [protoc](https://github.com/protocolbuffers/protobuf/releases) 3.14.0 or greater
 [python-protobuf >= 3.14.0](https://pypi.org/project/protobuf/)
-python 2.7, 3.6, 3.7, 3.8
+python 3.6, 3.7, 3.8
 [mypy >= v0.800](https://pypi.org/project/mypy)
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
 
-## Python Implementation
-There is a python implementation of the plugin in `python/protoc-gen-mypy`. On windows
-you will have to use `python/protoc_gen_mypy.bat` for the executable.
+## Implementation
+The implementation of the plugin is in `python/mypy_protobuf_lib.py`, which installs to
+a posix executable protoc-gen-mypy.
+On windows you will have to use `protoc_gen_mypy.bat` for the executable.
 
 The plugin can be installed with
 ```
@@ -28,10 +29,6 @@ protoc --plugin=protoc-gen-mypy=path/to/protoc-gen-mypy --python_out=output/loca
 On windows, provide the bat file:
 ```
 protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/location --mypy_out=output/location
-```
-To suppress output, you can run
-```
-protoc --python_out=output/location --mypy_out=quiet:output/location
 ```
 
 ## Features
@@ -88,6 +85,16 @@ UserId = NewType("UserId", int)
 Email = NewType("Email", Text)
 ```
 
+### `py_generic_services`
+If `py_generic_services` is set in your proto file, then mypy-protobuf will
+generate service stubs. If you want GRPC stubs instead - use the GRPC instructions.
+
+### Output suppression
+To suppress output, you can run
+```
+protoc --python_out=output/location --mypy_out=quiet:output/location
+```
+
 ## GRPC
 
 This plugin provides stubs generation for grpcio generated code.
@@ -102,17 +109,6 @@ protoc \
 Note that generated code for grpc will work only together with code for python and locations should be the same.
 If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs 
 
-
-## Go Implementation
-There is a go implementation of the plugin in `go/src/protoc-gen-mypy`.
-The import sort order can be customized to split between stdlib and project protos
-by changing the `project` const at the top of the file (we use dropbox since our
-proto files are namespaced under dropbox/)
-
-To build the plugin: `go get github.com/dropbox/mypy-protobuf/go/src/protoc-gen-mypy`.
-
-The plugin can be used by adding the built target to the command line
-when running `protoc` (in addition to the normal plugin for output languages).
 
 ## Support
 Dropbox internally uses both implementations. We internally directly use the python implementation.
