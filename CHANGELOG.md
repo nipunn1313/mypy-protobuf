@@ -4,25 +4,31 @@ Non Backward Compatible Changes
 - Dropping support for running mypy-protobuf in python <= 3.5. Note you can still generate stubs target-compatible to python2
 - Type proto Enum values for as `MyEnum.V` rather than `MyEnumValue` for import ergonomics,
 allowing the caller to import `MyEnum` rather than conditionally importing `MyEnumValue`
-- Rename extensions proto from `mypy/mypy.proto` to `mypy_protobuf/extensions.proto`
 - Disallow `None` as argument for primitive fields of constructors in proto3.
-- Deprecate and delete the go/ implementation
-- Flatten directory structure (remove python subdirectory). Updated unreleased installation instructions.
 
-Other Changes
+New Features
 - Support for `grpcio` stubs generation
 - Allow `mypy_protobuf.py` to be run directly as a script
 - Add support for proto's [`well_known_types`](https://developers.google.com/protocol-buffers/docs/reference/python-generated#wkt)
 - Support message fields named `self` - by renaming the constructor's `self` to `self_`
+- Rename extensions proto from `mypy/mypy.proto` to `mypy_protobuf/extensions.proto`
 - Add support for mypy-proto extensions `mypy_protobuf.casttype`, `mypy_protobuf.keytype`, and `mypy_protobuf.valuetype`
+- Add support for `import public` proto imports - by reexporting in generated code
+
+Output Format
+- Generate fully qualified references rather than mangling
 - Import builtins library rather than mangling builtins
+- Use fully qualified names rather than mangling imports
+- Add support for nomangle parameter for mangle-free output code (in many cases this is good enough and easier to read)
 - Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
 - Avoid importing google.protobuf.message.Message unless it's needed
-- Add support for nomangle parameter for mangle-free output code (in many cases this is good enough and easier to read)
-- Add support for `import public` proto imports - by reexporting in generated code
+
+Internal Improvements
+- Add support for python 3.9 to CI
 - Update mypy-protobuf CI to target 3.8 rather than 3.5
 - Inline mypy annotations, eliminate six, and remove `__future__` import in `mypy_protobuf_lib.py`
-- Add support for python 3.9
+- Flatten directory structure (remove python subdirectory). Updated unreleased installation instructions.
+- Deprecate and delete the go/ implementation
 
 ## 1.24
 
