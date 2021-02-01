@@ -15,10 +15,6 @@ from testproto.test3_pb2 import (
     OuterEnum as testproto___test3_pb2___OuterEnum,
 )
 
-from typing import (
-    Optional as typing___Optional,
-)
-
 from typing_extensions import (
     Literal as typing_extensions___Literal,
 )
@@ -32,7 +28,7 @@ class Inner(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a : typing___Optional[testproto___test3_pb2___OuterEnum.V] = ...,
+        a : testproto___test3_pb2___OuterEnum.V = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a",b"a"]) -> None: ...
 type___Inner = Inner

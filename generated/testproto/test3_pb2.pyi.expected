@@ -57,7 +57,7 @@ class OuterMessage3(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a_bool : typing___Optional[builtins.bool] = ...,
+        a_bool : builtins.bool = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"a_bool",b"a_bool"]) -> None: ...
 type___OuterMessage3 = OuterMessage3
@@ -81,8 +81,8 @@ class SimpleProto3(google___protobuf___message___Message):
 
         def __init__(self,
             *,
-            key : typing___Optional[builtins.int] = ...,
-            value : typing___Optional[typing___Text] = ...,
+            key : builtins.int = ...,
+            value : typing___Text = ...,
             ) -> None: ...
         def ClearField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> None: ...
     type___MapScalarEntry = MapScalarEntry
@@ -96,7 +96,7 @@ class SimpleProto3(google___protobuf___message___Message):
 
         def __init__(self,
             *,
-            key : typing___Optional[builtins.int] = ...,
+            key : builtins.int = ...,
             value : typing___Optional[type___OuterMessage3] = ...,
             ) -> None: ...
         def HasField(self, field_name: typing_extensions___Literal[u"value",b"value"]) -> builtins.bool: ...
@@ -136,24 +136,24 @@ class SimpleProto3(google___protobuf___message___Message):
 
     def __init__(self,
         *,
-        a_string : typing___Optional[typing___Text] = ...,
+        a_string : typing___Text = ...,
         a_repeated_string : typing___Optional[typing___Iterable[typing___Text]] = ...,
-        a_outer_enum : typing___Optional[type___OuterEnum.V] = ...,
+        a_outer_enum : type___OuterEnum.V = ...,
         outer_message : typing___Optional[type___OuterMessage3] = ...,
-        inner_enum : typing___Optional[type___SimpleProto3.InnerEnum.V] = ...,
-        a_oneof_1 : typing___Optional[typing___Text] = ...,
-        a_oneof_2 : typing___Optional[typing___Text] = ...,
+        inner_enum : type___SimpleProto3.InnerEnum.V = ...,
+        a_oneof_1 : typing___Text = ...,
+        a_oneof_2 : typing___Text = ...,
         outer_message_in_oneof : typing___Optional[type___OuterMessage3] = ...,
-        outer_enum_in_oneof : typing___Optional[type___OuterEnum.V] = ...,
-        inner_enum_in_oneof : typing___Optional[type___SimpleProto3.InnerEnum.V] = ...,
-        b_oneof_1 : typing___Optional[typing___Text] = ...,
-        b_oneof_2 : typing___Optional[typing___Text] = ...,
+        outer_enum_in_oneof : type___OuterEnum.V = ...,
+        inner_enum_in_oneof : type___SimpleProto3.InnerEnum.V = ...,
+        b_oneof_1 : typing___Text = ...,
+        b_oneof_2 : typing___Text = ...,
         bool : typing___Optional[type___OuterMessage3] = ...,
-        OuterEnum : typing___Optional[type___OuterEnum.V] = ...,
+        OuterEnum : type___OuterEnum.V = ...,
         OuterMessage3 : typing___Optional[type___OuterMessage3] = ...,
         map_scalar : typing___Optional[typing___Mapping[builtins.int, typing___Text]] = ...,
         map_message : typing___Optional[typing___Mapping[builtins.int, type___OuterMessage3]] = ...,
-        an_optional_string : typing___Optional[typing___Text] = ...,
+        an_optional_string : typing___Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"OuterMessage3",b"OuterMessage3",u"_an_optional_string",b"_an_optional_string",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"an_optional_string",b"an_optional_string",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"OuterEnum",b"OuterEnum",u"OuterMessage3",b"OuterMessage3",u"_an_optional_string",b"_an_optional_string",u"a_oneof",b"a_oneof",u"a_oneof_1",b"a_oneof_1",u"a_oneof_2",b"a_oneof_2",u"a_outer_enum",b"a_outer_enum",u"a_repeated_string",b"a_repeated_string",u"a_string",b"a_string",u"an_optional_string",b"an_optional_string",u"b_oneof",b"b_oneof",u"b_oneof_1",b"b_oneof_1",u"b_oneof_2",b"b_oneof_2",u"bool",b"bool",u"inner_enum",b"inner_enum",u"inner_enum_in_oneof",b"inner_enum_in_oneof",u"map_message",b"map_message",u"map_scalar",b"map_scalar",u"outer_enum_in_oneof",b"outer_enum_in_oneof",u"outer_message",b"outer_message",u"outer_message_in_oneof",b"outer_message_in_oneof"]) -> None: ...

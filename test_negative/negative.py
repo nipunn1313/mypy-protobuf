@@ -19,7 +19,7 @@ from testproto.test_pb2 import (
     Simple1,
     Simple2,
 )
-from testproto.test3_pb2 import OuterEnum, SimpleProto3
+from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
 from testproto.dot.com.test_pb2 import TestMessage
 from test.test_generated_mypy import Email, UserId
 
@@ -157,3 +157,7 @@ s8 = Simple1(user_id=55, email="abcd@gmail.com", email_by_uid={55: "abcd@gmail.c
 
 # Should not reexport inner.proto, since it doesn't have public tag.
 from testproto.reexport_pb2 import Inner  # E:2.7 E:3.8
+
+# In proto2 - you can pass in None for primitive, but not in proto3
+Simple2(a_string=None)
+OuterMessage3(a_bool=None)  # E:2.7 E:3.8
