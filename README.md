@@ -110,18 +110,12 @@ Note that generated code for grpc will work only together with code for python a
 If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs 
 
 
-## Support
-Dropbox internally uses both implementations. We internally directly use the python implementation.
-However, the go implementation here is a code drop from the Dropbox internal implementation with periodic
-re-upstreams. As a result, the python implementation will get more timely support. We encourage community
-contribution to improve quality/testing to bring both implementations to parity.
-
 ## Contributing
-Contributions to the implementations are welcome. Please run tests using `./run_test.sh`.
+Contributions to the implementation are welcome. Please run tests using `./run_test.sh`.
 Ensure code is formatted using black.
 ```
 pip3 install black
-black python/ test/
+black python/ test/ --exclude python/proto
 ```
 
 ## Contributors
