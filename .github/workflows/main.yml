@@ -29,13 +29,13 @@ jobs:
 
           # Include py 3.6 - 3.8 for mypy-protobuf runtime
           - py-ver-mypy-protobuf: 3.6.12
-            py-ver-mypy-target: 3.5
+            py-ver-mypy-target: 3.8
             py-ver-unit-tests: 3.8.6
           - py-ver-mypy-protobuf: 3.7.9
-            py-ver-mypy-target: 3.5
+            py-ver-mypy-target: 3.8
             py-ver-unit-tests: 3.8.6
           - py-ver-mypy-protobuf: 3.8.6
-            py-ver-mypy-target: 3.5
+            py-ver-mypy-target: 3.8
             py-ver-unit-tests: 3.8.6
     steps:
       - name: Install Protoc
