@@ -3,52 +3,35 @@
 isort:skip_file
 """
 import builtins
-from google.protobuf.descriptor import (
-    Descriptor as google___protobuf___descriptor___Descriptor,
-    FileDescriptor as google___protobuf___descriptor___FileDescriptor,
-)
+import google.protobuf.descriptor
+import google.protobuf.internal.containers
+import google.protobuf.message
+import typing
+import typing_extensions
 
-from google.protobuf.internal.containers import (
-    RepeatedCompositeFieldContainer as google___protobuf___internal___containers___RepeatedCompositeFieldContainer,
-)
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
-from google.protobuf.message import (
-    Message as google___protobuf___message___Message,
-)
-
-from typing import (
-    Iterable as typing___Iterable,
-    Optional as typing___Optional,
-)
-
-from typing_extensions import (
-    Literal as typing_extensions___Literal,
-)
-
-
-DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
-
-class NoPackage(google___protobuf___message___Message):
-    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+class NoPackage(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
 
     def __init__(self,
         ) -> None: ...
 type___NoPackage = NoPackage
 
-class NoPackage2(google___protobuf___message___Message):
-    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+class NoPackage2(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
 
     @property
     def np(self) -> type___NoPackage: ...
 
     @property
-    def np_rep(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[type___NoPackage]: ...
+    def np_rep(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[type___NoPackage]: ...
 
     def __init__(self,
         *,
-        np : typing___Optional[type___NoPackage] = ...,
-        np_rep : typing___Optional[typing___Iterable[type___NoPackage]] = ...,
+        np : typing.Optional[type___NoPackage] = ...,
+        np_rep : typing.Optional[typing.Iterable[type___NoPackage]] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"np",b"np"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"np",b"np",u"np_rep",b"np_rep"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[u"np",b"np"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[u"np",b"np",u"np_rep",b"np_rep"]) -> None: ...
 type___NoPackage2 = NoPackage2

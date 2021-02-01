@@ -75,8 +75,6 @@ PYTHON_RESERVED = {
     "yield",
 }
 
-PY2_ONLY_BUILTINS = {"buffer", "unicode"}
-
 
 # Identifiers are mangled so that they don't conflict with
 # field names.
@@ -134,12 +132,12 @@ class PkgWriter(object):
         self.lines: List[str] = []
         self.indent = ""
 
+        # Set of {x}, where {x} corresponds to to `import {x}`
+        self.imports: Set[str] = set()
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
-        self.imports: Dict[str, Set[Tuple[str, Optional[str]]]] = defaultdict(set)
+        self.from_imports: Dict[str, Set[Tuple[str, Optional[str]]]] = defaultdict(set)
         self.locals: Set[str] = set()
-        self.builtin_vars: Set[str] = set()
-        self.py2_builtin_vars: Set[str] = set()
 
     def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
@@ -147,12 +145,11 @@ class PkgWriter(object):
         """
         imp = path.replace("/", ".")
         if self.nomangle:
-            self.imports[imp].add((name, None))
+            self.from_imports[imp].add((name, None))
             return name
         else:
-            mangled_name = imp.replace(".", "___") + "___" + name
-            self.imports[imp].add((name, mangled_name))
-            return mangled_name
+            self.imports.add(imp)
+            return imp + "." + name
 
     def _import_message(self, name: str) -> str:
         """Import a referenced message and return a handle"""
@@ -186,11 +183,7 @@ class PkgWriter(object):
         return import_name + "." + remains
 
     def _builtin(self, name: str) -> str:
-        if name in PY2_ONLY_BUILTINS:
-            self.py2_builtin_vars.add(name)
-        else:
-            self.builtin_vars.add(name)
-        return "builtins.{}".format(name)
+        return self._import("builtins", name)
 
     @contextmanager
     def _indent(self) -> Generator:
@@ -708,22 +701,23 @@ class PkgWriter(object):
 
             if names:
                 # n,n to force a reexport (from x import y as y)
-                self.imports[reexport_imp].update((n, n) for n in names)
+                self.from_imports[reexport_imp].update((n, n) for n in names)
 
-        imports = []
-        if self.builtin_vars or self.py2_builtin_vars:
-            imports.append(u"import builtins")
-        for pkg, items in sorted(self.imports.items()):
-            imports.append(u"from {} import (".format(pkg))
+        import_lines = []
+        for pkg in sorted(self.imports):
+            import_lines.append(u"import {}".format(pkg))
+
+        for pkg, items in sorted(self.from_imports.items()):
+            import_lines.append(u"from {} import (".format(pkg))
             for (name, reexport_name) in sorted(items):
                 if reexport_name is None:
-                    imports.append(u"    {},".format(name))
+                    import_lines.append(u"    {},".format(name))
                 else:
-                    imports.append(u"    {} as {},".format(name, reexport_name))
-            imports.append(u")\n")
-        imports.append("")
+                    import_lines.append(u"    {} as {},".format(name, reexport_name))
+            import_lines.append(u")\n")
+        import_lines.append("")
 
-        return "\n".join(imports + self.lines)
+        return "\n".join(import_lines + self.lines)
 
 
 def is_scalar(fd: d.FieldDescriptorProto) -> bool:

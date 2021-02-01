@@ -3,44 +3,25 @@
 isort:skip_file
 """
 import builtins
-from google.protobuf.descriptor import (
-    Descriptor as google___protobuf___descriptor___Descriptor,
-    FileDescriptor as google___protobuf___descriptor___FileDescriptor,
-)
+import google.protobuf.descriptor
+import google.protobuf.internal.extension_dict
+import google.protobuf.message
+import testproto.test_pb2
+import typing
+import typing_extensions
 
-from google.protobuf.internal.extension_dict import (
-    _ExtensionFieldDescriptor as google___protobuf___internal___extension_dict____ExtensionFieldDescriptor,
-)
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
-from google.protobuf.message import (
-    Message as google___protobuf___message___Message,
-)
-
-from testproto.test_pb2 import (
-    Simple2 as testproto___test_pb2___Simple2,
-)
-
-from typing import (
-    Optional as typing___Optional,
-)
-
-from typing_extensions import (
-    Literal as typing_extensions___Literal,
-)
-
-
-DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
-
-class SeparateFileExtension(google___protobuf___message___Message):
-    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+class SeparateFileExtension(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     flag: builtins.bool = ...
 
-    ext: google___protobuf___internal___extension_dict____ExtensionFieldDescriptor[testproto___test_pb2___Simple2, type___SeparateFileExtension] = ...
+    ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, type___SeparateFileExtension] = ...
 
     def __init__(self,
         *,
-        flag : typing___Optional[builtins.bool] = ...,
+        flag : typing.Optional[builtins.bool] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"flag",b"flag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"flag",b"flag"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[u"flag",b"flag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[u"flag",b"flag"]) -> None: ...
 type___SeparateFileExtension = SeparateFileExtension

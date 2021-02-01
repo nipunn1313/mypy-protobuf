@@ -3,28 +3,15 @@
 isort:skip_file
 """
 import builtins
-from google.protobuf.descriptor import (
-    Descriptor as google___protobuf___descriptor___Descriptor,
-    FileDescriptor as google___protobuf___descriptor___FileDescriptor,
-)
+import google.protobuf.descriptor
+import google.protobuf.internal.well_known_types
+import google.protobuf.message
+import typing_extensions
 
-from google.protobuf.internal.well_known_types import (
-    Duration as google___protobuf___internal___well_known_types___Duration,
-)
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
-from google.protobuf.message import (
-    Message as google___protobuf___message___Message,
-)
-
-from typing_extensions import (
-    Literal as typing_extensions___Literal,
-)
-
-
-DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
-
-class Duration(google___protobuf___message___Message, google___protobuf___internal___well_known_types___Duration):
-    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+class Duration(google.protobuf.message.Message, google.protobuf.internal.well_known_types.Duration):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     seconds: builtins.int = ...
     nanos: builtins.int = ...
 
@@ -33,5 +20,5 @@ class Duration(google___protobuf___message___Message, google___protobuf___intern
         seconds : builtins.int = ...,
         nanos : builtins.int = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"nanos",b"nanos",u"seconds",b"seconds"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal[u"nanos",b"nanos",u"seconds",b"seconds"]) -> None: ...
 type___Duration = Duration
