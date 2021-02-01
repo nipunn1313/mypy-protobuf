@@ -4,7 +4,8 @@ Non Backward Compatible Changes
 - Dropping support for running mypy-protobuf in python <= 3.5. Note you can still generate stubs target-compatible to python2
 - Type proto Enum values for as `MyEnum.V` rather than `MyEnumValue` for import ergonomics,
 allowing the caller to import `MyEnum` rather than conditionally importing `MyEnumValue`
-- Disallow `None` as argument for primitive fields of constructors in proto3.
+- Default disallow `None` as argument for primitive fields of constructors in proto3.
+Provided `relax_strict_optional_primitives` flag to relax this strictness if you prefer.
 
 New Features
 - Support for `grpcio` stubs generation

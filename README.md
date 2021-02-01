@@ -121,6 +121,18 @@ If you're ok with this risk, try it out!
 protoc --python_out=output/location --mypy_out=readable_stubs:output/location
 ```
 
+### `relax_strict_optional_primitives`
+
+If you are using proto3, then primitives cannot be represented as NULL on the wire -
+only as their zero value. By default mypy-protobuf types message constructors to have
+non-nullable primitives (eg `int` instead of `Optional[int]`). python-protobuf itself will
+internally convert None -> zero value, and if you intentionally want to use this behavior,
+set this! We recommend avoiding this, but it may be helpful when migrating existing proto2 code.
+
+```
+protoc --python_out=output/location --mypy_out=relax_strict_optional_primitives:output/location
+```
+
 ### Output suppression
 To suppress output, you can run
 ```
