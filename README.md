@@ -10,7 +10,7 @@ See [Changelog](CHANGELOG.md) for recent changes
 
 [protoc](https://github.com/protocolbuffers/protobuf/releases) 3.14.0 or greater
 [python-protobuf >= 3.14.0](https://pypi.org/project/protobuf/)
-python 3.6, 3.7, 3.8
+python >= 3.6 - for running mypy-protobuf plugin. (It will generate stubs compatible back to python2)
 [mypy >= v0.800](https://pypi.org/project/mypy)
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
@@ -74,7 +74,7 @@ FOO = MyEnum.V(0)
 BAR = MyEnum.V(1)
 ```
 
-You can type your calling code as follows. Note that the type of `x` must be quoted
+Calling code may be typed as follows. Note that the type of `x` must be quoted
 until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) supports `V`
 ```
 def f(x: 'MyEnum.V'):

@@ -21,6 +21,7 @@ Other Changes
 - Add support for `import public` proto imports - by reexporting in generated code
 - Update mypy-protobuf CI to target 3.8 rather than 3.5
 - Inline mypy annotations, eliminate six, and remove `__future__` import in `mypy_protobuf_lib.py`
+- Add support for python 3.9
 
 ## 1.24
 
