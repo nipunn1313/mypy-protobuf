@@ -76,12 +76,17 @@ PYTHON_RESERVED = {
 }
 
 
-# Identifiers are mangled so that they don't conflict with
-# field names.
-def _mangle_message(name: str) -> str:
-    """Enum variant `Name` might conflict with a message or enum named `Name`, so
-    mangle it with a type__ prefix for internal references"""
-    return "type___{}".format(name)
+def _mangle_global_identifier(name: str) -> str:
+    """
+    Module level identifiers are mangled and aliased so that they can be disambiguated
+    from fields/enum variants with the same name within the file.
+
+    Eg:
+    Enum variant `Name` or message field `Name` might conflict with a top level
+    message or enum named `Name`, so mangle it with a global___ prefix for
+    internal references. Note that this doesn't affect inner enums/messages
+    because they get fuly qualified when referenced within a file"""
+    return "global___{}".format(name)
 
 
 class Descriptors(object):
@@ -166,7 +171,7 @@ class PkgWriter(object):
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
-            return _mangle_message(name)
+            return _mangle_global_identifier(name)
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
@@ -222,7 +227,8 @@ class PkgWriter(object):
     ) -> None:
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            l("{} = {}", _mangle_message(enum.name), enum.name)
+            if prefix == "":
+                l("{} = {}", _mangle_global_identifier(enum.name), enum.name)
             l(
                 "class {}({}[{}], {}):",
                 "_" + enum.name,
@@ -412,7 +418,8 @@ class PkgWriter(object):
 
                 self.write_stringly_typed_fields(desc)
 
-            l("{} = {}", _mangle_message(desc.name), desc.name)
+            if prefix == "":
+                l("{} = {}", _mangle_global_identifier(desc.name), desc.name)
             l("")
 
     def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:
