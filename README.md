@@ -32,7 +32,7 @@ pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=p
 ```
 
 ## Implementation
-The implementation of the plugin is in `python/mypy_protobuf_lib.py`, which installs to
+The implementation of the plugin is in `mypy_protobuf/main.py`, which installs to
 a posix executable protoc-gen-mypy.
 On windows you will have to use `protoc_gen_mypy.bat` for the executable.
 

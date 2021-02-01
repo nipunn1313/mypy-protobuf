@@ -82,7 +82,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     fi
     mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
 
-    # run mypy on negative-tests (expected failures)
+    # run mypy on negative-tests (expected mypy failures)
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
     NEGATIVE_FILES_27="test_negative/negative.py test_negative/negative_2.7.py $FILES27"
     NEGATIVE_FILES_38="test_negative/negative.py test_negative/negative_3.8.py $FILES38"
