@@ -23,7 +23,10 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
         python -m virtualenv $VENV
     fi
     source $VENV/bin/activate
-    python -m pip install . -r requirements.txt
+    if [[ -z $SKIP_CLEAN ]]; then
+        python -m pip install -r requirements.txt
+        python -m pip install -e .
+    fi
 
     # Generate protos
     python --version
@@ -64,7 +67,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
         python3 -m virtualenv $VENV
     fi
     source $VENV/bin/activate
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+    if [[ -z $SKIP_CLEAN ]]; then
         python3 -m pip install setuptools
         python3 -m pip install mypy==0.800
         python3 -m pip install -r requirements.txt
