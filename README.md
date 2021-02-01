@@ -1,7 +1,13 @@
-mypy-protobuf: Generate mypy stub files from protobuf specs ![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)![pypi](https://img.shields.io/pypi/v/mypy-protobuf)
+mypy-protobuf: Generate mypy stub files from protobuf specs
+[![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/dropbox/mypy-protobuf/actions?query=branch%3Amaster)
+[![pypi](https://img.shields.io/pypi/v/mypy-protobuf)](https://pypi.org/project/mypy-protobuf/)
+[![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/master/LICENSE)
 ===========================================================
 
 ## Requirements
+
+See [Changelog](CHANGELOG.md) for recent changes
+
 [protoc](https://github.com/protocolbuffers/protobuf/releases) 3.14.0 or greater
 [python-protobuf >= 3.14.0](https://pypi.org/project/protobuf/)
 python 3.6, 3.7, 3.8
@@ -9,15 +15,23 @@ python 3.6, 3.7, 3.8
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
 
-## Implementation
-The implementation of the plugin is in `python/mypy_protobuf_lib.py`, which installs to
-a posix executable protoc-gen-mypy.
-On windows you will have to use `protoc_gen_mypy.bat` for the executable.
+## Installation
 
 The plugin can be installed with
 ```
 pip install mypy-protobuf
 ```
+To install unreleased
+```
+REV=master  # or whichever unreleased git rev you'd like
+pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
+```
+
+## Implementation
+The implementation of the plugin is in `python/mypy_protobuf_lib.py`, which installs to
+a posix executable protoc-gen-mypy.
+On windows you will have to use `protoc_gen_mypy.bat` for the executable.
+
 On posix, ensure that the protoc-gen-mypy script installed onto your $PATH. Then run.
 ```
 protoc --python_out=output/location --mypy_out=output/location
@@ -32,6 +46,8 @@ protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/
 ```
 
 ## Features
+
+See [Changelog](CHANGELOG.md) for full listing
 
 ### Types enum int values more strongly
 
