@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 2.0
+
 Non Backward Compatible Changes
 - Dropping support for running mypy-protobuf in python <= 3.5. Note you can still generate stubs target-compatible to python2
 - Type proto Enum values for as `MyEnum.V` rather than `MyEnumValue` for import ergonomics,

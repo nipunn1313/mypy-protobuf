@@ -5,7 +5,8 @@ mypy-protobuf: Generate mypy stub files from protobuf specs
 [![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/master/LICENSE)
 ===========================================================
 
-See [Changelog](CHANGELOG.md) for recent changes
+We just released mypy-protobuf 2.0 on 02/02/2021! It includes some backward incompatible changes.
+See [Changelog](CHANGELOG.md) for recent changes.
 
 ## Requirements
 
