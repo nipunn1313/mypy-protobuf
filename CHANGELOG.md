@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Fix bug where module level `DESCRIPTOR: FileDescriptor` was not being generated for files w public imports
+
 ## 2.1
 
 - Fix crash when a import public reexport when dependent proto file is not listed on command line for generation
