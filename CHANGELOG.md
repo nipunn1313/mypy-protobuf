@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 2.1
+
 - Fix crash when a import public reexport when dependent proto file is not listed on command line for generation
 
 ## 2.0
