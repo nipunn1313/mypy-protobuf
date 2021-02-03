@@ -703,7 +703,7 @@ class PkgWriter(object):
     def write(self) -> str:
         for reexport_idx in self.fd.public_dependency:
             reexport_file = self.fd.dependency[reexport_idx]
-            reexport_fd = self.descriptors.to_generate[reexport_file]
+            reexport_fd = self.descriptors.files[reexport_file]
             reexport_imp = (
                 reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
             )

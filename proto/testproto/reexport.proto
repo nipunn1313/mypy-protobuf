@@ -4,5 +4,6 @@ package test3;
 
 // Should be reexported
 import public "testproto/test3.proto";
+import public "google/protobuf/empty.proto";
 // Not reexported
 import "testproto/inner/inner.proto";
