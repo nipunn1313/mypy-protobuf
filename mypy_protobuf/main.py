@@ -754,8 +754,7 @@ def generate_mypy_stubs(
         pkg_writer = PkgWriter(
             fd, descriptors, readable_stubs, relax_strict_optional_primitives
         )
-        if not fd.public_dependency:
-            pkg_writer.write_module_attributes()
+        pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type)
         pkg_writer.write_messages(fd.message_type, "")
         pkg_writer.write_extensions(fd.extension)
