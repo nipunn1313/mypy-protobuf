@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="mypy-protobuf",
-    version="2.1",
+    version="2.2",
     description="Generate mypy stub files from protobuf specs",
     keywords="mypy proto dropbox",
     license="Apache License 2.0",
@@ -14,7 +14,7 @@ setup(
         "mypy_protobuf.extensions_pb2",
     ],
     url="https://github.com/dropbox/mypy-protobuf",
-    download_url="https://github.com/dropbox/mypy-protobuf/archive/v2.1.tar.gz",
+    download_url="https://github.com/dropbox/mypy-protobuf/archive/v2.2.tar.gz",
     install_requires=["protobuf>=3.14.0"],
     entry_points={
         "console_scripts": [
