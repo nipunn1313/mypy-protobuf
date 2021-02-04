@@ -50,6 +50,8 @@ class Simple1(google.protobuf.message.Message):
 
     class EmailByUidEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int = ...
         value: typing.Text = ...
 
@@ -61,6 +63,29 @@ class Simple1(google.protobuf.message.Message):
         def HasField(self, field_name: typing_extensions.Literal[u"key",b"key",u"value",b"value"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal[u"key",b"key",u"value",b"value"]) -> None: ...
 
+    A_STRING_FIELD_NUMBER: builtins.int
+    A_REPEATED_STRING_FIELD_NUMBER: builtins.int
+    A_BOOLEAN_FIELD_NUMBER: builtins.int
+    A_UINT32_FIELD_NUMBER: builtins.int
+    A_ENUM_FIELD_NUMBER: builtins.int
+    A_EXTERNAL_ENUM_FIELD_NUMBER: builtins.int
+    A_INNER_FIELD_NUMBER: builtins.int
+    A_NESTED_FIELD_NUMBER: builtins.int
+    INNER_ENUM_FIELD_NUMBER: builtins.int
+    REP_INNER_ENUM_FIELD_NUMBER: builtins.int
+    INNER_MESSAGE_FIELD_NUMBER: builtins.int
+    REP_INNER_MESSAGE_FIELD_NUMBER: builtins.int
+    NO_PACKAGE_FIELD_NUMBER: builtins.int
+    NESTED_ENUM_FIELD_NUMBER: builtins.int
+    NESTED_MESSAGE_FIELD_NUMBER: builtins.int
+    A_ONEOF_1_FIELD_NUMBER: builtins.int
+    A_ONEOF_2_FIELD_NUMBER: builtins.int
+    OUTER_MESSAGE_IN_ONEOF_FIELD_NUMBER: builtins.int
+    OUTER_ENUM_IN_ONEOF_FIELD_NUMBER: builtins.int
+    INNER_ENUM_IN_ONEOF_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    EMAIL_FIELD_NUMBER: builtins.int
+    EMAIL_BY_UID_FIELD_NUMBER: builtins.int
     a_string: typing.Text = ...
     a_repeated_string: google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text] = ...
     a_boolean: builtins.bool = ...
@@ -134,6 +159,7 @@ global___Simple1 = Simple1
 
 class Simple2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    A_STRING_FIELD_NUMBER: builtins.int
     a_string: typing.Text = ...
 
     def __init__(self,
@@ -146,6 +172,7 @@ global___Simple2 = Simple2
 
 class Extensions1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    EXT1_STRING_FIELD_NUMBER: builtins.int
     ext1_string: typing.Text = ...
 
     ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions1] = ...
@@ -160,6 +187,7 @@ global___Extensions1 = Extensions1
 
 class Extensions2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    FLAG_FIELD_NUMBER: builtins.int
     flag: builtins.bool = ...
 
     foo: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions2] = ...
@@ -174,6 +202,35 @@ global___Extensions2 = Extensions2
 
 class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    FROM_FIELD_NUMBER: builtins.int
+    IN_FIELD_NUMBER: builtins.int
+    IS_FIELD_NUMBER: builtins.int
+    FOR_FIELD_NUMBER: builtins.int
+    TRY_FIELD_NUMBER: builtins.int
+    DEF_FIELD_NUMBER: builtins.int
+    NONLOCAL_FIELD_NUMBER: builtins.int
+    WHILE_FIELD_NUMBER: builtins.int
+    AND_FIELD_NUMBER: builtins.int
+    DEL_FIELD_NUMBER: builtins.int
+    GLOBAL_FIELD_NUMBER: builtins.int
+    NOT_FIELD_NUMBER: builtins.int
+    WITH_FIELD_NUMBER: builtins.int
+    AS_FIELD_NUMBER: builtins.int
+    ELIF_FIELD_NUMBER: builtins.int
+    IF_FIELD_NUMBER: builtins.int
+    OR_FIELD_NUMBER: builtins.int
+    YIELD_FIELD_NUMBER: builtins.int
+    ASSERT_FIELD_NUMBER: builtins.int
+    ELSE_FIELD_NUMBER: builtins.int
+    IMPORT_FIELD_NUMBER: builtins.int
+    PASS_FIELD_NUMBER: builtins.int
+    BREAK_FIELD_NUMBER: builtins.int
+    EXCEPT_FIELD_NUMBER: builtins.int
+    RAISE_FIELD_NUMBER: builtins.int
+    FALSE_FIELD_NUMBER: builtins.int
+    NONE_FIELD_NUMBER: builtins.int
+    TRUE_FIELD_NUMBER: builtins.int
+    CLASS_FIELD_NUMBER: builtins.int
 
     def __init__(self,
         ) -> None: ...
@@ -183,6 +240,7 @@ global___PythonReservedKeywords = PythonReservedKeywords
 
 class PythonReservedKeywordsSmall(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    FROM_FIELD_NUMBER: builtins.int
 
     def __init__(self,
         ) -> None: ...
@@ -192,6 +250,7 @@ global___PythonReservedKeywordsSmall = PythonReservedKeywordsSmall
 
 class SelfField(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    SELF_FIELD_NUMBER: builtins.int
     self: builtins.int = ...
 
     def __init__(self_,

@@ -163,6 +163,8 @@ def test_func():
 
     s2 = Simple1.FromString(s.SerializeToString())
     assert s2.a_string == "Hello"
+    assert s2.A_STRING_FIELD_NUMBER == 1
+    assert s2.USER_ID_FIELD_NUMBER == 21
 
     s3 = Simple1()
     s3.ParseFromString(s.SerializeToString())

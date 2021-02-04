@@ -20,6 +20,8 @@ global___NoPackage = NoPackage
 
 class NoPackage2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    NP_FIELD_NUMBER: builtins.int
+    NP_REP_FIELD_NUMBER: builtins.int
 
     @property
     def np(self) -> global___NoPackage: ...
