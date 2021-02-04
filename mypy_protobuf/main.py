@@ -294,6 +294,10 @@ class PkgWriter(object):
                 # Nested enums/messages
                 self.write_enums(desc.enum_type, qualified_name + ".")
                 self.write_messages(desc.nested_type, qualified_name + ".")
+
+                # integer constants  for field numbers
+                for f in desc.field:
+                    l("{}_FIELD_NUMBER: {}", f.name.upper(), self._builtin("int"))
                 fields = [f for f in desc.field if f.name not in PYTHON_RESERVED]
 
                 # Scalar fields

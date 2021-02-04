@@ -12,6 +12,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class lower(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    A_FIELD_NUMBER: builtins.int
     a: builtins.int = ...
 
     def __init__(self,
@@ -23,6 +24,7 @@ global___lower = lower
 
 class Upper(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    LOWER_FIELD_NUMBER: builtins.int
 
     @property
     def Lower(self) -> global___lower: ...
@@ -37,6 +39,7 @@ global___Upper = Upper
 
 class lower2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    UPPER_FIELD_NUMBER: builtins.int
 
     @property
     def upper(self) -> global___Upper: ...

@@ -26,6 +26,7 @@ BAR3 = OuterEnum.V(2)
 
 class OuterMessage3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    A_BOOL_FIELD_NUMBER: builtins.int
     a_bool: builtins.bool = ...
 
     def __init__(self,
@@ -48,6 +49,8 @@ class SimpleProto3(google.protobuf.message.Message):
 
     class MapScalarEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int = ...
         value: typing.Text = ...
 
@@ -60,6 +63,8 @@ class SimpleProto3(google.protobuf.message.Message):
 
     class MapMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int = ...
 
         @property
@@ -73,6 +78,24 @@ class SimpleProto3(google.protobuf.message.Message):
         def HasField(self, field_name: typing_extensions.Literal[u"value",b"value"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal[u"key",b"key",u"value",b"value"]) -> None: ...
 
+    A_STRING_FIELD_NUMBER: builtins.int
+    A_REPEATED_STRING_FIELD_NUMBER: builtins.int
+    A_OUTER_ENUM_FIELD_NUMBER: builtins.int
+    OUTER_MESSAGE_FIELD_NUMBER: builtins.int
+    INNER_ENUM_FIELD_NUMBER: builtins.int
+    A_ONEOF_1_FIELD_NUMBER: builtins.int
+    A_ONEOF_2_FIELD_NUMBER: builtins.int
+    OUTER_MESSAGE_IN_ONEOF_FIELD_NUMBER: builtins.int
+    OUTER_ENUM_IN_ONEOF_FIELD_NUMBER: builtins.int
+    INNER_ENUM_IN_ONEOF_FIELD_NUMBER: builtins.int
+    B_ONEOF_1_FIELD_NUMBER: builtins.int
+    B_ONEOF_2_FIELD_NUMBER: builtins.int
+    BOOL_FIELD_NUMBER: builtins.int
+    OUTERENUM_FIELD_NUMBER: builtins.int
+    OUTERMESSAGE3_FIELD_NUMBER: builtins.int
+    MAP_SCALAR_FIELD_NUMBER: builtins.int
+    MAP_MESSAGE_FIELD_NUMBER: builtins.int
+    AN_OPTIONAL_STRING_FIELD_NUMBER: builtins.int
     a_string: typing.Text = ...
     a_repeated_string: google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text] = ...
     a_outer_enum: global___OuterEnum.V = ...
