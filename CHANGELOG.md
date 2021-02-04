@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 2.4
+
 - Add support for `_FIELD_NUMBER` generated fields on messages as specified [in the spec](https://developers.google.com/protocol-buffers/docs/reference/python-generated#fields)
 
 ## 2.3
