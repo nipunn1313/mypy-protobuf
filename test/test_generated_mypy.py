@@ -188,6 +188,10 @@ def test_enum():
     e4 = OuterEnum.Value("BAR")  # type: int
     assert OuterEnum.Name(e2) == "BAR"
 
+    # Protobuf itself allows both unicode and bytes here.
+    # TODO - typeshed currently has a bug where it only allows str
+    assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")  # type: ignore[arg-type]
+
 
 def test_has_field_proto2():
     # type: () -> None
