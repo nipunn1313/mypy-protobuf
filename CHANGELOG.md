@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Fix CI caching across version updates.
+- Added unit testing for EnumTypeWrapper.Value usage
 
 ## 2.2
 
