@@ -52,7 +52,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.pyenv
-          key: ${{env.PY_VERSIONS_TO_INSTALL}}
+          key: ${{env.PY_VERSIONS_TO_INSTALL}}-${{hashFiles('setup.py')}}
       - name: Install pyenv
         run: |
           if [ ! -e ~/.pyenv ]; then
