@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 2.3
+
 - Fix CI caching across version updates.
 - Added unit testing for EnumTypeWrapper.Value usage
 - Reexport of top level enum values when using `import public`
