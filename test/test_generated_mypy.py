@@ -19,7 +19,10 @@ import six
 from google.protobuf.descriptor import FieldDescriptor
 
 import testproto.test_pb2 as test_pb2
-from testproto.reexport_pb2 import SimpleProto3 as ReexportedSimpleProto3
+from testproto.reexport_pb2 import (
+    SimpleProto3 as ReexportedSimpleProto3,
+    FOO3 as ReexportedFOO3,
+)
 from testproto.test_extensions2_pb2 import SeparateFileExtension
 from testproto.test_pb2 import (
     DESCRIPTOR,
@@ -30,7 +33,11 @@ from testproto.test_pb2 import (
     Simple1,
     Simple2,
 )
-from testproto.test3_pb2 import SimpleProto3, OuterMessage3
+from testproto.test3_pb2 import (
+    FOO3,
+    OuterMessage3,
+    SimpleProto3,
+)
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import (
@@ -428,6 +435,7 @@ def test_message_descriptor_proto3():
 def test_reexport_identical():
     # type: () -> None
     assert SimpleProto3 is ReexportedSimpleProto3
+    assert FOO3 is ReexportedFOO3
 
 
 def test_enum_descriptor():

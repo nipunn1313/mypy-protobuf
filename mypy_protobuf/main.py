@@ -710,6 +710,7 @@ class PkgWriter(object):
             names = (
                 [m.name for m in reexport_fd.message_type]
                 + [m.name for m in reexport_fd.enum_type]
+                + [v.name for m in reexport_fd.enum_type for v in m.value]
                 + [m.name for m in reexport_fd.extension]
             )
             if reexport_fd.options.py_generic_services:
