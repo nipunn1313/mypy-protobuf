@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Fix CI caching across version updates.
+
 ## 2.2
 
 - Fix bug where module level `DESCRIPTOR: FileDescriptor` was not being generated for files w public imports
