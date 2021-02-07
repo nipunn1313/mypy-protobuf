@@ -595,6 +595,19 @@ class PkgWriter(object):
         )
         return ktype, vtype
 
+    def _callable_type(self, method: d.MethodDescriptorProto) -> str:
+        if method.client_streaming:
+            if method.server_streaming:
+                return self._import("grpc", "StreamStreamMultiCallable")
+            else:
+                return self._import("grpc", "StreamUnaryMultiCallable")
+        else:
+            if method.server_streaming:
+                return self._import("grpc", "UnaryStreamMultiCallable")
+            else:
+                return self._import("grpc", "UnaryUnaryMultiCallable")
+                
+
     def _input_type(self, method: d.MethodDescriptorProto) -> str:
         result = self._import_message(method.input_type)
         if method.client_streaming:
@@ -629,10 +642,10 @@ class PkgWriter(object):
             l("pass")
             l("")
         for method in methods:
-            l("def {}(self,", method.name)
+            l("{}:{}[", method.name, self._callable_type(method))
             with self._indent():
-                l("request: {},", self._input_type(method))
-            l(") -> {}: ...", self._output_type(method))
+                l("{},", self._input_type(method))
+                l("{}] = ...", self._output_type(method))
             l("")
 
     def write_grpc_services(self, services: Iterable[d.ServiceDescriptorProto]) -> None:
