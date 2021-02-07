@@ -606,15 +606,18 @@ class PkgWriter(object):
                 return self._import("grpc", "UnaryStreamMultiCallable")
             else:
                 return self._import("grpc", "UnaryUnaryMultiCallable")
-                
 
-    def _input_type(self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True) -> str:
+    def _input_type(
+        self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True
+    ) -> str:
         result = self._import_message(method.input_type)
         if use_stream_iterator and method.client_streaming:
             result = "{}[{}]".format(self._import("typing", "Iterator"), result)
         return result
 
-    def _output_type(self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True) -> str:
+    def _output_type(
+        self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True
+    ) -> str:
         result = self._import_message(method.output_type)
         if use_stream_iterator and method.server_streaming:
             result = "{}[{}]".format(self._import("typing", "Iterator"), result)
