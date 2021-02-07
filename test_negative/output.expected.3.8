@@ -2,11 +2,11 @@ test_negative/negative_3.8.py:17: error: Missing positional argument "channel" i
 test_negative/negative_3.8.py:24: error: "DummyReply" has no attribute "not_exists"
 test_negative/negative_3.8.py:25: error: "DummyReply" has no attribute "__iter__" (not iterable)
 test_negative/negative_3.8.py:30: error: "DummyReply" has no attribute "not_exists"
-test_negative/negative_3.8.py:32: error: "Iterator[DummyReply]" has no attribute "value"
-test_negative/negative_3.8.py:39: error: Argument 1 to "StreamUnary" of "DummyServiceStub" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"
+test_negative/negative_3.8.py:32: error: "CallIterator[DummyReply]" has no attribute "value"
+test_negative/negative_3.8.py:39: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterable[DummyRequest]"
 test_negative/negative_3.8.py:41: error: "DummyReply" has no attribute "__iter__" (not iterable)
-test_negative/negative_3.8.py:41: error: Argument 1 to "StreamUnary" of "DummyServiceStub" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"
-test_negative/negative_3.8.py:44: error: Argument 1 to "StreamStream" of "DummyServiceStub" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"
+test_negative/negative_3.8.py:41: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterable[DummyRequest]"
+test_negative/negative_3.8.py:44: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterable[DummyRequest]"
 test_negative/negative_3.8.py:48: error: "DummyReply" has no attribute "not_exists"
 test_negative/negative_3.8.py:85: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"
 test_negative/negative_3.8.py:85: note: This violates the Liskov substitution principle
