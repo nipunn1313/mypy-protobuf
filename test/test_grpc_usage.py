@@ -71,23 +71,19 @@ def test_grpc():
     )
     assert result4.value == "GRPC"
 
-
-    #test future() in MultiCallable
-    future_test : grpc.CallFuture[dummy_pb2.DummyReply] = client.UnaryUnary.future(request)
+    # test future() in MultiCallable
+    future_test: grpc.CallFuture[dummy_pb2.DummyReply] = client.UnaryUnary.future(
+        request
+    )
     result5 = future_test.result()
     print(result5)
     assert result5.value == "grpc"
 
-    #test params on __call__ in MultiCallable
-    result6 : dummy_pb2.DummyReply= client.UnaryUnary(
-        request, 
-        timeout=4, 
-        metadata=(
-            ("test","metadata"),
-            ("cheems","many")
-        )
+    # test params on __call__ in MultiCallable
+    result6: dummy_pb2.DummyReply = client.UnaryUnary(
+        request, timeout=4, metadata=(("test", "metadata"), ("cheems", "many"))
     )
 
     assert result6.value == "grpc"
-    
+
     server.stop(None)
