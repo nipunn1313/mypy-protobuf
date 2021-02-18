@@ -21,24 +21,24 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
+class OuterEnum(metaclass=_OuterEnum):
+    V = typing.NewType('V', builtins.int)
 global___OuterEnum = OuterEnum
 class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     FOO = OuterEnum.V(1)
     BAR = OuterEnum.V(2)
-class OuterEnum(metaclass=_OuterEnum):
-    V = typing.NewType('V', builtins.int)
 FOO = OuterEnum.V(1)
 BAR = OuterEnum.V(2)
 
 class Simple1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    class InnerEnum(metaclass=_InnerEnum):
+        V = typing.NewType('V', builtins.int)
     class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1 = Simple1.InnerEnum.V(1)
         INNER2 = Simple1.InnerEnum.V(2)
-    class InnerEnum(metaclass=_InnerEnum):
-        V = typing.NewType('V', builtins.int)
     INNER1 = Simple1.InnerEnum.V(1)
     INNER2 = Simple1.InnerEnum.V(2)
 
