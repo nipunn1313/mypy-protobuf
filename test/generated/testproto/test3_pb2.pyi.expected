@@ -14,15 +14,18 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class OuterEnum(metaclass=_OuterEnum):
     V = typing.NewType('V', builtins.int)
+
 global___OuterEnum = OuterEnum
+
+UNKNOWN = OuterEnum.V(0)
+FOO3 = OuterEnum.V(1)
+BAR3 = OuterEnum.V(2)
+
 class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     UNKNOWN = OuterEnum.V(0)
     FOO3 = OuterEnum.V(1)
     BAR3 = OuterEnum.V(2)
-UNKNOWN = OuterEnum.V(0)
-FOO3 = OuterEnum.V(1)
-BAR3 = OuterEnum.V(2)
 
 class OuterMessage3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
@@ -40,12 +43,14 @@ class SimpleProto3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class InnerEnum(metaclass=_InnerEnum):
         V = typing.NewType('V', builtins.int)
+
+    INNER1 = SimpleProto3.InnerEnum.V(0)
+    INNER2 = SimpleProto3.InnerEnum.V(1)
+
     class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1 = SimpleProto3.InnerEnum.V(0)
         INNER2 = SimpleProto3.InnerEnum.V(1)
-    INNER1 = SimpleProto3.InnerEnum.V(0)
-    INNER2 = SimpleProto3.InnerEnum.V(1)
 
     class MapScalarEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
