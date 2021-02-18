@@ -243,10 +243,10 @@ class PkgWriter(object):
             if prefix == "" and not self.readable_stubs:
                 l("{} = {}", _mangle_global_identifier(enum.name), enum.name)
                 l("")
-                
+
             self.write_enum_values(enum, prefix + enum.name + ".V")
             l("")
-            
+
             l(
                 "class {}({}[{}], {}):",
                 "_" + enum.name,
@@ -263,7 +263,6 @@ class PkgWriter(object):
                 )
                 self.write_enum_values(enum, prefix + enum.name + ".V")
             l("")
-
 
     def write_messages(
         self, messages: Iterable[d.DescriptorProto], prefix: str
