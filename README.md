@@ -73,7 +73,7 @@ class _MyEnum(google.protobuf.internal.EnumTypeWrapper[MyEnum.V], builtins.type)
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
     FOO = MyEnum.V(0)
     BAR = MyEnum.V(1)
-class MyEnum(metaclass=_OuterEnum):
+class MyEnum(metaclass=_MyEnum):
     V = typing___NewType('V', builtins.int)
 FOO = MyEnum.V(0)
 BAR = MyEnum.V(1)
