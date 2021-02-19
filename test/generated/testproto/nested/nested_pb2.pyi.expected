@@ -26,29 +26,33 @@ global___Nested = Nested
 
 class AnotherNested(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    class NestedEnum(metaclass=_NestedEnum):
+        V = typing.NewType('V', builtins.int)
+
+    INVALID = AnotherNested.NestedEnum.V(0)
+    ONE = AnotherNested.NestedEnum.V(1)
+    TWO = AnotherNested.NestedEnum.V(2)
+
     class _NestedEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NestedEnum.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INVALID = AnotherNested.NestedEnum.V(0)
         ONE = AnotherNested.NestedEnum.V(1)
         TWO = AnotherNested.NestedEnum.V(2)
-    class NestedEnum(metaclass=_NestedEnum):
-        V = typing.NewType('V', builtins.int)
-    INVALID = AnotherNested.NestedEnum.V(0)
-    ONE = AnotherNested.NestedEnum.V(1)
-    TWO = AnotherNested.NestedEnum.V(2)
 
     class NestedMessage(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+        class NestedEnum2(metaclass=_NestedEnum2):
+            V = typing.NewType('V', builtins.int)
+
+        UNDEFINED = AnotherNested.NestedMessage.NestedEnum2.V(0)
+        NESTED_ENUM1 = AnotherNested.NestedMessage.NestedEnum2.V(1)
+        NESTED_ENUM2 = AnotherNested.NestedMessage.NestedEnum2.V(2)
+
         class _NestedEnum2(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NestedEnum2.V], builtins.type):
             DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
             UNDEFINED = AnotherNested.NestedMessage.NestedEnum2.V(0)
             NESTED_ENUM1 = AnotherNested.NestedMessage.NestedEnum2.V(1)
             NESTED_ENUM2 = AnotherNested.NestedMessage.NestedEnum2.V(2)
-        class NestedEnum2(metaclass=_NestedEnum2):
-            V = typing.NewType('V', builtins.int)
-        UNDEFINED = AnotherNested.NestedMessage.NestedEnum2.V(0)
-        NESTED_ENUM1 = AnotherNested.NestedMessage.NestedEnum2.V(1)
-        NESTED_ENUM2 = AnotherNested.NestedMessage.NestedEnum2.V(2)
 
         S_FIELD_NUMBER: builtins.int
         B_FIELD_NUMBER: builtins.int

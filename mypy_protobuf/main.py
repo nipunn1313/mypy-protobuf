@@ -232,8 +232,21 @@ class PkgWriter(object):
     ) -> None:
         l = self._write_line
         for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
+            l("class {}(metaclass={}):", enum.name, "_" + enum.name)
+            with self._indent():
+                l(
+                    "V = {}('V', {})",
+                    self._import("typing", "NewType"),
+                    self._builtin("int"),
+                )
+            l("")
             if prefix == "" and not self.readable_stubs:
                 l("{} = {}", _mangle_global_identifier(enum.name), enum.name)
+                l("")
+
+            self.write_enum_values(enum, prefix + enum.name + ".V")
+            l("")
+
             l(
                 "class {}({}[{}], {}):",
                 "_" + enum.name,
@@ -249,16 +262,6 @@ class PkgWriter(object):
                     self._import("google.protobuf.descriptor", "EnumDescriptor"),
                 )
                 self.write_enum_values(enum, prefix + enum.name + ".V")
-
-            l("class {}(metaclass={}):", enum.name, "_" + enum.name)
-            with self._indent():
-                l(
-                    "V = {}('V', {})",
-                    self._import("typing", "NewType"),
-                    self._builtin("int"),
-                )
-
-            self.write_enum_values(enum, prefix + enum.name + ".V")
             l("")
 
     def write_messages(
