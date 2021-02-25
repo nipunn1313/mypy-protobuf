@@ -2,6 +2,7 @@
 
 - Organized generated enum code to prevent definition ordering issues in Pyright-based linters
 - Changed type generation for `grpcio` stubs to use the `MultiCallable` API ([see here](https://grpc.github.io/grpc/python/grpc.html#multi-callable-interfaces)) . This requires using the `grpc-stubs` typings for grpcio. This change should allow calling stub methods with common parameters (`timeout`, `metadata`, etc.) as well as calling methods on the `MultiCallable` object (e.g. `my_stub.MyRpcMethod.future()`).
+- Update stubs to mark repeated scalar and repeated enum fields as read-only
 
 ## 2.4
 
