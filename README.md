@@ -197,6 +197,7 @@ black mypy_protobuf/main.py test/
 - [@henribru](https://github.com/henribru)
 - [@Evgenus](https://github.com/Evgenus)
 - [@MHDante](https://github.com/MHDante)
+- [@nelfin](https://github.com/nelfin)
 
 Licence etc.
 ------------

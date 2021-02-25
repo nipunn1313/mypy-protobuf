@@ -161,3 +161,9 @@ from testproto.reexport_pb2 import Inner  # E:2.7 E:3.8
 # In proto2 - you can pass in None for primitive, but not in proto3
 Simple2(a_string=None)
 OuterMessage3(a_bool=None)  # E:2.7 E:3.8
+
+# Repeated scalar fields are not assignable only extendable
+s9 = Simple1()
+s10 = Simple1()
+s9.a_repeated_string = s10.a_repeated_string  # E:2.7 E:3.8
+s9.rep_inner_enum = s10.rep_inner_enum  # E:2.7 E:3.8

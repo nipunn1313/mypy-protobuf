@@ -310,8 +310,10 @@ class PkgWriter(object):
                             "google.protobuf.internal.containers",
                             "RepeatedScalarFieldContainer",
                         )
+                        l("")
+                        l("@property")
                         l(
-                            "{}: {}[{}] = ...",
+                            "def {}(self) -> {}[{}]: ...",
                             field.name,
                             container,
                             self.python_type(field),

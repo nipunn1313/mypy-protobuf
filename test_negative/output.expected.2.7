@@ -65,4 +65,6 @@ test_negative/negative.py:156: error: Argument "email" to "Simple1" has incompat
 test_negative/negative.py:156: error: Dict entry 0 has incompatible type "int": "str"; expected "UserId": "Email"
 test_negative/negative.py:159: error: Module 'testproto.reexport_pb2' has no attribute 'Inner'
 test_negative/negative.py:163: error: Argument "a_bool" to "OuterMessage3" has incompatible type "None"; expected "bool"
-Found 54 errors in 1 file (checked 17 source files)
+test_negative/negative.py:168: error: Property "a_repeated_string" defined in "Simple1" is read-only
+test_negative/negative.py:169: error: Property "rep_inner_enum" defined in "Simple1" is read-only
+Found 56 errors in 1 file (checked 17 source files)
