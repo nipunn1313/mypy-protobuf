@@ -683,10 +683,12 @@ class PkgWriter(object):
                 self.write_grpc_methods(service)
             l("")
             l(
-                "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}) -> None: ...",
+                "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}[{}, {}]) -> None: ...",
                 service.name,
                 service.name,
+                self._import("typing", "Union"),
                 self._import("grpc", "Server"),
+                self._import("grpc.aio", "Server"),
             )
             l("")
 
