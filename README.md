@@ -28,7 +28,7 @@ To install unreleased
 REV=master  # or whichever unreleased git rev you'd like
 pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV
 
-# Prior to directory structure flattening, you may need
+# For older (1.x) versions of mypy protobuf - you may need
 pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
 ```
 
