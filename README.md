@@ -5,7 +5,7 @@ mypy-protobuf: Generate mypy stub files from protobuf specs
 [![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/master/LICENSE)
 ===========================================================
 
-We just released a new major release mypy-protobuf 2. on 02/02/2021! It includes some backward incompatible changes.
+We released a new major version (2.\*) on 02/02/2021! It includes some backward incompatible changes.
 See [Changelog](CHANGELOG.md) for recent changes.
 
 ## Requirements
@@ -31,6 +31,10 @@ pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV
 # For older (1.x) versions of mypy protobuf - you may need
 pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
 ```
+
+## Getting Help
+
+Find other developers in the mypy-protobuf slack workspace ([Invitation Link](https://join.slack.com/t/mypy-protobuf/shared_invite/zt-scogn8b5-MhetFnFYGi6V513aRsbe_Q)). If your company uses slack and mypy-protobuf, you may opt to use slack-connect to make a shared channel.
 
 ## Implementation
 The implementation of the plugin is in `mypy_protobuf/main.py`, which installs to
