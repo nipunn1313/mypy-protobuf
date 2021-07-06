@@ -13,6 +13,7 @@ PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.6}
 find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
 
 (
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     pyenv shell $PY_VER_MYPY_PROTOBUF
     PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
@@ -20,6 +21,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
 
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+        python -m pip install virtualenv
         python -m virtualenv $VENV
     fi
     source $VENV/bin/activate
@@ -61,6 +63,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
 
 (
     # Run mypy
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     pyenv shell $PY_VER_MYPY
     PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
@@ -70,6 +73,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
         python3 --version
         python3 -m pip --version
+        python -m pip install virtualenv
         python3 -m virtualenv $VENV
     fi
     source $VENV/bin/activate
@@ -113,12 +117,14 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
 
 (
     # Run unit tests. These tests generate .expected files
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     pyenv shell $PY_VER_UNIT_TESTS
     PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
     VENV=venv_$PY_VERSION
 
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+        python -m pip install virtualenv
         python -m virtualenv $VENV
     fi
     source $VENV/bin/activate

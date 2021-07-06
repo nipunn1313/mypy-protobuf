@@ -60,6 +60,7 @@ jobs:
 
             export PATH="$HOME/.pyenv/bin:$PATH"
             eval "$(pyenv init -)"
+            eval "$(pyenv init --path)"
             eval "$(pyenv virtualenv-init -)"
             for PY in $PY_VERSIONS_TO_INSTALL; do
               pyenv install --skip-existing $PY
