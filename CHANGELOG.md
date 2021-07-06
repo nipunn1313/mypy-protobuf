@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Bump protoc support to 3.17.3
+
 ## 2.5
 
 - Organized generated enum code to prevent definition ordering issues in Pyright-based linters

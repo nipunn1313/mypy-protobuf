@@ -33,7 +33,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     # Generate protos
     python --version
     $PROTOC --version
-    expected="libprotoc 3.14.0"
+    expected="libprotoc 3.17.3"
     if [[ $($PROTOC --version) != $expected ]]; then
         echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
         exit 1
