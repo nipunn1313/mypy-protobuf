@@ -830,7 +830,7 @@ def code_generation() -> Generator[
     Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None, None
 ]:
     if len(sys.argv) > 1 and sys.argv[1] in ("-V", "--version"):
-        print(__version__)
+        print("mypy-protobuf " + __version__)
         sys.exit(0)
 
     # Read request message from stdin
