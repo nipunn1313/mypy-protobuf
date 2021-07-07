@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Bump protoc support to 3.17.3
+- Use latest python versions in tests (3.6.14 3.7.11 3.8.11 3.9.6)
 
 ## 2.5
 

@@ -4,10 +4,10 @@ RED="\033[0;31m"
 NC='\033[0m'
 PROTOC=${PROTOC:=protoc}
 
-PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.9.0}
-PY_VER_MYPY=${PY_VER_MYPY:=3.8.6}
+PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.9.6}
+PY_VER_MYPY=${PY_VER_MYPY:=3.8.11}
 PY_VER_MYPY_TARGET=${PY_VER_MYPY_TARGET:=3.8}
-PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.6}
+PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.11}
 
 # Clean out generated/ directory - except for .generated / __init__.py
 find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete

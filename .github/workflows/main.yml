@@ -8,7 +8,7 @@ jobs:
     name: ${{ matrix.py-ver-mypy-protobuf }} / ${{matrix.py-ver-mypy-target}} / ${{matrix.py-ver-unit-tests}} protoc/mypytarget/unittests py versions
     runs-on: ubuntu-latest
     env:
-      PY_VERSIONS_TO_INSTALL: 2.7.18 3.6.12 3.7.9 3.8.6 3.9.0
+      PY_VERSIONS_TO_INSTALL: 2.7.18 3.6.14 3.7.11 3.8.11 3.9.6
     strategy:
       matrix:
         # Running mypy-protobuf itself
@@ -25,23 +25,23 @@ jobs:
         # over-test combinations unnecessarily.
         include:
           # Include a python3 compile with mypy targeting 2.7 code
-          - py-ver-mypy-protobuf: 3.9.0
+          - py-ver-mypy-protobuf: 3.9.6
             py-ver-mypy-target: 2.7
             py-ver-unit-tests: 2.7.18
 
           # Include py 3.6 - 3.9 for mypy-protobuf runtime
-          - py-ver-mypy-protobuf: 3.6.12
+          - py-ver-mypy-protobuf: 3.6.14
             py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.6
-          - py-ver-mypy-protobuf: 3.7.9
+            py-ver-unit-tests: 3.8.11
+          - py-ver-mypy-protobuf: 3.7.11
             py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.6
-          - py-ver-mypy-protobuf: 3.8.6
+            py-ver-unit-tests: 3.8.11
+          - py-ver-mypy-protobuf: 3.8.11
             py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.6
-          - py-ver-mypy-protobuf: 3.9.0
+            py-ver-unit-tests: 3.8.11
+          - py-ver-mypy-protobuf: 3.9.6
             py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.6
+            py-ver-unit-tests: 3.8.11
     steps:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
