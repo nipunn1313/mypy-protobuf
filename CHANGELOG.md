@@ -2,6 +2,13 @@
 
 - Bump protoc support to 3.17.3
 - Use latest python versions in tests (3.6.14 3.7.11 3.8.11 3.9.6)
+- Support reserved names for message types. Previously generated invalid mypy.
+```
+message M {
+  message None {}
+  None none = 1;
+}
+```
 
 ## 2.5
 

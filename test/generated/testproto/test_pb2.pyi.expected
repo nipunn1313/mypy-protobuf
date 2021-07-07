@@ -237,14 +237,22 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     EXCEPT_FIELD_NUMBER: builtins.int
     RAISE_FIELD_NUMBER: builtins.int
     FALSE_FIELD_NUMBER: builtins.int
-    NONE_FIELD_NUMBER: builtins.int
     TRUE_FIELD_NUMBER: builtins.int
     CLASS_FIELD_NUMBER: builtins.int
+    NONE_FIELD_NUMBER: builtins.int
+    VALID_FIELD_NUMBER: builtins.int
+    valid: typing.Any = ...
+
+    @property
+    def none(self) -> typing.Any: ...
 
     def __init__(self,
+        *,
+        none : typing.Optional[typing.Any] = ...,
+        valid : typing.Optional[typing.Any] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal[u"False",b"False",u"None",b"None",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal[u"False",b"False",u"None",b"None",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[u"False",b"False",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"none",b"none",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"valid",b"valid",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[u"False",b"False",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"none",b"none",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"valid",b"valid",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> None: ...
 global___PythonReservedKeywords = PythonReservedKeywords
 
 class PythonReservedKeywordsSmall(google.protobuf.message.Message):

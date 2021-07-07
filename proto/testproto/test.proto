@@ -75,6 +75,8 @@ message Extensions2 {
   optional bool flag = 1;
 }
 
+message None {}
+
 message PythonReservedKeywords {
   enum finally {
       continue = 1;
@@ -110,9 +112,12 @@ message PythonReservedKeywords {
   optional int64 except = 25;
   optional int64 raise = 26;
   optional int64 False = 27;
-  optional int64 None = 28;
   optional int64 True = 29;
   optional int64 class = 30;
+
+  // Test unreserved identifiers w/ reserved message names
+  optional None none = 28;
+  optional finally valid = 31;
 }
 
 // Do one with just one arg - to make sure it's syntactically correct
