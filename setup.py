@@ -1,8 +1,8 @@
 from setuptools import setup
 
 def version():
-    """Gets the version from google/protobuf/__init__.py
-    Do not import google.protobuf.__init__ directly, because an installed
+    """Gets the version from mypy_protobuf/main.py
+    Do not import mypy_protobuf.main directly, because an installed
     protobuf library may be loaded instead."""
 
     with open(os.path.join('mypy_protobuf', 'main.py')) as version_file:
