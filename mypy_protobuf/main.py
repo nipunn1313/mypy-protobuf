@@ -174,6 +174,13 @@ class PkgWriter(object):
             assert name.startswith(".")
             name = name[1:]
 
+        split = name.split(".")
+
+        # Can't represent identifiers that are reserved, so mark as Any
+        # and don't bother importing
+        if any(s in PYTHON_RESERVED for s in split):
+            return self._import("typing", "Any")
+
         # Message defined in this file.
         if message_fd.name == self.fd.name:
             return name if self.readable_stubs else _mangle_global_identifier(name)
@@ -181,7 +188,6 @@ class PkgWriter(object):
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
-        split = name.split(".")
         import_name = self._import(
             message_fd.name[:-6].replace("-", "_") + "_pb2", split[0]
         )

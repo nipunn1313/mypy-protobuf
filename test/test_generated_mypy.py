@@ -17,6 +17,7 @@ import pytest
 import six
 
 from google.protobuf.descriptor import FieldDescriptor
+from google.protobuf.message import Message
 
 import testproto.test_pb2 as test_pb2
 from testproto.reexport_pb2 import (
@@ -476,3 +477,12 @@ def test_casttype():
     s.email = Email("abcd@gmail.com")
     assert s.email == "abcd@gmail.com"
     s.email_by_uid[UserId(33)] = Email("abcd@gmail.com")
+
+
+def test_access_message_with_python_keyword_name():
+    # type: () -> None
+    with pytest.raises(AttributeError, match="module.*has no attribute 'asdf'"):
+        getattr(test_pb2, "asdf")
+    msg_cls = getattr(test_pb2, "None")
+    none = msg_cls()
+    assert isinstance(none, Message)
