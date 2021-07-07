@@ -25,6 +25,7 @@ from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 from google.protobuf.internal.well_known_types import WKTBASES
 from . import extensions_pb2
 
+__version__ = "2.5"
 
 # So phabricator doesn't think mypy_protobuf.py is generated
 GENERATED = "@ge" + "nerated"
@@ -828,6 +829,10 @@ def generate_mypy_grpc_stubs(
 def code_generation() -> Generator[
     Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None, None
 ]:
+    if len(sys.argv) > 1 and sys.argv[1] in ("-V", "--version"):
+        print(__version__)
+        sys.exit(0)
+
     # Read request message from stdin
     data = sys.stdin.buffer.read()
 

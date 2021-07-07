@@ -205,6 +205,7 @@ black mypy_protobuf/main.py test/
 - [@MHDante](https://github.com/MHDante)
 - [@nelfin](https://github.com/nelfin)
 - [@alkasm](https://github.com/alkasm)
+- [@tarmath](https://github.com/tarmath)
 
 Licence etc.
 ------------

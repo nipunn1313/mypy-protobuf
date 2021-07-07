@@ -9,6 +9,7 @@ message M {
   None none = 1;
 }
 ```
+- Support `protoc-gen-mypy -V` and `protoc-gen-mypy --version` to print version number
 
 ## 2.5
 
