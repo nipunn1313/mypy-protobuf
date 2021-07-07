@@ -1,8 +1,19 @@
 from setuptools import setup
 
+def version():
+    """Gets the version from google/protobuf/__init__.py
+    Do not import google.protobuf.__init__ directly, because an installed
+    protobuf library may be loaded instead."""
+
+    with open(os.path.join('mypy_protobuf', 'main.py')) as version_file:
+        line = [v for v in version_file.readlines() if "__version__ =" in v][0]
+        exec(line, globals())
+        global __version__
+        return __version__
+
 setup(
     name="mypy-protobuf",
-    version="2.5",
+    version=version(),
     description="Generate mypy stub files from protobuf specs",
     keywords="mypy proto dropbox",
     license="Apache License 2.0",

@@ -28,6 +28,10 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     if [[ -z $SKIP_CLEAN ]]; then
         python -m pip install -r requirements.txt
         python -m pip install -e .
+
+        # Confirm version number
+        test $(protoc-gen-mypy -V) = 2.5
+        test $(protoc-gen-mypy --version) = 2.5
     fi
 
     # Generate protos
