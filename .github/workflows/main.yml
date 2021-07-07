@@ -52,9 +52,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-              ~/.pyenv/shims
+              ~/.pyenv
               !~/.pyenv/versions
-          key: pyenv-installation
+          key: pyenv-installation-2
       - name: Cache pyenv mypy-protobuf ver
         uses: actions/cache@v2
         with:
