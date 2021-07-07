@@ -73,14 +73,16 @@ This allows mypy to catch bugs where the wrong enum value is being used.
 mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
 
 ```
-class _MyEnum(google.protobuf.internal.EnumTypeWrapper[MyEnum.V], builtins.type):
-    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
-    FOO = MyEnum.V(0)
-    BAR = MyEnum.V(1)
 class MyEnum(metaclass=_MyEnum):
-    V = typing___NewType('V', builtins.int)
-FOO = MyEnum.V(0)
-BAR = MyEnum.V(1)
+    V = typing.NewType('V', builtins.int)
+
+FOO = MyEnum.V(1)
+BAR = MyEnum.V(2)
+
+class _MyEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MyEnum.V], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
+    FOO = MyEnum.V(1)
+    BAR = MyEnum.V(2)
 ```
 
 Calling code may be typed as follows. Note that the type of `x` must be quoted
