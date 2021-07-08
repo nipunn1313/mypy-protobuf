@@ -97,7 +97,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     else
         FILES=$FILES38
     fi
-    mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
+    mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
 
     # run mypy on negative-tests (expected mypy failures)
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
@@ -109,12 +109,12 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
         NEGATIVE_FILES=$NEGATIVE_FILES_38
     fi
 
-    if ! diff <(mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET $NEGATIVE_FILES) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
+    if ! diff <(mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET $NEGATIVE_FILES) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
 
         # Copy over all the py targets for convenience for the developer - so they don't have to run it many times
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=2.7 $NEGATIVE_FILES_27 > test_negative/output.expected.2.7 || true
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=3.8 $NEGATIVE_FILES_38 > test_negative/output.expected.3.8 || true
+        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=2.7 $NEGATIVE_FILES_27 > test_negative/output.expected.2.7 || true
+        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=3.8 $NEGATIVE_FILES_38 > test_negative/output.expected.3.8 || true
         exit 1
     fi
 )

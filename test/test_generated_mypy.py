@@ -46,7 +46,6 @@ from typing import (
     NewType,
     Optional,
     Generator,
-    Text,
     Tuple,
 )
 
@@ -54,11 +53,8 @@ from typing import (
 UserId = NewType("UserId", int)
 
 
-class Email(Text):
-    def __new__(cls, val):
-        # type: (Text) -> Any
-        assert "@" in val, "Email is not valid"
-        return Text.__new__(cls, val)  # type: ignore
+class Email(str):
+    pass
 
 
 def _is_summary(l):

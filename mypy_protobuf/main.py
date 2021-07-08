@@ -10,8 +10,8 @@ from typing import (
     Any,
     Callable,
     Dict,
-    Generator,
     Iterable,
+    Iterator,
     List,
     Optional,
     Set,
@@ -203,7 +203,7 @@ class PkgWriter(object):
         return self._import("builtins", name)
 
     @contextmanager
-    def _indent(self) -> Generator:
+    def _indent(self) -> Iterator[None]:
         self.indent = self.indent + "    "
         yield
         self.indent = self.indent[:-4]
@@ -826,8 +826,8 @@ def generate_mypy_grpc_stubs(
 
 
 @contextmanager
-def code_generation() -> Generator[
-    Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse], None, None
+def code_generation() -> Iterator[
+    Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse],
 ]:
     if len(sys.argv) > 1 and sys.argv[1] in ("-V", "--version"):
         print("mypy-protobuf " + __version__)
