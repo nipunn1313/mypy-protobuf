@@ -508,10 +508,11 @@ class PkgWriter(object):
             if len(wo_fields) > 1:
                 l("@{}", self._import("typing", "overload"))
             l(
-                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}]: ...",
+                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}[{}]]: ...",
                 self._import("typing_extensions", "Literal"),
                 # Accepts both unicode and bytes in both py2 and py3
                 'u"{}",b"{}"'.format(wo_field, wo_field),
+                self._import("typing", "Optional"),
                 self._import("typing_extensions", "Literal"),
                 # Returns `str` in both py2 and py3 (bytes in py2, unicode in py3)
                 ",".join('"{}"'.format(m) for m in members),

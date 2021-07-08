@@ -65,15 +65,21 @@ s.WhichOneof("garbage")  # E:2.7 E:3.8
 a = 5
 a = s.WhichOneof("a_oneof")  # E:2.7 E:3.8
 b = s.WhichOneof("a_oneof")
+assert b is not None
 s.HasField(b)  # allowed
 simple2 = Simple2(a_string="abc")
 simple2.HasField(b)  # E:2.7 E:3.8
+
+# WhichOneof should return optional str
+var_of_type_str = ""  # type: str
+var_of_type_str = s.WhichOneof("a_oneof")  # E:2.7 E:3.8
 
 # Proto3 WhichOneof
 s6.WhichOneof("garbage")  # E:2.7 E:3.8
 a3 = 5
 a3 = s6.WhichOneof("a_oneof")  # E:2.7 E:3.8
 b3 = s6.WhichOneof("a_oneof")
+assert b3 is not None
 s6.HasField(b3)  # allowed
 simple2.HasField(b3)  # E:2.7 E:3.8  - it's a text but not one of the literals
 
