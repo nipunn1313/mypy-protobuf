@@ -146,8 +146,8 @@ def test_generate_negative_matches():
     assert errors_38 == expected_errors_38
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 52
-    assert len(errors_38) == 64
+    assert len(errors_27) == 53
+    assert len(errors_38) == 65
 
 
 def test_func():
@@ -230,6 +230,14 @@ def test_has_field_proto2():
         with pytest.raises(TypeError, match="bad argument type for built-in operation"):
             s_untyped.HasField(b"a_string")
 
+    none_err = (
+        "bad argument type for built-in operation"
+        if six.PY3
+        else "expected string or Unicode object, NoneType found"
+    )
+    with pytest.raises(TypeError, match=none_err):
+        s_untyped.HasField(None)
+
 
 def test_has_field_proto3():
     # type: () -> None
@@ -269,6 +277,14 @@ def test_has_field_proto3():
     if six.PY3:
         with pytest.raises(TypeError, match="bad argument type for built-in operation"):
             s_untyped.HasField(b"outer_message")
+
+    none_err = (
+        "bad argument type for built-in operation"
+        if six.PY3
+        else "expected string or Unicode object, NoneType found"
+    )
+    with pytest.raises(TypeError, match=none_err):
+        s_untyped.HasField(None)
 
 
 def test_clear_field_proto2():
@@ -331,7 +347,9 @@ def test_which_oneof_proto2():
     assert s.WhichOneof(u"a_oneof") == "a_oneof_1"
     assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
     assert type(s.WhichOneof("a_oneof")) == str
-    assert s.HasField(s.WhichOneof("a_oneof"))
+    field = s.WhichOneof("a_oneof")
+    assert field is not None
+    assert s.HasField(field)
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
@@ -353,13 +371,21 @@ def test_which_oneof_proto3():
     assert s.WhichOneof(u"a_oneof") == "a_oneof_1"
     assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
     assert type(s.WhichOneof("a_oneof")) == str
-    assert s.HasField(s.WhichOneof("a_oneof"))
-    assert s.HasField(s.WhichOneof("b_oneof"))
+
+    field_a = s.WhichOneof("a_oneof")
+    assert field_a is not None
+    assert s.HasField(field_a)
+
+    field_b = s.WhichOneof("b_oneof")
+    assert field_b is not None
+    assert s.HasField(field_b)
 
     # synthetic oneof from optional field
     assert s.WhichOneof("_an_optional_string") is None
     s.an_optional_string = "foo"
-    assert s.HasField(s.WhichOneof("_an_optional_string"))
+    field_aos = s.WhichOneof("_an_optional_string")
+    assert field_aos is not None
+    assert s.HasField(field_aos)
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too

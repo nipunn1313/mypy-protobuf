@@ -10,6 +10,15 @@ message M {
 }
 ```
 - Support `protoc-gen-mypy -V` and `protoc-gen-mypy --version` to print version number
+- Return `Optional[Literal[...]]` instead of `Literal[...]` from WhichOneof to support
+cases in which none of the fields of the WhichOneof are set. See the following example.
+```
+def hello(name: str) -> None: ...
+n = proto.WhichOneof("name")
+hello(n)  # Will now result in a mypy error.
+assert n is not None
+hello(n)  # Should work ok
+```
 
 ## 2.5
 
