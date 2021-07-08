@@ -15,6 +15,7 @@ import glob
 import os
 import pytest
 import six
+import sys
 
 from google.protobuf.descriptor import FieldDescriptor
 from google.protobuf.message import Message
@@ -129,15 +130,17 @@ def test_generate_negative_matches():
     def grab_expectations(filename, marker):
         # type: (str, str) -> Generator[Tuple[str, int], None, None]
         for idx, line in enumerate(open(filename).readlines()):
-            if marker in line:
+            if "#" in line and marker in line:
                 yield filename, idx + 1
 
     errors_27 = set(grab_errors("test_negative/output.expected.2.7"))
     errors_38 = set(grab_errors("test_negative/output.expected.3.8"))
 
-    expected_errors_27 = set(
-        grab_expectations("test_negative/negative.py", "E:2.7")
-    ) | set(grab_expectations("test_negative/negative_2.7.py", "E:2.7"))
+    expected_errors_27 = (
+        set(grab_expectations("test_negative/negative.py", "E:2.7"))
+        | set(grab_expectations("test_negative/negative_2.7.py", "E:2.7"))
+        | set(grab_expectations("test/test_generated_mypy.py", "E:2.7"))
+    )
     expected_errors_38 = set(
         grab_expectations("test_negative/negative.py", "E:3.8")
     ) | set(grab_expectations("test_negative/negative_3.8.py", "E:3.8"))
@@ -195,8 +198,11 @@ def test_enum():
     assert OuterEnum.Name(e2) == "BAR"
 
     # Protobuf itself allows both unicode and bytes here.
-    # TODO - typeshed currently has a bug where it only allows str
-    assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")  # type: ignore[arg-type]
+    if six.PY3:
+        # Should work on both PY2/PY3, but there's a bug currently in typeshed,
+        # where it doesn't work on PY2. Fixing soon...
+        # def Value(self, name: Union[str, bytes]) -> _V: ...
+        assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")
 
 
 def test_has_field_proto2():

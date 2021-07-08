@@ -19,6 +19,7 @@ hello(n)  # Will now result in a mypy error.
 assert n is not None
 hello(n)  # Should work ok
 ```
+- Bump mypy version to 0.910, utilizing stubs types-protobuf==0.1.13. See https://mypy-lang.blogspot.com/2021/05/the-upcoming-switch-to-modular-typeshed.html
 
 ## 2.5
 

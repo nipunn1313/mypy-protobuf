@@ -83,7 +83,6 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     source $VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]]; then
         python3 -m pip install setuptools
-        python3 -m pip install mypy==0.800
         python3 -m pip install -r requirements.txt
     fi
 
