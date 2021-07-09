@@ -29,7 +29,7 @@ global___OuterEnum = OuterEnum
 FOO = OuterEnum.V(1)
 BAR = OuterEnum.V(2)
 
-class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):
+class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):  # type: ignore
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     FOO = OuterEnum.V(1)
     BAR = OuterEnum.V(2)
@@ -42,7 +42,7 @@ class Simple1(google.protobuf.message.Message):
     INNER1 = Simple1.InnerEnum.V(1)
     INNER2 = Simple1.InnerEnum.V(2)
 
-    class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):
+    class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):  # type: ignore
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1 = Simple1.InnerEnum.V(1)
         INNER2 = Simple1.InnerEnum.V(2)

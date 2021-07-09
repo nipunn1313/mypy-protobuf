@@ -21,7 +21,7 @@ UNKNOWN = OuterEnum.V(0)
 FOO3 = OuterEnum.V(1)
 BAR3 = OuterEnum.V(2)
 
-class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):
+class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):  # type: ignore
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     UNKNOWN = OuterEnum.V(0)
     FOO3 = OuterEnum.V(1)
@@ -47,7 +47,7 @@ class SimpleProto3(google.protobuf.message.Message):
     INNER1 = SimpleProto3.InnerEnum.V(0)
     INNER2 = SimpleProto3.InnerEnum.V(1)
 
-    class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):
+    class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):  # type: ignore
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1 = SimpleProto3.InnerEnum.V(0)
         INNER2 = SimpleProto3.InnerEnum.V(1)
