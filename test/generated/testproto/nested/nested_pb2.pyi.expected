@@ -33,7 +33,7 @@ class AnotherNested(google.protobuf.message.Message):
     ONE = AnotherNested.NestedEnum.V(1)
     TWO = AnotherNested.NestedEnum.V(2)
 
-    class _NestedEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NestedEnum.V], builtins.type):
+    class _NestedEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NestedEnum.V], builtins.type):  # type: ignore
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INVALID = AnotherNested.NestedEnum.V(0)
         ONE = AnotherNested.NestedEnum.V(1)
@@ -48,7 +48,7 @@ class AnotherNested(google.protobuf.message.Message):
         NESTED_ENUM1 = AnotherNested.NestedMessage.NestedEnum2.V(1)
         NESTED_ENUM2 = AnotherNested.NestedMessage.NestedEnum2.V(2)
 
-        class _NestedEnum2(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NestedEnum2.V], builtins.type):
+        class _NestedEnum2(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NestedEnum2.V], builtins.type):  # type: ignore
             DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
             UNDEFINED = AnotherNested.NestedMessage.NestedEnum2.V(0)
             NESTED_ENUM1 = AnotherNested.NestedMessage.NestedEnum2.V(1)

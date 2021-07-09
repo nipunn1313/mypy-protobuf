@@ -254,8 +254,11 @@ class PkgWriter(object):
             self.write_enum_values(enum, prefix + enum.name + ".V")
             l("")
 
+            # do a type-ignore to avoid the circular dependency. It's ugly.
+            # See https://github.com/dropbox/mypy-protobuf/issues/214 for discussion.
+            # Hopefully we can improve this in the future
             l(
-                "class {}({}[{}], {}):",
+                "class {}({}[{}], {}):  # type: ignore",
                 "_" + enum.name,
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
