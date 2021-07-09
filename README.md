@@ -19,9 +19,9 @@ See [Changelog](CHANGELOG.md) for recent changes.
 [types-protobuf==0.1.13](https://pypi.org/project/types-protobuf/0.1.13/) - for stubs from the google.protobuf library
 
 ### To run mypy on code generated with grpc plugin - you'll additionally need
-[grpcio>=1.33.2](https://pypi.org/project/grpcio/)
-[grpcio-tools](https://pypi.org/project/grpcio-tools/)
-[grpc-stubs>=1.24.5](https://pypi.org/project/grpc-stubs/)
+[grpcio>=1.38.1](https://pypi.org/project/grpcio/)
+[grpcio-tools>=1.38.1](https://pypi.org/project/grpcio-tools/)
+[grpc-stubs>=1.24.6](https://pypi.org/project/grpc-stubs/)
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
 
