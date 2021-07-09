@@ -1,11 +1,14 @@
 # Requirements to run tests
+#
+# Note that we don't need to install mypy-protobuf to run the
+# tests here - mypy-protobuf is installed/run in a separate virtualenv
+# from the one running unit tests.
 
 mypy==0.910 ; python_version >= '3.0'
 typed_ast==1.4.3 ; python_version >= '3.0'
-
-protobuf==3.14.0
 six==1.16.0
 pytest == 4.6.11
+protobuf>=3.17.3
 typing ; python_version<"3.5"
 grpcio==1.33.2 ; python_version>="3.0"
 grpcio-tools ; python_version>="3.0"
