@@ -14,6 +14,7 @@ See [Changelog](CHANGELOG.md) for recent changes.
 [protoc](https://github.com/protocolbuffers/protobuf/releases) 3.14.0 or greater
 [python-protobuf >= 3.14.0](https://pypi.org/project/protobuf/)
 [python >= 3.6](https://www.python.org/downloads/source/) - for running mypy-protobuf plugin. Generated stubs will compatible back to python2.
+[types-protobuf==0.1.13](https://pypi.org/project/types-protobuf/0.1.13/) - for stubs from the google.protobuf library
 
 Other configurations may work, but are not supported in testing currently. We would be open to expanding this list if a need arises - file an issue on the issue tracker.
 
