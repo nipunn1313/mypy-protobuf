@@ -30,8 +30,8 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
         python -m pip install -e .
 
         # Confirm version number
-        test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.5"
-        test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.5"
+        test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.6"
+        test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.6"
     fi
 
     # Generate protos
