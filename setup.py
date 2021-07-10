@@ -1,20 +1,20 @@
 import os
-from setuptools import setup
+from setuptools import setup  # type: ignore[import]
 
-def version():
+def get_version() -> str:
     """Gets the version from mypy_protobuf/main.py
     Do not import mypy_protobuf.main directly, because an installed
     protobuf library may be loaded instead."""
 
     with open(os.path.join('mypy_protobuf', 'main.py')) as version_file:
         line = [v for v in version_file.readlines() if "__version__ =" in v][0]
-        exec(line, globals())
-        global __version__
-        return __version__
+        return line.split("=")[1].strip()
+
+version = get_version()
 
 setup(
     name="mypy-protobuf",
-    version=version(),
+    version=version,
     description="Generate mypy stub files from protobuf specs",
     keywords="mypy proto dropbox",
     license="Apache License 2.0",
@@ -26,7 +26,7 @@ setup(
         "mypy_protobuf.extensions_pb2",
     ],
     url="https://github.com/dropbox/mypy-protobuf",
-    download_url="https://github.com/dropbox/mypy-protobuf/archive/v2.5.tar.gz",
+    download_url="https://github.com/dropbox/mypy-protobuf/archive/v%s.tar.gz" % version,
     install_requires=["protobuf>=3.17.3"],
     entry_points={
         "console_scripts": [

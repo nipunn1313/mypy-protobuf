@@ -82,7 +82,6 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     fi
     source $VENV/bin/activate
     if [[ -z $SKIP_CLEAN ]]; then
-        python3 -m pip install setuptools
         python3 -m pip install -r requirements.txt
     fi
 
@@ -90,7 +89,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     mypy --version
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
     FILES27="$(ls test/*.py | grep -v grpc)  $(find test/generated -name "*.pyi" | grep -v grpc)"
-    FILES38="mypy_protobuf/main.py test/"
+    FILES38="mypy_protobuf/main.py setup.py test/"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         FILES=$FILES27
     else
