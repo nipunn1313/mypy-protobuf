@@ -19,4 +19,4 @@ setuptools<45.0.0 ; python_version < '3.0'
 setuptools ; python_version >= '3.0'
 
 types-six==0.1.7
-types-protobuf==0.1.13
+types-protobuf==0.1.14
