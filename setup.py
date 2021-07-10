@@ -8,7 +8,7 @@ def get_version() -> str:
 
     with open(os.path.join('mypy_protobuf', 'main.py')) as version_file:
         line = [v for v in version_file.readlines() if "__version__ =" in v][0]
-        return line.split("=")[1].strip()
+        return line.split("=")[1].strip().strip("\"\'")
 
 version = get_version()
 
