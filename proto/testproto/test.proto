@@ -13,6 +13,18 @@ enum OuterEnum {
   BAR = 2;
 }
 
+enum NamingConflicts {
+  // Naming conflicts!
+  Name = 1;
+  Value = 2;
+  keys = 3;
+  values = 4;
+  items = 5;
+  // See https://github.com/protocolbuffers/protobuf/issues/8803
+  // proto itself generates broken code when DESCRIPTOR is there
+  // DESCRIPTOR = 8;
+}
+
 message Simple1 {
   enum InnerEnum {
     INNER1 = 1;

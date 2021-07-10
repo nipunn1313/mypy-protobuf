@@ -76,6 +76,14 @@ PYTHON_RESERVED = {
     "yield",
 }
 
+PROTO_ENUM_RESERVED = {
+    "Name",
+    "Value",
+    "keys",
+    "values",
+    "items",
+}
+
 
 def _mangle_global_identifier(name: str) -> str:
     """
@@ -214,8 +222,10 @@ class PkgWriter(object):
         else:
             self.lines.append(self.indent + line.format(*args))
 
-    def write_enum_values(self, enum: d.EnumDescriptorProto, value_type: str) -> None:
-        for val in enum.value:
+    def write_enum_values(
+        self, values: Sequence[d.EnumValueDescriptorProto], value_type: str
+    ) -> None:
+        for val in values:
             if val.name in PYTHON_RESERVED:
                 continue
 
@@ -251,7 +261,7 @@ class PkgWriter(object):
                 l("{} = {}", _mangle_global_identifier(enum.name), enum.name)
                 l("")
 
-            self.write_enum_values(enum, prefix + enum.name + ".V")
+            self.write_enum_values(enum.value, prefix + enum.name + ".V")
             l("")
 
             # do a type-ignore to avoid the circular dependency. It's ugly.
@@ -271,7 +281,10 @@ class PkgWriter(object):
                     "DESCRIPTOR: {} = ...",
                     self._import("google.protobuf.descriptor", "EnumDescriptor"),
                 )
-                self.write_enum_values(enum, prefix + enum.name + ".V")
+                self.write_enum_values(
+                    [v for v in enum.value if v.name not in PROTO_ENUM_RESERVED],
+                    prefix + enum.name + ".V",
+                )
             l("")
 
     def write_messages(

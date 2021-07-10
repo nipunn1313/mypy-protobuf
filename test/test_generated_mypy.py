@@ -31,6 +31,8 @@ from testproto.test_pb2 import (
     Extensions1,
     Extensions2,
     FOO,
+    Name as NamingConflicts_Name,
+    NamingConflicts,
     OuterEnum,
     Simple1,
     Simple2,
@@ -200,6 +202,13 @@ def test_enum():
 
     # Protobuf itself allows both unicode and bytes here.
     assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")
+
+
+def test_enum_naming_conflicts():
+    # type: () -> None
+    assert NamingConflicts.Name(NamingConflicts_Name) == "Name"
+    assert NamingConflicts.Value("Name") == 1
+    assert NamingConflicts_Name == 1
 
 
 def test_has_field_proto2():
