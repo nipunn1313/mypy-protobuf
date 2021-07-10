@@ -14,9 +14,5 @@ grpcio==1.38.1 ; python_version>="3.0"
 grpcio-tools==1.38.1 ; python_version>="3.0"
 grpc-stubs>=1.24.6 ; python_version>="3.0"
 
-# For python2. See https://github.com/pypa/virtualenv/issues/1493
-setuptools<45.0.0 ; python_version < '3.0'
-setuptools ; python_version >= '3.0'
-
 types-six==0.1.7
 types-protobuf==0.1.14
