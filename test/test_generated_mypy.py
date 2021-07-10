@@ -198,11 +198,7 @@ def test_enum():
     assert OuterEnum.Name(e2) == "BAR"
 
     # Protobuf itself allows both unicode and bytes here.
-    if six.PY3:
-        # Should work on both PY2/PY3, but there's a bug currently in typeshed,
-        # where it doesn't work on PY2. Fixing soon...
-        # def Value(self, name: Union[str, bytes]) -> _V: ...
-        assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")
+    assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")
 
 
 def test_has_field_proto2():
