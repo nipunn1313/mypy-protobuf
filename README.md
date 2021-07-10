@@ -29,15 +29,20 @@ Other configurations may work, but are not supported in testing currently. We wo
 
 The plugin can be installed with
 ```
-pip install mypy-protobuf
+pip3 install mypy-protobuf
 ```
 To install unreleased
 ```
 REV=master  # or whichever unreleased git rev you'd like
-pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV
+pip3 install git+https://github.com/dropbox/mypy-protobuf.git@$REV
 
 # For older (1.x) versions of mypy protobuf - you may need
-pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
+pip3 install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
+```
+
+In order to run mypy on the generated code, you'll need to install
+```
+pip3 install mypy>=0.910 types-protobuf>=0.1.14
 ```
 
 # Usage
