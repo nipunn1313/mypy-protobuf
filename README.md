@@ -40,16 +40,10 @@ pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV
 pip install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
 ```
 
-## Getting Help
+# Usage
 
-Find other developers in the mypy-protobuf slack workspace ([Invitation Link](https://join.slack.com/t/mypy-protobuf/shared_invite/zt-scogn8b5-MhetFnFYGi6V513aRsbe_Q)). If your company uses slack and mypy-protobuf, you may opt to use slack-connect to make a shared channel.
-
-## Implementation
-The implementation of the plugin is in `mypy_protobuf/main.py`, which installs to
-a posix executable protoc-gen-mypy.
-On windows you will have to use `protoc_gen_mypy.bat` for the executable.
-
-On posix, ensure that the protoc-gen-mypy script installed onto your $PATH. Then run.
+On posix, protoc-gen-mypy is installed to python's executable bin. Assuming that's
+on your $PATH, you can run
 ```
 protoc --python_out=output/location --mypy_out=output/location
 ```
@@ -61,6 +55,15 @@ On windows, provide the bat file:
 ```
 protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/location --mypy_out=output/location
 ```
+
+## Getting Help
+
+Find other developers in the mypy-protobuf slack workspace ([Invitation Link](https://join.slack.com/t/mypy-protobuf/shared_invite/zt-scogn8b5-MhetFnFYGi6V513aRsbe_Q)). If your company uses slack and mypy-protobuf, you may opt to use slack-connect to make a shared channel.
+
+## Implementation
+
+The implementation of the plugin is in `mypy_protobuf/main.py`, which installs to
+an executable protoc-gen-mypy. On windows you will have to use `protoc_gen_mypy.bat` for the executable.
 
 ## Features
 
