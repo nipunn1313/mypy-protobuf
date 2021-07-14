@@ -95,6 +95,9 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     else
         FILES=$FILES38
     fi
+    if [ -e $CUSTOM_TYPESHED_DIR ]; then
+        export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
+    fi
     mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
 
     # run mypy on negative-tests (expected mypy failures)

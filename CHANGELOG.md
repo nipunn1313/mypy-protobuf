@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Fix #244 - support extensions defined at module scope with proper types.
+
 ## 2.6
 
 - Bump protoc support to 3.17.3

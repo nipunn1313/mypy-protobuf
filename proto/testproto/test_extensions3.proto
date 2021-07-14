@@ -11,3 +11,7 @@ extend google.protobuf.FieldOptions {
 extend google.protobuf.MessageOptions {
   string test_message_option = 51234;
 }
+
+message MessageOptionsTestMsg {
+    option (test_message_option) = "Hello world!";
+}
