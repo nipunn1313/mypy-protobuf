@@ -1,6 +1,19 @@
 ## Upcoming
 
-- Fix #244 - support extensions defined at module scope with proper types.
+- Fix [#244](https://github.com/dropbox/mypy-protobuf/issues/244) - support extensions defined at module scope with proper types, matching extensions defined within Messages
+```
+extend google.protobuf.MessageOptions {
+   string test_message_option = 51234;
+}
+```
+```python
+# Used to generate
+test_message_option: google.protobuf.descriptor.FieldDescriptor = ...
+
+# Now generates
+test_message_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text] = ...
+```
+
 
 ## 2.6
 
