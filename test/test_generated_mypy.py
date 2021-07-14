@@ -40,6 +40,7 @@ from testproto.test3_pb2 import (
     OuterMessage3,
     SimpleProto3,
 )
+from testproto.test_extensions3_pb2 import MessageOptionsTestMsg, test_message_option
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import (
@@ -149,8 +150,8 @@ def test_generate_negative_matches():
     assert errors_38 == expected_errors_38
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 53
-    assert len(errors_38) == 65
+    assert len(errors_27) == 58
+    assert len(errors_38) == 70
 
 
 def test_func():
@@ -436,6 +437,14 @@ def test_extensions_proto2():
     assert Extensions1.ext in s1.Extensions
 
     assert len(s2.Extensions) == 1
+
+
+def test_extensions_proto3():
+    # type: () -> None
+    assert (
+        MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[test_message_option]
+        == "Hello world!"
+    )
 
 
 def test_constructor_proto2():

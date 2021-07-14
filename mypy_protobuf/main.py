@@ -376,18 +376,7 @@ class PkgWriter(object):
                         )
                     l("")
 
-                for ext in desc.extension:
-                    l(
-                        "{}: {}[{}, {}] = ...",
-                        ext.name,
-                        self._import(
-                            "google.protobuf.internal.extension_dict",
-                            "_ExtensionFieldDescriptor",
-                        ),
-                        self._import_message(ext.extendee),
-                        self.python_type(ext),
-                    )
-                    l("")
+                self.write_extensions(desc.extension)
 
                 # Constructor
                 self_arg = "self_" if any(f.name == "self" for f in fields) else "self"
@@ -522,14 +511,18 @@ class PkgWriter(object):
             )
 
     def write_extensions(self, extensions: Sequence[d.FieldDescriptorProto]) -> None:
-        if not extensions:
-            return
         l = self._write_line
-        field_descriptor_class = self._import(
-            "google.protobuf.descriptor", "FieldDescriptor"
-        )
-        for extension in extensions:
-            l("{}: {} = ...", extension.name, field_descriptor_class)
+        for ext in extensions:
+            l(
+                "{}: {}[{}, {}] = ...",
+                ext.name,
+                self._import(
+                    "google.protobuf.internal.extension_dict",
+                    "_ExtensionFieldDescriptor",
+                ),
+                self._import_message(ext.extendee),
+                self.python_type(ext),
+            )
             l("")
 
     def write_methods(
@@ -706,7 +699,7 @@ class PkgWriter(object):
         if casttype:
             return self._import_casttype(casttype)
 
-        mapping: Dict[d.FieldDescriptorProto.TypeValue, Callable[[], str]] = {
+        mapping: Dict[d.FieldDescriptorProto.Type.V, Callable[[], str]] = {
             d.FieldDescriptorProto.TYPE_DOUBLE: lambda: self._builtin("float"),
             d.FieldDescriptorProto.TYPE_FLOAT: lambda: self._builtin("float"),
             d.FieldDescriptorProto.TYPE_INT64: lambda: self._builtin("int"),
