@@ -34,6 +34,20 @@ class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Out
     FOO = OuterEnum.V(1)
     BAR = OuterEnum.V(2)
 
+class NamingConflicts(metaclass=_NamingConflicts):
+    V = typing.NewType('V', builtins.int)
+
+global___NamingConflicts = NamingConflicts
+
+Name = NamingConflicts.V(1)
+Value = NamingConflicts.V(2)
+keys = NamingConflicts.V(3)
+values = NamingConflicts.V(4)
+items = NamingConflicts.V(5)
+
+class _NamingConflicts(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NamingConflicts.V], builtins.type):  # type: ignore
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
+
 class Simple1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class InnerEnum(metaclass=_InnerEnum):

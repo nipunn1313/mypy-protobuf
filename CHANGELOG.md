@@ -14,6 +14,7 @@ test_message_option: google.protobuf.descriptor.FieldDescriptor = ...
 test_message_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text] = ...
 ```
 - Now requires [types-protobuf](https://pypi.org/project/types-protobuf/) 3.17.1
+- Fix [#238](https://github.com/dropbox/mypy-protobuf/issues/238) - handling enum variants that name conflict with EnumTypeWrapper methods
 
 
 ## 2.6
