@@ -329,16 +329,11 @@ class PkgWriter(object):
                 # Scalar fields
                 for field in [f for f in fields if is_scalar(f)]:
                     if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                        container = self._import(
-                            "google.protobuf.internal.containers",
-                            "RepeatedScalarFieldContainer",
-                        )
                         l("")
                         l("@property")
                         l(
-                            "def {}(self) -> {}[{}]: ...",
+                            "def {}(self) -> {}: ...",
                             field.name,
-                            container,
                             self.python_type(field),
                         )
                     else:
@@ -348,45 +343,11 @@ class PkgWriter(object):
                 # Getters for non-scalar fields
                 for field in [f for f in fields if not is_scalar(f)]:
                     l("@property")
-                    if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                        msg = self.descriptors.messages[field.type_name]
-                        if msg.options.map_entry:
-                            # map generates a special Entry wrapper message
-                            if is_scalar(msg.field[1]):
-                                container = self._import(
-                                    "google.protobuf.internal.containers", "ScalarMap"
-                                )
-                            else:
-                                container = self._import(
-                                    "google.protobuf.internal.containers", "MessageMap"
-                                )
-                            ktype, vtype = self._map_key_value_types(
-                                field, msg.field[0], msg.field[1]
-                            )
-                            l(
-                                "def {}(self) -> {}[{}, {}]: ...",
-                                field.name,
-                                container,
-                                ktype,
-                                vtype,
-                            )
-                        else:
-                            container = self._import(
-                                "google.protobuf.internal.containers",
-                                "RepeatedCompositeFieldContainer",
-                            )
-                            l(
-                                "def {}(self) -> {}[{}]: ...",
-                                field.name,
-                                container,
-                                self.python_type(field),
-                            )
-                    else:
-                        l(
-                            "def {}(self) -> {}: ...",
-                            field.name,
-                            self.python_type(field),
-                        )
+                    l(
+                        "def {}(self) -> {}: ...",
+                        field.name,
+                        self.python_type(field),
+                    )
                     l("")
 
                 self.write_extensions(desc.extension)
@@ -400,49 +361,23 @@ class PkgWriter(object):
                         # See https://github.com/dropbox/mypy-protobuf/issues/71
                         l("*,")
                     for field in [f for f in fields]:
-                        if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                            if (
-                                field.type_name in self.descriptors.messages
-                                and self.descriptors.messages[
-                                    field.type_name
-                                ].options.map_entry
-                            ):
-                                msg = self.descriptors.messages[field.type_name]
-                                ktype, vtype = self._map_key_value_types(
-                                    field, msg.field[0], msg.field[1]
-                                )
-                                l(
-                                    "{} : {}[{}[{}, {}]] = ...,",
-                                    field.name,
-                                    self._import("typing", "Optional"),
-                                    self._import("typing", "Mapping"),
-                                    ktype,
-                                    vtype,
-                                )
-                            else:
-                                l(
-                                    "{} : {}[{}[{}]] = ...,",
-                                    field.name,
-                                    self._import("typing", "Optional"),
-                                    self._import("typing", "Iterable"),
-                                    self.python_type(field),
-                                )
-                        elif (
+                        if (
                             self.fd.syntax == "proto3"
                             and is_scalar(field)
+                            and field.label != d.FieldDescriptorProto.LABEL_REPEATED
                             and not self.relax_strict_optional_primitives
                         ):
                             l(
                                 "{} : {} = ...,",
                                 field.name,
-                                self.python_type(field),
+                                self.python_type(field, generic_container=True),
                             )
                         else:
                             l(
                                 "{} : {}[{}] = ...,",
                                 field.name,
                                 self._import("typing", "Optional"),
-                                self.python_type(field),
+                                self.python_type(field, generic_container=True),
                             )
                     l(") -> None: ...")
 
@@ -707,7 +642,16 @@ class PkgWriter(object):
             )
             l("")
 
-    def python_type(self, field: d.FieldDescriptorProto) -> str:
+    def python_type(
+        self, field: d.FieldDescriptorProto, generic_container: bool = False
+    ) -> str:
+        """
+        generic_container
+          if set, type the field with generic interfaces. Eg.
+          - Iterable[int] rather than RepeatedScalarFieldContainer[int]
+          - Mapping[k, v] rather than MessageMap[k, v]
+          Can be useful for input types (eg constructor)
+        """
         casttype = field.options.Extensions[extensions_pb2.casttype]
         if casttype:
             return self._import_casttype(casttype)
@@ -740,7 +684,51 @@ class PkgWriter(object):
         }
 
         assert field.type in mapping, "Unrecognized type: " + repr(field.type)
-        return mapping[field.type]()
+        field_type = mapping[field.type]()
+
+        # For non-repeated fields, we're done!
+        if field.label != d.FieldDescriptorProto.LABEL_REPEATED:
+            return field_type
+
+        # Scalar repeated fields go in RepeatedScalarFieldContainer
+        if is_scalar(field):
+            container = (
+                self._import("typing", "Iterable")
+                if generic_container
+                else self._import(
+                    "google.protobuf.internal.containers",
+                    "RepeatedScalarFieldContainer",
+                )
+            )
+            return "{}[{}]".format(container, field_type)
+
+        # non-scalar repeated map fields go in ScalarMap/MessageMap
+        msg = self.descriptors.messages[field.type_name]
+        if msg.options.map_entry:
+            # map generates a special Entry wrapper message
+            if generic_container:
+                container = self._import("typing", "Mapping")
+            elif is_scalar(msg.field[1]):
+                container = self._import(
+                    "google.protobuf.internal.containers", "ScalarMap"
+                )
+            else:
+                container = self._import(
+                    "google.protobuf.internal.containers", "MessageMap"
+                )
+            ktype, vtype = self._map_key_value_types(field, msg.field[0], msg.field[1])
+            return "{}[{}, {}]".format(container, ktype, vtype)
+
+        # non-scalar repetated fields go in RepeatedCompositeFieldContainer
+        container = (
+            self._import("typing", "Iterable")
+            if generic_container
+            else self._import(
+                "google.protobuf.internal.containers",
+                "RepeatedCompositeFieldContainer",
+            )
+        )
+        return "{}[{}]".format(container, field_type)
 
     def write(self) -> str:
         for reexport_idx in self.fd.public_dependency:
