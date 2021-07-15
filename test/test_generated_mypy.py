@@ -38,11 +38,20 @@ from testproto.test_pb2 import (
     Simple2,
 )
 from testproto.test3_pb2 import (
+    BAR3,
     FOO3,
     OuterMessage3,
     SimpleProto3,
 )
-from testproto.test_extensions3_pb2 import MessageOptionsTestMsg, test_message_option
+from testproto.test_extensions3_pb2 import (
+    MessageOptionsTestMsg,
+    scalar_option,
+    repeated_scalar_option,
+    enum_option,
+    repeated_enum_option,
+    msg_option,
+    repeated_msg_option,
+)
 from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 
 from typing import (
@@ -451,9 +460,25 @@ def test_extensions_proto2():
 def test_extensions_proto3():
     # type: () -> None
     assert (
-        MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[test_message_option]
+        MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[scalar_option]
         == "Hello world!"
     )
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
+        repeated_scalar_option
+    ] == ["A", "B", "C"]
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[enum_option] == FOO3
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
+        repeated_enum_option
+    ] == [FOO3, BAR3]
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
+        msg_option
+    ] == OuterMessage3(a_string="Hello OuterMessage3")
+    assert list(
+        MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[repeated_msg_option]
+    ) == [
+        OuterMessage3(a_string="Hello OuterMessage3 A"),
+        OuterMessage3(a_string="Hello OuterMessage3 B"),
+    ]
 
 
 def test_constructor_proto2():
@@ -499,15 +524,15 @@ def test_mapping_type():
     s.map_scalar[5] = "abcd"
     assert s.map_scalar[5] == "abcd"
 
-    s.map_message[5].a_bool = True
-    assert s.map_message[5] == OuterMessage3(a_bool=True)
+    s.map_message[5].a_string = "hi"
+    assert s.map_message[5] == OuterMessage3(a_string="hi")
 
     assert s.map_message.get_or_create(6) == OuterMessage3()
     assert s.map_message[6] == OuterMessage3()
     assert s.map_message.get_or_create(6) == OuterMessage3()
 
     s2 = SimpleProto3(
-        map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_bool=True)}
+        map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_string="hi")}
     )
 
 
