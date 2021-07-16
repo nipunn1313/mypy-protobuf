@@ -163,7 +163,7 @@ from testproto.reexport_pb2 import Inner  # E:2.7 E:3.8
 
 # In proto2 - you can pass in None for primitive, but not in proto3
 Simple2(a_string=None)
-OuterMessage3(a_bool=None)  # E:2.7 E:3.8
+OuterMessage3(a_string=None)  # E:2.7 E:3.8
 
 # Repeated scalar fields are not assignable only extendable
 s9 = Simple1()

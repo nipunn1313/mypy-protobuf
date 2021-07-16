@@ -9,7 +9,7 @@ enum OuterEnum {
 }
 
 message OuterMessage3 {
-  bool a_bool = 1;
+  string a_string = 1;
 }
 
 message SimpleProto3 {

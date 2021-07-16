@@ -13,7 +13,8 @@ test_message_option: google.protobuf.descriptor.FieldDescriptor = ...
 # Now generates
 test_message_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text] = ...
 ```
-- Now requires [types-protobuf](https://pypi.org/project/types-protobuf/) 3.17.1
+Fix repeated extensions as well - to generate RepeatedScalarFieldContainer and RepeatedCompositeFieldContainer
+- Now requires [types-protobuf](https://pypi.org/project/types-protobuf/) 3.17.3
 - Fix [#238](https://github.com/dropbox/mypy-protobuf/issues/238) - handling enum variants that name conflict with EnumTypeWrapper methods
 
 

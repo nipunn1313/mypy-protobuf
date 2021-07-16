@@ -1,17 +1,34 @@
 syntax = "proto3";
 
 import "google/protobuf/descriptor.proto";
+import "testproto/test3.proto";
 
-package test;
+package test3;
 
 extend google.protobuf.FieldOptions {
   string test_field_extension = 50000;
 }
 
 extend google.protobuf.MessageOptions {
-  string test_message_option = 51234;
+  string scalar_option = 51234;
+  repeated string repeated_scalar_option = 51235;
+  OuterEnum enum_option = 51236;
+  repeated OuterEnum repeated_enum_option = 51237;
+  OuterMessage3 msg_option = 51238;
+  repeated OuterMessage3 repeated_msg_option = 51239;
 }
 
 message MessageOptionsTestMsg {
-    option (test_message_option) = "Hello world!";
+    option (scalar_option) = "Hello world!";
+    option (repeated_scalar_option) = "A";
+    option (repeated_scalar_option) = "B";
+    option (repeated_scalar_option) = "C";
+
+    option (enum_option) = FOO3;
+    option (repeated_enum_option) = FOO3;
+    option (repeated_enum_option) = BAR3;
+
+    option (msg_option).a_string = "Hello OuterMessage3";
+    option (repeated_msg_option) = {a_string: "Hello OuterMessage3 A"};
+    option (repeated_msg_option) = {a_string: "Hello OuterMessage3 B"};
 }
