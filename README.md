@@ -149,8 +149,10 @@ protoc --python_out=output/location --mypy_out=readable_stubs:output/location
 If you are using proto3, then primitives cannot be represented as NULL on the wire -
 only as their zero value. By default mypy-protobuf types message constructors to have
 non-nullable primitives (eg `int` instead of `Optional[int]`). python-protobuf itself will
-internally convert None -> zero value, and if you intentionally want to use this behavior,
-set this! We recommend avoiding this, but it may be helpful when migrating existing proto2 code.
+internally convert None -> zero value. If you intentionally want to use this behavior,
+set this flag! We recommend avoiding this, as it can lead to developer error - confusing
+NULL and 0 as distinct on the wire.
+However, it may be helpful when migrating existing proto2 code, where the distinction is meaningful
 
 ```
 protoc --python_out=output/location --mypy_out=relax_strict_optional_primitives:output/location
