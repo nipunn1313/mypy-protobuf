@@ -34,6 +34,7 @@ from testproto.test_pb2 import (
     Name as NamingConflicts_Name,
     NamingConflicts,
     OuterEnum,
+    PythonReservedKeywords,
     Simple1,
     Simple2,
 )
@@ -60,6 +61,7 @@ from typing import (
     Optional,
     Generator,
     Tuple,
+    Type,
 )
 
 
@@ -161,8 +163,8 @@ def test_generate_negative_matches():
     assert errors_38 == expected_errors_38
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 58
-    assert len(errors_38) == 70
+    assert len(errors_27) == 60
+    assert len(errors_38) == 72
 
 
 def test_func():
@@ -546,10 +548,19 @@ def test_casttype():
     s.email_by_uid[UserId(33)] = Email("abcd@gmail.com")
 
 
-def test_access_message_with_python_keyword_name():
+def test_reserved_keywords():
     # type: () -> None
     with pytest.raises(AttributeError, match="module.*has no attribute 'asdf'"):
         getattr(test_pb2, "asdf")
-    msg_cls = getattr(test_pb2, "None")
-    none = msg_cls()
-    assert isinstance(none, Message)
+
+    # Confirm that "None" is a Message
+    none_cls = getattr(test_pb2, "None")  # type: Type[test_pb2.__None]
+    none_instance = none_cls(valid=5)
+    assert isinstance(none_instance, Message)
+
+    # Confirm that messages and enums w/ reserved names type properly
+    prk = PythonReservedKeywords(
+        none=none_instance, valid=PythonReservedKeywords.valid_in_finally
+    )
+    assert prk.none.valid == 5
+    assert prk.valid == PythonReservedKeywords.valid_in_finally

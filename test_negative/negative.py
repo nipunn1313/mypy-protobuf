@@ -16,6 +16,7 @@ from testproto.test_pb2 import (
     Extensions1,
     Extensions2,
     FOO,
+    PythonReservedKeywords,
     Simple1,
     Simple2,
 )
@@ -170,3 +171,12 @@ s9 = Simple1()
 s10 = Simple1()
 s9.a_repeated_string = s10.a_repeated_string  # E:2.7 E:3.8
 s9.rep_inner_enum = s10.rep_inner_enum  # E:2.7 E:3.8
+
+# Some reserved keywored testing
+# Confirm that messages and enums w/ reserved names type properly
+PythonReservedKeywords().none.valid
+PythonReservedKeywords().none.invalid  # E:2.7 E:3.8
+# Enum should be int, even on enum with invalid name
+assert PythonReservedKeywords().valid == PythonReservedKeywords.valid_in_finally
+a_string = "hi"
+a_string = PythonReservedKeywords().valid  # E:2.7 E:3.8

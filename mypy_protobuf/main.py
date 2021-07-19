@@ -183,12 +183,12 @@ class PkgWriter(object):
             assert name.startswith(".")
             name = name[1:]
 
+        # Use prepended "__" to disambiguate message names that alias python reserved keywords
         split = name.split(".")
-
-        # Can't represent identifiers that are reserved, so mark as Any
-        # and don't bother importing
-        if any(s in PYTHON_RESERVED for s in split):
-            return self._import("typing", "Any")
+        for i, part in enumerate(split):
+            if part in PYTHON_RESERVED:
+                split[i] = "__" + part
+        name = ".".join(split)
 
         # Message defined in this file.
         if message_fd.name == self.fd.name:
@@ -200,9 +200,11 @@ class PkgWriter(object):
         import_name = self._import(
             message_fd.name[:-6].replace("-", "_") + "_pb2", split[0]
         )
+
         remains = ".".join(split[1:])
         if not remains:
             return import_name
+
         # remains could either be a direct import of a nested enum or message
         # from another package.
         return import_name + "." + remains
@@ -248,8 +250,13 @@ class PkgWriter(object):
         self, enums: Iterable[d.EnumDescriptorProto], prefix: str = ""
     ) -> None:
         l = self._write_line
-        for enum in [e for e in enums if e.name not in PYTHON_RESERVED]:
-            l("class {}(metaclass={}):", enum.name, "_" + enum.name)
+        for enum in enums:
+            class_name = (
+                enum.name if enum.name not in PYTHON_RESERVED else "__" + enum.name
+            )
+            value_type_fq = prefix + class_name + ".V"
+
+            l("class {}(metaclass={}):", class_name, "_" + enum.name)
             with self._indent():
                 l(
                     "V = {}('V', {})",
@@ -258,10 +265,10 @@ class PkgWriter(object):
                 )
             l("")
             if prefix == "" and not self.readable_stubs:
-                l("{} = {}", _mangle_global_identifier(enum.name), enum.name)
+                l("{} = {}", _mangle_global_identifier(class_name), class_name)
                 l("")
 
-            self.write_enum_values(enum.value, prefix + enum.name + ".V")
+            self.write_enum_values(enum.value, value_type_fq)
             l("")
 
             # do a type-ignore to avoid the circular dependency. It's ugly.
@@ -273,7 +280,7 @@ class PkgWriter(object):
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
                 ),
-                enum.name + ".V",
+                class_name + ".V",
                 self._builtin("type"),
             )
             with self._indent():
@@ -283,7 +290,7 @@ class PkgWriter(object):
                 )
                 self.write_enum_values(
                     [v for v in enum.value if v.name not in PROTO_ENUM_RESERVED],
-                    prefix + enum.name + ".V",
+                    value_type_fq,
                 )
             l("")
 
@@ -292,7 +299,7 @@ class PkgWriter(object):
     ) -> None:
         l = self._write_line
 
-        for desc in [m for m in messages if m.name not in PYTHON_RESERVED]:
+        for desc in messages:
             self.locals.add(desc.name)
             qualified_name = prefix + desc.name
 
@@ -309,8 +316,11 @@ class PkgWriter(object):
                     well_known_type.__name__,
                 )
 
+            class_name = (
+                desc.name if desc.name not in PYTHON_RESERVED else "__" + desc.name
+            )
             message_class = self._import("google.protobuf.message", "Message")
-            l("class {}({}{}):", desc.name, message_class, addl_base)
+            l("class {}({}{}):", class_name, message_class, addl_base)
             with self._indent():
                 l(
                     "DESCRIPTOR: {} = ...",
@@ -384,7 +394,7 @@ class PkgWriter(object):
                 self.write_stringly_typed_fields(desc)
 
             if prefix == "" and not self.readable_stubs:
-                l("{} = {}", _mangle_global_identifier(desc.name), desc.name)
+                l("{} = {}", _mangle_global_identifier(class_name), class_name)
             l("")
 
     def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:
@@ -504,11 +514,16 @@ class PkgWriter(object):
 
     def write_services(self, services: Iterable[d.ServiceDescriptorProto]) -> None:
         l = self._write_line
-        for service in [s for s in services if s.name not in PYTHON_RESERVED]:
+        for service in services:
+            class_name = (
+                service.name
+                if service.name not in PYTHON_RESERVED
+                else "__" + service.name
+            )
             # The service definition interface
             l(
                 "class {}({}, metaclass={}):",
-                service.name,
+                class_name,
                 self._import("google.protobuf.service", "Service"),
                 self._import("abc", "ABCMeta"),
             )
@@ -516,7 +531,7 @@ class PkgWriter(object):
                 self.write_methods(service, is_abstract=True)
 
             # The stub client
-            l("class {}({}):", service.name + "_Stub", service.name)
+            l("class {}({}):", service.name + "_Stub", class_name)
             with self._indent():
                 l(
                     "def __init__(self, rpc_channel: {}) -> None: ...",

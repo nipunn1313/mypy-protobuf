@@ -118,7 +118,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     }
 
     call_mypy $PY_VER_MYPY_TARGET $NEGATIVE_FILES
-    if ! diff $MYPY_OUTPUT/mypy_output test_negative/output.expected.$PY_VER_MYPY_TARGET; then
+    if ! diff $MYPY_OUTPUT/mypy_output test_negative/output.expected.$PY_VER_MYPY_TARGET || ! diff $MYPY_OUTPUT/mypy_output.omit_linenos test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
 
         # Copy over all the mypy results for the developer.
