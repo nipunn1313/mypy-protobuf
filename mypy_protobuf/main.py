@@ -156,7 +156,6 @@ class PkgWriter(object):
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
         self.from_imports: Dict[str, Set[Tuple[str, Optional[str]]]] = defaultdict(set)
-        self.locals: Set[str] = set()
 
     def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
@@ -300,7 +299,6 @@ class PkgWriter(object):
         l = self._write_line
 
         for desc in messages:
-            self.locals.add(desc.name)
             qualified_name = prefix + desc.name
 
             # Reproduce some hardcoded logic from the protobuf implementation - where
