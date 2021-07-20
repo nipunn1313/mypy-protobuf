@@ -5,7 +5,10 @@ import "google/protobuf/empty.proto";
 
 package test.grpc;
 
+// SimpleService
 service SimpleService {
+  // UnaryUnary
   rpc UnaryUnary (google.protobuf.Empty) returns (test.Simple1) {}
+  // UnaryStream
   rpc UnaryStream (test.Simple1) returns (google.protobuf.Empty) {}
 }

@@ -8,8 +8,11 @@ import "testproto/nested/nested.proto";
 import "testproto/nopackage.proto";
 import "testproto/test3.proto";
 
+// Outer Enum
 enum OuterEnum {
+  // FOO
   FOO = 1;
+  // BAR
   BAR = 2;
 }
 
@@ -26,8 +29,11 @@ enum NamingConflicts {
 }
 
 message Simple1 {
+  // Inner Enum
   enum InnerEnum {
+    // INNER1
     INNER1 = 1;
+    // INNER2
     INNER2 = 2;
   }
   message InnerMessage {}
@@ -76,13 +82,19 @@ message Simple2 {
 }
 
 message Extensions1 {
-  extend Simple1 { optional Extensions1 ext = 1000; }
+  extend Simple1 {
+    // ext
+    optional Extensions1 ext = 1000;
+  }
 
   optional string ext1_string = 1;
 }
 
 message Extensions2 {
-  extend Simple1 { optional Extensions2 foo = 2020; }
+  extend Simple1 {
+    // foo
+    optional Extensions2 foo = 2020;
+  }
 
   optional bool flag = 1;
 }
@@ -143,8 +155,11 @@ message PythonReservedKeywordsSmall {
 
 // Method name is reserved
 service PythonReservedKeywordsService {
+    // lambda
     rpc lambda(Simple1) returns (PythonReservedKeywords.lambda) {}
+    // valid_method_name1
     rpc valid_method_name1(Simple1) returns (None) {}
+    // valid_method_name2
     rpc valid_method_name2(Simple1) returns (PythonReservedKeywords.lambda) {}
 }
 
