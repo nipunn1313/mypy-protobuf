@@ -13,7 +13,6 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class NoPackage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-
     def __init__(self,
         ) -> None: ...
 global___NoPackage = NoPackage
@@ -22,13 +21,10 @@ class NoPackage2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     NP_FIELD_NUMBER: builtins.int
     NP_REP_FIELD_NUMBER: builtins.int
-
     @property
     def np(self) -> global___NoPackage: ...
-
     @property
     def np_rep(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___NoPackage]: ...
-
     def __init__(self,
         *,
         np : typing.Optional[global___NoPackage] = ...,

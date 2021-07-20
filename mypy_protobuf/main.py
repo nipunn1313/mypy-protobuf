@@ -332,43 +332,42 @@ class PkgWriter(object):
                 # integer constants  for field numbers
                 for f in desc.field:
                     l("{}_FIELD_NUMBER: {}", f.name.upper(), self._builtin("int"))
-                fields = [f for f in desc.field if f.name not in PYTHON_RESERVED]
 
-                # Scalar fields
-                for field in [f for f in fields if is_scalar(f)]:
-                    if field.label == d.FieldDescriptorProto.LABEL_REPEATED:
-                        l("")
+                for field in desc.field:
+                    if field.name in PYTHON_RESERVED:
+                        continue
+
+                    if (
+                        is_scalar(field)
+                        and field.label != d.FieldDescriptorProto.LABEL_REPEATED
+                    ):
+                        # Scalar non repeated fields are r/w
+                        l("{}: {} = ...", field.name, self.python_type(field))
+                    else:
+                        # r/o Getters for non-scalar fields and scalar-repeated fields
                         l("@property")
                         l(
                             "def {}(self) -> {}: ...",
                             field.name,
                             self.python_type(field),
                         )
-                    else:
-                        l("{}: {} = ...", field.name, self.python_type(field))
-                l("")
-
-                # Getters for non-scalar fields
-                for field in [f for f in fields if not is_scalar(f)]:
-                    l("@property")
-                    l(
-                        "def {}(self) -> {}: ...",
-                        field.name,
-                        self.python_type(field),
-                    )
-                    l("")
 
                 self.write_extensions(desc.extension)
 
                 # Constructor
-                self_arg = "self_" if any(f.name == "self" for f in fields) else "self"
+                self_arg = (
+                    "self_" if any(f.name == "self" for f in desc.field) else "self"
+                )
                 l("def __init__({},", self_arg)
                 with self._indent():
-                    if len(fields) > 0:
+                    constructor_fields = [
+                        f for f in desc.field if f.name not in PYTHON_RESERVED
+                    ]
+                    if len(constructor_fields) > 0:
                         # Only positional args allowed
                         # See https://github.com/dropbox/mypy-protobuf/issues/71
                         l("*,")
-                    for field in [f for f in fields]:
+                    for field in constructor_fields:
                         if (
                             self.fd.syntax == "proto3"
                             and is_scalar(field)

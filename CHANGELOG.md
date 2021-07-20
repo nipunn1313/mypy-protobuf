@@ -18,7 +18,8 @@ Fix repeated extensions as well - to generate RepeatedScalarFieldContainer and R
 - Fix [#238](https://github.com/dropbox/mypy-protobuf/issues/238) - handling enum variants that name conflict with EnumTypeWrapper methods
 - Improve mypy-protobuf testsuite expected-errors file to make insertions/deletions easier to code review
 - Fix [#227](https://github.com/dropbox/mypy-protobuf/issues/227) - improve support for messages/enums with python reserved keyword names
-
+- Order fields within a message in original .proto file order Previously, they were grouped by scalar/nonscalar. Remove
+that grouping to make it a bit easier to correlate .proto files to .pyi files.
 
 ## 2.6
 
