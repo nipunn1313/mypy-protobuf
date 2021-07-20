@@ -17,6 +17,7 @@ Fix repeated extensions as well - to generate RepeatedScalarFieldContainer and R
 - Now requires [types-protobuf](https://pypi.org/project/types-protobuf/) 3.17.3
 - Fix [#238](https://github.com/dropbox/mypy-protobuf/issues/238) - handling enum variants that name conflict with EnumTypeWrapper methods
 - Improve mypy-protobuf testsuite expected-errors file to make insertions/deletions easier to code review
+- Fix [#227](https://github.com/dropbox/mypy-protobuf/issues/227) - improve support for messages/enums with python reserved keyword names
 
 
 ## 2.6

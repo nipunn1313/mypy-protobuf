@@ -92,4 +92,6 @@ test_negative/negative.py: error: Module "testproto.reexport_pb2" has no attribu
 test_negative/negative.py: error: Argument "a_string" to "OuterMessage3" has incompatible type "None"; expected "str"
 test_negative/negative.py: error: Property "a_repeated_string" defined in "Simple1" is read-only
 test_negative/negative.py: error: Property "rep_inner_enum" defined in "Simple1" is read-only
-Found 78 errors in 2 files (checked 32 source files)
+test_negative/negative.py: error: "__None" has no attribute "invalid"; maybe "valid"?
+test_negative/negative.py: error: Incompatible types in assignment (expression has type "V", variable has type "str")
+Found 80 errors in 2 files (checked 32 source files)

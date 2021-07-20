@@ -87,16 +87,20 @@ message Extensions2 {
   optional bool flag = 1;
 }
 
-message None {}
+message None {
+  optional int64 valid = 1;
+}
 
 message PythonReservedKeywords {
   enum finally {
       continue = 1;
+      valid_in_finally = 2;
   }
-  // protoc python generator actually generates invalid code for this, so not testing
-  //message lambda {
-  //    optional int64 continue = 1;
-  //}
+
+  message lambda {
+      optional int64 continue = 1;
+      optional int64 valid = 2;
+  }
 
   required int64 from = 1;
   optional Simple2 in = 2;
@@ -137,9 +141,18 @@ message PythonReservedKeywordsSmall {
   required int64 from = 1;
 }
 
+// Method name is reserved
 service PythonReservedKeywordsService {
-    rpc lambda(Simple1) returns (Simple2) {}
+    rpc lambda(Simple1) returns (PythonReservedKeywords.lambda) {}
+    rpc valid_method_name1(Simple1) returns (None) {}
+    rpc valid_method_name2(Simple1) returns (PythonReservedKeywords.lambda) {}
 }
+
+// when service name itself is reserved - generated code was found to be invalid
+// in protoc 3.17.3
+//service global {
+//    rpc Echo(Simple1) returns (Simple2) {}
+//}
 
 option py_generic_services = true;
 service ATestService {
