@@ -16,6 +16,7 @@ test_message_option: google.protobuf.internal.extension_dict._ExtensionFieldDesc
 Fix repeated extensions as well - to generate RepeatedScalarFieldContainer and RepeatedCompositeFieldContainer
 - Now requires [types-protobuf](https://pypi.org/project/types-protobuf/) 3.17.3
 - Fix [#238](https://github.com/dropbox/mypy-protobuf/issues/238) - handling enum variants that name conflict with EnumTypeWrapper methods
+- Improve mypy-protobuf testsuite expected-errors file to make insertions/deletions easier to code review
 
 
 ## 2.6

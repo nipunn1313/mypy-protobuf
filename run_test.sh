@@ -110,12 +110,24 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
         NEGATIVE_FILES=$NEGATIVE_FILES_38
     fi
 
-    if ! diff <(mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET $NEGATIVE_FILES) test_negative/output.expected.$PY_VER_MYPY_TARGET; then
+    MYPY_OUTPUT=`mktemp -d`
+    call_mypy() {
+        # Write output to file. Make variant w/ omitted line numbers for easy diffing / CR
+        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$1 ${@: 2} > $MYPY_OUTPUT/mypy_output || true
+        cut -d: -f1,3- $MYPY_OUTPUT/mypy_output > $MYPY_OUTPUT/mypy_output.omit_linenos
+    }
+
+    call_mypy $PY_VER_MYPY_TARGET $NEGATIVE_FILES
+    if ! diff $MYPY_OUTPUT/mypy_output test_negative/output.expected.$PY_VER_MYPY_TARGET; then
         echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
 
-        # Copy over all the py targets for convenience for the developer - so they don't have to run it many times
-        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=2.7 $NEGATIVE_FILES_27 > test_negative/output.expected.2.7 || true
-        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=3.8 $NEGATIVE_FILES_38 > test_negative/output.expected.3.8 || true
+        # Copy over all the mypy results for the developer.
+        call_mypy 2.7 $NEGATIVE_FILES_27
+        cp $MYPY_OUTPUT/mypy_output test_negative/output.expected.2.7
+        cp $MYPY_OUTPUT/mypy_output.omit_linenos test_negative/output.expected.2.7.omit_linenos
+        call_mypy 3.8 $NEGATIVE_FILES_38
+        cp $MYPY_OUTPUT/mypy_output test_negative/output.expected.3.8
+        cp $MYPY_OUTPUT/mypy_output.omit_linenos test_negative/output.expected.3.8.omit_linenos
         exit 1
     fi
 )
