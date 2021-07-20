@@ -14,7 +14,6 @@ class Inner(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     A_FIELD_NUMBER: builtins.int
     a: testproto.test3_pb2.OuterEnum.V = ...
-
     def __init__(self,
         *,
         a : testproto.test3_pb2.OuterEnum.V = ...,
