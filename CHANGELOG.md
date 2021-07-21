@@ -1,6 +1,8 @@
 ## Upcoming
 
 - Propagate comments from .proto files to .pyi files
+- Add protobuf type stubs to the setup requirements
+- Use pytest 6.2.4 for internal test suites on python3
 
 ## 2.7
 
