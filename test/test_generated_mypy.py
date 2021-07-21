@@ -104,11 +104,17 @@ def compare_pyi_to_expected(output_path):
 
 def test_generate_mypy_matches():
     # type: () -> None
-    # Once we're on python3, we can simplify this to glob.glob("proto/**/*.proto, recursive=True)
-    proto_files = glob.glob("proto/**/*.proto") + glob.glob("proto/*/*/*.proto")
+    if sys.version_info < (3, 0):
+        return
+    proto_files = glob.glob("proto/**/*.proto", recursive=True)
     assert len(proto_files) == 15  # Just a sanity check that all the files show up
 
-    failures = []
+    pyi_files = glob.glob("test/generated/**/*.pyi", recursive=True)
+    assert (
+        len(pyi_files) == 17
+    )  # Should be higher - because grpc files generate extra pyis
+
+    failure_check_results = []
     for fn in proto_files:
         assert fn.endswith(".proto")
         fn_split = fn.split(os.sep)  # Eg. [proto, testproto, dot.com, test.proto]
@@ -122,11 +128,17 @@ def test_generate_mypy_matches():
 
         output = os.path.join("test", "generated", *components)
 
-        failures.append(compare_pyi_to_expected(output))
+        failure_check_results.append(compare_pyi_to_expected(output))
+        if "grpc" in components:
+            grpc_output = output[:-4] + "_grpc.pyi"
+            failure_check_results.append(compare_pyi_to_expected(grpc_output))
 
-    real_failures = ["\n\t" + f for f in failures if f]
-    if real_failures:
-        raise Exception("".join(real_failures))
+    # Make sure we checked everything
+    assert len(failure_check_results) == len(pyi_files)
+
+    failures = ["\n\t" + f for f in failure_check_results if f]
+    if failures:
+        raise Exception("".join(failures))
 
 
 def test_generate_negative_matches():

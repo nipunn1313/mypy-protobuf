@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Propagate comments from .proto files to .pyi files
+
 ## 2.7
 
 - Fix [#244](https://github.com/dropbox/mypy-protobuf/issues/244) - support extensions defined at module scope with proper types, matching extensions defined within Messages. See [_ExtensionDict](https://github.com/python/typeshed/blob/4765978f6ceeb24e10bdf93c0d4b72dfb35836d4/stubs/protobuf/google/protobuf/internal/extension_dict.pyi#L9)
