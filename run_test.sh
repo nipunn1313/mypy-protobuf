@@ -5,6 +5,8 @@ NC='\033[0m'
 PROTOC=${PROTOC:=protoc}
 
 PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.9.6}
+PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
+
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.11}
 PY_VER_MYPY_TARGET=${PY_VER_MYPY_TARGET:=3.8}
 PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.11}
@@ -12,27 +14,68 @@ PY_VER_UNIT_TESTS=${PY_VER_UNIT_TESTS:=3.8.11}
 # Clean out generated/ directory - except for .generated / __init__.py
 find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
 
+if [ -e $CUSTOM_TYPESHED_DIR ]; then
+    export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
+fi
+
+# Create mypy venv
+MYPY_VENV=venv_$PY_VER_MYPY
+(
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    pyenv shell $PY_VER_MYPY
+
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
+        python3 --version
+        python3 -m pip --version
+        python -m pip install virtualenv
+        python3 -m virtualenv $MYPY_VENV
+        $MYPY_VENV/bin/python3 -m pip install -r mypy_requirements.txt
+    fi
+    $MYPY_VENV/bin/mypy --version
+)
+
+# Create unit tests venv
+UNIT_TESTS_VENV=venv_$PY_VER_UNIT_TESTS
+(
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    pyenv shell $PY_VER_UNIT_TESTS
+
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $UNIT_TESTS_VENV ]]; then
+        python -m pip install virtualenv
+        python -m virtualenv $UNIT_TESTS_VENV
+        $UNIT_TESTS_VENV/bin/python -m pip install -r test_requirements.txt
+    fi
+    $UNIT_TESTS_VENV/bin/py.test --version
+)
+
+# Create mypy-protobuf venv
+MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 (
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     pyenv shell $PY_VER_MYPY_PROTOBUF
-    PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
-    VENV=venv_$PY_VERSION
 
     # Create virtualenv + Install requirements for mypy-protobuf
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
+    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_PROTOBUF_VENV ]]; then
         python -m pip install virtualenv
-        python -m virtualenv $VENV
+        python -m virtualenv $MYPY_PROTOBUF_VENV
+        $MYPY_PROTOBUF_VENV/bin/python -m pip install -e .
     fi
-    source $VENV/bin/activate
-    if [[ -z $SKIP_CLEAN ]]; then
-        python -m pip install -r requirements.txt
-        python -m pip install -e .
+)
 
-        # Confirm version number
-        test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.7"
-        test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.7"
-    fi
+# Run mypy-protobuf
+(
+    source $MYPY_PROTOBUF_VENV/bin/activate
+
+    # Confirm version number
+    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.7"
+    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.7"
+
+    # Run mypy on mypy-protobuf internal code for developers to catch issues
+    FILES="mypy_protobuf/main.py setup.py"
+    $MYPY_VENV/bin/mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$MYPY_PROTOBUF_VENV/bin/python3 --python-version=$PY_VER_MYPY_PROTOBUF_SHORT --pretty --show-error-codes $FILES
 
     # Generate protos
     python --version
@@ -65,40 +108,20 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=test/generated $GRPC_PROTOS
 )
 
+# Run mypy on unit tests / generated output
 (
-    # Run mypy
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    pyenv shell $PY_VER_MYPY
-    PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
-    VENV=venv_$PY_VERSION
-
-    # Create virtualenv
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
-        python3 --version
-        python3 -m pip --version
-        python -m pip install virtualenv
-        python3 -m virtualenv $VENV
-    fi
-    source $VENV/bin/activate
-    if [[ -z $SKIP_CLEAN ]]; then
-        python3 -m pip install -r requirements.txt
-    fi
+    source $MYPY_VENV/bin/activate
 
     # Run mypy
-    mypy --version
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
     FILES27="$(ls test/*.py | grep -v grpc)  $(find test/generated -name "*.pyi" | grep -v grpc)"
-    FILES38="mypy_protobuf/main.py setup.py test/"
+    FILES38="test/"
     if [ $PY_VER_MYPY_TARGET = "2.7" ]; then
         FILES=$FILES27
     else
         FILES=$FILES38
     fi
-    if [ -e $CUSTOM_TYPESHED_DIR ]; then
-        export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
-    fi
-    mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
+    mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$UNIT_TESTS_VENV/bin/python --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
 
     # run mypy on negative-tests (expected mypy failures)
     # --python-version=2.7 chokes on the generated grpc files - so split them out here
@@ -113,7 +136,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
     MYPY_OUTPUT=`mktemp -d`
     call_mypy() {
         # Write output to file. Make variant w/ omitted line numbers for easy diffing / CR
-        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-version=$1 ${@: 2} > $MYPY_OUTPUT/mypy_output || true
+        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$UNIT_TESTS_VENV/bin/python --python-version=$1 ${@: 2} > $MYPY_OUTPUT/mypy_output || true
         cut -d: -f1,3- $MYPY_OUTPUT/mypy_output > $MYPY_OUTPUT/mypy_output.omit_linenos
     }
 
@@ -134,21 +157,7 @@ find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \
 
 (
     # Run unit tests. These tests generate .expected files
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    pyenv shell $PY_VER_UNIT_TESTS
-    PY_VERSION=`python -c 'import sys; print(sys.version.split()[0])'`
-    VENV=venv_$PY_VERSION
-
-    if [[ -z $SKIP_CLEAN ]] || [[ ! -e $VENV ]]; then
-        python -m pip install virtualenv
-        python -m virtualenv $VENV
-    fi
-    source $VENV/bin/activate
-    python -m pip install -r requirements.txt
-
-    python --version
-    py.test --version
+    source $UNIT_TESTS_VENV/bin/activate
     if [[ $PY_VER_UNIT_TESTS =~ ^2.* ]]; then IGNORE="--ignore=test/test_grpc_usage.py"; else IGNORE=""; fi
     PYTHONPATH=test/generated py.test --ignore=test/generated $IGNORE -v
 )

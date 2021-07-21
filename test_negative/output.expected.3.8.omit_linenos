@@ -94,4 +94,4 @@ test_negative/negative.py: error: Property "a_repeated_string" defined in "Simpl
 test_negative/negative.py: error: Property "rep_inner_enum" defined in "Simple1" is read-only
 test_negative/negative.py: error: "__None" has no attribute "invalid"; maybe "valid"?
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "V", variable has type "str")
-Found 80 errors in 2 files (checked 32 source files)
+Found 80 errors in 2 files (checked 30 source files)
