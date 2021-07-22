@@ -5,43 +5,21 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   run_test:
-    name: ${{ matrix.py-ver-mypy-protobuf }} / ${{matrix.py-ver-mypy-target}} / ${{matrix.py-ver-unit-tests}} protoc/mypytarget/unittests py versions
+    name: ${{ matrix.py-ver-mypy-protobuf }}
     runs-on: ubuntu-latest
     env:
       PY_VER_MYPY: 3.8.11
+      PY_VER_UNIT_TESTS_3: 3.8.11
+      PY_VER_UNIT_TESTS_2: 2.7.18
     strategy:
       matrix:
         # Running mypy-protobuf itself
-        # py-ver-mypy-protobuf: []
-        # --python-version=X target passed into mypy
-        # py-ver-mypy-target: []
-        # Run unit tests - validating that correct typechecking usages
-        # of the google.protobuf library in various python versions
-        # also run at runtime
-        # py-ver-unit-tests: []
-
-        # Explicitly list out each part of the matrix we're using, rather
-        # than automatically multiplying the set in together, so we don't
-        # over-test combinations unnecessarily.
-        include:
-          # Include a python3 compile with mypy targeting 2.7 code
-          - py-ver-mypy-protobuf: 3.9.6
-            py-ver-mypy-target: 2.7
-            py-ver-unit-tests: 2.7.18
-
-          # Include py 3.6 - 3.9 for mypy-protobuf runtime
-          - py-ver-mypy-protobuf: 3.6.14
-            py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.11
-          - py-ver-mypy-protobuf: 3.7.11
-            py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.11
-          - py-ver-mypy-protobuf: 3.8.11
-            py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.11
-          - py-ver-mypy-protobuf: 3.9.6
-            py-ver-mypy-target: 3.8
-            py-ver-unit-tests: 3.8.11
+        py-ver-mypy-protobuf: [
+            3.6.14,
+            3.7.11,
+            3.8.11,
+            3.9.6,
+        ]
     steps:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
@@ -60,11 +38,16 @@ jobs:
         with:
           path: ~/.pyenv/versions/${{matrix.py-ver-mypy-protobuf}}
           key: pyenv-${{matrix.py-ver-mypy-protobuf}}-${{hashFiles('setup.py')}}
-      - name: Cache pyenv unit tests ver
+      - name: Cache pyenv unit tests 3 ver
         uses: actions/cache@v2
         with:
-          path: ~/.pyenv/versions/${{matrix.py-ver-unit-tests}}
-          key: pyenv-${{matrix.py-ver-unit-tests}}-${{hashFiles('setup.py')}}
+          path: ~/.pyenv/versions/${{env.PY_VER_UNIT_TESTS_3}}
+          key: pyenv-${{env.PY_VER_UNIT_TESTS_3}}-${{hashFiles('setup.py')}}
+      - name: Cache pyenv unit tests 2 ver
+        uses: actions/cache@v2
+        with:
+          path: ~/.pyenv/versions/${{env.PY_VER_UNIT_TESTS_2}}
+          key: pyenv-${{env.PY_VER_UNIT_TESTS_2}}-${{hashFiles('setup.py')}}
       - name: Cache pyenv mypy ver
         uses: actions/cache@v2
         with:
@@ -82,7 +65,7 @@ jobs:
           eval "$(pyenv init --path)"
           eval "$(pyenv virtualenv-init -)"
 
-          for PY in ${{matrix.py-ver-mypy-protobuf}} ${{matrix.py-ver-unit-tests}} ${{env.PY_VER_MYPY}}; do
+          for PY in ${{matrix.py-ver-mypy-protobuf}} ${{env.PY_VER_MYPY}} ${{env.PY_VER_UNIT_TESTS_3}} ${{env.PY_VER_UNIT_TESTS_2}}; do
             if [ ! -e ~/.pyenv/versions/$PY ]; then
               pyenv install --skip-existing $PY
               pyenv shell $PY
@@ -92,8 +75,6 @@ jobs:
       - name: Run Tests (./run_test.sh)
         env:
           PY_VER_MYPY_PROTOBUF: ${{matrix.py-ver-mypy-protobuf}}
-          PY_VER_MYPY_TARGET: ${{matrix.py-ver-mypy-target}}
-          PY_VER_UNIT_TESTS: ${{matrix.py-ver-unit-tests}}
         run: |
           export PATH="$HOME/.pyenv/bin:$PATH"
           eval "$(pyenv init -)"
@@ -101,7 +82,6 @@ jobs:
           eval "$(pyenv virtualenv-init -)"
           ./run_test.sh
       - name: Run Pyright
-        if: ${{ matrix.py-ver-unit-tests == '3.8.11' }}
         uses: jakebailey/pyright-action@v1
         with:
           version: 1.1.157
