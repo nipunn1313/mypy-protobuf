@@ -100,6 +100,11 @@ jobs:
           eval "$(pyenv init --path)"
           eval "$(pyenv virtualenv-init -)"
           ./run_test.sh
+      - name: Run Pyright
+        if: ${{ matrix.py-ver-unit-tests == '3.8.11' }}
+        uses: jakebailey/pyright-action@v1
+        with:
+          version: 1.1.157
 
   black:
     name: Black formatting
