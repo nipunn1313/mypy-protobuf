@@ -22,27 +22,30 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 # Outer Enum
-class OuterEnum(metaclass=_OuterEnum):
+class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
+    pass
+class _OuterEnum:
     V = typing.NewType('V', builtins.int)
-
-global___OuterEnum = OuterEnum
-
-# FOO
-FOO = OuterEnum.V(1)
-# BAR
-BAR = OuterEnum.V(2)
-
-class _OuterEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OuterEnum.V], builtins.type):  # type: ignore
+class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.V], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     # FOO
     FOO = OuterEnum.V(1)
     # BAR
     BAR = OuterEnum.V(2)
 
-class NamingConflicts(metaclass=_NamingConflicts):
-    V = typing.NewType('V', builtins.int)
+# FOO
+FOO = OuterEnum.V(1)
+# BAR
+BAR = OuterEnum.V(2)
+global___OuterEnum = OuterEnum
 
-global___NamingConflicts = NamingConflicts
+
+class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
+    pass
+class _NamingConflicts:
+    V = typing.NewType('V', builtins.int)
+class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.V], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
 
 # Naming conflicts!
 Name = NamingConflicts.V(1)
@@ -53,27 +56,27 @@ values = NamingConflicts.V(4)
 # proto itself generates broken code when DESCRIPTOR is there
 # DESCRIPTOR = 8;
 items = NamingConflicts.V(5)
+global___NamingConflicts = NamingConflicts
 
-class _NamingConflicts(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NamingConflicts.V], builtins.type):  # type: ignore
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
 
 class Simple1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     # Inner Enum
-    class InnerEnum(metaclass=_InnerEnum):
+    class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
+        pass
+    class _InnerEnum:
         V = typing.NewType('V', builtins.int)
-
-    # INNER1
-    INNER1 = Simple1.InnerEnum.V(1)
-    # INNER2
-    INNER2 = Simple1.InnerEnum.V(2)
-
-    class _InnerEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InnerEnum.V], builtins.type):  # type: ignore
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         # INNER1
         INNER1 = Simple1.InnerEnum.V(1)
         # INNER2
         INNER2 = Simple1.InnerEnum.V(2)
+
+    # INNER1
+    INNER1 = Simple1.InnerEnum.V(1)
+    # INNER2
+    INNER2 = Simple1.InnerEnum.V(2)
 
     class InnerMessage(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
@@ -237,14 +240,15 @@ global_____None = __None
 
 class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    class __finally(metaclass=_finally):
+    class __finally(_finally, metaclass=_finallyEnumTypeWrapper):
+        pass
+    class _finally:
         V = typing.NewType('V', builtins.int)
-
-    valid_in_finally = PythonReservedKeywords.__finally.V(2)
-
-    class _finally(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[__finally.V], builtins.type):  # type: ignore
+    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         valid_in_finally = PythonReservedKeywords.__finally.V(2)
+
+    valid_in_finally = PythonReservedKeywords.__finally.V(2)
 
     class __lambda(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...

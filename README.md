@@ -89,25 +89,37 @@ This allows mypy to catch bugs where the wrong enum value is being used.
 mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
 
 ```
-class MyEnum(metaclass=_MyEnum):
+class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
+    pass
+class _MyEnum:
     V = typing.NewType('V', builtins.int)
-
-FOO = MyEnum.V(1)
-BAR = MyEnum.V(2)
-
-class _MyEnum(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MyEnum.V], builtins.type):
+class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MyEnum.V], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    FOO = MyEnum.V(1)
-    BAR = MyEnum.V(2)
+    FOO = MyEnum.V(0)
+    BAR = MyEnum.V(1)
+FOO = MyEnum.V(0)
+BAR = MyEnum.V(1)
 ```
 
-Calling code may be typed as follows. Note that the type of `x` must be quoted
-until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) supports `V`
+`_MyEnumEnumTypeWrapper` extends the EnumTypeWrapper to take/return MyEnum.V rather than int
+`MyEnum` is an instance of the `EnumTypeWrapper`.
+- Use `_MyEnum` and of metaclass is an implementation detail to make MyEnum.V a valid type w/o a circular dependency
+
+Calling code may be typed as follows.
+
+In python >= 3.7
 ```
-def f(x: 'MyEnum.V'):
+# Need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
+from __future__ import annotations  # Not needed with python>=3.10
+def f(x: MyEnum.V):
     print(x)
-
 f(MyEnum.Value("FOO"))
+```
+
+Note that for usages of cast, the type of `x` must be quoted
+until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) includes `V`
+```
+cast('MyEnum.V', x)
 ```
 
 ### Supports generating type wrappers for fields and maps
