@@ -295,35 +295,28 @@ class PkgWriter(object):
             )
             value_type_fq = prefix + class_name + ".V"
 
-            l("class {}(metaclass={}):", class_name, "_" + enum.name)
+            l(
+                "class {}({}, metaclass={}):",
+                class_name,
+                "_" + enum.name,
+                "_" + enum.name + "EnumTypeWrapper",
+            )
+            with self._indent():
+                l("pass")
+            l("class {}:", "_" + enum.name)
             with self._indent():
                 l(
                     "V = {}('V', {})",
                     self._import("typing", "NewType"),
                     self._builtin("int"),
                 )
-            l("")
-            if prefix == "" and not self.readable_stubs:
-                l("{} = {}", _mangle_global_identifier(class_name), class_name)
-                l("")
-
-            self.write_enum_values(
-                enumerate(enum.value),
-                value_type_fq,
-                scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
-            )
-            l("")
-
-            # do a type-ignore to avoid the circular dependency. It's ugly.
-            # See https://github.com/dropbox/mypy-protobuf/issues/214 for discussion.
-            # Hopefully we can improve this in the future
             l(
-                "class {}({}[{}], {}):  # type: ignore",
-                "_" + enum.name,
+                "class {}({}[{}], {}):",
+                "_" + enum.name + "EnumTypeWrapper",
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
                 ),
-                class_name + ".V",
+                "_" + enum.name + ".V",
                 self._builtin("type"),
             )
             with self._indent():
@@ -340,6 +333,16 @@ class PkgWriter(object):
                     value_type_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
                 )
+            l("")
+
+            self.write_enum_values(
+                enumerate(enum.value),
+                value_type_fq,
+                scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
+            )
+            if prefix == "" and not self.readable_stubs:
+                l("{} = {}", _mangle_global_identifier(class_name), class_name)
+                l("")
             l("")
 
     def write_messages(
