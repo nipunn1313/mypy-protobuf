@@ -4,6 +4,7 @@
 - Add protobuf type stubs to the setup requirements
 - Fix [#239](https://github.com/dropbox/mypy-protobuf/issues/239) Remove type: ignore used in enum by pulling `V` into a separate class.
 - Use pytest 6.2.4 for internal test suites on python3
+- Remove `protoc_gen_mypy.bat` as the entry-points method creates protoc-gen-mypy.exe. Add test confirming.
 
 ## 2.7
 

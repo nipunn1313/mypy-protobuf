@@ -56,9 +56,9 @@ Alternately, you can explicitly provide the path:
 ```
 protoc --plugin=protoc-gen-mypy=path/to/protoc-gen-mypy --python_out=output/location --mypy_out=output/location
 ```
-On windows, provide the bat file:
+Check the version number with
 ```
-protoc --plugin=protoc-gen-mypy=path/to/protoc_gen_mypy.bat --python_out=output/location --mypy_out=output/location
+> protoc-gen-mypy --version
 ```
 
 ## Getting Help
@@ -68,7 +68,7 @@ Find other developers in the mypy-protobuf slack workspace ([Invitation Link](ht
 ## Implementation
 
 The implementation of the plugin is in `mypy_protobuf/main.py`, which installs to
-an executable protoc-gen-mypy. On windows you will have to use `protoc_gen_mypy.bat` for the executable.
+an executable protoc-gen-mypy. On windows it installs to `protoc-gen-mypy.exe`
 
 ## Features
 

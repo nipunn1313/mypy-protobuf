@@ -96,3 +96,19 @@ jobs:
         run: |
           pip3 install black
           black --check mypy_protobuf/main.py test/
+
+  sanity_check_windows:
+    name: Sanity Check Windows Executable
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          version: '3.17.3'
+      - name: Run Protoc
+        run: |
+          pip3 install -e .
+          mkdir wintestout
+          protoc --python_out=wintestout --mypy_out=wintestout proto\mypy_protobuf\extensions.proto
