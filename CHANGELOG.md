@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 2.8
+
 - Propagate comments from .proto files to .pyi files
 - Add protobuf type stubs to the setup requirements
 - Fix [#239](https://github.com/dropbox/mypy-protobuf/issues/239) Remove type: ignore used in enum by pulling `V` into a separate class.
