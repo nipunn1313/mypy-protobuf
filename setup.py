@@ -29,8 +29,8 @@ setup(
     download_url="https://github.com/dropbox/mypy-protobuf/archive/v%s.tar.gz" % version,
     install_requires=[
         "protobuf>=3.17.3",
-        "types-protobuf==3.17.3",
-        "grpcio-tools==1.38.1",
+        "types-protobuf>=3.17.3",
+        "grpcio-tools>=1.38.1",
     ],
     entry_points={
         "console_scripts": [
