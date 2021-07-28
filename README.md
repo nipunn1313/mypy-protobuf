@@ -1,8 +1,8 @@
 mypy-protobuf: Generate mypy stub files from protobuf specs
 
-[![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/dropbox/mypy-protobuf/actions?query=branch%3Amaster)
+[![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/dropbox/mypy-protobuf/actions?query=branch%3Amain)
 [![pypi](https://img.shields.io/pypi/v/mypy-protobuf?logo=Pypi)](https://pypi.org/project/mypy-protobuf/)
-[![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/main/LICENSE)
 ===========================================================
 
 We released a new major version (2.\*) on 02/02/2021! It includes some backward incompatible changes.
@@ -33,7 +33,7 @@ pip3 install mypy-protobuf
 ```
 To install unreleased
 ```
-REV=master  # or whichever unreleased git rev you'd like
+REV=main  # or whichever unreleased git rev you'd like
 pip3 install git+https://github.com/dropbox/mypy-protobuf.git@$REV
 
 # For older (1.x) versions of mypy protobuf - you may need

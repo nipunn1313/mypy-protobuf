@@ -1,5 +1,7 @@
 ## Upcoming
 
+- [Rename master branch to main](https://github.com/github/renaming)
+
 ## 2.8
 
 - Propagate comments from .proto files to .pyi files
