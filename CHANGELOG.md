@@ -1,6 +1,7 @@
 ## Upcoming
 
 - [Rename master branch to main](https://github.com/github/renaming)
+- Make `install_requires` requirements for grpcio-tools and types-protobuf use >=
 
 ## 2.8
 
