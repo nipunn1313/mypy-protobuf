@@ -70,8 +70,8 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     source $MYPY_PROTOBUF_VENV/bin/activate
 
     # Confirm version number
-    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.8"
-    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.8"
+    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.9"
+    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.9"
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py setup.py"
