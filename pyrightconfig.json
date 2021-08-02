@@ -5,7 +5,6 @@
     "extraPaths": ["test/generated"],
     "include": [
         "mypy_protobuf/",
-        "setup.py",
         "test/"
     ],
     "exclude": [

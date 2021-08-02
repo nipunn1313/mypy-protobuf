@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Switch from setup.py to pyproject.toml and setup.cfg per https://packaging.python.org/tutorials/packaging-projects/
+
 ## 2.9
 
 - [Rename master branch to main](https://github.com/github/renaming)
