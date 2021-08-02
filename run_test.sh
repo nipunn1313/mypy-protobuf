@@ -74,7 +74,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.9"
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
-    FILES="mypy_protobuf/main.py setup.py"
+    FILES="mypy_protobuf/main.py"
     $MYPY_VENV/bin/mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$MYPY_PROTOBUF_VENV/bin/python3 --python-version=$PY_VER_MYPY_PROTOBUF_SHORT --pretty --show-error-codes $FILES
 
     # Generate protos
