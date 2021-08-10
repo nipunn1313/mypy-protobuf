@@ -9,6 +9,9 @@ PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.11}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS_3:=3.8.11} ${PY_VER_UNIT_TESTS_2:=2.7.18}"
 
+PROTOC_ARGS="--proto_path=proto/ --experimental_allow_proto3_optional"
+GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
+
 # Clean out generated/ directory - except for .generated / __init__.py
 find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
 
@@ -72,6 +75,8 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     # Confirm version number
     test "$(protoc-gen-mypy -V)" = "mypy-protobuf 2.9"
     test "$(protoc-gen-mypy --version)" = "mypy-protobuf 2.9"
+    test "$(protoc-gen-mypy_grpc -V)" = "mypy-protobuf 2.9"
+    test "$(protoc-gen-mypy_grpc --version)" = "mypy-protobuf 2.9"
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
@@ -86,7 +91,6 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
         exit 1
     fi
 
-    PROTOC_ARGS="--proto_path=proto/ --experimental_allow_proto3_optional"
     # Compile protoc -> python
     $PROTOC $PROTOC_ARGS --python_out=test/generated `find proto -name "*.proto"`
 
@@ -102,15 +106,21 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     # Overwrite w/ run with mypy-protobuf without flags
     $PROTOC $PROTOC_ARGS --mypy_out=test/generated `find proto -name "*.proto"`
 
-    # Compile GRPC
-    GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
+    # Generate grpc protos
     $PROTOC $PROTOC_ARGS --mypy_grpc_out=test/generated $GRPC_PROTOS
-    python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=test/generated $GRPC_PROTOS
 )
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
     UNIT_TESTS_VENV=venv_$PY_VER
     PY_VER_MYPY_TARGET=$(echo $PY_VER | cut -d. -f1-2)
+
+    # Generate GRPC protos for mypy / tests
+    if [[ $PY_VER =~ ^3.* ]]; then
+        (
+            source $UNIT_TESTS_VENV/bin/activate
+            python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=test/generated $GRPC_PROTOS
+        )
+    fi
 
     # Run mypy on unit tests / generated output
     (
