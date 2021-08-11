@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Switch from setup.py to pyproject.toml and setup.cfg per https://packaging.python.org/tutorials/packaging-projects/
+- Remove dependency on grpcio-tools. mypy-protobuf doesn't need it to run. It's only needed to run mypy afterward.
 
 ## 2.9
 
