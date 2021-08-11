@@ -8,7 +8,6 @@ __pycache__/
 /mypy_env/
 *.pyc
 /test/generated/**/*.py
-/test/generated/**/*.pyi
 !/test/generated/**/__init__.py
 .pytest_cache
 /build/

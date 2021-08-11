@@ -12,9 +12,6 @@ PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS_3:=3.8.11} ${PY_VER_UNIT_TESTS_2:=2.7.18}
 PROTOC_ARGS="--proto_path=proto/ --experimental_allow_proto3_optional"
 GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
 
-# Clean out generated/ directory - except for .generated / __init__.py
-find test/generated -type f -not \( -name "*.expected" -or -name "__init__.py" \) -delete
-
 if [ -e $CUSTOM_TYPESHED_DIR ]; then
     export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
 fi
@@ -91,6 +88,11 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
         exit 1
     fi
 
+    # CI Check to make sure generated files are committed
+    SHA_BEFORE=$(find test/generated -name "*.pyi" | xargs sha1sum)
+    # Clean out generated/ directory - except for __init__.py
+    find test/generated -type f -not -name "__init__.py" -delete
+
     # Compile protoc -> python
     $PROTOC $PROTOC_ARGS --python_out=test/generated `find proto -name "*.proto"`
 
@@ -108,6 +110,11 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # Generate grpc protos
     $PROTOC $PROTOC_ARGS --mypy_grpc_out=test/generated $GRPC_PROTOS
+
+    if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" | xargs sha1sum); then
+        echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
+        exit 1
+    fi
 )
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
@@ -171,7 +178,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     )
 
     (
-        # Run unit tests. These tests generate .expected files
+        # Run unit tests.
         source $UNIT_TESTS_VENV/bin/activate
         if [[ $PY_VER =~ ^2.* ]]; then IGNORE="--ignore=test/test_grpc_usage.py"; else IGNORE=""; fi
         PYTHONPATH=test/generated py.test --ignore=test/generated $IGNORE -v

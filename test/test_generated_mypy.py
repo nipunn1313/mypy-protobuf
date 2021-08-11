@@ -1,14 +1,11 @@
 """
-This file serves two purposes
-1) Run a test which ensures that mypy is producing the expected output. For
-developer convenience, in the case which it doesn't, it'll copy over the
-output to the expected output, so you can view the output diff in your
-code reviews. This will fail in CI if there is any inconsistency.
-
-2) This is a file which should mypy with success. See test_negative for
+This is a file which should mypy with success. See test_negative for
 a file that should have failures.
 
-Both of these tests are run by the run_test.sh script.
+This file contains a test to ensure that the test_negative failures
+are the expected failures
+
+These tests can be set up and run by the run_test.sh script
 """
 
 import glob
@@ -79,30 +76,6 @@ def _is_summary(l):
     return l.startswith("Found ") and l.endswith("source files)\n")
 
 
-def compare_pyi_to_expected(output_path):
-    # type: (str) -> Optional[str]
-    expected_path = output_path + ".expected"
-    assert os.path.exists(output_path)
-
-    with open(output_path) as f:
-        output_contents = f.read()
-
-    expected_contents = None  # type: Optional[str]
-    if os.path.exists(expected_path):
-        with open(expected_path) as f:
-            expected_contents = f.read()
-
-    if output_contents != expected_contents:
-        with open(expected_path, "w") as f:
-            f.write(output_contents)
-
-        return "{} doesn't match {}. This test will copy it over. Please rerun".format(
-            output_path, expected_path
-        )
-    else:
-        return None
-
-
 def test_generate_mypy_matches():
     # type: () -> None
     if sys.version_info < (3, 0):
@@ -129,17 +102,15 @@ def test_generate_mypy_matches():
 
         output = os.path.join("test", "generated", *components)
 
-        failure_check_results.append(compare_pyi_to_expected(output))
+        assert os.path.exists(output)
+        failure_check_results.append(output)
         if "grpc" in components:
             grpc_output = output[:-4] + "_grpc.pyi"
-            failure_check_results.append(compare_pyi_to_expected(grpc_output))
+            assert os.path.exists(grpc_output)
+            failure_check_results.append(grpc_output)
 
     # Make sure we checked everything
     assert len(failure_check_results) == len(pyi_files)
-
-    failures = ["\n\t" + f for f in failure_check_results if f]
-    if failures:
-        raise Exception("".join(failures))
 
 
 def test_generate_negative_matches():
