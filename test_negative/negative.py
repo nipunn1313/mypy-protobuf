@@ -155,7 +155,11 @@ s8.email = "abcd@gmail.com"  # E:2.7 E:3.8
 s8.email_by_uid[55] = "abcd@gmail.com"  # E:2.7 E:3.8
 s8.email_by_uid[UserId(55)] = "abcd@gmail.com"  # E:2.7 E:3.8
 s8.email_by_uid[55] = Email("abcd@gmail.com")  # E:2.7 E:3.8
-s8 = Simple1(user_id=55, email="abcd@gmail.com", email_by_uid={55: "abcd@gmail.com"})  # E:2.7 E:3.8
+s8 = Simple1(
+    user_id=55,  # E:2.7 E:3.8
+    email="abcd@gmail.com",  # E:2.7 E:3.8
+    email_by_uid={55: "abcd@gmail.com"},  # E:2.7 E:3.8
+)
 
 # Should not reexport inner.proto, since it doesn't have public tag.
 from testproto.reexport_pb2 import Inner  # E:2.7 E:3.8

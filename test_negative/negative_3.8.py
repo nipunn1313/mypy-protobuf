@@ -50,32 +50,32 @@ for result5 in stub1.StreamStream(iter_requests()):
 
 class GoodServicer(DummyServiceServicer):
     def UnaryUnary(
-            self,
-            request: DummyRequest,
-            context: grpc.ServicerContext,
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
     ) -> DummyReply:
         return DummyReply()
 
     def UnaryStream(
-            self,
-            request: DummyRequest,
-            context: grpc.ServicerContext,
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
     ) -> typing.Iterator[DummyReply]:
         yield DummyReply()
 
     def StreamUnary(
-            self,
-            request: typing.Iterator[DummyRequest],
-            context: grpc.ServicerContext,
+        self,
+        request: typing.Iterator[DummyRequest],
+        context: grpc.ServicerContext,
     ) -> DummyReply:
         for data in request:
             pass
         return DummyReply()
 
     def StreamStream(
-            self,
-            request: typing.Iterator[DummyRequest],
-            context: grpc.ServicerContext,
+        self,
+        request: typing.Iterator[DummyRequest],
+        context: grpc.ServicerContext,
     ) -> typing.Iterator[DummyReply]:
         for data in request:
             yield DummyReply()
@@ -83,25 +83,25 @@ class GoodServicer(DummyServiceServicer):
 
 class BadServicer(DummyServiceServicer):
     def UnaryUnary(  # E:3.8
-            self,
-            request: typing.Iterator[DummyRequest],
-            context: grpc.ServicerContext,
+        self,
+        request: typing.Iterator[DummyRequest],
+        context: grpc.ServicerContext,
     ) -> typing.Iterator[DummyReply]:
         for data in request:
             yield DummyReply()
 
     def UnaryStream(  # E:3.8
-            self,
-            request: typing.Iterator[DummyRequest],
-            context: grpc.ServicerContext,
+        self,
+        request: typing.Iterator[DummyRequest],
+        context: grpc.ServicerContext,
     ) -> DummyReply:
         for data in request:
             pass
         return DummyReply()
 
     def StreamUnary(  # E:3.8
-            self,
-            request: DummyRequest,
-            context: grpc.ServicerContext,
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
     ) -> typing.Iterator[DummyReply]:
         yield DummyReply()

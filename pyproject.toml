@@ -6,4 +6,4 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.black]
-extend-exclude = "(_pb2.pyi?$|_pb2_grpc.pyi?$|test_negative/)"
+extend-exclude = "(_pb2.pyi?$|_pb2_grpc.pyi?$)"
