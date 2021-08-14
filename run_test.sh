@@ -77,7 +77,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
-    $MYPY_VENV/bin/mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$MYPY_PROTOBUF_VENV/bin/python3 --python-version=$PY_VER_MYPY_PROTOBUF_SHORT --pretty --show-error-codes $FILES
+    $MYPY_VENV/bin/mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$MYPY_PROTOBUF_VENV/bin/python3 --python-version=$PY_VER_MYPY_PROTOBUF_SHORT $FILES
 
     # Generate protos
     python --version
@@ -142,7 +142,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         else
             FILES=$FILES38
         fi
-        mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$UNIT_TESTS_VENV/bin/python --python-version=$PY_VER_MYPY_TARGET --pretty --show-error-codes $FILES
+        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$UNIT_TESTS_VENV/bin/python --python-version=$PY_VER_MYPY_TARGET $FILES
 
         # run mypy on negative-tests (expected mypy failures)
         # --python-version=2.7 chokes on the generated grpc files - so split them out here
@@ -158,7 +158,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         call_mypy() {
             # Write output to file. Make variant w/ omitted line numbers for easy diffing / CR
             PY_VER_MYPY_TARGET=$(echo $1 | cut -d. -f1-2)
-            mypy --strict --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=venv_$1/bin/python --python-version=$PY_VER_MYPY_TARGET ${@: 2} > $MYPY_OUTPUT/mypy_output || true
+            mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=venv_$1/bin/python --python-version=$PY_VER_MYPY_TARGET ${@: 2} > $MYPY_OUTPUT/mypy_output || true
             cut -d: -f1,3- $MYPY_OUTPUT/mypy_output > $MYPY_OUTPUT/mypy_output.omit_linenos
         }
 
