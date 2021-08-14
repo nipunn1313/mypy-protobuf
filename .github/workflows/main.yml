@@ -75,6 +75,7 @@ jobs:
       - name: Run Tests (./run_test.sh)
         env:
           PY_VER_MYPY_PROTOBUF: ${{matrix.py-ver-mypy-protobuf}}
+          VALIDATE: 1
         run: |
           export PATH="$HOME/.pyenv/bin:$PATH"
           eval "$(pyenv init -)"
