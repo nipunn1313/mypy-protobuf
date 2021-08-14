@@ -85,13 +85,13 @@ test_negative/negative.py:155: error: Invalid index type "int" for "ScalarMap[Us
 test_negative/negative.py:155: error: Incompatible types in assignment (expression has type "str", target has type "Email")
 test_negative/negative.py:156: error: Incompatible types in assignment (expression has type "str", target has type "Email")
 test_negative/negative.py:157: error: Invalid index type "int" for "ScalarMap[UserId, Email]"; expected type "UserId"
-test_negative/negative.py:158: error: Argument "user_id" to "Simple1" has incompatible type "int"; expected "Optional[UserId]"
-test_negative/negative.py:158: error: Argument "email" to "Simple1" has incompatible type "str"; expected "Optional[Email]"
-test_negative/negative.py:158: error: Dict entry 0 has incompatible type "int": "str"; expected "UserId": "Email"
-test_negative/negative.py:161: error: Module "testproto.reexport_pb2" has no attribute "Inner"
-test_negative/negative.py:165: error: Argument "a_string" to "OuterMessage3" has incompatible type "None"; expected "str"
-test_negative/negative.py:170: error: Property "a_repeated_string" defined in "Simple1" is read-only
-test_negative/negative.py:171: error: Property "rep_inner_enum" defined in "Simple1" is read-only
-test_negative/negative.py:176: error: "__None" has no attribute "invalid"; maybe "valid"?
-test_negative/negative.py:180: error: Incompatible types in assignment (expression has type "V", variable has type "str")
+test_negative/negative.py:159: error: Argument "user_id" to "Simple1" has incompatible type "int"; expected "Optional[UserId]"
+test_negative/negative.py:160: error: Argument "email" to "Simple1" has incompatible type "str"; expected "Optional[Email]"
+test_negative/negative.py:161: error: Dict entry 0 has incompatible type "int": "str"; expected "UserId": "Email"
+test_negative/negative.py:165: error: Module "testproto.reexport_pb2" has no attribute "Inner"
+test_negative/negative.py:169: error: Argument "a_string" to "OuterMessage3" has incompatible type "None"; expected "str"
+test_negative/negative.py:174: error: Property "a_repeated_string" defined in "Simple1" is read-only
+test_negative/negative.py:175: error: Property "rep_inner_enum" defined in "Simple1" is read-only
+test_negative/negative.py:180: error: "__None" has no attribute "invalid"; maybe "valid"?
+test_negative/negative.py:184: error: Incompatible types in assignment (expression has type "V", variable has type "str")
 Found 80 errors in 2 files (checked 30 source files)

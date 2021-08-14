@@ -95,7 +95,7 @@ jobs:
       - name: Run black
         run: |
           pip3 install black
-          black --check mypy_protobuf/main.py test/
+          black --check .
 
   sanity_check_windows:
     name: Sanity Check Windows Executable

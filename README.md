@@ -196,7 +196,7 @@ Contributions to the implementation are welcome. Please run tests using `./run_t
 Ensure code is formatted using black.
 ```
 pip3 install black
-black mypy_protobuf/main.py test/
+black .
 ```
 
 ## Contributors
