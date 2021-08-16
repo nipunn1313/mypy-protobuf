@@ -776,7 +776,11 @@ class PkgWriter(object):
                 "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}) -> None: ...",
                 service.name,
                 service.name,
-                self._import("grpc", "Server"),
+                "{}[{}, {}]".format(
+                    self._import("typing", "Union"),
+                    self._import("grpc", "Server"),
+                    self._import("grpc.aio", "Server", "AioServer"),
+                ),
             )
             l("")
 
