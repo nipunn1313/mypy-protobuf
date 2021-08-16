@@ -739,6 +739,7 @@ class PkgWriter(object):
         services: Iterable[d.ServiceDescriptorProto],
         scl_prefix: SourceCodeLocation,
     ) -> None:
+        assert False
         l = self._write_line
         l(
             "from .{} import *",
