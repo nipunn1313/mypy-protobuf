@@ -13,3 +13,8 @@ extend google.protobuf.FieldOptions {
     // Tells mypy to use a specific type for values; only makes sense on map fields
     optional string valuetype = 60003;
 }
+
+extend google.protobuf.ServiceOptions {
+    // Tells mypy to generate async methods for this service
+    optional bool async_service = 60004;
+}

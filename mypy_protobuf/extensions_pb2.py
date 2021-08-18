@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1emypy_protobuf/extensions.proto\x12\rmypy_protobuf\x1a google/protobuf/descriptor.proto:1\n\x08\x63\x61sttype\x12\x1d.google.protobuf.FieldOptions\x18\xe0\xd4\x03 \x01(\t:0\n\x07keytype\x12\x1d.google.protobuf.FieldOptions\x18\xe2\xd4\x03 \x01(\t:2\n\tvaluetype\x12\x1d.google.protobuf.FieldOptions\x18\xe3\xd4\x03 \x01(\t'
+  serialized_pb=b'\n\x1emypy_protobuf/extensions.proto\x12\rmypy_protobuf\x1a google/protobuf/descriptor.proto:1\n\x08\x63\x61sttype\x12\x1d.google.protobuf.FieldOptions\x18\xe0\xd4\x03 \x01(\t:0\n\x07keytype\x12\x1d.google.protobuf.FieldOptions\x18\xe2\xd4\x03 \x01(\t:2\n\tvaluetype\x12\x1d.google.protobuf.FieldOptions\x18\xe3\xd4\x03 \x01(\t:8\n\rasync_service\x12\x1f.google.protobuf.ServiceOptions\x18\xe4\xd4\x03 \x01(\x08'
   ,
   dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 
@@ -49,14 +49,24 @@ valuetype = _descriptor.FieldDescriptor(
   message_type=None, enum_type=None, containing_type=None,
   is_extension=True, extension_scope=None,
   serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key)
+ASYNC_SERVICE_FIELD_NUMBER = 60004
+async_service = _descriptor.FieldDescriptor(
+  name='async_service', full_name='mypy_protobuf.async_service', index=3,
+  number=60004, type=8, cpp_type=7, label=1,
+  has_default_value=False, default_value=False,
+  message_type=None, enum_type=None, containing_type=None,
+  is_extension=True, extension_scope=None,
+  serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key)
 
 DESCRIPTOR.extensions_by_name['casttype'] = casttype
 DESCRIPTOR.extensions_by_name['keytype'] = keytype
 DESCRIPTOR.extensions_by_name['valuetype'] = valuetype
+DESCRIPTOR.extensions_by_name['async_service'] = async_service
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 google_dot_protobuf_dot_descriptor__pb2.FieldOptions.RegisterExtension(casttype)
 google_dot_protobuf_dot_descriptor__pb2.FieldOptions.RegisterExtension(keytype)
 google_dot_protobuf_dot_descriptor__pb2.FieldOptions.RegisterExtension(valuetype)
+google_dot_protobuf_dot_descriptor__pb2.ServiceOptions.RegisterExtension(async_service)
 
 # @@protoc_insertion_point(module_scope)

@@ -681,9 +681,14 @@ class PkgWriter(object):
         return result
 
     def _output_type(
-        self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True
+        self,
+        method: d.MethodDescriptorProto,
+        async_service: bool,
+        use_stream_iterator: bool = True,
     ) -> str:
         result = self._import_message(method.output_type)
+        if async_service:
+            result = "{}[{}]".format(self._import("typing", "Awaitable"), result)
         if use_stream_iterator and method.server_streaming:
             result = "{}[{}]".format(self._import("typing", "Iterator"), result)
         return result
@@ -700,6 +705,7 @@ class PkgWriter(object):
         if not methods:
             l("pass")
             l("")
+        async_service = service.options.Extensions[extensions_pb2.async_service]
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
             self._write_comments(scl)
@@ -709,7 +715,7 @@ class PkgWriter(object):
             with self._indent():
                 l("request: {},", self._input_type(method))
                 l("context: {},", self._import("grpc", "ServicerContext"))
-            l(") -> {}: ...", self._output_type(method))
+            l(") -> {}: ...", self._output_type(method, async_service))
             l("")
 
     def write_grpc_stub_methods(
@@ -724,6 +730,7 @@ class PkgWriter(object):
         if not methods:
             l("pass")
             l("")
+        async_service = service.options.Extensions[extensions_pb2.async_service]
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
             self._write_comments(scl)
@@ -731,7 +738,7 @@ class PkgWriter(object):
             l("{}:{}[", method.name, self._callable_type(method))
             with self._indent():
                 l("{},", self._input_type(method, False))
-                l("{}] = ...", self._output_type(method, False))
+                l("{}] = ...", self._output_type(method, async_service, False))
             l("")
 
     def write_grpc_services(
@@ -748,6 +755,8 @@ class PkgWriter(object):
         for i, service in enumerate(services):
             if service.name in PYTHON_RESERVED:
                 continue
+
+            async_service = service.options.Extensions[extensions_pb2.async_service]
 
             scl = scl_prefix + [i]
             self._write_comments(scl)
@@ -776,7 +785,9 @@ class PkgWriter(object):
                 "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}) -> None: ...",
                 service.name,
                 service.name,
-                self._import("grpc", "Server"),
+                self._import("grpc", "Server")
+                if async_service
+                else self._import("grpc", "Server"),
             )
             l("")
 

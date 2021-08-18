@@ -75,6 +75,11 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     test "$(protoc-gen-mypy_grpc -V)" = "mypy-protobuf 2.9"
     test "$(protoc-gen-mypy_grpc --version)" = "mypy-protobuf 2.9"
 
+    # Compile protoc -> mypy using mypy_protobuf
+    # Prereq - create the mypy.proto python proto
+    $PROTOC $PROTOC_ARGS --python_out=. `find proto/mypy_protobuf -name "*.proto"`
+    $PROTOC $PROTOC_ARGS --mypy_out=. `find proto/mypy_protobuf -name "*.proto"`
+
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
     $MYPY_VENV/bin/mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$MYPY_PROTOBUF_VENV/bin/python3 --python-version=$PY_VER_MYPY_PROTOBUF_SHORT $FILES
@@ -95,11 +100,6 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # Compile protoc -> python
     $PROTOC $PROTOC_ARGS --python_out=test/generated `find proto -name "*.proto"`
-
-    # Compile protoc -> mypy using mypy_protobuf
-    # Prereq - create the mypy.proto python proto
-    $PROTOC $PROTOC_ARGS --python_out=. `find proto/mypy_protobuf -name "*.proto"`
-    $PROTOC $PROTOC_ARGS --mypy_out=. `find proto/mypy_protobuf -name "*.proto"`
 
     # Sanity check that our flags work
     $PROTOC $PROTOC_ARGS --mypy_out=quiet:test/generated `find proto -name "*.proto"`

@@ -3,6 +3,8 @@ syntax = "proto3";
 
 package dummy;
 
+import "mypy_protobuf/extensions.proto";
+
 message DummyRequest {
   string value = 1;
 }
@@ -16,4 +18,9 @@ service DummyService {
   rpc UnaryStream (DummyRequest) returns (stream DummyReply) {}
   rpc StreamUnary (stream DummyRequest) returns (DummyReply) {}
   rpc StreamStream (stream DummyRequest) returns (stream DummyReply) {}
+}
+
+service DummyAsyncService {
+  option (mypy_protobuf.async_service) = true;
+  rpc UnaryUnary (DummyRequest) returns (DummyReply) {}
 }

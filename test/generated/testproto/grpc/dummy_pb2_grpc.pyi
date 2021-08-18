@@ -53,3 +53,20 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
 
 
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: grpc.Server) -> None: ...
+
+class DummyAsyncServiceStub:
+    def __init__(self, channel: grpc.Channel) -> None: ...
+    UnaryUnary:grpc.UnaryUnaryMultiCallable[
+        global___DummyRequest,
+        typing.Awaitable[global___DummyReply]] = ...
+
+
+class DummyAsyncServiceServicer(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def UnaryUnary(self,
+        request: global___DummyRequest,
+        context: grpc.ServicerContext,
+    ) -> typing.Awaitable[global___DummyReply]: ...
+
+
+def add_DummyAsyncServiceServicer_to_server(servicer: DummyAsyncServiceServicer, server: grpc.Server) -> None: ...
