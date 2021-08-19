@@ -147,11 +147,13 @@ class PkgWriter(object):
         descriptors: Descriptors,
         readable_stubs: bool,
         relax_strict_optional_primitives: bool,
+        grpc: bool,
     ) -> None:
         self.fd = fd
         self.descriptors = descriptors
         self.readable_stubs = readable_stubs
         self.relax_strict_optional_primitives = relax_strict_optional_primitives
+        self.grpc = grpc
         self.lines: List[str] = []
         self.indent = ""
 
@@ -198,8 +200,8 @@ class PkgWriter(object):
                 split[i] = "__" + part
         name = ".".join(split)
 
-        # Message defined in this file.
-        if message_fd.name == self.fd.name:
+        # Message defined in this file. Note: GRPC stubs in same .proto are generated into separate files
+        if not self.grpc and message_fd.name == self.fd.name:
             return name if self.readable_stubs else _mangle_global_identifier(name)
 
         # Not in file. Must import
@@ -740,11 +742,6 @@ class PkgWriter(object):
         scl_prefix: SourceCodeLocation,
     ) -> None:
         l = self._write_line
-        l(
-            "from .{} import *",
-            self.fd.name.rsplit("/", 1)[-1][:-6].replace("-", "_") + "_pb2",
-        )
-
         for i, service in enumerate(services):
             if service.name in PYTHON_RESERVED:
                 continue
@@ -921,7 +918,11 @@ def generate_mypy_stubs(
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
-            fd, descriptors, readable_stubs, relax_strict_optional_primitives
+            fd,
+            descriptors,
+            readable_stubs,
+            relax_strict_optional_primitives,
+            grpc=False,
         )
 
         pkg_writer.write_module_attributes()
@@ -957,7 +958,11 @@ def generate_mypy_grpc_stubs(
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
-            fd, descriptors, readable_stubs, relax_strict_optional_primitives
+            fd,
+            descriptors,
+            readable_stubs,
+            relax_strict_optional_primitives,
+            grpc=True,
         )
         pkg_writer.write_grpc_services(
             fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER]

@@ -7,9 +7,11 @@ import typing
 
 import grpc
 
-from testproto.grpc.dummy_pb2_grpc import (
+from testproto.grpc.dummy_pb2 import (
     DummyRequest,
     DummyReply,
+)
+from testproto.grpc.dummy_pb2_grpc import (
     DummyServiceServicer,
     DummyServiceStub,
 )
