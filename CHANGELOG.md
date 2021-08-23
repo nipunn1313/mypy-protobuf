@@ -2,6 +2,7 @@
 
 - Switch from setup.py to pyproject.toml and setup.cfg per https://packaging.python.org/tutorials/packaging-projects/
 - Remove dependency on grpcio-tools. mypy-protobuf doesn't need it to run. It's only needed to run mypy afterward.
+- Avoid relative imports in `_grpc_pb2.pyi` stubs. grpc stubs themselves don't use relative imports, nor `__init__.py` files
 
 ## 2.9
 

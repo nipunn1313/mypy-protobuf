@@ -7,7 +7,6 @@ import google.protobuf.empty_pb2
 import grpc
 import testproto.test_pb2
 
-from .import_pb2 import *
 # SimpleService
 class SimpleServiceStub:
     def __init__(self, channel: grpc.Channel) -> None: ...
