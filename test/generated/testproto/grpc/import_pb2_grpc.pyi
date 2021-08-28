@@ -7,32 +7,44 @@ import google.protobuf.empty_pb2
 import grpc
 import testproto.test_pb2
 
-# SimpleService
 class SimpleServiceStub:
+    """SimpleService"""
     def __init__(self, channel: grpc.Channel) -> None: ...
-    # UnaryUnary
-    UnaryUnary:grpc.UnaryUnaryMultiCallable[
+    UnaryUnary: grpc.UnaryUnaryMultiCallable[
         google.protobuf.empty_pb2.Empty,
         testproto.test_pb2.Simple1] = ...
+    """UnaryUnary"""
 
-    # UnaryStream
-    UnaryStream:grpc.UnaryUnaryMultiCallable[
+    UnaryStream: grpc.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty] = ...
+    """UnaryStream"""
+
+    NoComment: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty] = ...
 
 
-# SimpleService
 class SimpleServiceServicer(metaclass=abc.ABCMeta):
-    # UnaryUnary
+    """SimpleService"""
     @abc.abstractmethod
     def UnaryUnary(self,
         request: google.protobuf.empty_pb2.Empty,
         context: grpc.ServicerContext,
-    ) -> testproto.test_pb2.Simple1: ...
+    ) -> testproto.test_pb2.Simple1:
+        """UnaryUnary"""
+        pass
 
-    # UnaryStream
     @abc.abstractmethod
     def UnaryStream(self,
+        request: testproto.test_pb2.Simple1,
+        context: grpc.ServicerContext,
+    ) -> google.protobuf.empty_pb2.Empty:
+        """UnaryStream"""
+        pass
+
+    @abc.abstractmethod
+    def NoComment(self,
         request: testproto.test_pb2.Simple1,
         context: grpc.ServicerContext,
     ) -> google.protobuf.empty_pb2.Empty: ...
