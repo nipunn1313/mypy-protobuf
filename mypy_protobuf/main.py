@@ -202,7 +202,11 @@ class PkgWriter(object):
 
         # Message defined in this file. Note: GRPC stubs in same .proto are generated into separate files
         if not self.grpc and message_fd.name == self.fd.name:
-            return name if self.readable_stubs else _mangle_global_identifier(name)
+            return (
+                '"'
+                + (name if self.readable_stubs else _mangle_global_identifier(name))
+                + '"'
+            )
 
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
