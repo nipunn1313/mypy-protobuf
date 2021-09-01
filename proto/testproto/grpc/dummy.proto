@@ -11,9 +11,14 @@ message DummyReply {
   string value = 1;
 }
 
+// DummyService
 service DummyService {
+  // UnaryUnary
   rpc UnaryUnary (DummyRequest) returns (DummyReply) {}
+  // UnaryStream
   rpc UnaryStream (DummyRequest) returns (stream DummyReply) {}
+  // StreamUnary
   rpc StreamUnary (stream DummyRequest) returns (DummyReply) {}
+  // StreamStream
   rpc StreamStream (stream DummyRequest) returns (stream DummyReply) {}
 }

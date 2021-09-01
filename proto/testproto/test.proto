@@ -16,8 +16,8 @@ enum OuterEnum {
   BAR = 2;
 }
 
+// Naming conflicts!
 enum NamingConflicts {
-  // Naming conflicts!
   Name = 1;
   Value = 2;
   keys = 3;
@@ -28,6 +28,7 @@ enum NamingConflicts {
   // DESCRIPTOR = 8;
 }
 
+// Message with one of everything
 message Simple1 {
   // Inner Enum
   enum InnerEnum {
