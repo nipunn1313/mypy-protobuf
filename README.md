@@ -74,6 +74,11 @@ an executable protoc-gen-mypy. On windows it installs to `protoc-gen-mypy.exe`
 
 See [Changelog](CHANGELOG.md) for full listing
 
+### Bring comments from .proto files to docstrings in .pyi files
+
+Comments in the .proto files on messages, fields, enums, enum variants, extensions, services, and methods
+will appear as docstrings in .pyi files. Useful in IDEs for showing completions with comments.
+
 ### Types enum int values more strongly
 
 Enum int values produce stubs which wrap the int values in NewType
