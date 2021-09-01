@@ -36,7 +36,12 @@ message Simple1 {
     // INNER2
     INNER2 = 2;
   }
-  message InnerMessage {}
+  message InnerMessage {
+    message InnerMessage2 {
+      optional string inner_field = 1;
+    }
+    optional InnerMessage2 im2 = 1;
+  }
 
   optional string a_string = 1;
   repeated string a_repeated_string = 2;
