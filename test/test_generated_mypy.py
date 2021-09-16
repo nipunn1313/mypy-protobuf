@@ -70,14 +70,12 @@ class Email(str):
     pass
 
 
-def _is_summary(l):
-    # type: (str) -> bool
+def _is_summary(l: str) -> bool:
     """Checks if the line is the summary line 'Found X errors in Y files (checked Z source files)'"""
     return l.startswith("Found ") and l.endswith("source files)\n")
 
 
-def test_generate_mypy_matches():
-    # type: () -> None
+def test_generate_mypy_matches() -> None:
     if sys.version_info < (3, 0):
         return
     proto_files = glob.glob("proto/**/*.proto", recursive=True)
@@ -113,20 +111,19 @@ def test_generate_mypy_matches():
     assert len(failure_check_results) == len(pyi_files)
 
 
-def test_generate_negative_matches():
-    # type: () -> None
+def test_generate_negative_matches() -> None:
     """Confirm that the test_negative expected file matches an error for each line"""
 
-    def grab_errors(filename):
-        # type: (str) -> Generator[Tuple[str, int], None, None]
+    def grab_errors(filename: str) -> Generator[Tuple[str, int], None, None]:
         for line in open(filename).readlines():
             if _is_summary(line):
                 continue
             parts = line.split(":")
             yield parts[0], int(parts[1])
 
-    def grab_expectations(filename, marker):
-        # type: (str, str) -> Generator[Tuple[str, int], None, None]
+    def grab_expectations(
+        filename: str, marker: str
+    ) -> Generator[Tuple[str, int], None, None]:
         for idx, line in enumerate(open(filename).readlines()):
             if "#" in line and marker in line:
                 yield filename, idx + 1
@@ -143,8 +140,7 @@ def test_generate_negative_matches():
     assert len(errors_38) == 74
 
 
-def test_func():
-    # type: () -> None
+def test_func() -> None:
     s = Simple1(a_string="hello")
 
     s = Simple1()
@@ -169,8 +165,7 @@ def test_func():
     assert l == lower2(upper=Upper(Lower=lower(a=2)))
 
 
-def test_enum():
-    # type: () -> None
+def test_enum() -> None:
     e = FOO
     e = OuterEnum.Value("BAR")
     assert OuterEnum.Value("BAR") == 2
@@ -180,26 +175,24 @@ def test_enum():
     assert OuterEnum.items() == [("FOO", 1), ("BAR", 2)]
 
     # Make sure we can assure typing with a couple of techniques
-    e2 = OuterEnum.Value("BAR")  # type: test_pb2.OuterEnum.V
+    e2: test_pb2.OuterEnum.V = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e2) == "BAR"
-    e3 = OuterEnum.Value("BAR")  # type: OuterEnum.V
+    e3: OuterEnum.V = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e3) == "BAR"
-    e4 = OuterEnum.Value("BAR")  # type: int
+    e4: int = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e2) == "BAR"
 
     # Protobuf itself allows both unicode and bytes here.
     assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")
 
 
-def test_enum_naming_conflicts():
-    # type: () -> None
+def test_enum_naming_conflicts() -> None:
     assert NamingConflicts.Name(NamingConflicts_Name) == "Name"
     assert NamingConflicts.Value("Name") == 1
     assert NamingConflicts_Name == 1
 
 
-def test_has_field_proto2():
-    # type: () -> None
+def test_has_field_proto2() -> None:
     """For HasField which is typed with Literal"""
     s = Simple1()
     s.a_string = "Hello"
@@ -215,7 +208,7 @@ def test_has_field_proto2():
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped = s  # type: Any
+    s_untyped: Any = s
     with pytest.raises(
         ValueError, match="Protocol message Simple1 has no field garbage."
     ):
@@ -238,8 +231,7 @@ def test_has_field_proto2():
         s_untyped.HasField(None)
 
 
-def test_has_field_proto3():
-    # type: () -> None
+def test_has_field_proto3() -> None:
     s = SimpleProto3()
     assert not s.HasField(u"outer_message")
     assert not s.HasField("outer_message")
@@ -253,7 +245,7 @@ def test_has_field_proto3():
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped = s  # type: Any
+    s_untyped: Any = s
     with pytest.raises(
         ValueError, match="Protocol message SimpleProto3 has no field garbage."
     ):
@@ -286,8 +278,7 @@ def test_has_field_proto3():
         s_untyped.HasField(None)
 
 
-def test_clear_field_proto2():
-    # type: () -> None
+def test_clear_field_proto2() -> None:
     """For ClearField which is typed with Literal"""
     s = Simple1()
     s.a_string = "Hello"
@@ -304,13 +295,12 @@ def test_clear_field_proto2():
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped = s  # type: Any
+    s_untyped: Any = s
     with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
         s_untyped.ClearField("garbage")
 
 
-def test_clear_field_proto3():
-    # type: () -> None
+def test_clear_field_proto3() -> None:
     """For ClearField which is typed with Literal"""
     s = SimpleProto3()
     s.a_string = "Hello"
@@ -331,13 +321,12 @@ def test_clear_field_proto3():
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped = s  # type: Any
+    s_untyped: Any = s
     with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
         s_untyped.ClearField("garbage")
 
 
-def test_which_oneof_proto2():
-    # type: () -> None
+def test_which_oneof_proto2() -> None:
     s = Simple1()
 
     assert s.WhichOneof("a_oneof") is None
@@ -352,15 +341,14 @@ def test_which_oneof_proto2():
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped = s  # type: Any
+    s_untyped: Any = s
     with pytest.raises(
         ValueError, match='Protocol message has no oneof "garbage" field.'
     ):
         s_untyped.WhichOneof("garbage")
 
 
-def test_which_oneof_proto3():
-    # type: () -> None
+def test_which_oneof_proto3() -> None:
     s = SimpleProto3()
 
     assert s.WhichOneof("a_oneof") is None
@@ -388,15 +376,14 @@ def test_which_oneof_proto3():
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped = s  # type: Any
+    s_untyped: Any = s
     with pytest.raises(
         ValueError, match='Protocol message has no oneof "garbage" field.'
     ):
         s_untyped.WhichOneof("garbage")
 
 
-def test_extensions_proto2():
-    # type: () -> None
+def test_extensions_proto2() -> None:
     s1 = Simple1()
     s2 = Simple2()
 
@@ -435,8 +422,7 @@ def test_extensions_proto2():
     assert len(s2.Extensions) == 1
 
 
-def test_extensions_proto3():
-    # type: () -> None
+def test_extensions_proto3() -> None:
     assert (
         MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[scalar_option]
         == "Hello world!"
@@ -459,8 +445,7 @@ def test_extensions_proto3():
     ]
 
 
-def test_constructor_proto2():
-    # type: () -> None
+def test_constructor_proto2() -> None:
     x = Simple2()  # It's OK to omit a required field from the constructor.
     assert not x.HasField("a_string")
 
@@ -468,36 +453,30 @@ def test_constructor_proto2():
     assert not x.HasField("a_string")
 
 
-def test_message_descriptor_proto2():
-    # type: () -> None
+def test_message_descriptor_proto2() -> None:
     assert Simple1().DESCRIPTOR.full_name == "test.Simple1"
     assert Simple1.DESCRIPTOR.full_name == "test.Simple1"
 
 
-def test_message_descriptor_proto3():
-    # type: () -> None
+def test_message_descriptor_proto3() -> None:
     assert SimpleProto3().DESCRIPTOR.full_name == "test3.SimpleProto3"
     assert SimpleProto3.DESCRIPTOR.full_name == "test3.SimpleProto3"
 
 
-def test_reexport_identical():
-    # type: () -> None
+def test_reexport_identical() -> None:
     assert SimpleProto3 is ReexportedSimpleProto3
     assert FOO3 is ReexportedFOO3
 
 
-def test_enum_descriptor():
-    # type: () -> None
+def test_enum_descriptor() -> None:
     assert OuterEnum.DESCRIPTOR.name == "OuterEnum"
 
 
-def test_module_descriptor():
-    # type: () -> None
+def test_module_descriptor() -> None:
     assert DESCRIPTOR.name == "testproto/test.proto"
 
 
-def test_mapping_type():
-    # type: () -> None
+def test_mapping_type() -> None:
     s = SimpleProto3()
     s.map_scalar[5] = "abcd"
     assert s.map_scalar[5] == "abcd"
@@ -514,8 +493,7 @@ def test_mapping_type():
     )
 
 
-def test_casttype():
-    # type: () -> None
+def test_casttype() -> None:
     s = Simple1()
     s.user_id = UserId(33)
     assert s.user_id == 33
@@ -524,13 +502,12 @@ def test_casttype():
     s.email_by_uid[UserId(33)] = Email("abcd@gmail.com")
 
 
-def test_reserved_keywords():
-    # type: () -> None
+def test_reserved_keywords() -> None:
     with pytest.raises(AttributeError, match="module.*has no attribute 'asdf'"):
         getattr(test_pb2, "asdf")
 
     # Confirm that "None" is a Message
-    none_cls = getattr(test_pb2, "None")  # type: Type[test_pb2._r_None]
+    none_cls: Type[test_pb2._r_None] = getattr(test_pb2, "None")
     none_instance = none_cls(valid=5)
     assert isinstance(none_instance, Message)
 

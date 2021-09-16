@@ -39,9 +39,7 @@ class Servicer(dummy_pb2_grpc.DummyServiceServicer):
             yield dummy_pb2.DummyReply(value=data.value.upper())
 
 
-def make_server():
-    # type: () -> grpc.Server
-
+def make_server() -> grpc.Server:
     server = grpc.server(futures.ThreadPoolExecutor())
     servicer = Servicer()
     server.add_insecure_port(ADDRESS)
@@ -49,9 +47,7 @@ def make_server():
     return server
 
 
-def test_grpc():
-    # type: () -> None
-
+def test_grpc() -> None:
     server = make_server()
     server.start()
     channel = grpc.insecure_channel(ADDRESS)
