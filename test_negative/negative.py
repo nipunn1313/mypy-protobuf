@@ -48,10 +48,10 @@ s.HasField("a_repeated_string")  # E:2.7 E:3.8
 
 # Proto3
 s6 = SimpleProto3()
-s6.HasField(u"garbage")  # E:2.7 E:3.8
-s6.HasField(u"a_string")  # E:2.7 E:3.8
-s6.HasField(u"outer_enum")  # E:2.7 E:3.8
-s6.HasField(u"a_repeated_string")  # E:2.7 E:3.8
+s6.HasField("garbage")  # E:2.7 E:3.8
+s6.HasField("a_string")  # E:2.7 E:3.8
+s6.HasField("outer_enum")  # E:2.7 E:3.8
+s6.HasField("a_repeated_string")  # E:2.7 E:3.8
 
 # Proto2
 s.ClearField("garbage")  # E:2.7 E:3.8

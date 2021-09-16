@@ -177,8 +177,8 @@ def test_enum() -> None:
     e4: int = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e2) == "BAR"
 
-    # Protobuf itself allows both unicode and bytes here.
-    assert OuterEnum.Value(u"BAR") == OuterEnum.Value(b"BAR")
+    # Protobuf itself allows both str and bytes here.
+    assert OuterEnum.Value("BAR") == OuterEnum.Value(b"BAR")
 
 
 def test_enum_naming_conflicts() -> None:
@@ -193,7 +193,6 @@ def test_has_field_proto2() -> None:
     s.a_string = "Hello"
 
     # Proto2 tests
-    assert s.HasField(u"a_string")
     assert s.HasField("a_string")
     assert not s.HasField("a_inner")
     assert not s.HasField("a_enum")
@@ -221,7 +220,6 @@ def test_has_field_proto2() -> None:
 
 def test_has_field_proto3() -> None:
     s = SimpleProto3()
-    assert not s.HasField(u"outer_message")
     assert not s.HasField("outer_message")
     assert not s.HasField("a_oneof")
 
@@ -235,12 +233,12 @@ def test_has_field_proto3() -> None:
     with pytest.raises(
         ValueError, match="Protocol message SimpleProto3 has no field garbage."
     ):
-        s_untyped.HasField(u"garbage")
+        s_untyped.HasField("garbage")
     with pytest.raises(
         ValueError,
         match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_string" for presence in proto3.',
     ):
-        s_untyped.HasField(u"a_string")
+        s_untyped.HasField("a_string")
     with pytest.raises(
         ValueError,
         match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
@@ -250,7 +248,7 @@ def test_has_field_proto3() -> None:
         ValueError,
         match='Protocol message SimpleProto3 has no singular "a_repeated_string" field',
     ):
-        s_untyped.HasField(u"a_repeated_string")
+        s_untyped.HasField("a_repeated_string")
     with pytest.raises(TypeError, match="bad argument type for built-in operation"):
         s_untyped.HasField(b"outer_message")
 
@@ -265,7 +263,6 @@ def test_clear_field_proto2() -> None:
     s.a_string = "Hello"
 
     # Proto2 tests
-    s.ClearField(u"a_string")
     s.ClearField("a_string")
     s.ClearField("a_inner")
     s.ClearField("a_repeated_string")
@@ -285,7 +282,6 @@ def test_clear_field_proto3() -> None:
     s.a_string = "Hello"
 
     # Proto2 tests
-    s.ClearField(u"a_string")
     s.ClearField("a_string")
     s.ClearField("a_outer_enum")
     s.ClearField("outer_message")
@@ -309,7 +305,6 @@ def test_which_oneof_proto2() -> None:
     assert s.WhichOneof("a_oneof") is None
     s.a_oneof_1 = "hello"
     assert s.WhichOneof("a_oneof") == "a_oneof_1"
-    assert s.WhichOneof(u"a_oneof") == "a_oneof_1"
     assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
     assert type(s.WhichOneof("a_oneof")) == str
     field = s.WhichOneof("a_oneof")
@@ -332,7 +327,6 @@ def test_which_oneof_proto3() -> None:
     s.a_oneof_1 = "hello"
     s.b_oneof_1 = "world"
     assert s.WhichOneof("a_oneof") == "a_oneof_1"
-    assert s.WhichOneof(u"a_oneof") == "a_oneof_1"
     assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
     assert type(s.WhichOneof("a_oneof")) == str
 
