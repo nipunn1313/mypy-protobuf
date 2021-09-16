@@ -5,6 +5,7 @@
 - Avoid relative imports in `_grpc_pb2.pyi` stubs. grpc stubs themselves don't use relative imports, nor `__init__.py` files
 - Use `"""` docstring style comments in generated code rather than `#` style so it shows up in IDEs.
 - Disambiguate messages from reserved python keywords (eg `None`) with prefix `_r_` rather than `__` - since `__` is considered private.
+- Bump tests to use pyright 1.1.169, types-protobuf 3.17.4, pytest 6.2.5, grpc-stubs 1.24.7, grpcio-tools 1.40.0
 - Since upstream protobuf has dropped support with 3.18.0, 2.10 will be the last mypy-protobuf that supports targeting python 2.7. Updated docs for this.
 
 ## 2.9
@@ -22,7 +23,7 @@
 
 ## 2.7
 
-- Fix [#244](https://github.com/dropbox/mypy-protobuf/issues/244) - support extensions defined at module scope with proper types, matching extensions defined within Messages. See [_ExtensionDict](https://github.com/python/typeshed/blob/4765978f6ceeb24e10bdf93c0d4b72dfb35836d4/stubs/protobuf/google/protobuf/internal/extension_dict.pyi#L9)
+- Fix [#244](https://github.com/dropbox/mypy-protobuf/issues/244) - support extensions defined at module scope with proper types, matching extensions defined within Messages. See [`_ExtensionDict`](https://github.com/python/typeshed/blob/4765978f6ceeb24e10bdf93c0d4b72dfb35836d4/stubs/protobuf/google/protobuf/internal/extension_dict.pyi#L9)
 ```
 extend google.protobuf.MessageOptions {
    string test_message_option = 51234;
