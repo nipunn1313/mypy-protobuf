@@ -237,7 +237,7 @@ class Extensions2(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal[u"flag",b"flag"]) -> None: ...
 global___Extensions2 = Extensions2
 
-class __None(google.protobuf.message.Message):
+class _r_None(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     VALID_FIELD_NUMBER: builtins.int
     valid: builtins.int = ...
@@ -247,21 +247,21 @@ class __None(google.protobuf.message.Message):
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal[u"valid",b"valid"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal[u"valid",b"valid"]) -> None: ...
-global_____None = __None
+global____r_None = _r_None
 
 class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    class __finally(_finally, metaclass=_finallyEnumTypeWrapper):
+    class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
         pass
     class _finally:
         V = typing.NewType('V', builtins.int)
     class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        valid_in_finally = PythonReservedKeywords.__finally.V(2)
+        valid_in_finally = PythonReservedKeywords._r_finally.V(2)
 
-    valid_in_finally = PythonReservedKeywords.__finally.V(2)
+    valid_in_finally = PythonReservedKeywords._r_finally.V(2)
 
-    class __lambda(google.protobuf.message.Message):
+    class _r_lambda(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
         CONTINUE_FIELD_NUMBER: builtins.int
         VALID_FIELD_NUMBER: builtins.int
@@ -304,14 +304,14 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     NONE_FIELD_NUMBER: builtins.int
     VALID_FIELD_NUMBER: builtins.int
     @property
-    def none(self) -> global_____None:
+    def none(self) -> global____r_None:
         """Test unreserved identifiers w/ reserved message names"""
         pass
-    valid: global___PythonReservedKeywords.__finally.V = ...
+    valid: global___PythonReservedKeywords._r_finally.V = ...
     def __init__(self,
         *,
-        none : typing.Optional[global_____None] = ...,
-        valid : typing.Optional[global___PythonReservedKeywords.__finally.V] = ...,
+        none : typing.Optional[global____r_None] = ...,
+        valid : typing.Optional[global___PythonReservedKeywords._r_finally.V] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal[u"False",b"False",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"none",b"none",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"valid",b"valid",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal[u"False",b"False",u"True",b"True",u"and",b"and",u"as",b"as",u"assert",b"assert",u"break",b"break",u"class",b"class",u"def",b"def",u"del",b"del",u"elif",b"elif",u"else",b"else",u"except",b"except",u"for",b"for",u"from",b"from",u"global",b"global",u"if",b"if",u"import",b"import",u"in",b"in",u"is",b"is",u"none",b"none",u"nonlocal",b"nonlocal",u"not",b"not",u"or",b"or",u"pass",b"pass",u"raise",b"raise",u"try",b"try",u"valid",b"valid",u"while",b"while",u"with",b"with",u"yield",b"yield"]) -> None: ...
@@ -347,16 +347,16 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
     def valid_method_name1(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global_____None], None]],
-    ) -> concurrent.futures.Future[global_____None]:
+        done: typing.Optional[typing.Callable[[global____r_None], None]],
+    ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
         pass
     @abc.abstractmethod
     def valid_method_name2(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global___PythonReservedKeywords.__lambda], None]],
-    ) -> concurrent.futures.Future[global___PythonReservedKeywords.__lambda]:
+        done: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
+    ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
         pass
 class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
@@ -365,15 +365,15 @@ class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     def valid_method_name1(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global_____None], None]],
-    ) -> concurrent.futures.Future[global_____None]:
+        done: typing.Optional[typing.Callable[[global____r_None], None]],
+    ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
         pass
     def valid_method_name2(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global___PythonReservedKeywords.__lambda], None]],
-    ) -> concurrent.futures.Future[global___PythonReservedKeywords.__lambda]:
+        done: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
+    ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
         pass
 class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
