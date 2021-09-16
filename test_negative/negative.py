@@ -34,7 +34,7 @@ s4 = Simple1()
 s4.CopyFrom(s.SerializeToString())  # E:2.7 E:3.8
 
 s5 = Simple1()
-l = []  # type: List[int]
+l: List[int] = []
 l.extend(s5.a_repeated_string)  # E:2.7 E:3.8
 
 tm = TestMessage(foo=55)  # E:2.7 E:3.8
@@ -70,7 +70,7 @@ simple2 = Simple2(a_string="abc")
 simple2.HasField(b)  # E:2.7 E:3.8
 
 # WhichOneof should return optional str
-var_of_type_str = ""  # type: str
+var_of_type_str: str = ""
 var_of_type_str = s.WhichOneof("a_oneof")  # E:2.7 E:3.8
 
 # Proto3 WhichOneof
