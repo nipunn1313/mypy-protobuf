@@ -538,7 +538,7 @@ def test_reserved_keywords():
         getattr(test_pb2, "asdf")
 
     # Confirm that "None" is a Message
-    none_cls = getattr(test_pb2, "None")  # type: Type[test_pb2.__None]
+    none_cls = getattr(test_pb2, "None")  # type: Type[test_pb2._r_None]
     none_instance = none_cls(valid=5)
     assert isinstance(none_instance, Message)
 

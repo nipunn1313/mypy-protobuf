@@ -4,6 +4,7 @@
 - Remove dependency on grpcio-tools. mypy-protobuf doesn't need it to run. It's only needed to run mypy afterward.
 - Avoid relative imports in `_grpc_pb2.pyi` stubs. grpc stubs themselves don't use relative imports, nor `__init__.py` files
 - Use `"""` docstring style comments in generated code rather than `#` style so it shows up in IDEs.
+- Disambiguate messages from reserved python keywords (eg `None`) with prefix `_r_` rather than `__` - since `__` is considered private.
 - Since upstream protobuf has dropped support with 3.18.0, 2.10 will be the last mypy-protobuf that supports targeting python 2.7. Updated docs for this.
 
 ## 2.9

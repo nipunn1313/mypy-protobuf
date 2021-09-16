@@ -193,11 +193,11 @@ class PkgWriter(object):
             assert name.startswith(".")
             name = name[1:]
 
-        # Use prepended "__" to disambiguate message names that alias python reserved keywords
+        # Use prepended "_r_" to disambiguate message names that alias python reserved keywords
         split = name.split(".")
         for i, part in enumerate(split):
             if part in PYTHON_RESERVED:
-                split[i] = "__" + part
+                split[i] = "_r_" + part
         name = ".".join(split)
 
         # Message defined in this file. Note: GRPC stubs in same .proto are generated into separate files
@@ -318,7 +318,7 @@ class PkgWriter(object):
         l = self._write_line
         for i, enum in enumerate(enums):
             class_name = (
-                enum.name if enum.name not in PYTHON_RESERVED else "__" + enum.name
+                enum.name if enum.name not in PYTHON_RESERVED else "_r_" + enum.name
             )
             value_type_fq = prefix + class_name + ".V"
 
@@ -399,7 +399,7 @@ class PkgWriter(object):
                 )
 
             class_name = (
-                desc.name if desc.name not in PYTHON_RESERVED else "__" + desc.name
+                desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             )
             message_class = self._import("google.protobuf.message", "Message")
             l("class {}({}{}):", class_name, message_class, addl_base)
@@ -648,7 +648,7 @@ class PkgWriter(object):
             class_name = (
                 service.name
                 if service.name not in PYTHON_RESERVED
-                else "__" + service.name
+                else "_r_" + service.name
             )
             # The service definition interface
             l(
