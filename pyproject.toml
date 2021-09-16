@@ -11,7 +11,3 @@ extend-exclude = "(_pb2.pyi?$|_pb2_grpc.pyi?$)"
 [tool.mypy]
 strict = true
 show_error_codes = true
-
-[[tool.mypy.overrides]]
-module = "pytest.*"
-ignore_missing_imports = true
