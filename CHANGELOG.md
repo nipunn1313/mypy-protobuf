@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Drop support for targeting python 2.7
+
 ## 2.10
 
 - Switch from setup.py to pyproject.toml and setup.cfg per https://packaging.python.org/tutorials/packaging-projects/

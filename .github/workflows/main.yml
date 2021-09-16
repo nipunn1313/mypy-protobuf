@@ -10,7 +10,6 @@ jobs:
     env:
       PY_VER_MYPY: 3.8.11
       PY_VER_UNIT_TESTS_3: 3.8.11
-      PY_VER_UNIT_TESTS_2: 2.7.18
     strategy:
       matrix:
         # Running mypy-protobuf itself
@@ -43,11 +42,6 @@ jobs:
         with:
           path: ~/.pyenv/versions/${{env.PY_VER_UNIT_TESTS_3}}
           key: pyenv-${{env.PY_VER_UNIT_TESTS_3}}-${{hashFiles('setup.py')}}
-      - name: Cache pyenv unit tests 2 ver
-        uses: actions/cache@v2
-        with:
-          path: ~/.pyenv/versions/${{env.PY_VER_UNIT_TESTS_2}}
-          key: pyenv-${{env.PY_VER_UNIT_TESTS_2}}-${{hashFiles('setup.py')}}
       - name: Cache pyenv mypy ver
         uses: actions/cache@v2
         with:
@@ -65,7 +59,7 @@ jobs:
           eval "$(pyenv init --path)"
           eval "$(pyenv virtualenv-init -)"
 
-          for PY in ${{matrix.py-ver-mypy-protobuf}} ${{env.PY_VER_MYPY}} ${{env.PY_VER_UNIT_TESTS_3}} ${{env.PY_VER_UNIT_TESTS_2}}; do
+          for PY in ${{matrix.py-ver-mypy-protobuf}} ${{env.PY_VER_MYPY}} ${{env.PY_VER_UNIT_TESTS_3}}; do
             if [ ! -e ~/.pyenv/versions/$PY ]; then
               pyenv install --skip-existing $PY
               pyenv shell $PY
