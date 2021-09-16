@@ -60,9 +60,6 @@ from typing import (
     Type,
 )
 
-PY2 = sys.version_info < (3,)
-PY3 = not PY2
-
 UserId = NewType("UserId", int)
 
 
@@ -76,8 +73,6 @@ def _is_summary(l: str) -> bool:
 
 
 def test_generate_mypy_matches() -> None:
-    if sys.version_info < (3, 0):
-        return
     proto_files = glob.glob("proto/**/*.proto", recursive=True)
     assert len(proto_files) == 15  # Just a sanity check that all the files show up
 
@@ -200,8 +195,6 @@ def test_has_field_proto2() -> None:
     # Proto2 tests
     assert s.HasField(u"a_string")
     assert s.HasField("a_string")
-    if PY2:
-        assert s.HasField(b"a_string")
     assert not s.HasField("a_inner")
     assert not s.HasField("a_enum")
     assert not s.HasField("a_oneof")
@@ -218,15 +211,10 @@ def test_has_field_proto2() -> None:
         match='Protocol message Simple1 has no singular "a_repeated_string" field',
     ):
         s_untyped.HasField("a_repeated_string")
-    if PY3:
-        with pytest.raises(TypeError, match="bad argument type for built-in operation"):
-            s_untyped.HasField(b"a_string")
+    with pytest.raises(TypeError, match="bad argument type for built-in operation"):
+        s_untyped.HasField(b"a_string")
 
-    none_err = (
-        "bad argument type for built-in operation"
-        if PY3
-        else "expected string or Unicode object, NoneType found"
-    )
+    none_err = "bad argument type for built-in operation"
     with pytest.raises(TypeError, match=none_err):
         s_untyped.HasField(None)
 
@@ -235,8 +223,6 @@ def test_has_field_proto3() -> None:
     s = SimpleProto3()
     assert not s.HasField(u"outer_message")
     assert not s.HasField("outer_message")
-    if PY2:
-        assert not s.HasField(b"outer_message")
     assert not s.HasField("a_oneof")
 
     assert not s.HasField("an_optional_string")
@@ -265,15 +251,10 @@ def test_has_field_proto3() -> None:
         match='Protocol message SimpleProto3 has no singular "a_repeated_string" field',
     ):
         s_untyped.HasField(u"a_repeated_string")
-    if PY3:
-        with pytest.raises(TypeError, match="bad argument type for built-in operation"):
-            s_untyped.HasField(b"outer_message")
+    with pytest.raises(TypeError, match="bad argument type for built-in operation"):
+        s_untyped.HasField(b"outer_message")
 
-    none_err = (
-        "bad argument type for built-in operation"
-        if PY3
-        else "expected string or Unicode object, NoneType found"
-    )
+    none_err = "bad argument type for built-in operation"
     with pytest.raises(TypeError, match=none_err):
         s_untyped.HasField(None)
 
@@ -285,8 +266,6 @@ def test_clear_field_proto2() -> None:
 
     # Proto2 tests
     s.ClearField(u"a_string")
-    if PY2:
-        s.ClearField(b"a_string")
     s.ClearField("a_string")
     s.ClearField("a_inner")
     s.ClearField("a_repeated_string")
@@ -307,8 +286,6 @@ def test_clear_field_proto3() -> None:
 
     # Proto2 tests
     s.ClearField(u"a_string")
-    if PY2:
-        s.ClearField(b"a_string")
     s.ClearField("a_string")
     s.ClearField("a_outer_enum")
     s.ClearField("outer_message")
