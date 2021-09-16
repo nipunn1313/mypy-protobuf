@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Drop support for targeting python 2.7
+- Generate py3 specific syntax for unicode strings (`""` rather than `u""`)
 
 ## 2.10
 

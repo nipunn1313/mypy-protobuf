@@ -388,7 +388,7 @@ class PkgWriter(object):
             # Reproduce some hardcoded logic from the protobuf implementation - where
             # some specific "well_known_types" generated protos to have additional
             # base classes
-            addl_base = u""
+            addl_base = ""
             if self.fd.package + "." + desc.name in WKTBASES:
                 # chop off the .proto - and import the well known type
                 # eg `from google.protobuf.duration import Duration`
@@ -504,7 +504,7 @@ class PkgWriter(object):
     def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:
         """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
         l = self._write_line
-        # HasField, ClearField, WhichOneof accepts both bytes/unicode
+        # HasField, ClearField, WhichOneof accepts both bytes/str
         # HasField only supports singular. ClearField supports repeated as well
         # In proto3, HasField only supports message fields and optional fields
         # HasField always supports oneof fields
@@ -535,10 +535,10 @@ class PkgWriter(object):
         cf_fields.extend(wo_fields.keys())
 
         hf_fields_text = ",".join(
-            sorted('u"{}",b"{}"'.format(name, name) for name in hf_fields)
+            sorted('"{}",b"{}"'.format(name, name) for name in hf_fields)
         )
         cf_fields_text = ",".join(
-            sorted('u"{}",b"{}"'.format(name, name) for name in cf_fields)
+            sorted('"{}",b"{}"'.format(name, name) for name in cf_fields)
         )
 
         if not hf_fields and not cf_fields and not wo_fields:
@@ -564,11 +564,11 @@ class PkgWriter(object):
             l(
                 "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}[{}]]: ...",
                 self._import("typing_extensions", "Literal"),
-                # Accepts both unicode and bytes in both py2 and py3
-                'u"{}",b"{}"'.format(wo_field, wo_field),
+                # Accepts both str and bytes
+                '"{}",b"{}"'.format(wo_field, wo_field),
                 self._import("typing", "Optional"),
                 self._import("typing_extensions", "Literal"),
-                # Returns `str` in both py2 and py3 (bytes in py2, unicode in py3)
+                # Returns `str`
                 ",".join('"{}"'.format(m) for m in members),
             )
 
@@ -931,16 +931,16 @@ class PkgWriter(object):
 
         import_lines = []
         for pkg in sorted(self.imports):
-            import_lines.append(u"import {}".format(pkg))
+            import_lines.append("import {}".format(pkg))
 
         for pkg, items in sorted(self.from_imports.items()):
-            import_lines.append(u"from {} import (".format(pkg))
+            import_lines.append("from {} import (".format(pkg))
             for (name, reexport_name) in sorted(items):
                 if reexport_name is None:
-                    import_lines.append(u"    {},".format(name))
+                    import_lines.append("    {},".format(name))
                 else:
-                    import_lines.append(u"    {} as {},".format(name, reexport_name))
-            import_lines.append(u")\n")
+                    import_lines.append("    {} as {},".format(name, reexport_name))
+            import_lines.append(")\n")
         import_lines.append("")
 
         return "\n".join(import_lines + self.lines)
