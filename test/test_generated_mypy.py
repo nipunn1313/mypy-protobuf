@@ -131,23 +131,15 @@ def test_generate_negative_matches():
             if "#" in line and marker in line:
                 yield filename, idx + 1
 
-    errors_27 = set(grab_errors("test_negative/output.expected.2.7"))
     errors_38 = set(grab_errors("test_negative/output.expected.3.8"))
 
-    expected_errors_27 = (
-        set(grab_expectations("test_negative/negative.py", "E:2.7"))
-        | set(grab_expectations("test_negative/negative_2.7.py", "E:2.7"))
-        | set(grab_expectations("test/test_generated_mypy.py", "E:2.7"))
-    )
     expected_errors_38 = set(
         grab_expectations("test_negative/negative.py", "E:3.8")
     ) | set(grab_expectations("test_negative/negative_3.8.py", "E:3.8"))
 
-    assert errors_27 == expected_errors_27
     assert errors_38 == expected_errors_38
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_27) == 62
     assert len(errors_38) == 74
 
 
