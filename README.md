@@ -93,6 +93,33 @@ enum MyEnum {
 Will yield an [enum type wrapper](https://github.com/python/typeshed/blob/16ae4c61201cd8b96b8b22cdfb2ab9e89ba5bcf2/stubs/protobuf/google/protobuf/internal/enum_type_wrapper.pyi) whose methods type to `MyEnum.V` rather than `int`.
 This allows mypy to catch bugs where the wrong enum value is being used.
 
+Calling code may be typed as follows.
+
+In python >= 3.7
+```
+# Need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
+from __future__ import annotations  # Not needed with python>=3.10
+def f(x: MyEnum.V):
+    print(x)
+f(MyEnum.Value("FOO"))
+```
+
+For usages of cast, the type of `x` must be quoted
+until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) includes `V`
+```
+cast('MyEnum.V', x)
+```
+
+Similarly, for type aliases, you must either quote the type or hide it behind `TYPE_CHECKING`
+```
+from typing import Tuple, TYPE_CHECKING
+FOO = Tuple['MyEnum.V', 'MyEnum.V']
+if TYPE_CHECKING:
+    FOO = Tuple[MyEnum.V, MyEnum.V]
+```
+
+#### Enum int impl details
+
 mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
 
 ```
@@ -112,22 +139,7 @@ BAR = MyEnum.V(1)
 `MyEnum` is an instance of the `EnumTypeWrapper`.
 - Use `_MyEnum` and of metaclass is an implementation detail to make MyEnum.V a valid type w/o a circular dependency
 
-Calling code may be typed as follows.
 
-In python >= 3.7
-```
-# Need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
-from __future__ import annotations  # Not needed with python>=3.10
-def f(x: MyEnum.V):
-    print(x)
-f(MyEnum.Value("FOO"))
-```
-
-Note that for usages of cast, the type of `x` must be quoted
-until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) includes `V`
-```
-cast('MyEnum.V', x)
-```
 
 ### Supports generating type wrappers for fields and maps
 
