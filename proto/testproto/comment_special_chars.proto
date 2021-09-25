@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package comment_special_chars;
+
+message Test {
+  // Ending with "
+  string a = 1;
+  // Ending with ""
+  string b = 2;
+  // Ending with """
+  string c = 3;
+  // Ending with \
+  string d = 4;
+  // Containing bad escape: \x
+  string e = 5;
+}

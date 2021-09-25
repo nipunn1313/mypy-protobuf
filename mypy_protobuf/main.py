@@ -269,8 +269,24 @@ class PkgWriter(object):
         if sci_loc.trailing_comments is not None:
             lines.extend(self._break_text(sci_loc.trailing_comments))
 
+        lines = [
+            # Replace backslashes with double-backslashes
+            # to remove anything that would become an escape sequence in a Python string.
+            # Escape triple-quotes that would otherwise end the docstring early.
+            line
+                .replace("\\", "\\\\")
+                .replace('"""', '\\"\\"\\"')
+            for line in lines
+        ]
         if len(lines) == 1:
-            self._write_line('"""{}"""', lines[0])
+            line = lines[0]
+            if line.endswith('"'):
+                # Docstrings are terminated with triple-quotes, so if the documentation itself ends in a quote,
+                # insert some whitespace to separate it from the closing quotes.
+                # This is not necessary with multiline comments
+                # because in that case we always insert a newline before the trailing triple-quotes.
+                line = line + " "
+            self._write_line('"""{}"""', line)
         else:
             for i, line in enumerate(lines):
                 if i == 0:
