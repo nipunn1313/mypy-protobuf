@@ -17,6 +17,10 @@ class Test(google.protobuf.message.Message):
     C_FIELD_NUMBER: builtins.int
     D_FIELD_NUMBER: builtins.int
     E_FIELD_NUMBER: builtins.int
+    F_FIELD_NUMBER: builtins.int
+    G_FIELD_NUMBER: builtins.int
+    H_FIELD_NUMBER: builtins.int
+    I_FIELD_NUMBER: builtins.int
     a: typing.Text = ...
     r"""Ending with " """
 
@@ -27,10 +31,22 @@ class Test(google.protobuf.message.Message):
     r"""Ending with \"\"\" """
 
     d: typing.Text = ...
-    r"""Ending with \\"""
+    r"""Ending with \ """
 
     e: typing.Text = ...
-    r"""Containing bad escape: \\x"""
+    r"""Containing bad escape: \x"""
+
+    f: typing.Text = ...
+    r"""Containing \"\"\"" quadruple"""
+
+    g: typing.Text = ...
+    r"""Containing \"\"\""" quintuple"""
+
+    h: typing.Text = ...
+    r"""Containing \"\"\"\"\"\" sextuple"""
+
+    i: typing.Text = ...
+    r"""\"\"\" Multiple \"\"\" triples \"\"\" """
 
     def __init__(self,
         *,
@@ -39,6 +55,10 @@ class Test(google.protobuf.message.Message):
         c : typing.Text = ...,
         d : typing.Text = ...,
         e : typing.Text = ...,
+        f : typing.Text = ...,
+        g : typing.Text = ...,
+        h : typing.Text = ...,
+        i : typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a",b"a","b",b"b","c",b"c","d",b"d","e",b"e"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a",b"a","b",b"b","c",b"c","d",b"d","e",b"e","f",b"f","g",b"g","h",b"h","i",b"i"]) -> None: ...
 global___Test = Test

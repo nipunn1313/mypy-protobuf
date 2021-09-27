@@ -13,4 +13,12 @@ message Test {
   string d = 4;
   // Containing bad escape: \x
   string e = 5;
+  // Containing """" quadruple
+  string f = 6;
+  // Containing """"" quintuple
+  string g = 7;
+  // Containing """""" sextuple
+  string h = 8;
+  // """ Multiple """ triples """
+  string i = 9;
 }
