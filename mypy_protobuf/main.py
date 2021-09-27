@@ -284,11 +284,11 @@ class PkgWriter(object):
                 # This is not necessary with multiline comments
                 # because in that case we always insert a newline before the trailing triple-quotes.
                 line = line + " "
-            self._write_line('"""{}"""', line)
+            self._write_line('r"""{}"""', line)
         else:
             for i, line in enumerate(lines):
                 if i == 0:
-                    self._write_line('"""{}', line)
+                    self._write_line('r"""{}', line)
                 else:
                     self._write_line("{}", line)
             self._write_line('"""')

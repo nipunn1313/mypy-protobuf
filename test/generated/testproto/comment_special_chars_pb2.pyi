@@ -18,19 +18,19 @@ class Test(google.protobuf.message.Message):
     D_FIELD_NUMBER: builtins.int
     E_FIELD_NUMBER: builtins.int
     a: typing.Text = ...
-    """Ending with " """
+    r"""Ending with " """
 
     b: typing.Text = ...
-    """Ending with "" """
+    r"""Ending with "" """
 
     c: typing.Text = ...
-    """Ending with \"\"\" """
+    r"""Ending with \"\"\" """
 
     d: typing.Text = ...
-    """Ending with \\"""
+    r"""Ending with \\"""
 
     e: typing.Text = ...
-    """Containing bad escape: \\x"""
+    r"""Containing bad escape: \\x"""
 
     def __init__(self,
         *,
