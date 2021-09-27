@@ -21,4 +21,15 @@ message Test {
   string h = 8;
   // """ Multiple """ triples """
   string i = 9;
+  // "quotes" can be a problem in comments.
+  // """Triple quotes""" just as well
+  string j = 10;
+  // """"""""""""""""""""""""""""""""""""""""""""""""
+  // "                                              "
+  // " Super Duper comments with surrounding edges! "
+  // "                                              "
+  // "            Pay attention to me!!!!           "
+  // "                                              "
+  // """"""""""""""""""""""""""""""""""""""""""""""""
+  string k = 11;
 }

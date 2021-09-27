@@ -271,7 +271,7 @@ class PkgWriter(object):
 
         lines = [
             # Escape triple-quotes that would otherwise end the docstring early.
-            line.replace('"""', '\\"\\"\\"')
+            line.replace('"""', r"\"\"\"")
             for line in lines
         ]
         if len(lines) == 1:

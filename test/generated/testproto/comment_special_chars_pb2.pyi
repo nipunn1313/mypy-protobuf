@@ -21,6 +21,8 @@ class Test(google.protobuf.message.Message):
     G_FIELD_NUMBER: builtins.int
     H_FIELD_NUMBER: builtins.int
     I_FIELD_NUMBER: builtins.int
+    J_FIELD_NUMBER: builtins.int
+    K_FIELD_NUMBER: builtins.int
     a: typing.Text = ...
     r"""Ending with " """
 
@@ -48,6 +50,21 @@ class Test(google.protobuf.message.Message):
     i: typing.Text = ...
     r"""\"\"\" Multiple \"\"\" triples \"\"\" """
 
+    j: typing.Text = ...
+    r""""quotes" can be a problem in comments.
+    \"\"\"Triple quotes\"\"\" just as well
+    """
+
+    k: typing.Text = ...
+    r"""\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
+    "                                              "
+    " Super Duper comments with surrounding edges! "
+    "                                              "
+    "            Pay attention to me!!!!           "
+    "                                              "
+    \"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
+    """
+
     def __init__(self,
         *,
         a : typing.Text = ...,
@@ -59,6 +76,8 @@ class Test(google.protobuf.message.Message):
         g : typing.Text = ...,
         h : typing.Text = ...,
         i : typing.Text = ...,
+        j : typing.Text = ...,
+        k : typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a",b"a","b",b"b","c",b"c","d",b"d","e",b"e","f",b"f","g",b"g","h",b"h","i",b"i"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a",b"a","b",b"b","c",b"c","d",b"d","e",b"e","f",b"f","g",b"g","h",b"h","i",b"i","j",b"j","k",b"k"]) -> None: ...
 global___Test = Test
