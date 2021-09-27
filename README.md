@@ -264,6 +264,7 @@ black .
 - [@nelfin](https://github.com/nelfin)
 - [@alkasm](https://github.com/alkasm)
 - [@tarmath](https://github.com/tarmath)
+- [@jaredkhan](https://github.com/jaredkhan)
 
 Licence etc.
 ------------

@@ -273,9 +273,7 @@ class PkgWriter(object):
             # Replace backslashes with double-backslashes
             # to remove anything that would become an escape sequence in a Python string.
             # Escape triple-quotes that would otherwise end the docstring early.
-            line
-                .replace("\\", "\\\\")
-                .replace('"""', '\\"\\"\\"')
+            line.replace("\\", "\\\\").replace('"""', '\\"\\"\\"')
             for line in lines
         ]
         if len(lines) == 1:

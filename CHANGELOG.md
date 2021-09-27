@@ -3,6 +3,7 @@
 - Drop support for targeting python 2.7
 - Generate py3 specific syntax for unicode strings (`""` rather than `u""`)
 - Now requires protobuf 3.18.0
+- Handle escaping properly in docstrings and attribute strings (#296)
 
 ## 2.10
 
