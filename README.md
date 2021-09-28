@@ -84,7 +84,7 @@ will appear as docstrings in .pyi files. Useful in IDEs for showing completions 
 ### Types enum int values more strongly
 
 Enum int values produce stubs which wrap the int values in NewType
-```
+```proto
 enum MyEnum {
   FOO = 0;
   BAR = 1;
@@ -96,7 +96,7 @@ This allows mypy to catch bugs where the wrong enum value is being used.
 Calling code may be typed as follows.
 
 In python >= 3.7
-```
+```python
 # Need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
 from __future__ import annotations  # Not needed with python>=3.10
 def f(x: MyEnum.V):
@@ -106,12 +106,12 @@ f(MyEnum.Value("FOO"))
 
 For usages of cast, the type of `x` must be quoted
 until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) includes `V`
-```
+```python
 cast('MyEnum.V', x)
 ```
 
 Similarly, for type aliases, you must either quote the type or hide it behind `TYPE_CHECKING`
-```
+```python
 from typing import Tuple, TYPE_CHECKING
 FOO = Tuple['MyEnum.V', 'MyEnum.V']
 if TYPE_CHECKING:
@@ -122,7 +122,7 @@ if TYPE_CHECKING:
 
 mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
 
-```
+```python
 class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
     pass
 class _MyEnum:
@@ -144,7 +144,7 @@ BAR = MyEnum.V(1)
 ### Supports generating type wrappers for fields and maps
 
 M.proto
-```
+```proto
 message M {
   uint32 user_id = 1 [(mypy_protobuf.casttype)="mymod.UserId"
   map<uint32, string> email_by_uid = 2 [
@@ -154,7 +154,7 @@ message M {
 }
 ```
 mymod.py
-```
+```python
 UserId = NewType("UserId", int)
 Email = NewType("Email", Text)
 ```
