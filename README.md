@@ -265,6 +265,7 @@ black .
 - [@alkasm](https://github.com/alkasm)
 - [@tarmath](https://github.com/tarmath)
 - [@jaredkhan](https://github.com/jaredkhan)
+- [@sodul](https://github.com/sodul)
 
 Licence etc.
 ------------
