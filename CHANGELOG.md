@@ -31,7 +31,7 @@
 ## 2.7
 
 - Fix [#244](https://github.com/dropbox/mypy-protobuf/issues/244) - support extensions defined at module scope with proper types, matching extensions defined within Messages. See [`_ExtensionDict`](https://github.com/python/typeshed/blob/4765978f6ceeb24e10bdf93c0d4b72dfb35836d4/stubs/protobuf/google/protobuf/internal/extension_dict.pyi#L9)
-```
+```proto
 extend google.protobuf.MessageOptions {
    string test_message_option = 51234;
 }
@@ -56,7 +56,7 @@ that grouping to make it a bit easier to correlate .proto files to .pyi files.
 - Bump protoc support to 3.17.3
 - Use latest python versions in tests (3.6.14 3.7.11 3.8.11 3.9.6)
 - Support reserved names for message types. Previously generated invalid mypy.
-```
+```proto
 message M {
   message None {}
   None none = 1;
@@ -65,7 +65,7 @@ message M {
 - Support `protoc-gen-mypy -V` and `protoc-gen-mypy --version` to print version number
 - Return `Optional[Literal[...]]` instead of `Literal[...]` from WhichOneof to support
 cases in which none of the fields of the WhichOneof are set. See the following example.
-```
+```python
 def hello(name: str) -> None: ...
 n = proto.WhichOneof("name")
 hello(n)  # Will now result in a mypy error.
@@ -149,13 +149,13 @@ Internal Improvements
 - Add support for optional proto3 fields
 - Support ScalarMap and MessageMap generated types for map types in proto.  This will allow us to support `get_or_create`
 
-```
+```proto
 message Message {
     map<int32, OuterMessage3> map_message = 17
 }
 ```
 and
-```
+```python
 message.map_message.get_or_create(0)
 ```
 
@@ -187,14 +187,14 @@ with generated python code. Most caller code should not require mypy type change
 `ProtoEnum.Value('first')` should work either way.
 
 Generated Before (in 1.21)
-```
+```python
 class ProtoEnum(object):
     @classmethod
     def Value(cls, name: str) -> ProtoEnumValue
 ```
 
 Generated After (in 1.22)
-```
+```python
 ProtoEnum: _ProtoEnum
 class _ProtoEnum(google.protobuf.EnumTypeWrapper):
     def Value(self, name: str) -> ProtoEnumValue
@@ -209,7 +209,7 @@ class _ProtoEnum(google.protobuf.EnumTypeWrapper):
 an enum value must happen via a NewType wrapper to the int.
 
 Example:
-```
+```proto
 enum ProtoEnum {
     FIRST = 1;
     SECOND = 2;
@@ -220,7 +220,7 @@ mesage ProtoMsg {
 }
 ```
 Generated Before (in 1.20):
-```
+```python
 class ProtoEnum(object):
     @classmethod
     def Value(cls, name: str) -> ProtoEnum
@@ -229,7 +229,7 @@ class ProtoMsg(Message):
     def __init__(self, enum: ProtoEnum) -> None
 ```
 Generated After (in 1.21):
-```
+```python
 ProtoEnumValue = NewType('ProtoEnumValue', int)
 class ProtoEnum(object):
     @classmethod
@@ -241,7 +241,7 @@ class ProtoMsg(Message):
 Migration Guide (with example calling code)
 
 Before (with 1.20)
-```
+```python
 from msg_pb2 import ProtoEnum, ProtoMsg
 
 def make_proto_msg(enum: ProtoEnum) -> ProtoMsg:
@@ -249,7 +249,7 @@ def make_proto_msg(enum: ProtoEnum) -> ProtoMsg:
 make_proto_msg(ProtoMsg.FIRST)
 ```
 After (with 1.21)
-```
+```python
 from msg_pb2 import ProtoEnum, ProtoMsg
 
 def make_proto_msg(enum: 'msg_pb2.ProtoEnumValue') -> ProtoMsg:
