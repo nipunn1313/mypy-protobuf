@@ -8,17 +8,17 @@ import grpc
 import testproto.test_pb2
 
 class SimpleServiceStub:
-    r"""SimpleService"""
+    """SimpleService"""
     def __init__(self, channel: grpc.Channel) -> None: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[
         google.protobuf.empty_pb2.Empty,
         testproto.test_pb2.Simple1] = ...
-    r"""UnaryUnary"""
+    """UnaryUnary"""
 
     UnaryStream: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty] = ...
-    r"""UnaryStream"""
+    """UnaryStream"""
 
     NoComment: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
@@ -26,13 +26,13 @@ class SimpleServiceStub:
 
 
 class SimpleServiceServicer(metaclass=abc.ABCMeta):
-    r"""SimpleService"""
+    """SimpleService"""
     @abc.abstractmethod
     def UnaryUnary(self,
         request: google.protobuf.empty_pb2.Empty,
         context: grpc.ServicerContext,
     ) -> testproto.test_pb2.Simple1:
-        r"""UnaryUnary"""
+        """UnaryUnary"""
         pass
 
     @abc.abstractmethod
@@ -40,7 +40,7 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
         request: testproto.test_pb2.Simple1,
         context: grpc.ServicerContext,
     ) -> google.protobuf.empty_pb2.Empty:
-        r"""UnaryStream"""
+        """UnaryStream"""
         pass
 
     @abc.abstractmethod

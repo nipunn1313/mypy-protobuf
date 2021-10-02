@@ -12,7 +12,7 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class NoPackage(google.protobuf.message.Message):
-    r"""Intentionally don't set a package - just to make sure we can handle it.
+    """Intentionally don't set a package - just to make sure we can handle it.
 
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...

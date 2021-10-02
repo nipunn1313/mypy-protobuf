@@ -24,39 +24,39 @@ class Test(google.protobuf.message.Message):
     J_FIELD_NUMBER: builtins.int
     K_FIELD_NUMBER: builtins.int
     a: typing.Text = ...
-    r"""Ending with " """
+    """Ending with " """
 
     b: typing.Text = ...
-    r"""Ending with "" """
+    """Ending with "" """
 
     c: typing.Text = ...
-    r"""Ending with \"\"\" """
+    """Ending with \"\"\" """
 
     d: typing.Text = ...
-    r"""Ending with \ """
+    """Ending with \\ """
 
     e: typing.Text = ...
-    r"""Containing bad escape: \x"""
+    """Containing bad escape: \\x"""
 
     f: typing.Text = ...
-    r"""Containing \"\"\"" quadruple"""
+    """Containing \"\"\"" quadruple"""
 
     g: typing.Text = ...
-    r"""Containing \"\"\""" quintuple"""
+    """Containing \"\"\""" quintuple"""
 
     h: typing.Text = ...
-    r"""Containing \"\"\"\"\"\" sextuple"""
+    """Containing \"\"\"\"\"\" sextuple"""
 
     i: typing.Text = ...
-    r"""\"\"\" Multiple \"\"\" triples \"\"\" """
+    """\"\"\" Multiple \"\"\" triples \"\"\" """
 
     j: typing.Text = ...
-    r""""quotes" can be a problem in comments.
+    """"quotes" can be a problem in comments.
     \"\"\"Triple quotes\"\"\" just as well
     """
 
     k: typing.Text = ...
-    r"""\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
+    """\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
     "                                              "
     " Super Duper comments with surrounding edges! "
     "                                              "
