@@ -11,7 +11,7 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class Duration(google.protobuf.message.Message, google.protobuf.internal.well_known_types.Duration):
-    r"""A Duration represents a signed, fixed-length span of time represented
+    """A Duration represents a signed, fixed-length span of time represented
     as a count of seconds and fractions of seconds at nanosecond
     resolution. It is independent of any calendar and concepts like "day"
     or "month". It is related to Timestamp in that the difference between
@@ -74,13 +74,13 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     SECONDS_FIELD_NUMBER: builtins.int
     NANOS_FIELD_NUMBER: builtins.int
     seconds: builtins.int = ...
-    r"""Signed seconds of the span of time. Must be from -315,576,000,000
+    """Signed seconds of the span of time. Must be from -315,576,000,000
     to +315,576,000,000 inclusive. Note: these bounds are computed from:
     60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
     """
 
     nanos: builtins.int = ...
-    r"""Signed fractions of a second at nanosecond resolution of the span
+    """Signed fractions of a second at nanosecond resolution of the span
     of time. Durations less than one second are represented with a 0
     `seconds` field and a positive or negative `nanos` field. For durations
     of one second or more, a non-zero value for the `nanos` field must be

@@ -117,13 +117,13 @@ class SimpleProto3(google.protobuf.message.Message):
     @property
     def bool(self) -> global___OuterMessage3: ...
     OuterEnum: global___OuterEnum.V = ...
-    r"""Test having fieldname match messagename"""
+    """Test having fieldname match messagename"""
 
     @property
     def OuterMessage3(self) -> global___OuterMessage3: ...
     @property
     def map_scalar(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, typing.Text]:
-        r"""Test generation of map"""
+        """Test generation of map"""
         pass
     @property
     def map_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___OuterMessage3]: ...

@@ -271,7 +271,7 @@ class PkgWriter(object):
 
         lines = [
             # Escape triple-quotes that would otherwise end the docstring early.
-            line.replace('"""', r"\"\"\"")
+            line.replace("\\", "\\\\").replace('"""', r"\"\"\"")
             for line in lines
         ]
         if len(lines) == 1:
@@ -282,11 +282,11 @@ class PkgWriter(object):
                 # This is not necessary with multiline comments
                 # because in that case we always insert a newline before the trailing triple-quotes.
                 line = line + " "
-            self._write_line('r"""{}"""', line)
+            self._write_line('"""{}"""', line)
         else:
             for i, line in enumerate(lines):
                 if i == 0:
-                    self._write_line('r"""{}', line)
+                    self._write_line('"""{}', line)
                 else:
                     self._write_line("{}", line)
             self._write_line('"""')

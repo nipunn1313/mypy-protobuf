@@ -22,30 +22,30 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
-    r"""Outer Enum"""
+    """Outer Enum"""
     pass
 class _OuterEnum:
     V = typing.NewType('V', builtins.int)
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.V], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     FOO = OuterEnum.V(1)
-    r"""FOO"""
+    """FOO"""
 
     BAR = OuterEnum.V(2)
-    r"""BAR"""
+    """BAR"""
 
 
 FOO = OuterEnum.V(1)
-r"""FOO"""
+"""FOO"""
 
 BAR = OuterEnum.V(2)
-r"""BAR"""
+"""BAR"""
 
 global___OuterEnum = OuterEnum
 
 
 class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
-    r"""Naming conflicts!"""
+    """Naming conflicts!"""
     pass
 class _NamingConflicts:
     V = typing.NewType('V', builtins.int)
@@ -57,7 +57,7 @@ Value = NamingConflicts.V(2)
 keys = NamingConflicts.V(3)
 values = NamingConflicts.V(4)
 items = NamingConflicts.V(5)
-r"""See https://github.com/protocolbuffers/protobuf/issues/8803
+"""See https://github.com/protocolbuffers/protobuf/issues/8803
 proto itself generates broken code when DESCRIPTOR is there
 DESCRIPTOR = 8;
 """
@@ -66,27 +66,27 @@ global___NamingConflicts = NamingConflicts
 
 
 class Simple1(google.protobuf.message.Message):
-    r"""Message with one of everything"""
+    """Message with one of everything"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
-        r"""Inner Enum"""
+        """Inner Enum"""
         pass
     class _InnerEnum:
         V = typing.NewType('V', builtins.int)
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.V], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1 = Simple1.InnerEnum.V(1)
-        r"""INNER1"""
+        """INNER1"""
 
         INNER2 = Simple1.InnerEnum.V(2)
-        r"""INNER2"""
+        """INNER2"""
 
 
     INNER1 = Simple1.InnerEnum.V(1)
-    r"""INNER1"""
+    """INNER1"""
 
     INNER2 = Simple1.InnerEnum.V(2)
-    r"""INNER2"""
+    """INNER2"""
 
 
     class InnerMessage(google.protobuf.message.Message):
@@ -212,7 +212,7 @@ class Extensions1(google.protobuf.message.Message):
     EXT1_STRING_FIELD_NUMBER: builtins.int
     ext1_string: typing.Text = ...
     ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions1] = ...
-    r"""ext"""
+    """ext"""
 
     def __init__(self,
         *,
@@ -227,7 +227,7 @@ class Extensions2(google.protobuf.message.Message):
     FLAG_FIELD_NUMBER: builtins.int
     flag: builtins.bool = ...
     foo: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions2] = ...
-    r"""foo"""
+    """foo"""
 
     def __init__(self,
         *,
@@ -305,7 +305,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     VALID_FIELD_NUMBER: builtins.int
     @property
     def none(self) -> global____r_None:
-        r"""Test unreserved identifiers w/ reserved message names"""
+        """Test unreserved identifiers w/ reserved message names"""
         pass
     valid: global___PythonReservedKeywords._r_finally.V = ...
     def __init__(self,
@@ -318,7 +318,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
 global___PythonReservedKeywords = PythonReservedKeywords
 
 class PythonReservedKeywordsSmall(google.protobuf.message.Message):
-    r"""Do one with just one arg - to make sure it's syntactically correct"""
+    """Do one with just one arg - to make sure it's syntactically correct"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     FROM_FIELD_NUMBER: builtins.int
     def __init__(self,
@@ -331,7 +331,7 @@ class SelfField(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     SELF_FIELD_NUMBER: builtins.int
     self: builtins.int = ...
-    r"""Field self -> must generate an __init__ method w/ different name"""
+    """Field self -> must generate an __init__ method w/ different name"""
 
     def __init__(self_,
         *,
@@ -342,14 +342,14 @@ class SelfField(google.protobuf.message.Message):
 global___SelfField = SelfField
 
 class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
-    r"""Method name is reserved"""
+    """Method name is reserved"""
     @abc.abstractmethod
     def valid_method_name1(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         done: typing.Optional[typing.Callable[[global____r_None], None]],
     ) -> concurrent.futures.Future[global____r_None]:
-        r"""valid_method_name1"""
+        """valid_method_name1"""
         pass
     @abc.abstractmethod
     def valid_method_name2(self,
@@ -357,24 +357,24 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
         request: global___Simple1,
         done: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
-        r"""valid_method_name2"""
+        """valid_method_name2"""
         pass
 class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
-    r"""Method name is reserved"""
+    """Method name is reserved"""
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
     def valid_method_name1(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         done: typing.Optional[typing.Callable[[global____r_None], None]],
     ) -> concurrent.futures.Future[global____r_None]:
-        r"""valid_method_name1"""
+        """valid_method_name1"""
         pass
     def valid_method_name2(self,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         done: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
-        r"""valid_method_name2"""
+        """valid_method_name2"""
         pass
 class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     @abc.abstractmethod
