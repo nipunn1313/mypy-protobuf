@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Require protobuf 3.18.1
+
 ## 3.0.0
 
 - Drop support for targeting python 2.7
