@@ -87,32 +87,33 @@ enum MyEnum {
   BAR = 1;
 }
 ```
-Will yield an [enum type wrapper](https://github.com/python/typeshed/blob/16ae4c61201cd8b96b8b22cdfb2ab9e89ba5bcf2/stubs/protobuf/google/protobuf/internal/enum_type_wrapper.pyi) whose methods type to `MyEnum.V` rather than `int`.
+Will yield an [enum type wrapper](https://github.com/python/typeshed/blob/16ae4c61201cd8b96b8b22cdfb2ab9e89ba5bcf2/stubs/protobuf/google/protobuf/internal/enum_type_wrapper.pyi) whose methods type to `MyEnum.ValueType` (a `NewType(int)` rather than `int`.
 This allows mypy to catch bugs where the wrong enum value is being used.
 
 Calling code may be typed as follows.
 
 In python >= 3.7
 ```python
-# Need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
-from __future__ import annotations  # Not needed with python>=3.10
-def f(x: MyEnum.V):
+# May need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
+# from __future__ import annotations  # Not needed with python>=3.10 or protobuf>=3.20.0
+def f(x: MyEnum.ValueType):
     print(x)
 f(MyEnum.Value("FOO"))
 ```
 
-For usages of cast, the type of `x` must be quoted
-until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) includes `V`
+With protobuf <= 3.20.0, for usages of cast, the type of `x` must be quoted
+After protobuf >= 3.20.0 - `ValueType` exists in the python code and quotes aren't needed
+until [upstream protobuf](https://github.com/protocolbuffers/protobuf/pull/8182) includes `ValueType`
 ```python
-cast('MyEnum.V', x)
+cast('MyEnum.ValueType', x)
 ```
 
-Similarly, for type aliases, you must either quote the type or hide it behind `TYPE_CHECKING`
+Similarly, for type aliases with protobuf < 3.20.0, you must either quote the type or hide it behind `TYPE_CHECKING`
 ```python
 from typing import Tuple, TYPE_CHECKING
-FOO = Tuple['MyEnum.V', 'MyEnum.V']
+FOO = Tuple['MyEnum.ValueType', 'MyEnum.ValueType']
 if TYPE_CHECKING:
-    FOO = Tuple[MyEnum.V, MyEnum.V]
+    FOO = Tuple[MyEnum.ValueType, MyEnum.ValueType]
 ```
 
 #### Enum int impl details
@@ -123,18 +124,20 @@ mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
 class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
     pass
 class _MyEnum:
-    V = typing.NewType('V', builtins.int)
-class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MyEnum.V], builtins.type):
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V = Union[ValueType]
+class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    FOO = MyEnum.V(0)
-    BAR = MyEnum.V(1)
-FOO = MyEnum.V(0)
-BAR = MyEnum.V(1)
+    FOO = MyEnum.ValueType(0)
+    BAR = MyEnum.ValueType(1)
+FOO = MyEnum.ValueType(0)
+BAR = MyEnum.ValueType(1)
 ```
 
-`_MyEnumEnumTypeWrapper` extends the EnumTypeWrapper to take/return MyEnum.V rather than int
+`_MyEnumEnumTypeWrapper` extends the EnumTypeWrapper to take/return MyEnum.ValueType rather than int
 `MyEnum` is an instance of the `EnumTypeWrapper`.
-- Use `_MyEnum` and of metaclass is an implementation detail to make MyEnum.V a valid type w/o a circular dependency
+- Use `_MyEnum` and of metaclass is an implementation detail to make MyEnum.ValueType a valid type w/o a circular dependency
+- `V` is supported as an alias of `ValueType` for backward compatibility
 
 
 

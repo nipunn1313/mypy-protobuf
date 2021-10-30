@@ -170,12 +170,16 @@ def test_enum() -> None:
     assert OuterEnum.items() == [("FOO", 1), ("BAR", 2)]
 
     # Make sure we can assure typing with a couple of techniques
-    e2: test_pb2.OuterEnum.V = OuterEnum.Value("BAR")
+    e2: test_pb2.OuterEnum.ValueType = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e2) == "BAR"
-    e3: OuterEnum.V = OuterEnum.Value("BAR")
+    e3: OuterEnum.ValueType = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e3) == "BAR"
     e4: int = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e2) == "BAR"
+
+    # Legacy .V type
+    e5: OuterEnum.V = OuterEnum.Value("BAR")
+    assert OuterEnum.Name(e3) == "BAR"
 
     # Protobuf itself allows both str and bytes here.
     assert OuterEnum.Value("BAR") == OuterEnum.Value(b"BAR")

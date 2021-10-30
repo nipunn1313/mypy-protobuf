@@ -15,16 +15,17 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     pass
 class _OuterEnum:
-    V = typing.NewType('V', builtins.int)
-class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.V], builtins.type):
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V = typing.Union[ValueType]
+class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    UNKNOWN = OuterEnum.V(0)
-    FOO3 = OuterEnum.V(1)
-    BAR3 = OuterEnum.V(2)
+    UNKNOWN = OuterEnum.ValueType(0)
+    FOO3 = OuterEnum.ValueType(1)
+    BAR3 = OuterEnum.ValueType(2)
 
-UNKNOWN = OuterEnum.V(0)
-FOO3 = OuterEnum.V(1)
-BAR3 = OuterEnum.V(2)
+UNKNOWN = OuterEnum.ValueType(0)
+FOO3 = OuterEnum.ValueType(1)
+BAR3 = OuterEnum.ValueType(2)
 global___OuterEnum = OuterEnum
 
 
@@ -44,14 +45,15 @@ class SimpleProto3(google.protobuf.message.Message):
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         pass
     class _InnerEnum:
-        V = typing.NewType('V', builtins.int)
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.V], builtins.type):
+        ValueType = typing.NewType('ValueType', builtins.int)
+        V = typing.Union[ValueType]
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        INNER1 = SimpleProto3.InnerEnum.V(0)
-        INNER2 = SimpleProto3.InnerEnum.V(1)
+        INNER1 = SimpleProto3.InnerEnum.ValueType(0)
+        INNER2 = SimpleProto3.InnerEnum.ValueType(1)
 
-    INNER1 = SimpleProto3.InnerEnum.V(0)
-    INNER2 = SimpleProto3.InnerEnum.V(1)
+    INNER1 = SimpleProto3.InnerEnum.ValueType(0)
+    INNER2 = SimpleProto3.InnerEnum.ValueType(1)
 
     class MapScalarEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
@@ -102,21 +104,21 @@ class SimpleProto3(google.protobuf.message.Message):
     a_string: typing.Text = ...
     @property
     def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    a_outer_enum: global___OuterEnum.V = ...
+    a_outer_enum: global___OuterEnum.ValueType = ...
     @property
     def outer_message(self) -> global___OuterMessage3: ...
-    inner_enum: global___SimpleProto3.InnerEnum.V = ...
+    inner_enum: global___SimpleProto3.InnerEnum.ValueType = ...
     a_oneof_1: typing.Text = ...
     a_oneof_2: typing.Text = ...
     @property
     def outer_message_in_oneof(self) -> global___OuterMessage3: ...
-    outer_enum_in_oneof: global___OuterEnum.V = ...
-    inner_enum_in_oneof: global___SimpleProto3.InnerEnum.V = ...
+    outer_enum_in_oneof: global___OuterEnum.ValueType = ...
+    inner_enum_in_oneof: global___SimpleProto3.InnerEnum.ValueType = ...
     b_oneof_1: typing.Text = ...
     b_oneof_2: typing.Text = ...
     @property
     def bool(self) -> global___OuterMessage3: ...
-    OuterEnum: global___OuterEnum.V = ...
+    OuterEnum: global___OuterEnum.ValueType = ...
     """Test having fieldname match messagename"""
 
     @property
@@ -132,18 +134,18 @@ class SimpleProto3(google.protobuf.message.Message):
         *,
         a_string : typing.Text = ...,
         a_repeated_string : typing.Optional[typing.Iterable[typing.Text]] = ...,
-        a_outer_enum : global___OuterEnum.V = ...,
+        a_outer_enum : global___OuterEnum.ValueType = ...,
         outer_message : typing.Optional[global___OuterMessage3] = ...,
-        inner_enum : global___SimpleProto3.InnerEnum.V = ...,
+        inner_enum : global___SimpleProto3.InnerEnum.ValueType = ...,
         a_oneof_1 : typing.Text = ...,
         a_oneof_2 : typing.Text = ...,
         outer_message_in_oneof : typing.Optional[global___OuterMessage3] = ...,
-        outer_enum_in_oneof : global___OuterEnum.V = ...,
-        inner_enum_in_oneof : global___SimpleProto3.InnerEnum.V = ...,
+        outer_enum_in_oneof : global___OuterEnum.ValueType = ...,
+        inner_enum_in_oneof : global___SimpleProto3.InnerEnum.ValueType = ...,
         b_oneof_1 : typing.Text = ...,
         b_oneof_2 : typing.Text = ...,
         bool : typing.Optional[global___OuterMessage3] = ...,
-        OuterEnum : global___OuterEnum.V = ...,
+        OuterEnum : global___OuterEnum.ValueType = ...,
         OuterMessage3 : typing.Optional[global___OuterMessage3] = ...,
         map_scalar : typing.Optional[typing.Mapping[builtins.int, typing.Text]] = ...,
         map_message : typing.Optional[typing.Mapping[builtins.int, global___OuterMessage3]] = ...,

@@ -25,20 +25,21 @@ class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     """Outer Enum"""
     pass
 class _OuterEnum:
-    V = typing.NewType('V', builtins.int)
-class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.V], builtins.type):
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V = typing.Union[ValueType]
+class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    FOO = OuterEnum.V(1)
+    FOO = OuterEnum.ValueType(1)
     """FOO"""
 
-    BAR = OuterEnum.V(2)
+    BAR = OuterEnum.ValueType(2)
     """BAR"""
 
 
-FOO = OuterEnum.V(1)
+FOO = OuterEnum.ValueType(1)
 """FOO"""
 
-BAR = OuterEnum.V(2)
+BAR = OuterEnum.ValueType(2)
 """BAR"""
 
 global___OuterEnum = OuterEnum
@@ -48,15 +49,16 @@ class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrappe
     """Naming conflicts!"""
     pass
 class _NamingConflicts:
-    V = typing.NewType('V', builtins.int)
-class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.V], builtins.type):
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V = typing.Union[ValueType]
+class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
 
-Name = NamingConflicts.V(1)
-Value = NamingConflicts.V(2)
-keys = NamingConflicts.V(3)
-values = NamingConflicts.V(4)
-items = NamingConflicts.V(5)
+Name = NamingConflicts.ValueType(1)
+Value = NamingConflicts.ValueType(2)
+keys = NamingConflicts.ValueType(3)
+values = NamingConflicts.ValueType(4)
+items = NamingConflicts.ValueType(5)
 """See https://github.com/protocolbuffers/protobuf/issues/8803
 proto itself generates broken code when DESCRIPTOR is there
 DESCRIPTOR = 8;
@@ -72,20 +74,21 @@ class Simple1(google.protobuf.message.Message):
         """Inner Enum"""
         pass
     class _InnerEnum:
-        V = typing.NewType('V', builtins.int)
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.V], builtins.type):
+        ValueType = typing.NewType('ValueType', builtins.int)
+        V = typing.Union[ValueType]
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        INNER1 = Simple1.InnerEnum.V(1)
+        INNER1 = Simple1.InnerEnum.ValueType(1)
         """INNER1"""
 
-        INNER2 = Simple1.InnerEnum.V(2)
+        INNER2 = Simple1.InnerEnum.ValueType(2)
         """INNER2"""
 
 
-    INNER1 = Simple1.InnerEnum.V(1)
+    INNER1 = Simple1.InnerEnum.ValueType(1)
     """INNER1"""
 
-    INNER2 = Simple1.InnerEnum.V(2)
+    INNER2 = Simple1.InnerEnum.ValueType(2)
     """INNER2"""
 
 
@@ -136,30 +139,30 @@ class Simple1(google.protobuf.message.Message):
     def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
     a_boolean: builtins.bool = ...
     a_uint32: builtins.int = ...
-    a_enum: global___OuterEnum.V = ...
-    a_external_enum: testproto.test3_pb2.OuterEnum.V = ...
+    a_enum: global___OuterEnum.ValueType = ...
+    a_external_enum: testproto.test3_pb2.OuterEnum.ValueType = ...
     @property
     def a_inner(self) -> testproto.inner.inner_pb2.Inner: ...
     @property
     def a_nested(self) -> testproto.nested.nested_pb2.Nested: ...
-    inner_enum: global___Simple1.InnerEnum.V = ...
+    inner_enum: global___Simple1.InnerEnum.ValueType = ...
     @property
-    def rep_inner_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Simple1.InnerEnum.V]: ...
+    def rep_inner_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Simple1.InnerEnum.ValueType]: ...
     @property
     def inner_message(self) -> global___Simple1.InnerMessage: ...
     @property
     def rep_inner_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Simple1.InnerMessage]: ...
     @property
     def no_package(self) -> testproto.nopackage_pb2.NoPackage: ...
-    nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.V = ...
+    nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType = ...
     @property
     def nested_message(self) -> testproto.nested.nested_pb2.AnotherNested.NestedMessage: ...
     a_oneof_1: typing.Text = ...
     a_oneof_2: typing.Text = ...
     @property
     def outer_message_in_oneof(self) -> global___Simple2: ...
-    outer_enum_in_oneof: global___OuterEnum.V = ...
-    inner_enum_in_oneof: global___Simple1.InnerEnum.V = ...
+    outer_enum_in_oneof: global___OuterEnum.ValueType = ...
+    inner_enum_in_oneof: global___Simple1.InnerEnum.ValueType = ...
     user_id: test.test_generated_mypy.UserId = ...
     email: test.test_generated_mypy.Email = ...
     @property
@@ -170,22 +173,22 @@ class Simple1(google.protobuf.message.Message):
         a_repeated_string : typing.Optional[typing.Iterable[typing.Text]] = ...,
         a_boolean : typing.Optional[builtins.bool] = ...,
         a_uint32 : typing.Optional[builtins.int] = ...,
-        a_enum : typing.Optional[global___OuterEnum.V] = ...,
-        a_external_enum : typing.Optional[testproto.test3_pb2.OuterEnum.V] = ...,
+        a_enum : typing.Optional[global___OuterEnum.ValueType] = ...,
+        a_external_enum : typing.Optional[testproto.test3_pb2.OuterEnum.ValueType] = ...,
         a_inner : typing.Optional[testproto.inner.inner_pb2.Inner] = ...,
         a_nested : typing.Optional[testproto.nested.nested_pb2.Nested] = ...,
-        inner_enum : typing.Optional[global___Simple1.InnerEnum.V] = ...,
-        rep_inner_enum : typing.Optional[typing.Iterable[global___Simple1.InnerEnum.V]] = ...,
+        inner_enum : typing.Optional[global___Simple1.InnerEnum.ValueType] = ...,
+        rep_inner_enum : typing.Optional[typing.Iterable[global___Simple1.InnerEnum.ValueType]] = ...,
         inner_message : typing.Optional[global___Simple1.InnerMessage] = ...,
         rep_inner_message : typing.Optional[typing.Iterable[global___Simple1.InnerMessage]] = ...,
         no_package : typing.Optional[testproto.nopackage_pb2.NoPackage] = ...,
-        nested_enum : typing.Optional[testproto.nested.nested_pb2.AnotherNested.NestedEnum.V] = ...,
+        nested_enum : typing.Optional[testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType] = ...,
         nested_message : typing.Optional[testproto.nested.nested_pb2.AnotherNested.NestedMessage] = ...,
         a_oneof_1 : typing.Optional[typing.Text] = ...,
         a_oneof_2 : typing.Optional[typing.Text] = ...,
         outer_message_in_oneof : typing.Optional[global___Simple2] = ...,
-        outer_enum_in_oneof : typing.Optional[global___OuterEnum.V] = ...,
-        inner_enum_in_oneof : typing.Optional[global___Simple1.InnerEnum.V] = ...,
+        outer_enum_in_oneof : typing.Optional[global___OuterEnum.ValueType] = ...,
+        inner_enum_in_oneof : typing.Optional[global___Simple1.InnerEnum.ValueType] = ...,
         user_id : typing.Optional[test.test_generated_mypy.UserId] = ...,
         email : typing.Optional[test.test_generated_mypy.Email] = ...,
         email_by_uid : typing.Optional[typing.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]] = ...,
@@ -254,12 +257,13 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
         pass
     class _finally:
-        V = typing.NewType('V', builtins.int)
-    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.V], builtins.type):
+        ValueType = typing.NewType('ValueType', builtins.int)
+        V = typing.Union[ValueType]
+    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        valid_in_finally = PythonReservedKeywords._r_finally.V(2)
+        valid_in_finally = PythonReservedKeywords._r_finally.ValueType(2)
 
-    valid_in_finally = PythonReservedKeywords._r_finally.V(2)
+    valid_in_finally = PythonReservedKeywords._r_finally.ValueType(2)
 
     class _r_lambda(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
@@ -307,11 +311,11 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     def none(self) -> global____r_None:
         """Test unreserved identifiers w/ reserved message names"""
         pass
-    valid: global___PythonReservedKeywords._r_finally.V = ...
+    valid: global___PythonReservedKeywords._r_finally.ValueType = ...
     def __init__(self,
         *,
         none : typing.Optional[global____r_None] = ...,
-        valid : typing.Optional[global___PythonReservedKeywords._r_finally.V] = ...,
+        valid : typing.Optional[global___PythonReservedKeywords._r_finally.ValueType] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["False",b"False","True",b"True","and",b"and","as",b"as","assert",b"assert","break",b"break","class",b"class","def",b"def","del",b"del","elif",b"elif","else",b"else","except",b"except","for",b"for","from",b"from","global",b"global","if",b"if","import",b"import","in",b"in","is",b"is","none",b"none","nonlocal",b"nonlocal","not",b"not","or",b"or","pass",b"pass","raise",b"raise","try",b"try","valid",b"valid","while",b"while","with",b"with","yield",b"yield"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["False",b"False","True",b"True","and",b"and","as",b"as","assert",b"assert","break",b"break","class",b"class","def",b"def","del",b"del","elif",b"elif","else",b"else","except",b"except","for",b"for","from",b"from","global",b"global","if",b"if","import",b"import","in",b"in","is",b"is","none",b"none","nonlocal",b"nonlocal","not",b"not","or",b"or","pass",b"pass","raise",b"raise","try",b"try","valid",b"valid","while",b"while","with",b"with","yield",b"yield"]) -> None: ...
