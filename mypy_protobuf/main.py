@@ -33,13 +33,11 @@ SourceCodeLocation = List[int]
 
 # So phabricator doesn't think mypy_protobuf.py is generated
 GENERATED = "@ge" + "nerated"
-HEADER = """\"\"\"
-{} by mypy-protobuf.  Do not edit manually!
+HEADER = f"""\"\"\"
+{GENERATED} by mypy-protobuf.  Do not edit manually!
 isort:skip_file
 \"\"\"
-""".format(
-    GENERATED
-)
+"""
 
 # See https://github.com/dropbox/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
@@ -99,7 +97,7 @@ def _mangle_global_identifier(name: str) -> str:
     message or enum named `Name`, so mangle it with a global___ prefix for
     internal references. Note that this doesn't affect inner enums/messages
     because they get fuly qualified when referenced within a file"""
-    return "global___{}".format(name)
+    return f"global___{name}"
 
 
 class Descriptors(object):
@@ -229,7 +227,8 @@ class PkgWriter(object):
         self.indent = self.indent[:-4]
 
     def _write_line(self, line: str, *args: Any) -> None:
-        line = line.format(*args)
+        if args:
+            line = line.format(*args)
         if line == "":
             self.lines.append(line)
         else:
@@ -239,8 +238,7 @@ class PkgWriter(object):
         if text_block == "":
             return []
         return [
-            "{}".format(l[1:] if l.startswith(" ") else l)
-            for l in text_block.rstrip().split("\n")
+            l[1:] if l.startswith(" ") else l for l in text_block.rstrip().split("\n")
         ]
 
     def _has_comments(self, scl: SourceCodeLocation) -> bool:
@@ -282,13 +280,13 @@ class PkgWriter(object):
                 # This is not necessary with multiline comments
                 # because in that case we always insert a newline before the trailing triple-quotes.
                 line = line + " "
-            self._write_line('"""{}"""', line)
+            self._write_line(f'"""{line}"""')
         else:
             for i, line in enumerate(lines):
                 if i == 0:
-                    self._write_line('"""{}', line)
+                    self._write_line(f'"""{line}')
                 else:
-                    self._write_line("{}", line)
+                    self._write_line(f"{line}")
             self._write_line('"""')
 
         return True
@@ -305,20 +303,15 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
             self._write_line(
-                "{} = {}({})",
-                val.name,
-                value_type,
-                val.number,
+                f"{val.name} = {value_type}({val.number})",
             )
             if self._write_comments(scl):
                 self._write_line("")  # Extra newline to separate
 
     def write_module_attributes(self) -> None:
         l = self._write_line
-        l(
-            "DESCRIPTOR: {} = ...",
-            self._import("google.protobuf.descriptor", "FileDescriptor"),
-        )
+        fd_type = self._import("google.protobuf.descriptor", "FileDescriptor")
+        l(f"DESCRIPTOR: {fd_type} = ...")
         l("")
 
     def write_enums(
@@ -333,18 +326,15 @@ class PkgWriter(object):
                 enum.name if enum.name not in PYTHON_RESERVED else "_r_" + enum.name
             )
             value_type_fq = prefix + class_name + ".ValueType"
+            enum_helper_class = "_" + enum.name
+            etw_helper_class = "_" + enum.name + "EnumTypeWrapper"
 
-            l(
-                "class {}({}, metaclass={}):",
-                class_name,
-                "_" + enum.name,
-                "_" + enum.name + "EnumTypeWrapper",
-            )
+            l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
             with self._indent():
                 scl = scl_prefix + [i]
                 self._write_comments(scl)
                 l("pass")
-            l("class {}:", "_" + enum.name)
+            l(f"class {enum_helper_class}:")
             with self._indent():
                 l(
                     "ValueType = {}('ValueType', {})",
@@ -357,18 +347,16 @@ class PkgWriter(object):
                 l("V = {}[ValueType]", self._import("typing", "Union"))
             l(
                 "class {}({}[{}], {}):",
-                "_" + enum.name + "EnumTypeWrapper",
+                etw_helper_class,
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
                 ),
-                "_" + enum.name + ".ValueType",
+                enum_helper_class + ".ValueType",
                 self._builtin("type"),
             )
             with self._indent():
-                l(
-                    "DESCRIPTOR: {} = ...",
-                    self._import("google.protobuf.descriptor", "EnumDescriptor"),
-                )
+                ed = self._import("google.protobuf.descriptor", "EnumDescriptor")
+                l(f"DESCRIPTOR: {ed} = ...")
                 self.write_enum_values(
                     [
                         (i, v)
@@ -386,7 +374,7 @@ class PkgWriter(object):
                 scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
             )
             if prefix == "" and not self.readable_stubs:
-                l("{} = {}", _mangle_global_identifier(class_name), class_name)
+                l(f"{_mangle_global_identifier(class_name)} = {class_name}")
                 l("")
             l("")
 
@@ -418,15 +406,13 @@ class PkgWriter(object):
                 desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             )
             message_class = self._import("google.protobuf.message", "Message")
-            l("class {}({}{}):", class_name, message_class, addl_base)
+            l(f"class {class_name}({message_class}{addl_base}):")
             with self._indent():
                 scl = scl_prefix + [i]
                 self._write_comments(scl)
 
-                l(
-                    "DESCRIPTOR: {} = ...",
-                    self._import("google.protobuf.descriptor", "Descriptor"),
-                )
+                desc_type = self._import("google.protobuf.descriptor", "Descriptor")
+                l(f"DESCRIPTOR: {desc_type} = ...")
 
                 # Nested enums/messages
                 self.write_enums(
@@ -442,18 +428,19 @@ class PkgWriter(object):
 
                 # integer constants  for field numbers
                 for f in desc.field:
-                    l("{}_FIELD_NUMBER: {}", f.name.upper(), self._builtin("int"))
+                    l(f"{f.name.upper()}_FIELD_NUMBER: {self._builtin('int')}")
 
                 for idx, field in enumerate(desc.field):
                     if field.name in PYTHON_RESERVED:
                         continue
+                    field_type = self.python_type(field)
 
                     if (
                         is_scalar(field)
                         and field.label != d.FieldDescriptorProto.LABEL_REPEATED
                     ):
                         # Scalar non repeated fields are r/w
-                        l("{}: {} = ...", field.name, self.python_type(field))
+                        l(f"{field.name}: {field_type} = ...")
                         if self._write_comments(
                             scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         ):
@@ -462,12 +449,8 @@ class PkgWriter(object):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         l("@property")
-                        l(
-                            "def {}(self) -> {}:{}",
-                            field.name,
-                            self.python_type(field),
-                            " ..." if not self._has_comments(scl_field) else "",
-                        )
+                        body = " ..." if not self._has_comments(scl_field) else ""
+                        l(f"def {field.name}(self) -> {field_type}:{body}")
                         if self._has_comments(scl_field):
                             with self._indent():
                                 self._write_comments(scl_field)
@@ -481,7 +464,7 @@ class PkgWriter(object):
                 self_arg = (
                     "self_" if any(f.name == "self" for f in desc.field) else "self"
                 )
-                l("def __init__({},", self_arg)
+                l(f"def __init__({self_arg},")
                 with self._indent():
                     constructor_fields = [
                         f for f in desc.field if f.name not in PYTHON_RESERVED
@@ -491,30 +474,23 @@ class PkgWriter(object):
                         # See https://github.com/dropbox/mypy-protobuf/issues/71
                         l("*,")
                     for field in constructor_fields:
+                        field_type = self.python_type(field, generic_container=True)
                         if (
                             self.fd.syntax == "proto3"
                             and is_scalar(field)
                             and field.label != d.FieldDescriptorProto.LABEL_REPEATED
                             and not self.relax_strict_optional_primitives
                         ):
-                            l(
-                                "{} : {} = ...,",
-                                field.name,
-                                self.python_type(field, generic_container=True),
-                            )
+                            l(f"{field.name} : {field_type} = ...,")
                         else:
-                            l(
-                                "{} : {}[{}] = ...,",
-                                field.name,
-                                self._import("typing", "Optional"),
-                                self.python_type(field, generic_container=True),
-                            )
+                            opt = self._import("typing", "Optional")
+                            l(f"{field.name} : {opt}[{field_type}] = ...,")
                     l(") -> None: ...")
 
                 self.write_stringly_typed_fields(desc)
 
             if prefix == "" and not self.readable_stubs:
-                l("{} = {}", _mangle_global_identifier(class_name), class_name)
+                l(f"{_mangle_global_identifier(class_name)} = {class_name}")
             l("")
 
     def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:
@@ -550,12 +526,8 @@ class PkgWriter(object):
         hf_fields.extend(wo_fields.keys())
         cf_fields.extend(wo_fields.keys())
 
-        hf_fields_text = ",".join(
-            sorted('"{}",b"{}"'.format(name, name) for name in hf_fields)
-        )
-        cf_fields_text = ",".join(
-            sorted('"{}",b"{}"'.format(name, name) for name in cf_fields)
-        )
+        hf_fields_text = ",".join(sorted(f'"{name}",b"{name}"' for name in hf_fields))
+        cf_fields_text = ",".join(sorted(f'"{name}",b"{name}"' for name in cf_fields))
 
         if not hf_fields and not cf_fields and not wo_fields:
             return
@@ -581,11 +553,11 @@ class PkgWriter(object):
                 "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}[{}]]: ...",
                 self._import("typing_extensions", "Literal"),
                 # Accepts both str and bytes
-                '"{}",b"{}"'.format(wo_field, wo_field),
+                f'"{wo_field}",b"{wo_field}"',
                 self._import("typing", "Optional"),
                 self._import("typing_extensions", "Literal"),
                 # Returns `str`
-                ",".join('"{}"'.format(m) for m in members),
+                ",".join(f'"{m}"' for m in members),
             )
 
     def write_extensions(
@@ -627,7 +599,7 @@ class PkgWriter(object):
         for i, method in methods:
             if is_abstract:
                 l("@{}", self._import("abc", "abstractmethod"))
-            l("def {}(self,", method.name)
+            l(f"def {method.name}(self,")
             with self._indent():
                 l(
                     "rpc_controller: {},",
@@ -732,7 +704,7 @@ class PkgWriter(object):
     ) -> str:
         result = self._import_message(method.input_type)
         if use_stream_iterator and method.client_streaming:
-            result = "{}[{}]".format(self._import("typing", "Iterator"), result)
+            result = f"{self._import('typing', 'Iterator')}[{result}]"
         return result
 
     def _output_type(
@@ -740,7 +712,7 @@ class PkgWriter(object):
     ) -> str:
         result = self._import_message(method.output_type)
         if use_stream_iterator and method.server_streaming:
-            result = "{}[{}]".format(self._import("typing", "Iterator"), result)
+            result = f"{self._import('typing', 'Iterator')}[{result}]"
         return result
 
     def write_grpc_methods(
@@ -809,7 +781,7 @@ class PkgWriter(object):
             scl = scl_prefix + [i]
 
             # The stub client
-            l("class {}Stub:", service.name)
+            l(f"class {service.name}Stub:")
             with self._indent():
                 self._write_comments(scl)
                 l(
@@ -895,7 +867,7 @@ class PkgWriter(object):
                     "RepeatedScalarFieldContainer",
                 )
             )
-            return "{}[{}]".format(container, field_type)
+            return f"{container}[{field_type}]"
 
         # non-scalar repeated map fields go in ScalarMap/MessageMap
         msg = self.descriptors.messages[field.type_name]
@@ -912,7 +884,7 @@ class PkgWriter(object):
                     "google.protobuf.internal.containers", "MessageMap"
                 )
             ktype, vtype = self._map_key_value_types(field, msg.field[0], msg.field[1])
-            return "{}[{}, {}]".format(container, ktype, vtype)
+            return f"{container}[{ktype}, {vtype}]"
 
         # non-scalar repetated fields go in RepeatedCompositeFieldContainer
         container = (
@@ -923,7 +895,7 @@ class PkgWriter(object):
                 "RepeatedCompositeFieldContainer",
             )
         )
-        return "{}[{}]".format(container, field_type)
+        return f"{container}[{field_type}]"
 
     def write(self) -> str:
         for reexport_idx in self.fd.public_dependency:
@@ -947,15 +919,15 @@ class PkgWriter(object):
 
         import_lines = []
         for pkg in sorted(self.imports):
-            import_lines.append("import {}".format(pkg))
+            import_lines.append(f"import {pkg}")
 
         for pkg, items in sorted(self.from_imports.items()):
-            import_lines.append("from {} import (".format(pkg))
+            import_lines.append(f"from {pkg} import (")
             for (name, reexport_name) in sorted(items):
                 if reexport_name is None:
-                    import_lines.append("    {},".format(name))
+                    import_lines.append(f"    {name},")
                 else:
-                    import_lines.append("    {} as {},".format(name, reexport_name))
+                    import_lines.append(f"    {name} as {reexport_name},")
             import_lines.append(")\n")
         import_lines.append("")
 
