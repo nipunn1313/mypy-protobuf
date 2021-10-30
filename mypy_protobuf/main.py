@@ -118,7 +118,7 @@ class Descriptors(object):
         ) -> None:
             for enum in enums:
                 self.message_to_fd[prefix + enum.name] = _fd
-                self.message_to_fd[prefix + enum.name + ".V"] = _fd
+                self.message_to_fd[prefix + enum.name + ".ValueType"] = _fd
 
         def _add_messages(
             messages: "RepeatedCompositeFieldContainer[d.DescriptorProto]",
@@ -332,7 +332,7 @@ class PkgWriter(object):
             class_name = (
                 enum.name if enum.name not in PYTHON_RESERVED else "_r_" + enum.name
             )
-            value_type_fq = prefix + class_name + ".V"
+            value_type_fq = prefix + class_name + ".ValueType"
 
             l(
                 "class {}({}, metaclass={}):",
@@ -347,17 +347,21 @@ class PkgWriter(object):
             l("class {}:", "_" + enum.name)
             with self._indent():
                 l(
-                    "V = {}('V', {})",
+                    "ValueType = {}('ValueType', {})",
                     self._import("typing", "NewType"),
                     self._builtin("int"),
                 )
+                # Ideally this would be `V: TypeAlias = ValueType`, but it appears
+                # to be buggy in mypy in nested scopes
+                # Workaround described here https://github.com/python/mypy/issues/7866
+                l("V = {}[ValueType]", self._import("typing", "Union"))
             l(
                 "class {}({}[{}], {}):",
                 "_" + enum.name + "EnumTypeWrapper",
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
                 ),
-                "_" + enum.name + ".V",
+                "_" + enum.name + ".ValueType",
                 self._builtin("type"),
             )
             with self._indent():
@@ -864,7 +868,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
             d.FieldDescriptorProto.TYPE_BYTES: lambda: self._builtin("bytes"),
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(
-                field.type_name + ".V"
+                field.type_name + ".ValueType"
             ),
             d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(
                 field.type_name
