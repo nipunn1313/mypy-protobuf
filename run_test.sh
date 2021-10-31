@@ -82,7 +82,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     # Generate protos
     python --version
     $PROTOC --version
-    expected="libprotoc 3.18.1"
+    expected="libprotoc 3.19.1"
     if [[ $($PROTOC --version) != $expected ]]; then
         echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
         exit 1
