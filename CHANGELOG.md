@@ -1,6 +1,6 @@
 ## Upcoming
 
-- Require protobuf 3.18.1
+- Require protobuf 3.19.1
 - Change `EnumTypeWrapper.V` to `EnumTypeWrapper.ValueType` per https://github.com/protocolbuffers/protobuf/pull/8182.
 Will allow for unquoted annotations starting with protobuf 3.20.0. `.V` will continue to work for the foreseeable
 future for backward compatibility.
