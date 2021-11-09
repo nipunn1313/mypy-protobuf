@@ -5,6 +5,10 @@
 Will allow for unquoted annotations starting with protobuf 3.20.0. `.V` will continue to work for the foreseeable
 future for backward compatibility.
 
+Release blockers:
+- 0.920 of mypy to support explicit `TypeAlias` notation.
+- pyright to support TypeAlias notation inside classes
+
 ## 3.0.0
 
 - Drop support for targeting python 2.7
