@@ -461,10 +461,11 @@ class PkgWriter(object):
                 )
 
                 # Constructor
-                self_arg = (
-                    "self_" if any(f.name == "self" for f in desc.field) else "self"
-                )
-                l(f"def __init__({self_arg},")
+                if any(f.name == "self" for f in desc.field):
+                    l("# pyright: reportSelfClsParameterName=false")
+                    l(f"def __init__(self_,")
+                else:
+                    l(f"def __init__(self,")
                 with self._indent():
                     constructor_fields = [
                         f for f in desc.field if f.name not in PYTHON_RESERVED
