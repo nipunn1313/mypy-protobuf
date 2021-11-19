@@ -4,6 +4,7 @@
 - Change `EnumTypeWrapper.V` to `EnumTypeWrapper.ValueType` per https://github.com/protocolbuffers/protobuf/pull/8182.
 Will allow for unquoted annotations starting with protobuf 3.20.0. `.V` will continue to work for the foreseeable
 future for backward compatibility.
+- suppress pyright warning reportSelfClsParameterName when a proto field is named `self`
 
 Release blockers:
 - 0.920 of mypy to support explicit `TypeAlias` notation.

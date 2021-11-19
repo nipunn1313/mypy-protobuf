@@ -337,6 +337,7 @@ class SelfField(google.protobuf.message.Message):
     self: builtins.int = ...
     """Field self -> must generate an __init__ method w/ different name"""
 
+    # pyright: reportSelfClsParameterName=false
     def __init__(self_,
         *,
         self : typing.Optional[builtins.int] = ...,
