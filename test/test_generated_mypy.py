@@ -231,6 +231,16 @@ def test_has_field_proto3() -> None:
     # synthetic oneof from optional field, see https://github.com/protocolbuffers/protobuf/blob/v3.12.0/docs/implementing_proto3_presence.md#updating-a-code-generator
     assert not s.HasField("_an_optional_string")
 
+    s = SimpleProto3(an_optional_string=None)
+    assert not s.HasField("an_optional_string")
+    # synthetic oneof from optional field
+    assert not s.HasField("_an_optional_string")
+
+    s = SimpleProto3(an_optional_string="")
+    assert s.HasField("an_optional_string")
+    # synthetic oneof from optional field
+    assert s.HasField("_an_optional_string")
+
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
@@ -426,6 +436,30 @@ def test_constructor_proto2() -> None:
 
     x = Simple2(a_string=None)  # It's OK to pass None for a required field.
     assert not x.HasField("a_string")
+
+    x = Simple2(a_string="")
+    assert x.HasField("a_string")
+
+    x = Simple2(a_string="hello")
+    assert x.HasField("a_string")
+
+
+def test_constructor_proto3() -> None:
+    x = SimpleProto3()
+    assert x.a_string == ""
+    assert not x.HasField("an_optional_string")
+
+    # an_optional_string has optional keyword so None is allowed
+    x = SimpleProto3(an_optional_string=None)
+    assert not x.HasField("an_optional_string")
+
+    x = SimpleProto3(a_string="", an_optional_string="")
+    assert x.a_string == ""
+    assert x.HasField("an_optional_string")
+
+    x = SimpleProto3(a_string="hello", an_optional_string="hello")
+    assert x.a_string == "hello"
+    assert x.HasField("an_optional_string")
 
 
 def test_message_descriptor_proto2() -> None:

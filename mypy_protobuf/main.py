@@ -481,6 +481,7 @@ class PkgWriter(object):
                             and is_scalar(field)
                             and field.label != d.FieldDescriptorProto.LABEL_REPEATED
                             and not self.relax_strict_optional_primitives
+                            and not field.proto3_optional
                         ):
                             l(f"{field.name} : {field_type} = ...,")
                         else:
