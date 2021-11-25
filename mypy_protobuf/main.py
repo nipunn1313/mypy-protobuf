@@ -303,7 +303,7 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
             self._write_line(
-                f"{val.name} = {value_type}({val.number})",
+                f"{val.name}: {value_type} = ...  # {val.number}",
             )
             if self._write_comments(scl):
                 self._write_line("")  # Extra newline to separate
@@ -328,12 +328,8 @@ class PkgWriter(object):
             value_type_fq = prefix + class_name + ".ValueType"
             enum_helper_class = "_" + enum.name
             etw_helper_class = "_" + enum.name + "EnumTypeWrapper"
+            scl = scl_prefix + [i]
 
-            l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
-            with self._indent():
-                scl = scl_prefix + [i]
-                self._write_comments(scl)
-                l("pass")
             l(f"class {enum_helper_class}:")
             with self._indent():
                 l(
@@ -366,6 +362,10 @@ class PkgWriter(object):
                     value_type_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
                 )
+            l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
+            with self._indent():
+                self._write_comments(scl)
+                l("pass")
             l("")
 
             self.write_enum_values(

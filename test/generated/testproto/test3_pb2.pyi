@@ -12,20 +12,20 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
-class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
-    pass
 class _OuterEnum:
     ValueType = typing.NewType('ValueType', builtins.int)
     V = typing.Union[ValueType]
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    UNKNOWN = OuterEnum.ValueType(0)
-    FOO3 = OuterEnum.ValueType(1)
-    BAR3 = OuterEnum.ValueType(2)
+    UNKNOWN: OuterEnum.ValueType = ...  # 0
+    FOO3: OuterEnum.ValueType = ...  # 1
+    BAR3: OuterEnum.ValueType = ...  # 2
+class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
+    pass
 
-UNKNOWN = OuterEnum.ValueType(0)
-FOO3 = OuterEnum.ValueType(1)
-BAR3 = OuterEnum.ValueType(2)
+UNKNOWN: OuterEnum.ValueType = ...  # 0
+FOO3: OuterEnum.ValueType = ...  # 1
+BAR3: OuterEnum.ValueType = ...  # 2
 global___OuterEnum = OuterEnum
 
 
@@ -42,18 +42,18 @@ global___OuterMessage3 = OuterMessage3
 
 class SimpleProto3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
-        pass
     class _InnerEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
         V = typing.Union[ValueType]
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        INNER1 = SimpleProto3.InnerEnum.ValueType(0)
-        INNER2 = SimpleProto3.InnerEnum.ValueType(1)
+        INNER1: SimpleProto3.InnerEnum.ValueType = ...  # 0
+        INNER2: SimpleProto3.InnerEnum.ValueType = ...  # 1
+    class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
+        pass
 
-    INNER1 = SimpleProto3.InnerEnum.ValueType(0)
-    INNER2 = SimpleProto3.InnerEnum.ValueType(1)
+    INNER1: SimpleProto3.InnerEnum.ValueType = ...  # 0
+    INNER2: SimpleProto3.InnerEnum.ValueType = ...  # 1
 
     class MapScalarEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...

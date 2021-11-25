@@ -86,8 +86,8 @@ will appear as docstrings in .pyi files. Useful in IDEs for showing completions 
 Enum int values produce stubs which wrap the int values in NewType
 ```proto
 enum MyEnum {
-  FOO = 0;
-  BAR = 1;
+  HELLO = 0;
+  WORLD = 1;
 }
 ```
 Will yield an [enum type wrapper](https://github.com/python/typeshed/blob/16ae4c61201cd8b96b8b22cdfb2ab9e89ba5bcf2/stubs/protobuf/google/protobuf/internal/enum_type_wrapper.pyi) whose methods type to `MyEnum.ValueType` (a `NewType(int)` rather than `int`.
@@ -101,7 +101,7 @@ In python >= 3.7
 # from __future__ import annotations  # Not needed with python>=3.10 or protobuf>=3.20.0
 def f(x: MyEnum.ValueType):
     print(x)
-f(MyEnum.Value("FOO"))
+f(MyEnum.Value("HELLO"))
 ```
 
 With protobuf <= 3.20.0, for usages of cast, the type of `x` must be quoted
@@ -114,27 +114,27 @@ cast('MyEnum.ValueType', x)
 Similarly, for type aliases with protobuf < 3.20.0, you must either quote the type or hide it behind `TYPE_CHECKING`
 ```python
 from typing import Tuple, TYPE_CHECKING
-FOO = Tuple['MyEnum.ValueType', 'MyEnum.ValueType']
+T = Tuple['MyEnum.ValueType', 'MyEnum.ValueType']
 if TYPE_CHECKING:
-    FOO = Tuple[MyEnum.ValueType, MyEnum.ValueType]
+    T = Tuple[MyEnum.ValueType, MyEnum.ValueType]
 ```
 
 #### Enum int impl details
 
-mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows.
+mypy-protobuf  autogenerates an instance of the EnumTypeWrapper as follows. See `readme_enum.proto` and `readme_enum_pb2.pyi`
 
 ```python
-class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
-    pass
 class _MyEnum:
     ValueType = typing.NewType('ValueType', builtins.int)
-    V = Union[ValueType]
+    V = typing.Union[ValueType]
 class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    FOO = MyEnum.ValueType(0)
-    BAR = MyEnum.ValueType(1)
-FOO = MyEnum.ValueType(0)
-BAR = MyEnum.ValueType(1)
+    HELLO: MyEnum.ValueType = ...  # 0
+    WORLD: MyEnum.ValueType = ...  # 1
+class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
+    pass
+HELLO: MyEnum.ValueType = ...  # 0
+WORLD: MyEnum.ValueType = ...  # 1
 ```
 
 `_MyEnumEnumTypeWrapper` extends the EnumTypeWrapper to take/return MyEnum.ValueType rather than int
