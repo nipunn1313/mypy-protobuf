@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package test;
+
+enum MyEnum {
+  HELLO = 0;
+  WORLD = 1;
+}

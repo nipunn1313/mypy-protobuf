@@ -21,44 +21,44 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
-class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
-    """Outer Enum"""
-    pass
 class _OuterEnum:
     ValueType = typing.NewType('ValueType', builtins.int)
     V = typing.Union[ValueType]
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-    FOO = OuterEnum.ValueType(1)
+    FOO: OuterEnum.ValueType = ...  # 1
     """FOO"""
 
-    BAR = OuterEnum.ValueType(2)
+    BAR: OuterEnum.ValueType = ...  # 2
     """BAR"""
 
+class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
+    """Outer Enum"""
+    pass
 
-FOO = OuterEnum.ValueType(1)
+FOO: OuterEnum.ValueType = ...  # 1
 """FOO"""
 
-BAR = OuterEnum.ValueType(2)
+BAR: OuterEnum.ValueType = ...  # 2
 """BAR"""
 
 global___OuterEnum = OuterEnum
 
 
-class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
-    """Naming conflicts!"""
-    pass
 class _NamingConflicts:
     ValueType = typing.NewType('ValueType', builtins.int)
     V = typing.Union[ValueType]
 class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
+class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
+    """Naming conflicts!"""
+    pass
 
-Name = NamingConflicts.ValueType(1)
-Value = NamingConflicts.ValueType(2)
-keys = NamingConflicts.ValueType(3)
-values = NamingConflicts.ValueType(4)
-items = NamingConflicts.ValueType(5)
+Name: NamingConflicts.ValueType = ...  # 1
+Value: NamingConflicts.ValueType = ...  # 2
+keys: NamingConflicts.ValueType = ...  # 3
+values: NamingConflicts.ValueType = ...  # 4
+items: NamingConflicts.ValueType = ...  # 5
 """See https://github.com/protocolbuffers/protobuf/issues/8803
 proto itself generates broken code when DESCRIPTOR is there
 DESCRIPTOR = 8;
@@ -70,25 +70,25 @@ global___NamingConflicts = NamingConflicts
 class Simple1(google.protobuf.message.Message):
     """Message with one of everything"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
-        """Inner Enum"""
-        pass
     class _InnerEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
         V = typing.Union[ValueType]
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        INNER1 = Simple1.InnerEnum.ValueType(1)
+        INNER1: Simple1.InnerEnum.ValueType = ...  # 1
         """INNER1"""
 
-        INNER2 = Simple1.InnerEnum.ValueType(2)
+        INNER2: Simple1.InnerEnum.ValueType = ...  # 2
         """INNER2"""
 
+    class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
+        """Inner Enum"""
+        pass
 
-    INNER1 = Simple1.InnerEnum.ValueType(1)
+    INNER1: Simple1.InnerEnum.ValueType = ...  # 1
     """INNER1"""
 
-    INNER2 = Simple1.InnerEnum.ValueType(2)
+    INNER2: Simple1.InnerEnum.ValueType = ...  # 2
     """INNER2"""
 
 
@@ -254,16 +254,16 @@ global____r_None = _r_None
 
 class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
-    class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
-        pass
     class _finally:
         ValueType = typing.NewType('ValueType', builtins.int)
         V = typing.Union[ValueType]
     class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        valid_in_finally = PythonReservedKeywords._r_finally.ValueType(2)
+        valid_in_finally: PythonReservedKeywords._r_finally.ValueType = ...  # 2
+    class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
+        pass
 
-    valid_in_finally = PythonReservedKeywords._r_finally.ValueType(2)
+    valid_in_finally: PythonReservedKeywords._r_finally.ValueType = ...  # 2
 
     class _r_lambda(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
