@@ -14,7 +14,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class _OuterEnum:
     ValueType = typing.NewType('ValueType', builtins.int)
-    V = typing.Union[ValueType]
+    V: typing_extensions.TypeAlias = ValueType
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     UNKNOWN: OuterEnum.ValueType = ...  # 0
@@ -44,7 +44,7 @@ class SimpleProto3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class _InnerEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
-        V = typing.Union[ValueType]
+        V: typing_extensions.TypeAlias = ValueType
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1: SimpleProto3.InnerEnum.ValueType = ...  # 0

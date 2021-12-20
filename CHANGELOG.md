@@ -8,10 +8,6 @@ future for backward compatibility.
 - Allow optional constructor keywords for primitive field types in proto3, following this [chart](https://github.com/protocolbuffers/protobuf/blob/master/docs/field_presence.md#presence-in-proto3-apis).
 - Reorder Enum helper classes to eliminate pycharm errors
 
-Release blockers:
-- Require 0.930 of mypy to support explicit `TypeAlias` notation.
-- pyright to support TypeAlias notation inside classes
-
 ## 3.0.0
 
 - Drop support for targeting python 2.7

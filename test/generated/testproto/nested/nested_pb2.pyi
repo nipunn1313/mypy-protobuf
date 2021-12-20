@@ -27,7 +27,7 @@ class AnotherNested(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class _NestedEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
-        V = typing.Union[ValueType]
+        V: typing_extensions.TypeAlias = ValueType
     class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NestedEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INVALID: AnotherNested.NestedEnum.ValueType = ...  # 0
@@ -44,7 +44,7 @@ class AnotherNested(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
         class _NestedEnum2:
             ValueType = typing.NewType('ValueType', builtins.int)
-            V = typing.Union[ValueType]
+            V: typing_extensions.TypeAlias = ValueType
         class _NestedEnum2EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NestedEnum2.ValueType], builtins.type):
             DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
             UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 0

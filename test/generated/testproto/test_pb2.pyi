@@ -23,7 +23,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
 class _OuterEnum:
     ValueType = typing.NewType('ValueType', builtins.int)
-    V = typing.Union[ValueType]
+    V: typing_extensions.TypeAlias = ValueType
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
     FOO: OuterEnum.ValueType = ...  # 1
@@ -47,7 +47,7 @@ global___OuterEnum = OuterEnum
 
 class _NamingConflicts:
     ValueType = typing.NewType('ValueType', builtins.int)
-    V = typing.Union[ValueType]
+    V: typing_extensions.TypeAlias = ValueType
 class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
 class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
@@ -72,7 +72,7 @@ class Simple1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class _InnerEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
-        V = typing.Union[ValueType]
+        V: typing_extensions.TypeAlias = ValueType
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         INNER1: Simple1.InnerEnum.ValueType = ...  # 1
@@ -256,7 +256,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     class _finally:
         ValueType = typing.NewType('ValueType', builtins.int)
-        V = typing.Union[ValueType]
+        V: typing_extensions.TypeAlias = ValueType
     class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
         valid_in_finally: PythonReservedKeywords._r_finally.ValueType = ...  # 2
