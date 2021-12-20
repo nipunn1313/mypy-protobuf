@@ -1,2 +1,2 @@
 # Requirements to run mypy itself. Mypy executable exists in a separate venv.
-mypy[python2]==0.910
+mypy[python2]==0.920
