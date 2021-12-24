@@ -337,10 +337,8 @@ class PkgWriter(object):
                     self._import("typing", "NewType"),
                     self._builtin("int"),
                 )
-                # Ideally this would be `V: TypeAlias = ValueType`, but it appears
-                # to be buggy in mypy in nested scopes
-                # Workaround described here https://github.com/python/mypy/issues/7866
-                l("V = {}[ValueType]", self._import("typing", "Union"))
+                # Alias to the classic shorter definition "V"
+                l("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
             l(
                 "class {}({}[{}], {}):",
                 etw_helper_class,
