@@ -70,10 +70,10 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     source $MYPY_PROTOBUF_VENV/bin/activate
 
     # Confirm version number
-    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 3.0.0"
-    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 3.0.0"
-    test "$(protoc-gen-mypy_grpc -V)" = "mypy-protobuf 3.0.0"
-    test "$(protoc-gen-mypy_grpc --version)" = "mypy-protobuf 3.0.0"
+    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 3.1.0"
+    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 3.1.0"
+    test "$(protoc-gen-mypy_grpc -V)" = "mypy-protobuf 3.1.0"
+    test "$(protoc-gen-mypy_grpc --version)" = "mypy-protobuf 3.1.0"
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
