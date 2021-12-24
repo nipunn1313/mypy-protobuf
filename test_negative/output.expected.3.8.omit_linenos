@@ -68,13 +68,13 @@ test_negative/negative.py: error: Argument 1 to "Name" of "_EnumTypeWrapper" has
 test_negative/negative.py: error: Argument 1 to "Name" of "_EnumTypeWrapper" has incompatible type "testproto.test3_pb2.SimpleProto3._InnerEnum.ValueType"; expected "testproto.test3_pb2._OuterEnum.ValueType"  [arg-type]
 test_negative/negative.py: error: "ScalarMap[int, str]" has no attribute "get_or_create"  [attr-defined]
 test_negative/negative.py: error: No overload variant of "get" of "Mapping" matches argument type "str"  [call-overload]
-test_negative/negative.py: note: Possible overload variant:
+test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def get(self, key: int) -> Optional[str]
-test_negative/negative.py: note:     <1 more non-matching overload not shown>
+test_negative/negative.py: note:     def [_T] get(self, int, Union[str, _T]) -> Union[str, _T]
 test_negative/negative.py: error: No overload variant of "get" of "Mapping" matches argument type "str"  [call-overload]
-test_negative/negative.py: note: Possible overload variant:
+test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def get(self, key: int) -> Optional[OuterMessage3]
-test_negative/negative.py: note:     <1 more non-matching overload not shown>
+test_negative/negative.py: note:     def [_T] get(self, int, Union[OuterMessage3, _T]) -> Union[OuterMessage3, _T]
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")  [assignment]
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")  [assignment]
 test_negative/negative.py: error: Dict entry 0 has incompatible type "str": "int"; expected "int": "str"  [dict-item]
