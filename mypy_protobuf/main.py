@@ -303,7 +303,7 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
             self._write_line(
-                f"{val.name}: {value_type} = ...  # {val.number}",
+                f"{val.name}: {value_type}  # {val.number}",
             )
             if self._write_comments(scl):
                 self._write_line("")  # Extra newline to separate
@@ -311,7 +311,7 @@ class PkgWriter(object):
     def write_module_attributes(self) -> None:
         l = self._write_line
         fd_type = self._import("google.protobuf.descriptor", "FileDescriptor")
-        l(f"DESCRIPTOR: {fd_type} = ...")
+        l(f"DESCRIPTOR: {fd_type}")
         l("")
 
     def write_enums(
@@ -350,7 +350,7 @@ class PkgWriter(object):
             )
             with self._indent():
                 ed = self._import("google.protobuf.descriptor", "EnumDescriptor")
-                l(f"DESCRIPTOR: {ed} = ...")
+                l(f"DESCRIPTOR: {ed}")
                 self.write_enum_values(
                     [
                         (i, v)
@@ -410,7 +410,7 @@ class PkgWriter(object):
                 self._write_comments(scl)
 
                 desc_type = self._import("google.protobuf.descriptor", "Descriptor")
-                l(f"DESCRIPTOR: {desc_type} = ...")
+                l(f"DESCRIPTOR: {desc_type}")
 
                 # Nested enums/messages
                 self.write_enums(
@@ -438,7 +438,7 @@ class PkgWriter(object):
                         and field.label != d.FieldDescriptorProto.LABEL_REPEATED
                     ):
                         # Scalar non repeated fields are r/w
-                        l(f"{field.name}: {field_type} = ...")
+                        l(f"{field.name}: {field_type}")
                         if self._write_comments(
                             scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         ):
@@ -481,10 +481,10 @@ class PkgWriter(object):
                             and not self.relax_strict_optional_primitives
                             and not field.proto3_optional
                         ):
-                            l(f"{field.name} : {field_type} = ...,")
+                            l(f"{field.name}: {field_type} = ...,")
                         else:
                             opt = self._import("typing", "Optional")
-                            l(f"{field.name} : {opt}[{field_type}] = ...,")
+                            l(f"{field.name}: {opt}[{field_type}] = ...,")
                     l(") -> None: ...")
 
                 self.write_stringly_typed_fields(desc)
@@ -570,7 +570,7 @@ class PkgWriter(object):
             scl = scl_prefix + [i]
 
             l(
-                "{}: {}[{}, {}] = ...",
+                "{}: {}[{}, {}]",
                 ext.name,
                 self._import(
                     "google.protobuf.internal.extension_dict",
@@ -764,7 +764,7 @@ class PkgWriter(object):
             l("{}: {}[", method.name, self._callable_type(method))
             with self._indent():
                 l("{},", self._input_type(method, False))
-                l("{}] = ...", self._output_type(method, False))
+                l("{}]", self._output_type(method, False))
             self._write_comments(scl)
             l("")
 

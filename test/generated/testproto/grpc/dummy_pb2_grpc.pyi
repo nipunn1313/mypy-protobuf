@@ -12,22 +12,22 @@ class DummyServiceStub:
     def __init__(self, channel: grpc.Channel) -> None: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply] = ...
+        testproto.grpc.dummy_pb2.DummyReply]
     """UnaryUnary"""
 
     UnaryStream: grpc.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply] = ...
+        testproto.grpc.dummy_pb2.DummyReply]
     """UnaryStream"""
 
     StreamUnary: grpc.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply] = ...
+        testproto.grpc.dummy_pb2.DummyReply]
     """StreamUnary"""
 
     StreamStream: grpc.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply] = ...
+        testproto.grpc.dummy_pb2.DummyReply]
     """StreamStream"""
 
 

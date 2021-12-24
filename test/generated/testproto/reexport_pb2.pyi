@@ -17,4 +17,4 @@ from testproto.test3_pb2 import (
 )
 
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
