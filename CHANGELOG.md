@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Internal: Get tests to pass on pure-python protobuf impl (minor semantic differences)
+
 ## 3.1.0
 
 - Require protobuf 3.19.1

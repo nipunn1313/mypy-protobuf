@@ -61,9 +61,10 @@ from typing import (
     Type,
 )
 
-# Tests only work with C++ python API implementation
-# Pure python impl has different semantics which are untested
-assert api_implementation.Type() == "cpp"
+# C++ python API implementation has some semantic differences from pure python
+# We mainly focus on testing the C++ impl - but just have some flags here
+# to flag off tests that only work on cpp impl
+CPP_IMPL = api_implementation.Type() == "cpp"
 
 UserId = NewType("UserId", int)
 
@@ -187,7 +188,8 @@ def test_enum() -> None:
     assert OuterEnum.Name(e3) == "BAR"
 
     # Protobuf itself allows both str and bytes here.
-    assert OuterEnum.Value("BAR") == OuterEnum.Value(b"BAR")
+    if CPP_IMPL:
+        assert OuterEnum.Value("BAR") == OuterEnum.Value(b"BAR")
 
 
 def test_enum_naming_conflicts() -> None:
@@ -209,22 +211,23 @@ def test_has_field_proto2() -> None:
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped: Any = s
-    with pytest.raises(
-        ValueError, match="Protocol message Simple1 has no field garbage."
-    ):
-        s_untyped.HasField("garbage")
-    with pytest.raises(
-        ValueError,
-        match='Protocol message Simple1 has no singular "a_repeated_string" field',
-    ):
-        s_untyped.HasField("a_repeated_string")
-    with pytest.raises(TypeError, match="bad argument type for built-in operation"):
-        s_untyped.HasField(b"a_string")
+    if CPP_IMPL:
+        s_untyped: Any = s
+        with pytest.raises(
+            ValueError, match="Protocol message Simple1 has no field garbage."
+        ):
+            s_untyped.HasField("garbage")
+        with pytest.raises(
+            ValueError,
+            match='Protocol message Simple1 has no singular "a_repeated_string" field',
+        ):
+            s_untyped.HasField("a_repeated_string")
+        with pytest.raises(TypeError, match="bad argument type for built-in operation"):
+            s_untyped.HasField(b"a_string")
 
-    none_err = "bad argument type for built-in operation"
-    with pytest.raises(TypeError, match=none_err):
-        s_untyped.HasField(None)
+        none_err = "bad argument type for built-in operation"
+        with pytest.raises(TypeError, match=none_err):
+            s_untyped.HasField(None)
 
 
 def test_has_field_proto3() -> None:
@@ -248,32 +251,33 @@ def test_has_field_proto3() -> None:
 
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped: Any = s
-    with pytest.raises(
-        ValueError, match="Protocol message SimpleProto3 has no field garbage."
-    ):
-        s_untyped.HasField("garbage")
-    with pytest.raises(
-        ValueError,
-        match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_string" for presence in proto3.',
-    ):
-        s_untyped.HasField("a_string")
-    with pytest.raises(
-        ValueError,
-        match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
-    ):
-        s_untyped.HasField("a_outer_enum")
-    with pytest.raises(
-        ValueError,
-        match='Protocol message SimpleProto3 has no singular "a_repeated_string" field',
-    ):
-        s_untyped.HasField("a_repeated_string")
-    with pytest.raises(TypeError, match="bad argument type for built-in operation"):
-        s_untyped.HasField(b"outer_message")
+    if CPP_IMPL:
+        s_untyped: Any = s
+        with pytest.raises(
+            ValueError, match="Protocol message SimpleProto3 has no field garbage."
+        ):
+            s_untyped.HasField("garbage")
+        with pytest.raises(
+            ValueError,
+            match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_string" for presence in proto3.',
+        ):
+            s_untyped.HasField("a_string")
+        with pytest.raises(
+            ValueError,
+            match='Can\'t test non-optional, non-submessage field "SimpleProto3.a_outer_enum" for presence in proto3.',
+        ):
+            s_untyped.HasField("a_outer_enum")
+        with pytest.raises(
+            ValueError,
+            match='Protocol message SimpleProto3 has no singular "a_repeated_string" field',
+        ):
+            s_untyped.HasField("a_repeated_string")
+        with pytest.raises(TypeError, match="bad argument type for built-in operation"):
+            s_untyped.HasField(b"outer_message")
 
-    none_err = "bad argument type for built-in operation"
-    with pytest.raises(TypeError, match=none_err):
-        s_untyped.HasField(None)
+        none_err = "bad argument type for built-in operation"
+        with pytest.raises(TypeError, match=none_err):
+            s_untyped.HasField(None)
 
 
 def test_clear_field_proto2() -> None:
@@ -286,13 +290,16 @@ def test_clear_field_proto2() -> None:
     s.ClearField("a_inner")
     s.ClearField("a_repeated_string")
     s.ClearField("a_oneof")
-    s.ClearField(b"a_string")
+    if CPP_IMPL:
+        s.ClearField(b"a_string")
 
-    # Erase the types to verify that incorrect inputs fail at runtime
-    # Each test here should be duplicated in test_negative to ensure mypy fails it too
-    s_untyped: Any = s
-    with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
-        s_untyped.ClearField("garbage")
+        # Erase the types to verify that incorrect inputs fail at runtime
+        # Each test here should be duplicated in test_negative to ensure mypy fails it too
+        s_untyped: Any = s
+        with pytest.raises(
+            ValueError, match='Protocol message has no "garbage" field.'
+        ):
+            s_untyped.ClearField("garbage")
 
 
 def test_clear_field_proto3() -> None:
@@ -306,7 +313,8 @@ def test_clear_field_proto3() -> None:
     s.ClearField("outer_message")
     s.ClearField("a_repeated_string")
     s.ClearField("a_oneof")
-    s.ClearField(b"a_string")
+    if CPP_IMPL:
+        s.ClearField(b"a_string")
     s.ClearField("an_optional_string")
     # synthetic oneof from optional field
     s.ClearField("_an_optional_string")
@@ -314,8 +322,11 @@ def test_clear_field_proto3() -> None:
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
-    with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
-        s_untyped.ClearField("garbage")
+    if CPP_IMPL:
+        with pytest.raises(
+            ValueError, match='Protocol message has no "garbage" field.'
+        ):
+            s_untyped.ClearField("garbage")
 
 
 def test_which_oneof_proto2() -> None:
@@ -324,7 +335,8 @@ def test_which_oneof_proto2() -> None:
     assert s.WhichOneof("a_oneof") is None
     s.a_oneof_1 = "hello"
     assert s.WhichOneof("a_oneof") == "a_oneof_1"
-    assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
+    if CPP_IMPL:
+        assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
     assert type(s.WhichOneof("a_oneof")) == str
     field = s.WhichOneof("a_oneof")
     assert field is not None
@@ -346,7 +358,8 @@ def test_which_oneof_proto3() -> None:
     s.a_oneof_1 = "hello"
     s.b_oneof_1 = "world"
     assert s.WhichOneof("a_oneof") == "a_oneof_1"
-    assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
+    if CPP_IMPL:
+        assert s.WhichOneof(b"a_oneof") == "a_oneof_1"
     assert type(s.WhichOneof("a_oneof")) == str
 
     field_a = s.WhichOneof("a_oneof")
