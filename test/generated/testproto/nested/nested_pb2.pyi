@@ -10,67 +10,67 @@ import testproto.test3_pb2
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class Nested(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     A_FIELD_NUMBER: builtins.int
-    a: testproto.test3_pb2.OuterEnum.ValueType = ...
+    a: testproto.test3_pb2.OuterEnum.ValueType
     def __init__(self,
         *,
-        a : testproto.test3_pb2.OuterEnum.ValueType = ...,
+        a: testproto.test3_pb2.OuterEnum.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["a",b"a"]) -> None: ...
 global___Nested = Nested
 
 class AnotherNested(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _NestedEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
         V: typing_extensions.TypeAlias = ValueType
     class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-        INVALID: AnotherNested.NestedEnum.ValueType = ...  # 0
-        ONE: AnotherNested.NestedEnum.ValueType = ...  # 1
-        TWO: AnotherNested.NestedEnum.ValueType = ...  # 2
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        INVALID: AnotherNested.NestedEnum.ValueType  # 0
+        ONE: AnotherNested.NestedEnum.ValueType  # 1
+        TWO: AnotherNested.NestedEnum.ValueType  # 2
     class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper):
         pass
 
-    INVALID: AnotherNested.NestedEnum.ValueType = ...  # 0
-    ONE: AnotherNested.NestedEnum.ValueType = ...  # 1
-    TWO: AnotherNested.NestedEnum.ValueType = ...  # 2
+    INVALID: AnotherNested.NestedEnum.ValueType  # 0
+    ONE: AnotherNested.NestedEnum.ValueType  # 1
+    TWO: AnotherNested.NestedEnum.ValueType  # 2
 
     class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
         class _NestedEnum2:
             ValueType = typing.NewType('ValueType', builtins.int)
             V: typing_extensions.TypeAlias = ValueType
         class _NestedEnum2EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NestedEnum2.ValueType], builtins.type):
-            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
-            UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 0
-            NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 1
-            NESTED_ENUM2: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 2
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+            UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 0
+            NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 1
+            NESTED_ENUM2: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 2
         class NestedEnum2(_NestedEnum2, metaclass=_NestedEnum2EnumTypeWrapper):
             pass
 
-        UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 0
-        NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 1
-        NESTED_ENUM2: AnotherNested.NestedMessage.NestedEnum2.ValueType = ...  # 2
+        UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 0
+        NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 1
+        NESTED_ENUM2: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 2
 
         S_FIELD_NUMBER: builtins.int
         B_FIELD_NUMBER: builtins.int
         NE_FIELD_NUMBER: builtins.int
         NE2_FIELD_NUMBER: builtins.int
-        s: typing.Text = ...
-        b: builtins.bool = ...
-        ne: global___AnotherNested.NestedEnum.ValueType = ...
-        ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...
+        s: typing.Text
+        b: builtins.bool
+        ne: global___AnotherNested.NestedEnum.ValueType
+        ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType
         def __init__(self,
             *,
-            s : typing.Text = ...,
-            b : builtins.bool = ...,
-            ne : global___AnotherNested.NestedEnum.ValueType = ...,
-            ne2 : global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,
+            s: typing.Text = ...,
+            b: builtins.bool = ...,
+            ne: global___AnotherNested.NestedEnum.ValueType = ...,
+            ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,
             ) -> None: ...
         def ClearField(self, field_name: typing_extensions.Literal["b",b"b","ne",b"ne","ne2",b"ne2","s",b"s"]) -> None: ...
 

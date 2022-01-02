@@ -10,24 +10,24 @@ import google.protobuf.message
 import testproto.test3_pb2
 import typing
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class MessageOptionsTestMsg(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     def __init__(self,
         ) -> None: ...
 global___MessageOptionsTestMsg = MessageOptionsTestMsg
 
-test_field_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, typing.Text] = ...
+test_field_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, typing.Text]
 
-scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text] = ...
+scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text]
 
-repeated_scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]] = ...
+repeated_scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]]
 
-enum_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterEnum.ValueType] = ...
+enum_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterEnum.ValueType]
 
-repeated_enum_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[testproto.test3_pb2.OuterEnum.ValueType]] = ...
+repeated_enum_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[testproto.test3_pb2.OuterEnum.ValueType]]
 
-msg_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterMessage3] = ...
+msg_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterMessage3]
 
-repeated_msg_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[testproto.test3_pb2.OuterMessage3]] = ...
+repeated_msg_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[testproto.test3_pb2.OuterMessage3]]

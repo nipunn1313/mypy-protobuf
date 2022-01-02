@@ -8,15 +8,15 @@ import google.protobuf.message
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class TestMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FOO_FIELD_NUMBER: builtins.int
-    foo: typing.Text = ...
+    foo: typing.Text
     def __init__(self,
         *,
-        foo : typing.Text = ...,
+        foo: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["foo",b"foo"]) -> None: ...
 global___TestMessage = TestMessage

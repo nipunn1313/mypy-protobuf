@@ -12,17 +12,17 @@ class SimpleServiceStub:
     def __init__(self, channel: grpc.Channel) -> None: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[
         google.protobuf.empty_pb2.Empty,
-        testproto.test_pb2.Simple1] = ...
+        testproto.test_pb2.Simple1]
     """UnaryUnary"""
 
     UnaryStream: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
-        google.protobuf.empty_pb2.Empty] = ...
+        google.protobuf.empty_pb2.Empty]
     """UnaryStream"""
 
     NoComment: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
-        google.protobuf.empty_pb2.Empty] = ...
+        google.protobuf.empty_pb2.Empty]
 
 
 class SimpleServiceServicer(metaclass=abc.ABCMeta):

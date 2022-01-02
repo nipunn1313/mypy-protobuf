@@ -4,4 +4,4 @@ isort:skip_file
 """
 import google.protobuf.descriptor
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor

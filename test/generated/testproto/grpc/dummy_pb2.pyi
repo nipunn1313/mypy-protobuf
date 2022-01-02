@@ -8,26 +8,26 @@ import google.protobuf.message
 import typing
 import typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class DummyRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     VALUE_FIELD_NUMBER: builtins.int
-    value: typing.Text = ...
+    value: typing.Text
     def __init__(self,
         *,
-        value : typing.Text = ...,
+        value: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
 global___DummyRequest = DummyRequest
 
 class DummyReply(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     VALUE_FIELD_NUMBER: builtins.int
-    value: typing.Text = ...
+    value: typing.Text
     def __init__(self,
         *,
-        value : typing.Text = ...,
+        value: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
 global___DummyReply = DummyReply
