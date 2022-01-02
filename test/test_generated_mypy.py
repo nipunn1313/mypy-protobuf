@@ -14,6 +14,7 @@ import pytest
 import sys
 
 from google.protobuf.descriptor import FieldDescriptor
+from google.protobuf.internal import api_implementation  # type: ignore
 from google.protobuf.message import Message
 
 import testproto.test_pb2 as test_pb2
@@ -59,6 +60,10 @@ from typing import (
     Tuple,
     Type,
 )
+
+# Tests only work with C++ python API implementation
+# Pure python impl has different semantics which are untested
+assert api_implementation.Type() == "cpp"
 
 UserId = NewType("UserId", int)
 
