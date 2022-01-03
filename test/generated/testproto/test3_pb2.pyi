@@ -17,9 +17,9 @@ class _OuterEnum:
     V: typing_extensions.TypeAlias = ValueType
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    UNKNOWN: OuterEnum.ValueType  # 0
-    FOO3: OuterEnum.ValueType  # 1
-    BAR3: OuterEnum.ValueType  # 2
+    UNKNOWN: _OuterEnum.ValueType  # 0
+    FOO3: _OuterEnum.ValueType  # 1
+    BAR3: _OuterEnum.ValueType  # 2
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     pass
 
@@ -45,10 +45,10 @@ class SimpleProto3(google.protobuf.message.Message):
     class _InnerEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SimpleProto3._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        INNER1: SimpleProto3.InnerEnum.ValueType  # 0
-        INNER2: SimpleProto3.InnerEnum.ValueType  # 1
+        INNER1: SimpleProto3._InnerEnum.ValueType  # 0
+        INNER2: SimpleProto3._InnerEnum.ValueType  # 1
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         pass
 

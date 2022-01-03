@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Remove unnecessary `...` in generated files.
+- Reorder/reference enum classes to avoid forward references.
 - Internal: Get tests to pass on pure-python protobuf impl (minor semantic differences)
 
 ## 3.1.0
