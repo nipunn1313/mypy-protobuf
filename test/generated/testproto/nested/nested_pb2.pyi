@@ -28,11 +28,11 @@ class AnotherNested(google.protobuf.message.Message):
     class _NestedEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NestedEnum.ValueType], builtins.type):
+    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AnotherNested._NestedEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        INVALID: AnotherNested.NestedEnum.ValueType  # 0
-        ONE: AnotherNested.NestedEnum.ValueType  # 1
-        TWO: AnotherNested.NestedEnum.ValueType  # 2
+        INVALID: AnotherNested._NestedEnum.ValueType  # 0
+        ONE: AnotherNested._NestedEnum.ValueType  # 1
+        TWO: AnotherNested._NestedEnum.ValueType  # 2
     class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper):
         pass
 
@@ -45,11 +45,11 @@ class AnotherNested(google.protobuf.message.Message):
         class _NestedEnum2:
             ValueType = typing.NewType('ValueType', builtins.int)
             V: typing_extensions.TypeAlias = ValueType
-        class _NestedEnum2EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NestedEnum2.ValueType], builtins.type):
+        class _NestedEnum2EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AnotherNested.NestedMessage._NestedEnum2.ValueType], builtins.type):
             DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-            UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 0
-            NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 1
-            NESTED_ENUM2: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 2
+            UNDEFINED: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 0
+            NESTED_ENUM1: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 1
+            NESTED_ENUM2: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 2
         class NestedEnum2(_NestedEnum2, metaclass=_NestedEnum2EnumTypeWrapper):
             pass
 

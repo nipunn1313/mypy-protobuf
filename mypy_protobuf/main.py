@@ -327,6 +327,7 @@ class PkgWriter(object):
             )
             value_type_fq = prefix + class_name + ".ValueType"
             enum_helper_class = "_" + enum.name
+            value_type_helper_fq = prefix + enum_helper_class + ".ValueType"
             etw_helper_class = "_" + enum.name + "EnumTypeWrapper"
             scl = scl_prefix + [i]
 
@@ -345,7 +346,7 @@ class PkgWriter(object):
                 self._import(
                     "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
                 ),
-                enum_helper_class + ".ValueType",
+                value_type_helper_fq,
                 self._builtin("type"),
             )
             with self._indent():
@@ -357,7 +358,7 @@ class PkgWriter(object):
                         for i, v in enumerate(enum.value)
                         if v.name not in PROTO_ENUM_RESERVED
                     ],
-                    value_type_fq,
+                    value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
                 )
             l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")

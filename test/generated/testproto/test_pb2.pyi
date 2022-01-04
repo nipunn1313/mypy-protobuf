@@ -26,10 +26,10 @@ class _OuterEnum:
     V: typing_extensions.TypeAlias = ValueType
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    FOO: OuterEnum.ValueType  # 1
+    FOO: _OuterEnum.ValueType  # 1
     """FOO"""
 
-    BAR: OuterEnum.ValueType  # 2
+    BAR: _OuterEnum.ValueType  # 2
     """BAR"""
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
@@ -73,12 +73,12 @@ class Simple1(google.protobuf.message.Message):
     class _InnerEnum:
         ValueType = typing.NewType('ValueType', builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InnerEnum.ValueType], builtins.type):
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        INNER1: Simple1.InnerEnum.ValueType  # 1
+        INNER1: Simple1._InnerEnum.ValueType  # 1
         """INNER1"""
 
-        INNER2: Simple1.InnerEnum.ValueType  # 2
+        INNER2: Simple1._InnerEnum.ValueType  # 2
         """INNER2"""
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
@@ -257,9 +257,9 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     class _finally:
         ValueType = typing.NewType('ValueType', builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_finally.ValueType], builtins.type):
+    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        valid_in_finally: PythonReservedKeywords._r_finally.ValueType  # 2
+        valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
     class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
         pass
 
