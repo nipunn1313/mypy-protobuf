@@ -5,6 +5,7 @@
 - Support `*_FIELD_NUMBER` for extensions
 - Bump types-protobuf dependency to 3.18
 - Internal: Get tests to pass on pure-python protobuf impl (minor semantic differences)
+- Internal: Bump pyright in testing to 1.1.206
 
 ## 3.1.0
 
