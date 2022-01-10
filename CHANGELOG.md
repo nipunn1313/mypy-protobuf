@@ -2,6 +2,7 @@
 
 - Remove unnecessary `...` in generated files.
 - Reorder/reference enum classes to avoid forward references.
+- Support `*_FIELD_NUMBER` for extensions
 - Internal: Get tests to pass on pure-python protobuf impl (minor semantic differences)
 
 ## 3.1.0

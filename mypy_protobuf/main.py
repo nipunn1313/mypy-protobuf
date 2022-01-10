@@ -567,6 +567,10 @@ class PkgWriter(object):
         scl_prefix: SourceCodeLocation,
     ) -> None:
         l = self._write_line
+
+        for ext in extensions:
+            l(f"{ext.name.upper()}_FIELD_NUMBER: {self._builtin('int')}")
+
         for i, ext in enumerate(extensions):
             scl = scl_prefix + [i]
 

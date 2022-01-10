@@ -214,6 +214,7 @@ class Extensions1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXT1_STRING_FIELD_NUMBER: builtins.int
     ext1_string: typing.Text
+    EXT_FIELD_NUMBER: builtins.int
     ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions1]
     """ext"""
 
@@ -229,6 +230,7 @@ class Extensions2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FLAG_FIELD_NUMBER: builtins.int
     flag: builtins.bool
+    FOO_FIELD_NUMBER: builtins.int
     foo: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions2]
     """foo"""
 

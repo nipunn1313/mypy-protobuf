@@ -44,6 +44,7 @@ from testproto.test3_pb2 import (
 from testproto.test_extensions3_pb2 import (
     MessageOptionsTestMsg,
     scalar_option,
+    SCALAR_OPTION_FIELD_NUMBER,
     repeated_scalar_option,
     enum_option,
     repeated_enum_option,
@@ -391,6 +392,7 @@ def test_extensions_proto2() -> None:
     s2 = Simple2()
 
     assert isinstance(Extensions1.ext, FieldDescriptor)
+    assert test_pb2.Extensions1.EXT_FIELD_NUMBER == 1000
     assert isinstance(Extensions2.foo, FieldDescriptor)
     assert isinstance(SeparateFileExtension.ext, FieldDescriptor)
 
@@ -430,6 +432,7 @@ def test_extensions_proto3() -> None:
         MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[scalar_option]
         == "Hello world!"
     )
+    assert SCALAR_OPTION_FIELD_NUMBER == 51234
     assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
         repeated_scalar_option
     ] == ["A", "B", "C"]
