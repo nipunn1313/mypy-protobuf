@@ -21,7 +21,7 @@ test_negative/negative_3.8.py:104: note: This violates the Liskov substitution p
 test_negative/negative_3.8.py:104: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative_3.8.py:104: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"  [override]
 test_negative/negative.py:28: error: "Simple1" has no attribute "SerializeToStringg"  [attr-defined]
-test_negative/negative.py:31: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "ByteString"  [arg-type]
+test_negative/negative.py:31: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "bytes"  [arg-type]
 test_negative/negative.py:34: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "bytes"; expected "Simple1"  [arg-type]
 test_negative/negative.py:38: error: Argument 1 to "extend" of "list" has incompatible type "RepeatedScalarFieldContainer[str]"; expected "Iterable[int]"  [arg-type]
 test_negative/negative.py:40: error: Argument "foo" to "TestMessage" has incompatible type "int"; expected "str"  [arg-type]
