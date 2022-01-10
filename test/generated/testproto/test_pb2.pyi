@@ -350,50 +350,60 @@ global___SelfField = SelfField
 
 class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     """Method name is reserved"""
+    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod
-    def valid_method_name1(self,
+    def valid_method_name1(
+        inst: PythonReservedKeywordsService,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global____r_None], None]],
+        callback: typing.Optional[typing.Callable[[global____r_None], None]],
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
         pass
     @abc.abstractmethod
-    def valid_method_name2(self,
+    def valid_method_name2(
+        inst: PythonReservedKeywordsService,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
+        callback: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
         pass
 class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     """Method name is reserved"""
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
-    def valid_method_name1(self,
+    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
+    def valid_method_name1(
+        inst: PythonReservedKeywordsService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global____r_None], None]],
+        callback: typing.Optional[typing.Callable[[global____r_None], None]] = None,
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
         pass
-    def valid_method_name2(self,
+    def valid_method_name2(
+        inst: PythonReservedKeywordsService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]],
+        callback: typing.Optional[typing.Callable[[global___PythonReservedKeywords._r_lambda], None]] = None,
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
         pass
 class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
+    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod
-    def Echo(self,
+    def Echo(
+        inst: ATestService,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global___Simple2], None]],
+        callback: typing.Optional[typing.Callable[[global___Simple2], None]],
     ) -> concurrent.futures.Future[global___Simple2]: ...
 class ATestService_Stub(ATestService):
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
-    def Echo(self,
+    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
+    def Echo(
+        inst: ATestService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        done: typing.Optional[typing.Callable[[global___Simple2], None]],
+        callback: typing.Optional[typing.Callable[[global___Simple2], None]] = None,
     ) -> concurrent.futures.Future[global___Simple2]: ...

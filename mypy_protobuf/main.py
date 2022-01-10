@@ -590,10 +590,15 @@ class PkgWriter(object):
     def write_methods(
         self,
         service: d.ServiceDescriptorProto,
+        class_name: str,
         is_abstract: bool,
         scl_prefix: SourceCodeLocation,
     ) -> None:
         l = self._write_line
+        l(
+            "DESCRIPTOR: {}",
+            self._import("google.protobuf.descriptor", "ServiceDescriptor"),
+        )
         methods = [
             (i, m)
             for i, m in enumerate(service.method)
@@ -604,18 +609,20 @@ class PkgWriter(object):
         for i, method in methods:
             if is_abstract:
                 l("@{}", self._import("abc", "abstractmethod"))
-            l(f"def {method.name}(self,")
+            l(f"def {method.name}(")
             with self._indent():
+                l(f"inst: {class_name},")
                 l(
                     "rpc_controller: {},",
                     self._import("google.protobuf.service", "RpcController"),
                 )
                 l("request: {},", self._import_message(method.input_type))
                 l(
-                    "done: {}[{}[[{}], None]],",
+                    "callback: {}[{}[[{}], None]]{},",
                     self._import("typing", "Optional"),
                     self._import("typing", "Callable"),
                     self._import_message(method.output_type),
+                    "" if is_abstract else " = None",
                 )
 
             scl_method = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
@@ -652,17 +659,22 @@ class PkgWriter(object):
             )
             with self._indent():
                 self._write_comments(scl)
-                self.write_methods(service, is_abstract=True, scl_prefix=scl)
+                self.write_methods(
+                    service, class_name, is_abstract=True, scl_prefix=scl
+                )
 
             # The stub client
-            l("class {}({}):", service.name + "_Stub", class_name)
+            stub_class_name = service.name + "_Stub"
+            l("class {}({}):", stub_class_name, class_name)
             with self._indent():
                 self._write_comments(scl)
                 l(
                     "def __init__(self, rpc_channel: {}) -> None: ...",
                     self._import("google.protobuf.service", "RpcChannel"),
                 )
-                self.write_methods(service, is_abstract=False, scl_prefix=scl)
+                self.write_methods(
+                    service, stub_class_name, is_abstract=False, scl_prefix=scl
+                )
 
     def _import_casttype(self, casttype: str) -> str:
         split = casttype.split(".")

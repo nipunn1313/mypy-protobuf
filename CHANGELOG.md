@@ -4,8 +4,11 @@
 - Reorder/reference enum classes to avoid forward references.
 - Support `*_FIELD_NUMBER` for extensions
 - Bump types-protobuf dependency to 3.19
+- Support DESCRIPTOR: ServiceDescriptor in py generic services
+- More accurately represent method names  in py generic services (done -> callback, self -> inst)
 - Internal: Get tests to pass on pure-python protobuf impl (minor semantic differences)
 - Internal: Bump pyright in testing to 1.1.206
+- Internal: Use stubtest to validate generated stubs match generated runtime
 
 ## 3.1.0
 
