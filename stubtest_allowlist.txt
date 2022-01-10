@@ -1,0 +1,55 @@
+# Generated pb2 __init__ methods diverge because the runtime
+# has *args, **kwargs - and we're trying to do better
+testproto\..*_pb2\..*\.__init__$
+
+# stubtest is confused by these edge cases
+testproto.test_pb2.PythonReservedKeywords.*
+testproto.test_pb2.None
+
+# Enum variants - stubtest doesn't like int varying from a NewType
+testproto.test_pb2.FOO
+testproto.test_pb2.BAR
+testproto.test_pb2.Simple1.INNER1
+testproto.test_pb2.Simple1.INNER2
+testproto.test_pb2.Name
+testproto.test_pb2.Value
+testproto.test_pb2.items
+testproto.test_pb2.keys
+testproto.test_pb2.values
+testproto.test3_pb2.SimpleProto3.INNER1
+testproto.test3_pb2.SimpleProto3.INNER2
+testproto.reexport_pb2.SimpleProto3.INNER1
+testproto.reexport_pb2.SimpleProto3.INNER2
+testproto.reexport_pb2.UNKNOWN
+testproto.reexport_pb2.FOO3
+testproto.reexport_pb2.BAR3
+testproto.test3_pb2.UNKNOWN
+testproto.test3_pb2.FOO3
+testproto.test3_pb2.BAR3
+testproto.nested.nested_pb2.AnotherNested.ONE
+testproto.nested.nested_pb2.AnotherNested.TWO
+testproto.readme_enum_pb2.HELLO
+testproto.readme_enum_pb2.WORLD
+testproto.nested.nested_pb2.AnotherNested.NestedMessage.UNDEFINED
+testproto.nested.nested_pb2.AnotherNested.NestedMessage.NESTED_ENUM1
+testproto.nested.nested_pb2.AnotherNested.NestedMessage.NESTED_ENUM2
+testproto.nested.nested_pb2.AnotherNested.INVALID
+
+# Our enum types and helper types aren't there at runtime (Dynamic EnumTypeWrapper at runtime)
+# .*\..*EnumTypeWrapper$
+testproto.test_pb2.Simple1._?InnerEnum(EnumTypeWrapper)?
+testproto.test_pb2._?OuterEnum(EnumTypeWrapper)?
+testproto.test_pb2._?NamingConflicts(EnumTypeWrapper)?
+testproto.test3_pb2.SimpleProto3._?InnerEnum(EnumTypeWrapper)?
+testproto.test3_pb2._?OuterEnum(EnumTypeWrapper)?
+testproto.reexport_pb2.SimpleProto3._?InnerEnum(EnumTypeWrapper)?
+testproto.reexport_pb2._?OuterEnum(EnumTypeWrapper)?
+testproto.readme_enum_pb2._?MyEnum(EnumTypeWrapper)?
+testproto.nested.nested_pb2.AnotherNested._?NestedEnum(EnumTypeWrapper)?
+testproto.nested.nested_pb2.AnotherNested.NestedMessage._?NestedEnum2(EnumTypeWrapper)?
+
+# Some issues with our service stubs for now
+testproto.test_pb2.ATestService.*
+testproto.grpc.dummy_pb2_grpc.DummyServiceServicer.*
+testproto.grpc.dummy_pb2_grpc.DummyService
+testproto.grpc.import_pb2_grpc.SimpleService
