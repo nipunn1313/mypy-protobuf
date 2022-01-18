@@ -1,6 +1,8 @@
 # Requirements to run unit tests. Tests import from
 # generated code.
 protobuf>=3.19.1
+# Fix is up in https://github.com/protocolbuffers/protobuf/pull/9418
+# git+https://github.com/nipunn1313/protobuf@service_reflection#subdirectory=python  --install-option='--cpp_implementation'
 pytest==6.2.5
 grpc-stubs==1.24.7
 grpcio-tools==1.43.0
