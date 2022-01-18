@@ -750,7 +750,11 @@ class PkgWriter(object):
             l("@{}", self._import("abc", "abstractmethod"))
             l("def {}(self,", method.name)
             with self._indent():
-                l("request: {},", self._input_type(method))
+                input_name = (
+                    "request_iterator" if method.client_streaming else "request"
+                )
+                input_type = self._input_type(method)
+                l(f"{input_name}: {input_type},")
                 l("context: {},", self._import("grpc", "ServicerContext"))
             l(
                 ") -> {}:{}",

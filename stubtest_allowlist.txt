@@ -50,6 +50,7 @@ testproto.nested.nested_pb2.AnotherNested.NestedMessage._?NestedEnum2(EnumTypeWr
 
 # Some issues with our service stubs for now
 testproto.test_pb2.ATestService.*
-testproto.grpc.dummy_pb2_grpc.DummyServiceServicer.*
+
+# Part of an "EXPERIMENTAL API" according to comment. Not documented.
 testproto.grpc.dummy_pb2_grpc.DummyService
 testproto.grpc.import_pb2_grpc.SimpleService
