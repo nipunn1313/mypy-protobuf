@@ -23,7 +23,7 @@ jobs:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
-          version: '3.19.1'
+          version: '3.19.3'
       - uses: actions/checkout@v2
       - name: Cache pyenv
         uses: actions/cache@v2
@@ -101,7 +101,7 @@ jobs:
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
-          version: '3.19.1'
+          version: '3.19.3'
       - name: Run Protoc
         run: |
           pip3 install -e .
