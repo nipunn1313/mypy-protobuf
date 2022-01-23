@@ -1,8 +1,9 @@
 ## Upcoming
 
+- Drop support for Python 3.6 [EOL]
+
 ## 3.2.0
 
-- Drop support for Python 3.6 [EOL]
 - Remove unnecessary `...` in generated files.
 - Reorder/reference enum classes to avoid forward references.
 - Support `*_FIELD_NUMBER` for extensions
