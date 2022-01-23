@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 3.2.0
+
 - Drop support for Python 3.6 [EOL]
 - Remove unnecessary `...` in generated files.
 - Reorder/reference enum classes to avoid forward references.
