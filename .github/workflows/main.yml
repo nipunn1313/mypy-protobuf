@@ -20,14 +20,16 @@ jobs:
             3.10.1,
         ]
     steps:
-      - name: Read protobuf version
-        run: echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
-        id: protobuf_version
+      - uses: actions/checkout@v2
+      - name: Read version numbers
+        run: |
+          echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
+          echo ::set-output name=PYRIGHT_VERSION::$(grep '"pyright"' .github/package.json | cut -d\" -f4)
+        id: read_versions
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
-          version: "${{ steps.protobuf_version.outputs.PROTOBUF_VERSION }}"
-      - uses: actions/checkout@v2
+          version: "${{ steps.read_versions.outputs.PROTOBUF_VERSION }}"
       - name: Cache pyenv
         uses: actions/cache@v2
         with:
@@ -79,10 +81,11 @@ jobs:
           eval "$(pyenv init --path)"
           eval "$(pyenv virtualenv-init -)"
           ./run_test.sh
+
       - name: Run Pyright
         uses: jakebailey/pyright-action@v1
         with:
-          version: 1.1.206
+          version: "${{ steps.read_versions.outputs.PYRIGHT_VERSION }}"
 
   black:
     name: Black formatting
@@ -101,13 +104,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: Read protobuf version
+      - name: Read versions
         run: echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
-        id: protobuf_version
+        id: read_versions
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
-          version: "${{ steps.protobuf_version.outputs.PROTOBUF_VERSION }}"
+          version: "${{ steps.read_versions.outputs.PROTOBUF_VERSION }}"
       - name: Run Protoc
         run: |
           pip3 install -e .
