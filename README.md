@@ -1,12 +1,13 @@
 mypy-protobuf: Generate mypy stub files from protobuf specs
 
-[![CI](https://github.com/dropbox/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/dropbox/mypy-protobuf/actions?query=branch%3Amain)
+[![CI](https://github.com/nipunn1313/mypy-protobuf/workflows/CI/badge.svg)](https://github.com/nipunn1313/mypy-protobuf/actions?query=branch%3Amain)
 [![pypi](https://img.shields.io/pypi/v/mypy-protobuf?logo=Pypi)](https://pypi.org/project/mypy-protobuf/)
-[![license](https://img.shields.io/github/license/dropbox/mypy-protobuf)](https://github.com/dropbox/mypy-protobuf/blob/main/LICENSE)
+[![license](https://img.shields.io/github/license/nipunn1313/mypy-protobuf)](https://github.com/nipunn1313/mypy-protobuf/blob/main/LICENSE)
 ===========================================================
 
-Starting in mypy-protobuf 3.0.0, only python3 targeting is supported
 2.10 is the last version of mypy-protobuf which supports targeting python 2.7.
+
+Built originally with love at [Dropbox](https://github.com/dropbox)
 
 See [Changelog](CHANGELOG.md) for recent changes.
 
@@ -40,10 +41,10 @@ pip3 install mypy-protobuf
 To install unreleased
 ```
 REV=main  # or whichever unreleased git rev you'd like
-pip3 install git+https://github.com/dropbox/mypy-protobuf.git@$REV
+pip3 install git+https://github.com/nipunn1313/mypy-protobuf.git@$REV
 
 # For older (1.x) versions of mypy protobuf - you may need
-pip3 install git+https://github.com/dropbox/mypy-protobuf.git@$REV#subdirectory=python
+pip3 install git+https://github.com/nipunn1313/mypy-protobuf.git@$REV#subdirectory=python
 ```
 
 In order to run mypy on the generated code, you'll need to install
@@ -233,7 +234,6 @@ black .
 
 ## Contributors
 
-### Dropboxers
 - [@nipunn1313](https://github.com/nipunn1313)
 - [@dzbarsky](https://github.com/dzbarsky)
 - [@gvanrossum](https://github.com/gvanrossum)
@@ -241,8 +241,6 @@ black .
 - [@msullivan](https://github.com/msullivan)
 - [@bradenaw](https://github.com/bradenaw)
 - [@ilevkivskyi](https://github.com/ilevkivskyi)
-
-### Others
 - [@Ketouem](https://github.com/Ketouem)
 - [@nmiculinic](https://github.com/nmiculinic)
 - [@onto](https://github.com/onto)
@@ -276,6 +274,3 @@ Licence etc.
 
 1. License: Apache 2.0.
 2. Copyright attribution: Copyright (c) 2017 Dropbox, Inc.
-3. External contributions to the project should be subject to
-   Dropbox's Contributor License Agreement (CLA):
-   https://opensource.dropbox.com/cla/

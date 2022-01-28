@@ -39,7 +39,7 @@ isort:skip_file
 \"\"\"
 """
 
-# See https://github.com/dropbox/mypy-protobuf/issues/73 for details
+# See https://github.com/nipunn1313/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
     "False",
     "None",
@@ -471,7 +471,7 @@ class PkgWriter(object):
                     ]
                     if len(constructor_fields) > 0:
                         # Only positional args allowed
-                        # See https://github.com/dropbox/mypy-protobuf/issues/71
+                        # See https://github.com/nipunn1313/mypy-protobuf/issues/71
                         l("*,")
                     for field in constructor_fields:
                         field_type = self.python_type(field, generic_container=True)
