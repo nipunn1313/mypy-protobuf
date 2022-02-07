@@ -21,7 +21,7 @@ Earlier releases might work, but aren't tested
 Earlier releases might work, but aren't tested
 - [mypy >= v0.931](https://pypi.org/project/mypy) or [pyright >= 1.1.206](https://github.com/microsoft/pyright)
 - [python-protobuf >= 3.19.3](https://pypi.org/project/protobuf/) - matching protoc release
-- [types-protobuf >= 3.19.5](https://pypi.org/project/types-protobuf/) - for stubs from the google.protobuf library
+- [types-protobuf >= 3.19.10](https://pypi.org/project/types-protobuf/) - for stubs from the google.protobuf library
 
 ### To run typecheckers on code generated with grpc plugin - you'll additionally need
 Earlier releases might work, but aren't tested

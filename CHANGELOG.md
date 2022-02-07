@@ -3,6 +3,7 @@
 - Drop support for Python 3.6 [EOL]
 - Moved from dropbox/mypy-protobuf to nipunn1313/mypy-protobuf
   - Nipunn is the primary maintainer and plans to continue maintenance!
+- Bump to types-protobuf 3.19.10
 
 ## 3.2.0
 
