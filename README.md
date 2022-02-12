@@ -99,7 +99,7 @@ Calling code may be typed as follows.
 In python >= 3.7
 ```python
 # May need [PEP 563](https://www.python.org/dev/peps/pep-0563/) to postpone evaluation of annotations
-# from __future__ import annotations  # Not needed with python>=3.10 or protobuf>=3.20.0
+# from __future__ import annotations  # Not needed with python>=3.11 or protobuf>=3.20.0
 def f(x: MyEnum.ValueType):
     print(x)
 f(MyEnum.Value("HELLO"))
