@@ -3,10 +3,10 @@ test_negative/negative_3.8.py: error: "DummyReply" has no attribute "not_exists"
 test_negative/negative_3.8.py: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
 test_negative/negative_3.8.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
 test_negative/negative_3.8.py: error: "CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
-test_negative/negative_3.8.py: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterable[DummyRequest]"  [arg-type]
+test_negative/negative_3.8.py: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative_3.8.py: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
-test_negative/negative_3.8.py: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterable[DummyRequest]"  [arg-type]
-test_negative/negative_3.8.py: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterable[DummyRequest]"  [arg-type]
+test_negative/negative_3.8.py: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative_3.8.py: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative_3.8.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
 test_negative/negative_3.8.py: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
 test_negative/negative_3.8.py: note: This violates the Liskov substitution principle
