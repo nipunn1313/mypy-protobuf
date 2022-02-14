@@ -1,6 +1,8 @@
 ## Upcoming
 
 - Drop support for Python 3.6 [EOL]
+- Bump to grpc-stubs 1.24.7
+- Require protobuf 3.19.4
 - Moved from dropbox/mypy-protobuf to nipunn1313/mypy-protobuf
   - Nipunn is the primary maintainer and plans to continue maintenance!
 
@@ -10,7 +12,7 @@
 - Reorder/reference enum classes to avoid forward references.
 - Support `*_FIELD_NUMBER` for extensions
 - Bump types-protobuf dependency to 3.19
-- Require protobuf 3.19.4
+- Require protobuf 3.19.3
 - Support DESCRIPTOR: ServiceDescriptor in py generic services
 - More accurately represent method names in py generic services (done -> callback, self -> inst)
 - More accurately represent method names in grpc services (`request` -> `request_iterator`)

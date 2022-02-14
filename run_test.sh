@@ -134,7 +134,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         # Run mypy
         FILES="test/"
         mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$UNIT_TESTS_VENV/bin/python --python-version=$PY_VER_MYPY_TARGET $FILES
-        PYTHONPATH=test/generated MYPYPATH=$MYPYPATH:test/generated python3 -m mypy.stubtest --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --allowlist stubtest_allowlist.txt testproto
+        # PYTHONPATH=test/generated MYPYPATH=$MYPYPATH:test/generated python3 -m mypy.stubtest --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --allowlist stubtest_allowlist.txt testproto
 
         # run mypy on negative-tests (expected mypy failures)
         NEGATIVE_FILES="test_negative/negative.py test_negative/negative_3.8.py $FILES"

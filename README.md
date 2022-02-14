@@ -27,7 +27,7 @@ Earlier releases might work, but aren't tested
 Earlier releases might work, but aren't tested
 - [grpcio>=1.40.0](https://pypi.org/project/grpcio/)
 - [grpcio-tools>=1.40.0](https://pypi.org/project/grpcio-tools/)
-- [grpc-stubs>=1.24.7](https://pypi.org/project/grpc-stubs/)
+- [grpc-stubs>=1.24.8](https://pypi.org/project/grpc-stubs/)
 
 Other configurations may work, but are not continuously tested currently.
 We would be open to expanding this list - file an issue on the issue tracker.
