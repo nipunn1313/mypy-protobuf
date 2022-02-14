@@ -268,6 +268,7 @@ black .
 - [@tarmath](https://github.com/tarmath)
 - [@jaredkhan](https://github.com/jaredkhan)
 - [@sodul](https://github.com/sodul)
+- [@miaachan](https://github.com/miaachan)
 
 Licence etc.
 ------------
