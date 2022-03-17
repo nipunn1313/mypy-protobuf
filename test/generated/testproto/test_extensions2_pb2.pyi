@@ -7,7 +7,6 @@ import google.protobuf.descriptor
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
 import testproto.test_pb2
-import typing
 import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
@@ -21,7 +20,7 @@ class SeparateFileExtension(google.protobuf.message.Message):
 
     def __init__(self,
         *,
-        flag: typing.Optional[builtins.bool] = ...,
+        flag: builtins.bool | None = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["flag",b"flag"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["flag",b"flag"]) -> None: ...

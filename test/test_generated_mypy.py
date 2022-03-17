@@ -56,7 +56,6 @@ from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
 from typing import (
     Any,
     NewType,
-    Optional,
     Generator,
     Tuple,
     Type,

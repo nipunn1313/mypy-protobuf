@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""Protoc Plugin to generate mypy stubs. Loosely based on @zbarsky's go implementation"""
+"""Protoc Plugin to generate mypy stubs."""
+from __future__ import annotations
 import os
 
 import sys
@@ -13,7 +14,6 @@ from typing import (
     Iterable,
     Iterator,
     List,
-    Optional,
     Set,
     Sequence,
     Tuple,
@@ -159,7 +159,7 @@ class PkgWriter(object):
         self.imports: Set[str] = set()
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
-        self.from_imports: Dict[str, Set[Tuple[str, Optional[str]]]] = defaultdict(set)
+        self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
 
         # Comments
         self.source_code_info_by_scl = {
@@ -168,7 +168,7 @@ class PkgWriter(object):
 
     def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
-        eg. self._import("typing", "Optional") -> "Optional"
+        eg. self._import("typing", "Literal") -> "Literal"
         """
         imp = path.replace("/", ".")
         if self.readable_stubs:
@@ -484,8 +484,7 @@ class PkgWriter(object):
                         ):
                             l(f"{field.name}: {field_type} = ...,")
                         else:
-                            opt = self._import("typing", "Optional")
-                            l(f"{field.name}: {opt}[{field_type}] = ...,")
+                            l(f"{field.name}: {field_type} | None = ...,")
                     l(") -> None: ...")
 
                 self.write_stringly_typed_fields(desc)
@@ -551,11 +550,10 @@ class PkgWriter(object):
             if len(wo_fields) > 1:
                 l("@{}", self._import("typing", "overload"))
             l(
-                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}[{}]]: ...",
+                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
                 self._import("typing_extensions", "Literal"),
                 # Accepts both str and bytes
                 f'"{wo_field}",b"{wo_field}"',
-                self._import("typing", "Optional"),
                 self._import("typing_extensions", "Literal"),
                 # Returns `str`
                 ",".join(f'"{m}"' for m in members),
@@ -618,8 +616,7 @@ class PkgWriter(object):
                 )
                 l("request: {},", self._import_message(method.input_type))
                 l(
-                    "callback: {}[{}[[{}], None]]{},",
-                    self._import("typing", "Optional"),
+                    "callback: {}[[{}], None] | None{},",
                     self._import("typing", "Callable"),
                     self._import_message(method.output_type),
                     "" if is_abstract else " = None",
