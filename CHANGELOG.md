@@ -4,6 +4,7 @@
 - Bump to grpc-stubs 1.24.7
 - Require protobuf 3.19.4
 - Bump support to mypy 0.941
+- Use PEP 604 Union syntax `X | None` rather than `Optional[X]`
 - Moved from dropbox/mypy-protobuf to nipunn1313/mypy-protobuf
   - Nipunn is the primary maintainer and plans to continue maintenance!
 
