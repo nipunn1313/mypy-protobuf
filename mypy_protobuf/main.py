@@ -338,7 +338,7 @@ class PkgWriter(object):
 
             l(f"class {enum_helper_class}:")
             with self._indent():
-                l(G
+                l(
                     "ValueType = {}('ValueType', {})",
                     self._import("typing", "NewType"),
                     self._builtin("int"),
