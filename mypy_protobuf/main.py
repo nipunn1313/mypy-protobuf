@@ -86,6 +86,11 @@ PROTO_ENUM_RESERVED = {
     "items",
 }
 
+if sys.version_info > (3, 9):
+    typing_package_name = "typing"
+else:
+    typing_package_name = "typing_extensions"
+
 
 def _mangle_global_identifier(name: str) -> str:
     """
@@ -333,13 +338,13 @@ class PkgWriter(object):
 
             l(f"class {enum_helper_class}:")
             with self._indent():
-                l(
+                l(G
                     "ValueType = {}('ValueType', {})",
                     self._import("typing", "NewType"),
                     self._builtin("int"),
                 )
                 # Alias to the classic shorter definition "V"
-                l("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
+                l("V: {} = ValueType", self._import(typing_package_name, "TypeAlias"))
             l(
                 "class {}({}[{}], {}):",
                 etw_helper_class,
@@ -535,14 +540,14 @@ class PkgWriter(object):
         if hf_fields:
             l(
                 "def HasField(self, field_name: {}[{}]) -> {}: ...",
-                self._import("typing_extensions", "Literal"),
+                self._import(typing_package_name, "Literal"),
                 hf_fields_text,
                 self._builtin("bool"),
             )
         if cf_fields:
             l(
                 "def ClearField(self, field_name: {}[{}]) -> None: ...",
-                self._import("typing_extensions", "Literal"),
+                self._import(typing_package_name, "Literal"),
                 cf_fields_text,
             )
 
@@ -551,10 +556,10 @@ class PkgWriter(object):
                 l("@{}", self._import("typing", "overload"))
             l(
                 "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
-                self._import("typing_extensions", "Literal"),
+                self._import(typing_package_name, "Literal"),
                 # Accepts both str and bytes
                 f'"{wo_field}",b"{wo_field}"',
-                self._import("typing_extensions", "Literal"),
+                self._import(typing_package_name, "Literal"),
                 # Returns `str`
                 ",".join(f'"{m}"' for m in members),
             )
