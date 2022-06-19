@@ -21,7 +21,7 @@ class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     FOO3: _OuterEnum.ValueType  # 1
     BAR3: _OuterEnum.ValueType  # 2
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
-    pass
+    ...
 
 UNKNOWN: OuterEnum.ValueType  # 0
 FOO3: OuterEnum.ValueType  # 1
@@ -32,10 +32,10 @@ global___OuterEnum = OuterEnum
 class OuterMessage3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     A_STRING_FIELD_NUMBER: builtins.int
-    a_string: typing.Text
+    a_string: builtins.str
     def __init__(self,
         *,
-        a_string: typing.Text = ...,
+        a_string: builtins.str = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> None: ...
 global___OuterMessage3 = OuterMessage3
@@ -50,7 +50,7 @@ class SimpleProto3(google.protobuf.message.Message):
         INNER1: SimpleProto3._InnerEnum.ValueType  # 0
         INNER2: SimpleProto3._InnerEnum.ValueType  # 1
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
-        pass
+        ...
 
     INNER1: SimpleProto3.InnerEnum.ValueType  # 0
     INNER2: SimpleProto3.InnerEnum.ValueType  # 1
@@ -60,11 +60,11 @@ class SimpleProto3(google.protobuf.message.Message):
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
-        value: typing.Text
+        value: builtins.str
         def __init__(self,
             *,
             key: builtins.int = ...,
-            value: typing.Text = ...,
+            value: builtins.str = ...,
             ) -> None: ...
         def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
 
@@ -101,21 +101,21 @@ class SimpleProto3(google.protobuf.message.Message):
     MAP_SCALAR_FIELD_NUMBER: builtins.int
     MAP_MESSAGE_FIELD_NUMBER: builtins.int
     AN_OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-    a_string: typing.Text
+    a_string: builtins.str
     @property
-    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     a_outer_enum: global___OuterEnum.ValueType
     @property
     def outer_message(self) -> global___OuterMessage3: ...
     inner_enum: global___SimpleProto3.InnerEnum.ValueType
-    a_oneof_1: typing.Text
-    a_oneof_2: typing.Text
+    a_oneof_1: builtins.str
+    a_oneof_2: builtins.str
     @property
     def outer_message_in_oneof(self) -> global___OuterMessage3: ...
     outer_enum_in_oneof: global___OuterEnum.ValueType
     inner_enum_in_oneof: global___SimpleProto3.InnerEnum.ValueType
-    b_oneof_1: typing.Text
-    b_oneof_2: typing.Text
+    b_oneof_1: builtins.str
+    b_oneof_2: builtins.str
     @property
     def bool(self) -> global___OuterMessage3: ...
     OuterEnum: global___OuterEnum.ValueType
@@ -124,32 +124,32 @@ class SimpleProto3(google.protobuf.message.Message):
     @property
     def OuterMessage3(self) -> global___OuterMessage3: ...
     @property
-    def map_scalar(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, typing.Text]:
+    def map_scalar(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.str]:
         """Test generation of map"""
-        pass
+        ...
     @property
     def map_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___OuterMessage3]: ...
-    an_optional_string: typing.Text
+    an_optional_string: builtins.str
     def __init__(self,
         *,
-        a_string: typing.Text = ...,
-        a_repeated_string: typing.Iterable[typing.Text] | None = ...,
+        a_string: builtins.str = ...,
+        a_repeated_string: typing.Iterable[builtins.str] | None = ...,
         a_outer_enum: global___OuterEnum.ValueType = ...,
         outer_message: global___OuterMessage3 | None = ...,
         inner_enum: global___SimpleProto3.InnerEnum.ValueType = ...,
-        a_oneof_1: typing.Text = ...,
-        a_oneof_2: typing.Text = ...,
+        a_oneof_1: builtins.str = ...,
+        a_oneof_2: builtins.str = ...,
         outer_message_in_oneof: global___OuterMessage3 | None = ...,
         outer_enum_in_oneof: global___OuterEnum.ValueType = ...,
         inner_enum_in_oneof: global___SimpleProto3.InnerEnum.ValueType = ...,
-        b_oneof_1: typing.Text = ...,
-        b_oneof_2: typing.Text = ...,
+        b_oneof_1: builtins.str = ...,
+        b_oneof_2: builtins.str = ...,
         bool: global___OuterMessage3 | None = ...,
         OuterEnum: global___OuterEnum.ValueType = ...,
         OuterMessage3: global___OuterMessage3 | None = ...,
-        map_scalar: typing.Mapping[builtins.int, typing.Text] | None = ...,
+        map_scalar: typing.Mapping[builtins.int, builtins.str] | None = ...,
         map_message: typing.Mapping[builtins.int, global___OuterMessage3] | None = ...,
-        an_optional_string: typing.Text | None = ...,
+        an_optional_string: builtins.str | None = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["OuterMessage3",b"OuterMessage3","_an_optional_string",b"_an_optional_string","a_oneof",b"a_oneof","a_oneof_1",b"a_oneof_1","a_oneof_2",b"a_oneof_2","an_optional_string",b"an_optional_string","b_oneof",b"b_oneof","b_oneof_1",b"b_oneof_1","b_oneof_2",b"b_oneof_2","bool",b"bool","inner_enum_in_oneof",b"inner_enum_in_oneof","outer_enum_in_oneof",b"outer_enum_in_oneof","outer_message",b"outer_message","outer_message_in_oneof",b"outer_message_in_oneof"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["OuterEnum",b"OuterEnum","OuterMessage3",b"OuterMessage3","_an_optional_string",b"_an_optional_string","a_oneof",b"a_oneof","a_oneof_1",b"a_oneof_1","a_oneof_2",b"a_oneof_2","a_outer_enum",b"a_outer_enum","a_repeated_string",b"a_repeated_string","a_string",b"a_string","an_optional_string",b"an_optional_string","b_oneof",b"b_oneof","b_oneof_1",b"b_oneof_1","b_oneof_2",b"b_oneof_2","bool",b"bool","inner_enum",b"inner_enum","inner_enum_in_oneof",b"inner_enum_in_oneof","map_message",b"map_message","map_scalar",b"map_scalar","outer_enum_in_oneof",b"outer_enum_in_oneof","outer_message",b"outer_message","outer_message_in_oneof",b"outer_message_in_oneof"]) -> None: ...

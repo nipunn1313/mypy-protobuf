@@ -34,7 +34,7 @@ class AnotherNested(google.protobuf.message.Message):
         ONE: AnotherNested._NestedEnum.ValueType  # 1
         TWO: AnotherNested._NestedEnum.ValueType  # 2
     class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper):
-        pass
+        ...
 
     INVALID: AnotherNested.NestedEnum.ValueType  # 0
     ONE: AnotherNested.NestedEnum.ValueType  # 1
@@ -51,7 +51,7 @@ class AnotherNested(google.protobuf.message.Message):
             NESTED_ENUM1: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 1
             NESTED_ENUM2: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 2
         class NestedEnum2(_NestedEnum2, metaclass=_NestedEnum2EnumTypeWrapper):
-            pass
+            ...
 
         UNDEFINED: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 0
         NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 1
@@ -61,13 +61,13 @@ class AnotherNested(google.protobuf.message.Message):
         B_FIELD_NUMBER: builtins.int
         NE_FIELD_NUMBER: builtins.int
         NE2_FIELD_NUMBER: builtins.int
-        s: typing.Text
+        s: builtins.str
         b: builtins.bool
         ne: global___AnotherNested.NestedEnum.ValueType
         ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType
         def __init__(self,
             *,
-            s: typing.Text = ...,
+            s: builtins.str = ...,
             b: builtins.bool = ...,
             ne: global___AnotherNested.NestedEnum.ValueType = ...,
             ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,

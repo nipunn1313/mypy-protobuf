@@ -34,7 +34,7 @@ class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     """Outer Enum"""
-    pass
+    ...
 
 FOO: OuterEnum.ValueType  # 1
 """FOO"""
@@ -52,7 +52,7 @@ class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
 class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
     """Naming conflicts!"""
-    pass
+    ...
 
 Name: NamingConflicts.ValueType  # 1
 Value: NamingConflicts.ValueType  # 2
@@ -83,7 +83,7 @@ class Simple1(google.protobuf.message.Message):
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         """Inner Enum"""
-        pass
+        ...
 
     INNER1: Simple1.InnerEnum.ValueType  # 1
     """INNER1"""
@@ -102,11 +102,11 @@ class Simple1(google.protobuf.message.Message):
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
-        value: typing.Text
+        value: builtins.str
         def __init__(self,
             *,
             key: builtins.int | None = ...,
-            value: typing.Text | None = ...,
+            value: builtins.str | None = ...,
             ) -> None: ...
         def HasField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
@@ -134,9 +134,9 @@ class Simple1(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     EMAIL_FIELD_NUMBER: builtins.int
     EMAIL_BY_UID_FIELD_NUMBER: builtins.int
-    a_string: typing.Text
+    a_string: builtins.str
     @property
-    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     a_boolean: builtins.bool
     a_uint32: builtins.int
     a_enum: global___OuterEnum.ValueType
@@ -157,8 +157,8 @@ class Simple1(google.protobuf.message.Message):
     nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType
     @property
     def nested_message(self) -> testproto.nested.nested_pb2.AnotherNested.NestedMessage: ...
-    a_oneof_1: typing.Text
-    a_oneof_2: typing.Text
+    a_oneof_1: builtins.str
+    a_oneof_2: builtins.str
     @property
     def outer_message_in_oneof(self) -> global___Simple2: ...
     outer_enum_in_oneof: global___OuterEnum.ValueType
@@ -169,8 +169,8 @@ class Simple1(google.protobuf.message.Message):
     def email_by_uid(self) -> google.protobuf.internal.containers.ScalarMap[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]: ...
     def __init__(self,
         *,
-        a_string: typing.Text | None = ...,
-        a_repeated_string: typing.Iterable[typing.Text] | None = ...,
+        a_string: builtins.str | None = ...,
+        a_repeated_string: typing.Iterable[builtins.str] | None = ...,
         a_boolean: builtins.bool | None = ...,
         a_uint32: builtins.int | None = ...,
         a_enum: global___OuterEnum.ValueType | None = ...,
@@ -184,8 +184,8 @@ class Simple1(google.protobuf.message.Message):
         no_package: testproto.nopackage_pb2.NoPackage | None = ...,
         nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType | None = ...,
         nested_message: testproto.nested.nested_pb2.AnotherNested.NestedMessage | None = ...,
-        a_oneof_1: typing.Text | None = ...,
-        a_oneof_2: typing.Text | None = ...,
+        a_oneof_1: builtins.str | None = ...,
+        a_oneof_2: builtins.str | None = ...,
         outer_message_in_oneof: global___Simple2 | None = ...,
         outer_enum_in_oneof: global___OuterEnum.ValueType | None = ...,
         inner_enum_in_oneof: global___Simple1.InnerEnum.ValueType | None = ...,
@@ -201,10 +201,10 @@ global___Simple1 = Simple1
 class Simple2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     A_STRING_FIELD_NUMBER: builtins.int
-    a_string: typing.Text
+    a_string: builtins.str
     def __init__(self,
         *,
-        a_string: typing.Text | None = ...,
+        a_string: builtins.str | None = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> None: ...
@@ -213,14 +213,14 @@ global___Simple2 = Simple2
 class Extensions1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     EXT1_STRING_FIELD_NUMBER: builtins.int
-    ext1_string: typing.Text
+    ext1_string: builtins.str
     EXT_FIELD_NUMBER: builtins.int
     ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions1]
     """ext"""
 
     def __init__(self,
         *,
-        ext1_string: typing.Text | None = ...,
+        ext1_string: builtins.str | None = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ext1_string",b"ext1_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["ext1_string",b"ext1_string"]) -> None: ...
@@ -263,7 +263,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
     class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
-        pass
+        ...
 
     valid_in_finally: PythonReservedKeywords._r_finally.ValueType  # 2
 
@@ -312,7 +312,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     @property
     def none(self) -> global____r_None:
         """Test unreserved identifiers w/ reserved message names"""
-        pass
+        ...
     valid: global___PythonReservedKeywords._r_finally.ValueType
     def __init__(self,
         *,
@@ -359,7 +359,7 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
         callback: typing.Callable[[global____r_None], None] | None,
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
-        pass
+        ...
     @abc.abstractmethod
     def valid_method_name2(
         inst: PythonReservedKeywordsService,
@@ -368,7 +368,7 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
         callback: typing.Callable[[global___PythonReservedKeywords._r_lambda], None] | None,
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
-        pass
+        ...
 class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     """Method name is reserved"""
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
@@ -380,7 +380,7 @@ class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
         callback: typing.Callable[[global____r_None], None] | None = None,
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
-        pass
+        ...
     def valid_method_name2(
         inst: PythonReservedKeywordsService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
@@ -388,7 +388,7 @@ class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
         callback: typing.Callable[[global___PythonReservedKeywords._r_lambda], None] | None = None,
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
-        pass
+        ...
 class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod

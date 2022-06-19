@@ -364,7 +364,7 @@ class PkgWriter(object):
             l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
             with self._indent():
                 self._write_comments(scl)
-                l("pass")
+                l("...")
             l("")
 
             self.write_enum_values(
@@ -453,7 +453,7 @@ class PkgWriter(object):
                         if self._has_comments(scl_field):
                             with self._indent():
                                 self._write_comments(scl_field)
-                                l("pass")
+                                l("...")
 
                 self.write_extensions(
                     desc.extension, scl + [d.DescriptorProto.EXTENSION_FIELD_NUMBER]
@@ -603,7 +603,7 @@ class PkgWriter(object):
             if m.name not in PYTHON_RESERVED
         ]
         if not methods:
-            l("pass")
+            l("...")
         for i, method in methods:
             if is_abstract:
                 l("@{}", self._import("abc", "abstractmethod"))
@@ -632,7 +632,7 @@ class PkgWriter(object):
             if self._has_comments(scl_method):
                 with self._indent():
                     self._write_comments(scl_method)
-                    l("pass")
+                    l("...")
 
     def write_services(
         self,
@@ -739,7 +739,7 @@ class PkgWriter(object):
             if m.name not in PYTHON_RESERVED
         ]
         if not methods:
-            l("pass")
+            l("...")
             l("")
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
@@ -761,7 +761,7 @@ class PkgWriter(object):
             if self._has_comments(scl):
                 with self._indent():
                     self._write_comments(scl)
-                    l("pass")
+                    l("...")
             l("")
 
     def write_grpc_stub_methods(
@@ -774,7 +774,7 @@ class PkgWriter(object):
             if m.name not in PYTHON_RESERVED
         ]
         if not methods:
-            l("pass")
+            l("...")
             l("")
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
@@ -855,7 +855,7 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_SFIXED32: lambda: self._builtin("int"),
             d.FieldDescriptorProto.TYPE_SINT32: lambda: self._builtin("int"),
             d.FieldDescriptorProto.TYPE_BOOL: lambda: self._builtin("bool"),
-            d.FieldDescriptorProto.TYPE_STRING: lambda: self._import("typing", "Text"),
+            d.FieldDescriptorProto.TYPE_STRING: lambda: self._builtin("str"),
             d.FieldDescriptorProto.TYPE_BYTES: lambda: self._builtin("bytes"),
             d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(
                 field.type_name + ".ValueType"

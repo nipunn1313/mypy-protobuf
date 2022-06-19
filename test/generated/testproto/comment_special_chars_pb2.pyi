@@ -5,7 +5,6 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
 import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
@@ -23,39 +22,39 @@ class Test(google.protobuf.message.Message):
     I_FIELD_NUMBER: builtins.int
     J_FIELD_NUMBER: builtins.int
     K_FIELD_NUMBER: builtins.int
-    a: typing.Text
+    a: builtins.str
     """Ending with " """
 
-    b: typing.Text
+    b: builtins.str
     """Ending with "" """
 
-    c: typing.Text
+    c: builtins.str
     """Ending with \"\"\" """
 
-    d: typing.Text
+    d: builtins.str
     """Ending with \\ """
 
-    e: typing.Text
+    e: builtins.str
     """Containing bad escape: \\x"""
 
-    f: typing.Text
+    f: builtins.str
     """Containing \"\"\"" quadruple"""
 
-    g: typing.Text
+    g: builtins.str
     """Containing \"\"\""" quintuple"""
 
-    h: typing.Text
+    h: builtins.str
     """Containing \"\"\"\"\"\" sextuple"""
 
-    i: typing.Text
+    i: builtins.str
     """\"\"\" Multiple \"\"\" triples \"\"\" """
 
-    j: typing.Text
+    j: builtins.str
     """"quotes" can be a problem in comments.
     \"\"\"Triple quotes\"\"\" just as well
     """
 
-    k: typing.Text
+    k: builtins.str
     """\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
     "                                              "
     " Super Duper comments with surrounding edges! "
@@ -67,17 +66,17 @@ class Test(google.protobuf.message.Message):
 
     def __init__(self,
         *,
-        a: typing.Text = ...,
-        b: typing.Text = ...,
-        c: typing.Text = ...,
-        d: typing.Text = ...,
-        e: typing.Text = ...,
-        f: typing.Text = ...,
-        g: typing.Text = ...,
-        h: typing.Text = ...,
-        i: typing.Text = ...,
-        j: typing.Text = ...,
-        k: typing.Text = ...,
+        a: builtins.str = ...,
+        b: builtins.str = ...,
+        c: builtins.str = ...,
+        d: builtins.str = ...,
+        e: builtins.str = ...,
+        f: builtins.str = ...,
+        g: builtins.str = ...,
+        h: builtins.str = ...,
+        i: builtins.str = ...,
+        j: builtins.str = ...,
+        k: builtins.str = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["a",b"a","b",b"b","c",b"c","d",b"d","e",b"e","f",b"f","g",b"g","h",b"h","i",b"i","j",b"j","k",b"k"]) -> None: ...
 global___Test = Test

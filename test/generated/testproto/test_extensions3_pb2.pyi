@@ -9,7 +9,6 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
 import testproto.test3_pb2
-import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -26,11 +25,11 @@ ENUM_OPTION_FIELD_NUMBER: builtins.int
 REPEATED_ENUM_OPTION_FIELD_NUMBER: builtins.int
 MSG_OPTION_FIELD_NUMBER: builtins.int
 REPEATED_MSG_OPTION_FIELD_NUMBER: builtins.int
-test_field_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, typing.Text]
+test_field_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.str]
 
-scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text]
+scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, builtins.str]
 
-repeated_scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]]
+repeated_scalar_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]]
 
 enum_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterEnum.ValueType]
 

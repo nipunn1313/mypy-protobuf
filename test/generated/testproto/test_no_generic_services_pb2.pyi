@@ -5,7 +5,6 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
 import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
@@ -13,10 +12,10 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 class Simple3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     A_STRING_FIELD_NUMBER: builtins.int
-    a_string: typing.Text
+    a_string: builtins.str
     def __init__(self,
         *,
-        a_string: typing.Text | None = ...,
+        a_string: builtins.str | None = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> None: ...
