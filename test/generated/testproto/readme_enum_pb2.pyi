@@ -18,7 +18,7 @@ class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTyp
     HELLO: _MyEnum.ValueType  # 0
     WORLD: _MyEnum.ValueType  # 1
 class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
-    pass
+    ...
 
 HELLO: MyEnum.ValueType  # 0
 WORLD: MyEnum.ValueType  # 1

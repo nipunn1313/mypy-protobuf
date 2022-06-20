@@ -39,7 +39,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> testproto.grpc.dummy_pb2.DummyReply:
         """UnaryUnary"""
-        pass
+        ...
 
     @abc.abstractmethod
     def UnaryStream(self,
@@ -47,7 +47,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> typing.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
         """UnaryStream"""
-        pass
+        ...
 
     @abc.abstractmethod
     def StreamUnary(self,
@@ -55,7 +55,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> testproto.grpc.dummy_pb2.DummyReply:
         """StreamUnary"""
-        pass
+        ...
 
     @abc.abstractmethod
     def StreamStream(self,
@@ -63,7 +63,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> typing.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
         """StreamStream"""
-        pass
+        ...
 
 
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: grpc.Server) -> None: ...
