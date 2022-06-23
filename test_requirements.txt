@@ -3,5 +3,5 @@
 protobuf>=3.19.4
 pytest==7.1.2
 grpc-stubs==1.24.10
-grpcio-tools==1.46.3
+grpcio-tools==1.47.0
 types-protobuf>=3.19.12
