@@ -9,61 +9,63 @@ import typing
 
 class DummyServiceStub:
     """DummyService"""
+
     def __init__(self, channel: grpc.Channel) -> None: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply]
+        testproto.grpc.dummy_pb2.DummyReply,
+    ]
     """UnaryUnary"""
-
     UnaryStream: grpc.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply]
+        testproto.grpc.dummy_pb2.DummyReply,
+    ]
     """UnaryStream"""
-
     StreamUnary: grpc.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply]
+        testproto.grpc.dummy_pb2.DummyReply,
+    ]
     """StreamUnary"""
-
     StreamStream: grpc.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply]
+        testproto.grpc.dummy_pb2.DummyReply,
+    ]
     """StreamStream"""
-
 
 class DummyServiceServicer(metaclass=abc.ABCMeta):
     """DummyService"""
+
     @abc.abstractmethod
-    def UnaryUnary(self,
+    def UnaryUnary(
+        self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: grpc.ServicerContext,
     ) -> testproto.grpc.dummy_pb2.DummyReply:
         """UnaryUnary"""
         ...
-
     @abc.abstractmethod
-    def UnaryStream(self,
+    def UnaryStream(
+        self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: grpc.ServicerContext,
     ) -> typing.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
         """UnaryStream"""
         ...
-
     @abc.abstractmethod
-    def StreamUnary(self,
+    def StreamUnary(
+        self,
         request_iterator: typing.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: grpc.ServicerContext,
     ) -> testproto.grpc.dummy_pb2.DummyReply:
         """StreamUnary"""
         ...
-
     @abc.abstractmethod
-    def StreamStream(self,
+    def StreamStream(
+        self,
         request_iterator: typing.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: grpc.ServicerContext,
     ) -> typing.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
         """StreamStream"""
         ...
-
 
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: grpc.Server) -> None: ...

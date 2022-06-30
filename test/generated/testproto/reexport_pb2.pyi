@@ -6,7 +6,6 @@ import google.protobuf.descriptor
 from google.protobuf.empty_pb2 import (
     Empty as Empty,
 )
-
 from testproto.test3_pb2 import (
     BAR3 as BAR3,
     FOO3 as FOO3,
@@ -15,6 +14,5 @@ from testproto.test3_pb2 import (
     SimpleProto3 as SimpleProto3,
     UNKNOWN as UNKNOWN,
 )
-
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor

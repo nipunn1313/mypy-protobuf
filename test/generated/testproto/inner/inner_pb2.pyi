@@ -12,11 +12,14 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class Inner(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     A_FIELD_NUMBER: builtins.int
     a: testproto.test3_pb2.OuterEnum.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
         a: testproto.test3_pb2.OuterEnum.ValueType = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a",b"a"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a", b"a"]) -> None: ...
+
 global___Inner = Inner

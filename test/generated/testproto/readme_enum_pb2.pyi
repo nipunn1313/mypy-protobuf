@@ -11,16 +11,16 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _MyEnum:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     HELLO: _MyEnum.ValueType  # 0
     WORLD: _MyEnum.ValueType  # 1
-class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper):
-    ...
+
+class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper): ...
 
 HELLO: MyEnum.ValueType  # 0
 WORLD: MyEnum.ValueType  # 1
 global___MyEnum = MyEnum
-

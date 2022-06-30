@@ -70,7 +70,9 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     be expressed in JSON format as "3.000000001s", and 3 seconds and 1
     microsecond should be expressed in JSON format as "3.000001s".
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SECONDS_FIELD_NUMBER: builtins.int
     NANOS_FIELD_NUMBER: builtins.int
     seconds: builtins.int
@@ -78,7 +80,6 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     to +315,576,000,000 inclusive. Note: these bounds are computed from:
     60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
     """
-
     nanos: builtins.int
     """Signed fractions of a second at nanosecond resolution of the span
     of time. Durations less than one second are represented with a 0
@@ -87,11 +88,12 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     of the same sign as the `seconds` field. Must be from -999,999,999
     to +999,999,999 inclusive.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         seconds: builtins.int = ...,
         nanos: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nanos",b"nanos","seconds",b"seconds"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["nanos", b"nanos", "seconds", b"seconds"]) -> None: ...
+
 global___Duration = Duration
