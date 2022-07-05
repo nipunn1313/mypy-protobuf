@@ -83,9 +83,7 @@ def test_generate_mypy_matches() -> None:
     assert len(proto_files) == 17  # Just a sanity check that all the files show up
 
     pyi_files = glob.glob("test/generated/**/*.pyi", recursive=True)
-    assert (
-        len(pyi_files) == 19
-    )  # Should be higher - because grpc files generate extra pyis
+    assert len(pyi_files) == 19  # Should be higher - because grpc files generate extra pyis
 
     failure_check_results = []
     for fn in proto_files:
@@ -94,9 +92,7 @@ def test_generate_mypy_matches() -> None:
         assert fn_split[-1].endswith(".proto")
         last = fn_split[-1][: -len(".proto")] + "_pb2.pyi"  # Eg [test_pb2.proto]
         components = fn_split[1:-1]  # Eg. [testproto, dot.com]
-        components = [
-            c.replace(".", os.sep) for c in components
-        ]  # Eg. [testproto, dot/com]
+        components = [c.replace(".", os.sep) for c in components]  # Eg. [testproto, dot/com]
         components.append(last)  # Eg. [testproto, dot/com, test_pb2.proto]
 
         output = os.path.join("test", "generated", *components)
@@ -122,18 +118,14 @@ def test_generate_negative_matches() -> None:
             parts = line.split(":")
             yield parts[0], int(parts[1])
 
-    def grab_expectations(
-        filename: str, marker: str
-    ) -> Generator[Tuple[str, int], None, None]:
+    def grab_expectations(filename: str, marker: str) -> Generator[Tuple[str, int], None, None]:
         for idx, line in enumerate(open(filename).readlines()):
             if "#" in line and marker in line:
                 yield filename, idx + 1
 
     errors_38 = set(grab_errors("test_negative/output.expected.3.8"))
 
-    expected_errors_38 = set(
-        grab_expectations("test_negative/negative.py", "E:3.8")
-    ) | set(grab_expectations("test_negative/negative_3.8.py", "E:3.8"))
+    expected_errors_38 = set(grab_expectations("test_negative/negative.py", "E:3.8")) | set(grab_expectations("test_negative/negative_3.8.py", "E:3.8"))
 
     assert errors_38 == expected_errors_38
 
@@ -213,9 +205,7 @@ def test_has_field_proto2() -> None:
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     if CPP_IMPL:
         s_untyped: Any = s
-        with pytest.raises(
-            ValueError, match="Protocol message Simple1 has no field garbage."
-        ):
+        with pytest.raises(ValueError, match="Protocol message Simple1 has no field garbage."):
             s_untyped.HasField("garbage")
         with pytest.raises(
             ValueError,
@@ -253,9 +243,7 @@ def test_has_field_proto3() -> None:
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     if CPP_IMPL:
         s_untyped: Any = s
-        with pytest.raises(
-            ValueError, match="Protocol message SimpleProto3 has no field garbage."
-        ):
+        with pytest.raises(ValueError, match="Protocol message SimpleProto3 has no field garbage."):
             s_untyped.HasField("garbage")
         with pytest.raises(
             ValueError,
@@ -296,9 +284,7 @@ def test_clear_field_proto2() -> None:
         # Erase the types to verify that incorrect inputs fail at runtime
         # Each test here should be duplicated in test_negative to ensure mypy fails it too
         s_untyped: Any = s
-        with pytest.raises(
-            ValueError, match='Protocol message has no "garbage" field.'
-        ):
+        with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
             s_untyped.ClearField("garbage")
 
 
@@ -323,9 +309,7 @@ def test_clear_field_proto3() -> None:
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
     if CPP_IMPL:
-        with pytest.raises(
-            ValueError, match='Protocol message has no "garbage" field.'
-        ):
+        with pytest.raises(ValueError, match='Protocol message has no "garbage" field.'):
             s_untyped.ClearField("garbage")
 
 
@@ -345,9 +329,7 @@ def test_which_oneof_proto2() -> None:
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
-    with pytest.raises(
-        ValueError, match='Protocol message has no oneof "garbage" field.'
-    ):
+    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
         s_untyped.WhichOneof("garbage")
 
 
@@ -380,9 +362,7 @@ def test_which_oneof_proto3() -> None:
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
-    with pytest.raises(
-        ValueError, match='Protocol message has no oneof "garbage" field.'
-    ):
+    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
         s_untyped.WhichOneof("garbage")
 
 
@@ -427,24 +407,13 @@ def test_extensions_proto2() -> None:
 
 
 def test_extensions_proto3() -> None:
-    assert (
-        MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[scalar_option]
-        == "Hello world!"
-    )
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[scalar_option] == "Hello world!"
     assert SCALAR_OPTION_FIELD_NUMBER == 51234
-    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
-        repeated_scalar_option
-    ] == ["A", "B", "C"]
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[repeated_scalar_option] == ["A", "B", "C"]
     assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[enum_option] == FOO3
-    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
-        repeated_enum_option
-    ] == [FOO3, BAR3]
-    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[
-        msg_option
-    ] == OuterMessage3(a_string="Hello OuterMessage3")
-    assert list(
-        MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[repeated_msg_option]
-    ) == [
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[repeated_enum_option] == [FOO3, BAR3]
+    assert MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[msg_option] == OuterMessage3(a_string="Hello OuterMessage3")
+    assert list(MessageOptionsTestMsg.DESCRIPTOR.GetOptions().Extensions[repeated_msg_option]) == [
         OuterMessage3(a_string="Hello OuterMessage3 A"),
         OuterMessage3(a_string="Hello OuterMessage3 B"),
     ]
@@ -517,9 +486,7 @@ def test_mapping_type() -> None:
     assert s.map_message[6] == OuterMessage3()
     assert s.map_message.get_or_create(6) == OuterMessage3()
 
-    s2 = SimpleProto3(
-        map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_string="hi")}
-    )
+    s2 = SimpleProto3(map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_string="hi")})
 
 
 def test_casttype() -> None:
@@ -541,8 +508,6 @@ def test_reserved_keywords() -> None:
     assert isinstance(none_instance, Message)
 
     # Confirm that messages and enums w/ reserved names type properly
-    prk = PythonReservedKeywords(
-        none=none_instance, valid=PythonReservedKeywords.valid_in_finally
-    )
+    prk = PythonReservedKeywords(none=none_instance, valid=PythonReservedKeywords.valid_in_finally)
     assert prk.none.valid == 5
     assert prk.valid == PythonReservedKeywords.valid_in_finally

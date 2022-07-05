@@ -11,6 +11,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class Test(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     A_FIELD_NUMBER: builtins.int
     B_FIELD_NUMBER: builtins.int
     C_FIELD_NUMBER: builtins.int
@@ -24,36 +25,26 @@ class Test(google.protobuf.message.Message):
     K_FIELD_NUMBER: builtins.int
     a: builtins.str
     """Ending with " """
-
     b: builtins.str
     """Ending with "" """
-
     c: builtins.str
     """Ending with \"\"\" """
-
     d: builtins.str
     """Ending with \\ """
-
     e: builtins.str
     """Containing bad escape: \\x"""
-
     f: builtins.str
     """Containing \"\"\"" quadruple"""
-
     g: builtins.str
     """Containing \"\"\""" quintuple"""
-
     h: builtins.str
     """Containing \"\"\"\"\"\" sextuple"""
-
     i: builtins.str
     """\"\"\" Multiple \"\"\" triples \"\"\" """
-
     j: builtins.str
     """"quotes" can be a problem in comments.
     \"\"\"Triple quotes\"\"\" just as well
     """
-
     k: builtins.str
     """\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
     "                                              "
@@ -63,8 +54,8 @@ class Test(google.protobuf.message.Message):
     "                                              "
     \"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         a: builtins.str = ...,
         b: builtins.str = ...,
@@ -77,6 +68,7 @@ class Test(google.protobuf.message.Message):
         i: builtins.str = ...,
         j: builtins.str = ...,
         k: builtins.str = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a",b"a","b",b"b","c",b"c","d",b"d","e",b"e","f",b"f","g",b"g","h",b"h","i",b"i","j",b"j","k",b"k"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a", b"a", "b", b"b", "c", b"c", "d", b"d", "e", b"e", "f", b"f", "g", b"g", "h", b"h", "i", b"i", "j", b"j", "k", b"k"]) -> None: ...
+
 global___Test = Test

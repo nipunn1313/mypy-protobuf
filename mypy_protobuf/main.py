@@ -162,9 +162,7 @@ class PkgWriter(object):
         self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
 
         # Comments
-        self.source_code_info_by_scl = {
-            tuple(location.path): location for location in fd.source_code_info.location
-        }
+        self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
 
     def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
@@ -205,9 +203,7 @@ class PkgWriter(object):
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
-        import_name = self._import(
-            message_fd.name[:-6].replace("-", "_") + "_pb2", split[0]
-        )
+        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0])
 
         remains = ".".join(split[1:])
         if not remains:
@@ -237,17 +233,11 @@ class PkgWriter(object):
     def _break_text(self, text_block: str) -> List[str]:
         if text_block == "":
             return []
-        return [
-            l[1:] if l.startswith(" ") else l for l in text_block.rstrip().split("\n")
-        ]
+        return [l[1:] if l.startswith(" ") else l for l in text_block.rstrip().split("\n")]
 
     def _has_comments(self, scl: SourceCodeLocation) -> bool:
         sci_loc = self.source_code_info_by_scl.get(tuple(scl))
-        return sci_loc is not None and bool(
-            sci_loc.leading_detached_comments
-            or sci_loc.leading_comments
-            or sci_loc.trailing_comments
-        )
+        return sci_loc is not None and bool(sci_loc.leading_detached_comments or sci_loc.leading_comments or sci_loc.trailing_comments)
 
     def _write_comments(self, scl: SourceCodeLocation) -> bool:
         """Return true if any comments were written"""
@@ -257,15 +247,22 @@ class PkgWriter(object):
         sci_loc = self.source_code_info_by_scl.get(tuple(scl))
         assert sci_loc is not None
 
-        lines = []
+        leading_detached_lines = []
+        leading_lines = []
+        trailing_lines = []
         for leading_detached_comment in sci_loc.leading_detached_comments:
-            lines.extend(self._break_text(leading_detached_comment))
-            lines.append("")
+            leading_detached_lines = self._break_text(leading_detached_comment)
         if sci_loc.leading_comments is not None:
-            lines.extend(self._break_text(sci_loc.leading_comments))
+            leading_lines = self._break_text(sci_loc.leading_comments)
         # Trailing comments also go in the header - to make sure it gets into the docstring
         if sci_loc.trailing_comments is not None:
-            lines.extend(self._break_text(sci_loc.trailing_comments))
+            trailing_lines = self._break_text(sci_loc.trailing_comments)
+
+        lines = leading_detached_lines
+        if leading_detached_lines and (leading_lines or trailing_lines):
+            lines.append("")
+        lines.extend(leading_lines)
+        lines.extend(trailing_lines)
 
         lines = [
             # Escape triple-quotes that would otherwise end the docstring early.
@@ -305,8 +302,7 @@ class PkgWriter(object):
             self._write_line(
                 f"{val.name}: {value_type}  # {val.number}",
             )
-            if self._write_comments(scl):
-                self._write_line("")  # Extra newline to separate
+            self._write_comments(scl)
 
     def write_module_attributes(self) -> None:
         l = self._write_line
@@ -322,9 +318,7 @@ class PkgWriter(object):
     ) -> None:
         l = self._write_line
         for i, enum in enumerate(enums):
-            class_name = (
-                enum.name if enum.name not in PYTHON_RESERVED else "_r_" + enum.name
-            )
+            class_name = enum.name if enum.name not in PYTHON_RESERVED else "_r_" + enum.name
             value_type_fq = prefix + class_name + ".ValueType"
             enum_helper_class = "_" + enum.name
             value_type_helper_fq = prefix + enum_helper_class + ".ValueType"
@@ -334,18 +328,17 @@ class PkgWriter(object):
             l(f"class {enum_helper_class}:")
             with self._indent():
                 l(
-                    "ValueType = {}('ValueType', {})",
+                    'ValueType = {}("ValueType", {})',
                     self._import("typing", "NewType"),
                     self._builtin("int"),
                 )
                 # Alias to the classic shorter definition "V"
                 l("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
+            l("")
             l(
                 "class {}({}[{}], {}):",
                 etw_helper_class,
-                self._import(
-                    "google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"
-                ),
+                self._import("google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"),
                 value_type_helper_fq,
                 self._builtin("type"),
             )
@@ -353,19 +346,22 @@ class PkgWriter(object):
                 ed = self._import("google.protobuf.descriptor", "EnumDescriptor")
                 l(f"DESCRIPTOR: {ed}")
                 self.write_enum_values(
-                    [
-                        (i, v)
-                        for i, v in enumerate(enum.value)
-                        if v.name not in PROTO_ENUM_RESERVED
-                    ],
+                    [(i, v) for i, v in enumerate(enum.value) if v.name not in PROTO_ENUM_RESERVED],
                     value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
                 )
-            l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
-            with self._indent():
-                self._write_comments(scl)
-                l("...")
             l("")
+
+            if self._has_comments(scl):
+                l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
+                with self._indent():
+                    if self._write_comments(scl):
+                        l("")
+                    l("...")
+            else:
+                l(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}): ...")
+            if prefix == "":
+                l("")
 
             self.write_enum_values(
                 enumerate(enum.value),
@@ -374,7 +370,6 @@ class PkgWriter(object):
             )
             if prefix == "" and not self.readable_stubs:
                 l(f"{_mangle_global_identifier(class_name)} = {class_name}")
-                l("")
             l("")
 
     def write_messages(
@@ -401,17 +396,17 @@ class PkgWriter(object):
                     well_known_type.__name__,
                 )
 
-            class_name = (
-                desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
-            )
+            class_name = desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             message_class = self._import("google.protobuf.message", "Message")
             l(f"class {class_name}({message_class}{addl_base}):")
             with self._indent():
                 scl = scl_prefix + [i]
-                self._write_comments(scl)
+                if self._write_comments(scl):
+                    l("")
 
                 desc_type = self._import("google.protobuf.descriptor", "Descriptor")
                 l(f"DESCRIPTOR: {desc_type}")
+                l("")
 
                 # Nested enums/messages
                 self.write_enums(
@@ -434,16 +429,10 @@ class PkgWriter(object):
                         continue
                     field_type = self.python_type(field)
 
-                    if (
-                        is_scalar(field)
-                        and field.label != d.FieldDescriptorProto.LABEL_REPEATED
-                    ):
+                    if is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED:
                         # Scalar non repeated fields are r/w
                         l(f"{field.name}: {field_type}")
-                        if self._write_comments(
-                            scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
-                        ):
-                            l("")
+                        self._write_comments(scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx])
                     else:
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
@@ -455,41 +444,34 @@ class PkgWriter(object):
                                 self._write_comments(scl_field)
                                 l("...")
 
-                self.write_extensions(
-                    desc.extension, scl + [d.DescriptorProto.EXTENSION_FIELD_NUMBER]
-                )
+                self.write_extensions(desc.extension, scl + [d.DescriptorProto.EXTENSION_FIELD_NUMBER])
 
                 # Constructor
-                if any(f.name == "self" for f in desc.field):
-                    l("# pyright: reportSelfClsParameterName=false")
-                    l(f"def __init__(self_,")
-                else:
-                    l(f"def __init__(self,")
+                l(f"def __init__(")
                 with self._indent():
-                    constructor_fields = [
-                        f for f in desc.field if f.name not in PYTHON_RESERVED
-                    ]
+                    if any(f.name == "self" for f in desc.field):
+                        l("# pyright: reportSelfClsParameterName=false")
+                        l("self_,")
+                    else:
+                        l("self,")
+                with self._indent():
+                    constructor_fields = [f for f in desc.field if f.name not in PYTHON_RESERVED]
                     if len(constructor_fields) > 0:
                         # Only positional args allowed
                         # See https://github.com/nipunn1313/mypy-protobuf/issues/71
                         l("*,")
                     for field in constructor_fields:
                         field_type = self.python_type(field, generic_container=True)
-                        if (
-                            self.fd.syntax == "proto3"
-                            and is_scalar(field)
-                            and field.label != d.FieldDescriptorProto.LABEL_REPEATED
-                            and not self.relax_strict_optional_primitives
-                            and not field.proto3_optional
-                        ):
+                        if self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional:
                             l(f"{field.name}: {field_type} = ...,")
                         else:
                             l(f"{field.name}: {field_type} | None = ...,")
-                    l(") -> None: ...")
+                l(") -> None: ...")
 
                 self.write_stringly_typed_fields(desc)
 
             if prefix == "" and not self.readable_stubs:
+                l("")
                 l(f"{_mangle_global_identifier(class_name)} = {class_name}")
             l("")
 
@@ -500,34 +482,15 @@ class PkgWriter(object):
         # HasField only supports singular. ClearField supports repeated as well
         # In proto3, HasField only supports message fields and optional fields
         # HasField always supports oneof fields
-        hf_fields = [
-            f.name
-            for f in desc.field
-            if f.HasField("oneof_index")
-            or (
-                f.label != d.FieldDescriptorProto.LABEL_REPEATED
-                and (
-                    self.fd.syntax != "proto3"
-                    or f.type == d.FieldDescriptorProto.TYPE_MESSAGE
-                    or f.proto3_optional
-                )
-            )
-        ]
+        hf_fields = [f.name for f in desc.field if f.HasField("oneof_index") or (f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional))]
         cf_fields = [f.name for f in desc.field]
-        wo_fields = {
-            oneof.name: [
-                f.name
-                for f in desc.field
-                if f.HasField("oneof_index") and f.oneof_index == idx
-            ]
-            for idx, oneof in enumerate(desc.oneof_decl)
-        }
+        wo_fields = {oneof.name: [f.name for f in desc.field if f.HasField("oneof_index") and f.oneof_index == idx] for idx, oneof in enumerate(desc.oneof_decl)}
 
         hf_fields.extend(wo_fields.keys())
         cf_fields.extend(wo_fields.keys())
 
-        hf_fields_text = ",".join(sorted(f'"{name}",b"{name}"' for name in hf_fields))
-        cf_fields_text = ",".join(sorted(f'"{name}",b"{name}"' for name in cf_fields))
+        hf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in hf_fields))
+        cf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in cf_fields))
 
         if not hf_fields and not cf_fields and not wo_fields:
             return
@@ -553,10 +516,10 @@ class PkgWriter(object):
                 "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
                 self._import("typing_extensions", "Literal"),
                 # Accepts both str and bytes
-                f'"{wo_field}",b"{wo_field}"',
+                f'"{wo_field}", b"{wo_field}"',
                 self._import("typing_extensions", "Literal"),
                 # Returns `str`
-                ",".join(f'"{m}"' for m in members),
+                ", ".join(f'"{m}"' for m in members),
             )
 
     def write_extensions(
@@ -583,7 +546,6 @@ class PkgWriter(object):
                 self.python_type(ext),
             )
             self._write_comments(scl)
-            l("")
 
     def write_methods(
         self,
@@ -597,11 +559,7 @@ class PkgWriter(object):
             "DESCRIPTOR: {}",
             self._import("google.protobuf.descriptor", "ServiceDescriptor"),
         )
-        methods = [
-            (i, m)
-            for i, m in enumerate(service.method)
-            if m.name not in PYTHON_RESERVED
-        ]
+        methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
             l("...")
         for i, method in methods:
@@ -642,11 +600,7 @@ class PkgWriter(object):
         l = self._write_line
         for i, service in enumerate(services):
             scl = scl_prefix + [i]
-            class_name = (
-                service.name
-                if service.name not in PYTHON_RESERVED
-                else "_r_" + service.name
-            )
+            class_name = service.name if service.name not in PYTHON_RESERVED else "_r_" + service.name
             # The service definition interface
             l(
                 "class {}({}, metaclass={}):",
@@ -655,29 +609,27 @@ class PkgWriter(object):
                 self._import("abc", "ABCMeta"),
             )
             with self._indent():
-                self._write_comments(scl)
-                self.write_methods(
-                    service, class_name, is_abstract=True, scl_prefix=scl
-                )
+                if self._write_comments(scl):
+                    l("")
+                self.write_methods(service, class_name, is_abstract=True, scl_prefix=scl)
+            l("")
 
             # The stub client
             stub_class_name = service.name + "_Stub"
             l("class {}({}):", stub_class_name, class_name)
             with self._indent():
-                self._write_comments(scl)
+                if self._write_comments(scl):
+                    l("")
                 l(
                     "def __init__(self, rpc_channel: {}) -> None: ...",
                     self._import("google.protobuf.service", "RpcChannel"),
                 )
-                self.write_methods(
-                    service, stub_class_name, is_abstract=False, scl_prefix=scl
-                )
+                self.write_methods(service, stub_class_name, is_abstract=False, scl_prefix=scl)
+            l("")
 
     def _import_casttype(self, casttype: str) -> str:
         split = casttype.split(".")
-        assert (
-            len(split) == 2
-        ), "mypy_protobuf.[casttype,keytype,valuetype] is expected to be of format path/to/file.TypeInFile"
+        assert len(split) == 2, "mypy_protobuf.[casttype,keytype,valuetype] is expected to be of format path/to/file.TypeInFile"
         pkg = split[0].replace("/", ".")
         return self._import(pkg, split[1])
 
@@ -688,17 +640,9 @@ class PkgWriter(object):
         value_field: d.FieldDescriptorProto,
     ) -> Tuple[str, str]:
         key_casttype = map_field.options.Extensions[extensions_pb2.keytype]
-        ktype = (
-            self._import_casttype(key_casttype)
-            if key_casttype
-            else self.python_type(key_field)
-        )
+        ktype = self._import_casttype(key_casttype) if key_casttype else self.python_type(key_field)
         value_casttype = map_field.options.Extensions[extensions_pb2.valuetype]
-        vtype = (
-            self._import_casttype(value_casttype)
-            if value_casttype
-            else self.python_type(value_field)
-        )
+        vtype = self._import_casttype(value_casttype) if value_casttype else self.python_type(value_field)
         return ktype, vtype
 
     def _callable_type(self, method: d.MethodDescriptorProto) -> str:
@@ -713,31 +657,21 @@ class PkgWriter(object):
             else:
                 return self._import("grpc", "UnaryUnaryMultiCallable")
 
-    def _input_type(
-        self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True
-    ) -> str:
+    def _input_type(self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True) -> str:
         result = self._import_message(method.input_type)
         if use_stream_iterator and method.client_streaming:
             result = f"{self._import('typing', 'Iterator')}[{result}]"
         return result
 
-    def _output_type(
-        self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True
-    ) -> str:
+    def _output_type(self, method: d.MethodDescriptorProto, use_stream_iterator: bool = True) -> str:
         result = self._import_message(method.output_type)
         if use_stream_iterator and method.server_streaming:
             result = f"{self._import('typing', 'Iterator')}[{result}]"
         return result
 
-    def write_grpc_methods(
-        self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation
-    ) -> None:
+    def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         l = self._write_line
-        methods = [
-            (i, m)
-            for i, m in enumerate(service.method)
-            if m.name not in PYTHON_RESERVED
-        ]
+        methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
             l("...")
             l("")
@@ -745,11 +679,10 @@ class PkgWriter(object):
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
 
             l("@{}", self._import("abc", "abstractmethod"))
-            l("def {}(self,", method.name)
+            l("def {}(", method.name)
             with self._indent():
-                input_name = (
-                    "request_iterator" if method.client_streaming else "request"
-                )
+                l("self,")
+                input_name = "request_iterator" if method.client_streaming else "request"
                 input_type = self._input_type(method)
                 l(f"{input_name}: {input_type},")
                 l("context: {},", self._import("grpc", "ServicerContext"))
@@ -762,17 +695,10 @@ class PkgWriter(object):
                 with self._indent():
                     self._write_comments(scl)
                     l("...")
-            l("")
 
-    def write_grpc_stub_methods(
-        self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation
-    ) -> None:
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         l = self._write_line
-        methods = [
-            (i, m)
-            for i, m in enumerate(service.method)
-            if m.name not in PYTHON_RESERVED
-        ]
+        methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
             l("...")
             l("")
@@ -782,9 +708,9 @@ class PkgWriter(object):
             l("{}: {}[", method.name, self._callable_type(method))
             with self._indent():
                 l("{},", self._input_type(method, False))
-                l("{}]", self._output_type(method, False))
+                l("{},", self._output_type(method, False))
+            l("]")
             self._write_comments(scl)
-            l("")
 
     def write_grpc_services(
         self,
@@ -801,7 +727,8 @@ class PkgWriter(object):
             # The stub client
             l(f"class {service.name}Stub:")
             with self._indent():
-                self._write_comments(scl)
+                if self._write_comments(scl):
+                    l("")
                 l(
                     "def __init__(self, channel: {}) -> None: ...",
                     self._import("grpc", "Channel"),
@@ -816,7 +743,8 @@ class PkgWriter(object):
                 self._import("abc", "ABCMeta"),
             )
             with self._indent():
-                self._write_comments(scl)
+                if self._write_comments(scl):
+                    l("")
                 self.write_grpc_methods(service, scl)
             l("")
             l(
@@ -827,9 +755,7 @@ class PkgWriter(object):
             )
             l("")
 
-    def python_type(
-        self, field: d.FieldDescriptorProto, generic_container: bool = False
-    ) -> str:
+    def python_type(self, field: d.FieldDescriptorProto, generic_container: bool = False) -> str:
         """
         generic_container
           if set, type the field with generic interfaces. Eg.
@@ -857,15 +783,9 @@ class PkgWriter(object):
             d.FieldDescriptorProto.TYPE_BOOL: lambda: self._builtin("bool"),
             d.FieldDescriptorProto.TYPE_STRING: lambda: self._builtin("str"),
             d.FieldDescriptorProto.TYPE_BYTES: lambda: self._builtin("bytes"),
-            d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(
-                field.type_name + ".ValueType"
-            ),
-            d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(
-                field.type_name
-            ),
-            d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(
-                field.type_name
-            ),
+            d.FieldDescriptorProto.TYPE_ENUM: lambda: self._import_message(field.type_name + ".ValueType"),
+            d.FieldDescriptorProto.TYPE_MESSAGE: lambda: self._import_message(field.type_name),
+            d.FieldDescriptorProto.TYPE_GROUP: lambda: self._import_message(field.type_name),
         }
 
         assert field.type in mapping, "Unrecognized type: " + repr(field.type)
@@ -894,13 +814,9 @@ class PkgWriter(object):
             if generic_container:
                 container = self._import("typing", "Mapping")
             elif is_scalar(msg.field[1]):
-                container = self._import(
-                    "google.protobuf.internal.containers", "ScalarMap"
-                )
+                container = self._import("google.protobuf.internal.containers", "ScalarMap")
             else:
-                container = self._import(
-                    "google.protobuf.internal.containers", "MessageMap"
-                )
+                container = self._import("google.protobuf.internal.containers", "MessageMap")
             ktype, vtype = self._map_key_value_types(field, msg.field[0], msg.field[1])
             return f"{container}[{ktype}, {vtype}]"
 
@@ -919,15 +835,8 @@ class PkgWriter(object):
         for reexport_idx in self.fd.public_dependency:
             reexport_file = self.fd.dependency[reexport_idx]
             reexport_fd = self.descriptors.files[reexport_file]
-            reexport_imp = (
-                reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
-            )
-            names = (
-                [m.name for m in reexport_fd.message_type]
-                + [m.name for m in reexport_fd.enum_type]
-                + [v.name for m in reexport_fd.enum_type for v in m.value]
-                + [m.name for m in reexport_fd.extension]
-            )
+            reexport_imp = reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
+            names = [m.name for m in reexport_fd.message_type] + [m.name for m in reexport_fd.enum_type] + [v.name for m in reexport_fd.enum_type for v in m.value] + [m.name for m in reexport_fd.extension]
             if reexport_fd.options.py_generic_services:
                 names.extend(m.name for m in reexport_fd.service)
 
@@ -946,17 +855,17 @@ class PkgWriter(object):
                     import_lines.append(f"    {name},")
                 else:
                     import_lines.append(f"    {name} as {reexport_name},")
-            import_lines.append(")\n")
+            import_lines.append(")")
         import_lines.append("")
 
-        return "\n".join(import_lines + self.lines)
+        content = "\n".join(import_lines + self.lines)
+        if not content.endswith("\n"):
+            content = content + "\n"
+        return content
 
 
 def is_scalar(fd: d.FieldDescriptorProto) -> bool:
-    return not (
-        fd.type == d.FieldDescriptorProto.TYPE_MESSAGE
-        or fd.type == d.FieldDescriptorProto.TYPE_GROUP
-    )
+    return not (fd.type == d.FieldDescriptorProto.TYPE_MESSAGE or fd.type == d.FieldDescriptorProto.TYPE_GROUP)
 
 
 def generate_mypy_stubs(
@@ -976,19 +885,11 @@ def generate_mypy_stubs(
         )
 
         pkg_writer.write_module_attributes()
-        pkg_writer.write_enums(
-            fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER]
-        )
-        pkg_writer.write_messages(
-            fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER]
-        )
-        pkg_writer.write_extensions(
-            fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER]
-        )
+        pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER])
+        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER])
+        pkg_writer.write_extensions(fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER])
         if fd.options.py_generic_services:
-            pkg_writer.write_services(
-                fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER]
-            )
+            pkg_writer.write_services(fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER])
 
         assert name == fd.name
         assert fd.name.endswith(".proto")
@@ -1014,9 +915,7 @@ def generate_mypy_grpc_stubs(
             relax_strict_optional_primitives,
             grpc=True,
         )
-        pkg_writer.write_grpc_services(
-            fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER]
-        )
+        pkg_writer.write_grpc_services(fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER])
 
         assert name == fd.name
         assert fd.name.endswith(".proto")
@@ -1046,9 +945,7 @@ def code_generation() -> Iterator[
     response = plugin_pb2.CodeGeneratorResponse()
 
     # Declare support for optional proto3 fields
-    response.supported_features |= (
-        plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL
-    )
+    response.supported_features |= plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL
 
     yield request, response
 

@@ -22,36 +22,37 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _OuterEnum:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     FOO: _OuterEnum.ValueType  # 1
     """FOO"""
-
     BAR: _OuterEnum.ValueType  # 2
     """BAR"""
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     """Outer Enum"""
+
     ...
 
 FOO: OuterEnum.ValueType  # 1
 """FOO"""
-
 BAR: OuterEnum.ValueType  # 2
 """BAR"""
-
 global___OuterEnum = OuterEnum
 
-
 class _NamingConflicts:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+
 class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
     """Naming conflicts!"""
+
     ...
 
 Name: NamingConflicts.ValueType  # 1
@@ -63,53 +64,55 @@ items: NamingConflicts.ValueType  # 5
 proto itself generates broken code when DESCRIPTOR is there
 DESCRIPTOR = 8;
 """
-
 global___NamingConflicts = NamingConflicts
-
 
 class Simple1(google.protobuf.message.Message):
     """Message with one of everything"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _InnerEnum:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
+
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         INNER1: Simple1._InnerEnum.ValueType  # 1
         """INNER1"""
-
         INNER2: Simple1._InnerEnum.ValueType  # 2
         """INNER2"""
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         """Inner Enum"""
-        ...
 
+        ...
     INNER1: Simple1.InnerEnum.ValueType  # 1
     """INNER1"""
-
     INNER2: Simple1.InnerEnum.ValueType  # 2
     """INNER2"""
 
-
     class InnerMessage(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        def __init__(self,
-            ) -> None: ...
+
+        def __init__(
+            self,
+        ) -> None: ...
 
     class EmailByUidEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         value: builtins.str
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int | None = ...,
             value: builtins.str | None = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     A_STRING_FIELD_NUMBER: builtins.int
     A_REPEATED_STRING_FIELD_NUMBER: builtins.int
@@ -167,7 +170,8 @@ class Simple1(google.protobuf.message.Message):
     email: test.test_generated_mypy.Email
     @property
     def email_by_uid(self) -> google.protobuf.internal.containers.ScalarMap[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         a_string: builtins.str | None = ...,
         a_repeated_string: typing.Iterable[builtins.str] | None = ...,
@@ -192,92 +196,106 @@ class Simple1(google.protobuf.message.Message):
         user_id: test.test_generated_mypy.UserId | None = ...,
         email: test.test_generated_mypy.Email | None = ...,
         email_by_uid: typing.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email] | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["a_boolean",b"a_boolean","a_enum",b"a_enum","a_external_enum",b"a_external_enum","a_inner",b"a_inner","a_nested",b"a_nested","a_oneof",b"a_oneof","a_oneof_1",b"a_oneof_1","a_oneof_2",b"a_oneof_2","a_string",b"a_string","a_uint32",b"a_uint32","email",b"email","inner_enum",b"inner_enum","inner_enum_in_oneof",b"inner_enum_in_oneof","inner_message",b"inner_message","nested_enum",b"nested_enum","nested_message",b"nested_message","no_package",b"no_package","outer_enum_in_oneof",b"outer_enum_in_oneof","outer_message_in_oneof",b"outer_message_in_oneof","user_id",b"user_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a_boolean",b"a_boolean","a_enum",b"a_enum","a_external_enum",b"a_external_enum","a_inner",b"a_inner","a_nested",b"a_nested","a_oneof",b"a_oneof","a_oneof_1",b"a_oneof_1","a_oneof_2",b"a_oneof_2","a_repeated_string",b"a_repeated_string","a_string",b"a_string","a_uint32",b"a_uint32","email",b"email","email_by_uid",b"email_by_uid","inner_enum",b"inner_enum","inner_enum_in_oneof",b"inner_enum_in_oneof","inner_message",b"inner_message","nested_enum",b"nested_enum","nested_message",b"nested_message","no_package",b"no_package","outer_enum_in_oneof",b"outer_enum_in_oneof","outer_message_in_oneof",b"outer_message_in_oneof","rep_inner_enum",b"rep_inner_enum","rep_inner_message",b"rep_inner_message","user_id",b"user_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["a_oneof",b"a_oneof"]) -> typing_extensions.Literal["a_oneof_1","a_oneof_2","outer_message_in_oneof","outer_enum_in_oneof","inner_enum_in_oneof"] | None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "user_id", b"user_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "rep_inner_enum", b"rep_inner_enum", "rep_inner_message", b"rep_inner_message", "user_id", b"user_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["a_oneof", b"a_oneof"]) -> typing_extensions.Literal["a_oneof_1", "a_oneof_2", "outer_message_in_oneof", "outer_enum_in_oneof", "inner_enum_in_oneof"] | None: ...
+
 global___Simple1 = Simple1
 
 class Simple2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     A_STRING_FIELD_NUMBER: builtins.int
     a_string: builtins.str
-    def __init__(self,
+    def __init__(
+        self,
         *,
         a_string: builtins.str | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> None: ...
+
 global___Simple2 = Simple2
 
 class Extensions1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     EXT1_STRING_FIELD_NUMBER: builtins.int
     ext1_string: builtins.str
     EXT_FIELD_NUMBER: builtins.int
     ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions1]
     """ext"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         ext1_string: builtins.str | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ext1_string",b"ext1_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ext1_string",b"ext1_string"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["ext1_string", b"ext1_string"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ext1_string", b"ext1_string"]) -> None: ...
+
 global___Extensions1 = Extensions1
 
 class Extensions2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FLAG_FIELD_NUMBER: builtins.int
     flag: builtins.bool
     FOO_FIELD_NUMBER: builtins.int
     foo: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[global___Simple1, global___Extensions2]
     """foo"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         flag: builtins.bool | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["flag",b"flag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["flag",b"flag"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["flag", b"flag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["flag", b"flag"]) -> None: ...
+
 global___Extensions2 = Extensions2
 
 class _r_None(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VALID_FIELD_NUMBER: builtins.int
     valid: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         valid: builtins.int | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["valid",b"valid"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["valid",b"valid"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["valid", b"valid"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["valid", b"valid"]) -> None: ...
+
 global____r_None = _r_None
 
 class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _finally:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
+
     class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
-    class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper):
-        ...
 
+    class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper): ...
     valid_in_finally: PythonReservedKeywords._r_finally.ValueType  # 2
 
     class _r_lambda(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         CONTINUE_FIELD_NUMBER: builtins.int
         VALID_FIELD_NUMBER: builtins.int
         valid: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             valid: builtins.int | None = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["continue",b"continue","valid",b"valid"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["continue",b"continue","valid",b"valid"]) -> None: ...
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["continue", b"continue", "valid", b"valid"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["continue", b"continue", "valid", b"valid"]) -> None: ...
 
     FROM_FIELD_NUMBER: builtins.int
     IN_FIELD_NUMBER: builtins.int
@@ -314,42 +332,51 @@ class PythonReservedKeywords(google.protobuf.message.Message):
         """Test unreserved identifiers w/ reserved message names"""
         ...
     valid: global___PythonReservedKeywords._r_finally.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
         none: global____r_None | None = ...,
         valid: global___PythonReservedKeywords._r_finally.ValueType | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["False",b"False","True",b"True","and",b"and","as",b"as","assert",b"assert","break",b"break","class",b"class","def",b"def","del",b"del","elif",b"elif","else",b"else","except",b"except","for",b"for","from",b"from","global",b"global","if",b"if","import",b"import","in",b"in","is",b"is","none",b"none","nonlocal",b"nonlocal","not",b"not","or",b"or","pass",b"pass","raise",b"raise","try",b"try","valid",b"valid","while",b"while","with",b"with","yield",b"yield"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["False",b"False","True",b"True","and",b"and","as",b"as","assert",b"assert","break",b"break","class",b"class","def",b"def","del",b"del","elif",b"elif","else",b"else","except",b"except","for",b"for","from",b"from","global",b"global","if",b"if","import",b"import","in",b"in","is",b"is","none",b"none","nonlocal",b"nonlocal","not",b"not","or",b"or","pass",b"pass","raise",b"raise","try",b"try","valid",b"valid","while",b"while","with",b"with","yield",b"yield"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["False", b"False", "True", b"True", "and", b"and", "as", b"as", "assert", b"assert", "break", b"break", "class", b"class", "def", b"def", "del", b"del", "elif", b"elif", "else", b"else", "except", b"except", "for", b"for", "from", b"from", "global", b"global", "if", b"if", "import", b"import", "in", b"in", "is", b"is", "none", b"none", "nonlocal", b"nonlocal", "not", b"not", "or", b"or", "pass", b"pass", "raise", b"raise", "try", b"try", "valid", b"valid", "while", b"while", "with", b"with", "yield", b"yield"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["False", b"False", "True", b"True", "and", b"and", "as", b"as", "assert", b"assert", "break", b"break", "class", b"class", "def", b"def", "del", b"del", "elif", b"elif", "else", b"else", "except", b"except", "for", b"for", "from", b"from", "global", b"global", "if", b"if", "import", b"import", "in", b"in", "is", b"is", "none", b"none", "nonlocal", b"nonlocal", "not", b"not", "or", b"or", "pass", b"pass", "raise", b"raise", "try", b"try", "valid", b"valid", "while", b"while", "with", b"with", "yield", b"yield"]) -> None: ...
+
 global___PythonReservedKeywords = PythonReservedKeywords
 
 class PythonReservedKeywordsSmall(google.protobuf.message.Message):
     """Do one with just one arg - to make sure it's syntactically correct"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FROM_FIELD_NUMBER: builtins.int
-    def __init__(self,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from",b"from"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["from",b"from"]) -> None: ...
+    def __init__(
+        self,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["from", b"from"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["from", b"from"]) -> None: ...
+
 global___PythonReservedKeywordsSmall = PythonReservedKeywordsSmall
 
 class SelfField(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SELF_FIELD_NUMBER: builtins.int
     self: builtins.int
     """Field self -> must generate an __init__ method w/ different name"""
-
-    # pyright: reportSelfClsParameterName=false
-    def __init__(self_,
+    def __init__(
+        # pyright: reportSelfClsParameterName=false
+        self_,
         *,
         self: builtins.int | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["self",b"self"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["self",b"self"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["self", b"self"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["self", b"self"]) -> None: ...
+
 global___SelfField = SelfField
 
 class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     """Method name is reserved"""
+
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod
     def valid_method_name1(
@@ -369,8 +396,10 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
         ...
+
 class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     """Method name is reserved"""
+
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     def valid_method_name1(
@@ -389,6 +418,7 @@ class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
         ...
+
 class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod
@@ -398,6 +428,7 @@ class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
         request: global___Simple1,
         callback: typing.Callable[[global___Simple2], None] | None,
     ) -> concurrent.futures.Future[global___Simple2]: ...
+
 class ATestService_Stub(ATestService):
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor

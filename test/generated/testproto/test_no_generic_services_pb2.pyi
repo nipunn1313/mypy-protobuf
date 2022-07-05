@@ -11,12 +11,15 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class Simple3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     A_STRING_FIELD_NUMBER: builtins.int
     a_string: builtins.str
-    def __init__(self,
+    def __init__(
+        self,
         *,
         a_string: builtins.str | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a_string",b"a_string"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> None: ...
+
 global___Simple3 = Simple3

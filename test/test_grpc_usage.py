@@ -57,28 +57,20 @@ def test_grpc() -> None:
     result2 = client.UnaryStream(dummy_pb2.DummyRequest(value=result1.value))
     result2_list = list(result2)
     assert len(result2_list) == 4
-    result3 = client.StreamStream(
-        dummy_pb2.DummyRequest(value=part.value) for part in result2_list
-    )
+    result3 = client.StreamStream(dummy_pb2.DummyRequest(value=part.value) for part in result2_list)
     result3_list = list(result3)
     assert len(result3_list) == 4
-    result4 = client.StreamUnary(
-        dummy_pb2.DummyRequest(value=part.value) for part in result3_list
-    )
+    result4 = client.StreamUnary(dummy_pb2.DummyRequest(value=part.value) for part in result3_list)
     assert result4.value == "GRPC"
 
     # test future() in MultiCallable
-    future_test: grpc.CallFuture[dummy_pb2.DummyReply] = client.UnaryUnary.future(
-        request
-    )
+    future_test: grpc.CallFuture[dummy_pb2.DummyReply] = client.UnaryUnary.future(request)
     result5 = future_test.result()
     print(result5)
     assert result5.value == "grpc"
 
     # test params on __call__ in MultiCallable
-    result6: dummy_pb2.DummyReply = client.UnaryUnary(
-        request, timeout=4, metadata=(("test", "metadata"), ("cheems", "many"))
-    )
+    result6: dummy_pb2.DummyReply = client.UnaryUnary(request, timeout=4, metadata=(("test", "metadata"), ("cheems", "many")))
 
     assert result6.value == "grpc"
 

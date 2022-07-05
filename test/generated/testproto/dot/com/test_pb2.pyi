@@ -11,11 +11,14 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class TestMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FOO_FIELD_NUMBER: builtins.int
     foo: builtins.str
-    def __init__(self,
+    def __init__(
+        self,
         *,
         foo: builtins.str = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["foo",b"foo"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["foo", b"foo"]) -> None: ...
+
 global___TestMessage = TestMessage

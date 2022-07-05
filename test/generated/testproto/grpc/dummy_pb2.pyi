@@ -11,22 +11,28 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class DummyRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VALUE_FIELD_NUMBER: builtins.int
     value: builtins.str
-    def __init__(self,
+    def __init__(
+        self,
         *,
         value: builtins.str = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
+
 global___DummyRequest = DummyRequest
 
 class DummyReply(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VALUE_FIELD_NUMBER: builtins.int
     value: builtins.str
-    def __init__(self,
+    def __init__(
+        self,
         *,
         value: builtins.str = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
+
 global___DummyReply = DummyReply

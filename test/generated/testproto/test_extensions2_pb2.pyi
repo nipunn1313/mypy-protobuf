@@ -13,15 +13,17 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class SeparateFileExtension(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FLAG_FIELD_NUMBER: builtins.int
     flag: builtins.bool
     EXT_FIELD_NUMBER: builtins.int
     ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, global___SeparateFileExtension]
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         flag: builtins.bool | None = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["flag",b"flag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["flag",b"flag"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["flag", b"flag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["flag", b"flag"]) -> None: ...
+
 global___SeparateFileExtension = SeparateFileExtension
