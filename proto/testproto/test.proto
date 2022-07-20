@@ -1,3 +1,4 @@
+// Proto 2 test file.
 syntax = "proto2";
 
 package test;

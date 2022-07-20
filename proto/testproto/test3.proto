@@ -1,3 +1,8 @@
+/*
+* Proto 3 test example.
+*
+* Descriptor documentation should show up in module docstrings.
+*/
 syntax = "proto3";
 
 package test3;

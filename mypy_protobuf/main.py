@@ -36,8 +36,7 @@ GENERATED = "@ge" + "nerated"
 HEADER = f"""\"\"\"
 {GENERATED} by mypy-protobuf.  Do not edit manually!
 isort:skip_file
-\"\"\"
-"""
+\"\"\""""
 
 # See https://github.com/nipunn1313/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
@@ -832,6 +831,24 @@ class PkgWriter(object):
         return f"{container}[{field_type}]"
 
     def write(self) -> str:
+        # save current module content, so that imports and module docstring can be inserted
+        saved_lines = self.lines
+        self.lines = []
+
+        self._write_line(HEADER)
+        # module docstring may exist as comment before syntax (optional) or package name
+        if not self._write_comments([d.FileDescriptorProto.SYNTAX_FIELD_NUMBER]):
+            self._write_comments([d.FileDescriptorProto.PACKAGE_FIELD_NUMBER])
+        if len(self.lines) >= 2:
+            # HACK: merge double module docstring
+            if self.lines[0].endswith('"""') and self.lines[1].startswith('"""'):
+                self.lines[0] = self.lines[0][:-3]
+                self.lines[1] = self.lines[1][3:]
+                # HACK: convert single-line docstring to multiline
+                if self.lines[1].endswith('"""'):
+                    self.lines[1] = self.lines[1][:-3]
+                    self._write_line('"""')
+
         for reexport_idx in self.fd.public_dependency:
             reexport_file = self.fd.dependency[reexport_idx]
             reexport_fd = self.descriptors.files[reexport_file]
@@ -844,21 +861,23 @@ class PkgWriter(object):
                 # n,n to force a reexport (from x import y as y)
                 self.from_imports[reexport_imp].update((n, n) for n in names)
 
-        import_lines = []
         for pkg in sorted(self.imports):
-            import_lines.append(f"import {pkg}")
+            self._write_line(f"import {pkg}")
 
         for pkg, items in sorted(self.from_imports.items()):
-            import_lines.append(f"from {pkg} import (")
+            self._write_line(f"from {pkg} import (")
             for (name, reexport_name) in sorted(items):
                 if reexport_name is None:
-                    import_lines.append(f"    {name},")
+                    self._write_line(f"    {name},")
                 else:
-                    import_lines.append(f"    {name} as {reexport_name},")
-            import_lines.append(")")
-        import_lines.append("")
+                    self._write_line(f"    {name} as {reexport_name},")
+            self._write_line(")")
+        self._write_line("")
 
-        content = "\n".join(import_lines + self.lines)
+        # restore module content
+        self.lines += saved_lines
+
+        content = "\n".join(self.lines)
         if not content.endswith("\n"):
             content = content + "\n"
         return content
@@ -895,7 +914,7 @@ def generate_mypy_stubs(
         assert fd.name.endswith(".proto")
         output = response.file.add()
         output.name = fd.name[:-6].replace("-", "_").replace(".", "/") + "_pb2.pyi"
-        output.content = HEADER + pkg_writer.write()
+        output.content = pkg_writer.write()
         if not quiet:
             print("Writing mypy to", output.name, file=sys.stderr)
 
