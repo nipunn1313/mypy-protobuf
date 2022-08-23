@@ -3,10 +3,10 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
 import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
@@ -35,7 +35,7 @@ class NoPackage2(google.protobuf.message.Message):
         self,
         *,
         np: global___NoPackage | None = ...,
-        np_rep: typing.Iterable[global___NoPackage] | None = ...,
+        np_rep: collections.abc.Iterable[global___NoPackage] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["np", b"np"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["np", b"np", "np_rep", b"np_rep"]) -> None: ...

@@ -10,7 +10,6 @@ These tests can be set up and run by the run_test.sh script
 
 import glob
 import os
-import sys
 from typing import Any, Generator, NewType, Tuple, Type
 
 import pytest
@@ -55,9 +54,9 @@ class Email(str):
     pass
 
 
-def _is_summary(l: str) -> bool:
+def _is_summary(line: str) -> bool:
     """Checks if the line is the summary line 'Found X errors in Y files (checked Z source files)'"""
-    return l.startswith("Found ") and l.endswith("source files)\n")
+    return line.startswith("Found ") and line.endswith("source files)\n")
 
 
 def test_generate_mypy_matches() -> None:
@@ -135,9 +134,9 @@ def test_func() -> None:
     s4.CopyFrom(s)
     assert s4.a_string == "Hello"
 
-    l = lower2()
-    l.upper.Lower.a = 2
-    assert l == lower2(upper=Upper(Lower=lower(a=2)))
+    ll = lower2()
+    ll.upper.Lower.a = 2
+    assert ll == lower2(upper=Upper(Lower=lower(a=2)))
 
 
 def test_enum() -> None:
@@ -155,10 +154,12 @@ def test_enum() -> None:
     e3: OuterEnum.ValueType = OuterEnum.Value("BAR")
     assert OuterEnum.Name(e3) == "BAR"
     e4: int = OuterEnum.Value("BAR")
+    print(e4)
     assert OuterEnum.Name(e2) == "BAR"
 
     # Legacy .V type
     e5: OuterEnum.V = OuterEnum.Value("BAR")
+    print(e5)
     assert OuterEnum.Name(e3) == "BAR"
 
     # Protobuf itself allows both str and bytes here.
@@ -468,7 +469,7 @@ def test_mapping_type() -> None:
     assert s.map_message[6] == OuterMessage3()
     assert s.map_message.get_or_create(6) == OuterMessage3()
 
-    s2 = SimpleProto3(map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_string="hi")})
+    SimpleProto3(map_scalar={5: "abcd"}, map_message={5: OuterMessage3(a_string="hi")})
 
 
 def test_casttype() -> None:

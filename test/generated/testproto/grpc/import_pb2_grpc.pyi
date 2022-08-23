@@ -36,7 +36,6 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> testproto.test_pb2.Simple1:
         """UnaryUnary"""
-        ...
     @abc.abstractmethod
     def UnaryStream(
         self,
@@ -44,7 +43,6 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> google.protobuf.empty_pb2.Empty:
         """UnaryStream"""
-        ...
     @abc.abstractmethod
     def NoComment(
         self,
