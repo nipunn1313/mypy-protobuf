@@ -1,5 +1,6 @@
 ## Upcoming
 
+- Support emitting module docstrings
 - Drop support for Python 3.6 [EOL]
 - Bump to grpc-stubs 1.24.7
 - Require protobuf 3.19.4
