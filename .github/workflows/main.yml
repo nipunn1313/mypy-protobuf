@@ -93,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: Run black
+      - name: Run formatters
         run: |
           pip3 install black isort
           black --check .

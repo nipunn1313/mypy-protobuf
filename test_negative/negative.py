@@ -3,24 +3,14 @@ This code is intended to have mypy failures which we will ensure
 show up in the output.
 """
 
-from typing import (
-    List,
-    Text,
-)
-
-from testproto.test_extensions2_pb2 import SeparateFileExtension
-from testproto.test_pb2 import (
-    DESCRIPTOR,
-    Extensions1,
-    Extensions2,
-    FOO,
-    PythonReservedKeywords,
-    Simple1,
-    Simple2,
-)
-from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
-from testproto.dot.com.test_pb2 import TestMessage
 from test.test_generated_mypy import Email, UserId
+from typing import List, Text
+
+from testproto.dot.com.test_pb2 import TestMessage
+from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
+from testproto.test_extensions2_pb2 import SeparateFileExtension
+from testproto.test_pb2 import (DESCRIPTOR, FOO, Extensions1, Extensions2,
+                                PythonReservedKeywords, Simple1, Simple2)
 
 s = Simple1()
 s.a_string = "Hello"
