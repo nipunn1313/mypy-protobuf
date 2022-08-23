@@ -23,16 +23,25 @@ from testproto.reexport_pb2 import FOO3 as ReexportedFOO3
 from testproto.reexport_pb2 import SimpleProto3 as ReexportedSimpleProto3
 from testproto.test3_pb2 import BAR3, FOO3, OuterMessage3, SimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
-from testproto.test_extensions3_pb2 import (SCALAR_OPTION_FIELD_NUMBER,
-                                            MessageOptionsTestMsg, enum_option,
-                                            msg_option, repeated_enum_option,
-                                            repeated_msg_option,
-                                            repeated_scalar_option,
-                                            scalar_option)
+from testproto.test_extensions3_pb2 import (
+    SCALAR_OPTION_FIELD_NUMBER,
+    MessageOptionsTestMsg,
+    enum_option,
+    msg_option,
+    repeated_enum_option,
+    repeated_msg_option,
+    repeated_scalar_option,
+    scalar_option,
+)
 from testproto.test_pb2 import DESCRIPTOR, FOO, Extensions1, Extensions2
 from testproto.test_pb2 import Name as NamingConflicts_Name
-from testproto.test_pb2 import (NamingConflicts, OuterEnum,
-                                PythonReservedKeywords, Simple1, Simple2)
+from testproto.test_pb2 import (
+    NamingConflicts,
+    OuterEnum,
+    PythonReservedKeywords,
+    Simple1,
+    Simple2,
+)
 
 # C++ python API implementation has some semantic differences from pure python
 # We mainly focus on testing the C++ impl - but just have some flags here

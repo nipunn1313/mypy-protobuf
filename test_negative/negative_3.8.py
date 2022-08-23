@@ -7,8 +7,7 @@ import typing
 
 import grpc
 from testproto.grpc.dummy_pb2 import DummyReply, DummyRequest
-from testproto.grpc.dummy_pb2_grpc import (DummyServiceServicer,
-                                           DummyServiceStub)
+from testproto.grpc.dummy_pb2_grpc import DummyServiceServicer, DummyServiceStub
 
 stub0 = DummyServiceStub()  # E:3.8
 channel = grpc.insecure_channel("127.0.0.1:8080")
