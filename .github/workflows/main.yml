@@ -87,16 +87,17 @@ jobs:
         with:
           version: "${{ steps.read_versions.outputs.PYRIGHT_VERSION }}"
 
-  black:
-    name: Black formatting
+  formatting:
+    name: Formatting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Run black
         run: |
-          pip3 install black
+          pip3 install black isort
           black --check .
+          isort --check .
 
   sanity_check_windows:
     name: Sanity Check Windows Executable

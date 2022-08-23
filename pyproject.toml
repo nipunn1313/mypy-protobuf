@@ -10,6 +10,9 @@ extend-exclude = "(_pb2.py$|_pb2_grpc.py$)"
 # We don't care about line length for generated code
 line-length = 10000
 
+[tool.isort]
+skip_gitignore = true
+
 [tool.mypy]
 strict = true
 show_error_codes = true
