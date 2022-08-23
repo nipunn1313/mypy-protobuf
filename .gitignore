@@ -1,4 +1,3 @@
-/go/src/github.com
 /main
 .*.swp
 __pycache__/
@@ -14,6 +13,6 @@ __pycache__/
 /dist/
 *.egg-info
 .idea/
-*.DS_Store
-*venv*
-/runenv
+.DS_Store
+/venv_*
+/protoc_*
