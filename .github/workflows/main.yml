@@ -97,7 +97,7 @@ jobs:
         run: |
           pip3 install black isort
           black --check .
-          isort --check .
+          isort --check . --diff
 
   sanity_check_windows:
     name: Sanity Check Windows Executable

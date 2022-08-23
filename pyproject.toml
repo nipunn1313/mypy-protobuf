@@ -12,6 +12,7 @@ line-length = 10000
 
 [tool.isort]
 skip_gitignore = true
+extend_skip = ["mypy_protobuf/extensions_pb2.py"]
 
 [tool.mypy]
 strict = true
