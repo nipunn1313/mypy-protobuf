@@ -352,12 +352,12 @@ class PkgWriter(object):
             if self._has_comments(scl):
                 wl(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
                 with self._indent():
-                    if not self._write_comments(scl):
-                        wl("...")
+                    self._write_comments(scl)
+                wl("")
             else:
                 wl(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}): ...")
-            if prefix == "":
-                wl("")
+                if prefix == "":
+                    wl("")
 
             self.write_enum_values(
                 enumerate(enum.value),

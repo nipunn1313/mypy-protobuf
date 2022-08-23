@@ -81,6 +81,7 @@ class Simple1(google.protobuf.message.Message):
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         """Inner Enum"""
+
     INNER1: Simple1.InnerEnum.ValueType  # 1
     """INNER1"""
     INNER2: Simple1.InnerEnum.ValueType  # 2
