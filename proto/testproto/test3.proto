@@ -5,6 +5,7 @@
 */
 syntax = "proto3";
 
+/* package test3 */
 package test3;
 
 enum OuterEnum {

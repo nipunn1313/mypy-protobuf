@@ -33,10 +33,10 @@ SourceCodeLocation = List[int]
 
 # So phabricator doesn't think mypy_protobuf.py is generated
 GENERATED = "@ge" + "nerated"
-HEADER = f"""\"\"\"
+HEADER = f"""
 {GENERATED} by mypy-protobuf.  Do not edit manually!
 isort:skip_file
-\"\"\""""
+"""
 
 # See https://github.com/nipunn1313/mypy-protobuf/issues/73 for details
 PYTHON_RESERVED = {
@@ -835,19 +835,15 @@ class PkgWriter(object):
         saved_lines = self.lines
         self.lines = []
 
-        self._write_line(HEADER)
         # module docstring may exist as comment before syntax (optional) or package name
-        if not self._write_comments([d.FileDescriptorProto.SYNTAX_FIELD_NUMBER]):
-            self._write_comments([d.FileDescriptorProto.PACKAGE_FIELD_NUMBER])
-        if len(self.lines) >= 2:
-            # HACK: merge double module docstring
-            if self.lines[0].endswith('"""') and self.lines[1].startswith('"""'):
-                self.lines[0] = self.lines[0][:-3]
-                self.lines[1] = self.lines[1][3:]
-                # HACK: convert single-line docstring to multiline
-                if self.lines[1].endswith('"""'):
-                    self.lines[1] = self.lines[1][:-3]
-                    self._write_line('"""')
+        self._write_comments([d.FileDescriptorProto.SYNTAX_FIELD_NUMBER])
+        self._write_comments([d.FileDescriptorProto.PACKAGE_FIELD_NUMBER])
+
+        if self.lines:
+            assert self.lines[0].startswith('"""')
+            self.lines[0] = f'"""{HEADER}{self.lines[0][3:]}'
+        else:
+            self._write_line(f'"""{HEADER}"""')
 
         for reexport_idx in self.fd.public_dependency:
             reexport_file = self.fd.dependency[reexport_idx]
@@ -940,7 +936,7 @@ def generate_mypy_grpc_stubs(
         assert fd.name.endswith(".proto")
         output = response.file.add()
         output.name = fd.name[:-6].replace("-", "_").replace(".", "/") + "_pb2_grpc.pyi"
-        output.content = HEADER + pkg_writer.write()
+        output.content = pkg_writer.write()
         if not quiet:
             print("Writing mypy to", output.name, file=sys.stderr)
 
