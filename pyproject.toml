@@ -21,7 +21,7 @@ show_error_codes = true
 
 [tool.pyright]
 venvPath = "."
-venv = "venv_3.8.11"
+venv = "venv_3.8.13"
 # verboseOutput = true
 extraPaths = ["test/generated"]
 include = [

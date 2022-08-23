@@ -3,10 +3,10 @@
 RED="\033[0;31m"
 NC='\033[0m'
 
-PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.10.1}
+PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.10.6}
 PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
-PY_VER_MYPY=${PY_VER_MYPY:=3.8.11}
-PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS_3:=3.8.11}"
+PY_VER_MYPY=${PY_VER_MYPY:=3.8.13}
+PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS_3:=3.8.13}"
 
 PROTOC_ARGS="--proto_path=proto/ --experimental_allow_proto3_optional"
 GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
