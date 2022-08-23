@@ -2,7 +2,6 @@
 
 RED="\033[0;31m"
 NC='\033[0m'
-PROTOC=${PROTOC:=protoc}
 
 PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.10.1}
 PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
@@ -14,6 +13,31 @@ GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
 
 if [ -e $CUSTOM_TYPESHED_DIR ]; then
     export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
+fi
+
+# Install protoc
+PROTOBUF_VERSION=$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
+PROTOC_DIR="protoc_$PROTOBUF_VERSION"
+if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
+    if uname -a | grep Darwin; then
+        # brew install coreutils wget
+        PLAT=osx
+    else
+        PLAT=linux
+    fi
+
+    PROTOC_FILENAME="protoc-${PROTOBUF_VERSION}-${PLAT}-x86_64.zip"
+    PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/$PROTOC_FILENAME"
+
+    rm -rf "$PROTOC_DIR"
+    wget "$PROTOC_URL" -P "$PROTOC_DIR"
+    mkdir -p "$PROTOC_DIR/protoc_install"
+    unzip "$PROTOC_DIR/$PROTOC_FILENAME" -d "$PROTOC_DIR/protoc_install"
+fi
+PROTOC="$PROTOC_DIR/protoc_install/bin/protoc"
+if [[ $($PROTOC --version) != "libprotoc $PROTOBUF_VERSION" ]]; then
+    echo -e "${RED}Wrong protoc installed?"
+    exit 1
 fi
 
 # Create mypy venv
@@ -82,11 +106,6 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     # Generate protos
     python --version
     $PROTOC --version
-    expected="libprotoc 3.19.4"
-    if [[ $($PROTOC --version) != $expected ]]; then
-        echo -e "${RED}For tests - must install protoc version ${expected} ${NC}"
-        exit 1
-    fi
 
     # CI Check to make sure generated files are committed
     SHA_BEFORE=$(find test/generated -name "*.pyi" | xargs sha1sum)

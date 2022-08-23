@@ -30,10 +30,6 @@ jobs:
           echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
           echo ::set-output name=PYRIGHT_VERSION::$(grep '"pyright"' .github/package.json | cut -d\" -f4)
         id: read_versions
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v1
-        with:
-          version: "${{ steps.read_versions.outputs.PROTOBUF_VERSION }}"
       - name: Cache pyenv
         uses: actions/cache@v2
         with:
