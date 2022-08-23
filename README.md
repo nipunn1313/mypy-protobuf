@@ -269,6 +269,7 @@ black .
 - [@jaredkhan](https://github.com/jaredkhan)
 - [@sodul](https://github.com/sodul)
 - [@miaachan](https://github.com/miaachan)
+- [@Alphadelta14](https://github.com/Alphadelta14)
 
 Licence etc.
 ------------
