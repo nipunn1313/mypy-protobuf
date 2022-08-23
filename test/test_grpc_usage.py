@@ -1,7 +1,7 @@
-import grpc
 import typing
 from concurrent import futures
 
+import grpc
 from testproto.grpc import dummy_pb2, dummy_pb2_grpc
 
 ADDRESS = "localhost:22222"

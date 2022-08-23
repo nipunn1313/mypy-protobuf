@@ -10,55 +10,37 @@ These tests can be set up and run by the run_test.sh script
 
 import glob
 import os
-import pytest
 import sys
+from typing import Any, Generator, NewType, Tuple, Type
 
+import pytest
+import testproto.test_pb2 as test_pb2
 from google.protobuf.descriptor import FieldDescriptor
 from google.protobuf.internal import api_implementation
 from google.protobuf.message import Message
-
-import testproto.test_pb2 as test_pb2
-from testproto.reexport_pb2 import (
-    SimpleProto3 as ReexportedSimpleProto3,
-    FOO3 as ReexportedFOO3,
-)
+from testproto.Capitalized.Capitalized_pb2 import Upper, lower, lower2
+from testproto.reexport_pb2 import FOO3 as ReexportedFOO3
+from testproto.reexport_pb2 import SimpleProto3 as ReexportedSimpleProto3
+from testproto.test3_pb2 import BAR3, FOO3, OuterMessage3, SimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
+from testproto.test_extensions3_pb2 import (
+    SCALAR_OPTION_FIELD_NUMBER,
+    MessageOptionsTestMsg,
+    enum_option,
+    msg_option,
+    repeated_enum_option,
+    repeated_msg_option,
+    repeated_scalar_option,
+    scalar_option,
+)
+from testproto.test_pb2 import DESCRIPTOR, FOO, Extensions1, Extensions2
+from testproto.test_pb2 import Name as NamingConflicts_Name
 from testproto.test_pb2 import (
-    DESCRIPTOR,
-    Extensions1,
-    Extensions2,
-    FOO,
-    Name as NamingConflicts_Name,
     NamingConflicts,
     OuterEnum,
     PythonReservedKeywords,
     Simple1,
     Simple2,
-)
-from testproto.test3_pb2 import (
-    BAR3,
-    FOO3,
-    OuterMessage3,
-    SimpleProto3,
-)
-from testproto.test_extensions3_pb2 import (
-    MessageOptionsTestMsg,
-    scalar_option,
-    SCALAR_OPTION_FIELD_NUMBER,
-    repeated_scalar_option,
-    enum_option,
-    repeated_enum_option,
-    msg_option,
-    repeated_msg_option,
-)
-from testproto.Capitalized.Capitalized_pb2 import lower, lower2, Upper
-
-from typing import (
-    Any,
-    NewType,
-    Generator,
-    Tuple,
-    Type,
 )
 
 # C++ python API implementation has some semantic differences from pure python
