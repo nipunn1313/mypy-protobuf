@@ -18,10 +18,10 @@ jobs:
       matrix:
         # Running mypy-protobuf itself
         py-ver-mypy-protobuf: [
-            3.7.13,
-            3.8.13,
-            3.9.13,
-            3.10.6,
+          3.7.13,
+          3.8.13,
+          3.9.13,
+          3.10.6,
         ]
     steps:
       - uses: actions/checkout@v2
