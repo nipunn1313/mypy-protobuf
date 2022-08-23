@@ -3,9 +3,9 @@
 isort:skip_file
 https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 import abc
+import collections.abc
 import grpc
 import testproto.grpc.dummy_pb2
-import typing
 
 class DummyServiceStub:
     """DummyService"""
@@ -42,30 +42,26 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
         context: grpc.ServicerContext,
     ) -> testproto.grpc.dummy_pb2.DummyReply:
         """UnaryUnary"""
-        ...
     @abc.abstractmethod
     def UnaryStream(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: grpc.ServicerContext,
-    ) -> typing.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
+    ) -> collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
         """UnaryStream"""
-        ...
     @abc.abstractmethod
     def StreamUnary(
         self,
-        request_iterator: typing.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
+        request_iterator: collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: grpc.ServicerContext,
     ) -> testproto.grpc.dummy_pb2.DummyReply:
         """StreamUnary"""
-        ...
     @abc.abstractmethod
     def StreamStream(
         self,
-        request_iterator: typing.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
+        request_iterator: collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: grpc.ServicerContext,
-    ) -> typing.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
+    ) -> collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
         """StreamStream"""
-        ...
 
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: grpc.Server) -> None: ...

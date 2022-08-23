@@ -4,6 +4,7 @@ isort:skip_file
 Proto 2 test file."""
 import abc
 import builtins
+import collections.abc
 import concurrent.futures
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
@@ -25,7 +26,7 @@ class _OuterEnum:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
+class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     FOO: _OuterEnum.ValueType  # 1
     """FOO"""
@@ -34,8 +35,6 @@ class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     """Outer Enum"""
-
-    ...
 
 FOO: OuterEnum.ValueType  # 1
 """FOO"""
@@ -47,13 +46,11 @@ class _NamingConflicts:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):
+class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
 
 class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
     """Naming conflicts!"""
-
-    ...
 
 Name: NamingConflicts.ValueType  # 1
 Value: NamingConflicts.ValueType  # 2
@@ -75,7 +72,7 @@ class Simple1(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         INNER1: Simple1._InnerEnum.ValueType  # 1
         """INNER1"""
@@ -84,8 +81,6 @@ class Simple1(google.protobuf.message.Message):
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         """Inner Enum"""
-
-        ...
     INNER1: Simple1.InnerEnum.ValueType  # 1
     """INNER1"""
     INNER2: Simple1.InnerEnum.ValueType  # 2
@@ -174,7 +169,7 @@ class Simple1(google.protobuf.message.Message):
         self,
         *,
         a_string: builtins.str | None = ...,
-        a_repeated_string: typing.Iterable[builtins.str] | None = ...,
+        a_repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
         a_boolean: builtins.bool | None = ...,
         a_uint32: builtins.int | None = ...,
         a_enum: global___OuterEnum.ValueType | None = ...,
@@ -182,9 +177,9 @@ class Simple1(google.protobuf.message.Message):
         a_inner: testproto.inner.inner_pb2.Inner | None = ...,
         a_nested: testproto.nested.nested_pb2.Nested | None = ...,
         inner_enum: global___Simple1.InnerEnum.ValueType | None = ...,
-        rep_inner_enum: typing.Iterable[global___Simple1.InnerEnum.ValueType] | None = ...,
+        rep_inner_enum: collections.abc.Iterable[global___Simple1.InnerEnum.ValueType] | None = ...,
         inner_message: global___Simple1.InnerMessage | None = ...,
-        rep_inner_message: typing.Iterable[global___Simple1.InnerMessage] | None = ...,
+        rep_inner_message: collections.abc.Iterable[global___Simple1.InnerMessage] | None = ...,
         no_package: testproto.nopackage_pb2.NoPackage | None = ...,
         nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType | None = ...,
         nested_message: testproto.nested.nested_pb2.AnotherNested.NestedMessage | None = ...,
@@ -195,7 +190,7 @@ class Simple1(google.protobuf.message.Message):
         inner_enum_in_oneof: global___Simple1.InnerEnum.ValueType | None = ...,
         user_id: test.test_generated_mypy.UserId | None = ...,
         email: test.test_generated_mypy.Email | None = ...,
-        email_by_uid: typing.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email] | None = ...,
+        email_by_uid: collections.abc.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "user_id", b"user_id"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "rep_inner_enum", b"rep_inner_enum", "rep_inner_message", b"rep_inner_message", "user_id", b"user_id"]) -> None: ...
@@ -276,7 +271,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):
+    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
 
@@ -330,7 +325,6 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     @property
     def none(self) -> global____r_None:
         """Test unreserved identifiers w/ reserved message names"""
-        ...
     valid: global___PythonReservedKeywords._r_finally.ValueType
     def __init__(
         self,
@@ -383,19 +377,17 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
         inst: PythonReservedKeywordsService,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        callback: typing.Callable[[global____r_None], None] | None,
+        callback: collections.abc.Callable[[global____r_None], None] | None,
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
-        ...
     @abc.abstractmethod
     def valid_method_name2(
         inst: PythonReservedKeywordsService,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        callback: typing.Callable[[global___PythonReservedKeywords._r_lambda], None] | None,
+        callback: collections.abc.Callable[[global___PythonReservedKeywords._r_lambda], None] | None,
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
-        ...
 
 class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     """Method name is reserved"""
@@ -406,18 +398,16 @@ class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
         inst: PythonReservedKeywordsService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        callback: typing.Callable[[global____r_None], None] | None = None,
+        callback: collections.abc.Callable[[global____r_None], None] | None = ...,
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
-        ...
     def valid_method_name2(
         inst: PythonReservedKeywordsService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        callback: typing.Callable[[global___PythonReservedKeywords._r_lambda], None] | None = None,
+        callback: collections.abc.Callable[[global___PythonReservedKeywords._r_lambda], None] | None = ...,
     ) -> concurrent.futures.Future[global___PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
-        ...
 
 class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
@@ -426,7 +416,7 @@ class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
         inst: ATestService,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        callback: typing.Callable[[global___Simple2], None] | None,
+        callback: collections.abc.Callable[[global___Simple2], None] | None,
     ) -> concurrent.futures.Future[global___Simple2]: ...
 
 class ATestService_Stub(ATestService):
@@ -436,5 +426,5 @@ class ATestService_Stub(ATestService):
         inst: ATestService_Stub,
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
-        callback: typing.Callable[[global___Simple2], None] | None = None,
+        callback: collections.abc.Callable[[global___Simple2], None] | None = ...,
     ) -> concurrent.futures.Future[global___Simple2]: ...

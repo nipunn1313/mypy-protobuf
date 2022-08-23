@@ -87,17 +87,18 @@ jobs:
         with:
           version: "${{ steps.read_versions.outputs.PYRIGHT_VERSION }}"
 
-  formatting:
-    name: Formatting
+  linting:
+    name: Linting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: Run formatters
+      - name: Run formatters and linters
         run: |
-          pip3 install black isort
+          pip3 install black isort flake8-pyi
           black --check .
           isort --check . --diff
+          flake8 .
 
   sanity_check_windows:
     name: Sanity Check Windows Executable
