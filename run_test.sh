@@ -8,10 +8,9 @@ PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.13}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS_3:=3.8.13}"
 
-PROTOC_ARGS="--proto_path=proto/ --experimental_allow_proto3_optional"
-GRPC_PROTOS=$(find proto/testproto/grpc -name "*.proto")
+PROTOC_ARGS=( --proto_path=proto/ --experimental_allow_proto3_optional )
 
-if [ -e $CUSTOM_TYPESHED_DIR ]; then
+if [ -e "$CUSTOM_TYPESHED_DIR" ]; then
     export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
 fi
 
@@ -101,36 +100,36 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
-    $MYPY_VENV/bin/mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$MYPY_PROTOBUF_VENV/bin/python3 --python-version=$PY_VER_MYPY_PROTOBUF_SHORT $FILES
+    "$MYPY_VENV/bin/mypy" --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$MYPY_PROTOBUF_VENV/bin/python3" --python-version="$PY_VER_MYPY_PROTOBUF_SHORT" $FILES
 
     # Generate protos
     python --version
     $PROTOC --version
 
     # CI Check to make sure generated files are committed
-    SHA_BEFORE=$(find test/generated -name "*.pyi" | xargs sha1sum)
+    SHA_BEFORE=$(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum)
     # Clean out generated/ directory - except for __init__.py
     find test/generated -type f -not -name "__init__.py" -delete
 
     # Compile protoc -> python
-    $PROTOC $PROTOC_ARGS --python_out=test/generated `find proto -name "*.proto"`
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --python_out=test/generated
 
     # Compile protoc -> mypy using mypy_protobuf
     # Prereq - create the mypy.proto python proto
-    $PROTOC $PROTOC_ARGS --python_out=. `find proto/mypy_protobuf -name "*.proto"`
-    $PROTOC $PROTOC_ARGS --mypy_out=. `find proto/mypy_protobuf -name "*.proto"`
+    find proto/mypy_protobuf -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --python_out=.
+    find proto/mypy_protobuf -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=.
 
     # Sanity check that our flags work
-    $PROTOC $PROTOC_ARGS --mypy_out=quiet:test/generated `find proto -name "*.proto"`
-    $PROTOC $PROTOC_ARGS --mypy_out=readable_stubs:test/generated `find proto -name "*.proto"`
-    $PROTOC $PROTOC_ARGS --mypy_out=relax_strict_optional_primitives:test/generated `find proto -name "*.proto"`
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=quiet:test/generated
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=readable_stubs:test/generated
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=relax_strict_optional_primitives:test/generated
     # Overwrite w/ run with mypy-protobuf without flags
-    $PROTOC $PROTOC_ARGS --mypy_out=test/generated `find proto -name "*.proto"`
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
 
     # Generate grpc protos
-    $PROTOC $PROTOC_ARGS --mypy_grpc_out=test/generated $GRPC_PROTOS
+    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
 
-    if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" | xargs sha1sum); then
+    if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
         exit 1
     fi
@@ -143,7 +142,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     # Generate GRPC protos for mypy / tests
     (
         source $UNIT_TESTS_VENV/bin/activate
-        python -m grpc_tools.protoc $PROTOC_ARGS --grpc_python_out=test/generated $GRPC_PROTOS
+        find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated
     )
 
     # Run mypy on unit tests / generated output
@@ -151,29 +150,29 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         source $MYPY_VENV/bin/activate
 
         # Run mypy
-        FILES="test/"
-        mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=$UNIT_TESTS_VENV/bin/python --python-version=$PY_VER_MYPY_TARGET $FILES
+        FILES=( "test/" )
+        mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable=$UNIT_TESTS_VENV/bin/python --python-version="$PY_VER_MYPY_TARGET" "${FILES[@]}"
         # PYTHONPATH=test/generated MYPYPATH=$MYPYPATH:test/generated python3 -m mypy.stubtest --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --allowlist stubtest_allowlist.txt testproto
 
         # run mypy on negative-tests (expected mypy failures)
-        NEGATIVE_FILES="test_negative/negative.py test_negative/negative_3.8.py $FILES"
+        NEGATIVE_FILES=( test_negative/negative.py test_negative/negative_3.8.py "${FILES[@]}" )
 
-        MYPY_OUTPUT=`mktemp -d`
+        MYPY_OUTPUT=$(mktemp -d)
         call_mypy() {
             # Write output to file. Make variant w/ omitted line numbers for easy diffing / CR
-            PY_VER_MYPY_TARGET=$(echo $1 | cut -d. -f1-2)
-            mypy --custom-typeshed-dir=$CUSTOM_TYPESHED_DIR --python-executable=venv_$1/bin/python --python-version=$PY_VER_MYPY_TARGET ${@: 2} > $MYPY_OUTPUT/mypy_output || true
-            cut -d: -f1,3- $MYPY_OUTPUT/mypy_output > $MYPY_OUTPUT/mypy_output.omit_linenos
+            PY_VER_MYPY_TARGET=$(echo "$1" | cut -d. -f1-2)
+            mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
+            cut -d: -f1,3- "$MYPY_OUTPUT/mypy_output" > "$MYPY_OUTPUT/mypy_output.omit_linenos"
         }
 
-        call_mypy $PY_VER $NEGATIVE_FILES
-        if ! diff $MYPY_OUTPUT/mypy_output test_negative/output.expected.$PY_VER_MYPY_TARGET || ! diff $MYPY_OUTPUT/mypy_output.omit_linenos test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos; then
+        call_mypy $PY_VER "${NEGATIVE_FILES[@]}"
+        if ! diff "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET" || ! diff "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"; then
             echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
 
             # Copy over all the mypy results for the developer.
-            call_mypy 3.8.11 $NEGATIVE_FILES
-            cp $MYPY_OUTPUT/mypy_output test_negative/output.expected.3.8
-            cp $MYPY_OUTPUT/mypy_output.omit_linenos test_negative/output.expected.3.8.omit_linenos
+            call_mypy 3.8.11 "${NEGATIVE_FILES[@]}"
+            cp "$MYPY_OUTPUT/mypy_output" test_negative/output.expected.3.8
+            cp "$MYPY_OUTPUT/mypy_output.omit_linenos" test_negative/output.expected.3.8.omit_linenos
             exit 1
         fi
     )

@@ -99,6 +99,11 @@ jobs:
           black --check .
           isort --check . --diff
           flake8 .
+      - name: run shellcheck
+        uses: reviewdog/action-shellcheck@v1
+        with:
+          # By default, shellcheck tries to make sure any external files referenced actually exist
+          shellcheck_flags: -e SC1091
 
   sanity_check_windows:
     name: Sanity Check Windows Executable
