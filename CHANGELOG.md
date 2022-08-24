@@ -1,6 +1,8 @@
 ## Upcoming
 
 - Support emitting module docstrings
+- Make generated code flake8 compatible
+- Convert extensions.proto to proto3
 - Drop support for Python 3.6 [EOL]
 - Bump to grpc-stubs 1.24.7
 - Require protobuf 3.19.4

@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1emypy_protobuf/extensions.proto\x12\rmypy_protobuf\x1a google/protobuf/descriptor.proto:1\n\x08\x63\x61sttype\x12\x1d.google.protobuf.FieldOptions\x18\xe0\xd4\x03 \x01(\t:0\n\x07keytype\x12\x1d.google.protobuf.FieldOptions\x18\xe2\xd4\x03 \x01(\t:2\n\tvaluetype\x12\x1d.google.protobuf.FieldOptions\x18\xe3\xd4\x03 \x01(\t')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1emypy_protobuf/extensions.proto\x12\rmypy_protobuf\x1a google/protobuf/descriptor.proto:1\n\x08\x63\x61sttype\x12\x1d.google.protobuf.FieldOptions\x18\xe0\xd4\x03 \x01(\t:0\n\x07keytype\x12\x1d.google.protobuf.FieldOptions\x18\xe2\xd4\x03 \x01(\t:2\n\tvaluetype\x12\x1d.google.protobuf.FieldOptions\x18\xe3\xd4\x03 \x01(\tb\x06proto3')
 
 
 CASTTYPE_FIELD_NUMBER = 60000
