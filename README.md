@@ -151,10 +151,10 @@ WORLD: MyEnum.ValueType  # 1
 M.proto
 ```proto
 message M {
-  uint32 user_id = 1 [(mypy_protobuf.casttype)="mymod.UserId"];
+  uint32 user_id = 1 [(mypy_protobuf.options).casttype="mymod.UserId"];
   map<uint32, string> email_by_uid = 2 [
-    (mypy_protobuf.keytype)="path/to/mymod.UserId",
-    (mypy_protobuf.valuetype)="path/to/mymod.Email"
+    (mypy_protobuf.options).keytype="path/to/mymod.UserId",
+    (mypy_protobuf.options).valuetype="path/to/mymod.Email"
   ];
 }
 ```

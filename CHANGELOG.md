@@ -1,5 +1,9 @@
 ## Upcoming
 
+- Prefer (mypy_protobuf.options).casttype to (mypy_protobuf.casttype)
+    - Allows us to use a single extension number
+    - Applies to casttype,keytype,valuetype
+    - Deprecate (but still support) the old-style extension
 - Support emitting module docstrings
 - Make generated code flake8 compatible
 - Convert extensions.proto to proto3

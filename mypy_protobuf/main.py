@@ -634,10 +634,18 @@ class PkgWriter(object):
         key_field: d.FieldDescriptorProto,
         value_field: d.FieldDescriptorProto,
     ) -> Tuple[str, str]:
-        key_casttype = map_field.options.Extensions[extensions_pb2.keytype]
+        oldstyle_keytype = map_field.options.Extensions[extensions_pb2.keytype]
+        if oldstyle_keytype:
+            print(f"Warning: Map Field {map_field.name}: (mypy_protobuf.keytype) is deprecated. Prefer (mypy_protobuf.options).keytype", file=sys.stderr)
+        key_casttype = map_field.options.Extensions[extensions_pb2.options].keytype or oldstyle_keytype
         ktype = self._import_casttype(key_casttype) if key_casttype else self.python_type(key_field)
-        value_casttype = map_field.options.Extensions[extensions_pb2.valuetype]
+
+        oldstyle_valuetype = map_field.options.Extensions[extensions_pb2.valuetype]
+        if oldstyle_valuetype:
+            print(f"Warning: Map Field {map_field.name}: (mypy_protobuf.valuetype) is deprecated. Prefer (mypy_protobuf.options).valuetype", file=sys.stderr)
+        value_casttype = map_field.options.Extensions[extensions_pb2.options].valuetype or map_field.options.Extensions[extensions_pb2.valuetype]
         vtype = self._import_casttype(value_casttype) if value_casttype else self.python_type(value_field)
+
         return ktype, vtype
 
     def _callable_type(self, method: d.MethodDescriptorProto) -> str:
@@ -758,7 +766,10 @@ class PkgWriter(object):
           - Mapping[k, v] rather than MessageMap[k, v]
           Can be useful for input types (eg constructor)
         """
-        casttype = field.options.Extensions[extensions_pb2.casttype]
+        oldstyle_casttype = field.options.Extensions[extensions_pb2.casttype]
+        if oldstyle_casttype:
+            print(f"Warning: Field {field.name}: (mypy_protobuf.casttype) is deprecated. Prefer (mypy_protobuf.options).casttype", file=sys.stderr)
+        casttype = field.options.Extensions[extensions_pb2.options].casttype or oldstyle_casttype
         if casttype:
             return self._import_casttype(casttype)
 
