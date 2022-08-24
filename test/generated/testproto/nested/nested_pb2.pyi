@@ -17,6 +17,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+typing.final
 class Nested(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -31,6 +32,7 @@ class Nested(google.protobuf.message.Message):
 
 global___Nested = Nested
 
+typing.final
 class AnotherNested(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -49,6 +51,7 @@ class AnotherNested(google.protobuf.message.Message):
     ONE: AnotherNested.NestedEnum.ValueType  # 1
     TWO: AnotherNested.NestedEnum.ValueType  # 2
 
+    typing.final
     class NestedMessage(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

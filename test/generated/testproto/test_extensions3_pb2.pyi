@@ -9,9 +9,11 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
 import testproto.test3_pb2
+import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+typing.final
 class MessageOptionsTestMsg(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
