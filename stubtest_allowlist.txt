@@ -54,3 +54,6 @@ testproto.test_pb2.ATestService.*
 # Part of an "EXPERIMENTAL API" according to comment. Not documented.
 testproto.grpc.dummy_pb2_grpc.DummyService
 testproto.grpc.import_pb2_grpc.SimpleService
+
+# global prefix globals are generated, but aren't used at runtime
+.*_pb2\.global___.*
