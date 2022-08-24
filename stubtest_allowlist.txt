@@ -56,4 +56,4 @@ testproto.grpc.import_pb2_grpc.SimpleService
 .*_pb2\.global___.*
 
 # Until we update typeshed, this will fail
-google.protobuf.empty_pb2.Empty
+testproto.reexport_pb2.Empty
