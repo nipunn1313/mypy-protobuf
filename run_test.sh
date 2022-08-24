@@ -170,7 +170,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
 
             # Copy over all the mypy results for the developer.
-            call_mypy 3.8.11 "${NEGATIVE_FILES[@]}"
+            call_mypy $PY_VER "${NEGATIVE_FILES[@]}"
             cp "$MYPY_OUTPUT/mypy_output" test_negative/output.expected.3.8
             cp "$MYPY_OUTPUT/mypy_output.omit_linenos" test_negative/output.expected.3.8.omit_linenos
             exit 1

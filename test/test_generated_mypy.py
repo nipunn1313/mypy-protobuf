@@ -16,6 +16,7 @@ import pytest
 import testproto.test_pb2 as test_pb2
 from google.protobuf.descriptor import FieldDescriptor
 from google.protobuf.internal import api_implementation
+from google.protobuf.internal.containers import ScalarMap
 from google.protobuf.message import Message
 from testproto.Capitalized.Capitalized_pb2 import Upper, lower, lower2
 from testproto.reexport_pb2 import FOO3 as ReexportedFOO3
@@ -41,6 +42,7 @@ from testproto.test_pb2 import (
     Simple1,
     Simple2,
 )
+from typing_extensions import assert_type
 
 # C++ python API implementation has some semantic differences from pure python
 # We mainly focus on testing the C++ impl - but just have some flags here
@@ -474,11 +476,26 @@ def test_mapping_type() -> None:
 
 def test_casttype() -> None:
     s = Simple1()
+    assert_type(s.user_id, UserId)
+    assert_type(s.email, Email)
+    assert_type(s.email_by_uid, ScalarMap[UserId, Email])
+
     s.user_id = UserId(33)
     assert s.user_id == 33
     s.email = Email("abcd@gmail.com")
     assert s.email == "abcd@gmail.com"
     s.email_by_uid[UserId(33)] = Email("abcd@gmail.com")
+
+    s2 = SimpleProto3()
+    assert_type(s2.user_id, UserId)
+    assert_type(s2.email, Email)
+    assert_type(s2.email_by_uid, ScalarMap[UserId, Email])
+
+    s2.user_id = UserId(33)
+    assert s2.user_id == 33
+    s2.email = Email("abcd@gmail.com")
+    assert s2.email == "abcd@gmail.com"
+    s2.email_by_uid[UserId(33)] = Email("abcd@gmail.com")
 
 
 def test_reserved_keywords() -> None:

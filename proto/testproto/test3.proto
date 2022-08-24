@@ -8,6 +8,8 @@ syntax = "proto3";
 /* package test3 */
 package test3;
 
+import "mypy_protobuf/extensions.proto";
+
 enum OuterEnum {
   UNKNOWN = 0;
   FOO3 = 1;
@@ -54,4 +56,11 @@ message SimpleProto3 {
   map<int32, OuterMessage3> map_message = 17;
 
   optional string an_optional_string = 18;
+
+  uint32 user_id = 19 [(mypy_protobuf.options).casttype="test/test_generated_mypy.UserId"];
+  string email = 20 [(mypy_protobuf.options).casttype="test/test_generated_mypy.Email"];
+  map<uint32, string> email_by_uid = 21 [
+    (mypy_protobuf.options).keytype="test/test_generated_mypy.UserId",
+    (mypy_protobuf.options).valuetype="test/test_generated_mypy.Email"
+  ];
 }
