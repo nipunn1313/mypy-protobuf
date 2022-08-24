@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 3.3.0
+
 - Prefer (mypy_protobuf.options).casttype to (mypy_protobuf.casttype)
     - Allows us to use a single extension number
     - Applies to casttype,keytype,valuetype
