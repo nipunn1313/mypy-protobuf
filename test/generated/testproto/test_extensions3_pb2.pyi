@@ -13,7 +13,7 @@ import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-typing.final
+@typing.final
 class MessageOptionsTestMsg(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

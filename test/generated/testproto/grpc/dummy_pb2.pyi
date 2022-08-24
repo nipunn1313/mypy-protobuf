@@ -15,7 +15,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-typing.final
+@typing.final
 class DummyRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -30,7 +30,7 @@ class DummyRequest(google.protobuf.message.Message):
 
 global___DummyRequest = DummyRequest
 
-typing.final
+@typing.final
 class DummyReply(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

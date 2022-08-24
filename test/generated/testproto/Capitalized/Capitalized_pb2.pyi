@@ -15,7 +15,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-typing.final
+@typing.final
 class lower(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -30,7 +30,7 @@ class lower(google.protobuf.message.Message):
 
 global___lower = lower
 
-typing.final
+@typing.final
 class Upper(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -47,7 +47,7 @@ class Upper(google.protobuf.message.Message):
 
 global___Upper = Upper
 
-typing.final
+@typing.final
 class lower2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
