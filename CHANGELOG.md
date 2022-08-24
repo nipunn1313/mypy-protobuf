@@ -4,6 +4,7 @@
     - Allows us to use a single extension number
     - Applies to casttype,keytype,valuetype
     - Deprecate (but still support) the old-style extension
+- Prefer importing from `typing` over `typing_extensions` on new enough python versions
 - Support emitting module docstrings
 - Make generated code flake8 compatible
 - Convert extensions.proto to proto3

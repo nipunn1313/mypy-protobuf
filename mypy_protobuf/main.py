@@ -12,6 +12,7 @@ from typing import (
     Iterable,
     Iterator,
     List,
+    Optional,
     Set,
     Sequence,
     Tuple,
@@ -157,6 +158,7 @@ class PkgWriter(object):
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
         self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
+        self.typing_extensions_min: Optional[Tuple[int, int]] = None
 
         # Comments
         self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
@@ -165,6 +167,16 @@ class PkgWriter(object):
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Literal") -> "Literal"
         """
+        if path == "typing_extensions":
+            stabilization = {
+                "Literal": (3, 8),
+                "TypeAlias": (3, 10),
+            }
+            assert name in stabilization
+            if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
+                self.typing_extensions_min = stabilization[name]
+            return "typing_extensions." + name
+
         imp = path.replace("/", ".")
         if self.readable_stubs:
             self.from_imports[imp].add((name, None))
@@ -864,8 +876,16 @@ class PkgWriter(object):
                 # n,n to force a reexport (from x import y as y)
                 self.from_imports[reexport_imp].update((n, n) for n in names)
 
+        if self.typing_extensions_min:
+            self.imports.add("sys")
         for pkg in sorted(self.imports):
             self._write_line(f"import {pkg}")
+        if self.typing_extensions_min:
+            self._write_line("")
+            self._write_line(f"if sys.version_info >= {self.typing_extensions_min}:")
+            self._write_line("    import typing as typing_extensions")
+            self._write_line("else:")
+            self._write_line("    import typing_extensions")
 
         for pkg, items in sorted(self.from_imports.items()):
             self._write_line(f"from {pkg} import (")

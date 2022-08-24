@@ -270,6 +270,7 @@ black .
 - [@sodul](https://github.com/sodul)
 - [@miaachan](https://github.com/miaachan)
 - [@Alphadelta14](https://github.com/Alphadelta14)
+- [@fergyfresh](https://github.com/fergyfresh)
 
 Licence etc.
 ------------

@@ -6,8 +6,13 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
+import sys
 import testproto.test_pb2
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
