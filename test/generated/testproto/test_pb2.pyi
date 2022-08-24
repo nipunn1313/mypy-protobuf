@@ -12,13 +12,18 @@ import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
 import google.protobuf.service
+import sys
 import test.test_generated_mypy
 import testproto.inner.inner_pb2
 import testproto.nested.nested_pb2
 import testproto.nopackage_pb2
 import testproto.test3_pb2
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
