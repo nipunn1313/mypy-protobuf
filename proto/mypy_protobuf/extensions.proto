@@ -16,10 +16,10 @@ message FieldOptions {
 
 extend google.protobuf.FieldOptions {
     // Custom field options from mypy-protobuf
-    FieldOptions options = 60004;
+    FieldOptions options = 1154;
 
     // Legacy fields. Prefer to use ones within `options` instead.
-    string casttype = 60000 [deprecated = true];
-    string keytype = 60002 [deprecated = true];
-    string valuetype = 60003 [deprecated = true];
+    string casttype = 1151 [deprecated = true];
+    string keytype = 1152 [deprecated = true];
+    string valuetype = 1153 [deprecated = true];
 }

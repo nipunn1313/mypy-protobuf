@@ -15,16 +15,16 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1emypy_protobuf/extensions.proto\x12\rmypy_protobuf\x1a google/protobuf/descriptor.proto\"D\n\x0c\x46ieldOptions\x12\x10\n\x08\x63\x61sttype\x18\x01 \x01(\t\x12\x0f\n\x07keytype\x18\x02 \x01(\t\x12\x11\n\tvaluetype\x18\x03 \x01(\t:M\n\x07options\x12\x1d.google.protobuf.FieldOptions\x18\xe4\xd4\x03 \x01(\x0b\x32\x1b.mypy_protobuf.FieldOptions:5\n\x08\x63\x61sttype\x12\x1d.google.protobuf.FieldOptions\x18\xe0\xd4\x03 \x01(\tB\x02\x18\x01:4\n\x07keytype\x12\x1d.google.protobuf.FieldOptions\x18\xe2\xd4\x03 \x01(\tB\x02\x18\x01:6\n\tvaluetype\x12\x1d.google.protobuf.FieldOptions\x18\xe3\xd4\x03 \x01(\tB\x02\x18\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1emypy_protobuf/extensions.proto\x12\rmypy_protobuf\x1a google/protobuf/descriptor.proto\"D\n\x0c\x46ieldOptions\x12\x10\n\x08\x63\x61sttype\x18\x01 \x01(\t\x12\x0f\n\x07keytype\x18\x02 \x01(\t\x12\x11\n\tvaluetype\x18\x03 \x01(\t:L\n\x07options\x12\x1d.google.protobuf.FieldOptions\x18\x82\t \x01(\x0b\x32\x1b.mypy_protobuf.FieldOptions:4\n\x08\x63\x61sttype\x12\x1d.google.protobuf.FieldOptions\x18\xff\x08 \x01(\tB\x02\x18\x01:3\n\x07keytype\x12\x1d.google.protobuf.FieldOptions\x18\x80\t \x01(\tB\x02\x18\x01:5\n\tvaluetype\x12\x1d.google.protobuf.FieldOptions\x18\x81\t \x01(\tB\x02\x18\x01\x62\x06proto3')
 
 
-OPTIONS_FIELD_NUMBER = 60004
+OPTIONS_FIELD_NUMBER = 1154
 options = DESCRIPTOR.extensions_by_name['options']
-CASTTYPE_FIELD_NUMBER = 60000
+CASTTYPE_FIELD_NUMBER = 1151
 casttype = DESCRIPTOR.extensions_by_name['casttype']
-KEYTYPE_FIELD_NUMBER = 60002
+KEYTYPE_FIELD_NUMBER = 1152
 keytype = DESCRIPTOR.extensions_by_name['keytype']
-VALUETYPE_FIELD_NUMBER = 60003
+VALUETYPE_FIELD_NUMBER = 1153
 valuetype = DESCRIPTOR.extensions_by_name['valuetype']
 
 _FIELDOPTIONS = DESCRIPTOR.message_types_by_name['FieldOptions']
