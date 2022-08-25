@@ -6,16 +6,15 @@ NC='\033[0m'
 PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.10.6}
 PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.13}
-PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS_3:=3.8.13}"
-
-PROTOC_ARGS=( --proto_path=proto/ --experimental_allow_proto3_optional )
+PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.8.13}"
 
 if [ -e "$CUSTOM_TYPESHED_DIR" ]; then
     export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
 fi
 
 # Install protoc
-PROTOBUF_VERSION=$(grep "^protobuf==" test_requirements.txt | cut -f3 -d=)
+PYTHON_PROTOBUF_VERSION=$(grep "^protobuf==" test_requirements.txt | cut -f3 -d=)
+PROTOBUF_VERSION=$(echo "$PYTHON_PROTOBUF_VERSION" | cut -f2-3 -d.)
 PROTOC_DIR="protoc_$PROTOBUF_VERSION"
 if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
     if uname -a | grep Darwin; then
@@ -34,10 +33,12 @@ if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
     unzip "$PROTOC_DIR/$PROTOC_FILENAME" -d "$PROTOC_DIR/protoc_install"
 fi
 PROTOC="$PROTOC_DIR/protoc_install/bin/protoc"
-if [[ $($PROTOC --version) != "libprotoc $PROTOBUF_VERSION" ]]; then
+if [[ $($PROTOC --version) != "libprotoc 3.$PROTOBUF_VERSION" ]]; then
     echo -e "${RED}Wrong protoc installed?"
     exit 1
 fi
+
+PROTOC_ARGS=( --proto_path=proto/ --proto_path="$PROTOC_DIR/protoc_install/include" --experimental_allow_proto3_optional )
 
 # Create mypy venv
 MYPY_VENV=venv_$PY_VER_MYPY
