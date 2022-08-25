@@ -24,7 +24,7 @@ jobs:
           3.10.6,
         ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Read version numbers
         run: |
           echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
@@ -91,7 +91,7 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - name: Run formatters and linters
         run: |
@@ -109,7 +109,7 @@ jobs:
     name: Sanity Check Windows Executable
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - name: Read versions
         run: echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
