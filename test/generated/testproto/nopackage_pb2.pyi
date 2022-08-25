@@ -16,6 +16,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class NoPackage(google.protobuf.message.Message):
     """Intentionally don't set a package - just to make sure we can handle it."""
 
@@ -27,6 +28,7 @@ class NoPackage(google.protobuf.message.Message):
 
 global___NoPackage = NoPackage
 
+@typing_extensions.final
 class NoPackage2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Mark messages as @typing.final
+
 ## 3.3.0
 
 - Prefer (mypy_protobuf.options).casttype to (mypy_protobuf.casttype)

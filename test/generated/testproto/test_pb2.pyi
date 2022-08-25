@@ -68,6 +68,7 @@ DESCRIPTOR = 8;
 """
 global___NamingConflicts = NamingConflicts
 
+@typing_extensions.final
 class Simple1(google.protobuf.message.Message):
     """Message with one of everything"""
 
@@ -92,6 +93,7 @@ class Simple1(google.protobuf.message.Message):
     INNER2: Simple1.InnerEnum.ValueType  # 2
     """INNER2"""
 
+    @typing_extensions.final
     class InnerMessage(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -99,6 +101,7 @@ class Simple1(google.protobuf.message.Message):
             self,
         ) -> None: ...
 
+    @typing_extensions.final
     class EmailByUidEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -204,6 +207,7 @@ class Simple1(google.protobuf.message.Message):
 
 global___Simple1 = Simple1
 
+@typing_extensions.final
 class Simple2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -219,6 +223,7 @@ class Simple2(google.protobuf.message.Message):
 
 global___Simple2 = Simple2
 
+@typing_extensions.final
 class Extensions1(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -237,6 +242,7 @@ class Extensions1(google.protobuf.message.Message):
 
 global___Extensions1 = Extensions1
 
+@typing_extensions.final
 class Extensions2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -255,6 +261,7 @@ class Extensions2(google.protobuf.message.Message):
 
 global___Extensions2 = Extensions2
 
+@typing_extensions.final
 class _r_None(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -270,6 +277,7 @@ class _r_None(google.protobuf.message.Message):
 
 global____r_None = _r_None
 
+@typing_extensions.final
 class PythonReservedKeywords(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -284,6 +292,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper): ...
     valid_in_finally: PythonReservedKeywords._r_finally.ValueType  # 2
 
+    @typing_extensions.final
     class _r_lambda(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -343,6 +352,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
 
 global___PythonReservedKeywords = PythonReservedKeywords
 
+@typing_extensions.final
 class PythonReservedKeywordsSmall(google.protobuf.message.Message):
     """Do one with just one arg - to make sure it's syntactically correct"""
 
@@ -357,6 +367,7 @@ class PythonReservedKeywordsSmall(google.protobuf.message.Message):
 
 global___PythonReservedKeywordsSmall = PythonReservedKeywordsSmall
 
+@typing_extensions.final
 class SelfField(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

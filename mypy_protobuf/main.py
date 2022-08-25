@@ -171,6 +171,7 @@ class PkgWriter(object):
             stabilization = {
                 "Literal": (3, 8),
                 "TypeAlias": (3, 10),
+                "final": (3, 8),
             }
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
@@ -406,6 +407,7 @@ class PkgWriter(object):
 
             class_name = desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             message_class = self._import("google.protobuf.message", "Message")
+            wl("@{}", self._import("typing_extensions", "final"))
             wl(f"class {class_name}({message_class}{addl_base}):")
             with self._indent():
                 scl = scl_prefix + [i]

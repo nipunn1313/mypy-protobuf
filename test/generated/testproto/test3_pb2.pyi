@@ -36,6 +36,7 @@ FOO3: OuterEnum.ValueType  # 1
 BAR3: OuterEnum.ValueType  # 2
 global___OuterEnum = OuterEnum
 
+@typing_extensions.final
 class OuterMessage3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -50,6 +51,7 @@ class OuterMessage3(google.protobuf.message.Message):
 
 global___OuterMessage3 = OuterMessage3
 
+@typing_extensions.final
 class SimpleProto3(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -66,6 +68,7 @@ class SimpleProto3(google.protobuf.message.Message):
     INNER1: SimpleProto3.InnerEnum.ValueType  # 0
     INNER2: SimpleProto3.InnerEnum.ValueType  # 1
 
+    @typing_extensions.final
     class MapScalarEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -81,6 +84,7 @@ class SimpleProto3(google.protobuf.message.Message):
         ) -> None: ...
         def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class MapMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -98,6 +102,7 @@ class SimpleProto3(google.protobuf.message.Message):
         def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class EmailByUidEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
