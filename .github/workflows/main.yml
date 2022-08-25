@@ -31,24 +31,24 @@ jobs:
           echo ::set-output name=PYRIGHT_VERSION::$(grep '"pyright"' .github/package.json | cut -d\" -f4)
         id: read_versions
       - name: Cache pyenv
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
               ~/.pyenv
               !~/.pyenv/versions
           key: pyenv-installation-2
       - name: Cache pyenv mypy-protobuf ver
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pyenv/versions/${{matrix.py-ver-mypy-protobuf}}
           key: pyenv-${{matrix.py-ver-mypy-protobuf}}-${{hashFiles('setup.py')}}
       - name: Cache pyenv unit tests 3 ver
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pyenv/versions/${{env.PY_VER_UNIT_TESTS_3}}
           key: pyenv-${{env.PY_VER_UNIT_TESTS_3}}-${{hashFiles('setup.py')}}
       - name: Cache pyenv mypy ver
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pyenv/versions/${{env.PY_VER_MYPY}}
           key: pyenv-${{env.PY_VER_MYPY}}-${{hashFiles('setup.py')}}
