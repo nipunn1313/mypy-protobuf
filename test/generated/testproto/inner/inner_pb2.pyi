@@ -7,7 +7,6 @@ import google.protobuf.descriptor
 import google.protobuf.message
 import sys
 import testproto.test3_pb2
-import typing
 
 if sys.version_info >= (3, 8):
     import typing as typing_extensions
@@ -16,7 +15,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing.final
+@typing_extensions.final
 class Inner(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

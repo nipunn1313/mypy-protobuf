@@ -8,7 +8,6 @@ import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
 import sys
-import typing
 
 if sys.version_info >= (3, 8):
     import typing as typing_extensions
@@ -17,7 +16,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing.final
+@typing_extensions.final
 class NoPackage(google.protobuf.message.Message):
     """Intentionally don't set a package - just to make sure we can handle it."""
 
@@ -29,7 +28,7 @@ class NoPackage(google.protobuf.message.Message):
 
 global___NoPackage = NoPackage
 
-@typing.final
+@typing_extensions.final
 class NoPackage2(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

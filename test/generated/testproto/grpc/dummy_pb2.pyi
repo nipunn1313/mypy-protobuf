@@ -6,7 +6,6 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
 import sys
-import typing
 
 if sys.version_info >= (3, 8):
     import typing as typing_extensions
@@ -15,7 +14,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing.final
+@typing_extensions.final
 class DummyRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -30,7 +29,7 @@ class DummyRequest(google.protobuf.message.Message):
 
 global___DummyRequest = DummyRequest
 
-@typing.final
+@typing_extensions.final
 class DummyReply(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
