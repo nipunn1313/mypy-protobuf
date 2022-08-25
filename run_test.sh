@@ -15,7 +15,7 @@ if [ -e "$CUSTOM_TYPESHED_DIR" ]; then
 fi
 
 # Install protoc
-PROTOBUF_VERSION=$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
+PROTOBUF_VERSION=$(grep "^protobuf==" test_requirements.txt | cut -f3 -d=)
 PROTOC_DIR="protoc_$PROTOBUF_VERSION"
 if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
     if uname -a | grep Darwin; then
