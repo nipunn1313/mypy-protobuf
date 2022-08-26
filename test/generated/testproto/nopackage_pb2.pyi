@@ -44,15 +44,21 @@ class NoPackage2(google.protobuf.message.Message):
         np: global___NoPackage | None = ...,
         np_rep: collections.abc.Iterable[global___NoPackage] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal[
-        "np",
-        b"np",
-    ]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal[
-        "np",
-        b"np",
-        "np_rep",
-        b"np_rep",
-    ]) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "np",
+            b"np",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "np",
+            b"np",
+            "np_rep",
+            b"np_rep",
+        ],
+    ) -> None: ...
 
 global___NoPackage2 = NoPackage2

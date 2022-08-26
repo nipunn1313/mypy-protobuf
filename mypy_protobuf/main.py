@@ -521,32 +521,44 @@ class PkgWriter(object):
             return
 
         if hf_fields:
-            wl("def HasField(self, field_name: {}[", self._import("typing_extensions", "Literal"))
+            wl("def HasField(")
             with self._indent():
-                for hf_field in sorted(hf_fields):
-                    wl(f'"{hf_field}",')
-                    wl(f'b"{hf_field}",')
-            wl("]) -> {}: ...", self._builtin("bool"))
+                wl("self,")
+                wl("field_name: {}[", self._import("typing_extensions", "Literal"))
+                with self._indent():
+                    for hf_field in sorted(hf_fields):
+                        wl(f'"{hf_field}",')
+                        wl(f'b"{hf_field}",')
+                wl("],")
+            wl(") -> {}: ...", self._builtin("bool"))
         if cf_fields:
-            wl("def ClearField(self, field_name: {}[", self._import("typing_extensions", "Literal"))
+            wl("def ClearField(")
             with self._indent():
-                for cf_field in sorted(cf_fields):
-                    wl(f'"{cf_field}",')
-                    wl(f'b"{cf_field}",')
-            wl("]) -> None: ...")
+                wl("self,")
+                wl("field_name: {}[", self._import("typing_extensions", "Literal"))
+                with self._indent():
+                    for cf_field in sorted(cf_fields):
+                        wl(f'"{cf_field}",')
+                        wl(f'b"{cf_field}",')
+                wl("],")
+            wl(") -> None: ...")
 
         for wo_field, members in sorted(wo_fields.items()):
             if len(wo_fields) > 1:
                 wl("@{}", self._import("typing", "overload"))
-            wl(
-                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
-                self._import("typing_extensions", "Literal"),
-                # Accepts both str and bytes
-                f'"{wo_field}", b"{wo_field}"',
-                self._import("typing_extensions", "Literal"),
-                # Returns `str`
-                ", ".join(f'"{m}"' for m in members),
-            )
+            wl("def WhichOneof(")
+            with self._indent():
+                wl("self,")
+                wl("oneof_group: {}[", self._import("typing_extensions", "Literal"))
+                with self._indent():
+                    wl(f'"{wo_field}",')
+                    wl(f'b"{wo_field}",')
+                wl("],")
+            wl(") -> None | {}[", self._import("typing_extensions", "Literal"))
+            with self._indent():
+                for m in members:
+                    wl(f'"{m}",')
+            wl("]: ...")
 
     def write_extensions(
         self,

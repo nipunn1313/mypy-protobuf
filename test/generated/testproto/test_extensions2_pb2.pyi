@@ -29,13 +29,19 @@ class SeparateFileExtension(google.protobuf.message.Message):
         *,
         flag: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal[
-        "flag",
-        b"flag",
-    ]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal[
-        "flag",
-        b"flag",
-    ]) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "flag",
+            b"flag",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "flag",
+            b"flag",
+        ],
+    ) -> None: ...
 
 global___SeparateFileExtension = SeparateFileExtension

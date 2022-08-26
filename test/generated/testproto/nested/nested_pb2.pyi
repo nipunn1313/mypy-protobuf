@@ -28,10 +28,13 @@ class Nested(google.protobuf.message.Message):
         *,
         a: testproto.test3_pb2.OuterEnum.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal[
-        "a",
-        b"a",
-    ]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "a",
+            b"a",
+        ],
+    ) -> None: ...
 
 global___Nested = Nested
 
@@ -89,16 +92,19 @@ class AnotherNested(google.protobuf.message.Message):
             ne: global___AnotherNested.NestedEnum.ValueType = ...,
             ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal[
-            "b",
-            b"b",
-            "ne",
-            b"ne",
-            "ne2",
-            b"ne2",
-            "s",
-            b"s",
-        ]) -> None: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal[
+                "b",
+                b"b",
+                "ne",
+                b"ne",
+                "ne2",
+                b"ne2",
+                "s",
+                b"s",
+            ],
+        ) -> None: ...
 
     def __init__(
         self,

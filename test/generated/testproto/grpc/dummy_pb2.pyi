@@ -25,10 +25,13 @@ class DummyRequest(google.protobuf.message.Message):
         *,
         value: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal[
-        "value",
-        b"value",
-    ]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "value",
+            b"value",
+        ],
+    ) -> None: ...
 
 global___DummyRequest = DummyRequest
 
@@ -43,9 +46,12 @@ class DummyReply(google.protobuf.message.Message):
         *,
         value: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal[
-        "value",
-        b"value",
-    ]) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "value",
+            b"value",
+        ],
+    ) -> None: ...
 
 global___DummyReply = DummyReply
