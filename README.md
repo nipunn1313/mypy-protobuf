@@ -276,4 +276,4 @@ Licence etc.
 ------------
 
 1. License: Apache 2.0.
-2. Copyright attribution: Copyright (c) 2017 Dropbox, Inc.
+2. Copyright attribution: Copyright (c) 2022 Nipunn Koorapati
