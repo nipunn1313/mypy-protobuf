@@ -25,7 +25,10 @@ class lower(google.protobuf.message.Message):
         *,
         a: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a", b"a"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "a",
+        b"a",
+    ]) -> None: ...
 
 global___lower = lower
 
@@ -41,8 +44,14 @@ class Upper(google.protobuf.message.Message):
         *,
         Lower: global___lower | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["Lower", b"Lower"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["Lower", b"Lower"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "Lower",
+        b"Lower",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "Lower",
+        b"Lower",
+    ]) -> None: ...
 
 global___Upper = Upper
 
@@ -58,7 +67,13 @@ class lower2(google.protobuf.message.Message):
         *,
         upper: global___Upper | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["upper", b"upper"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["upper", b"upper"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "upper",
+        b"upper",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "upper",
+        b"upper",
+    ]) -> None: ...
 
 global___lower2 = lower2

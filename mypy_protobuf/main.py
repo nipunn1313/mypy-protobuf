@@ -247,7 +247,9 @@ class PkgWriter(object):
 
     def _has_comments(self, scl: SourceCodeLocation) -> bool:
         sci_loc = self.source_code_info_by_scl.get(tuple(scl))
-        return sci_loc is not None and bool(sci_loc.leading_detached_comments or sci_loc.leading_comments or sci_loc.trailing_comments)
+        return sci_loc is not None and bool(
+            sci_loc.leading_detached_comments or sci_loc.leading_comments or sci_loc.trailing_comments
+        )
 
     def _write_comments(self, scl: SourceCodeLocation) -> bool:
         """Return true if any comments were written"""
@@ -471,7 +473,13 @@ class PkgWriter(object):
                         wl("*,")
                     for field in constructor_fields:
                         field_type = self.python_type(field, generic_container=True)
-                        if self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional:
+                        if (
+                            self.fd.syntax == "proto3"
+                            and is_scalar(field)
+                            and field.label != d.FieldDescriptorProto.LABEL_REPEATED
+                            and not self.relax_strict_optional_primitives
+                            and not field.proto3_optional
+                        ):
                             wl(f"{field.name}: {field_type} = ...,")
                         else:
                             wl(f"{field.name}: {field_type} | None = ...,")
@@ -491,32 +499,41 @@ class PkgWriter(object):
         # HasField only supports singular. ClearField supports repeated as well
         # In proto3, HasField only supports message fields and optional fields
         # HasField always supports oneof fields
-        hf_fields = [f.name for f in desc.field if f.HasField("oneof_index") or (f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional))]
+        hf_fields = [
+            f.name
+            for f in desc.field
+            if f.HasField("oneof_index")
+            or (
+                f.label != d.FieldDescriptorProto.LABEL_REPEATED
+                and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional)
+            )
+        ]
         cf_fields = [f.name for f in desc.field]
-        wo_fields = {oneof.name: [f.name for f in desc.field if f.HasField("oneof_index") and f.oneof_index == idx] for idx, oneof in enumerate(desc.oneof_decl)}
+        wo_fields = {
+            oneof.name: [f.name for f in desc.field if f.HasField("oneof_index") and f.oneof_index == idx]
+            for idx, oneof in enumerate(desc.oneof_decl)
+        }
 
         hf_fields.extend(wo_fields.keys())
         cf_fields.extend(wo_fields.keys())
-
-        hf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in hf_fields))
-        cf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in cf_fields))
 
         if not hf_fields and not cf_fields and not wo_fields:
             return
 
         if hf_fields:
-            wl(
-                "def HasField(self, field_name: {}[{}]) -> {}: ...",
-                self._import("typing_extensions", "Literal"),
-                hf_fields_text,
-                self._builtin("bool"),
-            )
+            wl("def HasField(self, field_name: {}[", self._import("typing_extensions", "Literal"))
+            with self._indent():
+                for hf_field in sorted(hf_fields):
+                    wl(f'"{hf_field}",')
+                    wl(f'b"{hf_field}",')
+            wl("]) -> {}: ...", self._builtin("bool"))
         if cf_fields:
-            wl(
-                "def ClearField(self, field_name: {}[{}]) -> None: ...",
-                self._import("typing_extensions", "Literal"),
-                cf_fields_text,
-            )
+            wl("def ClearField(self, field_name: {}[", self._import("typing_extensions", "Literal"))
+            with self._indent():
+                for cf_field in sorted(cf_fields):
+                    wl(f'"{cf_field}",')
+                    wl(f'b"{cf_field}",')
+            wl("]) -> None: ...")
 
         for wo_field, members in sorted(wo_fields.items()):
             if len(wo_fields) > 1:
@@ -650,14 +667,23 @@ class PkgWriter(object):
     ) -> Tuple[str, str]:
         oldstyle_keytype = map_field.options.Extensions[extensions_pb2.keytype]
         if oldstyle_keytype:
-            print(f"Warning: Map Field {map_field.name}: (mypy_protobuf.keytype) is deprecated. Prefer (mypy_protobuf.options).keytype", file=sys.stderr)
+            print(
+                f"Warning: Map Field {map_field.name}: (mypy_protobuf.keytype) is deprecated. Prefer (mypy_protobuf.options).keytype",
+                file=sys.stderr,
+            )
         key_casttype = map_field.options.Extensions[extensions_pb2.options].keytype or oldstyle_keytype
         ktype = self._import_casttype(key_casttype) if key_casttype else self.python_type(key_field)
 
         oldstyle_valuetype = map_field.options.Extensions[extensions_pb2.valuetype]
         if oldstyle_valuetype:
-            print(f"Warning: Map Field {map_field.name}: (mypy_protobuf.valuetype) is deprecated. Prefer (mypy_protobuf.options).valuetype", file=sys.stderr)
-        value_casttype = map_field.options.Extensions[extensions_pb2.options].valuetype or map_field.options.Extensions[extensions_pb2.valuetype]
+            print(
+                f"Warning: Map Field {map_field.name}: (mypy_protobuf.valuetype) is deprecated. Prefer (mypy_protobuf.options).valuetype",
+                file=sys.stderr,
+            )
+        value_casttype = (
+            map_field.options.Extensions[extensions_pb2.options].valuetype
+            or map_field.options.Extensions[extensions_pb2.valuetype]
+        )
         vtype = self._import_casttype(value_casttype) if value_casttype else self.python_type(value_field)
 
         return ktype, vtype
@@ -782,7 +808,10 @@ class PkgWriter(object):
         """
         oldstyle_casttype = field.options.Extensions[extensions_pb2.casttype]
         if oldstyle_casttype:
-            print(f"Warning: Field {field.name}: (mypy_protobuf.casttype) is deprecated. Prefer (mypy_protobuf.options).casttype", file=sys.stderr)
+            print(
+                f"Warning: Field {field.name}: (mypy_protobuf.casttype) is deprecated. Prefer (mypy_protobuf.options).casttype",
+                file=sys.stderr,
+            )
         casttype = field.options.Extensions[extensions_pb2.options].casttype or oldstyle_casttype
         if casttype:
             return self._import_casttype(casttype)
@@ -870,7 +899,12 @@ class PkgWriter(object):
             reexport_file = self.fd.dependency[reexport_idx]
             reexport_fd = self.descriptors.files[reexport_file]
             reexport_imp = reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
-            names = [m.name for m in reexport_fd.message_type] + [m.name for m in reexport_fd.enum_type] + [v.name for m in reexport_fd.enum_type for v in m.value] + [m.name for m in reexport_fd.extension]
+            names = (
+                [m.name for m in reexport_fd.message_type]
+                + [m.name for m in reexport_fd.enum_type]
+                + [v.name for m in reexport_fd.enum_type for v in m.value]
+                + [m.name for m in reexport_fd.extension]
+            )
             if reexport_fd.options.py_generic_services:
                 names.extend(m.name for m in reexport_fd.service)
 

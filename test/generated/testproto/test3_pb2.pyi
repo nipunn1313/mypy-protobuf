@@ -47,7 +47,10 @@ class OuterMessage3(google.protobuf.message.Message):
         *,
         a_string: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "a_string",
+        b"a_string",
+    ]) -> None: ...
 
 global___OuterMessage3 = OuterMessage3
 
@@ -82,7 +85,12 @@ class SimpleProto3(google.protobuf.message.Message):
             key: builtins.int = ...,
             value: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal[
+            "key",
+            b"key",
+            "value",
+            b"value",
+        ]) -> None: ...
 
     @typing_extensions.final
     class MapMessageEntry(google.protobuf.message.Message):
@@ -99,8 +107,16 @@ class SimpleProto3(google.protobuf.message.Message):
             key: builtins.int = ...,
             value: global___OuterMessage3 | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal[
+            "value",
+            b"value",
+        ]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal[
+            "key",
+            b"key",
+            "value",
+            b"value",
+        ]) -> None: ...
 
     @typing_extensions.final
     class EmailByUidEntry(google.protobuf.message.Message):
@@ -116,7 +132,12 @@ class SimpleProto3(google.protobuf.message.Message):
             key: builtins.int = ...,
             value: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal[
+            "key",
+            b"key",
+            "value",
+            b"value",
+        ]) -> None: ...
 
     A_STRING_FIELD_NUMBER: builtins.int
     A_REPEATED_STRING_FIELD_NUMBER: builtins.int
@@ -195,8 +216,86 @@ class SimpleProto3(google.protobuf.message.Message):
         email: test.test_generated_mypy.Email = ...,
         email_by_uid: collections.abc.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["OuterMessage3", b"OuterMessage3", "_an_optional_string", b"_an_optional_string", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "an_optional_string", b"an_optional_string", "b_oneof", b"b_oneof", "b_oneof_1", b"b_oneof_1", "b_oneof_2", b"b_oneof_2", "bool", b"bool", "inner_enum_in_oneof", b"inner_enum_in_oneof", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message", b"outer_message", "outer_message_in_oneof", b"outer_message_in_oneof"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["OuterEnum", b"OuterEnum", "OuterMessage3", b"OuterMessage3", "_an_optional_string", b"_an_optional_string", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_outer_enum", b"a_outer_enum", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "an_optional_string", b"an_optional_string", "b_oneof", b"b_oneof", "b_oneof_1", b"b_oneof_1", "b_oneof_2", b"b_oneof_2", "bool", b"bool", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "map_message", b"map_message", "map_scalar", b"map_scalar", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message", b"outer_message", "outer_message_in_oneof", b"outer_message_in_oneof", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "OuterMessage3",
+        b"OuterMessage3",
+        "_an_optional_string",
+        b"_an_optional_string",
+        "a_oneof",
+        b"a_oneof",
+        "a_oneof_1",
+        b"a_oneof_1",
+        "a_oneof_2",
+        b"a_oneof_2",
+        "an_optional_string",
+        b"an_optional_string",
+        "b_oneof",
+        b"b_oneof",
+        "b_oneof_1",
+        b"b_oneof_1",
+        "b_oneof_2",
+        b"b_oneof_2",
+        "bool",
+        b"bool",
+        "inner_enum_in_oneof",
+        b"inner_enum_in_oneof",
+        "outer_enum_in_oneof",
+        b"outer_enum_in_oneof",
+        "outer_message",
+        b"outer_message",
+        "outer_message_in_oneof",
+        b"outer_message_in_oneof",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "OuterEnum",
+        b"OuterEnum",
+        "OuterMessage3",
+        b"OuterMessage3",
+        "_an_optional_string",
+        b"_an_optional_string",
+        "a_oneof",
+        b"a_oneof",
+        "a_oneof_1",
+        b"a_oneof_1",
+        "a_oneof_2",
+        b"a_oneof_2",
+        "a_outer_enum",
+        b"a_outer_enum",
+        "a_repeated_string",
+        b"a_repeated_string",
+        "a_string",
+        b"a_string",
+        "an_optional_string",
+        b"an_optional_string",
+        "b_oneof",
+        b"b_oneof",
+        "b_oneof_1",
+        b"b_oneof_1",
+        "b_oneof_2",
+        b"b_oneof_2",
+        "bool",
+        b"bool",
+        "email",
+        b"email",
+        "email_by_uid",
+        b"email_by_uid",
+        "inner_enum",
+        b"inner_enum",
+        "inner_enum_in_oneof",
+        b"inner_enum_in_oneof",
+        "map_message",
+        b"map_message",
+        "map_scalar",
+        b"map_scalar",
+        "outer_enum_in_oneof",
+        b"outer_enum_in_oneof",
+        "outer_message",
+        b"outer_message",
+        "outer_message_in_oneof",
+        b"outer_message_in_oneof",
+        "user_id",
+        b"user_id",
+    ]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_an_optional_string", b"_an_optional_string"]) -> typing_extensions.Literal["an_optional_string"] | None: ...
     @typing.overload

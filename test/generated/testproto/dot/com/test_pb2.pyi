@@ -25,6 +25,9 @@ class TestMessage(google.protobuf.message.Message):
         *,
         foo: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["foo", b"foo"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "foo",
+        b"foo",
+    ]) -> None: ...
 
 global___TestMessage = TestMessage

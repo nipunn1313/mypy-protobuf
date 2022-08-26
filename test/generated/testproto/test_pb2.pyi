@@ -115,8 +115,18 @@ class Simple1(google.protobuf.message.Message):
             key: builtins.int | None = ...,
             value: builtins.str | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal[
+            "key",
+            b"key",
+            "value",
+            b"value",
+        ]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal[
+            "key",
+            b"key",
+            "value",
+            b"value",
+        ]) -> None: ...
 
     A_STRING_FIELD_NUMBER: builtins.int
     A_REPEATED_STRING_FIELD_NUMBER: builtins.int
@@ -201,8 +211,98 @@ class Simple1(google.protobuf.message.Message):
         email: test.test_generated_mypy.Email | None = ...,
         email_by_uid: collections.abc.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "user_id", b"user_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "rep_inner_enum", b"rep_inner_enum", "rep_inner_message", b"rep_inner_message", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "a_boolean",
+        b"a_boolean",
+        "a_enum",
+        b"a_enum",
+        "a_external_enum",
+        b"a_external_enum",
+        "a_inner",
+        b"a_inner",
+        "a_nested",
+        b"a_nested",
+        "a_oneof",
+        b"a_oneof",
+        "a_oneof_1",
+        b"a_oneof_1",
+        "a_oneof_2",
+        b"a_oneof_2",
+        "a_string",
+        b"a_string",
+        "a_uint32",
+        b"a_uint32",
+        "email",
+        b"email",
+        "inner_enum",
+        b"inner_enum",
+        "inner_enum_in_oneof",
+        b"inner_enum_in_oneof",
+        "inner_message",
+        b"inner_message",
+        "nested_enum",
+        b"nested_enum",
+        "nested_message",
+        b"nested_message",
+        "no_package",
+        b"no_package",
+        "outer_enum_in_oneof",
+        b"outer_enum_in_oneof",
+        "outer_message_in_oneof",
+        b"outer_message_in_oneof",
+        "user_id",
+        b"user_id",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "a_boolean",
+        b"a_boolean",
+        "a_enum",
+        b"a_enum",
+        "a_external_enum",
+        b"a_external_enum",
+        "a_inner",
+        b"a_inner",
+        "a_nested",
+        b"a_nested",
+        "a_oneof",
+        b"a_oneof",
+        "a_oneof_1",
+        b"a_oneof_1",
+        "a_oneof_2",
+        b"a_oneof_2",
+        "a_repeated_string",
+        b"a_repeated_string",
+        "a_string",
+        b"a_string",
+        "a_uint32",
+        b"a_uint32",
+        "email",
+        b"email",
+        "email_by_uid",
+        b"email_by_uid",
+        "inner_enum",
+        b"inner_enum",
+        "inner_enum_in_oneof",
+        b"inner_enum_in_oneof",
+        "inner_message",
+        b"inner_message",
+        "nested_enum",
+        b"nested_enum",
+        "nested_message",
+        b"nested_message",
+        "no_package",
+        b"no_package",
+        "outer_enum_in_oneof",
+        b"outer_enum_in_oneof",
+        "outer_message_in_oneof",
+        b"outer_message_in_oneof",
+        "rep_inner_enum",
+        b"rep_inner_enum",
+        "rep_inner_message",
+        b"rep_inner_message",
+        "user_id",
+        b"user_id",
+    ]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["a_oneof", b"a_oneof"]) -> typing_extensions.Literal["a_oneof_1", "a_oneof_2", "outer_message_in_oneof", "outer_enum_in_oneof", "inner_enum_in_oneof"] | None: ...
 
 global___Simple1 = Simple1
@@ -218,8 +318,14 @@ class Simple2(google.protobuf.message.Message):
         *,
         a_string: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["a_string", b"a_string"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "a_string",
+        b"a_string",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "a_string",
+        b"a_string",
+    ]) -> None: ...
 
 global___Simple2 = Simple2
 
@@ -237,8 +343,14 @@ class Extensions1(google.protobuf.message.Message):
         *,
         ext1_string: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ext1_string", b"ext1_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ext1_string", b"ext1_string"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "ext1_string",
+        b"ext1_string",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "ext1_string",
+        b"ext1_string",
+    ]) -> None: ...
 
 global___Extensions1 = Extensions1
 
@@ -256,8 +368,14 @@ class Extensions2(google.protobuf.message.Message):
         *,
         flag: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["flag", b"flag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["flag", b"flag"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "flag",
+        b"flag",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "flag",
+        b"flag",
+    ]) -> None: ...
 
 global___Extensions2 = Extensions2
 
@@ -272,8 +390,14 @@ class _r_None(google.protobuf.message.Message):
         *,
         valid: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["valid", b"valid"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["valid", b"valid"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "valid",
+        b"valid",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "valid",
+        b"valid",
+    ]) -> None: ...
 
 global____r_None = _r_None
 
@@ -304,8 +428,18 @@ class PythonReservedKeywords(google.protobuf.message.Message):
             *,
             valid: builtins.int | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["continue", b"continue", "valid", b"valid"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["continue", b"continue", "valid", b"valid"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal[
+            "continue",
+            b"continue",
+            "valid",
+            b"valid",
+        ]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal[
+            "continue",
+            b"continue",
+            "valid",
+            b"valid",
+        ]) -> None: ...
 
     FROM_FIELD_NUMBER: builtins.int
     IN_FIELD_NUMBER: builtins.int
@@ -347,8 +481,130 @@ class PythonReservedKeywords(google.protobuf.message.Message):
         none: global____r_None | None = ...,
         valid: global___PythonReservedKeywords._r_finally.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["False", b"False", "True", b"True", "and", b"and", "as", b"as", "assert", b"assert", "break", b"break", "class", b"class", "def", b"def", "del", b"del", "elif", b"elif", "else", b"else", "except", b"except", "for", b"for", "from", b"from", "global", b"global", "if", b"if", "import", b"import", "in", b"in", "is", b"is", "none", b"none", "nonlocal", b"nonlocal", "not", b"not", "or", b"or", "pass", b"pass", "raise", b"raise", "try", b"try", "valid", b"valid", "while", b"while", "with", b"with", "yield", b"yield"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["False", b"False", "True", b"True", "and", b"and", "as", b"as", "assert", b"assert", "break", b"break", "class", b"class", "def", b"def", "del", b"del", "elif", b"elif", "else", b"else", "except", b"except", "for", b"for", "from", b"from", "global", b"global", "if", b"if", "import", b"import", "in", b"in", "is", b"is", "none", b"none", "nonlocal", b"nonlocal", "not", b"not", "or", b"or", "pass", b"pass", "raise", b"raise", "try", b"try", "valid", b"valid", "while", b"while", "with", b"with", "yield", b"yield"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "False",
+        b"False",
+        "True",
+        b"True",
+        "and",
+        b"and",
+        "as",
+        b"as",
+        "assert",
+        b"assert",
+        "break",
+        b"break",
+        "class",
+        b"class",
+        "def",
+        b"def",
+        "del",
+        b"del",
+        "elif",
+        b"elif",
+        "else",
+        b"else",
+        "except",
+        b"except",
+        "for",
+        b"for",
+        "from",
+        b"from",
+        "global",
+        b"global",
+        "if",
+        b"if",
+        "import",
+        b"import",
+        "in",
+        b"in",
+        "is",
+        b"is",
+        "none",
+        b"none",
+        "nonlocal",
+        b"nonlocal",
+        "not",
+        b"not",
+        "or",
+        b"or",
+        "pass",
+        b"pass",
+        "raise",
+        b"raise",
+        "try",
+        b"try",
+        "valid",
+        b"valid",
+        "while",
+        b"while",
+        "with",
+        b"with",
+        "yield",
+        b"yield",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "False",
+        b"False",
+        "True",
+        b"True",
+        "and",
+        b"and",
+        "as",
+        b"as",
+        "assert",
+        b"assert",
+        "break",
+        b"break",
+        "class",
+        b"class",
+        "def",
+        b"def",
+        "del",
+        b"del",
+        "elif",
+        b"elif",
+        "else",
+        b"else",
+        "except",
+        b"except",
+        "for",
+        b"for",
+        "from",
+        b"from",
+        "global",
+        b"global",
+        "if",
+        b"if",
+        "import",
+        b"import",
+        "in",
+        b"in",
+        "is",
+        b"is",
+        "none",
+        b"none",
+        "nonlocal",
+        b"nonlocal",
+        "not",
+        b"not",
+        "or",
+        b"or",
+        "pass",
+        b"pass",
+        "raise",
+        b"raise",
+        "try",
+        b"try",
+        "valid",
+        b"valid",
+        "while",
+        b"while",
+        "with",
+        b"with",
+        "yield",
+        b"yield",
+    ]) -> None: ...
 
 global___PythonReservedKeywords = PythonReservedKeywords
 
@@ -362,8 +618,14 @@ class PythonReservedKeywordsSmall(google.protobuf.message.Message):
     def __init__(
         self,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["from", b"from"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["from", b"from"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "from",
+        b"from",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "from",
+        b"from",
+    ]) -> None: ...
 
 global___PythonReservedKeywordsSmall = PythonReservedKeywordsSmall
 
@@ -380,8 +642,14 @@ class SelfField(google.protobuf.message.Message):
         *,
         self: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["self", b"self"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["self", b"self"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal[
+        "self",
+        b"self",
+    ]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal[
+        "self",
+        b"self",
+    ]) -> None: ...
 
 global___SelfField = SelfField
 
