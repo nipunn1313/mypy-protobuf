@@ -98,8 +98,7 @@ simple2.ClearExtension(Extensions1.ext)  # E:2.7 E:3.8
 
 
 for x in s.Extensions:
-    pass
-x = 4  # E:2.7 E:3.8
+    x = 4  # E:2.7 E:3.8
 
 # Overload WhichOneof
 c = s6.WhichOneof("a_oneof")

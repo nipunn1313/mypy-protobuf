@@ -17,7 +17,7 @@ request1 = DummyRequest()
 response1 = stub1.UnaryUnary(request1)
 value = response1.value
 value2 = response1.not_exists  # E:3.8
-for result1 in stub1.UnaryUnary(request1):  # E:3.8
+for _result1 in stub1.UnaryUnary(request1):  # E:3.8
     pass
 
 for result2 in stub1.UnaryStream(request1):
@@ -33,10 +33,10 @@ def iter_requests() -> typing.Generator[DummyRequest, None, None]:
 
 response3 = stub1.StreamUnary(request1)  # E:3.8
 response4 = stub1.StreamUnary(iter_requests())
-for result3 in stub1.StreamUnary(request1):  # E:3.8
+for _result3 in stub1.StreamUnary(request1):  # E:3.8
     pass
 
-for result4 in stub1.StreamStream(request1):  # E:3.8
+for _result4 in stub1.StreamStream(request1):  # E:3.8
     pass
 for result5 in stub1.StreamStream(iter_requests()):
     value = result5.value
@@ -63,7 +63,7 @@ class GoodServicer(DummyServiceServicer):
         request: typing.Iterator[DummyRequest],
         context: grpc.ServicerContext,
     ) -> DummyReply:
-        for data in request:
+        for _data in request:
             pass
         return DummyReply()
 
@@ -72,7 +72,7 @@ class GoodServicer(DummyServiceServicer):
         request: typing.Iterator[DummyRequest],
         context: grpc.ServicerContext,
     ) -> typing.Iterator[DummyReply]:
-        for data in request:
+        for _data in request:
             yield DummyReply()
 
 
@@ -82,7 +82,7 @@ class BadServicer(DummyServiceServicer):
         request: typing.Iterator[DummyRequest],
         context: grpc.ServicerContext,
     ) -> typing.Iterator[DummyReply]:
-        for data in request:
+        for _data in request:
             yield DummyReply()
 
     def UnaryStream(  # E:3.8
@@ -90,7 +90,7 @@ class BadServicer(DummyServiceServicer):
         request: typing.Iterator[DummyRequest],
         context: grpc.ServicerContext,
     ) -> DummyReply:
-        for data in request:
+        for _data in request:
             pass
         return DummyReply()
 
