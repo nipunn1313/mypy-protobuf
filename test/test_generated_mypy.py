@@ -500,7 +500,7 @@ def test_casttype() -> None:
 
 def test_reserved_keywords() -> None:
     with pytest.raises(AttributeError, match="module.*has no attribute 'asdf'"):
-        getattr(test_pb2, "asdf")
+        getattr(test_pb2, "asdf")  # noqa: B009
 
     # Confirm that "None" is a Message
     none_cls: Type[test_pb2._r_None] = getattr(test_pb2, "None")
