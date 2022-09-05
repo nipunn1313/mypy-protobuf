@@ -31,7 +31,7 @@ class _OuterEnum:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):  # noqa: F821
+class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     FOO: _OuterEnum.ValueType  # 1
     """FOO"""
@@ -51,7 +51,7 @@ class _NamingConflicts:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):  # noqa: F821
+class _NamingConflictsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NamingConflicts.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
 
 class NamingConflicts(_NamingConflicts, metaclass=_NamingConflictsEnumTypeWrapper):
