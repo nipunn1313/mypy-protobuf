@@ -708,7 +708,7 @@ class PkgWriter(object):
                 ") -> {}:{}",
                 self._output_type(method),
                 " ..." if not self._has_comments(scl) else "",
-            ),
+            )
             if self._has_comments(scl):
                 with self._indent():
                     if not self._write_comments(scl):
