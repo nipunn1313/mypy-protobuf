@@ -57,3 +57,42 @@ testproto.grpc.import_pb2_grpc.SimpleService
 
 # Until we update typeshed, this will fail
 testproto.reexport_pb2.Empty
+
+# All readonly generated @property fields seem to trip up
+# stubtest. It claims they aren't available at runtime, when practically,
+# they actually are.
+# Eg:
+# error: testproto.test_pb2.Simple1.rep_inner_message is not present at runtime
+#
+testproto.Capitalized.Capitalized_pb2.Upper.Lower
+testproto.Capitalized.Capitalized_pb2.lower2.upper
+testproto.nopackage_pb2.NoPackage2.np
+testproto.nopackage_pb2.NoPackage2.np_rep
+testproto.reexport_pb2.SimpleProto3.MapMessageEntry.value
+testproto.reexport_pb2.SimpleProto3.OuterMessage3
+testproto.reexport_pb2.SimpleProto3.a_repeated_string
+testproto.reexport_pb2.SimpleProto3.bool
+testproto.reexport_pb2.SimpleProto3.email_by_uid
+testproto.reexport_pb2.SimpleProto3.map_message
+testproto.reexport_pb2.SimpleProto3.map_scalar
+testproto.reexport_pb2.SimpleProto3.outer_message
+testproto.reexport_pb2.SimpleProto3.outer_message_in_oneof
+testproto.test3_pb2.SimpleProto3.MapMessageEntry.value
+testproto.test3_pb2.SimpleProto3.OuterMessage3
+testproto.test3_pb2.SimpleProto3.a_repeated_string
+testproto.test3_pb2.SimpleProto3.bool
+testproto.test3_pb2.SimpleProto3.email_by_uid
+testproto.test3_pb2.SimpleProto3.map_message
+testproto.test3_pb2.SimpleProto3.map_scalar
+testproto.test3_pb2.SimpleProto3.outer_message
+testproto.test3_pb2.SimpleProto3.outer_message_in_oneof
+testproto.test_pb2.Simple1.a_inner
+testproto.test_pb2.Simple1.a_nested
+testproto.test_pb2.Simple1.a_repeated_string
+testproto.test_pb2.Simple1.email_by_uid
+testproto.test_pb2.Simple1.inner_message
+testproto.test_pb2.Simple1.nested_message
+testproto.test_pb2.Simple1.no_package
+testproto.test_pb2.Simple1.outer_message_in_oneof
+testproto.test_pb2.Simple1.rep_inner_enum
+testproto.test_pb2.Simple1.rep_inner_message
