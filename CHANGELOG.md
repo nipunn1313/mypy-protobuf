@@ -2,7 +2,7 @@
 
 - Mark messages as @typing.final
 - Switch to use the reserved mypy-protobuf extension option numbers https://github.com/protocolbuffers/protobuf/blob/main/docs/options.md
-- Bump protobuf dependency to 3.20.1
+- Bump protobuf dependency to 4.21.8
 - Skip unnecessary flake8 noqa F821 on module scope fwd reference classes
 
 ## 3.3.0
