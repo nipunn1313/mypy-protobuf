@@ -1,5 +1,7 @@
 ## Upcoming
 
+## 3.4.0
+
 - Mark messages as @typing.final
 - Switch to use the reserved mypy-protobuf extension option numbers https://github.com/protocolbuffers/protobuf/blob/main/docs/options.md
 - Bump protobuf dependency to 4.21.8
