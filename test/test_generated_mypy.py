@@ -314,7 +314,7 @@ def test_which_oneof_proto2() -> None:
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
-    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
+    with pytest.raises(ValueError, match='Protocol message Simple1 has no "garbage" field.'):
         s_untyped.WhichOneof("garbage")
 
 
@@ -347,7 +347,7 @@ def test_which_oneof_proto3() -> None:
     # Erase the types to verify that incorrect inputs fail at runtime
     # Each test here should be duplicated in test_negative to ensure mypy fails it too
     s_untyped: Any = s
-    with pytest.raises(ValueError, match='Protocol message has no oneof "garbage" field.'):
+    with pytest.raises(ValueError, match='Protocol message SimpleProto3 has no "garbage" field.'):
         s_untyped.WhichOneof("garbage")
 
 
