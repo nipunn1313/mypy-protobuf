@@ -1,25 +1,25 @@
-test_negative/negative_3.8.py:12: error: Missing positional argument "channel" in call to "DummyServiceStub"  [call-arg]
-test_negative/negative_3.8.py:19: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative_3.8.py:20: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
-test_negative/negative_3.8.py:25: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative_3.8.py:27: error: "CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
-test_negative/negative_3.8.py:34: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative_3.8.py:36: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
-test_negative/negative_3.8.py:36: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative_3.8.py:39: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative_3.8.py:43: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative_3.8.py:80: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative_3.8.py:80: note: This violates the Liskov substitution principle
-test_negative/negative_3.8.py:80: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative_3.8.py:80: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"  [override]
-test_negative/negative_3.8.py:88: error: Argument 1 of "UnaryStream" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative_3.8.py:88: note: This violates the Liskov substitution principle
-test_negative/negative_3.8.py:88: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative_3.8.py:88: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Iterator[DummyReply]" in supertype "DummyServiceServicer"  [override]
-test_negative/negative_3.8.py:97: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "Iterator[DummyRequest]"  [override]
-test_negative/negative_3.8.py:97: note: This violates the Liskov substitution principle
-test_negative/negative_3.8.py:97: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative_3.8.py:97: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"  [override]
+test_negative/negative_38.py:12: error: Missing positional argument "channel" in call to "DummyServiceStub"  [call-arg]
+test_negative/negative_38.py:19: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative_38.py:20: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative_38.py:25: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative_38.py:27: error: "CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
+test_negative/negative_38.py:34: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative_38.py:36: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative_38.py:36: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative_38.py:39: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative_38.py:43: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative_38.py:80: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative_38.py:80: note: This violates the Liskov substitution principle
+test_negative/negative_38.py:80: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative_38.py:80: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"  [override]
+test_negative/negative_38.py:88: error: Argument 1 of "UnaryStream" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative_38.py:88: note: This violates the Liskov substitution principle
+test_negative/negative_38.py:88: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative_38.py:88: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Iterator[DummyReply]" in supertype "DummyServiceServicer"  [override]
+test_negative/negative_38.py:97: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "Iterator[DummyRequest]"  [override]
+test_negative/negative_38.py:97: note: This violates the Liskov substitution principle
+test_negative/negative_38.py:97: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative_38.py:97: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "DummyReply" in supertype "DummyServiceServicer"  [override]
 test_negative/negative.py:25: error: "Simple1" has no attribute "SerializeToStringg"  [attr-defined]
 test_negative/negative.py:28: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "bytes"  [arg-type]
 test_negative/negative.py:31: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "bytes"; expected "Simple1"  [arg-type]
@@ -94,4 +94,4 @@ test_negative/negative.py:170: error: Property "a_repeated_string" defined in "S
 test_negative/negative.py:171: error: Property "rep_inner_enum" defined in "Simple1" is read-only  [misc]
 test_negative/negative.py:176: error: "_r_None" has no attribute "invalid"; maybe "valid"?  [attr-defined]
 test_negative/negative.py:180: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
-Found 80 errors in 2 files (checked 32 source files)
+Found 80 errors in 2 files (checked 3 source files)
