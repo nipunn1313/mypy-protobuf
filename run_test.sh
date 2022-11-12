@@ -149,15 +149,16 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     # Run mypy on unit tests / generated output
     (
         source $MYPY_VENV/bin/activate
+        export MYPYPATH=$MYPYPATH:test/generated
 
         # Run mypy
         FILES=( "test/" )
-        mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable=$UNIT_TESTS_VENV/bin/python --python-version="$PY_VER_MYPY_TARGET" "${FILES[@]}"
+        mypy --explicit-package-bases --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable=$UNIT_TESTS_VENV/bin/python --python-version="$PY_VER_MYPY_TARGET" "${FILES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
         if [[ $API_IMPL != "python" ]]; then
-            PYTHONPATH=test/generated MYPYPATH=$MYPYPATH:test/generated python3 -m mypy.stubtest --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --allowlist stubtest_allowlist.txt testproto
+            PYTHONPATH=test/generated python3 -m mypy.stubtest --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --allowlist stubtest_allowlist.txt testproto
         fi
 
         # run mypy on negative-tests (expected mypy failures)
@@ -165,9 +166,10 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 
         MYPY_OUTPUT=$(mktemp -d)
         call_mypy() {
+            export MYPYPATH=$MYPYPATH:test/generated
             # Write output to file. Make variant w/ omitted line numbers for easy diffing / CR
             PY_VER_MYPY_TARGET=$(echo "$1" | cut -d. -f1-2)
-            mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
+            mypy --explicit-package-bases --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
             cut -d: -f1,3- "$MYPY_OUTPUT/mypy_output" > "$MYPY_OUTPUT/mypy_output.omit_linenos"
         }
 
