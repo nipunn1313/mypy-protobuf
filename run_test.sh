@@ -162,7 +162,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         fi
 
         # run mypy on negative-tests (expected mypy failures)
-        NEGATIVE_MODULES=( -m test_negative.negative -m test_negative.negative_38 "${MODULES[@]}" )
+        NEGATIVE_MODULES=( -m test_negative.negative "${MODULES[@]}" )
 
         MYPY_OUTPUT=$(mktemp -d)
         call_mypy() {

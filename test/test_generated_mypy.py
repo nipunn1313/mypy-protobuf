@@ -108,7 +108,7 @@ def test_generate_negative_matches() -> None:
 
     errors_38 = set(grab_errors("test_negative/output.expected.3.8"))
 
-    expected_errors_38 = set(grab_expectations("test_negative/negative.py", "E:3.8")) | set(grab_expectations("test_negative/negative_38.py", "E:3.8"))
+    expected_errors_38 = set(grab_expectations("test_negative/negative.py", "E:3.8"))
 
     assert errors_38 == expected_errors_38
 

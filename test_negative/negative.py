@@ -4,9 +4,12 @@ show up in the output.
 """
 
 from test.test_generated_mypy import Email, UserId
-from typing import List
+from typing import Generator, Iterator, List
 
+import grpc
 from testproto.dot.com.test_pb2 import TestMessage
+from testproto.grpc.dummy_pb2 import DummyReply, DummyRequest
+from testproto.grpc.dummy_pb2_grpc import DummyServiceServicer, DummyServiceStub
 from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
 from testproto.test_pb2 import (
@@ -178,3 +181,95 @@ PythonReservedKeywords().none.invalid  # E:3.8
 assert PythonReservedKeywords().valid == PythonReservedKeywords.valid_in_finally
 a_string = "hi"
 a_string = PythonReservedKeywords().valid  # E:3.8
+
+stub0 = DummyServiceStub()  # E:3.8
+channel = grpc.insecure_channel("127.0.0.1:8080")
+stub1 = DummyServiceStub(channel)
+request1 = DummyRequest()
+
+response1 = stub1.UnaryUnary(request1)
+value = response1.value
+value2 = response1.not_exists  # E:3.8
+for _result1 in stub1.UnaryUnary(request1):  # E:3.8
+    pass
+
+for result2 in stub1.UnaryStream(request1):
+    value = result2.value
+    value2 = result2.not_exists  # E:3.8
+response2 = stub1.UnaryStream(request1)
+value = response2.value  # E:3.8
+
+
+def iter_requests() -> Generator[DummyRequest, None, None]:
+    yield request1
+
+
+response3 = stub1.StreamUnary(request1)  # E:3.8
+response4 = stub1.StreamUnary(iter_requests())
+for _result3 in stub1.StreamUnary(request1):  # E:3.8
+    pass
+
+for _result4 in stub1.StreamStream(request1):  # E:3.8
+    pass
+for result5 in stub1.StreamStream(iter_requests()):
+    value = result5.value
+    value2 = result5.not_exists  # E:3.8
+
+
+class GoodServicer(DummyServiceServicer):
+    def UnaryUnary(
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        return DummyReply()
+
+    def UnaryStream(
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
+    ) -> Iterator[DummyReply]:
+        yield DummyReply()
+
+    def StreamUnary(
+        self,
+        request: Iterator[DummyRequest],
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        for _data in request:
+            pass
+        return DummyReply()
+
+    def StreamStream(
+        self,
+        request: Iterator[DummyRequest],
+        context: grpc.ServicerContext,
+    ) -> Iterator[DummyReply]:
+        for _data in request:
+            yield DummyReply()
+
+
+class BadServicer(DummyServiceServicer):
+    def UnaryUnary(  # E:3.8
+        self,
+        request: Iterator[DummyRequest],
+        context: grpc.ServicerContext,
+    ) -> Iterator[DummyReply]:
+        for _data in request:
+            yield DummyReply()
+
+    def UnaryStream(  # E:3.8
+        self,
+        request: Iterator[DummyRequest],
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        for _data in request:
+            pass
+        return DummyReply()
+
+    def StreamUnary(  # E:3.8
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
+    ) -> Iterator[DummyReply]:
+        yield DummyReply()
