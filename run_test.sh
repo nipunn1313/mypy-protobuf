@@ -152,7 +152,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         export MYPYPATH=$MYPYPATH:test/generated
 
         # Run mypy
-        MODULES=( "-m" "test" )
+        MODULES=( -m test.test_generated_mypy -m test.test_grpc_usage -m test.test_grpc_async_usage )
         mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable=$UNIT_TESTS_VENV/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
