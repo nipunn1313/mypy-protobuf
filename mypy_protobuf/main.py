@@ -892,7 +892,7 @@ class PkgWriter(object):
 
         for pkg, items in sorted(self.from_imports.items()):
             self._write_line(f"from {pkg} import (")
-            for (name, reexport_name) in sorted(items):
+            for name, reexport_name in sorted(items):
                 if reexport_name is None:
                     self._write_line(f"    {name},")
                 else:
@@ -972,9 +972,7 @@ def generate_mypy_grpc_stubs(
 
 
 @contextmanager
-def code_generation() -> Iterator[
-    Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse],
-]:
+def code_generation() -> Iterator[Tuple[plugin_pb2.CodeGeneratorRequest, plugin_pb2.CodeGeneratorResponse],]:
     if len(sys.argv) > 1 and sys.argv[1] in ("-V", "--version"):
         print("mypy-protobuf " + __version__)
         sys.exit(0)

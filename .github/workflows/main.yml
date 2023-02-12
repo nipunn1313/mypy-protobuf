@@ -10,7 +10,9 @@ on:
 jobs:
   run_test:
     name: ${{ matrix.py-ver-mypy-protobuf }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    # Some CI issues regarding ubuntu-latest
+    # runs-on: ubuntu-latest
     env:
       PY_VER_MYPY: 3.8.13
       PY_VER_UNIT_TESTS_3: 3.8.13
