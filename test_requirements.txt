@@ -2,6 +2,6 @@
 # generated code.
 protobuf==4.21.9
 pytest==7.2.1
-grpc-stubs==1.24.11
+grpc-stubs==1.24.12
 grpcio-tools==1.51.1
 types-protobuf==4.21.0.5
