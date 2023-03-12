@@ -98,7 +98,7 @@ jobs:
       - name: Run formatters and linters
         run: |
           pip3 install black isort flake8-pyi flake8-noqa flake8-bugbear
-          black --check .
+          black --check --extend-exclude '(_pb2_grpc|_pb2).pyi?$' .
           isort --check . --diff
           flake8 .
       - name: run shellcheck
