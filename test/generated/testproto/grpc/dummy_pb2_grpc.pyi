@@ -3,6 +3,7 @@
 isort:skip_file
 https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 import abc
+import collections.abc
 import grpc
 import grpc.aio
 import testproto.grpc.dummy_pb2
@@ -10,7 +11,7 @@ import typing
 
 _T = typing.TypeVar('_T')
 
-class _MaybeAsyncIterator(typing.AsyncIterator[_T], typing.Iterator[_T], metaclass=abc.ABCMeta):
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
     ...
 
 class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
@@ -73,28 +74,28 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, typing.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """UnaryUnary"""
     @abc.abstractmethod
     def UnaryStream(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: _ServicerContext,
-    ) -> typing.Union[typing.Iterator[testproto.grpc.dummy_pb2.DummyReply], typing.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> typing.Union[collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
         """UnaryStream"""
     @abc.abstractmethod
     def StreamUnary(
         self,
         request_iterator: _MaybeAsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, typing.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """StreamUnary"""
     @abc.abstractmethod
     def StreamStream(
         self,
         request_iterator: _MaybeAsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: _ServicerContext,
-    ) -> typing.Union[typing.Iterator[testproto.grpc.dummy_pb2.DummyReply], typing.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> typing.Union[collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
         """StreamStream"""
 
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

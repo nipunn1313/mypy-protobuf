@@ -3,6 +3,7 @@
 isort:skip_file
 """
 import abc
+import collections.abc
 import google.protobuf.empty_pb2
 import grpc
 import grpc.aio
@@ -11,7 +12,7 @@ import typing
 
 _T = typing.TypeVar('_T')
 
-class _MaybeAsyncIterator(typing.AsyncIterator[_T], typing.Iterator[_T], metaclass=abc.ABCMeta):
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
     ...
 
 class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
@@ -62,20 +63,20 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
         self,
         request: google.protobuf.empty_pb2.Empty,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.test_pb2.Simple1, typing.Awaitable[testproto.test_pb2.Simple1]]:
+    ) -> typing.Union[testproto.test_pb2.Simple1, collections.abc.Awaitable[testproto.test_pb2.Simple1]]:
         """UnaryUnary"""
     @abc.abstractmethod
     def UnaryStream(
         self,
         request: testproto.test_pb2.Simple1,
         context: _ServicerContext,
-    ) -> typing.Union[google.protobuf.empty_pb2.Empty, typing.Awaitable[google.protobuf.empty_pb2.Empty]]:
+    ) -> typing.Union[google.protobuf.empty_pb2.Empty, collections.abc.Awaitable[google.protobuf.empty_pb2.Empty]]:
         """UnaryStream"""
     @abc.abstractmethod
     def NoComment(
         self,
         request: testproto.test_pb2.Simple1,
         context: _ServicerContext,
-    ) -> typing.Union[google.protobuf.empty_pb2.Empty, typing.Awaitable[google.protobuf.empty_pb2.Empty]]: ...
+    ) -> typing.Union[google.protobuf.empty_pb2.Empty, collections.abc.Awaitable[google.protobuf.empty_pb2.Empty]]: ...
 
 def add_SimpleServiceServicer_to_server(servicer: SimpleServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

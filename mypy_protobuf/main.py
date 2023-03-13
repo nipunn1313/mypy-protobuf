@@ -696,14 +696,14 @@ class PkgWriter(object):
         if method.server_streaming:
             # Union[Iterator[Resp], AsyncIterator[Resp]] is subtyped by Iterator[Resp] and AsyncIterator[Resp].
             # So both can be used in the covariant function return position.
-            iterator = f"{self._import('typing', 'Iterator')}[{result}]"
-            aiterator = f"{self._import('typing', 'AsyncIterator')}[{result}]"
+            iterator = f"{self._import('collections.abc', 'Iterator')}[{result}]"
+            aiterator = f"{self._import('collections.abc', 'AsyncIterator')}[{result}]"
             result = f"{self._import('typing', 'Union')}[{iterator}, {aiterator}]"
         else:
             # Union[Resp, Awaitable[Resp]] is subtyped by Resp and Awaitable[Resp].
             # So both can be used in the covariant function return position.
             # Awaitable[Resp] is equivalent to async def.
-            awaitable = f"{self._import('typing', 'Awaitable')}[{result}]"
+            awaitable = f"{self._import('collections.abc', 'Awaitable')}[{result}]"
             result = f"{self._import('typing', 'Union')}[{result}, {awaitable}]"
         return result
 
@@ -715,8 +715,8 @@ class PkgWriter(object):
         wl("")
         wl(
             "class _MaybeAsyncIterator({}[_T], {}[_T], metaclass={}):",
-            self._import("typing", "AsyncIterator"),
-            self._import("typing", "Iterator"),
+            self._import("collections.abc", "AsyncIterator"),
+            self._import("collections.abc", "Iterator"),
             self._import("abc", "ABCMeta"),
         )
         with self._indent():
