@@ -4,7 +4,7 @@ RED="\033[0;31m"
 NC='\033[0m'
 
 PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.10.6}
-PY_VER_MYPY_PROTOBUF_SHORT=$(echo $PY_VER_MYPY_PROTOBUF | cut -d. -f1-2)
+PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.13}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.8.13}"
 
@@ -45,16 +45,16 @@ MYPY_VENV=venv_$PY_VER_MYPY
 (
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
-    pyenv shell $PY_VER_MYPY
+    pyenv shell "$PY_VER_MYPY"
 
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
         python3 --version
         python3 -m pip --version
         python -m pip install virtualenv
-        python3 -m virtualenv $MYPY_VENV
-        $MYPY_VENV/bin/python3 -m pip install -r mypy_requirements.txt
+        python3 -m virtualenv "$MYPY_VENV"
+        "$MYPY_VENV"/bin/python3 -m pip install -r mypy_requirements.txt
     fi
-    $MYPY_VENV/bin/mypy --version
+    "$MYPY_VENV"/bin/mypy --version
 )
 
 # Create unit tests venvs
@@ -63,14 +63,14 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         UNIT_TESTS_VENV=venv_$PY_VER
         eval "$(pyenv init --path)"
         eval "$(pyenv init -)"
-        pyenv shell $PY_VER
+        pyenv shell "$PY_VER"
 
         if [[ -z $SKIP_CLEAN ]] || [[ ! -e $UNIT_TESTS_VENV ]]; then
             python -m pip install virtualenv
-            python -m virtualenv $UNIT_TESTS_VENV
-            $UNIT_TESTS_VENV/bin/python -m pip install -r test_requirements.txt
+            python -m virtualenv "$UNIT_TESTS_VENV"
+            "$UNIT_TESTS_VENV"/bin/python -m pip install -r test_requirements.txt
         fi
-        $UNIT_TESTS_VENV/bin/py.test --version
+        "$UNIT_TESTS_VENV"/bin/py.test --version
     )
 done
 
@@ -79,19 +79,19 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 (
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
-    pyenv shell $PY_VER_MYPY_PROTOBUF
+    pyenv shell "$PY_VER_MYPY_PROTOBUF"
 
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_PROTOBUF_VENV ]]; then
         python -m pip install virtualenv
-        python -m virtualenv $MYPY_PROTOBUF_VENV
-        $MYPY_PROTOBUF_VENV/bin/python -m pip install -e .
+        python -m virtualenv "$MYPY_PROTOBUF_VENV"
+        "$MYPY_PROTOBUF_VENV"/bin/python -m pip install -e .
     fi
 )
 
 # Run mypy-protobuf
 (
-    source $MYPY_PROTOBUF_VENV/bin/activate
+    source "$MYPY_PROTOBUF_VENV"/bin/activate
 
     # Confirm version number
     test "$(protoc-gen-mypy -V)" = "mypy-protobuf 3.4.0"
@@ -138,22 +138,22 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
     UNIT_TESTS_VENV=venv_$PY_VER
-    PY_VER_MYPY_TARGET=$(echo $PY_VER | cut -d. -f1-2)
+    PY_VER_MYPY_TARGET=$(echo "$PY_VER" | cut -d. -f1-2)
 
     # Generate GRPC protos for mypy / tests
     (
-        source $UNIT_TESTS_VENV/bin/activate
+        source "$UNIT_TESTS_VENV"/bin/activate
         find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated
     )
 
     # Run mypy on unit tests / generated output
     (
-        source $MYPY_VENV/bin/activate
+        source "$MYPY_VENV"/bin/activate
         export MYPYPATH=$MYPYPATH:test/generated
 
         # Run mypy
         MODULES=( -m test.test_generated_mypy -m test.test_grpc_usage -m test.test_grpc_async_usage )
-        mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable=$UNIT_TESTS_VENV/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
+        mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
@@ -173,12 +173,12 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             cut -d: -f1,3- "$MYPY_OUTPUT/mypy_output" > "$MYPY_OUTPUT/mypy_output.omit_linenos"
         }
 
-        call_mypy $PY_VER "${NEGATIVE_MODULES[@]}"
+        call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
         if ! diff "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET" || ! diff "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"; then
             echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
 
             # Copy over all the mypy results for the developer.
-            call_mypy $PY_VER "${NEGATIVE_MODULES[@]}"
+            call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
             cp "$MYPY_OUTPUT/mypy_output" test_negative/output.expected.3.8
             cp "$MYPY_OUTPUT/mypy_output.omit_linenos" test_negative/output.expected.3.8.omit_linenos
             exit 1
@@ -187,7 +187,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 
     (
         # Run unit tests.
-        source $UNIT_TESTS_VENV/bin/activate
+        source "$UNIT_TESTS_VENV"/bin/activate
         PYTHONPATH=test/generated py.test --ignore=test/generated -v
     )
 done
