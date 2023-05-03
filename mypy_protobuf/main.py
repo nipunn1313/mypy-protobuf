@@ -346,12 +346,11 @@ class PkgWriter(object):
                 wl("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
             wl("")
             wl(
-                "class {}({}[{}], {}):{}",
+                "class {}({}[{}], {}):",
                 etw_helper_class,
                 self._import("google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"),
                 value_type_helper_fq,
                 self._builtin("type"),
-                "  # noqa: F821" if prefix else "",
             )
             with self._indent():
                 ed = self._import("google.protobuf.descriptor", "EnumDescriptor")
