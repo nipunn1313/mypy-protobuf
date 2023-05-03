@@ -97,7 +97,7 @@ jobs:
       - uses: actions/setup-python@v4
       - name: Run formatters and linters
         run: |
-          pip3 install black isort flake8-pyi flake8-noqa flake8-bugbear
+          pip3 install black isort flake8-pyi>=23.5.0 flake8-noqa flake8-bugbear
           black --check --extend-exclude '(_pb2_grpc|_pb2).pyi?$' .
           isort --check . --diff
           flake8 .

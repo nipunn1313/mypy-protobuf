@@ -1,5 +1,8 @@
 ## Upcoming
 
+- Don't add unnecessary flake8 noqa F821 comments. (Become compatible with
+  flake8-pyi>=23.5.0.)
+
 ## 3.4.0
 
 - Mark messages as @typing.final
