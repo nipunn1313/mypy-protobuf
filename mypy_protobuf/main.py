@@ -346,12 +346,11 @@ class PkgWriter(object):
                 wl("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
             wl("")
             wl(
-                "class {}({}[{}], {}):{}",
+                "class {}({}[{}], {}):",
                 etw_helper_class,
                 self._import("google.protobuf.internal.enum_type_wrapper", "_EnumTypeWrapper"),
                 value_type_helper_fq,
                 self._builtin("type"),
-                "  # noqa: F821" if prefix else "",
             )
             with self._indent():
                 ed = self._import("google.protobuf.descriptor", "EnumDescriptor")
@@ -460,8 +459,7 @@ class PkgWriter(object):
                 wl("def __init__(")
                 with self._indent():
                     if any(f.name == "self" for f in desc.field):
-                        wl("# pyright: reportSelfClsParameterName=false")
-                        wl("self_,")
+                        wl("self_,  # pyright: ignore[reportSelfClsParameterName]")
                     else:
                         wl("self,")
                 with self._indent():
@@ -577,7 +575,7 @@ class PkgWriter(object):
                 wl("@{}", self._import("abc", "abstractmethod"))
             wl(f"def {method.name}(")
             with self._indent():
-                wl(f"inst: {class_name},")
+                wl(f"inst: {class_name},  # pyright: ignore[reportSelfClsParameterName]")
                 wl(
                     "rpc_controller: {},",
                     self._import("google.protobuf.service", "RpcController"),

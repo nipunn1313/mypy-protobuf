@@ -113,7 +113,7 @@ def test_generate_negative_matches() -> None:
     assert errors_38 == expected_errors_38
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_38) == 74
+    assert len(errors_38) == 77
 
 
 def test_func() -> None:

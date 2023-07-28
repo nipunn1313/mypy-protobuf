@@ -78,7 +78,7 @@ class Simple1(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):  # noqa: F821
+    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         INNER1: Simple1._InnerEnum.ValueType  # 1
         """INNER1"""
@@ -285,7 +285,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):  # noqa: F821
+    class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
 
@@ -375,8 +375,7 @@ class SelfField(google.protobuf.message.Message):
     self: builtins.int
     """Field self -> must generate an __init__ method w/ different name"""
     def __init__(
-        # pyright: reportSelfClsParameterName=false
-        self_,
+        self_,  # pyright: ignore[reportSelfClsParameterName]
         *,
         self: builtins.int | None = ...,
     ) -> None: ...
@@ -391,7 +390,7 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod
     def valid_method_name1(
-        inst: PythonReservedKeywordsService,
+        inst: PythonReservedKeywordsService,  # pyright: ignore[reportSelfClsParameterName]
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         callback: collections.abc.Callable[[global____r_None], None] | None,
@@ -399,7 +398,7 @@ class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=a
         """valid_method_name1"""
     @abc.abstractmethod
     def valid_method_name2(
-        inst: PythonReservedKeywordsService,
+        inst: PythonReservedKeywordsService,  # pyright: ignore[reportSelfClsParameterName]
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         callback: collections.abc.Callable[[global___PythonReservedKeywords._r_lambda], None] | None,
@@ -412,14 +411,14 @@ class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     def valid_method_name1(
-        inst: PythonReservedKeywordsService_Stub,
+        inst: PythonReservedKeywordsService_Stub,  # pyright: ignore[reportSelfClsParameterName]
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         callback: collections.abc.Callable[[global____r_None], None] | None = ...,
     ) -> concurrent.futures.Future[global____r_None]:
         """valid_method_name1"""
     def valid_method_name2(
-        inst: PythonReservedKeywordsService_Stub,
+        inst: PythonReservedKeywordsService_Stub,  # pyright: ignore[reportSelfClsParameterName]
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         callback: collections.abc.Callable[[global___PythonReservedKeywords._r_lambda], None] | None = ...,
@@ -430,7 +429,7 @@ class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     @abc.abstractmethod
     def Echo(
-        inst: ATestService,
+        inst: ATestService,  # pyright: ignore[reportSelfClsParameterName]
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         callback: collections.abc.Callable[[global___Simple2], None] | None,
@@ -440,7 +439,7 @@ class ATestService_Stub(ATestService):
     def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
     DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
     def Echo(
-        inst: ATestService_Stub,
+        inst: ATestService_Stub,  # pyright: ignore[reportSelfClsParameterName]
         rpc_controller: google.protobuf.service.RpcController,
         request: global___Simple1,
         callback: collections.abc.Callable[[global___Simple2], None] | None = ...,

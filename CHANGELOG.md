@@ -1,5 +1,8 @@
 ## Upcoming
 
+- Add gRPC aio stub and servicer generation (#489)
+- Bump tested dependencies to pyright==1.1.319, mypy==1.4.1, protobuf==4.23.4, grpcio-tools==1.56.2
+
 ## 3.4.0
 
 - Mark messages as @typing.final
@@ -10,9 +13,9 @@
 ## 3.3.0
 
 - Prefer (mypy_protobuf.options).casttype to (mypy_protobuf.casttype)
-    - Allows us to use a single extension number
-    - Applies to casttype,keytype,valuetype
-    - Deprecate (but still support) the old-style extension
+  - Allows us to use a single extension number
+  - Applies to casttype,keytype,valuetype
+  - Deprecate (but still support) the old-style extension
 - Prefer importing from `typing` over `typing_extensions` on new enough python versions
 - Support emitting module docstrings
 - Make generated code flake8 compatible
@@ -43,8 +46,8 @@
 
 - Require protobuf 3.19.1
 - Change `EnumTypeWrapper.V` to `EnumTypeWrapper.ValueType` per https://github.com/protocolbuffers/protobuf/pull/8182.
-Will allow for unquoted annotations starting with protobuf 3.20.0. `.V` will continue to work for the foreseeable
-future for backward compatibility.
+  Will allow for unquoted annotations starting with protobuf 3.20.0. `.V` will continue to work for the foreseeable
+  future for backward compatibility.
 - suppress pyright warning reportSelfClsParameterName when a proto field is named `self`
 - Allow optional constructor keywords for primitive field types in proto3, following this [chart](https://github.com/protocolbuffers/protobuf/blob/master/docs/field_presence.md#presence-in-proto3-apis).
 - Reorder Enum helper classes to eliminate pycharm errors
@@ -84,11 +87,13 @@ future for backward compatibility.
 ## 2.7
 
 - Fix [#244](https://github.com/nipunn1313/mypy-protobuf/issues/244) - support extensions defined at module scope with proper types, matching extensions defined within Messages. See [`_ExtensionDict`](https://github.com/python/typeshed/blob/4765978f6ceeb24e10bdf93c0d4b72dfb35836d4/stubs/protobuf/google/protobuf/internal/extension_dict.pyi#L9)
+
 ```proto
 extend google.protobuf.MessageOptions {
    string test_message_option = 51234;
 }
 ```
+
 ```python
 # Used to generate
 test_message_option: google.protobuf.descriptor.FieldDescriptor = ...
@@ -96,28 +101,33 @@ test_message_option: google.protobuf.descriptor.FieldDescriptor = ...
 # Now generates
 test_message_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, typing.Text] = ...
 ```
+
 Fix repeated extensions as well - to generate RepeatedScalarFieldContainer and RepeatedCompositeFieldContainer
+
 - Now requires [types-protobuf](https://pypi.org/project/types-protobuf/) 3.17.3
 - Fix [#238](https://github.com/nipunn1313/mypy-protobuf/issues/238) - handling enum variants that name conflict with EnumTypeWrapper methods
 - Improve mypy-protobuf testsuite expected-errors file to make insertions/deletions easier to code review
 - Fix [#227](https://github.com/nipunn1313/mypy-protobuf/issues/227) - improve support for messages/enums with python reserved keyword names
 - Order fields within a message in original .proto file order Previously, they were grouped by scalar/nonscalar. Remove
-that grouping to make it a bit easier to correlate .proto files to .pyi files.
+  that grouping to make it a bit easier to correlate .proto files to .pyi files.
 
 ## 2.6
 
 - Bump protoc support to 3.17.3
 - Use latest python versions in tests (3.6.14 3.7.11 3.8.11 3.9.6)
 - Support reserved names for message types. Previously generated invalid mypy.
+
 ```proto
 message M {
   message None {}
   None none = 1;
 }
 ```
+
 - Support `protoc-gen-mypy -V` and `protoc-gen-mypy --version` to print version number
 - Return `Optional[Literal[...]]` instead of `Literal[...]` from WhichOneof to support
-cases in which none of the fields of the WhichOneof are set. See the following example.
+  cases in which none of the fields of the WhichOneof are set. See the following example.
+
 ```python
 def hello(name: str) -> None: ...
 n = proto.WhichOneof("name")
@@ -125,6 +135,7 @@ hello(n)  # Will now result in a mypy error.
 assert n is not None
 hello(n)  # Should work ok
 ```
+
 - Bump mypy version to 0.910, utilizing stubs types-protobuf==0.1.14. See https://mypy-lang.blogspot.com/2021/05/the-upcoming-switch-to-modular-typeshed.html
 - Bump grpcio version tested to 1.38.1 and grpc-stubs to 1.24.6
 - Generate a `# type: ignore` for enum generated stubs to avoid circular dependency described in #214. Bandaid solution.
@@ -156,13 +167,15 @@ hello(n)  # Should work ok
 ## 2.0
 
 Non Backward Compatible Changes
+
 - Dropping support for running mypy-protobuf in python <= 3.5. Note you can still generate stubs target-compatible to python2
 - Type proto Enum values for as `MyEnum.V` rather than `MyEnumValue` for import ergonomics,
-allowing the caller to import `MyEnum` rather than conditionally importing `MyEnumValue`
+  allowing the caller to import `MyEnum` rather than conditionally importing `MyEnumValue`
 - Default disallow `None` as argument for primitive fields of constructors in proto3.
-Provided `relax_strict_optional_primitives` flag to relax this strictness if you prefer.
+  Provided `relax_strict_optional_primitives` flag to relax this strictness if you prefer.
 
 New Features
+
 - Support for `grpcio` stubs generation
 - Allow `mypy_protobuf.py` to be run directly as a script
 - Add support for proto's [`well_known_types`](https://developers.google.com/protocol-buffers/docs/reference/python-generated#wkt)
@@ -172,16 +185,18 @@ New Features
 - Add support for `import public` proto imports - by reexporting in generated code
 
 Output Format
+
 - Generate fully qualified references rather than mangling
 - Import builtins library rather than mangling builtins
 - Use fully qualified names rather than mangling imports
 - Only mangle-alias top-level identifiers w/ `global___` to avoid conflict w/ fields of same name [previously was mangling inner messages as well]
 - Add support for `readable_stubs` parameter for mangle-free output code w/o fully-qualified references to message.
-(in many cases this is good enough and easier to read)
+  (in many cases this is good enough and easier to read)
 - Generate `arg: Optional[type] = ...` instead of `arg: Optional[type] = None`
 - Avoid importing google.protobuf.message.Message unless it's needed
 
 Internal Improvements
+
 - Add support for python 3.9 to CI
 - Update mypy-protobuf CI to target 3.8 rather than 3.5
 - Inline mypy annotations, eliminate six, and remove `__future__` import in `mypy_protobuf_lib.py`
@@ -200,46 +215,55 @@ Internal Improvements
 - Support `Message.HasExtension` and `Message.ClearExtension`
 - Bump python-protobuf from 3.11.3 to 3.13.0
 - Add support for optional proto3 fields
-- Support ScalarMap and MessageMap generated types for map types in proto.  This will allow us to support `get_or_create`
+- Support ScalarMap and MessageMap generated types for map types in proto. This will allow us to support `get_or_create`
 
 ```proto
 message Message {
     map<int32, OuterMessage3> map_message = 17
 }
 ```
+
 and
+
 ```python
 message.map_message.get_or_create(0)
 ```
 
 Before (1.23)
+
 ```
 main.py:4: error: "MutableMapping[str, Nested]" has no attribute "get_or_create"  [attr-defined]
 ```
+
 After (1.24) - there is no error
 
 ## 1.23
 
 - Inherit FromString from superclass Message - rather than re-generating here. Fixes bug
-in python2 usage `google/protobuf/type_pb2.pyi:92: error: Argument 1 of "FromString" is incompatible with supertype "Message"; supertype defines the argument type as "ByteString"  [override]`
+  in python2 usage `google/protobuf/type_pb2.pyi:92: error: Argument 1 of "FromString" is incompatible with supertype "Message"; supertype defines the argument type as "ByteString"  [override]`
 
 ## 1.22
 
 - Update tested/required mypy version to 0.780 (picks up new typeshed annotations). Includes improved typing/error messages on Message.
 
 Before (mypy < 0.780):
+
 ```
 test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Message"
 ```
+
 After (mypy >= 0.780:
+
 ```
 test_negative/negative.py:26: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "str"; expected "Simple1"
 ```
+
 - Update generated EnumTypeWrapper to be instances of EnumTypeWrapper - for more consistency
-with generated python code. Most caller code should not require mypy type changes. Egh
-`ProtoEnum.Value('first')` should work either way.
+  with generated python code. Most caller code should not require mypy type changes. Egh
+  `ProtoEnum.Value('first')` should work either way.
 
 Generated Before (in 1.21)
+
 ```python
 class ProtoEnum(object):
     @classmethod
@@ -247,11 +271,13 @@ class ProtoEnum(object):
 ```
 
 Generated After (in 1.22)
+
 ```python
 ProtoEnum: _ProtoEnum
 class _ProtoEnum(google.protobuf.EnumTypeWrapper):
     def Value(self, name: str) -> ProtoEnumValue
 ```
+
 - Remove autogenerated EnumTypeWrapper methods that are redundant to the typeshed parent class. Added testing for these.
 
 ## 1.21
@@ -259,9 +285,10 @@ class _ProtoEnum(google.protobuf.EnumTypeWrapper):
 - Support for module descriptor.
 - Update mangling from `global__` to `message__`
 - Fix bug in message typing for nested enums. Split EnumValue from EnumTypeWrapper. Enforces that constructing
-an enum value must happen via a NewType wrapper to the int.
+  an enum value must happen via a NewType wrapper to the int.
 
 Example:
+
 ```proto
 enum ProtoEnum {
     FIRST = 1;
@@ -272,7 +299,9 @@ mesage ProtoMsg {
     ProtoEnum enum = 1;
 }
 ```
+
 Generated Before (in 1.20):
+
 ```python
 class ProtoEnum(object):
     @classmethod
@@ -281,7 +310,9 @@ class ProtoEnum(object):
 class ProtoMsg(Message):
     def __init__(self, enum: ProtoEnum) -> None
 ```
+
 Generated After (in 1.21):
+
 ```python
 ProtoEnumValue = NewType('ProtoEnumValue', int)
 class ProtoEnum(object):
@@ -291,9 +322,11 @@ class ProtoEnum(object):
 class ProtoMsg(Message):
     def __init__(self, enum: ProtoEnumValue) -> None
 ```
+
 Migration Guide (with example calling code)
 
 Before (with 1.20)
+
 ```python
 from msg_pb2 import ProtoEnum, ProtoMsg
 
@@ -301,7 +334,9 @@ def make_proto_msg(enum: ProtoEnum) -> ProtoMsg:
     return ProtoMsg(enum)
 make_proto_msg(ProtoMsg.FIRST)
 ```
+
 After (with 1.21)
+
 ```python
 from msg_pb2 import ProtoEnum, ProtoMsg
 
@@ -345,6 +380,5 @@ make_proto_msg(ProtoMsg.FIRST)
 ## 1.14
 
 - Add `Message.DESCRIPTOR`
-
 
 ## Older changelogs not available. Check git log if you need them!
