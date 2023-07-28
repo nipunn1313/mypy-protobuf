@@ -2,6 +2,7 @@
 
 - Add gRPC aio stub and servicer generation (#489)
 - Bump tested dependencies to pyright==1.1.319, mypy==1.4.1, protobuf==4.23.4, grpcio-tools==1.56.2
+- Drop support for py 3.7. Add support for py 3.11.
 
 ## 3.4.0
 

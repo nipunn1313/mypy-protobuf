@@ -14,17 +14,12 @@ jobs:
     # Some CI issues regarding ubuntu-latest
     # runs-on: ubuntu-latest
     env:
-      PY_VER_MYPY: 3.8.13
-      PY_VER_UNIT_TESTS_3: 3.8.13
+      PY_VER_MYPY: 3.8.17
+      PY_VER_UNIT_TESTS_3: 3.8.17
     strategy:
       matrix:
         # Running mypy-protobuf itself
-        py-ver-mypy-protobuf: [
-          3.7.13,
-          3.8.13,
-          3.9.13,
-          3.10.6,
-        ]
+        py-ver-mypy-protobuf: [3.8.17, 3.9.17, 3.10.12, 3.11.4]
     steps:
       - uses: actions/checkout@v3
       - name: Read version numbers
@@ -36,8 +31,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-              ~/.pyenv
-              !~/.pyenv/versions
+            ~/.pyenv
+            !~/.pyenv/versions
           key: pyenv-installation-2
       - name: Cache pyenv mypy-protobuf ver
         uses: actions/cache@v3
