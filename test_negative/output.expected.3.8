@@ -47,14 +47,14 @@ test_negative/negative.py:135: error: Argument 1 to "Name" of "_EnumTypeWrapper"
 test_negative/negative.py:139: error: "ScalarMap[int, str]" has no attribute "get_or_create"  [attr-defined]
 test_negative/negative.py:141: error: No overload variant of "get" of "ScalarMap" matches argument type "str"  [call-overload]
 test_negative/negative.py:141: note: Possible overload variants:
-test_negative/negative.py:141: note:     def get(self, key: int, default: None = ...) -> str
+test_negative/negative.py:141: note:     def get(self, key: int, default: None = ...) -> Optional[str]
 test_negative/negative.py:141: note:     def [_T] get(self, key: int, default: Union[str, _T]) -> Union[str, _T]
 test_negative/negative.py:142: error: No overload variant of "get" of "MessageMap" matches argument type "str"  [call-overload]
 test_negative/negative.py:142: note: Possible overload variants:
-test_negative/negative.py:142: note:     def get(self, key: int, default: None = ...) -> OuterMessage3
+test_negative/negative.py:142: note:     def get(self, key: int, default: None = ...) -> Optional[OuterMessage3]
 test_negative/negative.py:142: note:     def [_T] get(self, key: int, default: Union[OuterMessage3, _T]) -> Union[OuterMessage3, _T]
-test_negative/negative.py:145: error: Incompatible types in assignment (expression has type "str", variable has type "int")  [assignment]
-test_negative/negative.py:146: error: Incompatible types in assignment (expression has type "OuterMessage3", variable has type "int")  [assignment]
+test_negative/negative.py:145: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")  [assignment]
+test_negative/negative.py:146: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")  [assignment]
 test_negative/negative.py:148: error: Dict entry 0 has incompatible type "str": "int"; expected "int": "str"  [dict-item]
 test_negative/negative.py:148: error: Dict entry 0 has incompatible type "str": "str"; expected "int": "OuterMessage3"  [dict-item]
 test_negative/negative.py:152: error: Incompatible types in assignment (expression has type "int", variable has type "UserId")  [assignment]
@@ -82,16 +82,16 @@ test_negative/negative.py:209: error: "DummyReply" has no attribute "__iter__" (
 test_negative/negative.py:209: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative.py:212: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative.py:216: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:253: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative.py:253: note: This violates the Liskov substitution principle
-test_negative/negative.py:253: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative.py:253: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "DummyServiceServicer"  [override]
-test_negative/negative.py:261: error: Argument 1 of "UnaryStream" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative.py:261: note: This violates the Liskov substitution principle
-test_negative/negative.py:261: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:255: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py:255: note: This violates the Liskov substitution principle
+test_negative/negative.py:255: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative.py:261: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Union[Iterator[DummyReply], AsyncIterator[DummyReply]]" in supertype "DummyServiceServicer"  [override]
-test_negative/negative.py:270: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
-test_negative/negative.py:270: note: This violates the Liskov substitution principle
-test_negative/negative.py:270: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:263: error: Argument 1 of "UnaryStream" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py:263: note: This violates the Liskov substitution principle
+test_negative/negative.py:263: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative.py:270: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "DummyServiceServicer"  [override]
+test_negative/negative.py:272: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
+test_negative/negative.py:272: note: This violates the Liskov substitution principle
+test_negative/negative.py:272: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 Found 80 errors in 1 file (checked 4 source files)

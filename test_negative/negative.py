@@ -252,7 +252,7 @@ class GoodServicer(DummyServiceServicer):
 class BadServicer(DummyServiceServicer):
     def UnaryUnary(  # E:3.8
         self,
-        request: Iterator[DummyRequest],
+        request: Iterator[DummyRequest],  # E:3.8
         context: grpc.ServicerContext,
     ) -> Iterator[DummyReply]:
         for _data in request:
@@ -260,7 +260,7 @@ class BadServicer(DummyServiceServicer):
 
     def UnaryStream(  # E:3.8
         self,
-        request: Iterator[DummyRequest],
+        request: Iterator[DummyRequest],  # E:3.8
         context: grpc.ServicerContext,
     ) -> DummyReply:
         for _data in request:
@@ -269,7 +269,7 @@ class BadServicer(DummyServiceServicer):
 
     def StreamUnary(  # E:3.8
         self,
-        request: DummyRequest,
+        request: DummyRequest,  # E:3.8
         context: grpc.ServicerContext,
     ) -> Iterator[DummyReply]:
         yield DummyReply()

@@ -33,7 +33,7 @@ if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
     unzip "$PROTOC_DIR/$PROTOC_FILENAME" -d "$PROTOC_DIR/protoc_install"
 fi
 PROTOC="$PROTOC_DIR/protoc_install/bin/protoc"
-if [[ $($PROTOC --version) != "libprotoc 3.$PROTOBUF_VERSION" ]]; then
+if [[ $($PROTOC --version) != "libprotoc $PROTOBUF_VERSION" ]]; then
     echo -e "${RED}Wrong protoc installed?"
     exit 1
 fi
