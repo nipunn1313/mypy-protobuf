@@ -301,6 +301,7 @@ black .
 - [@miaachan](https://github.com/miaachan)
 - [@Alphadelta14](https://github.com/Alphadelta14)
 - [@fergyfresh](https://github.com/fergyfresh)
+- [@AlexWaygood](https://github.com/AlexWaygood)
 
 ## Licence etc.
 
