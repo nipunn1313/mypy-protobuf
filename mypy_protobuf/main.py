@@ -724,7 +724,7 @@ class PkgWriter(object):
         # _ServicerContext is supertyped by grpc.ServicerContext and grpc.aio.ServicerContext
         # So both can be used in the contravariant function parameter position.
         wl(
-            "class _ServicerContext({}, {}):  # type: ignore",
+            "class _ServicerContext({}, {}):  # type: ignore[misc, type-arg]",
             self._import("grpc", "ServicerContext"),
             self._import("grpc.aio", "ServicerContext"),
         )
