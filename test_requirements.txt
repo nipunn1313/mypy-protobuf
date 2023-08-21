@@ -1,6 +1,6 @@
 # Requirements to run unit tests. Tests import from
 # generated code.
-protobuf==4.23.4
+protobuf==4.24.1
 pytest==7.3.1
 pytest-asyncio==0.20.3
 grpc-stubs==1.53.0.2
