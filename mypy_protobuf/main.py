@@ -169,9 +169,7 @@ class PkgWriter(object):
         """
         if path == "typing_extensions":
             stabilization = {
-                "Literal": (3, 8),
                 "TypeAlias": (3, 10),
-                "final": (3, 8),
             }
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
@@ -407,7 +405,7 @@ class PkgWriter(object):
 
             class_name = desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             message_class = self._import("google.protobuf.message", "Message")
-            wl("@{}", self._import("typing_extensions", "final"))
+            wl("@{}", self._import("typing", "final"))
             wl(f"class {class_name}({message_class}{addl_base}):")
             with self._indent():
                 scl = scl_prefix + [i]
@@ -506,14 +504,14 @@ class PkgWriter(object):
         if hf_fields:
             wl(
                 "def HasField(self, field_name: {}[{}]) -> {}: ...",
-                self._import("typing_extensions", "Literal"),
+                self._import("typing", "Literal"),
                 hf_fields_text,
                 self._builtin("bool"),
             )
         if cf_fields:
             wl(
                 "def ClearField(self, field_name: {}[{}]) -> None: ...",
-                self._import("typing_extensions", "Literal"),
+                self._import("typing", "Literal"),
                 cf_fields_text,
             )
 
@@ -522,10 +520,10 @@ class PkgWriter(object):
                 wl("@{}", self._import("typing", "overload"))
             wl(
                 "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
-                self._import("typing_extensions", "Literal"),
+                self._import("typing", "Literal"),
                 # Accepts both str and bytes
                 f'"{wo_field}", b"{wo_field}"',
-                self._import("typing_extensions", "Literal"),
+                self._import("typing", "Literal"),
                 # Returns `str`
                 ", ".join(f'"{m}"' for m in members),
             )
