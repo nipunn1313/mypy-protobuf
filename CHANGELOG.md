@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Remove 3.7 compatibility for typing_extensions.final/Literal
+
 ## 3.5.0
 
 - Add gRPC aio stub and servicer generation (#489)
