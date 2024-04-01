@@ -143,17 +143,24 @@ class Simple1(google.protobuf.message.Message):
     EMAIL_FIELD_NUMBER: builtins.int
     EMAIL_BY_UID_FIELD_NUMBER: builtins.int
     a_string: builtins.str
-    @property
-    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     a_boolean: builtins.bool
     a_uint32: builtins.int
     a_enum: global___OuterEnum.ValueType
     a_external_enum: testproto.test3_pb2.OuterEnum.ValueType
+    inner_enum: global___Simple1.InnerEnum.ValueType
+    nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType
+    a_oneof_1: builtins.str
+    a_oneof_2: builtins.str
+    outer_enum_in_oneof: global___OuterEnum.ValueType
+    inner_enum_in_oneof: global___Simple1.InnerEnum.ValueType
+    user_id: test.test_generated_mypy.UserId
+    email: test.test_generated_mypy.Email
+    @property
+    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
     def a_inner(self) -> testproto.inner.inner_pb2.Inner: ...
     @property
     def a_nested(self) -> testproto.nested.nested_pb2.Nested: ...
-    inner_enum: global___Simple1.InnerEnum.ValueType
     @property
     def rep_inner_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Simple1.InnerEnum.ValueType]: ...
     @property
@@ -162,17 +169,10 @@ class Simple1(google.protobuf.message.Message):
     def rep_inner_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Simple1.InnerMessage]: ...
     @property
     def no_package(self) -> testproto.nopackage_pb2.NoPackage: ...
-    nested_enum: testproto.nested.nested_pb2.AnotherNested.NestedEnum.ValueType
     @property
     def nested_message(self) -> testproto.nested.nested_pb2.AnotherNested.NestedMessage: ...
-    a_oneof_1: builtins.str
-    a_oneof_2: builtins.str
     @property
     def outer_message_in_oneof(self) -> global___Simple2: ...
-    outer_enum_in_oneof: global___OuterEnum.ValueType
-    inner_enum_in_oneof: global___Simple1.InnerEnum.ValueType
-    user_id: test.test_generated_mypy.UserId
-    email: test.test_generated_mypy.Email
     @property
     def email_by_uid(self) -> google.protobuf.internal.containers.ScalarMap[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]: ...
     def __init__(
@@ -338,10 +338,11 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     CLASS_FIELD_NUMBER: builtins.int
     NONE_FIELD_NUMBER: builtins.int
     VALID_FIELD_NUMBER: builtins.int
+    valid: global___PythonReservedKeywords._r_finally.ValueType
     @property
     def none(self) -> global____r_None:
         """Test unreserved identifiers w/ reserved message names"""
-    valid: global___PythonReservedKeywords._r_finally.ValueType
+
     def __init__(
         self,
         *,

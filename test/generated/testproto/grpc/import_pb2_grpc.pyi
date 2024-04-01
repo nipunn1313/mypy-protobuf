@@ -27,11 +27,13 @@ class SimpleServiceStub:
         testproto.test_pb2.Simple1,
     ]
     """UnaryUnary"""
+
     UnaryStream: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
     ]
     """UnaryStream"""
+
     NoComment: grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
@@ -45,11 +47,13 @@ class SimpleServiceAsyncStub:
         testproto.test_pb2.Simple1,
     ]
     """UnaryUnary"""
+
     UnaryStream: grpc.aio.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
     ]
     """UnaryStream"""
+
     NoComment: grpc.aio.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,

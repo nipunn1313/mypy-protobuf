@@ -26,16 +26,19 @@ class DummyServiceStub:
         testproto.grpc.dummy_pb2.DummyReply,
     ]
     """UnaryUnary"""
+
     UnaryStream: grpc.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
     ]
     """UnaryStream"""
+
     StreamUnary: grpc.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
     ]
     """StreamUnary"""
+
     StreamStream: grpc.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
@@ -50,16 +53,19 @@ class DummyServiceAsyncStub:
         testproto.grpc.dummy_pb2.DummyReply,
     ]
     """UnaryUnary"""
+
     UnaryStream: grpc.aio.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
     ]
     """UnaryStream"""
+
     StreamUnary: grpc.aio.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
     ]
     """StreamUnary"""
+
     StreamStream: grpc.aio.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,

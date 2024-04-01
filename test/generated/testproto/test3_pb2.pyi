@@ -141,24 +141,27 @@ class SimpleProto3(google.protobuf.message.Message):
     EMAIL_FIELD_NUMBER: builtins.int
     EMAIL_BY_UID_FIELD_NUMBER: builtins.int
     a_string: builtins.str
-    @property
-    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     a_outer_enum: global___OuterEnum.ValueType
-    @property
-    def outer_message(self) -> global___OuterMessage3: ...
     inner_enum: global___SimpleProto3.InnerEnum.ValueType
     a_oneof_1: builtins.str
     a_oneof_2: builtins.str
-    @property
-    def outer_message_in_oneof(self) -> global___OuterMessage3: ...
     outer_enum_in_oneof: global___OuterEnum.ValueType
     inner_enum_in_oneof: global___SimpleProto3.InnerEnum.ValueType
     b_oneof_1: builtins.str
     b_oneof_2: builtins.str
-    @property
-    def bool(self) -> global___OuterMessage3: ...
     OuterEnum: global___OuterEnum.ValueType
     """Test having fieldname match messagename"""
+    an_optional_string: builtins.str
+    user_id: test.test_generated_mypy.UserId
+    email: test.test_generated_mypy.Email
+    @property
+    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @property
+    def outer_message(self) -> global___OuterMessage3: ...
+    @property
+    def outer_message_in_oneof(self) -> global___OuterMessage3: ...
+    @property
+    def bool(self) -> global___OuterMessage3: ...
     @property
     def OuterMessage3(self) -> global___OuterMessage3: ...
     @property
@@ -167,9 +170,6 @@ class SimpleProto3(google.protobuf.message.Message):
 
     @property
     def map_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___OuterMessage3]: ...
-    an_optional_string: builtins.str
-    user_id: test.test_generated_mypy.UserId
-    email: test.test_generated_mypy.Email
     @property
     def email_by_uid(self) -> google.protobuf.internal.containers.ScalarMap[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]: ...
     def __init__(

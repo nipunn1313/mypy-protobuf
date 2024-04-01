@@ -436,12 +436,16 @@ class PkgWriter(object):
                     if field.name in PYTHON_RESERVED:
                         continue
                     field_type = self.python_type(field)
-
                     if is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED:
                         # Scalar non repeated fields are r/w
                         wl(f"{field.name}: {field_type}")
                         self._write_comments(scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx])
-                    else:
+
+                for idx, field in enumerate(desc.field):
+                    if field.name in PYTHON_RESERVED:
+                        continue
+                    field_type = self.python_type(field)
+                    if not (is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         wl("@property")
@@ -450,6 +454,7 @@ class PkgWriter(object):
                         if self._has_comments(scl_field):
                             with self._indent():
                                 self._write_comments(scl_field)
+                            wl("")
 
                 self.write_extensions(desc.extension, scl + [d.DescriptorProto.EXTENSION_FIELD_NUMBER])
 
@@ -597,6 +602,7 @@ class PkgWriter(object):
                 with self._indent():
                     if not self._write_comments(scl_method):
                         wl("...")
+            wl("")
 
     def write_services(
         self,
@@ -618,7 +624,6 @@ class PkgWriter(object):
                 if self._write_comments(scl):
                     wl("")
                 self.write_methods(service, class_name, is_abstract=True, scl_prefix=scl)
-            wl("")
 
             # The stub client
             stub_class_name = service.name + "_Stub"
@@ -631,7 +636,6 @@ class PkgWriter(object):
                     self._import("google.protobuf.service", "RpcChannel"),
                 )
                 self.write_methods(service, stub_class_name, is_abstract=False, scl_prefix=scl)
-            wl("")
 
     def _import_casttype(self, casttype: str) -> str:
         split = casttype.split(".")
@@ -707,16 +711,14 @@ class PkgWriter(object):
         wl = self._write_line
         # _MaybeAsyncIterator[Req] is supertyped by Iterator[Req] and AsyncIterator[Req].
         # So both can be used in the contravariant function parameter position.
-        wl("_T = {}('_T')", self._import("typing", "TypeVar"))
+        wl('_T = {}("_T")', self._import("typing", "TypeVar"))
         wl("")
         wl(
-            "class _MaybeAsyncIterator({}[_T], {}[_T], metaclass={}):",
+            "class _MaybeAsyncIterator({}[_T], {}[_T], metaclass={}): ...",
             self._import("collections.abc", "AsyncIterator"),
             self._import("collections.abc", "Iterator"),
             self._import("abc", "ABCMeta"),
         )
-        with self._indent():
-            wl("...")
         wl("")
 
         # _ServicerContext is supertyped by grpc.ServicerContext and grpc.aio.ServicerContext
@@ -756,6 +758,7 @@ class PkgWriter(object):
                 with self._indent():
                     if not self._write_comments(scl):
                         wl("...")
+            wl("")
 
     def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, is_async: bool = False) -> None:
         wl = self._write_line
@@ -772,6 +775,7 @@ class PkgWriter(object):
                 wl("{},", self._output_type(method))
             wl("]")
             self._write_comments(scl)
+            wl("")
 
     def write_grpc_services(
         self,
@@ -797,7 +801,6 @@ class PkgWriter(object):
                 channel = f"{self._import('typing', 'Union')}[{self._import('grpc', 'Channel')}, {self._import('grpc.aio', 'Channel')}]"
                 wl("def __init__(self, channel: {}) -> None: ...", channel)
                 self.write_grpc_stub_methods(service, scl)
-            wl("")
 
             # The (fake) async stub client
             wl(
@@ -809,7 +812,6 @@ class PkgWriter(object):
                     wl("")
                 # No __init__ since this isn't a real class (yet), and requires manual casting to work.
                 self.write_grpc_stub_methods(service, scl, is_async=True)
-            wl("")
 
             # The service definition interface
             wl(
@@ -821,7 +823,6 @@ class PkgWriter(object):
                 if self._write_comments(scl):
                     wl("")
                 self.write_grpc_methods(service, scl)
-            wl("")
             server = self._import("grpc", "Server")
             aserver = self._import("grpc.aio", "Server")
             wl(
@@ -923,8 +924,9 @@ class PkgWriter(object):
         if self.lines:
             assert self.lines[0].startswith('"""')
             self.lines[0] = f'"""{HEADER}{self.lines[0][3:]}'
+            self._write_line("")
         else:
-            self._write_line(f'"""{HEADER}"""')
+            self._write_line(f'"""{HEADER}"""\n')
 
         for reexport_idx in self.fd.public_dependency:
             reexport_file = self.fd.dependency[reexport_idx]
