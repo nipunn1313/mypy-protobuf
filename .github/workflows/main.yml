@@ -89,7 +89,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-verison: "3.8"
       - name: Run formatters and linters
         run: |
           pip3 install black==24.3.0 isort flake8-pyi flake8-noqa flake8-bugbear
@@ -107,7 +109,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-verison: "3.8"
       - name: Read versions
         run: echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
         id: read_versions
