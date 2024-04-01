@@ -1,6 +1,7 @@
 ## Upcoming
 
 - Remove 3.7 compatibility for typing_extensions.final/Literal
+- Bump protobuf to 4.25.3
 
 ## 3.5.0
 
