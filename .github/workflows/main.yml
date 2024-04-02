@@ -80,7 +80,7 @@ jobs:
           ./run_test.sh
 
       - name: Run Pyright
-        uses: jakebailey/pyright-action@v1
+        uses: jakebailey/pyright-action@v2
         with:
           version: "${{ steps.read_versions.outputs.PYRIGHT_VERSION }}"
 
