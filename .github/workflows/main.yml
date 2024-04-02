@@ -116,7 +116,7 @@ jobs:
         run: echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
         id: read_versions
       - name: Install Protoc
-        uses: arduino/setup-protoc@v2
+        uses: arduino/setup-protoc@v3
         with:
           version: "${{ steps.read_versions.outputs.PROTOBUF_VERSION }}"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
