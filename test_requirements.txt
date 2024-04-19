@@ -4,5 +4,5 @@ protobuf==4.25.3
 pytest==8.1.1
 pytest-asyncio==0.23.6
 grpc-stubs==1.53.0.2
-grpcio-tools==1.62.1
+grpcio-tools==1.62.2
 types-protobuf==4.24.0.20240311
