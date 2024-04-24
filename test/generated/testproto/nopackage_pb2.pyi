@@ -8,7 +8,13 @@ import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -22,7 +28,7 @@ class NoPackage(google.protobuf.message.Message):
         self,
     ) -> None: ...
 
-global___NoPackage = NoPackage
+global___NoPackage: typing_extensions.TypeAlias = NoPackage
 
 @typing.final
 class NoPackage2(google.protobuf.message.Message):
@@ -43,4 +49,4 @@ class NoPackage2(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["np", b"np"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["np", b"np", "np_rep", b"np_rep"]) -> None: ...
 
-global___NoPackage2 = NoPackage2
+global___NoPackage2: typing_extensions.TypeAlias = NoPackage2

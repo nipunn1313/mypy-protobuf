@@ -36,7 +36,13 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.well_known_types
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -127,4 +133,4 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["nanos", b"nanos", "seconds", b"seconds"]) -> None: ...
 
-global___Duration = Duration
+global___Duration: typing_extensions.TypeAlias = Duration

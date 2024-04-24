@@ -46,7 +46,7 @@ FOO: OuterEnum.ValueType  # 1
 """FOO"""
 BAR: OuterEnum.ValueType  # 2
 """BAR"""
-global___OuterEnum = OuterEnum
+global___OuterEnum: typing_extensions.TypeAlias = OuterEnum
 
 class _NamingConflicts:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -67,7 +67,7 @@ items: NamingConflicts.ValueType  # 5
 proto itself generates broken code when DESCRIPTOR is there
 DESCRIPTOR = 8;
 """
-global___NamingConflicts = NamingConflicts
+global___NamingConflicts: typing_extensions.TypeAlias = NamingConflicts
 
 @typing.final
 class Simple1(google.protobuf.message.Message):
@@ -206,7 +206,7 @@ class Simple1(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "a_uint32", b"a_uint32", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "rep_inner_enum", b"rep_inner_enum", "rep_inner_message", b"rep_inner_message", "user_id", b"user_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["a_oneof", b"a_oneof"]) -> typing.Literal["a_oneof_1", "a_oneof_2", "outer_message_in_oneof", "outer_enum_in_oneof", "inner_enum_in_oneof"] | None: ...
 
-global___Simple1 = Simple1
+global___Simple1: typing_extensions.TypeAlias = Simple1
 
 @typing.final
 class Simple2(google.protobuf.message.Message):
@@ -222,7 +222,7 @@ class Simple2(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["a_string", b"a_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
 
-global___Simple2 = Simple2
+global___Simple2: typing_extensions.TypeAlias = Simple2
 
 @typing.final
 class Extensions1(google.protobuf.message.Message):
@@ -241,7 +241,7 @@ class Extensions1(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["ext1_string", b"ext1_string"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["ext1_string", b"ext1_string"]) -> None: ...
 
-global___Extensions1 = Extensions1
+global___Extensions1: typing_extensions.TypeAlias = Extensions1
 
 @typing.final
 class Extensions2(google.protobuf.message.Message):
@@ -260,7 +260,7 @@ class Extensions2(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["flag", b"flag"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["flag", b"flag"]) -> None: ...
 
-global___Extensions2 = Extensions2
+global___Extensions2: typing_extensions.TypeAlias = Extensions2
 
 @typing.final
 class _r_None(google.protobuf.message.Message):
@@ -276,7 +276,7 @@ class _r_None(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["valid", b"valid"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["valid", b"valid"]) -> None: ...
 
-global____r_None = _r_None
+global____r_None: typing_extensions.TypeAlias = _r_None
 
 @typing.final
 class PythonReservedKeywords(google.protobuf.message.Message):
@@ -352,7 +352,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["False", b"False", "True", b"True", "and", b"and", "as", b"as", "assert", b"assert", "break", b"break", "class", b"class", "def", b"def", "del", b"del", "elif", b"elif", "else", b"else", "except", b"except", "for", b"for", "from", b"from", "global", b"global", "if", b"if", "import", b"import", "in", b"in", "is", b"is", "none", b"none", "nonlocal", b"nonlocal", "not", b"not", "or", b"or", "pass", b"pass", "raise", b"raise", "try", b"try", "valid", b"valid", "while", b"while", "with", b"with", "yield", b"yield"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["False", b"False", "True", b"True", "and", b"and", "as", b"as", "assert", b"assert", "break", b"break", "class", b"class", "def", b"def", "del", b"del", "elif", b"elif", "else", b"else", "except", b"except", "for", b"for", "from", b"from", "global", b"global", "if", b"if", "import", b"import", "in", b"in", "is", b"is", "none", b"none", "nonlocal", b"nonlocal", "not", b"not", "or", b"or", "pass", b"pass", "raise", b"raise", "try", b"try", "valid", b"valid", "while", b"while", "with", b"with", "yield", b"yield"]) -> None: ...
 
-global___PythonReservedKeywords = PythonReservedKeywords
+global___PythonReservedKeywords: typing_extensions.TypeAlias = PythonReservedKeywords
 
 @typing.final
 class PythonReservedKeywordsSmall(google.protobuf.message.Message):
@@ -367,7 +367,7 @@ class PythonReservedKeywordsSmall(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["from", b"from"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["from", b"from"]) -> None: ...
 
-global___PythonReservedKeywordsSmall = PythonReservedKeywordsSmall
+global___PythonReservedKeywordsSmall: typing_extensions.TypeAlias = PythonReservedKeywordsSmall
 
 @typing.final
 class SelfField(google.protobuf.message.Message):
@@ -384,7 +384,7 @@ class SelfField(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["self", b"self"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["self", b"self"]) -> None: ...
 
-global___SelfField = SelfField
+global___SelfField: typing_extensions.TypeAlias = SelfField
 
 class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     """Method name is reserved"""

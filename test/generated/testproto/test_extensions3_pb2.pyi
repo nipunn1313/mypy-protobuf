@@ -9,8 +9,14 @@ import google.protobuf.descriptor_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
+import sys
 import testproto.test3_pb2
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -22,7 +28,7 @@ class MessageOptionsTestMsg(google.protobuf.message.Message):
         self,
     ) -> None: ...
 
-global___MessageOptionsTestMsg = MessageOptionsTestMsg
+global___MessageOptionsTestMsg: typing_extensions.TypeAlias = MessageOptionsTestMsg
 
 TEST_FIELD_EXTENSION_FIELD_NUMBER: builtins.int
 SCALAR_OPTION_FIELD_NUMBER: builtins.int

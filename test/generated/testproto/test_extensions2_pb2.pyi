@@ -7,8 +7,14 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
+import sys
 import testproto.test_pb2
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -28,4 +34,4 @@ class SeparateFileExtension(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["flag", b"flag"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["flag", b"flag"]) -> None: ...
 
-global___SeparateFileExtension = SeparateFileExtension
+global___SeparateFileExtension: typing_extensions.TypeAlias = SeparateFileExtension

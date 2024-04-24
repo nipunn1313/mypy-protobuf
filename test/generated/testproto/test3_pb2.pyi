@@ -35,7 +35,7 @@ class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper): ...
 UNKNOWN: OuterEnum.ValueType  # 0
 FOO3: OuterEnum.ValueType  # 1
 BAR3: OuterEnum.ValueType  # 2
-global___OuterEnum = OuterEnum
+global___OuterEnum: typing_extensions.TypeAlias = OuterEnum
 
 @typing.final
 class OuterMessage3(google.protobuf.message.Message):
@@ -50,7 +50,7 @@ class OuterMessage3(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
 
-global___OuterMessage3 = OuterMessage3
+global___OuterMessage3: typing_extensions.TypeAlias = OuterMessage3
 
 @typing.final
 class SimpleProto3(google.protobuf.message.Message):
@@ -206,4 +206,4 @@ class SimpleProto3(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["b_oneof", b"b_oneof"]) -> typing.Literal["b_oneof_1", "b_oneof_2"] | None: ...
 
-global___SimpleProto3 = SimpleProto3
+global___SimpleProto3: typing_extensions.TypeAlias = SimpleProto3

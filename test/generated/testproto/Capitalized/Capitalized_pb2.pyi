@@ -6,7 +6,13 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -23,7 +29,7 @@ class lower(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["a", b"a"]) -> None: ...
 
-global___lower = lower
+global___lower: typing_extensions.TypeAlias = lower
 
 @typing.final
 class Upper(google.protobuf.message.Message):
@@ -40,7 +46,7 @@ class Upper(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["Lower", b"Lower"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["Lower", b"Lower"]) -> None: ...
 
-global___Upper = Upper
+global___Upper: typing_extensions.TypeAlias = Upper
 
 @typing.final
 class lower2(google.protobuf.message.Message):
@@ -57,4 +63,4 @@ class lower2(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["upper", b"upper"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["upper", b"upper"]) -> None: ...
 
-global___lower2 = lower2
+global___lower2: typing_extensions.TypeAlias = lower2

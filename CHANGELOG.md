@@ -1,5 +1,7 @@
 ## Upcoming
 
+- Mark top-level mangled identifiers `global___*` as `TypeAlias`.
+
 ## 3.6.0
 
 - Remove 3.7 compatibility for typing_extensions.final/Literal

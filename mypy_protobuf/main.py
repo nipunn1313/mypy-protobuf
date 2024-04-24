@@ -376,7 +376,7 @@ class PkgWriter(object):
                 scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
             )
             if prefix == "" and not self.readable_stubs:
-                wl(f"{_mangle_global_identifier(class_name)} = {class_name}")
+                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
             wl("")
 
     def write_messages(
@@ -483,7 +483,7 @@ class PkgWriter(object):
 
             if prefix == "" and not self.readable_stubs:
                 wl("")
-                wl(f"{_mangle_global_identifier(class_name)} = {class_name}")
+                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
             wl("")
 
     def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:

@@ -8,7 +8,13 @@ import google.protobuf.descriptor
 import google.protobuf.descriptor_pb2
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -34,7 +40,7 @@ class FieldOptions(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]) -> None: ...
 
-global___FieldOptions = FieldOptions
+global___FieldOptions: typing_extensions.TypeAlias = FieldOptions
 
 OPTIONS_FIELD_NUMBER: builtins.int
 CASTTYPE_FIELD_NUMBER: builtins.int

@@ -6,7 +6,13 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -73,4 +79,4 @@ class Test(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["a", b"a", "b", b"b", "c", b"c", "d", b"d", "e", b"e", "f", b"f", "g", b"g", "h", b"h", "i", b"i", "j", b"j", "k", b"k"]) -> None: ...
 
-global___Test = Test
+global___Test: typing_extensions.TypeAlias = Test
