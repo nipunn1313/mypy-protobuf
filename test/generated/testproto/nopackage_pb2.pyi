@@ -8,7 +8,13 @@ import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -22,7 +28,7 @@ class NoPackage(google.protobuf.message.Message):
         self,
     ) -> None: ...
 
-global___NoPackage = NoPackage
+Global___NoPackage: typing_extensions.TypeAlias = NoPackage
 
 @typing.final
 class NoPackage2(google.protobuf.message.Message):
@@ -31,16 +37,16 @@ class NoPackage2(google.protobuf.message.Message):
     NP_FIELD_NUMBER: builtins.int
     NP_REP_FIELD_NUMBER: builtins.int
     @property
-    def np(self) -> global___NoPackage: ...
+    def np(self) -> Global___NoPackage: ...
     @property
-    def np_rep(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___NoPackage]: ...
+    def np_rep(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___NoPackage]: ...
     def __init__(
         self,
         *,
-        np: global___NoPackage | None = ...,
-        np_rep: collections.abc.Iterable[global___NoPackage] | None = ...,
+        np: Global___NoPackage | None = ...,
+        np_rep: collections.abc.Iterable[Global___NoPackage] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["np", b"np"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["np", b"np", "np_rep", b"np_rep"]) -> None: ...
 
-global___NoPackage2 = NoPackage2
+Global___NoPackage2: typing_extensions.TypeAlias = NoPackage2

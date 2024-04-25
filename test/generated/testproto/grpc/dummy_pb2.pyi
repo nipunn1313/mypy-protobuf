@@ -6,7 +6,13 @@ https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -23,7 +29,7 @@ class DummyRequest(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["value", b"value"]) -> None: ...
 
-global___DummyRequest = DummyRequest
+Global___DummyRequest: typing_extensions.TypeAlias = DummyRequest
 
 @typing.final
 class DummyReply(google.protobuf.message.Message):
@@ -38,4 +44,4 @@ class DummyReply(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["value", b"value"]) -> None: ...
 
-global___DummyReply = DummyReply
+Global___DummyReply: typing_extensions.TypeAlias = DummyReply

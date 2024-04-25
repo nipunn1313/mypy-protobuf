@@ -29,4 +29,4 @@ class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper): ...
 
 HELLO: MyEnum.ValueType  # 0
 WORLD: MyEnum.ValueType  # 1
-global___MyEnum = MyEnum
+Global___MyEnum: typing_extensions.TypeAlias = MyEnum

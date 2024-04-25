@@ -6,8 +6,14 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import testproto.test3_pb2
 import typing
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -24,4 +30,4 @@ class Inner(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["a", b"a"]) -> None: ...
 
-global___Inner = Inner
+Global___Inner: typing_extensions.TypeAlias = Inner
