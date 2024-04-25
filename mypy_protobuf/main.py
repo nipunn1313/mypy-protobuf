@@ -92,10 +92,10 @@ def _mangle_global_identifier(name: str) -> str:
 
     Eg:
     Enum variant `Name` or message field `Name` might conflict with a top level
-    message or enum named `Name`, so mangle it with a global___ prefix for
+    message or enum named `Name`, so mangle it with a `Global___` prefix for
     internal references. Note that this doesn't affect inner enums/messages
-    because they get fuly qualified when referenced within a file"""
-    return f"global___{name}"
+    because they get fully qualified when referenced within a file"""
+    return f"Global___{name}"
 
 
 class Descriptors(object):

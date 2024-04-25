@@ -25,7 +25,7 @@ class SeparateFileExtension(google.protobuf.message.Message):
     FLAG_FIELD_NUMBER: builtins.int
     flag: builtins.bool
     EXT_FIELD_NUMBER: builtins.int
-    ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, global___SeparateFileExtension]
+    ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, Global___SeparateFileExtension]
     def __init__(
         self,
         *,
@@ -34,4 +34,4 @@ class SeparateFileExtension(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["flag", b"flag"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["flag", b"flag"]) -> None: ...
 
-global___SeparateFileExtension: typing_extensions.TypeAlias = SeparateFileExtension
+Global___SeparateFileExtension: typing_extensions.TypeAlias = SeparateFileExtension

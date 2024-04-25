@@ -29,7 +29,7 @@ class DummyRequest(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["value", b"value"]) -> None: ...
 
-global___DummyRequest: typing_extensions.TypeAlias = DummyRequest
+Global___DummyRequest: typing_extensions.TypeAlias = DummyRequest
 
 @typing.final
 class DummyReply(google.protobuf.message.Message):
@@ -44,4 +44,4 @@ class DummyReply(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["value", b"value"]) -> None: ...
 
-global___DummyReply: typing_extensions.TypeAlias = DummyReply
+Global___DummyReply: typing_extensions.TypeAlias = DummyReply

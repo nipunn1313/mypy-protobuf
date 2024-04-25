@@ -31,7 +31,7 @@ class Nested(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["a", b"a"]) -> None: ...
 
-global___Nested: typing_extensions.TypeAlias = Nested
+Global___Nested: typing_extensions.TypeAlias = Nested
 
 @typing.final
 class AnotherNested(google.protobuf.message.Message):
@@ -77,15 +77,15 @@ class AnotherNested(google.protobuf.message.Message):
         NE2_FIELD_NUMBER: builtins.int
         s: builtins.str
         b: builtins.bool
-        ne: global___AnotherNested.NestedEnum.ValueType
-        ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType
+        ne: Global___AnotherNested.NestedEnum.ValueType
+        ne2: Global___AnotherNested.NestedMessage.NestedEnum2.ValueType
         def __init__(
             self,
             *,
             s: builtins.str = ...,
             b: builtins.bool = ...,
-            ne: global___AnotherNested.NestedEnum.ValueType = ...,
-            ne2: global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,
+            ne: Global___AnotherNested.NestedEnum.ValueType = ...,
+            ne2: Global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,
         ) -> None: ...
         def ClearField(self, field_name: typing.Literal["b", b"b", "ne", b"ne", "ne2", b"ne2", "s", b"s"]) -> None: ...
 
@@ -93,4 +93,4 @@ class AnotherNested(google.protobuf.message.Message):
         self,
     ) -> None: ...
 
-global___AnotherNested: typing_extensions.TypeAlias = AnotherNested
+Global___AnotherNested: typing_extensions.TypeAlias = AnotherNested

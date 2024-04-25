@@ -35,7 +35,7 @@ class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper): ...
 UNKNOWN: OuterEnum.ValueType  # 0
 FOO3: OuterEnum.ValueType  # 1
 BAR3: OuterEnum.ValueType  # 2
-global___OuterEnum: typing_extensions.TypeAlias = OuterEnum
+Global___OuterEnum: typing_extensions.TypeAlias = OuterEnum
 
 @typing.final
 class OuterMessage3(google.protobuf.message.Message):
@@ -50,7 +50,7 @@ class OuterMessage3(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
 
-global___OuterMessage3: typing_extensions.TypeAlias = OuterMessage3
+Global___OuterMessage3: typing_extensions.TypeAlias = OuterMessage3
 
 @typing.final
 class SimpleProto3(google.protobuf.message.Message):
@@ -93,12 +93,12 @@ class SimpleProto3(google.protobuf.message.Message):
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
-        def value(self) -> global___OuterMessage3: ...
+        def value(self) -> Global___OuterMessage3: ...
         def __init__(
             self,
             *,
             key: builtins.int = ...,
-            value: global___OuterMessage3 | None = ...,
+            value: Global___OuterMessage3 | None = ...,
         ) -> None: ...
         def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
@@ -141,15 +141,15 @@ class SimpleProto3(google.protobuf.message.Message):
     EMAIL_FIELD_NUMBER: builtins.int
     EMAIL_BY_UID_FIELD_NUMBER: builtins.int
     a_string: builtins.str
-    a_outer_enum: global___OuterEnum.ValueType
-    inner_enum: global___SimpleProto3.InnerEnum.ValueType
+    a_outer_enum: Global___OuterEnum.ValueType
+    inner_enum: Global___SimpleProto3.InnerEnum.ValueType
     a_oneof_1: builtins.str
     a_oneof_2: builtins.str
-    outer_enum_in_oneof: global___OuterEnum.ValueType
-    inner_enum_in_oneof: global___SimpleProto3.InnerEnum.ValueType
+    outer_enum_in_oneof: Global___OuterEnum.ValueType
+    inner_enum_in_oneof: Global___SimpleProto3.InnerEnum.ValueType
     b_oneof_1: builtins.str
     b_oneof_2: builtins.str
-    OuterEnum: global___OuterEnum.ValueType
+    OuterEnum: Global___OuterEnum.ValueType
     """Test having fieldname match messagename"""
     an_optional_string: builtins.str
     user_id: test.test_generated_mypy.UserId
@@ -157,19 +157,19 @@ class SimpleProto3(google.protobuf.message.Message):
     @property
     def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
-    def outer_message(self) -> global___OuterMessage3: ...
+    def outer_message(self) -> Global___OuterMessage3: ...
     @property
-    def outer_message_in_oneof(self) -> global___OuterMessage3: ...
+    def outer_message_in_oneof(self) -> Global___OuterMessage3: ...
     @property
-    def bool(self) -> global___OuterMessage3: ...
+    def bool(self) -> Global___OuterMessage3: ...
     @property
-    def OuterMessage3(self) -> global___OuterMessage3: ...
+    def OuterMessage3(self) -> Global___OuterMessage3: ...
     @property
     def map_scalar(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.str]:
         """Test generation of map"""
 
     @property
-    def map_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___OuterMessage3]: ...
+    def map_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, Global___OuterMessage3]: ...
     @property
     def email_by_uid(self) -> google.protobuf.internal.containers.ScalarMap[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]: ...
     def __init__(
@@ -177,21 +177,21 @@ class SimpleProto3(google.protobuf.message.Message):
         *,
         a_string: builtins.str = ...,
         a_repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
-        a_outer_enum: global___OuterEnum.ValueType = ...,
-        outer_message: global___OuterMessage3 | None = ...,
-        inner_enum: global___SimpleProto3.InnerEnum.ValueType = ...,
+        a_outer_enum: Global___OuterEnum.ValueType = ...,
+        outer_message: Global___OuterMessage3 | None = ...,
+        inner_enum: Global___SimpleProto3.InnerEnum.ValueType = ...,
         a_oneof_1: builtins.str = ...,
         a_oneof_2: builtins.str = ...,
-        outer_message_in_oneof: global___OuterMessage3 | None = ...,
-        outer_enum_in_oneof: global___OuterEnum.ValueType = ...,
-        inner_enum_in_oneof: global___SimpleProto3.InnerEnum.ValueType = ...,
+        outer_message_in_oneof: Global___OuterMessage3 | None = ...,
+        outer_enum_in_oneof: Global___OuterEnum.ValueType = ...,
+        inner_enum_in_oneof: Global___SimpleProto3.InnerEnum.ValueType = ...,
         b_oneof_1: builtins.str = ...,
         b_oneof_2: builtins.str = ...,
-        bool: global___OuterMessage3 | None = ...,
-        OuterEnum: global___OuterEnum.ValueType = ...,
-        OuterMessage3: global___OuterMessage3 | None = ...,
+        bool: Global___OuterMessage3 | None = ...,
+        OuterEnum: Global___OuterEnum.ValueType = ...,
+        OuterMessage3: Global___OuterMessage3 | None = ...,
         map_scalar: collections.abc.Mapping[builtins.int, builtins.str] | None = ...,
-        map_message: collections.abc.Mapping[builtins.int, global___OuterMessage3] | None = ...,
+        map_message: collections.abc.Mapping[builtins.int, Global___OuterMessage3] | None = ...,
         an_optional_string: builtins.str | None = ...,
         user_id: test.test_generated_mypy.UserId = ...,
         email: test.test_generated_mypy.Email = ...,
@@ -206,4 +206,4 @@ class SimpleProto3(google.protobuf.message.Message):
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["b_oneof", b"b_oneof"]) -> typing.Literal["b_oneof_1", "b_oneof_2"] | None: ...
 
-global___SimpleProto3: typing_extensions.TypeAlias = SimpleProto3
+Global___SimpleProto3: typing_extensions.TypeAlias = SimpleProto3

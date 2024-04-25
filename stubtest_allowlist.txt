@@ -57,7 +57,8 @@ testproto.grpc.dummy_pb2_grpc.DummyService
 testproto.grpc.import_pb2_grpc.SimpleService
 
 # global prefix globals are generated, but aren't used at runtime
-.*_pb2\.global___.*
+# using `__` would be preferable, but Y047 will detect unused names.
+.*_pb2\.Global___.*
 
 # All readonly generated @property fields seem to trip up
 # stubtest. It claims they aren't available at runtime, when practically,

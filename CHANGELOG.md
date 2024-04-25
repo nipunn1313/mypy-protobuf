@@ -1,6 +1,8 @@
 ## Upcoming
 
-- Mark top-level mangled identifiers `global___*` as `TypeAlias`.
+- Mark top-level mangled identifiers as `TypeAlias`.
+- Change the top-level mangling prefix from `global___` to `Global___` to respect
+  [Y042](https://github.com/PyCQA/flake8-pyi/blob/main/ERRORCODES.md#list-of-warnings) naming convention. 
 
 ## 3.6.0
 
