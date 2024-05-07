@@ -8,8 +8,14 @@ import collections.abc
 import google.protobuf.empty_pb2
 import grpc
 import grpc.aio
+import sys
 import testproto.test_pb2
 import typing
+
+if sys.version_info >= (3, 13):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 _T = typing.TypeVar("_T")
 
@@ -20,46 +26,111 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
-class SimpleServiceStub:
+_MTVSimpleService0 = typing_extensions.TypeVar(
+    '_MTVSimpleService0',
+    grpc.UnaryUnaryMultiCallable[
+        google.protobuf.empty_pb2.Empty,
+        testproto.test_pb2.Simple1,
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
+        google.protobuf.empty_pb2.Empty,
+        testproto.test_pb2.Simple1,
+    ],
+    default=grpc.UnaryUnaryMultiCallable[
+        google.protobuf.empty_pb2.Empty,
+        testproto.test_pb2.Simple1,
+    ],
+)
+
+_MTVSimpleService1 = typing_extensions.TypeVar(
+    '_MTVSimpleService1',
+    grpc.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty,
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty,
+    ],
+    default=grpc.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty,
+    ],
+)
+
+_MTVSimpleService2 = typing_extensions.TypeVar(
+    '_MTVSimpleService2',
+    grpc.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty,
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty,
+    ],
+    default=grpc.UnaryUnaryMultiCallable[
+        testproto.test_pb2.Simple1,
+        google.protobuf.empty_pb2.Empty,
+    ],
+)
+
+class SimpleServiceStub(typing.Generic[_MTVSimpleService0,_MTVSimpleService1,_MTVSimpleService2]):
     """SimpleService"""
 
-    def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
-    UnaryUnary: grpc.UnaryUnaryMultiCallable[
-        google.protobuf.empty_pb2.Empty,
-        testproto.test_pb2.Simple1,
-    ]
+    @typing.overload
+    def __init__(self: SimpleServiceStub[
+        grpc.UnaryUnaryMultiCallable[
+            google.protobuf.empty_pb2.Empty,
+            testproto.test_pb2.Simple1,
+        ],
+        grpc.UnaryUnaryMultiCallable[
+            testproto.test_pb2.Simple1,
+            google.protobuf.empty_pb2.Empty,
+        ],
+        grpc.UnaryUnaryMultiCallable[
+            testproto.test_pb2.Simple1,
+            google.protobuf.empty_pb2.Empty,
+        ],
+    ], channel: grpc.Channel) -> None: ...
+
+    @typing.overload
+    def __init__(self: SimpleServiceStub[
+        grpc.aio.UnaryUnaryMultiCallable[
+            google.protobuf.empty_pb2.Empty,
+            testproto.test_pb2.Simple1,
+        ],
+        grpc.aio.UnaryUnaryMultiCallable[
+            testproto.test_pb2.Simple1,
+            google.protobuf.empty_pb2.Empty,
+        ],
+        grpc.aio.UnaryUnaryMultiCallable[
+            testproto.test_pb2.Simple1,
+            google.protobuf.empty_pb2.Empty,
+        ],
+    ], channel: grpc.aio.Channel) -> None: ...
+
+    UnaryUnary: _MTVSimpleService0
     """UnaryUnary"""
 
-    UnaryStream: grpc.UnaryUnaryMultiCallable[
-        testproto.test_pb2.Simple1,
-        google.protobuf.empty_pb2.Empty,
-    ]
+    UnaryStream: _MTVSimpleService1
     """UnaryStream"""
 
-    NoComment: grpc.UnaryUnaryMultiCallable[
-        testproto.test_pb2.Simple1,
-        google.protobuf.empty_pb2.Empty,
-    ]
+    NoComment: _MTVSimpleService2
 
-class SimpleServiceAsyncStub:
-    """SimpleService"""
-
-    UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[
+SimpleServiceAsyncStub: typing_extensions.TypeAlias = SimpleServiceStub[
+    grpc.aio.UnaryUnaryMultiCallable[
         google.protobuf.empty_pb2.Empty,
         testproto.test_pb2.Simple1,
-    ]
-    """UnaryUnary"""
-
-    UnaryStream: grpc.aio.UnaryUnaryMultiCallable[
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
-    ]
-    """UnaryStream"""
-
-    NoComment: grpc.aio.UnaryUnaryMultiCallable[
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
-    ]
+    ],
+]
 
 class SimpleServiceServicer(metaclass=abc.ABCMeta):
     """SimpleService"""

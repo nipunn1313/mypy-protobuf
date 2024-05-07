@@ -7,8 +7,14 @@ import abc
 import collections.abc
 import grpc
 import grpc.aio
+import sys
 import testproto.grpc.dummy_pb2
 import typing
+
+if sys.version_info >= (3, 13):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 _T = typing.TypeVar("_T")
 
@@ -19,60 +25,143 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
-class DummyServiceStub:
+_MTVDummyService0 = typing_extensions.TypeVar(
+    '_MTVDummyService0',
+    grpc.UnaryUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.UnaryUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+_MTVDummyService1 = typing_extensions.TypeVar(
+    '_MTVDummyService1',
+    grpc.UnaryStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.UnaryStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.UnaryStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+_MTVDummyService2 = typing_extensions.TypeVar(
+    '_MTVDummyService2',
+    grpc.StreamUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.StreamUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.StreamUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+_MTVDummyService3 = typing_extensions.TypeVar(
+    '_MTVDummyService3',
+    grpc.StreamStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.StreamStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.StreamStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+class DummyServiceStub(typing.Generic[_MTVDummyService0,_MTVDummyService1,_MTVDummyService2,_MTVDummyService3]):
     """DummyService"""
 
-    def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
-    UnaryUnary: grpc.UnaryUnaryMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    @typing.overload
+    def __init__(self: DummyServiceStub[
+        grpc.UnaryUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.UnaryStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.StreamUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.StreamStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+    ], channel: grpc.Channel) -> None: ...
+
+    @typing.overload
+    def __init__(self: DummyServiceStub[
+        grpc.aio.UnaryUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.aio.UnaryStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.aio.StreamUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.aio.StreamStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+    ], channel: grpc.aio.Channel) -> None: ...
+
+    UnaryUnary: _MTVDummyService0
     """UnaryUnary"""
 
-    UnaryStream: grpc.UnaryStreamMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    UnaryStream: _MTVDummyService1
     """UnaryStream"""
 
-    StreamUnary: grpc.StreamUnaryMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    StreamUnary: _MTVDummyService2
     """StreamUnary"""
 
-    StreamStream: grpc.StreamStreamMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    StreamStream: _MTVDummyService3
     """StreamStream"""
 
-class DummyServiceAsyncStub:
-    """DummyService"""
-
-    UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[
+DummyServiceAsyncStub: typing_extensions.TypeAlias = DummyServiceStub[
+    grpc.aio.UnaryUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """UnaryUnary"""
-
-    UnaryStream: grpc.aio.UnaryStreamMultiCallable[
+    ],
+    grpc.aio.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """UnaryStream"""
-
-    StreamUnary: grpc.aio.StreamUnaryMultiCallable[
+    ],
+    grpc.aio.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """StreamUnary"""
-
-    StreamStream: grpc.aio.StreamStreamMultiCallable[
+    ],
+    grpc.aio.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """StreamStream"""
+    ],
+]
 
 class DummyServiceServicer(metaclass=abc.ABCMeta):
     """DummyService"""

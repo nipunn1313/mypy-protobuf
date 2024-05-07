@@ -13,8 +13,8 @@ from typing import (
     Iterator,
     List,
     Optional,
-    Set,
     Sequence,
+    Set,
     Tuple,
 )
 
@@ -22,6 +22,7 @@ import google.protobuf.descriptor_pb2 as d
 from google.protobuf.compiler import plugin_pb2 as plugin_pb2
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
 from google.protobuf.internal.well_known_types import WKTBASES
+
 from . import extensions_pb2
 
 __version__ = "3.6.0"
@@ -83,6 +84,8 @@ PROTO_ENUM_RESERVED = {
     "values",
     "items",
 }
+
+METHOD_TYPEVAR_PREFIX = "_MTV"
 
 
 def _mangle_global_identifier(name: str) -> str:
@@ -168,9 +171,7 @@ class PkgWriter(object):
         eg. self._import("typing", "Literal") -> "Literal"
         """
         if path == "typing_extensions":
-            stabilization = {
-                "TypeAlias": (3, 10),
-            }
+            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13)}
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
@@ -732,6 +733,46 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
+    def write_grpc_type_vars(self, service: d.ServiceDescriptorProto) -> None:
+        wl = self._write_line
+        methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
+        if not methods:
+            return
+        for i, method in methods:
+            wl("{}{}{} = {}(", METHOD_TYPEVAR_PREFIX, service.name, i, self._import("typing_extensions", "TypeVar"))
+            with self._indent():
+                wl("'{}{}{}',", METHOD_TYPEVAR_PREFIX, service.name, i)
+                wl("{}[", self._callable_type(method, is_async=False))
+                with self._indent():
+                    wl("{},", self._input_type(method))
+                    wl("{},", self._output_type(method))
+                wl("],")
+                wl("{}[", self._callable_type(method, is_async=True))
+                with self._indent():
+                    wl("{},", self._input_type(method))
+                    wl("{},", self._output_type(method))
+                wl("],")
+                wl("default={}[", self._callable_type(method, is_async=False))
+                with self._indent():
+                    wl("{},", self._input_type(method))
+                    wl("{},", self._output_type(method))
+                wl("],")
+            wl(")")
+            wl("")
+
+    def write_self_types(self, service: d.ServiceDescriptorProto, is_async: bool) -> None:
+        wl = self._write_line
+        methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
+        if not methods:
+            return
+        for i, method in methods:
+            with self._indent():
+                wl("{}[", self._callable_type(method, is_async=is_async))
+                with self._indent():
+                    wl("{},", self._input_type(method))
+                    wl("{},", self._output_type(method))
+                wl("],")
+
     def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
@@ -769,11 +810,7 @@ class PkgWriter(object):
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
 
-            wl("{}: {}[", method.name, self._callable_type(method, is_async=is_async))
-            with self._indent():
-                wl("{},", self._input_type(method))
-                wl("{},", self._output_type(method))
-            wl("]")
+            wl("{}: {}", method.name, f"{METHOD_TYPEVAR_PREFIX}{service.name}{i}")
             self._write_comments(scl)
             wl("")
 
@@ -791,29 +828,48 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
 
+            # Type vars
+            self.write_grpc_type_vars(service)
+
             # The stub client
+            class_name = f"{service.name}Stub"
             wl(
-                "class {}Stub:",
-                service.name,
+                "class {}({}[{}]):",
+                class_name,
+                self._import("typing", "Generic"),
+                ",".join(f"{METHOD_TYPEVAR_PREFIX}{service.name}{i}" for i in range(len(service.method))),
             )
             with self._indent():
                 if self._write_comments(scl):
                     wl("")
-                # To support casting into FooAsyncStub, allow both Channel and aio.Channel here.
-                channel = f"{self._import('typing', 'Union')}[{self._import('grpc', 'Channel')}, {self._import('grpc.aio', 'Channel')}]"
-                wl("def __init__(self, channel: {}) -> None: ...", channel)
+
+                # Write sync overload
+                wl("@{}", self._import("typing", "overload"))
+                wl("def __init__(self: {}[", class_name)
+                self.write_self_types(service, False)
+                wl(
+                    "], channel: {}) -> None: ...",
+                    self._import("grpc", "Channel"),
+                )
+                wl("")
+
+                # Write async overload
+                wl("@{}", self._import("typing", "overload"))
+                wl("def __init__(self: {}[", class_name)
+                self.write_self_types(service, True)
+                wl(
+                    "], channel: {}) -> None: ...",
+                    self._import("grpc.aio", "Channel"),
+                )
+                wl("")
+
                 self.write_grpc_stub_methods(service, scl)
 
-            # The (fake) async stub client
-            wl(
-                "class {}AsyncStub:",
-                service.name,
-            )
-            with self._indent():
-                if self._write_comments(scl):
-                    wl("")
-                # No __init__ since this isn't a real class (yet), and requires manual casting to work.
-                self.write_grpc_stub_methods(service, scl, is_async=True)
+            # Write AsyncStub alias
+            wl("{}AsyncStub: {} = {}[", service.name, self._import("typing_extensions", "TypeAlias"), class_name)
+            self.write_self_types(service, True)
+            wl("]")
+            wl("")
 
             # The service definition interface
             wl(
