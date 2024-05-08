@@ -89,7 +89,7 @@ _MTVDummyService3 = typing_extensions.TypeVar(
     ],
 )
 
-class DummyServiceStub(typing.Generic[_MTVDummyService0,_MTVDummyService1,_MTVDummyService2,_MTVDummyService3]):
+class DummyServiceStub(typing.Generic[_MTVDummyService0, _MTVDummyService1, _MTVDummyService2, _MTVDummyService3]):
     """DummyService"""
 
     @typing.overload

@@ -74,7 +74,7 @@ _MTVSimpleService2 = typing_extensions.TypeVar(
     ],
 )
 
-class SimpleServiceStub(typing.Generic[_MTVSimpleService0,_MTVSimpleService1,_MTVSimpleService2]):
+class SimpleServiceStub(typing.Generic[_MTVSimpleService0, _MTVSimpleService1, _MTVSimpleService2]):
     """SimpleService"""
 
     @typing.overload

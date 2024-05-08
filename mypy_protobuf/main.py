@@ -765,7 +765,7 @@ class PkgWriter(object):
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
             return
-        for i, method in methods:
+        for _, method in methods:
             with self._indent():
                 wl("{}[", self._callable_type(method, is_async=is_async))
                 with self._indent():
@@ -837,7 +837,7 @@ class PkgWriter(object):
                 "class {}({}[{}]):",
                 class_name,
                 self._import("typing", "Generic"),
-                ",".join(f"{METHOD_TYPEVAR_PREFIX}{service.name}{i}" for i in range(len(service.method))),
+                ", ".join(f"{METHOD_TYPEVAR_PREFIX}{service.name}{i}" for i in range(len(service.method))),
             )
             with self._indent():
                 if self._write_comments(scl):
