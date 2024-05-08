@@ -169,7 +169,8 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             # Write output to file. Make variant w/ omitted line numbers for easy diffing / CR
             PY_VER_MYPY_TARGET=$(echo "$1" | cut -d. -f1-2)
             export MYPYPATH=$MYPYPATH:test/generated
-            mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
+            # Use --no-incremental to avoid caching issues: https://github.com/python/mypy/issues/16363
+            mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --no-incremental --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
             cut -d: -f1,3- "$MYPY_OUTPUT/mypy_output" > "$MYPY_OUTPUT/mypy_output.omit_linenos"
         }
 
