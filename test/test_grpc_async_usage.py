@@ -25,18 +25,18 @@ class Servicer(dummy_pb2_grpc.DummyServiceServicer):
 
     async def StreamUnary(
         self,
-        request: typing.AsyncIterator[dummy_pb2.DummyRequest],
+        request_iterator: typing.AsyncIterator[dummy_pb2.DummyRequest],
         context: grpc.aio.ServicerContext,
     ) -> dummy_pb2.DummyReply:
-        values = [data.value async for data in request]
+        values = [data.value async for data in request_iterator]
         return dummy_pb2.DummyReply(value="".join(values))
 
     async def StreamStream(
         self,
-        request: typing.AsyncIterator[dummy_pb2.DummyRequest],
+        request_iterator: typing.AsyncIterator[dummy_pb2.DummyRequest],
         context: grpc.aio.ServicerContext,
     ) -> typing.AsyncIterator[dummy_pb2.DummyReply]:
-        async for data in request:
+        async for data in request_iterator:
             yield dummy_pb2.DummyReply(value=data.value.upper())
 
 

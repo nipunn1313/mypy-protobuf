@@ -25,17 +25,17 @@ class Servicer(dummy_pb2_grpc.DummyServiceServicer):
 
     def StreamUnary(
         self,
-        request: typing.Iterator[dummy_pb2.DummyRequest],
+        request_iterator: typing.Iterator[dummy_pb2.DummyRequest],
         context: grpc.ServicerContext,
     ) -> dummy_pb2.DummyReply:
-        return dummy_pb2.DummyReply(value="".join(data.value for data in request))
+        return dummy_pb2.DummyReply(value="".join(data.value for data in request_iterator))
 
     def StreamStream(
         self,
-        request: typing.Iterator[dummy_pb2.DummyRequest],
+        request_iterator: typing.Iterator[dummy_pb2.DummyRequest],
         context: grpc.ServicerContext,
     ) -> typing.Iterator[dummy_pb2.DummyReply]:
-        for data in request:
+        for data in request_iterator:
             yield dummy_pb2.DummyReply(value=data.value.upper())
 
 
