@@ -27,7 +27,7 @@ test_negative/negative.py:87: error: Incompatible types in assignment (expressio
 test_negative/negative.py:88: error: "Type[Extensions1]" has no attribute "bad"  [attr-defined]
 test_negative/negative.py:90: error: "Extensions1" has no attribute "foo"  [attr-defined]
 test_negative/negative.py:91: error: Incompatible types in assignment (expression has type "Extensions2", variable has type "Extensions1")  [assignment]
-test_negative/negative.py:95: error: Invalid index type "str" for "_ExtensionDict[Simple1]"; expected type "_ExtensionFieldDescriptor[Simple1, <nothing>]"  [index]
+test_negative/negative.py:95: error: Invalid index type "str" for "_ExtensionDict[Simple1]"; expected type "_ExtensionFieldDescriptor[Simple1, Never]"  [index]
 test_negative/negative.py:96: error: Invalid index type "_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]" for "_ExtensionDict[Simple1]"; expected type "_ExtensionFieldDescriptor[Simple1, SeparateFileExtension]"  [index]
 test_negative/negative.py:97: error: Unsupported operand types for in ("_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]" and "_ExtensionDict[Simple1]")  [operator]
 test_negative/negative.py:98: error: Argument 1 to "__delitem__" of "_ExtensionDict" has incompatible type "_ExtensionFieldDescriptor[Simple2, SeparateFileExtension]"; expected "_ExtensionFieldDescriptor[Simple1, SeparateFileExtension]"  [arg-type]

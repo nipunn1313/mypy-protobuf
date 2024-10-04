@@ -23,7 +23,7 @@ Earlier releases might work, but aren't tested
 
 Earlier releases might work, but aren't tested
 
-- [mypy >= v1.4.1](https://pypi.org/project/mypy) or [pyright >= 1.1.206](https://github.com/microsoft/pyright)
+- [mypy >= v1.11.2](https://pypi.org/project/mypy) or [pyright >= 1.1.206](https://github.com/microsoft/pyright)
 - [python-protobuf >= 4.25.3](https://pypi.org/project/protobuf/) - matching protoc release
 - [types-protobuf >= 4.24](https://pypi.org/project/types-protobuf/) - for stubs from the google.protobuf library
 
