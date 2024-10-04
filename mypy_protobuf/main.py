@@ -783,6 +783,8 @@ class PkgWriter(object):
         scl_prefix: SourceCodeLocation,
     ) -> None:
         wl = self._write_line
+        wl("GRPC_GENERATED_VERSION: str")
+        wl("GRPC_VERSION: str")
         for i, service in enumerate(services):
             if service.name in PYTHON_RESERVED:
                 continue
