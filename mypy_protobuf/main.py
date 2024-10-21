@@ -85,6 +85,7 @@ PROTO_ENUM_RESERVED = {
     "items",
 }
 
+
 def _build_typevar_name(service_name: str, method_name: str) -> str:
     # Prefix with underscore to avoid public api error: https://stackoverflow.com/a/78871465
     return f"_{service_name}{method_name}Type"
@@ -743,7 +744,7 @@ class PkgWriter(object):
         for _, method in methods:
             wl("{} = {}(", _build_typevar_name(service.name, method.name), self._import("typing_extensions", "TypeVar"))
             with self._indent():
-                wl("'{}',",  _build_typevar_name(service.name, method.name))
+                wl("'{}',", _build_typevar_name(service.name, method.name))
                 wl("{}[", self._callable_type(method, is_async=False))
                 with self._indent():
                     wl("{},", self._input_type(method))
