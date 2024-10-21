@@ -7,8 +7,14 @@ import abc
 import collections.abc
 import grpc
 import grpc.aio
+import sys
 import testproto.grpc.dummy_pb2
 import typing
+
+if sys.version_info >= (3, 13):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 _T = typing.TypeVar("_T")
 
@@ -19,60 +25,143 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
-class DummyServiceStub:
+_DummyServiceUnaryUnaryType = typing_extensions.TypeVar(
+    '_DummyServiceUnaryUnaryType',
+    grpc.UnaryUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.UnaryUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.UnaryUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+_DummyServiceUnaryStreamType = typing_extensions.TypeVar(
+    '_DummyServiceUnaryStreamType',
+    grpc.UnaryStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.UnaryStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.UnaryStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+_DummyServiceStreamUnaryType = typing_extensions.TypeVar(
+    '_DummyServiceStreamUnaryType',
+    grpc.StreamUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.StreamUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.StreamUnaryMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+_DummyServiceStreamStreamType = typing_extensions.TypeVar(
+    '_DummyServiceStreamStreamType',
+    grpc.StreamStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    grpc.aio.StreamStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+    default=grpc.StreamStreamMultiCallable[
+        testproto.grpc.dummy_pb2.DummyRequest,
+        testproto.grpc.dummy_pb2.DummyReply,
+    ],
+)
+
+class DummyServiceStub(typing.Generic[_DummyServiceUnaryUnaryType, _DummyServiceUnaryStreamType, _DummyServiceStreamUnaryType, _DummyServiceStreamStreamType]):
     """DummyService"""
 
-    def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
-    UnaryUnary: grpc.UnaryUnaryMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    @typing.overload
+    def __init__(self: DummyServiceStub[
+        grpc.UnaryUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.UnaryStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.StreamUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.StreamStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+    ], channel: grpc.Channel) -> None: ...
+
+    @typing.overload
+    def __init__(self: DummyServiceStub[
+        grpc.aio.UnaryUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.aio.UnaryStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.aio.StreamUnaryMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+        grpc.aio.StreamStreamMultiCallable[
+            testproto.grpc.dummy_pb2.DummyRequest,
+            testproto.grpc.dummy_pb2.DummyReply,
+        ],
+    ], channel: grpc.aio.Channel) -> None: ...
+
+    UnaryUnary: _DummyServiceUnaryUnaryType
     """UnaryUnary"""
 
-    UnaryStream: grpc.UnaryStreamMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    UnaryStream: _DummyServiceUnaryStreamType
     """UnaryStream"""
 
-    StreamUnary: grpc.StreamUnaryMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    StreamUnary: _DummyServiceStreamUnaryType
     """StreamUnary"""
 
-    StreamStream: grpc.StreamStreamMultiCallable[
-        testproto.grpc.dummy_pb2.DummyRequest,
-        testproto.grpc.dummy_pb2.DummyReply,
-    ]
+    StreamStream: _DummyServiceStreamStreamType
     """StreamStream"""
 
-class DummyServiceAsyncStub:
-    """DummyService"""
-
-    UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[
+DummyServiceAsyncStub: typing_extensions.TypeAlias = DummyServiceStub[
+    grpc.aio.UnaryUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """UnaryUnary"""
-
-    UnaryStream: grpc.aio.UnaryStreamMultiCallable[
+    ],
+    grpc.aio.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """UnaryStream"""
-
-    StreamUnary: grpc.aio.StreamUnaryMultiCallable[
+    ],
+    grpc.aio.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """StreamUnary"""
-
-    StreamStream: grpc.aio.StreamStreamMultiCallable[
+    ],
+    grpc.aio.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
-    ]
-    """StreamStream"""
+    ],
+]
 
 class DummyServiceServicer(metaclass=abc.ABCMeta):
     """DummyService"""

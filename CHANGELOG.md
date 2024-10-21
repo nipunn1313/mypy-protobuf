@@ -2,7 +2,8 @@
 
 - Mark top-level mangled identifiers as `TypeAlias`.
 - Change the top-level mangling prefix from `global___` to `Global___` to respect
-  [Y042](https://github.com/PyCQA/flake8-pyi/blob/main/ERRORCODES.md#list-of-warnings) naming convention. 
+  [Y042](https://github.com/PyCQA/flake8-pyi/blob/main/ERRORCODES.md#list-of-warnings) naming convention.
+- Support client stub async typing overloads
 
 ## 3.6.0
 

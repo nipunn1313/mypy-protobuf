@@ -303,6 +303,7 @@ black .
 - [@fergyfresh](https://github.com/fergyfresh)
 - [@AlexWaygood](https://github.com/AlexWaygood)
 - [@Avasam](https://github.com/Avasam)
+- [@artificial-aidan](https://github.com/artificial-aidan)
 
 ## Licence etc.
 

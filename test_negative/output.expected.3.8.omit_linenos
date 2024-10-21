@@ -72,7 +72,9 @@ test_negative/negative.py: error: Property "a_repeated_string" defined in "Simpl
 test_negative/negative.py: error: Property "rep_inner_enum" defined in "Simple1" is read-only  [misc]
 test_negative/negative.py: error: "_r_None" has no attribute "invalid"; maybe "valid"?  [attr-defined]
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
-test_negative/negative.py: error: Missing positional argument "channel" in call to "DummyServiceStub"  [call-arg]
+test_negative/negative.py: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py: note: Possible overload variants:
+test_negative/negative.py: note:     def [_DummyServiceUnaryUnaryType: (UnaryUnaryMultiCallable[DummyRequest, DummyReply], UnaryUnaryMultiCallable[DummyRequest, DummyReply]), _DummyServiceUnaryStreamType: (UnaryStreamMultiCallable[DummyRequest, DummyReply], UnaryStreamMultiCallable[DummyRequest, DummyReply]), _DummyServiceStreamUnaryType: (StreamUnaryMultiCallable[DummyRequest, DummyReply], StreamUnaryMultiCallable[DummyRequest, DummyReply]), _DummyServiceStreamStreamType: (StreamStreamMultiCallable[DummyRequest, DummyReply], StreamStreamMultiCallable[DummyRequest, DummyReply])] __init__(self, channel: Channel) -> DummyServiceStub[UnaryUnaryMultiCallable[DummyRequest, DummyReply], UnaryStreamMultiCallable[DummyRequest, DummyReply], StreamUnaryMultiCallable[DummyRequest, DummyReply], StreamStreamMultiCallable[DummyRequest, DummyReply]]
 test_negative/negative.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
 test_negative/negative.py: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
 test_negative/negative.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
