@@ -85,7 +85,9 @@ PROTO_ENUM_RESERVED = {
     "items",
 }
 
-METHOD_TYPEVAR_PREFIX = "_MTV"
+def _build_typevar_name(service_name: str, method_name: str) -> str:
+    # Prefix with underscore to avoid public api error: https://stackoverflow.com/a/78871465
+    return f"_{service_name}{method_name}Type"
 
 
 def _mangle_global_identifier(name: str) -> str:
@@ -738,10 +740,10 @@ class PkgWriter(object):
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
             return
-        for i, method in methods:
-            wl("{}{}{} = {}(", METHOD_TYPEVAR_PREFIX, service.name, i, self._import("typing_extensions", "TypeVar"))
+        for _, method in methods:
+            wl("{} = {}(", _build_typevar_name(service.name, method.name), self._import("typing_extensions", "TypeVar"))
             with self._indent():
-                wl("'{}{}{}',", METHOD_TYPEVAR_PREFIX, service.name, i)
+                wl("'{}',",  _build_typevar_name(service.name, method.name))
                 wl("{}[", self._callable_type(method, is_async=False))
                 with self._indent():
                     wl("{},", self._input_type(method))
@@ -810,7 +812,7 @@ class PkgWriter(object):
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
 
-            wl("{}: {}", method.name, f"{METHOD_TYPEVAR_PREFIX}{service.name}{i}")
+            wl("{}: {}", method.name, f"{_build_typevar_name(service.name, method.name)}")
             self._write_comments(scl)
             wl("")
 
@@ -837,7 +839,7 @@ class PkgWriter(object):
                 "class {}({}[{}]):",
                 class_name,
                 self._import("typing", "Generic"),
-                ", ".join(f"{METHOD_TYPEVAR_PREFIX}{service.name}{i}" for i in range(len(service.method))),
+                ", ".join(f"{_build_typevar_name(service.name, method.name)}" for method in service.method),
             )
             with self._indent():
                 if self._write_comments(scl):

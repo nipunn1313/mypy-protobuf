@@ -25,8 +25,8 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
-_MTVDummyService0 = typing_extensions.TypeVar(
-    '_MTVDummyService0',
+_DummyServiceUnaryUnaryType = typing_extensions.TypeVar(
+    '_DummyServiceUnaryUnaryType',
     grpc.UnaryUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
@@ -41,8 +41,8 @@ _MTVDummyService0 = typing_extensions.TypeVar(
     ],
 )
 
-_MTVDummyService1 = typing_extensions.TypeVar(
-    '_MTVDummyService1',
+_DummyServiceUnaryStreamType = typing_extensions.TypeVar(
+    '_DummyServiceUnaryStreamType',
     grpc.UnaryStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
@@ -57,8 +57,8 @@ _MTVDummyService1 = typing_extensions.TypeVar(
     ],
 )
 
-_MTVDummyService2 = typing_extensions.TypeVar(
-    '_MTVDummyService2',
+_DummyServiceStreamUnaryType = typing_extensions.TypeVar(
+    '_DummyServiceStreamUnaryType',
     grpc.StreamUnaryMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
@@ -73,8 +73,8 @@ _MTVDummyService2 = typing_extensions.TypeVar(
     ],
 )
 
-_MTVDummyService3 = typing_extensions.TypeVar(
-    '_MTVDummyService3',
+_DummyServiceStreamStreamType = typing_extensions.TypeVar(
+    '_DummyServiceStreamStreamType',
     grpc.StreamStreamMultiCallable[
         testproto.grpc.dummy_pb2.DummyRequest,
         testproto.grpc.dummy_pb2.DummyReply,
@@ -89,7 +89,7 @@ _MTVDummyService3 = typing_extensions.TypeVar(
     ],
 )
 
-class DummyServiceStub(typing.Generic[_MTVDummyService0, _MTVDummyService1, _MTVDummyService2, _MTVDummyService3]):
+class DummyServiceStub(typing.Generic[_DummyServiceUnaryUnaryType, _DummyServiceUnaryStreamType, _DummyServiceStreamUnaryType, _DummyServiceStreamStreamType]):
     """DummyService"""
 
     @typing.overload
@@ -132,16 +132,16 @@ class DummyServiceStub(typing.Generic[_MTVDummyService0, _MTVDummyService1, _MTV
         ],
     ], channel: grpc.aio.Channel) -> None: ...
 
-    UnaryUnary: _MTVDummyService0
+    UnaryUnary: _DummyServiceUnaryUnaryType
     """UnaryUnary"""
 
-    UnaryStream: _MTVDummyService1
+    UnaryStream: _DummyServiceUnaryStreamType
     """UnaryStream"""
 
-    StreamUnary: _MTVDummyService2
+    StreamUnary: _DummyServiceStreamUnaryType
     """StreamUnary"""
 
-    StreamStream: _MTVDummyService3
+    StreamStream: _DummyServiceStreamStreamType
     """StreamStream"""
 
 DummyServiceAsyncStub: typing_extensions.TypeAlias = DummyServiceStub[

@@ -26,8 +26,8 @@ class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type:
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
-_MTVSimpleService0 = typing_extensions.TypeVar(
-    '_MTVSimpleService0',
+_SimpleServiceUnaryUnaryType = typing_extensions.TypeVar(
+    '_SimpleServiceUnaryUnaryType',
     grpc.UnaryUnaryMultiCallable[
         google.protobuf.empty_pb2.Empty,
         testproto.test_pb2.Simple1,
@@ -42,8 +42,8 @@ _MTVSimpleService0 = typing_extensions.TypeVar(
     ],
 )
 
-_MTVSimpleService1 = typing_extensions.TypeVar(
-    '_MTVSimpleService1',
+_SimpleServiceUnaryStreamType = typing_extensions.TypeVar(
+    '_SimpleServiceUnaryStreamType',
     grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
@@ -58,8 +58,8 @@ _MTVSimpleService1 = typing_extensions.TypeVar(
     ],
 )
 
-_MTVSimpleService2 = typing_extensions.TypeVar(
-    '_MTVSimpleService2',
+_SimpleServiceNoCommentType = typing_extensions.TypeVar(
+    '_SimpleServiceNoCommentType',
     grpc.UnaryUnaryMultiCallable[
         testproto.test_pb2.Simple1,
         google.protobuf.empty_pb2.Empty,
@@ -74,7 +74,7 @@ _MTVSimpleService2 = typing_extensions.TypeVar(
     ],
 )
 
-class SimpleServiceStub(typing.Generic[_MTVSimpleService0, _MTVSimpleService1, _MTVSimpleService2]):
+class SimpleServiceStub(typing.Generic[_SimpleServiceUnaryUnaryType, _SimpleServiceUnaryStreamType, _SimpleServiceNoCommentType]):
     """SimpleService"""
 
     @typing.overload
@@ -109,13 +109,13 @@ class SimpleServiceStub(typing.Generic[_MTVSimpleService0, _MTVSimpleService1, _
         ],
     ], channel: grpc.aio.Channel) -> None: ...
 
-    UnaryUnary: _MTVSimpleService0
+    UnaryUnary: _SimpleServiceUnaryUnaryType
     """UnaryUnary"""
 
-    UnaryStream: _MTVSimpleService1
+    UnaryStream: _SimpleServiceUnaryStreamType
     """UnaryStream"""
 
-    NoComment: _MTVSimpleService2
+    NoComment: _SimpleServiceNoCommentType
 
 SimpleServiceAsyncStub: typing_extensions.TypeAlias = SimpleServiceStub[
     grpc.aio.UnaryUnaryMultiCallable[
