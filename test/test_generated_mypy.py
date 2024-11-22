@@ -426,14 +426,19 @@ def test_constructor_proto3() -> None:
     # an_optional_string has optional keyword so None is allowed
     x = SimpleProto3(an_optional_string=None)
     assert not x.HasField("an_optional_string")
+    # Field access still returns the 0-value, even though
+    # the field is not present.
+    assert x.an_optional_string == ""
 
     x = SimpleProto3(a_string="", an_optional_string="")
     assert x.a_string == ""
     assert x.HasField("an_optional_string")
+    assert x.an_optional_string == ""
 
     x = SimpleProto3(a_string="hello", an_optional_string="hello")
     assert x.a_string == "hello"
     assert x.HasField("an_optional_string")
+    assert x.an_optional_string == "hello"
 
 
 def test_message_descriptor_proto2() -> None:
