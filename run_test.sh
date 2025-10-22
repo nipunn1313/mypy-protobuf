@@ -156,6 +156,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
+        pip install -r test_requirements.txt
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
         if [[ $API_IMPL != "python" ]]; then
             PYTHONPATH=test/generated python3 -m mypy.stubtest --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --allowlist stubtest_allowlist.txt testproto
@@ -180,8 +181,8 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 
             # Copy over all the mypy results for the developer.
             call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
-            cp "$MYPY_OUTPUT/mypy_output" test_negative/output.expected.3.8
-            cp "$MYPY_OUTPUT/mypy_output.omit_linenos" test_negative/output.expected.3.8.omit_linenos
+            cp "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET"
+            cp "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"
             exit 1
         fi
     )
