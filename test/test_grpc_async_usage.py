@@ -11,14 +11,14 @@ class Servicer(dummy_pb2_grpc.DummyServiceServicer):
     async def UnaryUnary(
         self,
         request: dummy_pb2.DummyRequest,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
     ) -> dummy_pb2.DummyReply:
         return dummy_pb2.DummyReply(value=request.value[::-1])
 
     async def UnaryStream(
         self,
         request: dummy_pb2.DummyRequest,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
     ) -> typing.AsyncIterator[dummy_pb2.DummyReply]:
         for char in request.value:
             yield dummy_pb2.DummyReply(value=char)
@@ -26,7 +26,7 @@ class Servicer(dummy_pb2_grpc.DummyServiceServicer):
     async def StreamUnary(
         self,
         request_iterator: typing.AsyncIterator[dummy_pb2.DummyRequest],
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
     ) -> dummy_pb2.DummyReply:
         values = [data.value async for data in request_iterator]
         return dummy_pb2.DummyReply(value="".join(values))
@@ -34,7 +34,7 @@ class Servicer(dummy_pb2_grpc.DummyServiceServicer):
     async def StreamStream(
         self,
         request_iterator: typing.AsyncIterator[dummy_pb2.DummyRequest],
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
     ) -> typing.AsyncIterator[dummy_pb2.DummyReply]:
         async for data in request_iterator:
             yield dummy_pb2.DummyReply(value=data.value.upper())

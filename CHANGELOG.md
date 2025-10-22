@@ -4,6 +4,13 @@
 - Change the top-level mangling prefix from `global___` to `Global___` to respect
   [Y042](https://github.com/PyCQA/flake8-pyi/blob/main/ERRORCODES.md#list-of-warnings) naming convention.
 - Support client stub async typing overloads
+- Support [PEP702](https://peps.python.org/pep-0702/) deprecations
+  - Message deprecations are supported
+  - Field deprecations are not. This may be possible with init overloads
+  - Service deprecations are supported for Sync stubs
+    - Not for async stubs
+  - Enum message deprecation is supported
+    - Enum field deprecation is not
 
 ## 3.6.0
 

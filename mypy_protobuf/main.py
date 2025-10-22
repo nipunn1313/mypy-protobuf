@@ -165,6 +165,7 @@ class PkgWriter(object):
         # if {z} is None, then it shortens to `from {x} import {y}`
         self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
         self.typing_extensions_min: Optional[Tuple[int, int]] = None
+        self.deprecated_min: Optional[Tuple[int, int]] = None
 
         # Comments
         self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
@@ -179,6 +180,11 @@ class PkgWriter(object):
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
             return "typing_extensions." + name
+
+        if path == "warnings" and name == "deprecated":
+            if not self.deprecated_min or self.deprecated_min < (3, 11):
+                self.deprecated_min = (3, 13)
+            return name
 
         imp = path.replace("/", ".")
         if self.readable_stubs:
@@ -364,6 +370,12 @@ class PkgWriter(object):
                 )
             wl("")
 
+            if enum.options.deprecated:
+                wl(
+                    '@{}("{}")',
+                    self._import("warnings", "deprecated"),
+                    "This enum has been marked as deprecated using proto enum options.",
+                )
             if self._has_comments(scl):
                 wl(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
                 with self._indent():
@@ -409,6 +421,12 @@ class PkgWriter(object):
 
             class_name = desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             message_class = self._import("google.protobuf.message", "Message")
+            if desc.options.deprecated:
+                wl(
+                    '@{}("{}")',
+                    self._import("warnings", "deprecated"),
+                    "This message has been marked as deprecated using proto message options.",
+                )
             wl("@{}", self._import("typing", "final"))
             wl(f"class {class_name}({message_class}{addl_base}):")
             with self._indent():
@@ -835,6 +853,12 @@ class PkgWriter(object):
             self.write_grpc_type_vars(service)
 
             # The stub client
+            if service.options.deprecated:
+                wl(
+                    '@{}("{}")',
+                    self._import("warnings", "deprecated"),
+                    "This stub has been marked as deprecated using proto service options.",
+                )
             class_name = f"{service.name}Stub"
             wl(
                 "class {}({}[{}]):",
@@ -875,6 +899,12 @@ class PkgWriter(object):
             wl("")
 
             # The service definition interface
+            if service.options.deprecated:
+                wl(
+                    '@{}("{}")',
+                    self._import("warnings", "deprecated"),
+                    "This servicer has been marked as deprecated using proto service options.",
+                )
             wl(
                 "class {}Servicer(metaclass={}):",
                 service.name,
@@ -886,6 +916,12 @@ class PkgWriter(object):
                 self.write_grpc_methods(service, scl)
             server = self._import("grpc", "Server")
             aserver = self._import("grpc.aio", "Server")
+            if service.options.deprecated:
+                wl(
+                    '@{}("{}")',
+                    self._import("warnings", "deprecated"),
+                    "This servicer has been marked as deprecated using proto service options.",
+                )
             wl(
                 "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}) -> None: ...",
                 service.name,
@@ -1001,7 +1037,7 @@ class PkgWriter(object):
                 # n,n to force a reexport (from x import y as y)
                 self.from_imports[reexport_imp].update((n, n) for n in names)
 
-        if self.typing_extensions_min:
+        if self.typing_extensions_min or self.deprecated_min:
             self.imports.add("sys")
         for pkg in sorted(self.imports):
             self._write_line(f"import {pkg}")
@@ -1011,6 +1047,12 @@ class PkgWriter(object):
             self._write_line("    import typing as typing_extensions")
             self._write_line("else:")
             self._write_line("    import typing_extensions")
+        if self.deprecated_min:
+            self._write_line("")
+            self._write_line(f"if sys.version_info >= {self.deprecated_min}:")
+            self._write_line("    from warnings import deprecated")
+            self._write_line("else:")
+            self._write_line("    from typing_extensions import deprecated")
 
         for pkg, items in sorted(self.from_imports.items()):
             self._write_line(f"from {pkg} import (")

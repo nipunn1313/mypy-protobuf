@@ -6,10 +6,16 @@ NC='\033[0m'
 PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.11.4}
 PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.8.17}
-PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.8.17}"
+PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.8.17 3.13.9 3.14.0}"
+
+
 
 if [ -e "$CUSTOM_TYPESHED_DIR" ]; then
     export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
+    export CUSTOM_TYPESHED_DIR_ARG="--custom-typeshed-dir=$CUSTOM_TYPESHED_DIR"
+else
+    # mypy does not emit deprecation warnings for typeshed stubs. Setting an empty custom-typeshed-dir was causing the current directory to be considered a typeshed dir, and hiding deprecation warnings.
+    export CUSTOM_TYPESHED_DIR_ARG=""
 fi
 
 # Install protoc
@@ -101,7 +107,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
-    "$MYPY_VENV/bin/mypy" --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$MYPY_PROTOBUF_VENV/bin/python3" --python-version="$PY_VER_MYPY_PROTOBUF_SHORT" $FILES
+    "$MYPY_VENV/bin/mypy" ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$MYPY_PROTOBUF_VENV/bin/python3" --python-version="$PY_VER_MYPY_PROTOBUF_SHORT" $FILES
 
     # Generate protos
     python --version
@@ -153,13 +159,13 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 
         # Run mypy
         MODULES=( -m test.test_generated_mypy -m test.test_grpc_usage -m test.test_grpc_async_usage )
-        mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
+        mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
         pip install -r test_requirements.txt
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
         if [[ $API_IMPL != "python" ]]; then
-            PYTHONPATH=test/generated python3 -m mypy.stubtest --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --allowlist stubtest_allowlist.txt testproto
+            PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
         fi
 
         # run mypy on negative-tests (expected mypy failures)
@@ -171,7 +177,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             PY_VER_MYPY_TARGET=$(echo "$1" | cut -d. -f1-2)
             export MYPYPATH=$MYPYPATH:test/generated
             # Use --no-incremental to avoid caching issues: https://github.com/python/mypy/issues/16363
-            mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --no-incremental --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
+            mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="venv_$1/bin/python" --no-incremental --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
             cut -d: -f1,3- "$MYPY_OUTPUT/mypy_output" > "$MYPY_OUTPUT/mypy_output.omit_linenos"
         }
 

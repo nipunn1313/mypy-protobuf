@@ -22,3 +22,21 @@ service DummyService {
   // StreamStream
   rpc StreamStream (stream DummyRequest) returns (stream DummyReply) {}
 }
+
+message DeprecatedRequest {
+  option deprecated = true;
+  string old_field = 1 [deprecated = true];
+}
+
+// Marking the service as deprecated
+service DeprecatedService {
+  option deprecated = true;
+  // DeprecatedMethod
+  rpc DeprecatedMethod (DeprecatedRequest) returns (DummyReply) {
+    option deprecated = true;
+  }
+  // DeprecatedMethodNotDeprecatedRequest
+  rpc DeprecatedMethodNotDeprecatedRequest (DummyRequest) returns (DummyReply) {
+    option deprecated = true;
+  }
+}
