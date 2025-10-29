@@ -190,7 +190,11 @@ message DeprecatedMessage {
 
 enum DeprecatedEnum {
     // This enum is deprecated
+    // 2 lines of comments
+    // "Quotes in comments"
+    // and 'single quotes'
     option deprecated = true;
+    // Trailing comment
 
     DEPRECATED_ONE = 1;
     DEPRECATED_TWO = 2;

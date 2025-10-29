@@ -83,7 +83,7 @@ class _DeprecatedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     DEPRECATED_ONE: _DeprecatedEnum.ValueType  # 1
     DEPRECATED_TWO: _DeprecatedEnum.ValueType  # 2
 
-@deprecated("This enum has been marked as deprecated using proto enum options.")
+@deprecated("""This enum is deprecated\n2 lines of comments\n"Quotes in comments"\nand 'single quotes'\nTrailing comment""")
 class DeprecatedEnum(_DeprecatedEnum, metaclass=_DeprecatedEnumEnumTypeWrapper): ...
 
 DEPRECATED_ONE: DeprecatedEnum.ValueType  # 1
@@ -407,7 +407,7 @@ class SelfField(google.protobuf.message.Message):
 
 Global___SelfField: typing_extensions.TypeAlias = SelfField
 
-@deprecated("This message has been marked as deprecated using proto message options.")
+@deprecated("""This message is deprecated""")
 @typing.final
 class DeprecatedMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor

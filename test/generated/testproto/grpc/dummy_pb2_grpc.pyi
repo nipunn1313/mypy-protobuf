@@ -237,7 +237,7 @@ _DeprecatedServiceDeprecatedMethodNotDeprecatedRequestType = typing_extensions.T
     ],
 )
 
-@deprecated("This stub has been marked as deprecated using proto service options.")
+@deprecated("""This service is deprecated""")
 class DeprecatedServiceStub(typing.Generic[_DeprecatedServiceDeprecatedMethodType, _DeprecatedServiceDeprecatedMethodNotDeprecatedRequestType]):
     """Marking the service as deprecated"""
 
@@ -282,7 +282,7 @@ DeprecatedServiceAsyncStub: typing_extensions.TypeAlias = DeprecatedServiceStub[
     ],
 ]
 
-@deprecated("This servicer has been marked as deprecated using proto service options.")
+@deprecated("""This service is deprecated""")
 class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
     """Marking the service as deprecated"""
 
@@ -302,5 +302,5 @@ class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """DeprecatedMethodNotDeprecatedRequest"""
 
-@deprecated("This servicer has been marked as deprecated using proto service options.")
+@deprecated("""This service is deprecated""")
 def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

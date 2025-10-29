@@ -30,6 +30,7 @@ message DeprecatedRequest {
 
 // Marking the service as deprecated
 service DeprecatedService {
+  // This service is deprecated
   option deprecated = true;
   // DeprecatedMethod
   rpc DeprecatedMethod (DeprecatedRequest) returns (DummyReply) {

@@ -130,6 +130,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=quiet:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=readable_stubs:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=relax_strict_optional_primitives:test/generated
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=use_default_deprecation_warnings:test/generated
     # Overwrite w/ run with mypy-protobuf without flags
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
 
