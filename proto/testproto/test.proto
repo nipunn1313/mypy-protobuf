@@ -188,6 +188,14 @@ message DeprecatedMessage {
     optional string a_string = 1;
 }
 
+message DeprecatedMessageBadComment {
+    // This message is deprecated
+    // """ triple quotes in comment
+    option deprecated = true;
+
+    optional string a_string = 1;
+}
+
 enum DeprecatedEnum {
     // This enum is deprecated
     // 2 lines of comments

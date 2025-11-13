@@ -51,7 +51,7 @@ class DummyReply(google.protobuf.message.Message):
 
 Global___DummyReply: typing_extensions.TypeAlias = DummyReply
 
-@deprecated("This message has been marked as deprecated using proto message options.")
+@deprecated("""This message has been marked as deprecated using proto message options.""")
 @typing.final
 class DeprecatedRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor

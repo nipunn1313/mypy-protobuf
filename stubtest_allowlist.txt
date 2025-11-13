@@ -149,3 +149,4 @@ testproto.test_pb2.Simple1.EmailByUidEntry
 testproto.test_pb2.Simple1.InnerMessage
 testproto.test_pb2.Simple2
 testproto.test_pb2.DeprecatedMessage
+testproto.test_pb2.DeprecatedMessageBadComment

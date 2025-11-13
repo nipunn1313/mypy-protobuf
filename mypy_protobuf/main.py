@@ -2,6 +2,7 @@
 """Protoc Plugin to generate mypy stubs."""
 from __future__ import annotations
 
+import ast
 import sys
 from collections import defaultdict
 from contextlib import contextmanager
@@ -287,18 +288,22 @@ class PkgWriter(object):
         return lines
 
     def _write_deprecation_warning(self, scl: SourceCodeLocation, default_message: str) -> None:
+        msg = default_message
         if not self.use_default_depreaction_warnings and (comments := self._get_comments(scl)):
-            self._write_line(
-                '@{}("""{}""")',
-                self._import("warnings", "deprecated"),
-                "\\n".join(comments),
-            )
-        else:
-            self._write_line(
-                '@{}("{}")',
-                self._import("warnings", "deprecated"),
-                default_message,
-            )
+            # Make sure the comment string is a valid python string literal
+            joined = "\\n".join(comments)
+            # Check that it is valid python string by using ast.parse
+            try:
+                ast.parse(f'"""{joined}"""')
+                msg = joined
+            except SyntaxError as e:
+                print(f"Warning: Deprecation comment {joined} could not be parsed as a python string literal. Using default deprecation message. {e}", file=sys.stderr)
+                pass
+        self._write_line(
+            '@{}("""{}""")',
+            self._import("warnings", "deprecated"),
+            msg,
+        )
 
     def _write_comments(self, scl: SourceCodeLocation) -> bool:
         """Return true if any comments were written"""

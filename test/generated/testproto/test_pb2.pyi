@@ -424,6 +424,23 @@ class DeprecatedMessage(google.protobuf.message.Message):
 
 Global___DeprecatedMessage: typing_extensions.TypeAlias = DeprecatedMessage
 
+@deprecated("""This message has been marked as deprecated using proto message options.""")
+@typing.final
+class DeprecatedMessageBadComment(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    A_STRING_FIELD_NUMBER: builtins.int
+    a_string: builtins.str
+    def __init__(
+        self,
+        *,
+        a_string: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["a_string", b"a_string"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
+
+Global___DeprecatedMessageBadComment: typing_extensions.TypeAlias = DeprecatedMessageBadComment
+
 class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     """Method name is reserved"""
 
