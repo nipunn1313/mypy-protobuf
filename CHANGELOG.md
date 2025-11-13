@@ -5,6 +5,9 @@
 - Drop testing support for protobuf <6.32 because they don't support editions
   - With some more work this could be added back in a testing refactor
   - Protobuf <6.32 still had the edition enums and field options, so it *should* still work. But is untested
+- Change signatures of `HasField`, `ClearField` and `WhichOneOf` to be positional only
+  - This has always been the case, but starting in 3.13 stubtest is able to detect it.
+  - `pb2.Simple2().ClearField(field_name="a_string") -> TypeError: Simple2.ClearField() takes no keyword arguments`
 
 ## 3.7.0
 

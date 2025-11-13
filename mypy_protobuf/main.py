@@ -576,14 +576,14 @@ class PkgWriter(object):
 
         if hf_fields:
             wl(
-                "def HasField(self, field_name: {}[{}]) -> {}: ...",
+                "def HasField(self, field_name: {}[{}], /) -> {}: ...",
                 self._import("typing", "Literal"),
                 hf_fields_text,
                 self._builtin("bool"),
             )
         if cf_fields:
             wl(
-                "def ClearField(self, field_name: {}[{}]) -> None: ...",
+                "def ClearField(self, field_name: {}[{}], /) -> None: ...",
                 self._import("typing", "Literal"),
                 cf_fields_text,
             )
@@ -592,7 +592,7 @@ class PkgWriter(object):
             if len(wo_fields) > 1:
                 wl("@{}", self._import("typing", "overload"))
             wl(
-                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
+                "def WhichOneof(self, oneof_group: {}[{}], /) -> {}[{}] | None: ...",
                 self._import("typing", "Literal"),
                 # Accepts both str and bytes
                 f'"{wo_field}", b"{wo_field}"',

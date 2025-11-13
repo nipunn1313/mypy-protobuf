@@ -45,9 +45,9 @@ test_negative/negative.py:86: error: Argument 1 to "HasField" of "Simple2" has i
 test_negative/negative.py:90: error: Incompatible types in assignment (expression has type "Literal['a_oneof_1', 'a_oneof_2', 'outer_message_in_oneof', 'outer_enum_in_oneof', 'inner_enum_in_oneof'] | None", variable has type "str")  [assignment]
 test_negative/negative.py:93: error: No overload variant of "WhichOneof" of "SimpleProto3" matches argument type "str"  [call-overload]
 test_negative/negative.py:93: note: Possible overload variants:
-test_negative/negative.py:93: note:     def WhichOneof(self, oneof_group: Literal['_an_optional_string', b'_an_optional_string']) -> Literal['an_optional_string'] | None
-test_negative/negative.py:93: note:     def WhichOneof(self, oneof_group: Literal['a_oneof', b'a_oneof']) -> Literal['a_oneof_1', 'a_oneof_2', 'outer_message_in_oneof', 'outer_enum_in_oneof', 'inner_enum_in_oneof'] | None
-test_negative/negative.py:93: note:     def WhichOneof(self, oneof_group: Literal['b_oneof', b'b_oneof']) -> Literal['b_oneof_1', 'b_oneof_2'] | None
+test_negative/negative.py:93: note:     def WhichOneof(self, Literal['_an_optional_string', b'_an_optional_string'], /) -> Literal['an_optional_string'] | None
+test_negative/negative.py:93: note:     def WhichOneof(self, Literal['a_oneof', b'a_oneof'], /) -> Literal['a_oneof_1', 'a_oneof_2', 'outer_message_in_oneof', 'outer_enum_in_oneof', 'inner_enum_in_oneof'] | None
+test_negative/negative.py:93: note:     def WhichOneof(self, Literal['b_oneof', b'b_oneof'], /) -> Literal['b_oneof_1', 'b_oneof_2'] | None
 test_negative/negative.py:95: error: Incompatible types in assignment (expression has type "Literal['a_oneof_1', 'a_oneof_2', 'outer_message_in_oneof', 'outer_enum_in_oneof', 'inner_enum_in_oneof'] | None", variable has type "int")  [assignment]
 test_negative/negative.py:99: error: Argument 1 to "HasField" of "Simple2" has incompatible type "Literal['a_oneof_1', 'a_oneof_2', 'outer_message_in_oneof', 'outer_enum_in_oneof', 'inner_enum_in_oneof']"; expected "Literal['a_string', b'a_string']"  [arg-type]
 test_negative/negative.py:103: error: Incompatible types in assignment (expression has type "_ExtensionFieldDescriptor[Simple1, Extensions1]", variable has type "int")  [assignment]

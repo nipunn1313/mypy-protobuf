@@ -161,12 +161,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         uv pip install -p "$MYPY_VENV" "protobuf==$PYTHON_PROTOBUF_VERSION"
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
         if [[ $API_IMPL != "python" ]]; then
-            # Skip stubtest for python version 3.13+ until positional argument decision is made
-            if [[ "$PY_VER_MYPY" == "3.13.9" ]] || [[ "$PY_VER_MYPY" == "3.14.0" ]]; then
-                echo "Skipping stubtest for Python $PY_VER_MYPY until positional argument decision is made"
-            else
-                PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
-            fi
+            PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
         fi
 
         # run mypy on negative-tests (expected mypy failures)
