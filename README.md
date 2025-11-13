@@ -219,6 +219,16 @@ However, it may be helpful when migrating existing proto2 code, where the distin
 protoc --python_out=output/location --mypy_out=relax_strict_optional_primitives:output/location
 ```
 
+### `use_default_deprecation_warnings`
+
+By default mypy-protobuf will pull the leading and trailing comments from the deprecation option definition,
+and insert it into the deprecation warning. This option will instead use a standard deprecation warning instead of comments.
+
+```
+protoc --python_out=output/location --mypy_out=use_default_deprecation_warning:output/location
+
+```
+
 ### Output suppression
 
 To suppress output, you can run

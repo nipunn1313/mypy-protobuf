@@ -14,6 +14,11 @@ if sys.version_info >= (3, 10):
 else:
     import typing_extensions
 
+if sys.version_info >= (3, 13):
+    from warnings import deprecated
+else:
+    from typing_extensions import deprecated
+
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
@@ -45,3 +50,19 @@ class DummyReply(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["value", b"value"]) -> None: ...
 
 Global___DummyReply: typing_extensions.TypeAlias = DummyReply
+
+@deprecated("""This message has been marked as deprecated using proto message options.""")
+@typing.final
+class DeprecatedRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    OLD_FIELD_FIELD_NUMBER: builtins.int
+    old_field: builtins.str
+    def __init__(
+        self,
+        *,
+        old_field: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["old_field", b"old_field"]) -> None: ...
+
+Global___DeprecatedRequest: typing_extensions.TypeAlias = DeprecatedRequest

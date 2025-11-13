@@ -1,3 +1,30 @@
+test/generated/testproto/grpc/dummy_pb2.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi: note: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
+2 lines of comments
+"Quotes in comments"
+and 'single quotes'
+Trailing comment  [deprecated]
+test/generated/testproto/test_pb2.pyi: note: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi: note: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test_negative/negative.py: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test_negative/negative.py: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py: note: function testproto.grpc.dummy_pb2_grpc.add_DeprecatedServiceServicer_to_server is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py: note: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
+2 lines of comments
+"Quotes in comments"
+and 'single quotes'
+Trailing comment  [deprecated]
+test_negative/negative.py: note: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
 test_negative/negative.py: error: "Simple1" has no attribute "SerializeToStringg"  [attr-defined]
 test_negative/negative.py: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "bytes"  [arg-type]
 test_negative/negative.py: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "bytes"; expected "Simple1"  [arg-type]

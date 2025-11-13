@@ -99,6 +99,9 @@ def test_generate_negative_matches() -> None:
             if _is_summary(line):
                 continue
             parts = line.split(":")
+            # Filter out errors not from negative.py. Like deprecation warnigns from pyi files that were import followed
+            if not parts[0].endswith("test_negative/negative.py"):
+                continue
             yield parts[0], int(parts[1])
 
     def grab_expectations(filename: str, marker: str) -> Generator[Tuple[str, int], None, None]:
@@ -113,7 +116,7 @@ def test_generate_negative_matches() -> None:
     assert errors_38 == expected_errors_38
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_38) == 77
+    assert len(errors_38) == 81
 
 
 def test_func() -> None:

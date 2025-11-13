@@ -26,6 +26,11 @@ if sys.version_info >= (3, 10):
 else:
     import typing_extensions
 
+if sys.version_info >= (3, 13):
+    from warnings import deprecated
+else:
+    from typing_extensions import deprecated
+
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _OuterEnum:
@@ -68,6 +73,22 @@ proto itself generates broken code when DESCRIPTOR is there
 DESCRIPTOR = 8;
 """
 Global___NamingConflicts: typing_extensions.TypeAlias = NamingConflicts
+
+class _DeprecatedEnum:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _DeprecatedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DeprecatedEnum.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    DEPRECATED_ONE: _DeprecatedEnum.ValueType  # 1
+    DEPRECATED_TWO: _DeprecatedEnum.ValueType  # 2
+
+@deprecated("""This enum is deprecated\n2 lines of comments\n"Quotes in comments"\nand 'single quotes'\nTrailing comment""")
+class DeprecatedEnum(_DeprecatedEnum, metaclass=_DeprecatedEnumEnumTypeWrapper): ...
+
+DEPRECATED_ONE: DeprecatedEnum.ValueType  # 1
+DEPRECATED_TWO: DeprecatedEnum.ValueType  # 2
+Global___DeprecatedEnum: typing_extensions.TypeAlias = DeprecatedEnum
 
 @typing.final
 class Simple1(google.protobuf.message.Message):
@@ -385,6 +406,40 @@ class SelfField(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["self", b"self"]) -> None: ...
 
 Global___SelfField: typing_extensions.TypeAlias = SelfField
+
+@deprecated("""This message is deprecated""")
+@typing.final
+class DeprecatedMessage(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    A_STRING_FIELD_NUMBER: builtins.int
+    a_string: builtins.str
+    def __init__(
+        self,
+        *,
+        a_string: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["a_string", b"a_string"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
+
+Global___DeprecatedMessage: typing_extensions.TypeAlias = DeprecatedMessage
+
+@deprecated("""This message has been marked as deprecated using proto message options.""")
+@typing.final
+class DeprecatedMessageBadComment(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    A_STRING_FIELD_NUMBER: builtins.int
+    a_string: builtins.str
+    def __init__(
+        self,
+        *,
+        a_string: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["a_string", b"a_string"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
+
+Global___DeprecatedMessageBadComment: typing_extensions.TypeAlias = DeprecatedMessageBadComment
 
 class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
     """Method name is reserved"""

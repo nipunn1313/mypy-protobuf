@@ -3,18 +3,34 @@ This code is intended to have mypy failures which we will ensure
 show up in the output.
 """
 
+import concurrent
+import concurrent.futures
 from test.test_generated_mypy import Email, UserId
 from typing import Generator, Iterator, List
 
 import grpc
+import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
-from testproto.grpc.dummy_pb2 import DummyReply, DummyRequest
-from testproto.grpc.dummy_pb2_grpc import DummyServiceServicer, DummyServiceStub
+from testproto.grpc.dummy_pb2 import (  # E:3.8
+    DeprecatedRequest,
+    DummyReply,
+    DummyRequest,
+)
+from testproto.grpc.dummy_pb2_grpc import (  # E:3.8
+    DeprecatedServiceAsyncStub,
+    DeprecatedServiceServicer,
+    DeprecatedServiceStub,
+    DummyServiceServicer,
+    DummyServiceStub,
+    add_DeprecatedServiceServicer_to_server,
+)
 from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
-from testproto.test_pb2 import (
+from testproto.test_pb2 import DeprecatedEnum  # E:3.8
+from testproto.test_pb2 import (  # E:3.8
     DESCRIPTOR,
     FOO,
+    DeprecatedMessage,
     Extensions1,
     Extensions2,
     PythonReservedKeywords,
@@ -182,6 +198,8 @@ assert PythonReservedKeywords().valid == PythonReservedKeywords.valid_in_finally
 a_string = "hi"
 a_string = PythonReservedKeywords().valid  # E:3.8
 
+deprecated_message = DeprecatedMessage()
+
 stub0 = DummyServiceStub()  # E:3.8
 channel = grpc.insecure_channel("127.0.0.1:8080")
 stub1 = DummyServiceStub(channel)
@@ -273,3 +291,30 @@ class BadServicer(DummyServiceServicer):
         context: grpc.ServicerContext,
     ) -> Iterator[DummyReply]:
         yield DummyReply()
+
+
+class DeprecatedServicer(DeprecatedServiceServicer):
+    def DeprecatedMethod(
+        self,
+        request: DeprecatedRequest,
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        return DummyReply()
+
+    def DeprecatedMethodNotDeprecatedRequest(
+        self,
+        request: DummyRequest,
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        return DummyReply()
+
+
+server = grpc.server(thread_pool=concurrent.futures.ThreadPoolExecutor())
+deprecated_servicer = DeprecatedServicer()
+add_DeprecatedServiceServicer_to_server(deprecated_servicer, server)
+stub2 = DeprecatedServiceStub(channel)
+stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))
+stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Not deprecating methods at this time
+async_stub2 = DeprecatedServiceAsyncStub(grpc.aio.insecure_channel(""))  # Not deprecating async stub at this time
+
+de = DeprecatedEnum.DEPRECATED_ONE
