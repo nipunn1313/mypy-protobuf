@@ -10,6 +10,7 @@ These tests can be set up and run by the run_test.sh script
 
 import glob
 import os
+import re
 from typing import Any, Generator, NewType, Tuple, Type
 
 import pytest
@@ -524,3 +525,14 @@ def test_reserved_keywords() -> None:
     prk = PythonReservedKeywords(none=none_instance, valid=PythonReservedKeywords.valid_in_finally)
     assert prk.none.valid == 5
     assert prk.valid == PythonReservedKeywords.valid_in_finally
+
+
+def test_positional_args() -> None:
+    s = Simple2()
+
+    with pytest.raises(TypeError, match=re.escape("ClearField() takes no keyword arguments")):
+        s.ClearField(field_name="a_string")  # type: ignore[call-arg]
+    with pytest.raises(TypeError, match=re.escape("HasField() takes no keyword arguments")):
+        s.HasField(field_name="a_string")  # type: ignore[call-arg]
+    with pytest.raises(TypeError, match=re.escape("WhichOneof() takes no keyword arguments")):
+        s.WhichOneof(field_name="a_oneof")  # type: ignore[call-arg]
