@@ -11,6 +11,7 @@
     - Not for async stubs
   - Enum message deprecation is supported
     - Enum field deprecation is not
+- Drop Python 3.8 testing. Newer protobuf versions are incompatible. Generated code may still work
 
 ## 3.6.0
 
