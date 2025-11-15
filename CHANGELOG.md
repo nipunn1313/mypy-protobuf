@@ -1,4 +1,4 @@
-## Upcoming
+## 3.7.0
 
 - Mark top-level mangled identifiers as `TypeAlias`.
 - Change the top-level mangling prefix from `global___` to `Global___` to respect
