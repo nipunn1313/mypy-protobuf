@@ -2,6 +2,6 @@
   "name": "fake_package_json_for_github_action_to_read_version",
   "private": true,
   "devDependencies": {
-    "pyright": "1.1.385"
+    "pyright": "1.1.394"
   }
 }
