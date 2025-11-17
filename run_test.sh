@@ -124,17 +124,25 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=readable_stubs:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=relax_strict_optional_primitives:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=use_default_deprecation_warnings:test/generated
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated
     # Overwrite w/ run with mypy-protobuf without flags
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
 
     # Generate grpc protos
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
 
+    # Generate with concrete service stubs for testing
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated-concrete
+    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated-concrete
+
+
     if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
         exit 1
     fi
 )
+
+ERRORS=()
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
     UNIT_TESTS_VENV=venv_$PY_VER
@@ -149,6 +157,10 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     # Run mypy on unit tests / generated output
     (
         source "$MYPY_VENV"/bin/activate
+        # Run concrete mypy
+        CONCRETE_MODULES=( -m test.test_concrete )
+        MYPYPATH=$MYPYPATH:test/generated-concrete mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${CONCRETE_MODULES[@]}"
+
         export MYPYPATH=$MYPYPATH:test/generated
 
         # Run mypy
@@ -184,13 +196,13 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 
         call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
         if ! diff "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET" || ! diff "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"; then
-            echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
-
             # Copy over all the mypy results for the developer.
             call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
             cp "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET"
             cp "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"
-            exit 1
+
+            # Record error instead of echoing and exiting
+            ERRORS+=("test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you.")
         fi
     )
 
@@ -200,3 +212,13 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         PYTHONPATH=test/generated py.test --ignore=test/generated -v
     )
 done
+
+# Report all errors at the end
+if [ ${#ERRORS[@]} -gt 0 ]; then
+    echo -e "\n${RED}===============================================${NC}"
+    for error in "${ERRORS[@]}"; do
+        echo -e "${RED}$error${NC}"
+    done
+    echo -e "${RED}Now rerun${NC}"
+    exit 1
+fi

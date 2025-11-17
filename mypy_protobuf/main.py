@@ -151,6 +151,7 @@ class PkgWriter(object):
         readable_stubs: bool,
         relax_strict_optional_primitives: bool,
         use_default_deprecation_warnings: bool,
+        generate_concrete_servicer_stubs: bool,
         grpc: bool,
     ) -> None:
         self.fd = fd
@@ -158,6 +159,7 @@ class PkgWriter(object):
         self.readable_stubs = readable_stubs
         self.relax_strict_optional_primitives = relax_strict_optional_primitives
         self.use_default_depreaction_warnings = use_default_deprecation_warnings
+        self.generate_concrete_servicer_stubs = generate_concrete_servicer_stubs
         self.grpc = grpc
         self.lines: List[str] = []
         self.indent = ""
@@ -689,6 +691,7 @@ class PkgWriter(object):
                 self._import("google.protobuf.service", "Service"),
                 self._import("abc", "ABCMeta"),
             )
+            # The servicer interface
             with self._indent():
                 if self._write_comments(scl):
                     wl("")
@@ -850,7 +853,8 @@ class PkgWriter(object):
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
 
-            wl("@{}", self._import("abc", "abstractmethod"))
+            if self.generate_concrete_servicer_stubs is False:
+                wl("@{}", self._import("abc", "abstractmethod"))
             wl("def {}(", method.name)
             with self._indent():
                 wl("self,")
@@ -950,11 +954,17 @@ class PkgWriter(object):
                     scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
                     "This servicer has been marked as deprecated using proto service options.",
                 )
-            wl(
-                "class {}Servicer(metaclass={}):",
-                service.name,
-                self._import("abc", "ABCMeta"),
-            )
+            if self.generate_concrete_servicer_stubs is False:
+                wl(
+                    "class {}Servicer(metaclass={}):",
+                    service.name,
+                    self._import("abc", "ABCMeta"),
+                )
+            else:
+                wl(
+                    "class {}Servicer:",
+                    service.name,
+                )
             with self._indent():
                 if self._write_comments(scl):
                     wl("")
@@ -1126,6 +1136,7 @@ def generate_mypy_stubs(
     readable_stubs: bool,
     relax_strict_optional_primitives: bool,
     use_default_deprecation_warnings: bool,
+    generate_concrete_servicer_stubs: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
@@ -1134,6 +1145,7 @@ def generate_mypy_stubs(
             readable_stubs,
             relax_strict_optional_primitives,
             use_default_deprecation_warnings,
+            generate_concrete_servicer_stubs,
             grpc=False,
         )
 
@@ -1158,6 +1170,7 @@ def generate_mypy_grpc_stubs(
     readable_stubs: bool,
     relax_strict_optional_primitives: bool,
     use_default_deprecation_warnings: bool,
+    generate_concrete_servicer_stubs: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
@@ -1166,6 +1179,7 @@ def generate_mypy_grpc_stubs(
             readable_stubs,
             relax_strict_optional_primitives,
             use_default_deprecation_warnings,
+            generate_concrete_servicer_stubs,
             grpc=True,
         )
         pkg_writer.write_grpc_async_hacks()
@@ -1222,6 +1236,7 @@ def main() -> None:
             "readable_stubs" in request.parameter,
             "relax_strict_optional_primitives" in request.parameter,
             "use_default_deprecation_warnings" in request.parameter,
+            "generate_concrete_servicer_stubs" in request.parameter,
         )
 
 
@@ -1235,6 +1250,7 @@ def grpc() -> None:
             "readable_stubs" in request.parameter,
             "relax_strict_optional_primitives" in request.parameter,
             "use_default_deprecation_warnings" in request.parameter,
+            "generate_concrete_servicer_stubs" in request.parameter,
         )
 
 

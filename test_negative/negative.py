@@ -295,6 +295,7 @@ class BadServicer(DummyServiceServicer):
 
 
 class DeprecatedServicer(DeprecatedServiceServicer):
+
     def DeprecatedMethod(
         self,
         request: DeprecatedRequest,
@@ -334,3 +335,10 @@ ed.HasField("legacy")  # Should be generated
 ed.HasField("explicit_singular")  # Should be generated
 ed.HasField("message_field")  # Should be generated
 ed.HasField("default_singular")  # Should be generated
+
+
+class IncompleteServicer(DummyServiceServicer):
+    pass
+
+
+incomplete = IncompleteServicer()  # E:3.8
