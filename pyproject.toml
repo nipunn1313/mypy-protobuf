@@ -23,7 +23,6 @@ report_deprecated_as_note = true
 
 [tool.pyright]
 venvPath = "."
-venv = "venv_3.8.17"
 # verboseOutput = true
 extraPaths = ["test/generated"]
 include = [

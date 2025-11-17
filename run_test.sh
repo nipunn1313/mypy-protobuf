@@ -3,11 +3,17 @@
 RED="\033[0;31m"
 NC='\033[0m'
 
-PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.11.4}
+PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.14.0}
 PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
-PY_VER_MYPY=${PY_VER_MYPY:=3.8.17}
-PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.8.17 3.13.9 3.14.0}"
+PY_VER_MYPY=${PY_VER_MYPY:=3.14.0}
+PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.9.17 3.10.12 3.11.4 3.12.12 3.13.9 3.14.0}"
+PYTHON_PROTOBUF_VERSION=${PYTHON_PROTOBUF_VERSION:=5.28.3}
 
+# Confirm UV installed
+if ! command -v uv &> /dev/null; then
+    echo -e "${RED}uv could not be found, please install uv (https://docs.astral.sh/uv/getting-started/installation/)${NC}"
+    exit 1
+fi
 
 
 if [ -e "$CUSTOM_TYPESHED_DIR" ]; then
@@ -19,7 +25,6 @@ else
 fi
 
 # Install protoc
-PYTHON_PROTOBUF_VERSION=$(grep "^protobuf==" test_requirements.txt | cut -f3 -d=)
 PROTOBUF_VERSION=$(echo "$PYTHON_PROTOBUF_VERSION" | cut -f2-3 -d.)
 PROTOC_DIR="protoc_$PROTOBUF_VERSION"
 if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
@@ -49,17 +54,12 @@ PROTOC_ARGS=( --proto_path=proto/ --proto_path="$PROTOC_DIR/protoc_install/inclu
 # Create mypy venv
 MYPY_VENV=venv_$PY_VER_MYPY
 (
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    pyenv shell "$PY_VER_MYPY"
-
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
-        python3 --version
-        python3 -m pip --version
-        python -m pip install virtualenv
-        python3 -m virtualenv "$MYPY_VENV"
-        "$MYPY_VENV"/bin/python3 -m pip install -r mypy_requirements.txt
+        echo "Creating mypy venv for Python $PY_VER_MYPY"
+        uv venv -p "$PY_VER_MYPY" "$MYPY_VENV" --allow-existing
+        uv pip install -p "$MYPY_VENV"  -r mypy_requirements.txt
     fi
+    echo "Running mypy version:"
     "$MYPY_VENV"/bin/mypy --version
 )
 
@@ -67,14 +67,12 @@ MYPY_VENV=venv_$PY_VER_MYPY
 for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         UNIT_TESTS_VENV=venv_$PY_VER
-        eval "$(pyenv init --path)"
-        eval "$(pyenv init -)"
-        pyenv shell "$PY_VER"
 
         if [[ -z $SKIP_CLEAN ]] || [[ ! -e $UNIT_TESTS_VENV ]]; then
-            python -m pip install virtualenv
-            python -m virtualenv "$UNIT_TESTS_VENV"
-            "$UNIT_TESTS_VENV"/bin/python -m pip install -r test_requirements.txt
+            uv venv -p "$PY_VER" "$UNIT_TESTS_VENV" --allow-existing
+            uv pip install -p "$UNIT_TESTS_VENV"  -r test_requirements.txt
+            # Install protobuf version override
+            uv pip install -p "$UNIT_TESTS_VENV" "protobuf==$PYTHON_PROTOBUF_VERSION"
         fi
         "$UNIT_TESTS_VENV"/bin/py.test --version
     )
@@ -83,15 +81,10 @@ done
 # Create mypy-protobuf venv
 MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 (
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    pyenv shell "$PY_VER_MYPY_PROTOBUF"
-
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_PROTOBUF_VENV ]]; then
-        python -m pip install virtualenv
-        python -m virtualenv "$MYPY_PROTOBUF_VENV"
-        "$MYPY_PROTOBUF_VENV"/bin/python -m pip install -e .
+        uv venv -p "$PY_VER_MYPY_PROTOBUF" "$MYPY_PROTOBUF_VENV" --allow-existing
+        uv pip install -p "$MYPY_PROTOBUF_VENV" -e .
     fi
 )
 
@@ -163,10 +156,17 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
-        pip install -r test_requirements.txt
+        uv pip install -p "$MYPY_VENV" -r test_requirements.txt
+        # Override python protobuf version
+        uv pip install -p "$MYPY_VENV" "protobuf==$PYTHON_PROTOBUF_VERSION"
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
         if [[ $API_IMPL != "python" ]]; then
-            PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
+            # Skip stubtest for python version 3.13+ until positional argument decision is made
+            if [[ "$PY_VER_MYPY" == "3.13.9" ]] || [[ "$PY_VER_MYPY" == "3.14.0" ]]; then
+                echo "Skipping stubtest for Python $PY_VER_MYPY until positional argument decision is made"
+            else
+                PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
+            fi
         fi
 
         # run mypy on negative-tests (expected mypy failures)
