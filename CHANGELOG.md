@@ -5,6 +5,7 @@
 - Drop testing support for protobuf <6.32 because they don't support editions
   - With some more work this could be added back in a testing refactor
   - Protobuf <6.32 still had the edition enums and field options, so it *should* still work. But is untested
+- Add support for editions (up to 2024)
 
 ## 3.7.0
 

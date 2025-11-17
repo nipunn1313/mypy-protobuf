@@ -11,6 +11,7 @@ from typing import Generator, Iterator, List
 import grpc
 import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
+from testproto.edition2024_pb2 import Editions2024Test
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
     DummyReply,
@@ -318,3 +319,18 @@ stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Not deprecating me
 async_stub2 = DeprecatedServiceAsyncStub(grpc.aio.insecure_channel(""))  # Not deprecating async stub at this time
 
 de = DeprecatedEnum.DEPRECATED_ONE
+
+# Edition 2024 tests
+
+ed = Editions2024Test(
+    legacy=None,
+    explicit_singular=None,
+    message_field=None,
+    default_singular=None,
+    implicit_singular=None,  # E:3.8
+)
+ed.HasField("implicit_singular")  # E:3.8
+ed.HasField("legacy")  # Should be generated
+ed.HasField("explicit_singular")  # Should be generated
+ed.HasField("message_field")  # Should be generated
+ed.HasField("default_singular")  # Should be generated

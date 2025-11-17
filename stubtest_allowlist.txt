@@ -103,6 +103,7 @@ testproto.test_pb2.Simple1.no_package
 testproto.test_pb2.Simple1.outer_message_in_oneof
 testproto.test_pb2.Simple1.rep_inner_enum
 testproto.test_pb2.Simple1.rep_inner_message
+testproto.edition2024_pb2.Editions2024Test.message_field
 
 # All messages now fail with something like this:
 # error: testproto.nested.nested_pb2.Nested is inconsistent, metaclass differs
@@ -150,6 +151,8 @@ testproto.test_pb2.Simple1.InnerMessage
 testproto.test_pb2.Simple2
 testproto.test_pb2.DeprecatedMessage
 testproto.test_pb2.DeprecatedMessageBadComment
+testproto.edition2024_pb2.Editions2024SubMessage
+testproto.edition2024_pb2.Editions2024Test
 
 # All messages now fail with something like this:
 # error: testproto.nopackage_pb2.NoPackage2.DESCRIPTOR variable differs from runtime type google._upb._message.Descriptor
@@ -197,6 +200,8 @@ testproto.test_pb2.Simple1.InnerMessage.DESCRIPTOR
 testproto.test_pb2.Simple2.DESCRIPTOR
 testproto.test_pb2.DeprecatedMessage.DESCRIPTOR
 testproto.test_pb2.DeprecatedMessageBadComment.DESCRIPTOR
+testproto.edition2024_pb2.Editions2024SubMessage.DESCRIPTOR
+testproto.edition2024_pb2.Editions2024Test.DESCRIPTOR
 testproto.test_pb2.DESCRIPTOR
 testproto.test_no_generic_services_pb2.DESCRIPTOR
 testproto.test_extensions2_pb2.DESCRIPTOR
@@ -208,6 +213,7 @@ testproto.nested.nested_pb2.DESCRIPTOR
 testproto.inner.inner_pb2.DESCRIPTOR
 testproto.grpc.import_pb2.DESCRIPTOR
 testproto.grpc.dummy_pb2.DESCRIPTOR
+testproto.edition2024_pb2.DESCRIPTOR
 testproto.dot.com.test_pb2.DESCRIPTOR
 testproto.comment_special_chars_pb2.DESCRIPTOR
 testproto.Capitalized.Capitalized_pb2.DESCRIPTOR
