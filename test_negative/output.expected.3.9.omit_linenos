@@ -75,11 +75,13 @@ test_negative/negative.py: error: "ScalarMap[int, str]" has no attribute "get_or
 test_negative/negative.py: error: No overload variant of "get" of "ScalarMap" matches argument type "str"  [call-overload]
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def get(self, key: int, default: None = ...) -> Optional[str]
-test_negative/negative.py: note:     def [_T] get(self, key: int, default: Union[str, _T]) -> Union[str, _T]
+test_negative/negative.py: note:     def get(self, key: int, default: str) -> str
+test_negative/negative.py: note:     def [_T] get(self, key: int, default: _T) -> Union[str, _T]
 test_negative/negative.py: error: No overload variant of "get" of "MessageMap" matches argument type "str"  [call-overload]
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def get(self, key: int, default: None = ...) -> Optional[OuterMessage3]
-test_negative/negative.py: note:     def [_T] get(self, key: int, default: Union[OuterMessage3, _T]) -> Union[OuterMessage3, _T]
+test_negative/negative.py: note:     def get(self, key: int, default: OuterMessage3) -> OuterMessage3
+test_negative/negative.py: note:     def [_T] get(self, key: int, default: _T) -> Union[OuterMessage3, _T]
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "Optional[str]", variable has type "int")  [assignment]
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "Optional[OuterMessage3]", variable has type "int")  [assignment]
 test_negative/negative.py: error: Dict entry 0 has incompatible type "str": "int"; expected "int": "str"  [dict-item]

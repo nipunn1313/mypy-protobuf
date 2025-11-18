@@ -150,3 +150,86 @@ testproto.test_pb2.Simple1.InnerMessage
 testproto.test_pb2.Simple2
 testproto.test_pb2.DeprecatedMessage
 testproto.test_pb2.DeprecatedMessageBadComment
+
+# All messages now fail with something like this:
+# error: testproto.nopackage_pb2.NoPackage2.DESCRIPTOR variable differs from runtime type google._upb._message.Descriptor
+# Stub: in file /Users/aidandj/Development/mypy-protobuf/test/generated/testproto/nopackage_pb2.pyi:35
+# google.protobuf.descriptor.Descriptor
+# Runtime:
+# <google._upb._message.Descriptor object at 0x1127a1f30>
+#
+# For now, just allow all these errors until we come up with better silencing mechanisms or
+# alternately, better stubs for google._upb
+testproto.Capitalized.Capitalized_pb2.Upper.DESCRIPTOR
+testproto.Capitalized.Capitalized_pb2.lower.DESCRIPTOR
+testproto.Capitalized.Capitalized_pb2.lower2.DESCRIPTOR
+testproto.comment_special_chars_pb2.Test.DESCRIPTOR
+testproto.dot.com.test_pb2.TestMessage.DESCRIPTOR
+testproto.grpc.dummy_pb2.DummyReply.DESCRIPTOR
+testproto.grpc.dummy_pb2.DummyRequest.DESCRIPTOR
+testproto.grpc.dummy_pb2.DeprecatedRequest.DESCRIPTOR
+testproto.inner.inner_pb2.Inner.DESCRIPTOR
+testproto.nested.nested_pb2.AnotherNested.DESCRIPTOR
+testproto.nested.nested_pb2.AnotherNested.NestedMessage.DESCRIPTOR
+testproto.nested.nested_pb2.Nested.DESCRIPTOR
+testproto.nopackage_pb2.NoPackage.DESCRIPTOR
+testproto.nopackage_pb2.NoPackage2.DESCRIPTOR
+testproto.reexport_pb2.Empty.DESCRIPTOR
+testproto.reexport_pb2.OuterMessage3.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.EmailByUidEntry.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.MapMessageEntry.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.MapScalarEntry.DESCRIPTOR
+testproto.test3_pb2.OuterMessage3.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.EmailByUidEntry.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.MapMessageEntry.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.MapScalarEntry.DESCRIPTOR
+testproto.test_extensions2_pb2.SeparateFileExtension.DESCRIPTOR
+testproto.test_extensions3_pb2.MessageOptionsTestMsg.DESCRIPTOR
+testproto.test_no_generic_services_pb2.Simple3.DESCRIPTOR
+testproto.test_pb2.Extensions1.DESCRIPTOR
+testproto.test_pb2.Extensions2.DESCRIPTOR
+testproto.test_pb2.SelfField.DESCRIPTOR
+testproto.test_pb2.Simple1.DESCRIPTOR
+testproto.test_pb2.Simple1.EmailByUidEntry.DESCRIPTOR
+testproto.test_pb2.Simple1.InnerMessage.DESCRIPTOR
+testproto.test_pb2.Simple2.DESCRIPTOR
+testproto.test_pb2.DeprecatedMessage.DESCRIPTOR
+testproto.test_pb2.DeprecatedMessageBadComment.DESCRIPTOR
+testproto.test_pb2.DESCRIPTOR
+testproto.test_no_generic_services_pb2.DESCRIPTOR
+testproto.test_extensions2_pb2.DESCRIPTOR
+testproto.test3_pb2.DESCRIPTOR
+testproto.reexport_pb2.DESCRIPTOR
+testproto.readme_enum_pb2.DESCRIPTOR
+testproto.nopackage_pb2.DESCRIPTOR
+testproto.nested.nested_pb2.DESCRIPTOR
+testproto.inner.inner_pb2.DESCRIPTOR
+testproto.grpc.import_pb2.DESCRIPTOR
+testproto.grpc.dummy_pb2.DESCRIPTOR
+testproto.dot.com.test_pb2.DESCRIPTOR
+testproto.comment_special_chars_pb2.DESCRIPTOR
+testproto.Capitalized.Capitalized_pb2.DESCRIPTOR
+testproto.test_extensions3_pb2.DESCRIPTOR
+
+# All messages now fail with something like this:
+# error: testproto.test_extensions2_pb2.SeparateFileExtension.ext variable differs from runtime type google._upb._message.FieldDescriptor
+# Stub: in file /Users/aidandj/Development/mypy-protobuf/test/generated/testproto/test_extensions2_pb2.pyi:28
+# google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, testproto.test_extensions2_pb2.SeparateFileExtension]
+# Runtime:
+# <google._upb._message.FieldDescriptor object at 0x1045962f0>
+#
+# For now, just allow all these errors until we come up with better silencing mechanisms or
+# alternately, better stubs for google._upb
+testproto.test_pb2.Extensions2.foo
+testproto.test_pb2.Extensions1
+testproto.test_extensions3_pb2.test_field_extension
+testproto.test_extensions3_pb2.scalar_option
+testproto.test_extensions3_pb2.repeated_scalar_option
+testproto.test_extensions3_pb2.repeated_msg_option
+testproto.test_extensions3_pb2.repeated_enum_option
+testproto.test_extensions3_pb2.msg_option
+testproto.test_extensions3_pb2.enum_option
+testproto.test_extensions2_pb2.SeparateFileExtension.ext
+testproto.test_pb2.Extensions1.ext

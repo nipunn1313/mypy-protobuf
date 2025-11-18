@@ -1073,8 +1073,6 @@ class PkgWriter(object):
             reexport_fd = self.descriptors.files[reexport_file]
             reexport_imp = reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
             names = [m.name for m in reexport_fd.message_type] + [m.name for m in reexport_fd.enum_type] + [v.name for m in reexport_fd.enum_type for v in m.value] + [m.name for m in reexport_fd.extension]
-            if reexport_fd.options.py_generic_services:
-                names.extend(m.name for m in reexport_fd.service)
 
             if names:
                 # n,n to force a reexport (from x import y as y)

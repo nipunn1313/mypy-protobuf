@@ -33,7 +33,12 @@ from testproto.test_extensions3_pb2 import (
     repeated_scalar_option,
     scalar_option,
 )
-from testproto.test_pb2 import DESCRIPTOR, FOO, Extensions1, Extensions2
+from testproto.test_pb2 import (
+    DESCRIPTOR,
+    FOO,
+    Extensions1,
+    Extensions2,
+)
 from testproto.test_pb2 import Name as NamingConflicts_Name
 from testproto.test_pb2 import (
     NamingConflicts,
