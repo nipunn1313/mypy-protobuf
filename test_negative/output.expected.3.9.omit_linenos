@@ -127,4 +127,5 @@ test_negative/negative.py: note: This violates the Liskov substitution principle
 test_negative/negative.py: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative.py: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
 test_negative/negative.py: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-Found 82 errors in 1 file (checked 4 source files)
+test_negative/negative.py: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
+Found 83 errors in 1 file (checked 4 source files)

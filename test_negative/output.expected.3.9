@@ -125,6 +125,7 @@ test_negative/negative.py:289: error: Return type "Iterator[DummyReply]" of "Str
 test_negative/negative.py:291: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
 test_negative/negative.py:291: note: This violates the Liskov substitution principle
 test_negative/negative.py:291: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:330: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
-test_negative/negative.py:332: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-Found 82 errors in 1 file (checked 4 source files)
+test_negative/negative.py:331: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
+test_negative/negative.py:333: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:344: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
+Found 83 errors in 1 file (checked 4 source files)

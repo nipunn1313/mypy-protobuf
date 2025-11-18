@@ -337,7 +337,14 @@ and insert it into the deprecation warning. This option will instead use a stand
 
 ```
 protoc --python_out=output/location --mypy_out=use_default_deprecation_warning:output/location
+```
 
+### `generate_concrete_servicer_stubs`
+
+By default mypy-protobuf will output servicer stubs with abstract methods. To output concrete stubs, set this option
+
+```
+protoc --python_out=output/location --mypy_grpc_out=generate_concrete_servicer_stubs:output/location
 ```
 
 ### Output suppression
