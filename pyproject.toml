@@ -23,6 +23,7 @@ report_deprecated_as_note = true
 
 [tool.pyright]
 venvPath = "."
+venv = "venv_3.14.0"
 # verboseOutput = true
 extraPaths = ["test/generated"]
 include = [
@@ -32,4 +33,10 @@ include = [
 exclude = [
     "**/*_pb2.py",
     "**/*_pb2_grpc.py"
+]
+
+executionEnvironments = [
+    # Due to how upb is typed, we need to disable incompatible variable override checks
+    { root = "test/generated", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
+    { root = "mypy_protobuf/extensions_pb2.pyi", reportIncompatibleVariableOverride = "none" },
 ]

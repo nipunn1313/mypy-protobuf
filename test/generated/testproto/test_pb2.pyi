@@ -3,16 +3,13 @@
 isort:skip_file
 Proto 2 test file."""
 
-import abc
 import builtins
 import collections.abc
-import concurrent.futures
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.internal.extension_dict
 import google.protobuf.message
-import google.protobuf.service
 import sys
 import test.test_generated_mypy
 import testproto.inner.inner_pb2
@@ -440,66 +437,3 @@ class DeprecatedMessageBadComment(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
 
 Global___DeprecatedMessageBadComment: typing_extensions.TypeAlias = DeprecatedMessageBadComment
-
-class PythonReservedKeywordsService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
-    """Method name is reserved"""
-
-    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
-    @abc.abstractmethod
-    def valid_method_name1(
-        inst: PythonReservedKeywordsService,  # pyright: ignore[reportSelfClsParameterName]
-        rpc_controller: google.protobuf.service.RpcController,
-        request: Global___Simple1,
-        callback: collections.abc.Callable[[Global____r_None], None] | None,
-    ) -> concurrent.futures.Future[Global____r_None]:
-        """valid_method_name1"""
-
-    @abc.abstractmethod
-    def valid_method_name2(
-        inst: PythonReservedKeywordsService,  # pyright: ignore[reportSelfClsParameterName]
-        rpc_controller: google.protobuf.service.RpcController,
-        request: Global___Simple1,
-        callback: collections.abc.Callable[[Global___PythonReservedKeywords._r_lambda], None] | None,
-    ) -> concurrent.futures.Future[Global___PythonReservedKeywords._r_lambda]:
-        """valid_method_name2"""
-
-class PythonReservedKeywordsService_Stub(PythonReservedKeywordsService):
-    """Method name is reserved"""
-
-    def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
-    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
-    def valid_method_name1(
-        inst: PythonReservedKeywordsService_Stub,  # pyright: ignore[reportSelfClsParameterName]
-        rpc_controller: google.protobuf.service.RpcController,
-        request: Global___Simple1,
-        callback: collections.abc.Callable[[Global____r_None], None] | None = ...,
-    ) -> concurrent.futures.Future[Global____r_None]:
-        """valid_method_name1"""
-
-    def valid_method_name2(
-        inst: PythonReservedKeywordsService_Stub,  # pyright: ignore[reportSelfClsParameterName]
-        rpc_controller: google.protobuf.service.RpcController,
-        request: Global___Simple1,
-        callback: collections.abc.Callable[[Global___PythonReservedKeywords._r_lambda], None] | None = ...,
-    ) -> concurrent.futures.Future[Global___PythonReservedKeywords._r_lambda]:
-        """valid_method_name2"""
-
-class ATestService(google.protobuf.service.Service, metaclass=abc.ABCMeta):
-    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
-    @abc.abstractmethod
-    def Echo(
-        inst: ATestService,  # pyright: ignore[reportSelfClsParameterName]
-        rpc_controller: google.protobuf.service.RpcController,
-        request: Global___Simple1,
-        callback: collections.abc.Callable[[Global___Simple2], None] | None,
-    ) -> concurrent.futures.Future[Global___Simple2]: ...
-
-class ATestService_Stub(ATestService):
-    def __init__(self, rpc_channel: google.protobuf.service.RpcChannel) -> None: ...
-    DESCRIPTOR: google.protobuf.descriptor.ServiceDescriptor
-    def Echo(
-        inst: ATestService_Stub,  # pyright: ignore[reportSelfClsParameterName]
-        rpc_controller: google.protobuf.service.RpcController,
-        request: Global___Simple1,
-        callback: collections.abc.Callable[[Global___Simple2], None] | None = ...,
-    ) -> concurrent.futures.Future[Global___Simple2]: ...
