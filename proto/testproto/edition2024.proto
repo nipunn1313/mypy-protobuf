@@ -1,0 +1,26 @@
+// Edition version of proto2 file
+edition = "2024";
+
+package test;
+
+option features.utf8_validation = NONE;
+option features.enforce_naming_style = STYLE_LEGACY;
+option features.default_symbol_visibility = EXPORT_ALL;
+
+message Editions2024SubMessage {
+  string thing = 1;
+}
+
+message Editions2024Test {
+  // Expect to be always set
+  string legacy = 1 [features.field_presence = LEGACY_REQUIRED];
+  // Expect HasField generated
+  string explicit_singular = 2 [features.field_presence = EXPLICIT];
+  // Expect HasField generated?
+  Editions2024SubMessage message_field = 3 [features.field_presence = EXPLICIT];
+  // Expect implicit field presence, no HasField generated
+  string implicit_singular = 4 [features.field_presence = IMPLICIT];
+  // Not set, should default to EXPLICIT
+  string default_singular = 5;
+
+}

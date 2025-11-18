@@ -68,10 +68,10 @@ def _is_summary(line: str) -> bool:
 
 def test_generate_mypy_matches() -> None:
     proto_files = glob.glob("proto/**/*.proto", recursive=True)
-    assert len(proto_files) == 17  # Just a sanity check that all the files show up
+    assert len(proto_files) == 18  # Just a sanity check that all the files show up
 
     pyi_files = glob.glob("test/generated/**/*.pyi", recursive=True)
-    assert len(pyi_files) == 19  # Should be higher - because grpc files generate extra pyis
+    assert len(pyi_files) == 20  # Should be higher - because grpc files generate extra pyis
 
     failure_check_results = []
     for fn in proto_files:
@@ -121,7 +121,7 @@ def test_generate_negative_matches() -> None:
     assert errors_39 == expected_errors_39
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_39) == 81
+    assert len(errors_39) == 83
 
 
 def test_func() -> None:
@@ -524,3 +524,30 @@ def test_reserved_keywords() -> None:
     prk = PythonReservedKeywords(none=none_instance, valid=PythonReservedKeywords.valid_in_finally)
     assert prk.none.valid == 5
     assert prk.valid == PythonReservedKeywords.valid_in_finally
+
+
+def test_editions_2024() -> None:
+    from testproto.edition2024_pb2 import Editions2024SubMessage, Editions2024Test
+
+    submsg = Editions2024SubMessage(thing="example")
+
+    testmsg = Editions2024Test(
+        legacy="legacy value",
+        explicit_singular="explicit value",
+        message_field=submsg,
+        implicit_singular="implicit value",
+        default_singular="default value",
+    )
+    assert testmsg.legacy == "legacy value"
+    assert testmsg.explicit_singular == "explicit value"
+    assert testmsg.message_field == submsg
+    assert testmsg.implicit_singular == "implicit value"
+    assert testmsg.default_singular == "default value"
+
+    assert testmsg.HasField("explicit_singular")
+    assert testmsg.HasField("message_field")
+    assert testmsg.HasField("legacy")
+    assert testmsg.HasField("default_singular")
+
+    with pytest.raises(ValueError):
+        testmsg.HasField("implicit_singular")  # type: ignore
