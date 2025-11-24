@@ -152,6 +152,7 @@ class PkgWriter(object):
         relax_strict_optional_primitives: bool,
         use_default_deprecation_warnings: bool,
         generate_concrete_servicer_stubs: bool,
+        dedot_imports: bool,
         grpc: bool,
     ) -> None:
         self.fd = fd
@@ -160,6 +161,7 @@ class PkgWriter(object):
         self.relax_strict_optional_primitives = relax_strict_optional_primitives
         self.use_default_depreaction_warnings = use_default_deprecation_warnings
         self.generate_concrete_servicer_stubs = generate_concrete_servicer_stubs
+        self.dedot_imports = dedot_imports
         self.grpc = grpc
         self.lines: List[str] = []
         self.indent = ""
@@ -175,7 +177,7 @@ class PkgWriter(object):
         # Comments
         self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
 
-    def _import(self, path: str, name: str) -> str:
+    def _import(self, path: str, name: str, dedot: bool = False) -> str:
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Literal") -> "Literal"
         """
@@ -196,8 +198,13 @@ class PkgWriter(object):
             self.from_imports[imp].add((name, None))
             return name
         else:
+            dedoted: str | None = None
+            if dedot:
+                # Mangle name like protoc does, replace '.' with '_dot_' and '_' with '__'
+                dedoted = imp.replace("_", "__").replace(".", "_dot_")
+                imp = f"{imp} as {dedoted}"
             self.imports.add(imp)
-            return imp + "." + name
+            return (dedoted or imp) + "." + name
 
     def _import_message(self, name: str) -> str:
         """Import a referenced message and return a handle"""
@@ -226,7 +233,7 @@ class PkgWriter(object):
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
-        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0])
+        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0], dedot=self.dedot_imports)
 
         remains = ".".join(split[1:])
         if not remains:
@@ -1137,6 +1144,7 @@ def generate_mypy_stubs(
     relax_strict_optional_primitives: bool,
     use_default_deprecation_warnings: bool,
     generate_concrete_servicer_stubs: bool,
+    dedot_imports: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
@@ -1146,6 +1154,7 @@ def generate_mypy_stubs(
             relax_strict_optional_primitives,
             use_default_deprecation_warnings,
             generate_concrete_servicer_stubs,
+            dedot_imports=dedot_imports,
             grpc=False,
         )
 
@@ -1171,6 +1180,7 @@ def generate_mypy_grpc_stubs(
     relax_strict_optional_primitives: bool,
     use_default_deprecation_warnings: bool,
     generate_concrete_servicer_stubs: bool,
+    dedot_imports: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
@@ -1180,6 +1190,7 @@ def generate_mypy_grpc_stubs(
             relax_strict_optional_primitives,
             use_default_deprecation_warnings,
             generate_concrete_servicer_stubs,
+            dedot_imports=dedot_imports,
             grpc=True,
         )
         pkg_writer.write_grpc_async_hacks()
@@ -1237,6 +1248,7 @@ def main() -> None:
             "relax_strict_optional_primitives" in request.parameter,
             "use_default_deprecation_warnings" in request.parameter,
             "generate_concrete_servicer_stubs" in request.parameter,
+            "dedot_imports" in request.parameter,
         )
 
 
@@ -1251,6 +1263,7 @@ def grpc() -> None:
             "relax_strict_optional_primitives" in request.parameter,
             "use_default_deprecation_warnings" in request.parameter,
             "generate_concrete_servicer_stubs" in request.parameter,
+            "dedot_imports" in request.parameter,
         )
 
 
