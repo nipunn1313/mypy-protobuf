@@ -136,10 +136,10 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated_concrete
 
     # Generate with sync_only stubs for testing
-    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_sync:test/generated-sync-only
+    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_sync:test/generated_sync_only --mypy_out=test/generated_sync_only --python_out=test/generated_sync_only
 
     # Generate with async_only stubs for testing
-    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_async:test/generated-async-only
+    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_async:test/generated_async_only --mypy_out=test/generated_async_only --python_out=test/generated_async_only
 
     if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
@@ -158,6 +158,8 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         source "$UNIT_TESTS_VENV"/bin/activate
         find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated
+        find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated_sync_only
+        find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated_async_only
     )
 
     # Run mypy on unit tests / generated output
@@ -168,12 +170,12 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         MYPYPATH=$MYPYPATH:test/generated_concrete mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --no-incremental --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${CONCRETE_MODULES[@]}"
 
         # Run sync_only mypy
-        SYNC_ONLY_MODULES=( -m test.test_sync_only )
-        MYPYPATH=$MYPYPATH:test/generated-sync-only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${SYNC_ONLY_MODULES[@]}"
+        SYNC_ONLY_MODULES=( -m test.sync_only.test_sync_only )
+        MYPYPATH=$MYPYPATH:test/generated_sync_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${SYNC_ONLY_MODULES[@]}"
 
         # Run async_only mypy
-        ASYNC_ONLY_MODULES=( -m test.test_async_only )
-        MYPYPATH=$MYPYPATH:test/generated-async-only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
+        ASYNC_ONLY_MODULES=( -m test.async_only.test_async_only )
+        MYPYPATH=$MYPYPATH:test/generated_async_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
 
         export MYPYPATH=$MYPYPATH:test/generated
 
@@ -223,7 +225,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         # Run unit tests.
         source "$UNIT_TESTS_VENV"/bin/activate
-        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated-sync-only --ignore=test/generated-async-only -v
+        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only -v
     )
 done
 
