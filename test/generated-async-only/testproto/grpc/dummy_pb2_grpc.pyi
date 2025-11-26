@@ -61,7 +61,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     def UnaryUnary(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[testproto.grpc.dummy_pb2.DummyRequest, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]],
     ) -> collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]:
         """UnaryUnary"""
 
@@ -69,7 +69,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     def UnaryStream(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[testproto.grpc.dummy_pb2.DummyRequest, collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]],
     ) -> collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]:
         """UnaryStream"""
 
@@ -77,7 +77,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     def StreamUnary(
         self,
         request_iterator: collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyRequest], collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]],
     ) -> collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]:
         """StreamUnary"""
 
@@ -85,7 +85,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     def StreamStream(
         self,
         request_iterator: collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyRequest], collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]],
     ) -> collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]:
         """StreamStream"""
 
@@ -117,7 +117,7 @@ class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
     def DeprecatedMethod(
         self,
         request: testproto.grpc.dummy_pb2.DeprecatedRequest,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[testproto.grpc.dummy_pb2.DeprecatedRequest, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]],
     ) -> collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]:
         """DeprecatedMethod"""
 
@@ -125,7 +125,7 @@ class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
     def DeprecatedMethodNotDeprecatedRequest(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[testproto.grpc.dummy_pb2.DummyRequest, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]],
     ) -> collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]:
         """DeprecatedMethodNotDeprecatedRequest"""
 

@@ -843,10 +843,10 @@ class PkgWriter(object):
             )
         wl("")
 
-    def get_servicer_context_type(self) -> str:
+    def get_servicer_context_type(self, input_: str, output: str) -> str:
         """Get the type to use for the context parameter in servicer methods."""
         if self.grpc_type == GRPCType.ASYNC:
-            return self._import("grpc.aio", "ServicerContext")
+            return self._import("grpc.aio", f"ServicerContext[{input_}, {output}]")
         elif self.grpc_type == GRPCType.SYNC:
             return self._import("grpc", "ServicerContext")
         else:
@@ -903,6 +903,8 @@ class PkgWriter(object):
             wl("")
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
+            input_type = self._servicer_input_type(method)
+            output_type = self._servicer_output_type(method)
 
             if self.generate_concrete_servicer_stubs is False:
                 wl("@{}", self._import("abc", "abstractmethod"))
@@ -910,12 +912,11 @@ class PkgWriter(object):
             with self._indent():
                 wl("self,")
                 input_name = "request_iterator" if method.client_streaming else "request"
-                input_type = self._servicer_input_type(method)
                 wl(f"{input_name}: {input_type},")
-                wl("context: {},", self.get_servicer_context_type())
+                wl("context: {},", self.get_servicer_context_type(input_type, output_type))
             wl(
                 ") -> {}:{}",
-                self._servicer_output_type(method),
+                output_type,
                 " ..." if not self._has_comments(scl) else "",
             )
             if self._has_comments(scl):

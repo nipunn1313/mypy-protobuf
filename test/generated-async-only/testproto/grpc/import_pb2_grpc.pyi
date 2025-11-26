@@ -49,7 +49,7 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
     def UnaryUnary(
         self,
         request: google.protobuf.empty_pb2.Empty,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[google.protobuf.empty_pb2.Empty, collections.abc.Awaitable[testproto.test_pb2.Simple1]],
     ) -> collections.abc.Awaitable[testproto.test_pb2.Simple1]:
         """UnaryUnary"""
 
@@ -57,7 +57,7 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
     def UnaryStream(
         self,
         request: testproto.test_pb2.Simple1,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[testproto.test_pb2.Simple1, collections.abc.Awaitable[google.protobuf.empty_pb2.Empty]],
     ) -> collections.abc.Awaitable[google.protobuf.empty_pb2.Empty]:
         """UnaryStream"""
 
@@ -65,7 +65,7 @@ class SimpleServiceServicer(metaclass=abc.ABCMeta):
     def NoComment(
         self,
         request: testproto.test_pb2.Simple1,
-        context: grpc.aio.ServicerContext,
+        context: grpc.aio.ServicerContext[testproto.test_pb2.Simple1, collections.abc.Awaitable[google.protobuf.empty_pb2.Empty]],
     ) -> collections.abc.Awaitable[google.protobuf.empty_pb2.Empty]: ...
 
 def add_SimpleServiceServicer_to_server(servicer: SimpleServiceServicer, server: grpc.aio.Server) -> None: ...
