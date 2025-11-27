@@ -136,10 +136,10 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated_concrete
 
     # Generate with sync_only stubs for testing
-    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_sync:test/generated_sync_only --mypy_out=test/generated_sync_only --python_out=test/generated_sync_only
+    find proto/testproto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_sync:test/generated_sync_only --mypy_out=test/generated_sync_only --python_out=test/generated_sync_only
 
     # Generate with async_only stubs for testing
-    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_async:test/generated_async_only --mypy_out=test/generated_async_only --python_out=test/generated_async_only
+    find proto/testproto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=only_async:test/generated_async_only --mypy_out=test/generated_async_only --python_out=test/generated_async_only
 
     if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
