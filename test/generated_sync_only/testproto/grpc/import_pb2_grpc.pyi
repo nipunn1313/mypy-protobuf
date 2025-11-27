@@ -34,6 +34,8 @@ _SimpleServiceNoCommentType: typing_extensions.TypeAlias = grpc.UnaryUnaryMultiC
 class SimpleServiceStub:
     """SimpleService"""
 
+    def __init__(self, channel: grpc.Channel) -> None: ...
+
     UnaryUnary: _SimpleServiceUnaryUnaryType
     """UnaryUnary"""
 

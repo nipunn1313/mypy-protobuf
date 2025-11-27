@@ -1022,6 +1022,18 @@ class PkgWriter(object):
                         self._import("grpc.aio", "Channel"),
                     )
                     wl("")
+                elif self.grpc_type == GRPCType.SYNC:
+                    wl(
+                        "def __init__(self, channel: {}) -> None: ...",
+                        self._import("grpc", "Channel"),
+                    )
+                    wl("")
+                elif self.grpc_type == GRPCType.ASYNC:
+                    wl(
+                        "def __init__(self, channel: {}) -> None: ...",
+                        self._import("grpc.aio", "Channel"),
+                    )
+                    wl("")
 
                 self.write_grpc_stub_methods(service, scl)
 
