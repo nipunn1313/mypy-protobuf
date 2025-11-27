@@ -10,8 +10,9 @@ only_async flag have the correct types:
 """
 
 from typing import Awaitable
+
 import grpc.aio
-from testproto.grpc import dummy_pb2_grpc, dummy_pb2
+from testproto.grpc import dummy_pb2, dummy_pb2_grpc
 
 
 class AsyncOnlyServicer(dummy_pb2_grpc.DummyServiceServicer):
