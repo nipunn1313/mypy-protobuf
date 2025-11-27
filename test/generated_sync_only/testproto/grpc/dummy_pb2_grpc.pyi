@@ -42,6 +42,8 @@ _DummyServiceStreamStreamType: typing_extensions.TypeAlias = grpc.StreamStreamMu
 class DummyServiceStub:
     """DummyService"""
 
+    def __init__(self, channel: grpc.Channel) -> None: ...
+
     UnaryUnary: _DummyServiceUnaryUnaryType
     """UnaryUnary"""
 
@@ -102,6 +104,8 @@ _DeprecatedServiceDeprecatedMethodNotDeprecatedRequestType: typing_extensions.Ty
 @deprecated("""This service is deprecated""")
 class DeprecatedServiceStub:
     """Marking the service as deprecated"""
+
+    def __init__(self, channel: grpc.Channel) -> None: ...
 
     DeprecatedMethod: _DeprecatedServiceDeprecatedMethodType
     """DeprecatedMethod"""
