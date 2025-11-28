@@ -578,17 +578,15 @@ class PkgWriter(object):
             return
 
         if hf_fields:
+            wl("_HasFieldNamesType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
             wl(
-                "def HasField(self, field_name: {}[{}]) -> {}: ...",
-                self._import("typing", "Literal"),
-                hf_fields_text,
+                "def HasField(self, field_name: _HasFieldNamesType) -> {}: ...",
                 self._builtin("bool"),
             )
         if cf_fields:
+            wl("_ClearFieldNamesType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
             wl(
-                "def ClearField(self, field_name: {}[{}]) -> None: ...",
-                self._import("typing", "Literal"),
-                cf_fields_text,
+                "def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...",
             )
 
         for wo_field, members in sorted(wo_fields.items()):

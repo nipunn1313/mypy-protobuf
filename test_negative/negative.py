@@ -342,3 +342,17 @@ class IncompleteServicer(DummyServiceServicer):
 
 
 incomplete = IncompleteServicer()  # E:3.8
+
+
+def test_hasfield_alias(msg: Editions2024Test, field: "Editions2024Test._HasFieldNamesType") -> bool:
+    return msg.HasField(field)
+
+
+test_hasfield_alias(Editions2024Test(), "not_a_field")  # E:3.8
+
+
+def test_clearfield_alias(msg: Editions2024Test, field: "Editions2024Test._ClearFieldNamesType") -> None:
+    return msg.ClearField(field)
+
+
+test_clearfield_alias(Editions2024Test(), "not_a_field")  # E:3.8

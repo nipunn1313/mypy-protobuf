@@ -7,6 +7,7 @@
   - Protobuf <6.32 still had the edition enums and field options, so it *should* still work. But is untested
 - Add support for editions (up to 2024)
 - Add `generate_concrete_servicer_stubs` option to generate concrete instead of abstract servicer stubs
+- Add `_HasFieldNamesType` and `_ClearFieldNamesType` aliases to allow for typing field manipulation functions
 
 ## 3.7.0
 

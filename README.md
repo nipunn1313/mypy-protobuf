@@ -370,6 +370,21 @@ protoc \
 Note that generated code for grpc will work only together with code for python and locations should be the same.
 If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs
 
+### `_ClearFieldNamesType` and `_HasFieldNamesType` aliases
+
+Where applicable, type aliases are generated for the arguments to `ClearField` and `HasField`. These can be used to create typed functions for field manipulation:
+
+```python
+  from testproto.edition2024_pb2 import Editions2024Test
+
+  def test_hasfield_alias(msg: Editions2024Test, field: "Editions2024Test._HasFieldNamesType") -> bool:
+      return msg.HasField(field)
+
+  test_hasfield_alias(Editions2024Test(), "legacy")
+```
+
+Note the deferred evaluation (string reference, or `from __future__ import annotations`. This bypasses the fact that the alias does not exist on the stub)
+
 ### Targeting python2 support
 
 mypy-protobuf's drops support for targeting python2 with version 3.0. If you still need python2 support -

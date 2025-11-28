@@ -121,7 +121,7 @@ def test_generate_negative_matches() -> None:
     assert errors_39 == expected_errors_39
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_39) == 84
+    assert len(errors_39) == 86
 
 
 def test_func() -> None:
@@ -551,3 +551,18 @@ def test_editions_2024() -> None:
 
     with pytest.raises(ValueError):
         testmsg.HasField("implicit_singular")  # type: ignore
+
+
+def test_has_field_and_clear_field_type_aliases_exist() -> None:
+    """Confirm that the generated type aliases for HasField and ClearField exist"""
+    from testproto.edition2024_pb2 import Editions2024Test
+
+    def test_hasfield_alias(msg: Editions2024Test, field: "Editions2024Test._HasFieldNamesType") -> bool:
+        return msg.HasField(field)
+
+    test_hasfield_alias(Editions2024Test(), "legacy")
+
+    def test_clearfield_alias(msg: Editions2024Test, field: "Editions2024Test._ClearFieldNamesType") -> None:
+        return msg.ClearField(field)
+
+    test_clearfield_alias(Editions2024Test(), "legacy")

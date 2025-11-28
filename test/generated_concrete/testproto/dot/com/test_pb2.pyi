@@ -17,17 +17,17 @@ else:
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
-class Simple3(google.protobuf.message.Message):
+class TestMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    A_STRING_FIELD_NUMBER: builtins.int
-    a_string: builtins.str
+    FOO_FIELD_NUMBER: builtins.int
+    foo: builtins.str
     def __init__(
         self,
         *,
-        a_string: builtins.str | None = ...,
+        foo: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["a_string", b"a_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["a_string", b"a_string"]) -> None: ...
+    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
 
-Global___Simple3: typing_extensions.TypeAlias = Simple3
+Global___TestMessage: typing_extensions.TypeAlias = TestMessage
