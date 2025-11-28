@@ -242,5 +242,7 @@ testproto.test_pb2.Extensions1.ext
 
 
 # Generated type aliases for HasField and ClearField. These do not exist on a message, but are also just type aliases
-.*_HasFieldNamesType
-.*_ClearFieldNamesType
+.*_HasFieldArgType
+.*_ClearFieldArgType
+.*_WhichOneofReturnType.*
+.*_WhichOneofArgType.*

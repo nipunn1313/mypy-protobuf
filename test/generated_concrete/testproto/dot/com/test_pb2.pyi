@@ -27,7 +27,7 @@ class TestMessage(google.protobuf.message.Message):
         *,
         foo: builtins.str = ...,
     ) -> None: ...
-    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
-    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___TestMessage: typing_extensions.TypeAlias = TestMessage

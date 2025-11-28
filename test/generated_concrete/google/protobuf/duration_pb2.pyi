@@ -131,7 +131,7 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
         seconds: builtins.int = ...,
         nanos: builtins.int = ...,
     ) -> None: ...
-    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["nanos", b"nanos", "seconds", b"seconds"]
-    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["nanos", b"nanos", "seconds", b"seconds"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___Duration: typing_extensions.TypeAlias = Duration

@@ -13,8 +13,8 @@ test/generated/testproto/test_pb2.pyi:88: note: class testproto.test_pb2.Depreca
 "Quotes in comments"
 and 'single quotes'
 Trailing comment  [deprecated]
-test/generated/testproto/test_pb2.pyi:444: note: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
-test/generated/testproto/test_pb2.pyi:463: note: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/test_pb2.pyi:446: note: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi:465: note: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test_negative/negative.py:15: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test_negative/negative.py:20: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
 test_negative/negative.py:20: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
@@ -130,4 +130,5 @@ test_negative/negative.py:333: error: Argument 1 to "HasField" of "Editions2024T
 test_negative/negative.py:344: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
 test_negative/negative.py:351: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
 test_negative/negative.py:358: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-Found 85 errors in 1 file (checked 4 source files)
+test_negative/negative.py:368: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
+Found 86 errors in 1 file (checked 4 source files)

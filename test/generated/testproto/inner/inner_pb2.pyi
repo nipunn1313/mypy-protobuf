@@ -28,7 +28,7 @@ class Inner(google.protobuf.message.Message):
         *,
         a: testproto.test3_pb2.OuterEnum.ValueType = ...,
     ) -> None: ...
-    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___Inner: typing_extensions.TypeAlias = Inner

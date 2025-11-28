@@ -32,8 +32,8 @@ class DummyRequest(google.protobuf.message.Message):
         *,
         value: builtins.str = ...,
     ) -> None: ...
-    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
-    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___DummyRequest: typing_extensions.TypeAlias = DummyRequest
 
@@ -48,8 +48,8 @@ class DummyReply(google.protobuf.message.Message):
         *,
         value: builtins.str = ...,
     ) -> None: ...
-    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
-    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___DummyReply: typing_extensions.TypeAlias = DummyReply
 
@@ -65,7 +65,7 @@ class DeprecatedRequest(google.protobuf.message.Message):
         *,
         old_field: builtins.str = ...,
     ) -> None: ...
-    _ClearFieldNamesType: typing_extensions.TypeAlias = typing.Literal["old_field", b"old_field"]
-    def ClearField(self, field_name: _ClearFieldNamesType) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["old_field", b"old_field"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___DeprecatedRequest: typing_extensions.TypeAlias = DeprecatedRequest

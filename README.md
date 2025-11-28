@@ -101,6 +101,7 @@ See [Changelog](CHANGELOG.md) for full listing
 * `mypy-protobuf` generates correctly typed constructors dependinding on field presence.
 * `mypy-protobuf` generates correctly typed `HasField`, `WhichOneof`, and `ClearField` methods.
 * There are differences in how `mypy-protobuf` and `pyi_out` generate enums. See [this issue](https://github.com/protocolbuffers/protobuf/issues/8175) for details
+* Type aliases exported for `HasField`, `WhichOneof` and `ClearField` arguments
 
 #### Examples
 
@@ -370,20 +371,28 @@ protoc \
 Note that generated code for grpc will work only together with code for python and locations should be the same.
 If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs
 
-### `_ClearFieldNamesType` and `_HasFieldNamesType` aliases
+### `_ClearFieldArgType` and `_HasFieldArgType` aliases
 
-Where applicable, type aliases are generated for the arguments to `ClearField` and `HasField`. These can be used to create typed functions for field manipulation:
+Where applicable, type aliases are generated for the arguments to `ClearField`, `WhichOneof` and `HasField`. These can be used to create typed functions for field manipulation:
 
 ```python
   from testproto.edition2024_pb2 import Editions2024Test
 
-  def test_hasfield_alias(msg: Editions2024Test, field: "Editions2024Test._HasFieldNamesType") -> bool:
+  def test_hasfield_alias(msg: Editions2024Test, field: "Editions2024Test._HasFieldArgType") -> bool:
       return msg.HasField(field)
 
   test_hasfield_alias(Editions2024Test(), "legacy")
+
+  def test_whichoneof_alias(
+      msg: SimpleProto3,
+      oneof: "SimpleProto3._WhichOneofArgType_a_oneof",
+  ) -> "SimpleProto3._WhichOneofReturnType_a_oneof | None":
+      return msg.WhichOneof(oneof)
+
+  test_whichoneof_alias(SimpleProto3(), "a_oneof")
 ```
 
-Note the deferred evaluation (string reference, or `from __future__ import annotations`. This bypasses the fact that the alias does not exist on the stub)
+Note the deferred evaluation (string reference, or `from __future__ import annotations`. This bypasses the fact that the alias does not exist on the runtime class)
 
 ### Targeting python2 support
 
