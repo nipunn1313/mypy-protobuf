@@ -371,7 +371,7 @@ protoc \
 Note that generated code for grpc will work only together with code for python and locations should be the same.
 If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs
 
-### `_ClearFieldArgType` and `_HasFieldArgType` aliases
+### `_ClearFieldArgType`, `_WhichOneofArgType_<oneof_name>`, `_WhichOneofReturnType_<oneof_name>` and `_HasFieldArgType` aliases
 
 Where applicable, type aliases are generated for the arguments to `ClearField`, `WhichOneof` and `HasField`. These can be used to create typed functions for field manipulation:
 
