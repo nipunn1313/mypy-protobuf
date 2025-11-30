@@ -3,17 +3,28 @@
 RED="\033[0;31m"
 NC='\033[0m'
 
-PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.11.4}
+PY_VER_MYPY_PROTOBUF=${PY_VER_MYPY_PROTOBUF:=3.12.12}
 PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
-PY_VER_MYPY=${PY_VER_MYPY:=3.8.17}
-PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.8.17}"
+PY_VER_MYPY=${PY_VER_MYPY:=3.12.12}
+PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.9.17 3.10.12 3.11.4 3.12.12 3.13.9 3.14.0}"
+PYTHON_PROTOBUF_VERSION=${PYTHON_PROTOBUF_VERSION:=6.32.1}
+
+# Confirm UV installed
+if ! command -v uv &> /dev/null; then
+    echo -e "${RED}uv could not be found, please install uv (https://docs.astral.sh/uv/getting-started/installation/)${NC}"
+    exit 1
+fi
+
 
 if [ -e "$CUSTOM_TYPESHED_DIR" ]; then
     export MYPYPATH=$CUSTOM_TYPESHED_DIR/stubs/protobuf
+    export CUSTOM_TYPESHED_DIR_ARG="--custom-typeshed-dir=$CUSTOM_TYPESHED_DIR"
+else
+    # mypy does not emit deprecation warnings for typeshed stubs. Setting an empty custom-typeshed-dir was causing the current directory to be considered a typeshed dir, and hiding deprecation warnings.
+    export CUSTOM_TYPESHED_DIR_ARG=""
 fi
 
 # Install protoc
-PYTHON_PROTOBUF_VERSION=$(grep "^protobuf==" test_requirements.txt | cut -f3 -d=)
 PROTOBUF_VERSION=$(echo "$PYTHON_PROTOBUF_VERSION" | cut -f2-3 -d.)
 PROTOC_DIR="protoc_$PROTOBUF_VERSION"
 if [[ -z $SKIP_CLEAN ]] || [[ ! -e $PROTOC_DIR ]]; then
@@ -43,17 +54,12 @@ PROTOC_ARGS=( --proto_path=proto/ --proto_path="$PROTOC_DIR/protoc_install/inclu
 # Create mypy venv
 MYPY_VENV=venv_$PY_VER_MYPY
 (
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    pyenv shell "$PY_VER_MYPY"
-
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_VENV ]]; then
-        python3 --version
-        python3 -m pip --version
-        python -m pip install virtualenv
-        python3 -m virtualenv "$MYPY_VENV"
-        "$MYPY_VENV"/bin/python3 -m pip install -r mypy_requirements.txt
+        echo "Creating mypy venv for Python $PY_VER_MYPY"
+        uv venv -p "$PY_VER_MYPY" "$MYPY_VENV" --allow-existing
+        uv pip install -p "$MYPY_VENV"  -r mypy_requirements.txt
     fi
+    echo "Running mypy version:"
     "$MYPY_VENV"/bin/mypy --version
 )
 
@@ -61,14 +67,12 @@ MYPY_VENV=venv_$PY_VER_MYPY
 for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         UNIT_TESTS_VENV=venv_$PY_VER
-        eval "$(pyenv init --path)"
-        eval "$(pyenv init -)"
-        pyenv shell "$PY_VER"
 
         if [[ -z $SKIP_CLEAN ]] || [[ ! -e $UNIT_TESTS_VENV ]]; then
-            python -m pip install virtualenv
-            python -m virtualenv "$UNIT_TESTS_VENV"
-            "$UNIT_TESTS_VENV"/bin/python -m pip install -r test_requirements.txt
+            uv venv -p "$PY_VER" "$UNIT_TESTS_VENV" --allow-existing
+            uv pip install -p "$UNIT_TESTS_VENV"  -r test_requirements.txt
+            # Install protobuf version override
+            uv pip install -p "$UNIT_TESTS_VENV" "protobuf==$PYTHON_PROTOBUF_VERSION"
         fi
         "$UNIT_TESTS_VENV"/bin/py.test --version
     )
@@ -77,15 +81,10 @@ done
 # Create mypy-protobuf venv
 MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 (
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
-    pyenv shell "$PY_VER_MYPY_PROTOBUF"
-
     # Create virtualenv + Install requirements for mypy-protobuf
     if [[ -z $SKIP_CLEAN ]] || [[ ! -e $MYPY_PROTOBUF_VENV ]]; then
-        python -m pip install virtualenv
-        python -m virtualenv "$MYPY_PROTOBUF_VENV"
-        "$MYPY_PROTOBUF_VENV"/bin/python -m pip install -e .
+        uv venv -p "$PY_VER_MYPY_PROTOBUF" "$MYPY_PROTOBUF_VENV" --allow-existing
+        uv pip install -p "$MYPY_PROTOBUF_VENV" -e .
     fi
 )
 
@@ -94,14 +93,14 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     source "$MYPY_PROTOBUF_VENV"/bin/activate
 
     # Confirm version number
-    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 3.6.0"
-    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 3.6.0"
-    test "$(protoc-gen-mypy_grpc -V)" = "mypy-protobuf 3.6.0"
-    test "$(protoc-gen-mypy_grpc --version)" = "mypy-protobuf 3.6.0"
+    test "$(protoc-gen-mypy -V)" = "mypy-protobuf 3.7.0"
+    test "$(protoc-gen-mypy --version)" = "mypy-protobuf 3.7.0"
+    test "$(protoc-gen-mypy_grpc -V)" = "mypy-protobuf 3.7.0"
+    test "$(protoc-gen-mypy_grpc --version)" = "mypy-protobuf 3.7.0"
 
     # Run mypy on mypy-protobuf internal code for developers to catch issues
     FILES="mypy_protobuf/main.py"
-    "$MYPY_VENV/bin/mypy" --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$MYPY_PROTOBUF_VENV/bin/python3" --python-version="$PY_VER_MYPY_PROTOBUF_SHORT" $FILES
+    "$MYPY_VENV/bin/mypy" ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$MYPY_PROTOBUF_VENV/bin/python3" --python-version="$PY_VER_MYPY_PROTOBUF_SHORT" $FILES
 
     # Generate protos
     python --version
@@ -124,17 +123,26 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=quiet:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=readable_stubs:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=relax_strict_optional_primitives:test/generated
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=use_default_deprecation_warnings:test/generated
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated
     # Overwrite w/ run with mypy-protobuf without flags
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
 
     # Generate grpc protos
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
 
+    # Generate with concrete service stubs for testing
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated-concrete
+    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated-concrete
+
+
     if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
         exit 1
     fi
 )
+
+ERRORS=()
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
     UNIT_TESTS_VENV=venv_$PY_VER
@@ -149,16 +157,28 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     # Run mypy on unit tests / generated output
     (
         source "$MYPY_VENV"/bin/activate
+        # Run concrete mypy
+        CONCRETE_MODULES=( -m test.test_concrete )
+        MYPYPATH=$MYPYPATH:test/generated-concrete mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${CONCRETE_MODULES[@]}"
+
         export MYPYPATH=$MYPYPATH:test/generated
 
         # Run mypy
         MODULES=( -m test.test_generated_mypy -m test.test_grpc_usage -m test.test_grpc_async_usage )
-        mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
+        mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${MODULES[@]}"
 
         # Run stubtest. Stubtest does not work with python impl - only cpp impl
+        uv pip install -p "$MYPY_VENV" -r test_requirements.txt
+        # Override python protobuf version
+        uv pip install -p "$MYPY_VENV" "protobuf==$PYTHON_PROTOBUF_VERSION"
         API_IMPL="$(python3 -c "import google.protobuf.internal.api_implementation as a ; print(a.Type())")"
         if [[ $API_IMPL != "python" ]]; then
-            PYTHONPATH=test/generated python3 -m mypy.stubtest --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --allowlist stubtest_allowlist.txt testproto
+            # Skip stubtest for python version 3.13+ until positional argument decision is made
+            if [[ "$PY_VER_MYPY" == "3.13.9" ]] || [[ "$PY_VER_MYPY" == "3.14.0" ]]; then
+                echo "Skipping stubtest for Python $PY_VER_MYPY until positional argument decision is made"
+            else
+                PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
+            fi
         fi
 
         # run mypy on negative-tests (expected mypy failures)
@@ -170,19 +190,19 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             PY_VER_MYPY_TARGET=$(echo "$1" | cut -d. -f1-2)
             export MYPYPATH=$MYPYPATH:test/generated
             # Use --no-incremental to avoid caching issues: https://github.com/python/mypy/issues/16363
-            mypy --custom-typeshed-dir="$CUSTOM_TYPESHED_DIR" --python-executable="venv_$1/bin/python" --no-incremental --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
+            mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="venv_$1/bin/python" --no-incremental --python-version="$PY_VER_MYPY_TARGET" "${@: 2}" > "$MYPY_OUTPUT/mypy_output" || true
             cut -d: -f1,3- "$MYPY_OUTPUT/mypy_output" > "$MYPY_OUTPUT/mypy_output.omit_linenos"
         }
 
         call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
         if ! diff "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET" || ! diff "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"; then
-            echo -e "${RED}test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you. Now rerun${NC}"
-
             # Copy over all the mypy results for the developer.
             call_mypy "$PY_VER" "${NEGATIVE_MODULES[@]}"
-            cp "$MYPY_OUTPUT/mypy_output" test_negative/output.expected.3.8
-            cp "$MYPY_OUTPUT/mypy_output.omit_linenos" test_negative/output.expected.3.8.omit_linenos
-            exit 1
+            cp "$MYPY_OUTPUT/mypy_output" "test_negative/output.expected.$PY_VER_MYPY_TARGET"
+            cp "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"
+
+            # Record error instead of echoing and exiting
+            ERRORS+=("test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you.")
         fi
     )
 
@@ -192,3 +212,13 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         PYTHONPATH=test/generated py.test --ignore=test/generated -v
     )
 done
+
+# Report all errors at the end
+if [ ${#ERRORS[@]} -gt 0 ]; then
+    echo -e "\n${RED}===============================================${NC}"
+    for error in "${ERRORS[@]}"; do
+        echo -e "${RED}$error${NC}"
+    done
+    echo -e "${RED}Now rerun${NC}"
+    exit 1
+fi

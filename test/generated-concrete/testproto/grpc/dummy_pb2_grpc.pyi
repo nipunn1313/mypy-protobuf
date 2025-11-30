@@ -168,10 +168,9 @@ DummyServiceAsyncStub: typing_extensions.TypeAlias = DummyServiceStub[
     ],
 ]
 
-class DummyServiceServicer(metaclass=abc.ABCMeta):
+class DummyServiceServicer:
     """DummyService"""
 
-    @abc.abstractmethod
     def UnaryUnary(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
@@ -179,7 +178,6 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """UnaryUnary"""
 
-    @abc.abstractmethod
     def UnaryStream(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
@@ -187,7 +185,6 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
         """UnaryStream"""
 
-    @abc.abstractmethod
     def StreamUnary(
         self,
         request_iterator: _MaybeAsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
@@ -195,7 +192,6 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """StreamUnary"""
 
-    @abc.abstractmethod
     def StreamStream(
         self,
         request_iterator: _MaybeAsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
@@ -283,10 +279,9 @@ DeprecatedServiceAsyncStub: typing_extensions.TypeAlias = DeprecatedServiceStub[
 ]
 
 @deprecated("""This service is deprecated""")
-class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
+class DeprecatedServiceServicer:
     """Marking the service as deprecated"""
 
-    @abc.abstractmethod
     def DeprecatedMethod(
         self,
         request: testproto.grpc.dummy_pb2.DeprecatedRequest,
@@ -294,7 +289,6 @@ class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """DeprecatedMethod"""
 
-    @abc.abstractmethod
     def DeprecatedMethodNotDeprecatedRequest(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,

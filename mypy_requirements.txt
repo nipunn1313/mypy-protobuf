@@ -1,2 +1,2 @@
 # Requirements to run mypy itself. Mypy executable exists in a separate venv.
-mypy==1.13.0
+mypy==1.14.1
