@@ -132,8 +132,8 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
 
     # Generate with concrete service stubs for testing
-    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated-concrete
-    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated-concrete
+    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated_concrete
+    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated_concrete
 
 
     if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
@@ -142,7 +142,8 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     fi
 )
 
-ERRORS=()
+ERROR_FILE=$(mktemp)
+trap 'rm -f "$ERROR_FILE"' EXIT
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
     UNIT_TESTS_VENV=venv_$PY_VER
@@ -159,7 +160,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         source "$MYPY_VENV"/bin/activate
         # Run concrete mypy
         CONCRETE_MODULES=( -m test.test_concrete )
-        MYPYPATH=$MYPYPATH:test/generated-concrete mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${CONCRETE_MODULES[@]}"
+        MYPYPATH=$MYPYPATH:test/generated_concrete mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${CONCRETE_MODULES[@]}"
 
         export MYPYPATH=$MYPYPATH:test/generated
 
@@ -202,7 +203,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             cp "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"
 
             # Record error instead of echoing and exiting
-            ERRORS+=("test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you.")
+            echo "test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you." >> "$ERROR_FILE"
         fi
     )
 
@@ -214,11 +215,11 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 done
 
 # Report all errors at the end
-if [ ${#ERRORS[@]} -gt 0 ]; then
+if [ -s "$ERROR_FILE" ]; then
     echo -e "\n${RED}===============================================${NC}"
-    for error in "${ERRORS[@]}"; do
+    while IFS= read -r error; do
         echo -e "${RED}$error${NC}"
-    done
+    done < "$ERROR_FILE"
     echo -e "${RED}Now rerun${NC}"
     exit 1
 fi

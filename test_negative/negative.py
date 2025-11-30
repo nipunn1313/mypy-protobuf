@@ -342,3 +342,27 @@ class IncompleteServicer(DummyServiceServicer):
 
 
 incomplete = IncompleteServicer()  # E:3.8
+
+
+def test_hasfield_alias(msg: Editions2024Test, field: "Editions2024Test._HasFieldArgType") -> bool:
+    return msg.HasField(field)
+
+
+test_hasfield_alias(Editions2024Test(), "not_a_field")  # E:3.8
+
+
+def test_clearfield_alias(msg: Editions2024Test, field: "Editions2024Test._ClearFieldArgType") -> None:
+    return msg.ClearField(field)
+
+
+test_clearfield_alias(Editions2024Test(), "not_a_field")  # E:3.8
+
+
+def test_whichoneof_alias(
+    msg: SimpleProto3,
+    oneof: "SimpleProto3._WhichOneofArgType_a_oneof",
+) -> "SimpleProto3._WhichOneofReturnType_a_oneof | None":
+    return msg.WhichOneof(oneof)
+
+
+test_whichoneof_alias(SimpleProto3(), "not_a_oneof")  # E:3.8
