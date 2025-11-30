@@ -1,9 +1,27 @@
 ## Upcoming
 
+- Drop support for `py_generic_services` as it was removed from the protobuf compiler starting in version 6.30
+  - https://protobuf.dev/news/2024-10-02/#rpc-service-interfaces
+- Drop testing support for protobuf <6.32 because they don't support editions
+  - With some more work this could be added back in a testing refactor
+  - Protobuf <6.32 still had the edition enums and field options, so it *should* still work. But is untested
+- Add support for editions (up to 2024)
+- Add `generate_concrete_servicer_stubs` option to generate concrete instead of abstract servicer stubs
+
+## 3.7.0
+
 - Mark top-level mangled identifiers as `TypeAlias`.
 - Change the top-level mangling prefix from `global___` to `Global___` to respect
   [Y042](https://github.com/PyCQA/flake8-pyi/blob/main/ERRORCODES.md#list-of-warnings) naming convention.
 - Support client stub async typing overloads
+- Support [PEP702](https://peps.python.org/pep-0702/) deprecations
+  - Message deprecations are supported
+  - Field deprecations are not. This may be possible with init overloads
+  - Service deprecations are supported for Sync stubs
+    - Not for async stubs
+  - Enum message deprecation is supported
+    - Enum field deprecation is not
+- Drop Python 3.8 testing. Newer protobuf versions are incompatible. Generated code may still work
 
 ## 3.6.0
 

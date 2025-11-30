@@ -34,6 +34,8 @@ testproto.nested.nested_pb2.AnotherNested.NestedMessage.UNDEFINED
 testproto.nested.nested_pb2.AnotherNested.NestedMessage.NESTED_ENUM1
 testproto.nested.nested_pb2.AnotherNested.NestedMessage.NESTED_ENUM2
 testproto.nested.nested_pb2.AnotherNested.INVALID
+testproto.test_pb2.DEPRECATED_ONE
+testproto.test_pb2.DEPRECATED_TWO
 
 # Our enum types and helper types aren't there at runtime (Dynamic EnumTypeWrapper at runtime)
 # .*\..*EnumTypeWrapper$
@@ -47,13 +49,16 @@ testproto.reexport_pb2._?OuterEnum(EnumTypeWrapper)?
 testproto.readme_enum_pb2._?MyEnum(EnumTypeWrapper)?
 testproto.nested.nested_pb2.AnotherNested._?NestedEnum(EnumTypeWrapper)?
 testproto.nested.nested_pb2.AnotherNested.NestedMessage._?NestedEnum2(EnumTypeWrapper)?
+testproto.test_pb2._?DeprecatedEnum(EnumTypeWrapper)?
 
 # Our fake async stubs are not there at runtime (yet)
 testproto.grpc.dummy_pb2_grpc.DummyServiceAsyncStub
 testproto.grpc.import_pb2_grpc.SimpleServiceAsyncStub
+testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub
 
 # Part of an "EXPERIMENTAL API" according to comment. Not documented.
 testproto.grpc.dummy_pb2_grpc.DummyService
+testproto.grpc.dummy_pb2_grpc.DeprecatedService
 testproto.grpc.import_pb2_grpc.SimpleService
 
 # global prefix globals are generated, but aren't used at runtime
@@ -98,6 +103,7 @@ testproto.test_pb2.Simple1.no_package
 testproto.test_pb2.Simple1.outer_message_in_oneof
 testproto.test_pb2.Simple1.rep_inner_enum
 testproto.test_pb2.Simple1.rep_inner_message
+testproto.edition2024_pb2.Editions2024Test.message_field
 
 # All messages now fail with something like this:
 # error: testproto.nested.nested_pb2.Nested is inconsistent, metaclass differs
@@ -115,6 +121,7 @@ testproto.comment_special_chars_pb2.Test
 testproto.dot.com.test_pb2.TestMessage
 testproto.grpc.dummy_pb2.DummyReply
 testproto.grpc.dummy_pb2.DummyRequest
+testproto.grpc.dummy_pb2.DeprecatedRequest
 testproto.inner.inner_pb2.Inner
 testproto.nested.nested_pb2.AnotherNested
 testproto.nested.nested_pb2.AnotherNested.NestedMessage
@@ -142,3 +149,93 @@ testproto.test_pb2.Simple1
 testproto.test_pb2.Simple1.EmailByUidEntry
 testproto.test_pb2.Simple1.InnerMessage
 testproto.test_pb2.Simple2
+testproto.test_pb2.DeprecatedMessage
+testproto.test_pb2.DeprecatedMessageBadComment
+testproto.edition2024_pb2.Editions2024SubMessage
+testproto.edition2024_pb2.Editions2024Test
+
+# All messages now fail with something like this:
+# error: testproto.nopackage_pb2.NoPackage2.DESCRIPTOR variable differs from runtime type google._upb._message.Descriptor
+# Stub: in file /Users/aidandj/Development/mypy-protobuf/test/generated/testproto/nopackage_pb2.pyi:35
+# google.protobuf.descriptor.Descriptor
+# Runtime:
+# <google._upb._message.Descriptor object at 0x1127a1f30>
+#
+# For now, just allow all these errors until we come up with better silencing mechanisms or
+# alternately, better stubs for google._upb
+testproto.Capitalized.Capitalized_pb2.Upper.DESCRIPTOR
+testproto.Capitalized.Capitalized_pb2.lower.DESCRIPTOR
+testproto.Capitalized.Capitalized_pb2.lower2.DESCRIPTOR
+testproto.comment_special_chars_pb2.Test.DESCRIPTOR
+testproto.dot.com.test_pb2.TestMessage.DESCRIPTOR
+testproto.grpc.dummy_pb2.DummyReply.DESCRIPTOR
+testproto.grpc.dummy_pb2.DummyRequest.DESCRIPTOR
+testproto.grpc.dummy_pb2.DeprecatedRequest.DESCRIPTOR
+testproto.inner.inner_pb2.Inner.DESCRIPTOR
+testproto.nested.nested_pb2.AnotherNested.DESCRIPTOR
+testproto.nested.nested_pb2.AnotherNested.NestedMessage.DESCRIPTOR
+testproto.nested.nested_pb2.Nested.DESCRIPTOR
+testproto.nopackage_pb2.NoPackage.DESCRIPTOR
+testproto.nopackage_pb2.NoPackage2.DESCRIPTOR
+testproto.reexport_pb2.Empty.DESCRIPTOR
+testproto.reexport_pb2.OuterMessage3.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.EmailByUidEntry.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.MapMessageEntry.DESCRIPTOR
+testproto.reexport_pb2.SimpleProto3.MapScalarEntry.DESCRIPTOR
+testproto.test3_pb2.OuterMessage3.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.EmailByUidEntry.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.MapMessageEntry.DESCRIPTOR
+testproto.test3_pb2.SimpleProto3.MapScalarEntry.DESCRIPTOR
+testproto.test_extensions2_pb2.SeparateFileExtension.DESCRIPTOR
+testproto.test_extensions3_pb2.MessageOptionsTestMsg.DESCRIPTOR
+testproto.test_no_generic_services_pb2.Simple3.DESCRIPTOR
+testproto.test_pb2.Extensions1.DESCRIPTOR
+testproto.test_pb2.Extensions2.DESCRIPTOR
+testproto.test_pb2.SelfField.DESCRIPTOR
+testproto.test_pb2.Simple1.DESCRIPTOR
+testproto.test_pb2.Simple1.EmailByUidEntry.DESCRIPTOR
+testproto.test_pb2.Simple1.InnerMessage.DESCRIPTOR
+testproto.test_pb2.Simple2.DESCRIPTOR
+testproto.test_pb2.DeprecatedMessage.DESCRIPTOR
+testproto.test_pb2.DeprecatedMessageBadComment.DESCRIPTOR
+testproto.edition2024_pb2.Editions2024SubMessage.DESCRIPTOR
+testproto.edition2024_pb2.Editions2024Test.DESCRIPTOR
+testproto.test_pb2.DESCRIPTOR
+testproto.test_no_generic_services_pb2.DESCRIPTOR
+testproto.test_extensions2_pb2.DESCRIPTOR
+testproto.test3_pb2.DESCRIPTOR
+testproto.reexport_pb2.DESCRIPTOR
+testproto.readme_enum_pb2.DESCRIPTOR
+testproto.nopackage_pb2.DESCRIPTOR
+testproto.nested.nested_pb2.DESCRIPTOR
+testproto.inner.inner_pb2.DESCRIPTOR
+testproto.grpc.import_pb2.DESCRIPTOR
+testproto.grpc.dummy_pb2.DESCRIPTOR
+testproto.edition2024_pb2.DESCRIPTOR
+testproto.dot.com.test_pb2.DESCRIPTOR
+testproto.comment_special_chars_pb2.DESCRIPTOR
+testproto.Capitalized.Capitalized_pb2.DESCRIPTOR
+testproto.test_extensions3_pb2.DESCRIPTOR
+
+# All messages now fail with something like this:
+# error: testproto.test_extensions2_pb2.SeparateFileExtension.ext variable differs from runtime type google._upb._message.FieldDescriptor
+# Stub: in file /Users/aidandj/Development/mypy-protobuf/test/generated/testproto/test_extensions2_pb2.pyi:28
+# google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, testproto.test_extensions2_pb2.SeparateFileExtension]
+# Runtime:
+# <google._upb._message.FieldDescriptor object at 0x1045962f0>
+#
+# For now, just allow all these errors until we come up with better silencing mechanisms or
+# alternately, better stubs for google._upb
+testproto.test_pb2.Extensions2.foo
+testproto.test_pb2.Extensions1
+testproto.test_extensions3_pb2.test_field_extension
+testproto.test_extensions3_pb2.scalar_option
+testproto.test_extensions3_pb2.repeated_scalar_option
+testproto.test_extensions3_pb2.repeated_msg_option
+testproto.test_extensions3_pb2.repeated_enum_option
+testproto.test_extensions3_pb2.msg_option
+testproto.test_extensions3_pb2.enum_option
+testproto.test_extensions2_pb2.SeparateFileExtension.ext
+testproto.test_pb2.Extensions1.ext

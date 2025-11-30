@@ -2,6 +2,7 @@
 """Protoc Plugin to generate mypy stubs."""
 from __future__ import annotations
 
+import ast
 import sys
 from collections import defaultdict
 from contextlib import contextmanager
@@ -25,7 +26,7 @@ from google.protobuf.internal.well_known_types import WKTBASES
 
 from . import extensions_pb2
 
-__version__ = "3.6.0"
+__version__ = "3.7.0"
 
 # SourceCodeLocation is defined by `message Location` here
 # https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/descriptor.proto
@@ -149,12 +150,16 @@ class PkgWriter(object):
         descriptors: Descriptors,
         readable_stubs: bool,
         relax_strict_optional_primitives: bool,
+        use_default_deprecation_warnings: bool,
+        generate_concrete_servicer_stubs: bool,
         grpc: bool,
     ) -> None:
         self.fd = fd
         self.descriptors = descriptors
         self.readable_stubs = readable_stubs
         self.relax_strict_optional_primitives = relax_strict_optional_primitives
+        self.use_default_depreaction_warnings = use_default_deprecation_warnings
+        self.generate_concrete_servicer_stubs = generate_concrete_servicer_stubs
         self.grpc = grpc
         self.lines: List[str] = []
         self.indent = ""
@@ -165,6 +170,7 @@ class PkgWriter(object):
         # if {z} is None, then it shortens to `from {x} import {y}`
         self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
         self.typing_extensions_min: Optional[Tuple[int, int]] = None
+        self.deprecated_min: Optional[Tuple[int, int]] = None
 
         # Comments
         self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
@@ -179,6 +185,11 @@ class PkgWriter(object):
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
             return "typing_extensions." + name
+
+        if path == "warnings" and name == "deprecated":
+            if not self.deprecated_min or self.deprecated_min < (3, 11):
+                self.deprecated_min = (3, 13)
+            return name
 
         imp = path.replace("/", ".")
         if self.readable_stubs:
@@ -250,6 +261,51 @@ class PkgWriter(object):
     def _has_comments(self, scl: SourceCodeLocation) -> bool:
         sci_loc = self.source_code_info_by_scl.get(tuple(scl))
         return sci_loc is not None and bool(sci_loc.leading_detached_comments or sci_loc.leading_comments or sci_loc.trailing_comments)
+
+    def _get_comments(self, scl: SourceCodeLocation) -> List[str]:
+        """Return list of comment lines"""
+        if not self._has_comments(scl):
+            return []
+
+        sci_loc = self.source_code_info_by_scl.get(tuple(scl))
+        assert sci_loc is not None
+
+        leading_detached_lines = []
+        leading_lines = []
+        trailing_lines = []
+        for leading_detached_comment in sci_loc.leading_detached_comments:
+            leading_detached_lines = self._break_text(leading_detached_comment)
+        if sci_loc.leading_comments is not None:
+            leading_lines = self._break_text(sci_loc.leading_comments)
+        # Trailing comments also go in the header - to make sure it gets into the docstring
+        if sci_loc.trailing_comments is not None:
+            trailing_lines = self._break_text(sci_loc.trailing_comments)
+
+        lines = leading_detached_lines
+        if leading_detached_lines and (leading_lines or trailing_lines):
+            lines.append("")
+        lines.extend(leading_lines)
+        lines.extend(trailing_lines)
+
+        return lines
+
+    def _write_deprecation_warning(self, scl: SourceCodeLocation, default_message: str) -> None:
+        msg = default_message
+        if not self.use_default_depreaction_warnings and (comments := self._get_comments(scl)):
+            # Make sure the comment string is a valid python string literal
+            joined = "\\n".join(comments)
+            # Check that it is valid python string by using ast.parse
+            try:
+                ast.parse(f'"""{joined}"""')
+                msg = joined
+            except SyntaxError as e:
+                print(f"Warning: Deprecation comment {joined} could not be parsed as a python string literal. Using default deprecation message. {e}", file=sys.stderr)
+                pass
+        self._write_line(
+            '@{}("""{}""")',
+            self._import("warnings", "deprecated"),
+            msg,
+        )
 
     def _write_comments(self, scl: SourceCodeLocation) -> bool:
         """Return true if any comments were written"""
@@ -364,6 +420,11 @@ class PkgWriter(object):
                 )
             wl("")
 
+            if enum.options.deprecated:
+                self._write_deprecation_warning(
+                    scl + [d.EnumDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
+                    "This enum has been marked as deprecated using proto enum options.",
+                )
             if self._has_comments(scl):
                 wl(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
                 with self._indent():
@@ -409,6 +470,11 @@ class PkgWriter(object):
 
             class_name = desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             message_class = self._import("google.protobuf.message", "Message")
+            if desc.options.deprecated:
+                self._write_deprecation_warning(
+                    scl_prefix + [i] + [d.DescriptorProto.OPTIONS_FIELD_NUMBER] + [d.MessageOptions.DEPRECATED_FIELD_NUMBER],
+                    "This message has been marked as deprecated using proto message options.",
+                )
             wl("@{}", self._import("typing", "final"))
             wl(f"class {class_name}({message_class}{addl_base}):")
             with self._indent():
@@ -476,8 +542,9 @@ class PkgWriter(object):
                         # See https://github.com/nipunn1313/mypy-protobuf/issues/71
                         wl("*,")
                     for field in constructor_fields:
+                        implicit_presence = field.options.features.field_presence == d.FeatureSet.FieldPresence.IMPLICIT
                         field_type = self.python_type(field, generic_container=True)
-                        if self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional:
+                        if (implicit_presence and self.fd.syntax == "editions") or (self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional):
                             wl(f"{field.name}: {field_type} = ...,")
                         else:
                             wl(f"{field.name}: {field_type} | None = ...,")
@@ -497,7 +564,7 @@ class PkgWriter(object):
         # HasField only supports singular. ClearField supports repeated as well
         # In proto3, HasField only supports message fields and optional fields
         # HasField always supports oneof fields
-        hf_fields = [f.name for f in desc.field if f.HasField("oneof_index") or (f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax != "proto3" or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional))]
+        hf_fields = [f.name for f in desc.field if f.HasField("oneof_index") or (self.fd.syntax == "editions" and f.options.features.field_presence != d.FeatureSet.FieldPresence.IMPLICIT) or (f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax in ("proto2", "") or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional))]
         cf_fields = [f.name for f in desc.field]
         wo_fields = {oneof.name: [f.name for f in desc.field if f.HasField("oneof_index") and f.oneof_index == idx] for idx, oneof in enumerate(desc.oneof_decl)}
 
@@ -624,6 +691,7 @@ class PkgWriter(object):
                 self._import("google.protobuf.service", "Service"),
                 self._import("abc", "ABCMeta"),
             )
+            # The servicer interface
             with self._indent():
                 if self._write_comments(scl):
                     wl("")
@@ -785,7 +853,8 @@ class PkgWriter(object):
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
 
-            wl("@{}", self._import("abc", "abstractmethod"))
+            if self.generate_concrete_servicer_stubs is False:
+                wl("@{}", self._import("abc", "abstractmethod"))
             wl("def {}(", method.name)
             with self._indent():
                 wl("self,")
@@ -835,6 +904,11 @@ class PkgWriter(object):
             self.write_grpc_type_vars(service)
 
             # The stub client
+            if service.options.deprecated:
+                self._write_deprecation_warning(
+                    scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
+                    "This stub has been marked as deprecated using proto service options.",
+                )
             class_name = f"{service.name}Stub"
             wl(
                 "class {}({}[{}]):",
@@ -875,17 +949,33 @@ class PkgWriter(object):
             wl("")
 
             # The service definition interface
-            wl(
-                "class {}Servicer(metaclass={}):",
-                service.name,
-                self._import("abc", "ABCMeta"),
-            )
+            if service.options.deprecated:
+                self._write_deprecation_warning(
+                    scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
+                    "This servicer has been marked as deprecated using proto service options.",
+                )
+            if self.generate_concrete_servicer_stubs is False:
+                wl(
+                    "class {}Servicer(metaclass={}):",
+                    service.name,
+                    self._import("abc", "ABCMeta"),
+                )
+            else:
+                wl(
+                    "class {}Servicer:",
+                    service.name,
+                )
             with self._indent():
                 if self._write_comments(scl):
                     wl("")
                 self.write_grpc_methods(service, scl)
             server = self._import("grpc", "Server")
             aserver = self._import("grpc.aio", "Server")
+            if service.options.deprecated:
+                self._write_deprecation_warning(
+                    scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
+                    "This servicer has been marked as deprecated using proto service options.",
+                )
             wl(
                 "def add_{}Servicer_to_server(servicer: {}Servicer, server: {}) -> None: ...",
                 service.name,
@@ -994,14 +1084,12 @@ class PkgWriter(object):
             reexport_fd = self.descriptors.files[reexport_file]
             reexport_imp = reexport_file[:-6].replace("-", "_").replace("/", ".") + "_pb2"
             names = [m.name for m in reexport_fd.message_type] + [m.name for m in reexport_fd.enum_type] + [v.name for m in reexport_fd.enum_type for v in m.value] + [m.name for m in reexport_fd.extension]
-            if reexport_fd.options.py_generic_services:
-                names.extend(m.name for m in reexport_fd.service)
 
             if names:
                 # n,n to force a reexport (from x import y as y)
                 self.from_imports[reexport_imp].update((n, n) for n in names)
 
-        if self.typing_extensions_min:
+        if self.typing_extensions_min or self.deprecated_min:
             self.imports.add("sys")
         for pkg in sorted(self.imports):
             self._write_line(f"import {pkg}")
@@ -1011,6 +1099,12 @@ class PkgWriter(object):
             self._write_line("    import typing as typing_extensions")
             self._write_line("else:")
             self._write_line("    import typing_extensions")
+        if self.deprecated_min:
+            self._write_line("")
+            self._write_line(f"if sys.version_info >= {self.deprecated_min}:")
+            self._write_line("    from warnings import deprecated")
+            self._write_line("else:")
+            self._write_line("    from typing_extensions import deprecated")
 
         for pkg, items in sorted(self.from_imports.items()):
             self._write_line(f"from {pkg} import (")
@@ -1041,6 +1135,8 @@ def generate_mypy_stubs(
     quiet: bool,
     readable_stubs: bool,
     relax_strict_optional_primitives: bool,
+    use_default_deprecation_warnings: bool,
+    generate_concrete_servicer_stubs: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
@@ -1048,6 +1144,8 @@ def generate_mypy_stubs(
             descriptors,
             readable_stubs,
             relax_strict_optional_primitives,
+            use_default_deprecation_warnings,
+            generate_concrete_servicer_stubs,
             grpc=False,
         )
 
@@ -1055,8 +1153,6 @@ def generate_mypy_stubs(
         pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER])
         pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER])
         pkg_writer.write_extensions(fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER])
-        if fd.options.py_generic_services:
-            pkg_writer.write_services(fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER])
 
         assert name == fd.name
         assert fd.name.endswith(".proto")
@@ -1073,6 +1169,8 @@ def generate_mypy_grpc_stubs(
     quiet: bool,
     readable_stubs: bool,
     relax_strict_optional_primitives: bool,
+    use_default_deprecation_warnings: bool,
+    generate_concrete_servicer_stubs: bool,
 ) -> None:
     for name, fd in descriptors.to_generate.items():
         pkg_writer = PkgWriter(
@@ -1080,6 +1178,8 @@ def generate_mypy_grpc_stubs(
             descriptors,
             readable_stubs,
             relax_strict_optional_primitives,
+            use_default_deprecation_warnings,
+            generate_concrete_servicer_stubs,
             grpc=True,
         )
         pkg_writer.write_grpc_async_hacks()
@@ -1112,6 +1212,10 @@ def code_generation() -> Iterator[Tuple[plugin_pb2.CodeGeneratorRequest, plugin_
 
     # Declare support for optional proto3 fields
     response.supported_features |= plugin_pb2.CodeGeneratorResponse.FEATURE_PROTO3_OPTIONAL
+    response.supported_features |= plugin_pb2.CodeGeneratorResponse.FEATURE_SUPPORTS_EDITIONS
+
+    response.minimum_edition = d.EDITION_LEGACY
+    response.maximum_edition = d.EDITION_2024
 
     yield request, response
 
@@ -1131,6 +1235,8 @@ def main() -> None:
             "quiet" in request.parameter,
             "readable_stubs" in request.parameter,
             "relax_strict_optional_primitives" in request.parameter,
+            "use_default_deprecation_warnings" in request.parameter,
+            "generate_concrete_servicer_stubs" in request.parameter,
         )
 
 
@@ -1143,6 +1249,8 @@ def grpc() -> None:
             "quiet" in request.parameter,
             "readable_stubs" in request.parameter,
             "relax_strict_optional_primitives" in request.parameter,
+            "use_default_deprecation_warnings" in request.parameter,
+            "generate_concrete_servicer_stubs" in request.parameter,
         )
 
 

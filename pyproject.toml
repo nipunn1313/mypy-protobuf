@@ -18,10 +18,12 @@ extend_skip_glob = ["*_pb2.py"]
 [tool.mypy]
 strict = true
 show_error_codes = true
+enable_error_code = ["deprecated"]
+report_deprecated_as_note = true
 
 [tool.pyright]
 venvPath = "."
-venv = "venv_3.8.17"
+venv = "venv_3.14.0"
 # verboseOutput = true
 extraPaths = ["test/generated"]
 include = [
@@ -30,5 +32,13 @@ include = [
 ]
 exclude = [
     "**/*_pb2.py",
-    "**/*_pb2_grpc.py"
+    "**/*_pb2_grpc.py",
+    "test/test_concrete.py"
+]
+
+executionEnvironments = [
+    # Due to how upb is typed, we need to disable incompatible variable override checks
+    { root = "test/generated", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
+    { root = "test/generated-concrete", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
+    { root = "mypy_protobuf/extensions_pb2.pyi", reportIncompatibleVariableOverride = "none" },
 ]

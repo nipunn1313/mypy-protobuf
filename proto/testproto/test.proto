@@ -165,18 +165,34 @@ service PythonReservedKeywordsService {
     rpc valid_method_name2(Simple1) returns (PythonReservedKeywords.lambda) {}
 }
 
-// when service name itself is reserved - generated code was found to be invalid
-// in protoc 3.17.3
-//service global {
-//    rpc Echo(Simple1) returns (Simple2) {}
-//}
-
-option py_generic_services = true;
-service ATestService {
-    rpc Echo(Simple1) returns (Simple2) {}
-}
-
 message SelfField {
     // Field self -> must generate an __init__ method w/ different name
     optional int64 self = 1;
+}
+
+message DeprecatedMessage {
+    // This message is deprecated
+    option deprecated = true;
+
+    optional string a_string = 1;
+}
+
+message DeprecatedMessageBadComment {
+    // This message is deprecated
+    // """ triple quotes in comment
+    option deprecated = true;
+
+    optional string a_string = 1;
+}
+
+enum DeprecatedEnum {
+    // This enum is deprecated
+    // 2 lines of comments
+    // "Quotes in comments"
+    // and 'single quotes'
+    option deprecated = true;
+    // Trailing comment
+
+    DEPRECATED_ONE = 1;
+    DEPRECATED_TWO = 2;
 }
