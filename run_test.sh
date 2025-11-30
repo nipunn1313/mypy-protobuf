@@ -142,7 +142,8 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     fi
 )
 
-ERRORS=()
+ERROR_FILE=$(mktemp)
+trap 'rm -f "$ERROR_FILE"' EXIT
 
 for PY_VER in $PY_VER_UNIT_TESTS; do
     UNIT_TESTS_VENV=venv_$PY_VER
@@ -202,7 +203,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             cp "$MYPY_OUTPUT/mypy_output.omit_linenos" "test_negative/output.expected.$PY_VER_MYPY_TARGET.omit_linenos"
 
             # Record error instead of echoing and exiting
-            ERRORS+=("test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you.")
+            echo "test_negative/output.expected.$PY_VER_MYPY_TARGET didnt match. Copying over for you." >> "$ERROR_FILE"
         fi
     )
 
@@ -214,11 +215,11 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 done
 
 # Report all errors at the end
-if [ ${#ERRORS[@]} -gt 0 ]; then
+if [ -s "$ERROR_FILE" ]; then
     echo -e "\n${RED}===============================================${NC}"
-    for error in "${ERRORS[@]}"; do
+    while IFS= read -r error; do
         echo -e "${RED}$error${NC}"
-    done
+    done < "$ERROR_FILE"
     echo -e "${RED}Now rerun${NC}"
     exit 1
 fi
