@@ -33,7 +33,7 @@ Earlier releases might work, but aren't tested
 
 - [grpcio>=1.70](https://pypi.org/project/grpcio/)
 - [grpcio-tools>=1.70](https://pypi.org/project/grpcio-tools/)
-- [grpc-stubs>=1.53.0.5](https://pypi.org/project/grpc-stubs/)
+- [types-grpcio>=1.0.0.20251009](https://pypi.org/project/types-grpcio/)
 
 Other configurations may work, but are not continuously tested currently.
 We would be open to expanding this list - file an issue on the issue tracker.
@@ -368,7 +368,7 @@ protoc \
 ```
 
 Note that generated code for grpc will work only together with code for python and locations should be the same.
-If you need stubs for grpc internal code we suggest using this package https://github.com/shabbyrobe/grpc-stubs
+If you need stubs for grpc internal code we suggest using this package https://pypi.org/project/types-grpcio/
 
 ### Targeting python2 support
 
