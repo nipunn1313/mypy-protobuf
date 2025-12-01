@@ -34,7 +34,7 @@ jobs:
           - 6.33.1
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Read version numbers
         run: |
           echo ::set-output name=PROTOBUF_VERSION::$(grep "^protobuf>=" test_requirements.txt | cut -f2 -d=)
@@ -70,7 +70,7 @@ jobs:
           - 3.14.0
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Read version numbers
         run: |
           echo ::set-output name=PYRIGHT_VERSION::$(grep '"pyright"' .github/package.json | cut -d\" -f4)
@@ -93,7 +93,7 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: "3.9"
@@ -113,7 +113,7 @@ jobs:
     name: Sanity Check Windows Executable
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: "3.9"
