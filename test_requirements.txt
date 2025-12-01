@@ -3,6 +3,6 @@
 protobuf==6.32.1
 pytest==8.4.2
 pytest-asyncio==0.24.0
-grpc-stubs==1.53.0.5
+types-grpcio==1.0.0.20251009
 grpcio-tools==1.76.0
 types-protobuf==6.32.1.20251105
