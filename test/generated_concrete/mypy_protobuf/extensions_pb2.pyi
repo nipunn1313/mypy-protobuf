@@ -38,7 +38,8 @@ class FieldOptions(google.protobuf.message.Message):
         keytype: builtins.str = ...,
         valuetype: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___FieldOptions: typing_extensions.TypeAlias = FieldOptions
 

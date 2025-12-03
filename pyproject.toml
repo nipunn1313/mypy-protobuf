@@ -39,6 +39,6 @@ exclude = [
 executionEnvironments = [
     # Due to how upb is typed, we need to disable incompatible variable override checks
     { root = "test/generated", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
-    { root = "test/generated-concrete", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
+    { root = "test/generated_concrete", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
     { root = "mypy_protobuf/extensions_pb2.pyi", reportIncompatibleVariableOverride = "none" },
 ]

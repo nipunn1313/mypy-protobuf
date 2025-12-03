@@ -7,6 +7,7 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
 import sys
+import testproto.test3_pb2
 import typing
 
 if sys.version_info >= (3, 10):
@@ -17,16 +18,17 @@ else:
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
-class TestMessage(google.protobuf.message.Message):
+class Inner(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    FOO_FIELD_NUMBER: builtins.int
-    foo: builtins.str
+    A_FIELD_NUMBER: builtins.int
+    a: testproto.test3_pb2.OuterEnum.ValueType
     def __init__(
         self,
         *,
-        foo: builtins.str = ...,
+        a: testproto.test3_pb2.OuterEnum.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["foo", b"foo"]) -> None: ...
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessage: typing_extensions.TypeAlias = TestMessage
+Global___Inner: typing_extensions.TypeAlias = Inner
