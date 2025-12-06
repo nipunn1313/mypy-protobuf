@@ -348,6 +348,26 @@ By default mypy-protobuf will output servicer stubs with abstract methods. To ou
 protoc --python_out=output/location --mypy_grpc_out=generate_concrete_servicer_stubs:output/location
 ```
 
+### `dedot_imports`
+
+This option attempts to match the standard generated python files import pattern by replacing the `.` separated imports.
+
+```
+protoc --python_out=output/location --mypy_grpc_out=dedot_imports:output/location
+```
+
+```
+# before:
+import testproto.inner.inner_pb2
+def a_inner(self) -> testproto.inner.inner_pb2.Inner: ...
+
+# after:
+import testproto.inner.inner_pb2 as testproto_dot_inner_dot_inner__pb2
+def a_inner(self) -> testproto_dot_inner_dot_inner__pb2.Inner: ...
+```
+
+*NOTE*: This is currently not compatible with `readable_stubs`
+
 ### Output suppression
 
 To suppress output, you can run

@@ -8,6 +8,7 @@ PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.12.12}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.9.17 3.10.12 3.11.4 3.12.12 3.13.9 3.14.0}"
 PYTHON_PROTOBUF_VERSION=${PYTHON_PROTOBUF_VERSION:=6.32.1}
+DEDOT_IMPORTS=${DEDOT_IMPORTS:=0}
 
 # Confirm UV installed
 if ! command -v uv &> /dev/null; then
@@ -125,9 +126,12 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=relax_strict_optional_primitives:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=use_default_deprecation_warnings:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated
-    # Overwrite w/ run with mypy-protobuf without flags
-    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
-
+    # Overwrite w/ run with mypy-protobuf without flags unless DEDOT_IMPORTS is set
+    if [[ "$DEDOT_IMPORTS" -eq 1 ]]; then
+        find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=dedot_imports:test/generated
+    else
+        find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
+    fi
     # Generate grpc protos
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
 
@@ -136,9 +140,12 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=generate_concrete_servicer_stubs:test/generated_concrete
 
 
-    if [[ -n $VALIDATE ]] && ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
-        echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
-        exit 1
+    # Don't validate if DEDOT_IMPORTS is set, as it changes the generated files
+    if [[ $VALIDATE == 1 ]] && [[ $DEDOT_IMPORTS == 0 ]]; then
+        if ! diff <(echo "$SHA_BEFORE") <(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum); then
+            echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
+            exit 1
+        fi
     fi
 )
 
