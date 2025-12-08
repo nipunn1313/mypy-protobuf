@@ -55,11 +55,13 @@ testproto.test_pb2._?DeprecatedEnum(EnumTypeWrapper)?
 testproto.grpc.dummy_pb2_grpc.DummyServiceAsyncStub
 testproto.grpc.import_pb2_grpc.SimpleServiceAsyncStub
 testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub
+testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceAsyncStub
 
 # Part of an "EXPERIMENTAL API" according to comment. Not documented.
 testproto.grpc.dummy_pb2_grpc.DummyService
 testproto.grpc.dummy_pb2_grpc.DeprecatedService
 testproto.grpc.import_pb2_grpc.SimpleService
+testproto.grpc.dummy_pb2_grpc.ManyRPCsService
 
 # global prefix globals are generated, but aren't used at runtime
 # using `__` would be preferable, but Y047 will detect unused names.
@@ -122,6 +124,8 @@ testproto.dot.com.test_pb2.TestMessage
 testproto.grpc.dummy_pb2.DummyReply
 testproto.grpc.dummy_pb2.DummyRequest
 testproto.grpc.dummy_pb2.DeprecatedRequest
+testproto.grpc.dummy_pb2.ManyRequest.*
+testproto.grpc.dummy_pb2.ManyResponse.*
 testproto.inner.inner_pb2.Inner
 testproto.nested.nested_pb2.AnotherNested
 testproto.nested.nested_pb2.AnotherNested.NestedMessage
@@ -246,3 +250,9 @@ testproto.test_pb2.Extensions1.ext
 .*_ClearFieldArgType
 .*_WhichOneofReturnType.*
 .*_WhichOneofArgType.*
+
+#
+testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.__init__
+testproto.grpc.dummy_pb2_grpc.DummyServiceStub.__init__
+testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceStub.__init__
+testproto.grpc.import_pb2_grpc.SimpleServiceStub.__init__

@@ -14,13 +14,13 @@ message DummyReply {
 // DummyService
 service DummyService {
   // UnaryUnary
-  rpc UnaryUnary (DummyRequest) returns (DummyReply) {}
+  rpc UnaryUnary(DummyRequest) returns (DummyReply) {}
   // UnaryStream
-  rpc UnaryStream (DummyRequest) returns (stream DummyReply) {}
+  rpc UnaryStream(DummyRequest) returns (stream DummyReply) {}
   // StreamUnary
-  rpc StreamUnary (stream DummyRequest) returns (DummyReply) {}
+  rpc StreamUnary(stream DummyRequest) returns (DummyReply) {}
   // StreamStream
-  rpc StreamStream (stream DummyRequest) returns (stream DummyReply) {}
+  rpc StreamStream(stream DummyRequest) returns (stream DummyReply) {}
 }
 
 message DeprecatedRequest {
@@ -33,11 +33,312 @@ service DeprecatedService {
   // This service is deprecated
   option deprecated = true;
   // DeprecatedMethod
-  rpc DeprecatedMethod (DeprecatedRequest) returns (DummyReply) {
+  rpc DeprecatedMethod(DeprecatedRequest) returns (DummyReply) {
     option deprecated = true;
   }
   // DeprecatedMethodNotDeprecatedRequest
-  rpc DeprecatedMethodNotDeprecatedRequest (DummyRequest) returns (DummyReply) {
+  rpc DeprecatedMethodNotDeprecatedRequest(DummyRequest) returns (DummyReply) {
     option deprecated = true;
   }
+}
+
+message ManyRequest1 {}
+message ManyResponse1 {}
+message ManyRequest2 {}
+message ManyResponse2 {}
+message ManyRequest3 {}
+message ManyResponse3 {}
+message ManyRequest4 {}
+message ManyResponse4 {}
+message ManyRequest5 {}
+message ManyResponse5 {}
+message ManyRequest6 {}
+message ManyResponse6 {}
+message ManyRequest7 {}
+message ManyResponse7 {}
+message ManyRequest8 {}
+message ManyResponse8 {}
+message ManyRequest9 {}
+message ManyResponse9 {}
+message ManyRequest10 {}
+message ManyResponse10 {}
+message ManyRequest11 {}
+message ManyResponse11 {}
+message ManyRequest12 {}
+message ManyResponse12 {}
+message ManyRequest13 {}
+message ManyResponse13 {}
+message ManyRequest14 {}
+message ManyResponse14 {}
+message ManyRequest15 {}
+message ManyResponse15 {}
+message ManyRequest16 {}
+message ManyResponse16 {}
+message ManyRequest17 {}
+message ManyResponse17 {}
+message ManyRequest18 {}
+message ManyResponse18 {}
+message ManyRequest19 {}
+message ManyResponse19 {}
+message ManyRequest20 {}
+message ManyResponse20 {}
+message ManyRequest21 {}
+message ManyResponse21 {}
+message ManyRequest22 {}
+message ManyResponse22 {}
+message ManyRequest23 {}
+message ManyResponse23 {}
+message ManyRequest24 {}
+message ManyResponse24 {}
+message ManyRequest25 {}
+message ManyResponse25 {}
+message ManyRequest26 {}
+message ManyResponse26 {}
+message ManyRequest27 {}
+message ManyResponse27 {}
+message ManyRequest28 {}
+message ManyResponse28 {}
+message ManyRequest29 {}
+message ManyResponse29 {}
+message ManyRequest30 {}
+message ManyResponse30 {}
+message ManyRequest31 {}
+message ManyResponse31 {}
+message ManyRequest32 {}
+message ManyResponse32 {}
+message ManyRequest33 {}
+message ManyResponse33 {}
+message ManyRequest34 {}
+message ManyResponse34 {}
+message ManyRequest35 {}
+message ManyResponse35 {}
+message ManyRequest36 {}
+message ManyResponse36 {}
+message ManyRequest37 {}
+message ManyResponse37 {}
+message ManyRequest38 {}
+message ManyResponse38 {}
+message ManyRequest39 {}
+message ManyResponse39 {}
+message ManyRequest40 {}
+message ManyResponse40 {}
+message ManyRequest41 {}
+message ManyResponse41 {}
+message ManyRequest42 {}
+message ManyResponse42 {}
+message ManyRequest43 {}
+message ManyResponse43 {}
+message ManyRequest44 {}
+message ManyResponse44 {}
+message ManyRequest45 {}
+message ManyResponse45 {}
+message ManyRequest46 {}
+message ManyResponse46 {}
+message ManyRequest47 {}
+message ManyResponse47 {}
+message ManyRequest48 {}
+message ManyResponse48 {}
+message ManyRequest49 {}
+message ManyResponse49 {}
+message ManyRequest50 {}
+message ManyResponse50 {}
+message ManyRequest51 {}
+message ManyResponse51 {}
+message ManyRequest52 {}
+message ManyResponse52 {}
+message ManyRequest53 {}
+message ManyResponse53 {}
+message ManyRequest54 {}
+message ManyResponse54 {}
+message ManyRequest55 {}
+message ManyResponse55 {}
+message ManyRequest56 {}
+message ManyResponse56 {}
+message ManyRequest57 {}
+message ManyResponse57 {}
+message ManyRequest58 {}
+message ManyResponse58 {}
+message ManyRequest59 {}
+message ManyResponse59 {}
+message ManyRequest60 {}
+message ManyResponse60 {}
+message ManyRequest61 {}
+message ManyResponse61 {}
+message ManyRequest62 {}
+message ManyResponse62 {}
+message ManyRequest63 {}
+message ManyResponse63 {}
+message ManyRequest64 {}
+message ManyResponse64 {}
+message ManyRequest65 {}
+message ManyResponse65 {}
+message ManyRequest66 {}
+message ManyResponse66 {}
+message ManyRequest67 {}
+message ManyResponse67 {}
+message ManyRequest68 {}
+message ManyResponse68 {}
+message ManyRequest69 {}
+message ManyResponse69 {}
+message ManyRequest70 {}
+message ManyResponse70 {}
+message ManyRequest71 {}
+message ManyResponse71 {}
+message ManyRequest72 {}
+message ManyResponse72 {}
+message ManyRequest73 {}
+message ManyResponse73 {}
+message ManyRequest74 {}
+message ManyResponse74 {}
+message ManyRequest75 {}
+message ManyResponse75 {}
+message ManyRequest76 {}
+message ManyResponse76 {}
+message ManyRequest77 {}
+message ManyResponse77 {}
+message ManyRequest78 {}
+message ManyResponse78 {}
+message ManyRequest79 {}
+message ManyResponse79 {}
+message ManyRequest80 {}
+message ManyResponse80 {}
+message ManyRequest81 {}
+message ManyResponse81 {}
+message ManyRequest82 {}
+message ManyResponse82 {}
+message ManyRequest83 {}
+message ManyResponse83 {}
+message ManyRequest84 {}
+message ManyResponse84 {}
+message ManyRequest85 {}
+message ManyResponse85 {}
+message ManyRequest86 {}
+message ManyResponse86 {}
+message ManyRequest87 {}
+message ManyResponse87 {}
+message ManyRequest88 {}
+message ManyResponse88 {}
+message ManyRequest89 {}
+message ManyResponse89 {}
+message ManyRequest90 {}
+message ManyResponse90 {}
+message ManyRequest91 {}
+message ManyResponse91 {}
+message ManyRequest92 {}
+message ManyResponse92 {}
+message ManyRequest93 {}
+message ManyResponse93 {}
+message ManyRequest94 {}
+message ManyResponse94 {}
+message ManyRequest95 {}
+message ManyResponse95 {}
+message ManyRequest96 {}
+message ManyResponse96 {}
+message ManyRequest97 {}
+message ManyResponse97 {}
+message ManyRequest98 {}
+message ManyResponse98 {}
+message ManyRequest99 {}
+message ManyResponse99 {}
+
+service ManyRPCsService {
+  rpc Method1(ManyRequest1) returns (ManyResponse1) {}
+  rpc Method2(ManyRequest2) returns (ManyResponse2) {}
+  rpc Method3(ManyRequest3) returns (ManyResponse3) {}
+  rpc Method4(ManyRequest4) returns (ManyResponse4) {}
+  rpc Method5(ManyRequest5) returns (ManyResponse5) {}
+  rpc Method6(ManyRequest6) returns (ManyResponse6) {}
+  rpc Method7(ManyRequest7) returns (ManyResponse7) {}
+  rpc Method8(ManyRequest8) returns (ManyResponse8) {}
+  rpc Method9(ManyRequest9) returns (ManyResponse9) {}
+  rpc Method10(ManyRequest10) returns (ManyResponse10) {}
+  rpc Method11(ManyRequest11) returns (ManyResponse11) {}
+  rpc Method12(ManyRequest12) returns (ManyResponse12) {}
+  rpc Method13(ManyRequest13) returns (ManyResponse13) {}
+  rpc Method14(ManyRequest14) returns (ManyResponse14) {}
+  rpc Method15(ManyRequest15) returns (ManyResponse15) {}
+  rpc Method16(ManyRequest16) returns (ManyResponse16) {}
+  rpc Method17(ManyRequest17) returns (ManyResponse17) {}
+  rpc Method18(ManyRequest18) returns (ManyResponse18) {}
+  rpc Method19(ManyRequest19) returns (ManyResponse19) {}
+  rpc Method20(ManyRequest20) returns (ManyResponse20) {}
+  rpc Method21(ManyRequest21) returns (ManyResponse21) {}
+  rpc Method22(ManyRequest22) returns (ManyResponse22) {}
+  rpc Method23(ManyRequest23) returns (ManyResponse23) {}
+  rpc Method24(ManyRequest24) returns (ManyResponse24) {}
+  rpc Method25(ManyRequest25) returns (ManyResponse25) {}
+  rpc Method26(ManyRequest26) returns (ManyResponse26) {}
+  rpc Method27(ManyRequest27) returns (ManyResponse27) {}
+  rpc Method28(ManyRequest28) returns (ManyResponse28) {}
+  rpc Method29(ManyRequest29) returns (ManyResponse29) {}
+  rpc Method30(ManyRequest30) returns (ManyResponse30) {}
+  rpc Method31(ManyRequest31) returns (ManyResponse31) {}
+  rpc Method32(ManyRequest32) returns (ManyResponse32) {}
+  rpc Method33(ManyRequest33) returns (ManyResponse33) {}
+  rpc Method34(ManyRequest34) returns (ManyResponse34) {}
+  rpc Method35(ManyRequest35) returns (ManyResponse35) {}
+  rpc Method36(ManyRequest36) returns (ManyResponse36) {}
+  rpc Method37(ManyRequest37) returns (ManyResponse37) {}
+  rpc Method38(ManyRequest38) returns (ManyResponse38) {}
+  rpc Method39(ManyRequest39) returns (ManyResponse39) {}
+  rpc Method40(ManyRequest40) returns (ManyResponse40) {}
+  rpc Method41(ManyRequest41) returns (ManyResponse41) {}
+  rpc Method42(ManyRequest42) returns (ManyResponse42) {}
+  rpc Method43(ManyRequest43) returns (ManyResponse43) {}
+  rpc Method44(ManyRequest44) returns (ManyResponse44) {}
+  rpc Method45(ManyRequest45) returns (ManyResponse45) {}
+  rpc Method46(ManyRequest46) returns (ManyResponse46) {}
+  rpc Method47(ManyRequest47) returns (ManyResponse47) {}
+  rpc Method48(ManyRequest48) returns (ManyResponse48) {}
+  rpc Method49(ManyRequest49) returns (ManyResponse49) {}
+  rpc Method50(ManyRequest50) returns (ManyResponse50) {}
+  rpc Method51(ManyRequest51) returns (ManyResponse51) {}
+  rpc Method52(ManyRequest52) returns (ManyResponse52) {}
+  rpc Method53(ManyRequest53) returns (ManyResponse53) {}
+  rpc Method54(ManyRequest54) returns (ManyResponse54) {}
+  rpc Method55(ManyRequest55) returns (ManyResponse55) {}
+  rpc Method56(ManyRequest56) returns (ManyResponse56) {}
+  rpc Method57(ManyRequest57) returns (ManyResponse57) {}
+  rpc Method58(ManyRequest58) returns (ManyResponse58) {}
+  rpc Method59(ManyRequest59) returns (ManyResponse59) {}
+  rpc Method60(ManyRequest60) returns (ManyResponse60) {}
+  rpc Method61(ManyRequest61) returns (ManyResponse61) {}
+  rpc Method62(ManyRequest62) returns (ManyResponse62) {}
+  rpc Method63(ManyRequest63) returns (ManyResponse63) {}
+  rpc Method64(ManyRequest64) returns (ManyResponse64) {}
+  rpc Method65(ManyRequest65) returns (ManyResponse65) {}
+  rpc Method66(ManyRequest66) returns (ManyResponse66) {}
+  rpc Method67(ManyRequest67) returns (ManyResponse67) {}
+  rpc Method68(ManyRequest68) returns (ManyResponse68) {}
+  rpc Method69(ManyRequest69) returns (ManyResponse69) {}
+  rpc Method70(ManyRequest70) returns (ManyResponse70) {}
+  rpc Method71(ManyRequest71) returns (ManyResponse71) {}
+  rpc Method72(ManyRequest72) returns (ManyResponse72) {}
+  rpc Method73(ManyRequest73) returns (ManyResponse73) {}
+  rpc Method74(ManyRequest74) returns (ManyResponse74) {}
+  rpc Method75(ManyRequest75) returns (ManyResponse75) {}
+  rpc Method76(ManyRequest76) returns (ManyResponse76) {}
+  rpc Method77(ManyRequest77) returns (ManyResponse77) {}
+  rpc Method78(ManyRequest78) returns (ManyResponse78) {}
+  rpc Method79(ManyRequest79) returns (ManyResponse79) {}
+  rpc Method80(ManyRequest80) returns (ManyResponse80) {}
+  rpc Method81(ManyRequest81) returns (ManyResponse81) {}
+  rpc Method82(ManyRequest82) returns (ManyResponse82) {}
+  rpc Method83(ManyRequest83) returns (ManyResponse83) {}
+  rpc Method84(ManyRequest84) returns (ManyResponse84) {}
+  rpc Method85(ManyRequest85) returns (ManyResponse85) {}
+  rpc Method86(ManyRequest86) returns (ManyResponse86) {}
+  rpc Method87(ManyRequest87) returns (ManyResponse87) {}
+  rpc Method88(ManyRequest88) returns (ManyResponse88) {}
+  rpc Method89(ManyRequest89) returns (ManyResponse89) {}
+  rpc Method90(ManyRequest90) returns (ManyResponse90) {}
+  rpc Method91(ManyRequest91) returns (ManyResponse91) {}
+  rpc Method92(ManyRequest92) returns (ManyResponse92) {}
+  rpc Method93(ManyRequest93) returns (ManyResponse93) {}
+  rpc Method94(ManyRequest94) returns (ManyResponse94) {}
+  rpc Method95(ManyRequest95) returns (ManyResponse95) {}
+  rpc Method96(ManyRequest96) returns (ManyResponse96) {}
+  rpc Method97(ManyRequest97) returns (ManyResponse97) {}
+  rpc Method98(ManyRequest98) returns (ManyResponse98) {}
+  rpc Method99(ManyRequest99) returns (ManyResponse99) {}
 }

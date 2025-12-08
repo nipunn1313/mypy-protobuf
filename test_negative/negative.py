@@ -12,6 +12,7 @@ import grpc
 import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
 from testproto.edition2024_pb2 import Editions2024Test
+from testproto.grpc import dummy_pb2_grpc
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
     DummyReply,
@@ -366,3 +367,7 @@ def test_whichoneof_alias(
 
 
 test_whichoneof_alias(SimpleProto3(), "not_a_oneof")  # E:3.8
+
+# Make sure new overloads for stubs are working
+dummy_pb2_grpc.DummyServiceStub()  # E:3.8
+dummy_pb2_grpc.DummyServiceStub("notachannel")  # E:3.8
