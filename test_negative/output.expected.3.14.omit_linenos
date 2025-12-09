@@ -1,4 +1,5 @@
 test/generated/testproto/grpc/dummy_pb2.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]

@@ -175,7 +175,7 @@ class PkgWriter(object):
         eg. self._import("typing", "Literal") -> "Literal"
         """
         if path == "typing_extensions":
-            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13)}
+            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12)}
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
@@ -811,7 +811,7 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
-    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, is_async: bool) -> None:
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, is_async: bool, both: bool = False) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -821,7 +821,10 @@ class PkgWriter(object):
             return f"{self._callable_type(method, is_async=is_async)}[{self._input_type(method)}, {self._output_type(method)}]"
 
         for _, method in methods:
-            wl("{}: {}", method.name, type_str(method, is_async=is_async))
+            if both:
+                wl("{}: {}[{}, {}]", method.name, self._import("typing", "Union"), type_str(method, is_async=False), type_str(method, is_async=True))
+            else:
+                wl("{}: {}", method.name, type_str(method, is_async=is_async))
 
     def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         wl = self._write_line
@@ -899,15 +902,18 @@ class PkgWriter(object):
                     self._import("grpc.aio", "Channel"),
                     async_class_alias,
                 )
+                self.write_grpc_stub_methods(service, False, both=True)
                 wl("")
 
             # Write Stub
+            wl("@{}", self._import("typing", "type_check_only"))
             wl("class _{}({}):", class_name, class_name)
             with self._indent():
                 wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc", "Channel"))
                 self.write_grpc_stub_methods(service, False)
             wl("")
             # Write AsyncStub
+            wl("@{}", self._import("typing", "type_check_only"))
             wl("class _{}Async({}):", class_name, class_name)
             with self._indent():
                 wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))

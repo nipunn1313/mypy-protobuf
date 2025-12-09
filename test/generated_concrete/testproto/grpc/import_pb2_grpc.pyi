@@ -34,13 +34,18 @@ class SimpleServiceStub:
     def __new__(cls, channel: grpc.Channel) -> _SimpleServiceStub: ...
     @typing.overload
     def __new__(cls, channel: grpc.aio.Channel) -> _SimpleServiceStubAsync: ...
+    UnaryUnary: typing.Union[grpc.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1], grpc.aio.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]]
+    UnaryStream: typing.Union[grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty], grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]]
+    NoComment: typing.Union[grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty], grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]]
 
+@typing.type_check_only
 class _SimpleServiceStub(SimpleServiceStub):
     def __init__(self, channel: grpc.Channel) -> None: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]
     UnaryStream: grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
     NoComment: grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
 
+@typing.type_check_only
 class _SimpleServiceStubAsync(SimpleServiceStub):
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
     UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]
