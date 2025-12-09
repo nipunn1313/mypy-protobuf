@@ -1,7 +1,6 @@
-import typing
-
 import grpc.aio
 import pytest
+import typing_extensions as typing
 from testproto.grpc import dummy_pb2, dummy_pb2_grpc
 
 ADDRESS = "localhost:22223"
@@ -66,3 +65,13 @@ async def test_grpc() -> None:
         assert result4.value == "GRPC"
 
     await server.stop(None)
+
+    class TestAttribute:
+        stub: "dummy_pb2_grpc.DummyServiceAsyncStub"
+
+        def __init__(self) -> None:
+            self.stub = dummy_pb2_grpc.DummyServiceStub(grpc.aio.insecure_channel(ADDRESS))
+
+        async def test(self) -> None:
+            val = await self.stub.UnaryUnary(dummy_pb2.DummyRequest(value="test"))
+            typing.assert_type(val, dummy_pb2.DummyReply)

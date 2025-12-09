@@ -51,12 +51,6 @@ testproto.nested.nested_pb2.AnotherNested._?NestedEnum(EnumTypeWrapper)?
 testproto.nested.nested_pb2.AnotherNested.NestedMessage._?NestedEnum2(EnumTypeWrapper)?
 testproto.test_pb2._?DeprecatedEnum(EnumTypeWrapper)?
 
-# Our fake async stubs are not there at runtime (yet)
-testproto.grpc.dummy_pb2_grpc.DummyServiceAsyncStub
-testproto.grpc.import_pb2_grpc.SimpleServiceAsyncStub
-testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub
-testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceAsyncStub
-
 # Part of an "EXPERIMENTAL API" according to comment. Not documented.
 testproto.grpc.dummy_pb2_grpc.DummyService
 testproto.grpc.dummy_pb2_grpc.DeprecatedService

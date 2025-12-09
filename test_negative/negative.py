@@ -19,7 +19,6 @@ from testproto.grpc.dummy_pb2 import (  # E:3.8
     DummyRequest,
 )
 from testproto.grpc.dummy_pb2_grpc import (  # E:3.8
-    DeprecatedServiceAsyncStub,
     DeprecatedServiceServicer,
     DeprecatedServiceStub,
     DummyServiceServicer,
@@ -317,8 +316,9 @@ deprecated_servicer = DeprecatedServicer()
 add_DeprecatedServiceServicer_to_server(deprecated_servicer, server)
 stub2 = DeprecatedServiceStub(channel)
 stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))
-stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Not deprecating methods at this time
-async_stub2 = DeprecatedServiceAsyncStub(grpc.aio.insecure_channel(""))  # Not deprecating async stub at this time
+stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Cannot deprecate methods at this time
+async_stub2: "dummy_pb2_grpc.DeprecatedServiceAsyncStub"  # E:3.8
+async_stub2 = DeprecatedServiceStub(grpc.aio.insecure_channel(""))
 
 de = DeprecatedEnum.DEPRECATED_ONE
 

@@ -371,6 +371,32 @@ protoc \
 Note that generated code for grpc will work only together with code for python and locations should be the same.
 If you need stubs for grpc internal code we suggest using this package https://pypi.org/project/types-grpcio/
 
+#### Async GRPC usage
+
+`mypy-protobuf` generates stubs that are compatible with both sync and async usage, with a few caveats.
+
+In a simple use case, the stubs work as expected.
+
+```python
+stub = dummy_Pb2_grpc.DummyServiceStub(grpc.aio.insecure_channel("localhost:1234"))
+result = await stub.UnaryUnary(dummy_pb2.DummyRequest(value="cprg"))
+typing.assert_type(result, dummy_pb2.DummyReply)
+```
+
+If you need to explicitly type something as an async stub (class attr, etc) then you must use deferred annotations, and the async stub, as it does not exist at runtime.
+
+```python
+class TestAttribute:
+    stub: "dummy_pb2_grpc.DummyServiceAsyncStub"
+
+    def __init__(self) -> None:
+        self.stub = dummy_pb2_grpc.DummyServiceStub(grpc.aio.insecure_channel("localhost:1234"))
+
+    async def test(self) -> None:
+        result = await self.stub.UnaryUnary(dummy_pb2.DummyRequest(value="cprg"))
+        typing.assert_type(result, dummy_pb2.DummyReply)
+```
+
 ### `_ClearFieldArgType`, `_WhichOneofArgType_<oneof_name>`, `_WhichOneofReturnType_<oneof_name>` and `_HasFieldArgType` aliases
 
 Where applicable, type aliases are generated for the arguments to `ClearField`, `WhichOneof` and `HasField`. These can be used to create typed functions for field manipulation:

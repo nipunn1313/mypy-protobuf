@@ -811,7 +811,7 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
-    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, is_async: bool, both: bool = False) -> None:
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, *, is_async: bool, both: bool = False, ignore_assignment_errors: bool = False) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -822,9 +822,15 @@ class PkgWriter(object):
 
         for _, method in methods:
             if both:
-                wl("{}: {}[{}, {}]", method.name, self._import("typing", "Union"), type_str(method, is_async=False), type_str(method, is_async=True))
+                wl(
+                    "{}: {}[{}, {}]",
+                    method.name,
+                    self._import("typing", "Union"),
+                    type_str(method, is_async=False),
+                    type_str(method, is_async=True),
+                )
             else:
-                wl("{}: {}", method.name, type_str(method, is_async=is_async))
+                wl("{}: {}{}", method.name, type_str(method, is_async=is_async), "" if not ignore_assignment_errors else "  # type: ignore[assignment]")
 
     def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         wl = self._write_line
@@ -871,8 +877,7 @@ class PkgWriter(object):
             scl = scl_prefix + [i]
 
             class_name = f"{service.name}Stub"
-            sync_class_alias = f"_{class_name}"
-            async_class_alias = f"_{class_name}Async"
+            async_class_alias = f"{service.name}AsyncStub"
 
             # The stub client
             if service.options.deprecated:
@@ -892,7 +897,7 @@ class PkgWriter(object):
                 wl(
                     "def __new__(cls, channel: {}) -> {}: ...",
                     self._import("grpc", "Channel"),
-                    sync_class_alias,
+                    class_name,
                 )
 
                 # Write async overload
@@ -902,26 +907,22 @@ class PkgWriter(object):
                     self._import("grpc.aio", "Channel"),
                     async_class_alias,
                 )
-                self.write_grpc_stub_methods(service, False, both=True)
+                self.write_grpc_stub_methods(service, is_async=False)
                 wl("")
 
-            # Write Stub
-            wl("@{}", self._import("typing", "type_check_only"))
-            wl("class _{}({}):", class_name, class_name)
-            with self._indent():
-                wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc", "Channel"))
-                self.write_grpc_stub_methods(service, False)
-            wl("")
             # Write AsyncStub
+            if service.options.deprecated:
+                self._write_deprecation_warning(
+                    scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
+                    "This stub has been marked as deprecated using proto service options.",
+                )
             wl("@{}", self._import("typing", "type_check_only"))
-            wl("class _{}Async({}):", class_name, class_name)
+            wl("class {}({}):", async_class_alias, class_name)
             with self._indent():
+                if self._write_comments(scl):
+                    wl("")
                 wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
-                self.write_grpc_stub_methods(service, True)
-            wl("")
-
-            # Write AsyncStub alias
-            wl("{}AsyncStub: {} = {}", service.name, self._import("typing_extensions", "TypeAlias"), async_class_alias)
+                self.write_grpc_stub_methods(service, is_async=True, ignore_assignment_errors=True)
             wl("")
 
             # The service definition interface

@@ -1,7 +1,7 @@
-import typing
 from concurrent import futures
 
 import grpc
+import typing_extensions as typing
 from testproto.grpc import dummy_pb2, dummy_pb2_grpc
 
 ADDRESS = "localhost:22222"
@@ -75,3 +75,13 @@ def test_grpc() -> None:
     assert result6.value == "grpc"
 
     server.stop(None)
+
+    class TestAttribute:
+        stub: dummy_pb2_grpc.DummyServiceStub
+
+        def __init__(self) -> None:
+            self.stub = dummy_pb2_grpc.DummyServiceStub(grpc.insecure_channel(ADDRESS))
+
+        def test(self) -> None:
+            val = self.stub.UnaryUnary(dummy_pb2.DummyRequest(value="test"))
+            typing.assert_type(val, dummy_pb2.DummyReply)
