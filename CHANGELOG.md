@@ -8,6 +8,8 @@
 - Add support for editions (up to 2024)
 - Add `generate_concrete_servicer_stubs` option to generate concrete instead of abstract servicer stubs
 - Switch to types-grpcio instead of no longer maintained grpc-stubs
+- Add `_HasFieldArgType` and `_ClearFieldArgType` aliases to allow for typing field manipulation functions
+- Add `_WhichOneofArgType_<oneof_name>` and `_WhichOneofReturnType_<oneof_name>` type aliases
 
 ## 3.7.0
 

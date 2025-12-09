@@ -8,8 +8,8 @@ __pycache__/
 *.pyc
 /test/generated/**/*.py
 !/test/generated/**/__init__.py
-/test/generated-concrete/**/*.py
-!/test/generated-concrete/**/__init__.py
+/test/generated_concrete/**/*.py
+!/test/generated_concrete/**/__init__.py
 .pytest_cache
 /build/
 /dist/

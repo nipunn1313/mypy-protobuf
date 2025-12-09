@@ -578,30 +578,42 @@ class PkgWriter(object):
             return
 
         if hf_fields:
+            wl("_HasFieldArgType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
             wl(
-                "def HasField(self, field_name: {}[{}]) -> {}: ...",
-                self._import("typing", "Literal"),
-                hf_fields_text,
+                "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
                 self._builtin("bool"),
             )
         if cf_fields:
+            wl("_ClearFieldArgType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
             wl(
-                "def ClearField(self, field_name: {}[{}]) -> None: ...",
-                self._import("typing", "Literal"),
-                cf_fields_text,
+                "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
             )
 
+        # Write type aliases first so overloads are not interrupted
         for wo_field, members in sorted(wo_fields.items()):
-            if len(wo_fields) > 1:
-                wl("@{}", self._import("typing", "overload"))
             wl(
-                "def WhichOneof(self, oneof_group: {}[{}]) -> {}[{}] | None: ...",
-                self._import("typing", "Literal"),
-                # Accepts both str and bytes
-                f'"{wo_field}", b"{wo_field}"',
+                "_WhichOneofReturnType_{}: {} = {}[{}]",
+                wo_field,
+                self._import("typing_extensions", "TypeAlias"),
                 self._import("typing", "Literal"),
                 # Returns `str`
                 ", ".join(f'"{m}"' for m in members),
+            )
+            wl(
+                "_WhichOneofArgType_{}: {} = {}[{}]",
+                wo_field,
+                self._import("typing_extensions", "TypeAlias"),
+                self._import("typing", "Literal"),
+                # Accepts both str and bytes
+                f'"{wo_field}", b"{wo_field}"',
+            )
+        for wo_field, _ in sorted(wo_fields.items()):
+            if len(wo_fields) > 1:
+                wl("@{}", self._import("typing", "overload"))
+            wl(
+                "def WhichOneof(self, oneof_group: {}) -> {} | None: ...",
+                f"_WhichOneofArgType_{wo_field}",
+                f"_WhichOneofReturnType_{wo_field}",
             )
 
     def write_extensions(
