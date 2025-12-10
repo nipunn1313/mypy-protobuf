@@ -56,6 +56,7 @@ testproto.grpc.dummy_pb2_grpc.DummyService
 testproto.grpc.dummy_pb2_grpc.DeprecatedService
 testproto.grpc.import_pb2_grpc.SimpleService
 testproto.grpc.dummy_pb2_grpc.ManyRPCsService
+testproto.grpc.dummy_pb2_grpc.EmptyService
 
 # global prefix globals are generated, but aren't used at runtime
 # using `__` would be preferable, but Y047 will detect unused names.
@@ -250,3 +251,4 @@ testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.__init__
 testproto.grpc.dummy_pb2_grpc.DummyServiceStub.__init__
 testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceStub.__init__
 testproto.grpc.import_pb2_grpc.SimpleServiceStub.__init__
+testproto.grpc.dummy_pb2_grpc.EmptyServiceStub.__init__

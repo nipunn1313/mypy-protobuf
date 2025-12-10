@@ -811,7 +811,7 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
-    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, *, is_async: bool, both: bool = False, ignore_assignment_errors: bool = False) -> None:
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, *, is_async: bool, both: bool = False, ignore_assignment_errors: bool = False) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -820,7 +820,8 @@ class PkgWriter(object):
         def type_str(method: d.MethodDescriptorProto, is_async: bool) -> str:
             return f"{self._callable_type(method, is_async=is_async)}[{self._input_type(method)}, {self._output_type(method)}]"
 
-        for _, method in methods:
+        for i, method in methods:
+            scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
             if both:
                 wl(
                     "{}: {}[{}, {}]",
@@ -831,6 +832,7 @@ class PkgWriter(object):
                 )
             else:
                 wl("{}: {}{}", method.name, type_str(method, is_async=is_async), "" if not ignore_assignment_errors else "  # type: ignore[assignment]")
+            self._write_comments(scl)
 
     def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         wl = self._write_line
@@ -907,7 +909,7 @@ class PkgWriter(object):
                     self._import("grpc.aio", "Channel"),
                     async_class_alias,
                 )
-                self.write_grpc_stub_methods(service, is_async=False)
+                self.write_grpc_stub_methods(service, scl, is_async=False)
                 wl("")
 
             # Write AsyncStub
@@ -922,7 +924,7 @@ class PkgWriter(object):
                 if self._write_comments(scl):
                     wl("")
                 wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
-                self.write_grpc_stub_methods(service, is_async=True, ignore_assignment_errors=True)
+                self.write_grpc_stub_methods(service, scl, is_async=True, ignore_assignment_errors=True)
             wl("")
 
             # The service definition interface

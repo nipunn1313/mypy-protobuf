@@ -29,7 +29,9 @@ class SimpleServiceStub:
     @typing.overload
     def __new__(cls, channel: grpc.aio.Channel) -> SimpleServiceAsyncStub: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]
+    """UnaryUnary"""
     UnaryStream: grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
+    """UnaryStream"""
     NoComment: grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
 
 @typing.type_check_only
@@ -38,7 +40,9 @@ class SimpleServiceAsyncStub(SimpleServiceStub):
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
     UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]  # type: ignore[assignment]
+    """UnaryUnary"""
     UnaryStream: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]  # type: ignore[assignment]
+    """UnaryStream"""
     NoComment: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]  # type: ignore[assignment]
 
 class SimpleServiceServicer(metaclass=abc.ABCMeta):

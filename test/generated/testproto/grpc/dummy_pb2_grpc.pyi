@@ -34,9 +34,13 @@ class DummyServiceStub:
     @typing.overload
     def __new__(cls, channel: grpc.aio.Channel) -> DummyServiceAsyncStub: ...
     UnaryUnary: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    """UnaryUnary"""
     UnaryStream: grpc.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    """UnaryStream"""
     StreamUnary: grpc.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    """StreamUnary"""
     StreamStream: grpc.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    """StreamStream"""
 
 @typing.type_check_only
 class DummyServiceAsyncStub(DummyServiceStub):
@@ -44,9 +48,13 @@ class DummyServiceAsyncStub(DummyServiceStub):
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
     UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    """UnaryUnary"""
     UnaryStream: grpc.aio.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    """UnaryStream"""
     StreamUnary: grpc.aio.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    """StreamUnary"""
     StreamStream: grpc.aio.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    """StreamStream"""
 
 class DummyServiceServicer(metaclass=abc.ABCMeta):
     """DummyService"""
@@ -94,7 +102,9 @@ class DeprecatedServiceStub:
     @typing.overload
     def __new__(cls, channel: grpc.aio.Channel) -> DeprecatedServiceAsyncStub: ...
     DeprecatedMethod: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]
+    """DeprecatedMethod"""
     DeprecatedMethodNotDeprecatedRequest: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    """DeprecatedMethodNotDeprecatedRequest"""
 
 @deprecated("""This service is deprecated""")
 @typing.type_check_only
@@ -103,7 +113,9 @@ class DeprecatedServiceAsyncStub(DeprecatedServiceStub):
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
     DeprecatedMethod: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    """DeprecatedMethod"""
     DeprecatedMethodNotDeprecatedRequest: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    """DeprecatedMethodNotDeprecatedRequest"""
 
 @deprecated("""This service is deprecated""")
 class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
@@ -1031,3 +1043,18 @@ class ManyRPCsServiceServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse99, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse99]]: ...
 
 def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
+
+class EmptyServiceStub:
+    @typing.overload
+    def __new__(cls, channel: grpc.Channel) -> EmptyServiceStub: ...
+    @typing.overload
+    def __new__(cls, channel: grpc.aio.Channel) -> EmptyServiceAsyncStub: ...
+
+@typing.type_check_only
+class EmptyServiceAsyncStub(EmptyServiceStub):
+    def __init__(self, channel: grpc.aio.Channel) -> None: ...
+
+class EmptyServiceServicer(metaclass=abc.ABCMeta):
+    ...
+
+def add_EmptyServiceServicer_to_server(servicer: EmptyServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

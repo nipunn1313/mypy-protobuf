@@ -342,3 +342,5 @@ service ManyRPCsService {
   rpc Method98(ManyRequest98) returns (ManyResponse98) {}
   rpc Method99(ManyRequest99) returns (ManyResponse99) {}
 }
+
+service EmptyService {}
