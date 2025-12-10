@@ -15,8 +15,8 @@ test/generated/testproto/test_pb2.pyi:96: error: class testproto.test_pb2.Deprec
 "Quotes in comments"
 and 'single quotes'
 Trailing comment  [deprecated]
-test/generated/testproto/test_pb2.pyi:462: error: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
-test/generated/testproto/test_pb2.pyi:481: error: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/test_pb2.pyi:474: error: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi:493: error: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test_negative/negative.py:16: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test_negative/negative.py:21: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
 test_negative/negative.py:21: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
