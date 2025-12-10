@@ -29,6 +29,7 @@ from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
 from testproto.test_pb2 import DeprecatedEnum  # E:3.8
 from testproto.test_pb2 import (  # E:3.8
+    DEPRECATED_ONE,
     DESCRIPTOR,
     FOO,
     DeprecatedMessage,
@@ -315,12 +316,14 @@ server = grpc.server(thread_pool=concurrent.futures.ThreadPoolExecutor())
 deprecated_servicer = DeprecatedServicer()
 add_DeprecatedServiceServicer_to_server(deprecated_servicer, server)
 stub2 = DeprecatedServiceStub(channel)
-stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))
-stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Cannot deprecate methods at this time
+stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))  # E:3.8
+stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # E:3.8
 async_stub2: "dummy_pb2_grpc.DeprecatedServiceAsyncStub"  # E:3.8
 async_stub2 = DeprecatedServiceStub(grpc.aio.insecure_channel(""))
 
-de = DeprecatedEnum.DEPRECATED_ONE
+de = DeprecatedEnum.DEPRECATED_ONE  # E:3.8
+de2 = DeprecatedEnum.DEPRECATED_TWO  # E:3.8
+de3 = DEPRECATED_ONE  # Cannot mark the global one as deprecated yet
 
 # Edition 2024 tests
 

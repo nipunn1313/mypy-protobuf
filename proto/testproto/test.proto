@@ -202,8 +202,12 @@ enum DeprecatedEnum {
     option deprecated = true;
     // Trailing comment
 
-    DEPRECATED_ONE = 1;
-    DEPRECATED_TWO = 2;
+    DEPRECATED_ONE = 1 [
+      // This enum value is deprecated but this message doesn't show
+      deprecated = true
+      ]; // Trailing comment for enum value
+    DEPRECATED_TWO = 2 [deprecated = true];
+    NOT_DEPRECATED = 3;
 }
 
 message TestDuplicatePackageMessage {

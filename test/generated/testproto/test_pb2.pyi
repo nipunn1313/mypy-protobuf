@@ -86,6 +86,7 @@ class _DeprecatedEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_Deprec
 class DeprecatedEnum(_DeprecatedEnum, metaclass=_DeprecatedEnumEnumTypeWrapper): ...
 
 DEPRECATED_ONE: DeprecatedEnum.ValueType  # 1
+"""Trailing comment for enum value"""
 DEPRECATED_TWO: DeprecatedEnum.ValueType  # 2
 Global___DeprecatedEnum: _TypeAlias = DeprecatedEnum  # noqa: Y015
 

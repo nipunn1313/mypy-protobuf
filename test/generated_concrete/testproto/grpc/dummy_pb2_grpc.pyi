@@ -93,7 +93,6 @@ class DummyServiceServicer:
         """StreamStream"""
 
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: _typing.Union[_grpc.Server, _aio.Server]) -> None: ...
-
 @_deprecated("""This service is deprecated""")
 class DeprecatedServiceStub:
     """Marking the service as deprecated"""
@@ -353,589 +352,491 @@ class ManyRPCsServiceServicer:
         request: _dummy_pb2.ManyRequest1,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse1, _abc.Awaitable[_dummy_pb2.ManyResponse1]]: ...
-
     def Method2(
         self,
         request: _dummy_pb2.ManyRequest2,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse2, _abc.Awaitable[_dummy_pb2.ManyResponse2]]: ...
-
     def Method3(
         self,
         request: _dummy_pb2.ManyRequest3,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse3, _abc.Awaitable[_dummy_pb2.ManyResponse3]]: ...
-
     def Method4(
         self,
         request: _dummy_pb2.ManyRequest4,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse4, _abc.Awaitable[_dummy_pb2.ManyResponse4]]: ...
-
     def Method5(
         self,
         request: _dummy_pb2.ManyRequest5,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse5, _abc.Awaitable[_dummy_pb2.ManyResponse5]]: ...
-
     def Method6(
         self,
         request: _dummy_pb2.ManyRequest6,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse6, _abc.Awaitable[_dummy_pb2.ManyResponse6]]: ...
-
     def Method7(
         self,
         request: _dummy_pb2.ManyRequest7,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse7, _abc.Awaitable[_dummy_pb2.ManyResponse7]]: ...
-
     def Method8(
         self,
         request: _dummy_pb2.ManyRequest8,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse8, _abc.Awaitable[_dummy_pb2.ManyResponse8]]: ...
-
     def Method9(
         self,
         request: _dummy_pb2.ManyRequest9,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse9, _abc.Awaitable[_dummy_pb2.ManyResponse9]]: ...
-
     def Method10(
         self,
         request: _dummy_pb2.ManyRequest10,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse10, _abc.Awaitable[_dummy_pb2.ManyResponse10]]: ...
-
     def Method11(
         self,
         request: _dummy_pb2.ManyRequest11,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse11, _abc.Awaitable[_dummy_pb2.ManyResponse11]]: ...
-
     def Method12(
         self,
         request: _dummy_pb2.ManyRequest12,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse12, _abc.Awaitable[_dummy_pb2.ManyResponse12]]: ...
-
     def Method13(
         self,
         request: _dummy_pb2.ManyRequest13,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse13, _abc.Awaitable[_dummy_pb2.ManyResponse13]]: ...
-
     def Method14(
         self,
         request: _dummy_pb2.ManyRequest14,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse14, _abc.Awaitable[_dummy_pb2.ManyResponse14]]: ...
-
     def Method15(
         self,
         request: _dummy_pb2.ManyRequest15,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse15, _abc.Awaitable[_dummy_pb2.ManyResponse15]]: ...
-
     def Method16(
         self,
         request: _dummy_pb2.ManyRequest16,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse16, _abc.Awaitable[_dummy_pb2.ManyResponse16]]: ...
-
     def Method17(
         self,
         request: _dummy_pb2.ManyRequest17,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse17, _abc.Awaitable[_dummy_pb2.ManyResponse17]]: ...
-
     def Method18(
         self,
         request: _dummy_pb2.ManyRequest18,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse18, _abc.Awaitable[_dummy_pb2.ManyResponse18]]: ...
-
     def Method19(
         self,
         request: _dummy_pb2.ManyRequest19,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse19, _abc.Awaitable[_dummy_pb2.ManyResponse19]]: ...
-
     def Method20(
         self,
         request: _dummy_pb2.ManyRequest20,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse20, _abc.Awaitable[_dummy_pb2.ManyResponse20]]: ...
-
     def Method21(
         self,
         request: _dummy_pb2.ManyRequest21,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse21, _abc.Awaitable[_dummy_pb2.ManyResponse21]]: ...
-
     def Method22(
         self,
         request: _dummy_pb2.ManyRequest22,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse22, _abc.Awaitable[_dummy_pb2.ManyResponse22]]: ...
-
     def Method23(
         self,
         request: _dummy_pb2.ManyRequest23,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse23, _abc.Awaitable[_dummy_pb2.ManyResponse23]]: ...
-
     def Method24(
         self,
         request: _dummy_pb2.ManyRequest24,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse24, _abc.Awaitable[_dummy_pb2.ManyResponse24]]: ...
-
     def Method25(
         self,
         request: _dummy_pb2.ManyRequest25,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse25, _abc.Awaitable[_dummy_pb2.ManyResponse25]]: ...
-
     def Method26(
         self,
         request: _dummy_pb2.ManyRequest26,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse26, _abc.Awaitable[_dummy_pb2.ManyResponse26]]: ...
-
     def Method27(
         self,
         request: _dummy_pb2.ManyRequest27,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse27, _abc.Awaitable[_dummy_pb2.ManyResponse27]]: ...
-
     def Method28(
         self,
         request: _dummy_pb2.ManyRequest28,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse28, _abc.Awaitable[_dummy_pb2.ManyResponse28]]: ...
-
     def Method29(
         self,
         request: _dummy_pb2.ManyRequest29,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse29, _abc.Awaitable[_dummy_pb2.ManyResponse29]]: ...
-
     def Method30(
         self,
         request: _dummy_pb2.ManyRequest30,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse30, _abc.Awaitable[_dummy_pb2.ManyResponse30]]: ...
-
     def Method31(
         self,
         request: _dummy_pb2.ManyRequest31,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse31, _abc.Awaitable[_dummy_pb2.ManyResponse31]]: ...
-
     def Method32(
         self,
         request: _dummy_pb2.ManyRequest32,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse32, _abc.Awaitable[_dummy_pb2.ManyResponse32]]: ...
-
     def Method33(
         self,
         request: _dummy_pb2.ManyRequest33,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse33, _abc.Awaitable[_dummy_pb2.ManyResponse33]]: ...
-
     def Method34(
         self,
         request: _dummy_pb2.ManyRequest34,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse34, _abc.Awaitable[_dummy_pb2.ManyResponse34]]: ...
-
     def Method35(
         self,
         request: _dummy_pb2.ManyRequest35,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse35, _abc.Awaitable[_dummy_pb2.ManyResponse35]]: ...
-
     def Method36(
         self,
         request: _dummy_pb2.ManyRequest36,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse36, _abc.Awaitable[_dummy_pb2.ManyResponse36]]: ...
-
     def Method37(
         self,
         request: _dummy_pb2.ManyRequest37,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse37, _abc.Awaitable[_dummy_pb2.ManyResponse37]]: ...
-
     def Method38(
         self,
         request: _dummy_pb2.ManyRequest38,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse38, _abc.Awaitable[_dummy_pb2.ManyResponse38]]: ...
-
     def Method39(
         self,
         request: _dummy_pb2.ManyRequest39,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse39, _abc.Awaitable[_dummy_pb2.ManyResponse39]]: ...
-
     def Method40(
         self,
         request: _dummy_pb2.ManyRequest40,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse40, _abc.Awaitable[_dummy_pb2.ManyResponse40]]: ...
-
     def Method41(
         self,
         request: _dummy_pb2.ManyRequest41,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse41, _abc.Awaitable[_dummy_pb2.ManyResponse41]]: ...
-
     def Method42(
         self,
         request: _dummy_pb2.ManyRequest42,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse42, _abc.Awaitable[_dummy_pb2.ManyResponse42]]: ...
-
     def Method43(
         self,
         request: _dummy_pb2.ManyRequest43,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse43, _abc.Awaitable[_dummy_pb2.ManyResponse43]]: ...
-
     def Method44(
         self,
         request: _dummy_pb2.ManyRequest44,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse44, _abc.Awaitable[_dummy_pb2.ManyResponse44]]: ...
-
     def Method45(
         self,
         request: _dummy_pb2.ManyRequest45,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse45, _abc.Awaitable[_dummy_pb2.ManyResponse45]]: ...
-
     def Method46(
         self,
         request: _dummy_pb2.ManyRequest46,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse46, _abc.Awaitable[_dummy_pb2.ManyResponse46]]: ...
-
     def Method47(
         self,
         request: _dummy_pb2.ManyRequest47,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse47, _abc.Awaitable[_dummy_pb2.ManyResponse47]]: ...
-
     def Method48(
         self,
         request: _dummy_pb2.ManyRequest48,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse48, _abc.Awaitable[_dummy_pb2.ManyResponse48]]: ...
-
     def Method49(
         self,
         request: _dummy_pb2.ManyRequest49,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse49, _abc.Awaitable[_dummy_pb2.ManyResponse49]]: ...
-
     def Method50(
         self,
         request: _dummy_pb2.ManyRequest50,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse50, _abc.Awaitable[_dummy_pb2.ManyResponse50]]: ...
-
     def Method51(
         self,
         request: _dummy_pb2.ManyRequest51,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse51, _abc.Awaitable[_dummy_pb2.ManyResponse51]]: ...
-
     def Method52(
         self,
         request: _dummy_pb2.ManyRequest52,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse52, _abc.Awaitable[_dummy_pb2.ManyResponse52]]: ...
-
     def Method53(
         self,
         request: _dummy_pb2.ManyRequest53,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse53, _abc.Awaitable[_dummy_pb2.ManyResponse53]]: ...
-
     def Method54(
         self,
         request: _dummy_pb2.ManyRequest54,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse54, _abc.Awaitable[_dummy_pb2.ManyResponse54]]: ...
-
     def Method55(
         self,
         request: _dummy_pb2.ManyRequest55,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse55, _abc.Awaitable[_dummy_pb2.ManyResponse55]]: ...
-
     def Method56(
         self,
         request: _dummy_pb2.ManyRequest56,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse56, _abc.Awaitable[_dummy_pb2.ManyResponse56]]: ...
-
     def Method57(
         self,
         request: _dummy_pb2.ManyRequest57,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse57, _abc.Awaitable[_dummy_pb2.ManyResponse57]]: ...
-
     def Method58(
         self,
         request: _dummy_pb2.ManyRequest58,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse58, _abc.Awaitable[_dummy_pb2.ManyResponse58]]: ...
-
     def Method59(
         self,
         request: _dummy_pb2.ManyRequest59,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse59, _abc.Awaitable[_dummy_pb2.ManyResponse59]]: ...
-
     def Method60(
         self,
         request: _dummy_pb2.ManyRequest60,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse60, _abc.Awaitable[_dummy_pb2.ManyResponse60]]: ...
-
     def Method61(
         self,
         request: _dummy_pb2.ManyRequest61,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse61, _abc.Awaitable[_dummy_pb2.ManyResponse61]]: ...
-
     def Method62(
         self,
         request: _dummy_pb2.ManyRequest62,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse62, _abc.Awaitable[_dummy_pb2.ManyResponse62]]: ...
-
     def Method63(
         self,
         request: _dummy_pb2.ManyRequest63,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse63, _abc.Awaitable[_dummy_pb2.ManyResponse63]]: ...
-
     def Method64(
         self,
         request: _dummy_pb2.ManyRequest64,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse64, _abc.Awaitable[_dummy_pb2.ManyResponse64]]: ...
-
     def Method65(
         self,
         request: _dummy_pb2.ManyRequest65,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse65, _abc.Awaitable[_dummy_pb2.ManyResponse65]]: ...
-
     def Method66(
         self,
         request: _dummy_pb2.ManyRequest66,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse66, _abc.Awaitable[_dummy_pb2.ManyResponse66]]: ...
-
     def Method67(
         self,
         request: _dummy_pb2.ManyRequest67,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse67, _abc.Awaitable[_dummy_pb2.ManyResponse67]]: ...
-
     def Method68(
         self,
         request: _dummy_pb2.ManyRequest68,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse68, _abc.Awaitable[_dummy_pb2.ManyResponse68]]: ...
-
     def Method69(
         self,
         request: _dummy_pb2.ManyRequest69,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse69, _abc.Awaitable[_dummy_pb2.ManyResponse69]]: ...
-
     def Method70(
         self,
         request: _dummy_pb2.ManyRequest70,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse70, _abc.Awaitable[_dummy_pb2.ManyResponse70]]: ...
-
     def Method71(
         self,
         request: _dummy_pb2.ManyRequest71,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse71, _abc.Awaitable[_dummy_pb2.ManyResponse71]]: ...
-
     def Method72(
         self,
         request: _dummy_pb2.ManyRequest72,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse72, _abc.Awaitable[_dummy_pb2.ManyResponse72]]: ...
-
     def Method73(
         self,
         request: _dummy_pb2.ManyRequest73,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse73, _abc.Awaitable[_dummy_pb2.ManyResponse73]]: ...
-
     def Method74(
         self,
         request: _dummy_pb2.ManyRequest74,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse74, _abc.Awaitable[_dummy_pb2.ManyResponse74]]: ...
-
     def Method75(
         self,
         request: _dummy_pb2.ManyRequest75,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse75, _abc.Awaitable[_dummy_pb2.ManyResponse75]]: ...
-
     def Method76(
         self,
         request: _dummy_pb2.ManyRequest76,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse76, _abc.Awaitable[_dummy_pb2.ManyResponse76]]: ...
-
     def Method77(
         self,
         request: _dummy_pb2.ManyRequest77,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse77, _abc.Awaitable[_dummy_pb2.ManyResponse77]]: ...
-
     def Method78(
         self,
         request: _dummy_pb2.ManyRequest78,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse78, _abc.Awaitable[_dummy_pb2.ManyResponse78]]: ...
-
     def Method79(
         self,
         request: _dummy_pb2.ManyRequest79,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse79, _abc.Awaitable[_dummy_pb2.ManyResponse79]]: ...
-
     def Method80(
         self,
         request: _dummy_pb2.ManyRequest80,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse80, _abc.Awaitable[_dummy_pb2.ManyResponse80]]: ...
-
     def Method81(
         self,
         request: _dummy_pb2.ManyRequest81,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse81, _abc.Awaitable[_dummy_pb2.ManyResponse81]]: ...
-
     def Method82(
         self,
         request: _dummy_pb2.ManyRequest82,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse82, _abc.Awaitable[_dummy_pb2.ManyResponse82]]: ...
-
     def Method83(
         self,
         request: _dummy_pb2.ManyRequest83,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse83, _abc.Awaitable[_dummy_pb2.ManyResponse83]]: ...
-
     def Method84(
         self,
         request: _dummy_pb2.ManyRequest84,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse84, _abc.Awaitable[_dummy_pb2.ManyResponse84]]: ...
-
     def Method85(
         self,
         request: _dummy_pb2.ManyRequest85,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse85, _abc.Awaitable[_dummy_pb2.ManyResponse85]]: ...
-
     def Method86(
         self,
         request: _dummy_pb2.ManyRequest86,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse86, _abc.Awaitable[_dummy_pb2.ManyResponse86]]: ...
-
     def Method87(
         self,
         request: _dummy_pb2.ManyRequest87,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse87, _abc.Awaitable[_dummy_pb2.ManyResponse87]]: ...
-
     def Method88(
         self,
         request: _dummy_pb2.ManyRequest88,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse88, _abc.Awaitable[_dummy_pb2.ManyResponse88]]: ...
-
     def Method89(
         self,
         request: _dummy_pb2.ManyRequest89,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse89, _abc.Awaitable[_dummy_pb2.ManyResponse89]]: ...
-
     def Method90(
         self,
         request: _dummy_pb2.ManyRequest90,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse90, _abc.Awaitable[_dummy_pb2.ManyResponse90]]: ...
-
     def Method91(
         self,
         request: _dummy_pb2.ManyRequest91,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse91, _abc.Awaitable[_dummy_pb2.ManyResponse91]]: ...
-
     def Method92(
         self,
         request: _dummy_pb2.ManyRequest92,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse92, _abc.Awaitable[_dummy_pb2.ManyResponse92]]: ...
-
     def Method93(
         self,
         request: _dummy_pb2.ManyRequest93,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse93, _abc.Awaitable[_dummy_pb2.ManyResponse93]]: ...
-
     def Method94(
         self,
         request: _dummy_pb2.ManyRequest94,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse94, _abc.Awaitable[_dummy_pb2.ManyResponse94]]: ...
-
     def Method95(
         self,
         request: _dummy_pb2.ManyRequest95,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse95, _abc.Awaitable[_dummy_pb2.ManyResponse95]]: ...
-
     def Method96(
         self,
         request: _dummy_pb2.ManyRequest96,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse96, _abc.Awaitable[_dummy_pb2.ManyResponse96]]: ...
-
     def Method97(
         self,
         request: _dummy_pb2.ManyRequest97,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse97, _abc.Awaitable[_dummy_pb2.ManyResponse97]]: ...
-
     def Method98(
         self,
         request: _dummy_pb2.ManyRequest98,
         context: _ServicerContext,
     ) -> _typing.Union[_dummy_pb2.ManyResponse98, _abc.Awaitable[_dummy_pb2.ManyResponse98]]: ...
-
     def Method99(
         self,
         request: _dummy_pb2.ManyRequest99,
@@ -954,7 +855,6 @@ class EmptyServiceStub:
 class EmptyServiceAsyncStub(EmptyServiceStub):
     def __init__(self, channel: _aio.Channel) -> None: ...
 
-class EmptyServiceServicer:
-    ...
+class EmptyServiceServicer: ...
 
 def add_EmptyServiceServicer_to_server(servicer: EmptyServiceServicer, server: _typing.Union[_grpc.Server, _aio.Server]) -> None: ...

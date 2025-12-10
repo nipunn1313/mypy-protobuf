@@ -89,42 +89,42 @@ test_negative/negative.py:170: error: Incompatible types in assignment (expressi
 test_negative/negative.py:171: error: Invalid index type "int" for "ScalarMap[UserId, Email]"; expected type "UserId"  [index]
 test_negative/negative.py:171: error: Incompatible types in assignment (expression has type "str", target has type "Email")  [assignment]
 test_negative/negative.py:172: error: Incompatible types in assignment (expression has type "str", target has type "Email")  [assignment]
-test_negative/negative.py:173: error: Invalid index type "int" for "ScalarMap[UserId, Email]"; expected type "UserId"  [index]
-test_negative/negative.py:175: error: Argument "user_id" to "Simple1" has incompatible type "int"; expected "Optional[UserId]"  [arg-type]
-test_negative/negative.py:176: error: Argument "email" to "Simple1" has incompatible type "str"; expected "Optional[Email]"  [arg-type]
-test_negative/negative.py:177: error: Dict entry 0 has incompatible type "int": "str"; expected "UserId": "Email"  [dict-item]
-test_negative/negative.py:181: error: Module "testproto.reexport_pb2" has no attribute "Inner"  [attr-defined]
-test_negative/negative.py:185: error: Argument "a_string" to "OuterMessage3" has incompatible type "None"; expected "str"  [arg-type]
-test_negative/negative.py:190: error: Property "a_repeated_string" defined in "Simple1" is read-only  [misc]
-test_negative/negative.py:191: error: Property "rep_inner_enum" defined in "Simple1" is read-only  [misc]
-test_negative/negative.py:196: error: "_r_None" has no attribute "invalid"; maybe "valid"?  [attr-defined]
-test_negative/negative.py:200: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
-test_negative/negative.py:204: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
-test_negative/negative.py:204: note: Possible overload variants:
-test_negative/negative.py:204: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
-test_negative/negative.py:204: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-test_negative/negative.py:211: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:212: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
-test_negative/negative.py:217: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:219: error: "_CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
-test_negative/negative.py:226: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative.py:228: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
-test_negative/negative.py:228: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative.py:231: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative.py:235: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:272: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
-test_negative/negative.py:274: error: Argument 1 of "UnaryUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative.py:274: note: This violates the Liskov substitution principle
-test_negative/negative.py:274: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:280: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Union[Iterator[DummyReply], AsyncIterator[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
-test_negative/negative.py:282: error: Argument 1 of "UnaryStream" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative.py:282: note: This violates the Liskov substitution principle
-test_negative/negative.py:282: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:289: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
-test_negative/negative.py:291: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
-test_negative/negative.py:291: note: This violates the Liskov substitution principle
-test_negative/negative.py:291: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:320: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:173: error: Incompatible types in assignment (expression has type "str", target has type "Email")  [assignment]
+test_negative/negative.py:174: error: Invalid index type "int" for "ScalarMap[UserId, Email]"; expected type "UserId"  [index]
+test_negative/negative.py:176: error: Argument "user_id" to "Simple1" has incompatible type "int"; expected "Optional[UserId]"  [arg-type]
+test_negative/negative.py:177: error: Argument "email" to "Simple1" has incompatible type "str"; expected "Optional[Email]"  [arg-type]
+test_negative/negative.py:178: error: Dict entry 0 has incompatible type "int": "str"; expected "UserId": "Email"  [dict-item]
+test_negative/negative.py:182: error: Module "testproto.reexport_pb2" has no attribute "Inner"  [attr-defined]
+test_negative/negative.py:186: error: Argument "a_string" to "OuterMessage3" has incompatible type "None"; expected "str"  [arg-type]
+test_negative/negative.py:191: error: Property "a_repeated_string" defined in "Simple1" is read-only  [misc]
+test_negative/negative.py:192: error: Property "rep_inner_enum" defined in "Simple1" is read-only  [misc]
+test_negative/negative.py:197: error: "_r_None" has no attribute "invalid"; maybe "valid"?  [attr-defined]
+test_negative/negative.py:201: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
+test_negative/negative.py:205: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py:205: note: Possible overload variants:
+test_negative/negative.py:205: note:     def __new__(cls, channel: Channel) -> _DummyServiceStub
+test_negative/negative.py:205: note:     def __new__(cls, channel: Channel) -> _DummyServiceStubAsync
+test_negative/negative.py:212: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative.py:213: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative.py:218: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative.py:220: error: "_CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
+test_negative/negative.py:227: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative.py:229: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative.py:229: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative.py:232: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative.py:236: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative.py:273: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py:275: error: Argument 1 of "UnaryUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py:275: note: This violates the Liskov substitution principle
+test_negative/negative.py:275: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:281: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Union[Iterator[DummyReply], AsyncIterator[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py:283: error: Argument 1 of "UnaryStream" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py:283: note: This violates the Liskov substitution principle
+test_negative/negative.py:283: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:290: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py:292: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
+test_negative/negative.py:292: note: This violates the Liskov substitution principle
+test_negative/negative.py:292: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative.py:332: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
 test_negative/negative.py:334: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
 test_negative/negative.py:345: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
