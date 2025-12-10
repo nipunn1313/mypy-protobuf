@@ -266,3 +266,7 @@ testproto.grpc.dummy_pb2_grpc.DummyServiceStub.*
 testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceStub.*
 testproto.grpc.import_pb2_grpc.SimpleServiceStub.*
 testproto.grpc.dummy_pb2_grpc.EmptyServiceStub.__init__
+
+# Because we generate message fields as properties when deprecated they do not exist at runtime
+testproto.grpc.dummy_pb2.DeprecatedRequest.old_field
+testproto.test_pb2.DeprecatedMessage.deprecated_field

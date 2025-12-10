@@ -103,6 +103,7 @@ See [Changelog](CHANGELOG.md) for full listing
 * There are differences in how `mypy-protobuf` and `pyi_out` generate enums. See [this issue](https://github.com/protocolbuffers/protobuf/issues/8175) for details
 * Type aliases exported for `HasField`, `WhichOneof` and `ClearField` arguments
 * Parses comments as docstrings
+* `mypy-protobuf` marks enums, enum values, messages, message fields, services, and methods with `@warnings.deprecated` if the deprecation option is set to true.
 
 #### Examples
 

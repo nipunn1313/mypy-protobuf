@@ -286,6 +286,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             if [[ "$PY_VER_MYPY" == "3.13.9" ]] || [[ "$PY_VER_MYPY" == "3.14.0" ]]; then
                 echo "Skipping stubtest for Python $PY_VER_MYPY until positional argument decision is made"
             else
+                echo "Running stubtest for Python $PY_VER_MYPY with API implementation: $API_IMPL"
                 PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
             fi
         fi

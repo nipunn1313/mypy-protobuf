@@ -100,48 +100,50 @@ test_negative/negative.py:191: error: Property "a_repeated_string" defined in "S
 test_negative/negative.py:192: error: Property "rep_inner_enum" defined in "Simple1" is read-only  [misc]
 test_negative/negative.py:197: error: "_r_None" has no attribute "invalid"; maybe "valid"?  [attr-defined]
 test_negative/negative.py:201: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
-test_negative/negative.py:205: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
-test_negative/negative.py:205: note: Possible overload variants:
-test_negative/negative.py:205: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
-test_negative/negative.py:205: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-test_negative/negative.py:212: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:213: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
-test_negative/negative.py:218: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:220: error: "_CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
-test_negative/negative.py:227: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative.py:229: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative.py:205: error: function testproto.test_pb2.DeprecatedMessage.deprecated_field is deprecated: This field has been marked as deprecated using proto field options.  [deprecated]
+test_negative/negative.py:207: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py:207: note: Possible overload variants:
+test_negative/negative.py:207: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:207: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+test_negative/negative.py:214: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative.py:215: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative.py:220: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative.py:222: error: "_CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
 test_negative/negative.py:229: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative.py:232: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
-test_negative/negative.py:236: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py:273: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "DummyReply | Awaitable[DummyReply]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
-test_negative/negative.py:275: error: Argument 1 of "UnaryUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative.py:275: note: This violates the Liskov substitution principle
-test_negative/negative.py:275: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:281: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Iterator[DummyReply] | AsyncIterator[DummyReply]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
-test_negative/negative.py:283: error: Argument 1 of "UnaryStream" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
-test_negative/negative.py:283: note: This violates the Liskov substitution principle
-test_negative/negative.py:283: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:290: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "DummyReply | Awaitable[DummyReply]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
-test_negative/negative.py:292: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
-test_negative/negative.py:292: note: This violates the Liskov substitution principle
-test_negative/negative.py:292: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:319: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethod is deprecated: This method has been marked as deprecated using proto method options.  [deprecated]
-test_negative/negative.py:320: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethodNotDeprecatedRequest is deprecated: Method is deprecated, but request message is not  [deprecated]
-test_negative/negative.py:321: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
-test_negative/negative.py:324: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_ONE is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
-test_negative/negative.py:325: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_TWO is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
-test_negative/negative.py:335: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
-test_negative/negative.py:337: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:348: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
-test_negative/negative.py:355: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:362: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:372: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
-test_negative/negative.py:375: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
-test_negative/negative.py:375: note: Possible overload variants:
-test_negative/negative.py:375: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
-test_negative/negative.py:375: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-test_negative/negative.py:376: error: No overload variant of "DummyServiceStub" matches argument type "str"  [call-overload]
-test_negative/negative.py:376: note: Possible overload variants:
-test_negative/negative.py:376: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
-test_negative/negative.py:376: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 109 errors in 4 files (checked 4 source files)
+test_negative/negative.py:231: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
+test_negative/negative.py:231: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative.py:234: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
+test_negative/negative.py:238: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
+test_negative/negative.py:275: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "DummyReply | Awaitable[DummyReply]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py:277: error: Argument 1 of "UnaryUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py:277: note: This violates the Liskov substitution principle
+test_negative/negative.py:277: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:283: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Iterator[DummyReply] | AsyncIterator[DummyReply]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py:285: error: Argument 1 of "UnaryStream" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py:285: note: This violates the Liskov substitution principle
+test_negative/negative.py:285: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:292: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "DummyReply | Awaitable[DummyReply]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py:294: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
+test_negative/negative.py:294: note: This violates the Liskov substitution principle
+test_negative/negative.py:294: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py:321: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethod is deprecated: This method has been marked as deprecated using proto method options.  [deprecated]
+test_negative/negative.py:322: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethodNotDeprecatedRequest is deprecated: Method is deprecated, but request message is not  [deprecated]
+test_negative/negative.py:323: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:326: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_ONE is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
+test_negative/negative.py:327: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_TWO is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
+test_negative/negative.py:337: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
+test_negative/negative.py:339: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:350: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
+test_negative/negative.py:357: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:364: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:365: error: Property "message_field" defined in "Editions2024Test" is read-only  [misc]
+test_negative/negative.py:376: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
+test_negative/negative.py:379: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py:379: note: Possible overload variants:
+test_negative/negative.py:379: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:379: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+test_negative/negative.py:380: error: No overload variant of "DummyServiceStub" matches argument type "str"  [call-overload]
+test_negative/negative.py:380: note: Possible overload variants:
+test_negative/negative.py:380: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:380: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+Found 111 errors in 4 files (checked 4 source files)

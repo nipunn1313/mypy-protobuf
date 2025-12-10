@@ -482,7 +482,7 @@ class PkgWriter(object):
         value_type: str,
         scl_prefix: SourceCodeLocation,
         *,
-        as_properties: bool = False,
+        class_attributes: bool = False,
     ) -> None:
         for i, val in values:
             if val.name in PYTHON_RESERVED:
@@ -490,17 +490,22 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
             # Class level
-            if as_properties:
-                self._write_line("@property")
+            if class_attributes:
                 if val.options.deprecated:
+                    self._write_line("@property")
                     self._write_deprecation_warning(
                         scl + [d.EnumValueDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
                         "This enum value has been marked as deprecated using proto enum value options.",
                     )
-                self._write_line(
-                    f"def {val.name}(self) -> {value_type}: {'' if self._has_comments(scl) else '...'}  # {val.number}",
-                )
-                with self._indent():
+                    self._write_line(
+                        f"def {val.name}(self) -> {value_type}: {'' if self._has_comments(scl) else '...'}  # {val.number}",
+                    )
+                    with self._indent():
+                        self._write_comments(scl)
+                else:
+                    self._write_line(
+                        f"{val.name}: {value_type}  # {val.number}",
+                    )
                     self._write_comments(scl)
             # Module level
             else:
@@ -554,7 +559,7 @@ class PkgWriter(object):
                     [(i, v) for i, v in enumerate(enum_proto.value) if v.name not in PROTO_ENUM_RESERVED],
                     value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
-                    as_properties=True,
+                    class_attributes=True,
                 )
             wl("")
 
@@ -643,9 +648,34 @@ class PkgWriter(object):
                         continue
                     field_type = self.python_type(field)
                     if is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED:
-                        # Scalar non repeated fields are r/w
-                        wl(f"{field.name}: {field_type}")
-                        self._write_comments(scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx])
+                        # Scalar non repeated fields are r/w, generate getter and setter if deprecated
+                        scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
+                        if field.options.deprecated:
+                            wl("@property")
+                            self._write_deprecation_warning(
+                                scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER],
+                                "This field has been marked as deprecated using proto field options.",
+                            )
+                            body = " ..." if not self._has_comments(scl_field) else ""
+                            wl(f"def {field.name}(self) -> {field_type}:{body}")
+                            if self._has_comments(scl_field):
+                                with self._indent():
+                                    self._write_comments(scl_field)
+                                wl("")
+                            wl(f"@{field.name}.setter")
+                            self._write_deprecation_warning(
+                                scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER],
+                                "This field has been marked as deprecated using proto field options.",
+                            )
+                            body = " ..." if not self._has_comments(scl_field) else ""
+                            wl(f"def {field.name}(self, value: {field_type}) -> None:{body}")
+                            if self._has_comments(scl_field):
+                                with self._indent():
+                                    self._write_comments(scl_field)
+                                wl("")
+                        else:
+                            wl(f"{field.name}: {field_type}")
+                            self._write_comments(scl_field)
 
                 for idx, field in enumerate(desc.field):
                     if field.name in PYTHON_RESERVED:
@@ -655,6 +685,11 @@ class PkgWriter(object):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         wl(self._property())
+                        if field.options.deprecated:
+                            self._write_deprecation_warning(
+                                scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER],
+                                "This field has been marked as deprecated using proto field options.",
+                            )
                         body = " ..." if not self._has_comments(scl_field) else ""
                         wl(f"def {field.name}(self) -> {field_type}:{body}")
                         if self._has_comments(scl_field):

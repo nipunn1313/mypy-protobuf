@@ -184,6 +184,7 @@ message DeprecatedMessage {
     option deprecated = true;
 
     optional string a_string = 1;
+    optional string deprecated_field = 2 [deprecated = true];
 }
 
 message DeprecatedMessageBadComment {
