@@ -490,24 +490,18 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
             # Class level
-            if class_attributes:
-                if val.options.deprecated:
-                    self._write_line("@property")
-                    self._write_deprecation_warning(
-                        scl + [d.EnumValueDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
-                        "This enum value has been marked as deprecated using proto enum value options.",
-                    )
-                    self._write_line(
-                        f"def {val.name}(self) -> {value_type}: {'' if self._has_comments(scl) else '...'}  # {val.number}",
-                    )
-                    with self._indent():
-                        self._write_comments(scl)
-                else:
-                    self._write_line(
-                        f"{val.name}: {value_type}  # {val.number}",
-                    )
+            if class_attributes and val.options.deprecated:
+                self._write_line("@property")
+                self._write_deprecation_warning(
+                    scl + [d.EnumValueDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
+                    "This enum value has been marked as deprecated using proto enum value options.",
+                )
+                self._write_line(
+                    f"def {val.name}(self) -> {value_type}: {'' if self._has_comments(scl) else '...'}  # {val.number}",
+                )
+                with self._indent():
                     self._write_comments(scl)
-            # Module level
+            # Module level or non-deprecated class level
             else:
                 self._write_line(
                     f"{val.name}: {value_type}  # {val.number}",
@@ -657,8 +651,7 @@ class PkgWriter(object):
                                 deprecation_scl_field,
                                 "This field has been marked as deprecated using proto field options.",
                             )
-                            body = " ..." if not self._has_comments(scl_field) else ""
-                            wl(f"def {field.name}(self) -> {field_type}:{body}")
+                            wl(f"def {field.name}(self) -> {field_type}:{' ...' if not self._has_comments(scl_field) else ''}")
                             if self._has_comments(scl_field):
                                 with self._indent():
                                     self._write_comments(scl_field)
@@ -668,8 +661,7 @@ class PkgWriter(object):
                                 deprecation_scl_field,
                                 "This field has been marked as deprecated using proto field options.",
                             )
-                            body = " ..." if not self._has_comments(scl_field) else ""
-                            wl(f"def {field.name}(self, value: {field_type}) -> None:{body}")
+                            wl(f"def {field.name}(self, value: {field_type}) -> None:{' ...' if not self._has_comments(scl_field) else ''}")
                             if self._has_comments(scl_field):
                                 with self._indent():
                                     self._write_comments(scl_field)
@@ -691,8 +683,7 @@ class PkgWriter(object):
                                 scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER],
                                 "This field has been marked as deprecated using proto field options.",
                             )
-                        body = " ..." if not self._has_comments(scl_field) else ""
-                        wl(f"def {field.name}(self) -> {field_type}:{body}")
+                        wl(f"def {field.name}(self) -> {field_type}:{' ...' if not self._has_comments(scl_field) else ''}")
                         if self._has_comments(scl_field):
                             with self._indent():
                                 self._write_comments(scl_field)
