@@ -36,10 +36,12 @@ class _OuterEnum:
 
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    FOO: _OuterEnum.ValueType  # 1
-    """FOO"""
-    BAR: _OuterEnum.ValueType  # 2
-    """BAR"""
+    @property
+    def FOO(self) -> _OuterEnum.ValueType:   # 1
+        """FOO"""
+    @property
+    def BAR(self) -> _OuterEnum.ValueType:   # 2
+        """BAR"""
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     """Outer Enum"""
@@ -77,14 +79,23 @@ class _DeprecatedEnum:
 
 class _DeprecatedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DeprecatedEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    DEPRECATED_ONE: _DeprecatedEnum.ValueType  # 1
-    DEPRECATED_TWO: _DeprecatedEnum.ValueType  # 2
+    @property
+    @deprecated("""This enum value has been marked as deprecated using proto enum value options.""")
+    def DEPRECATED_ONE(self) -> _DeprecatedEnum.ValueType:   # 1
+        """Trailing comment for enum value"""
+    @property
+    @deprecated("""This enum value has been marked as deprecated using proto enum value options.""")
+    def DEPRECATED_TWO(self) -> _DeprecatedEnum.ValueType: ...  # 2
+    @property
+    def NOT_DEPRECATED(self) -> _DeprecatedEnum.ValueType: ...  # 3
 
 @deprecated("""This enum is deprecated\n2 lines of comments\n"Quotes in comments"\nand 'single quotes'\nTrailing comment""")
 class DeprecatedEnum(_DeprecatedEnum, metaclass=_DeprecatedEnumEnumTypeWrapper): ...
 
 DEPRECATED_ONE: DeprecatedEnum.ValueType  # 1
+"""Trailing comment for enum value"""
 DEPRECATED_TWO: DeprecatedEnum.ValueType  # 2
+NOT_DEPRECATED: DeprecatedEnum.ValueType  # 3
 Global___DeprecatedEnum: typing_extensions.TypeAlias = DeprecatedEnum
 
 @typing.final
@@ -99,10 +110,12 @@ class Simple1(google.protobuf.message.Message):
 
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        INNER1: Simple1._InnerEnum.ValueType  # 1
-        """INNER1"""
-        INNER2: Simple1._InnerEnum.ValueType  # 2
-        """INNER2"""
+        @property
+        def INNER1(self) -> Simple1._InnerEnum.ValueType:   # 1
+            """INNER1"""
+        @property
+        def INNER2(self) -> Simple1._InnerEnum.ValueType:   # 2
+            """INNER2"""
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         """Inner Enum"""
@@ -320,7 +333,8 @@ class PythonReservedKeywords(google.protobuf.message.Message):
 
     class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
+        @property
+        def valid_in_finally(self) -> PythonReservedKeywords._finally.ValueType: ...  # 2
 
     class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper): ...
     valid_in_finally: PythonReservedKeywords._r_finally.ValueType  # 2

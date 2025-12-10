@@ -38,6 +38,7 @@ service DeprecatedService {
   }
   // DeprecatedMethodNotDeprecatedRequest
   rpc DeprecatedMethodNotDeprecatedRequest(DummyRequest) returns (DummyReply) {
+    // Method is deprecated, but request message is not
     option deprecated = true;
   }
 }

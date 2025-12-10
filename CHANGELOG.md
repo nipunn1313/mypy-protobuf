@@ -12,6 +12,8 @@
 - Add `_WhichOneofArgType_<oneof_name>` and `_WhichOneofReturnType_<oneof_name>` type aliases
 - Use `__new__` overloads for async stubs instead of `TypeVar` based `__init__` overloads.
   - https://github.com/nipunn1313/mypy-protobuf/issues/707
+- Export stub methods as properties instead of attributes. This allows for deprecation
+- Export enum fields as properties on class level (not module level) enums. This allows for deprecation
 
 ## 3.7.0
 

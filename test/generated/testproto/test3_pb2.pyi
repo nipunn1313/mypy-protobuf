@@ -26,9 +26,12 @@ class _OuterEnum:
 
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    UNKNOWN: _OuterEnum.ValueType  # 0
-    FOO3: _OuterEnum.ValueType  # 1
-    BAR3: _OuterEnum.ValueType  # 2
+    @property
+    def UNKNOWN(self) -> _OuterEnum.ValueType: ...  # 0
+    @property
+    def FOO3(self) -> _OuterEnum.ValueType: ...  # 1
+    @property
+    def BAR3(self) -> _OuterEnum.ValueType: ...  # 2
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper): ...
 
@@ -63,8 +66,10 @@ class SimpleProto3(google.protobuf.message.Message):
 
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SimpleProto3._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        INNER1: SimpleProto3._InnerEnum.ValueType  # 0
-        INNER2: SimpleProto3._InnerEnum.ValueType  # 1
+        @property
+        def INNER1(self) -> SimpleProto3._InnerEnum.ValueType: ...  # 0
+        @property
+        def INNER2(self) -> SimpleProto3._InnerEnum.ValueType: ...  # 1
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper): ...
     INNER1: SimpleProto3.InnerEnum.ValueType  # 0

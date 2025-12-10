@@ -124,7 +124,11 @@ test_negative/negative.py: error: Return type "Iterator[DummyReply]" of "StreamU
 test_negative/negative.py: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
 test_negative/negative.py: note: This violates the Liskov substitution principle
 test_negative/negative.py: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+test_negative/negative.py: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethod is deprecated: This method has been marked as deprecated using proto method options.  [deprecated]
+test_negative/negative.py: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethodNotDeprecatedRequest is deprecated: Method is deprecated, but request message is not  [deprecated]
 test_negative/negative.py: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_ONE is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
+test_negative/negative.py: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_TWO is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
 test_negative/negative.py: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
 test_negative/negative.py: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
 test_negative/negative.py: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
@@ -139,4 +143,4 @@ test_negative/negative.py: error: No overload variant of "DummyServiceStub" matc
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 105 errors in 4 files (checked 4 source files)
+Found 109 errors in 4 files (checked 4 source files)

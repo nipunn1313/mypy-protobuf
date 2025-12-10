@@ -28,22 +28,28 @@ class SimpleServiceStub:
     def __new__(cls, channel: grpc.Channel) -> SimpleServiceStub: ...
     @typing.overload
     def __new__(cls, channel: grpc.aio.Channel) -> SimpleServiceAsyncStub: ...
-    UnaryUnary: grpc.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]
-    """UnaryUnary"""
-    UnaryStream: grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
-    """UnaryStream"""
-    NoComment: grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
+    @property
+    def UnaryUnary(self) -> grpc.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]:
+        """UnaryUnary"""
+    @property
+    def UnaryStream(self) -> grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]:
+        """UnaryStream"""
+    @property
+    def NoComment(self) -> grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]: ...
 
 @typing.type_check_only
 class SimpleServiceAsyncStub(SimpleServiceStub):
     """SimpleService"""
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
-    UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]  # type: ignore[assignment]
-    """UnaryUnary"""
-    UnaryStream: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]  # type: ignore[assignment]
-    """UnaryStream"""
-    NoComment: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]  # type: ignore[assignment]
+    @property
+    def UnaryUnary(self) -> grpc.aio.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]:  # type: ignore[override]
+        """UnaryUnary"""
+    @property
+    def UnaryStream(self) -> grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]:  # type: ignore[override]
+        """UnaryStream"""
+    @property
+    def NoComment(self) -> grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]: ...  # type: ignore[override]
 
 class SimpleServiceServicer:
     """SimpleService"""
