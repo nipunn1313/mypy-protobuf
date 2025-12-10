@@ -77,14 +77,22 @@ class _DeprecatedEnum:
 
 class _DeprecatedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DeprecatedEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    DEPRECATED_ONE: _DeprecatedEnum.ValueType  # 1
-    DEPRECATED_TWO: _DeprecatedEnum.ValueType  # 2
+    @property
+    @deprecated("""This enum value has been marked as deprecated using proto enum value options.""")
+    def DEPRECATED_ONE(self) -> _DeprecatedEnum.ValueType:   # 1
+        """Trailing comment for enum value"""
+    @property
+    @deprecated("""This enum value has been marked as deprecated using proto enum value options.""")
+    def DEPRECATED_TWO(self) -> _DeprecatedEnum.ValueType: ...  # 2
+    NOT_DEPRECATED: _DeprecatedEnum.ValueType  # 3
 
 @deprecated("""This enum is deprecated\n2 lines of comments\n"Quotes in comments"\nand 'single quotes'\nTrailing comment""")
 class DeprecatedEnum(_DeprecatedEnum, metaclass=_DeprecatedEnumEnumTypeWrapper): ...
 
 DEPRECATED_ONE: DeprecatedEnum.ValueType  # 1
+"""Trailing comment for enum value"""
 DEPRECATED_TWO: DeprecatedEnum.ValueType  # 2
+NOT_DEPRECATED: DeprecatedEnum.ValueType  # 3
 Global___DeprecatedEnum: typing_extensions.TypeAlias = DeprecatedEnum
 
 @typing.final
@@ -432,15 +440,35 @@ class DeprecatedMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     A_STRING_FIELD_NUMBER: builtins.int
+    DEPRECATED_FIELD_FIELD_NUMBER: builtins.int
+    DEPRECATED_FIELD_WITH_COMMENT_FIELD_NUMBER: builtins.int
     a_string: builtins.str
+    @property
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self) -> builtins.str: ...
+    @deprecated_field.setter
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self, value: builtins.str) -> None: ...
+    @property
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field_with_comment(self) -> builtins.str:
+        """This field is deprecated with comment"""
+
+    @deprecated_field_with_comment.setter
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field_with_comment(self, value: builtins.str) -> None:
+        """This field is deprecated with comment"""
+
     def __init__(
         self,
         *,
         a_string: builtins.str | None = ...,
+        deprecated_field: builtins.str | None = ...,
+        deprecated_field_with_comment: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
+    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field", "deprecated_field_with_comment", b"deprecated_field_with_comment"]
     def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field", "deprecated_field_with_comment", b"deprecated_field_with_comment"]
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___DeprecatedMessage: typing_extensions.TypeAlias = DeprecatedMessage
