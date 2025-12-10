@@ -1,30 +1,28 @@
-test/generated/testproto/grpc/dummy_pb2.pyi:71: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:211: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:215: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:219: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:245: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:257: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:274: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:276: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:292: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test/generated/testproto/grpc/dummy_pb2_grpc.pyi:306: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
-test/generated/testproto/test_pb2.pyi:88: note: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
+test/generated/testproto/grpc/dummy_pb2.pyi:71: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:103: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:104: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:111: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:115: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:115: note: Error code "deprecated" not covered by "type: ignore" comment
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:127: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi:141: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi:88: error: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
 2 lines of comments
 "Quotes in comments"
 and 'single quotes'
 Trailing comment  [deprecated]
-test/generated/testproto/test_pb2.pyi:446: note: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
-test/generated/testproto/test_pb2.pyi:465: note: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test_negative/negative.py:15: note: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
-test_negative/negative.py:20: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
-test_negative/negative.py:20: note: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
-test_negative/negative.py:20: note: function testproto.grpc.dummy_pb2_grpc.add_DeprecatedServiceServicer_to_server is deprecated: This service is deprecated  [deprecated]
-test_negative/negative.py:30: note: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
+test/generated/testproto/test_pb2.pyi:446: error: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi:465: error: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test_negative/negative.py:16: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test_negative/negative.py:21: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:21: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:21: error: function testproto.grpc.dummy_pb2_grpc.add_DeprecatedServiceServicer_to_server is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:30: error: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
 2 lines of comments
 "Quotes in comments"
 and 'single quotes'
 Trailing comment  [deprecated]
-test_negative/negative.py:31: note: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
+test_negative/negative.py:31: error: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
 test_negative/negative.py:45: error: "Simple1" has no attribute "SerializeToStringg"  [attr-defined]
 test_negative/negative.py:48: error: Argument 1 to "ParseFromString" of "Message" has incompatible type "Simple1"; expected "bytes"  [arg-type]
 test_negative/negative.py:51: error: Argument 1 to "CopyFrom" of "Message" has incompatible type "bytes"; expected "Simple1"  [arg-type]
@@ -103,7 +101,8 @@ test_negative/negative.py:196: error: "_r_None" has no attribute "invalid"; mayb
 test_negative/negative.py:200: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
 test_negative/negative.py:204: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
 test_negative/negative.py:204: note: Possible overload variants:
-test_negative/negative.py:204: note:     def [_DummyServiceUnaryUnaryType: (UnaryUnaryMultiCallable[DummyRequest, DummyReply], UnaryUnaryMultiCallable[DummyRequest, DummyReply]), _DummyServiceUnaryStreamType: (UnaryStreamMultiCallable[DummyRequest, DummyReply], UnaryStreamMultiCallable[DummyRequest, DummyReply]), _DummyServiceStreamUnaryType: (StreamUnaryMultiCallable[DummyRequest, DummyReply], StreamUnaryMultiCallable[DummyRequest, DummyReply]), _DummyServiceStreamStreamType: (StreamStreamMultiCallable[DummyRequest, DummyReply], StreamStreamMultiCallable[DummyRequest, DummyReply])] __init__(self, channel: Channel) -> DummyServiceStub[UnaryUnaryMultiCallable[DummyRequest, DummyReply], UnaryStreamMultiCallable[DummyRequest, DummyReply], StreamUnaryMultiCallable[DummyRequest, DummyReply], StreamStreamMultiCallable[DummyRequest, DummyReply]]
+test_negative/negative.py:204: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:204: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
 test_negative/negative.py:211: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
 test_negative/negative.py:212: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
 test_negative/negative.py:217: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
@@ -125,10 +124,19 @@ test_negative/negative.py:289: error: Return type "Iterator[DummyReply]" of "Str
 test_negative/negative.py:291: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
 test_negative/negative.py:291: note: This violates the Liskov substitution principle
 test_negative/negative.py:291: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:331: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
-test_negative/negative.py:333: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:344: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
-test_negative/negative.py:351: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:358: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:368: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
-Found 86 errors in 1 file (checked 4 source files)
+test_negative/negative.py:320: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:332: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
+test_negative/negative.py:334: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:345: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
+test_negative/negative.py:352: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:359: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:369: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
+test_negative/negative.py:372: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py:372: note: Possible overload variants:
+test_negative/negative.py:372: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:372: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+test_negative/negative.py:373: error: No overload variant of "DummyServiceStub" matches argument type "str"  [call-overload]
+test_negative/negative.py:373: note: Possible overload variants:
+test_negative/negative.py:373: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:373: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+Found 105 errors in 4 files (checked 4 source files)

@@ -12,13 +12,13 @@ import grpc
 import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
 from testproto.edition2024_pb2 import Editions2024Test
+from testproto.grpc import dummy_pb2_grpc
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
     DummyReply,
     DummyRequest,
 )
 from testproto.grpc.dummy_pb2_grpc import (  # E:3.8
-    DeprecatedServiceAsyncStub,
     DeprecatedServiceServicer,
     DeprecatedServiceStub,
     DummyServiceServicer,
@@ -316,8 +316,9 @@ deprecated_servicer = DeprecatedServicer()
 add_DeprecatedServiceServicer_to_server(deprecated_servicer, server)
 stub2 = DeprecatedServiceStub(channel)
 stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))
-stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Not deprecating methods at this time
-async_stub2 = DeprecatedServiceAsyncStub(grpc.aio.insecure_channel(""))  # Not deprecating async stub at this time
+stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Cannot deprecate methods at this time
+async_stub2: "dummy_pb2_grpc.DeprecatedServiceAsyncStub"  # E:3.8
+async_stub2 = DeprecatedServiceStub(grpc.aio.insecure_channel(""))
 
 de = DeprecatedEnum.DEPRECATED_ONE
 
@@ -366,3 +367,7 @@ def test_whichoneof_alias(
 
 
 test_whichoneof_alias(SimpleProto3(), "not_a_oneof")  # E:3.8
+
+# Make sure new overloads for stubs are working
+dummy_pb2_grpc.DummyServiceStub()  # E:3.8
+dummy_pb2_grpc.DummyServiceStub("notachannel")  # E:3.8

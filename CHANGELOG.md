@@ -10,6 +10,8 @@
 - Switch to types-grpcio instead of no longer maintained grpc-stubs
 - Add `_HasFieldArgType` and `_ClearFieldArgType` aliases to allow for typing field manipulation functions
 - Add `_WhichOneofArgType_<oneof_name>` and `_WhichOneofReturnType_<oneof_name>` type aliases
+- Use `__new__` overloads for async stubs instead of `TypeVar` based `__init__` overloads.
+  - https://github.com/nipunn1313/mypy-protobuf/issues/707
 
 ## 3.7.0
 
