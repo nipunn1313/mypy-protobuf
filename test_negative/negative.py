@@ -313,6 +313,13 @@ class DeprecatedServicer(DeprecatedServiceServicer):
     ) -> DummyReply:
         return DummyReply()
 
+    def DeprecatedMethodNoComments(
+        self,
+        request: DeprecatedRequest,
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        return DummyReply()
+
 
 server = grpc.server(thread_pool=concurrent.futures.ThreadPoolExecutor())
 deprecated_servicer = DeprecatedServicer()

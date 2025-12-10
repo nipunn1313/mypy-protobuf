@@ -1,9 +1,13 @@
 test/generated/testproto/grpc/dummy_pb2.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: Error code "deprecated" not covered by "type: ignore" comment
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: note: Error code "deprecated" not covered by "type: ignore" comment
+test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
 test/generated/testproto/test_pb2.pyi: error: class testproto.test_pb2.DeprecatedEnum is deprecated: This enum is deprecated
@@ -145,4 +149,4 @@ test_negative/negative.py: error: No overload variant of "DummyServiceStub" matc
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 111 errors in 4 files (checked 4 source files)
+Found 114 errors in 4 files (checked 4 source files)

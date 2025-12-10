@@ -41,6 +41,9 @@ service DeprecatedService {
     // Method is deprecated, but request message is not
     option deprecated = true;
   }
+  rpc DeprecatedMethodNoComments(DeprecatedRequest) returns (DummyReply) {
+    option deprecated = true;
+  }
 }
 
 message ManyRequest1 {}
