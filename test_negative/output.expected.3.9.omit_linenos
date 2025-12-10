@@ -107,22 +107,22 @@ test_negative/negative.py: note:     def [_DummyServiceUnaryUnaryType: (UnaryUna
 test_negative/negative.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
 test_negative/negative.py: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
 test_negative/negative.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py: error: "CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
+test_negative/negative.py: error: "_CallIterator[DummyReply]" has no attribute "value"  [attr-defined]
 test_negative/negative.py: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative.py: error: "DummyReply" has no attribute "__iter__" (not iterable)  [attr-defined]
 test_negative/negative.py: error: Argument 1 to "__call__" of "StreamUnaryMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative.py: error: Argument 1 to "__call__" of "StreamStreamMultiCallable" has incompatible type "DummyRequest"; expected "Iterator[DummyRequest]"  [arg-type]
 test_negative/negative.py: error: "DummyReply" has no attribute "not_exists"  [attr-defined]
-test_negative/negative.py: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "DummyServiceServicer"  [override]
-test_negative/negative.py: error: Argument 1 of "UnaryUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py: error: Return type "Iterator[DummyReply]" of "UnaryUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py: error: Argument 1 of "UnaryUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
 test_negative/negative.py: note: This violates the Liskov substitution principle
 test_negative/negative.py: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Union[Iterator[DummyReply], AsyncIterator[DummyReply]]" in supertype "DummyServiceServicer"  [override]
-test_negative/negative.py: error: Argument 1 of "UnaryStream" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
+test_negative/negative.py: error: Return type "DummyReply" of "UnaryStream" incompatible with return type "Union[Iterator[DummyReply], AsyncIterator[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py: error: Argument 1 of "UnaryStream" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "DummyRequest"  [override]
 test_negative/negative.py: note: This violates the Liskov substitution principle
 test_negative/negative.py: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "DummyServiceServicer"  [override]
-test_negative/negative.py: error: Argument 1 of "StreamUnary" is incompatible with supertype "DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
+test_negative/negative.py: error: Return type "Iterator[DummyReply]" of "StreamUnary" incompatible with return type "Union[DummyReply, Awaitable[DummyReply]]" in supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"  [override]
+test_negative/negative.py: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
 test_negative/negative.py: note: This violates the Liskov substitution principle
 test_negative/negative.py: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
 test_negative/negative.py: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]

@@ -64,7 +64,7 @@ def test_grpc() -> None:
     assert result4.value == "GRPC"
 
     # test future() in MultiCallable
-    future_test: grpc.CallFuture[dummy_pb2.DummyReply] = client.UnaryUnary.future(request)
+    future_test: grpc._CallFuture[dummy_pb2.DummyReply] = client.UnaryUnary.future(request)
     result5 = future_test.result()
     print(result5)
     assert result5.value == "grpc"
