@@ -126,24 +126,24 @@ test_negative/negative.py:292: error: Return type "Iterator[DummyReply]" of "Str
 test_negative/negative.py:294: error: Argument 1 of "StreamUnary" is incompatible with supertype "testproto.grpc.dummy_pb2_grpc.DummyServiceServicer"; supertype defines the argument type as "_MaybeAsyncIterator[DummyRequest]"  [override]
 test_negative/negative.py:294: note: This violates the Liskov substitution principle
 test_negative/negative.py:294: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
-test_negative/negative.py:321: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethod is deprecated: This method has been marked as deprecated using proto method options.  [deprecated]
-test_negative/negative.py:322: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethodNotDeprecatedRequest is deprecated: Method is deprecated, but request message is not  [deprecated]
-test_negative/negative.py:323: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
-test_negative/negative.py:326: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_ONE is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
-test_negative/negative.py:327: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_TWO is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
-test_negative/negative.py:337: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
-test_negative/negative.py:339: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:350: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
-test_negative/negative.py:357: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:364: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
-test_negative/negative.py:365: error: Property "message_field" defined in "Editions2024Test" is read-only  [misc]
-test_negative/negative.py:376: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
-test_negative/negative.py:379: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
-test_negative/negative.py:379: note: Possible overload variants:
-test_negative/negative.py:379: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
-test_negative/negative.py:379: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-test_negative/negative.py:380: error: No overload variant of "DummyServiceStub" matches argument type "str"  [call-overload]
-test_negative/negative.py:380: note: Possible overload variants:
-test_negative/negative.py:380: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
-test_negative/negative.py:380: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 111 errors in 4 files (checked 4 source files)
+test_negative/negative.py:328: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethod is deprecated: This method has been marked as deprecated using proto method options.  [deprecated]
+test_negative/negative.py:329: error: function testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.DeprecatedMethodNotDeprecatedRequest is deprecated: Method is deprecated, but request message is not  [deprecated]
+test_negative/negative.py:330: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
+test_negative/negative.py:333: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_ONE is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
+test_negative/negative.py:334: error: function testproto.test_pb2._DeprecatedEnumEnumTypeWrapper.DEPRECATED_TWO is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
+test_negative/negative.py:344: error: Argument "implicit_singular" to "Editions2024Test" has incompatible type "None"; expected "str"  [arg-type]
+test_negative/negative.py:346: error: Argument 1 to "HasField" of "Editions2024Test" has incompatible type "Literal['implicit_singular']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:357: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
+test_negative/negative.py:364: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:371: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py:372: error: Property "message_field" defined in "Editions2024Test" is read-only  [misc]
+test_negative/negative.py:383: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
+test_negative/negative.py:386: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py:386: note: Possible overload variants:
+test_negative/negative.py:386: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:386: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+test_negative/negative.py:387: error: No overload variant of "DummyServiceStub" matches argument type "str"  [call-overload]
+test_negative/negative.py:387: note: Possible overload variants:
+test_negative/negative.py:387: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
+test_negative/negative.py:387: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
+Found 114 errors in 4 files (checked 4 source files)
