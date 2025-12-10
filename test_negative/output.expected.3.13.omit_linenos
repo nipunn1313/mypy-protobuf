@@ -99,6 +99,7 @@ test_negative/negative.py: error: Property "a_repeated_string" defined in "Simpl
 test_negative/negative.py: error: Property "rep_inner_enum" defined in "Simple1" is read-only  [misc]
 test_negative/negative.py: error: "_r_None" has no attribute "invalid"; maybe "valid"?  [attr-defined]
 test_negative/negative.py: error: Incompatible types in assignment (expression has type "ValueType", variable has type "str")  [assignment]
+test_negative/negative.py: error: function testproto.test_pb2.DeprecatedMessage.deprecated_field is deprecated: This field has been marked as deprecated using proto field options.  [deprecated]
 test_negative/negative.py: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
@@ -134,6 +135,7 @@ test_negative/negative.py: error: Argument 1 to "HasField" of "Editions2024Test"
 test_negative/negative.py: error: Cannot instantiate abstract class "IncompleteServicer" with abstract attributes "StreamStream", "StreamUnary", "UnaryStream" and "UnaryUnary"  [abstract]
 test_negative/negative.py: error: Argument 2 to "test_hasfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
 test_negative/negative.py: error: Argument 2 to "test_clearfield_alias" has incompatible type "Literal['not_a_field']"; expected "Literal['default_singular', b'default_singular', 'explicit_singular', b'explicit_singular', 'implicit_singular', b'implicit_singular', 'legacy', b'legacy', 'message_field', b'message_field']"  [arg-type]
+test_negative/negative.py: error: Property "message_field" defined in "Editions2024Test" is read-only  [misc]
 test_negative/negative.py: error: Argument 2 to "test_whichoneof_alias" has incompatible type "Literal['not_a_oneof']"; expected "Literal['a_oneof', b'a_oneof']"  [arg-type]
 test_negative/negative.py: error: All overload variants of "DummyServiceStub" require at least one argument  [call-overload]
 test_negative/negative.py: note: Possible overload variants:
@@ -143,4 +145,4 @@ test_negative/negative.py: error: No overload variant of "DummyServiceStub" matc
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 109 errors in 4 files (checked 4 source files)
+Found 111 errors in 4 files (checked 4 source files)

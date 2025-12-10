@@ -11,7 +11,7 @@ from typing import Generator, Iterator, List
 import grpc
 import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
-from testproto.edition2024_pb2 import Editions2024Test
+from testproto.edition2024_pb2 import Editions2024SubMessage, Editions2024Test
 from testproto.grpc import dummy_pb2_grpc
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
@@ -201,6 +201,8 @@ a_string = "hi"
 a_string = PythonReservedKeywords().valid  # E:3.8
 
 deprecated_message = DeprecatedMessage()
+deprecated_field = deprecated_message.deprecated_field
+deprecated_message.deprecated_field = "test"  # E:3.8
 
 stub0 = DummyServiceStub()  # E:3.8
 channel = grpc.insecure_channel("127.0.0.1:8080")
@@ -360,6 +362,8 @@ def test_clearfield_alias(msg: Editions2024Test, field: "Editions2024Test._Clear
 
 
 test_clearfield_alias(Editions2024Test(), "not_a_field")  # E:3.8
+Editions2024Test().message_field = Editions2024SubMessage()  # E:3.8
+mf = Editions2024Test().message_field
 
 
 def test_whichoneof_alias(

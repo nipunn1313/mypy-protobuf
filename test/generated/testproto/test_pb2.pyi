@@ -36,12 +36,10 @@ class _OuterEnum:
 
 class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    @property
-    def FOO(self) -> _OuterEnum.ValueType:   # 1
-        """FOO"""
-    @property
-    def BAR(self) -> _OuterEnum.ValueType:   # 2
-        """BAR"""
+    FOO: _OuterEnum.ValueType  # 1
+    """FOO"""
+    BAR: _OuterEnum.ValueType  # 2
+    """BAR"""
 
 class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper):
     """Outer Enum"""
@@ -86,8 +84,7 @@ class _DeprecatedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     @property
     @deprecated("""This enum value has been marked as deprecated using proto enum value options.""")
     def DEPRECATED_TWO(self) -> _DeprecatedEnum.ValueType: ...  # 2
-    @property
-    def NOT_DEPRECATED(self) -> _DeprecatedEnum.ValueType: ...  # 3
+    NOT_DEPRECATED: _DeprecatedEnum.ValueType  # 3
 
 @deprecated("""This enum is deprecated\n2 lines of comments\n"Quotes in comments"\nand 'single quotes'\nTrailing comment""")
 class DeprecatedEnum(_DeprecatedEnum, metaclass=_DeprecatedEnumEnumTypeWrapper): ...
@@ -110,12 +107,10 @@ class Simple1(google.protobuf.message.Message):
 
     class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Simple1._InnerEnum.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        @property
-        def INNER1(self) -> Simple1._InnerEnum.ValueType:   # 1
-            """INNER1"""
-        @property
-        def INNER2(self) -> Simple1._InnerEnum.ValueType:   # 2
-            """INNER2"""
+        INNER1: Simple1._InnerEnum.ValueType  # 1
+        """INNER1"""
+        INNER2: Simple1._InnerEnum.ValueType  # 2
+        """INNER2"""
 
     class InnerEnum(_InnerEnum, metaclass=_InnerEnumEnumTypeWrapper):
         """Inner Enum"""
@@ -333,8 +328,7 @@ class PythonReservedKeywords(google.protobuf.message.Message):
 
     class _finallyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[PythonReservedKeywords._finally.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        @property
-        def valid_in_finally(self) -> PythonReservedKeywords._finally.ValueType: ...  # 2
+        valid_in_finally: PythonReservedKeywords._finally.ValueType  # 2
 
     class _r_finally(_finally, metaclass=_finallyEnumTypeWrapper): ...
     valid_in_finally: PythonReservedKeywords._r_finally.ValueType  # 2
@@ -446,15 +440,23 @@ class DeprecatedMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     A_STRING_FIELD_NUMBER: builtins.int
+    DEPRECATED_FIELD_FIELD_NUMBER: builtins.int
     a_string: builtins.str
+    @property
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self) -> builtins.str: ...
+    @deprecated_field.setter
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self, value: builtins.str) -> None: ...
     def __init__(
         self,
         *,
         a_string: builtins.str | None = ...,
+        deprecated_field: builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
+    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field"]
     def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
+    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field"]
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
 Global___DeprecatedMessage: typing_extensions.TypeAlias = DeprecatedMessage

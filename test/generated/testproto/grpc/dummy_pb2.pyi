@@ -59,7 +59,12 @@ class DeprecatedRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     OLD_FIELD_FIELD_NUMBER: builtins.int
-    old_field: builtins.str
+    @property
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def old_field(self) -> builtins.str: ...
+    @old_field.setter
+    @deprecated("""This field has been marked as deprecated using proto field options.""")
+    def old_field(self, value: builtins.str) -> None: ...
     def __init__(
         self,
         *,

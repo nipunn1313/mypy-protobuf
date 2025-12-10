@@ -22,10 +22,8 @@ class _MyEnum:
 
 class _MyEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    @property
-    def HELLO(self) -> _MyEnum.ValueType: ...  # 0
-    @property
-    def WORLD(self) -> _MyEnum.ValueType: ...  # 1
+    HELLO: _MyEnum.ValueType  # 0
+    WORLD: _MyEnum.ValueType  # 1
 
 class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper): ...
 
