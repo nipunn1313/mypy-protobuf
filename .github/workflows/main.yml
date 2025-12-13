@@ -9,7 +9,7 @@ on:
 
 jobs:
   run_test:
-    name: mypy-protobuf - ${{ matrix.py-ver-mypy-protobuf }} - unittest - ${{ matrix.py-ver-unit-tests }} - protobuf ${{ matrix.protobuf-version }}
+    name: mypy-protobuf - ${{ matrix.py-ver-mypy-protobuf }} - unittest - ${{ matrix.py-ver-unit-tests }} - protobuf ${{ matrix.protobuf-version }} - dedot imports ${{ matrix.dedot-imports }}
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -32,6 +32,20 @@ jobs:
         protobuf-version:
           - 6.32.1
           - 6.33.1
+        dedot-imports:
+          - 0
+        include:
+          # Dedot imports has a smaller matrix, just validate that things still work
+          - py-ver-mypy-protobuf: 3.14.0
+            py-ver-unit-tests: 3.14.0
+            protobuf-version: 6.33.1
+            dedot-imports: 1
+          - py-ver-mypy-protobuf: 3.14.0
+            py-ver-unit-tests: 3.14.0
+            protobuf-version: 6.32.1
+            dedot-imports: 1
+
+
 
     steps:
       - uses: actions/checkout@v6
@@ -52,6 +66,7 @@ jobs:
           PY_VER_MYPY: ${{matrix.py-ver-mypy-protobuf}}
           PYTHON_PROTOBUF_VERSION: ${{matrix.protobuf-version}}
           VALIDATE: 1
+          DEDOT_IMPORTS: ${{matrix.dedot-imports}}
         run: |
           ./run_test.sh
 
