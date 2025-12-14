@@ -144,9 +144,14 @@ class GRPCType(enum.Enum):
 
     @classmethod
     def from_parameter(cls, parameter: str) -> GRPCType:
-        if "only_sync" in parameter:
+        has_sync = "only_sync" in parameter
+        has_async = "only_async" in parameter
+
+        if has_sync and has_async:
+            raise ValueError("Cannot specify both only_sync and only_async")
+        elif has_sync:
             return GRPCType.SYNC
-        elif "only_async" in parameter:
+        elif has_async:
             return GRPCType.ASYNC
         else:
             return GRPCType.BOTH
@@ -927,19 +932,17 @@ class PkgWriter(object):
             wl("")
 
     def make_server_type(self) -> str:
-        server = aserver = None
-        if self.grpc_type.supports_sync:
-            server = self._import("grpc", "Server")
-        if self.grpc_type.supports_async:
-            aserver = self._import("grpc.aio", "Server")
+        server = self._import("grpc", "Server")
+        aserver = self._import("grpc.aio", "Server")
 
-        if server and aserver:
+        if self.grpc_type == GRPCType.BOTH:
             return f"{self._import('typing', 'Union')}[{server}, {aserver}]"
-        elif server:
-            return server
-        elif aserver:
+        elif self.grpc_type == GRPCType.ASYNC:
             return aserver
-        raise RuntimeError(f"Impossible, {self.grpc_type=}")  # pragma: no cover
+        elif self.grpc_type == GRPCType.SYNC:
+            return server
+        else:
+            raise RuntimeError(f"Impossible, {self.grpc_type=}")  # pragma: no cover
 
     def write_grpc_services(
         self,
