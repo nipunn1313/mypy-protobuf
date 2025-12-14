@@ -173,11 +173,11 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
 
         # Run sync_only mypy
         SYNC_ONLY_MODULES=( -m test.sync_only.test_sync_only )
-        MYPYPATH=$MYPYPATH:test/generated_sync_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${SYNC_ONLY_MODULES[@]}"
+        MYPYPATH=$MYPYPATH:test/generated_sync_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${SYNC_ONLY_MODULES[@]}"
 
         # Run async_only mypy
         ASYNC_ONLY_MODULES=( -m test.async_only.test_async_only )
-        MYPYPATH=$MYPYPATH:test/generated_async_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
+        MYPYPATH=$MYPYPATH:test/generated_async_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
 
         export MYPYPATH=$MYPYPATH:test/generated
 
