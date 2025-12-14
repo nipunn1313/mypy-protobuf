@@ -33,13 +33,15 @@ exclude = [
     "**/*_pb2.py",
     "**/*_pb2_grpc.py",
     "test/test_concrete.py",
-    "test/async_only/**",
-    "test/sync_only/**",
 ]
 
 executionEnvironments = [
     # Due to how upb is typed, we need to disable incompatible variable override checks
     { root = "test/generated", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
     { root = "test/generated_concrete", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
+    { root = "test/generated_sync_only", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
+    { root = "test/generated_async_only", extraPaths = ["./"], reportIncompatibleVariableOverride = "none" },
     { root = "mypy_protobuf/extensions_pb2.pyi", reportIncompatibleVariableOverride = "none" },
+    { root = "test/async_only", extraPaths = ["test/generated_async_only"] },
+    { root = "test/sync_only", extraPaths = ["test/generated_sync_only"] },
 ]

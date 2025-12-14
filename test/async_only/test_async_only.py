@@ -1,31 +1,87 @@
 """
-Type-checking test for async_only GRPC stubs.
+Type-checking and runtime test for async_only GRPC stubs.
 
-This module is run through mypy to validate that stubs generated with the
-only_async flag have the correct types:
+This module validates that stubs generated with the only_async flag have the correct types:
 - Regular (non-generic) Stub class that only accepts grpc.aio.Channel
-- No AsyncStub type alias (the stub itself is async-only)
+- No SyncStub type alias (the stub itself is async-only)
 - Servicer methods use AsyncIterator for client streaming (not _MaybeAsyncIterator)
 - add_XXXServicer_to_server accepts grpc.aio.Server
 """
 
-from typing import Awaitable
-
 import grpc.aio
+import pytest
+import typing_extensions as typing
 from testproto.grpc import dummy_pb2, dummy_pb2_grpc
 
+ADDRESS = "localhost:22225"
 
-class AsyncOnlyServicer(dummy_pb2_grpc.DummyServiceServicer):
+
+class Servicer(dummy_pb2_grpc.DummyServiceServicer):
     async def UnaryUnary(
         self,
         request: dummy_pb2.DummyRequest,
-        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, Awaitable[dummy_pb2.DummyReply]],
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
     ) -> dummy_pb2.DummyReply:
-        await context.abort(grpc.StatusCode.UNIMPLEMENTED, "Not implemented")
         return dummy_pb2.DummyReply(value=request.value[::-1])
 
+    async def UnaryStream(
+        self,
+        request: dummy_pb2.DummyRequest,
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
+    ) -> typing.AsyncIterator[dummy_pb2.DummyReply]:
+        for char in request.value:
+            yield dummy_pb2.DummyReply(value=char)
 
-async def noop() -> None:
-    """Don't actually run anything; this is just for type-checking."""
-    stub = dummy_pb2_grpc.DummyServiceAsyncStub(channel=grpc.aio.insecure_channel("localhost:50051"))
-    await stub.UnaryUnary(dummy_pb2.DummyRequest(value="test"))
+    async def StreamUnary(
+        self,
+        request_iterator: typing.AsyncIterator[dummy_pb2.DummyRequest],
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
+    ) -> dummy_pb2.DummyReply:
+        values = [data.value async for data in request_iterator]
+        return dummy_pb2.DummyReply(value="".join(values))
+
+    async def StreamStream(
+        self,
+        request_iterator: typing.AsyncIterator[dummy_pb2.DummyRequest],
+        context: grpc.aio.ServicerContext[dummy_pb2.DummyRequest, dummy_pb2.DummyReply],
+    ) -> typing.AsyncIterator[dummy_pb2.DummyReply]:
+        async for data in request_iterator:
+            yield dummy_pb2.DummyReply(value=data.value.upper())
+
+
+def make_server() -> grpc.aio.Server:
+    server = grpc.aio.server()
+    servicer = Servicer()
+    server.add_insecure_port(ADDRESS)
+    dummy_pb2_grpc.add_DummyServiceServicer_to_server(servicer, server)
+    return server
+
+
+@pytest.mark.asyncio
+async def test_async_only_grpc() -> None:
+    server = make_server()
+    await server.start()
+    async with grpc.aio.insecure_channel(ADDRESS) as channel:
+        client = dummy_pb2_grpc.DummyServiceAsyncStub(channel)
+        request = dummy_pb2.DummyRequest(value="cprg")
+        result1 = await client.UnaryUnary(request)
+        result2 = client.UnaryStream(dummy_pb2.DummyRequest(value=result1.value))
+        result2_list = [r async for r in result2]
+        assert len(result2_list) == 4
+        result3 = client.StreamStream(dummy_pb2.DummyRequest(value=part.value) for part in result2_list)
+        result3_list = [r async for r in result3]
+        assert len(result3_list) == 4
+        result4 = await client.StreamUnary(dummy_pb2.DummyRequest(value=part.value) for part in result3_list)
+        assert result4.value == "GRPC"
+
+    await server.stop(None)
+
+    class TestAttribute:
+        stub: "dummy_pb2_grpc.DummyServiceAsyncStub"
+
+        def __init__(self) -> None:
+            self.stub = dummy_pb2_grpc.DummyServiceAsyncStub(grpc.aio.insecure_channel(ADDRESS))
+
+        async def test(self) -> None:
+            val = await self.stub.UnaryUnary(dummy_pb2.DummyRequest(value="test"))
+            typing.assert_type(val, dummy_pb2.DummyReply)

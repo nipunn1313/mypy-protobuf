@@ -108,8 +108,10 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # CI Check to make sure generated files are committed
     SHA_BEFORE=$(find test/generated -name "*.pyi" -print0 | xargs -0 sha1sum)
-    # Clean out generated/ directory - except for __init__.py
+    # Clean out generated/ directories - except for __init__.py
     find test/generated -type f -not -name "__init__.py" -delete
+    find test/generated_sync_only -type f -not -name "__init__.py" -delete
+    find test/generated_async_only -type f -not -name "__init__.py" -delete
 
     # Compile protoc -> python
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --python_out=test/generated
