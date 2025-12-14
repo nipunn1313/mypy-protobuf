@@ -115,9 +115,9 @@ class Descriptors(object):
             prefix: str,
             _fd: d.FileDescriptorProto,
         ) -> None:
-            for enum in enums:
-                self.message_to_fd[prefix + enum.name] = _fd
-                self.message_to_fd[prefix + enum.name + ".ValueType"] = _fd
+            for enum_proto in enums:
+                self.message_to_fd[prefix + enum_proto.name] = _fd
+                self.message_to_fd[prefix + enum_proto.name + ".ValueType"] = _fd
 
         def _add_messages(
             messages: "RepeatedCompositeFieldContainer[d.DescriptorProto]",
@@ -406,12 +406,12 @@ class PkgWriter(object):
         scl_prefix: SourceCodeLocation,
     ) -> None:
         wl = self._write_line
-        for i, enum in enumerate(enums):
-            class_name = enum.name if enum.name not in PYTHON_RESERVED else "_r_" + enum.name
+        for i, enum_proto in enumerate(enums):
+            class_name = enum_proto.name if enum_proto.name not in PYTHON_RESERVED else "_r_" + enum_proto.name
             value_type_fq = prefix + class_name + ".ValueType"
-            enum_helper_class = "_" + enum.name
+            enum_helper_class = "_" + enum_proto.name
             value_type_helper_fq = prefix + enum_helper_class + ".ValueType"
-            etw_helper_class = "_" + enum.name + "EnumTypeWrapper"
+            etw_helper_class = "_" + enum_proto.name + "EnumTypeWrapper"
             scl = scl_prefix + [i]
 
             wl(f"class {enum_helper_class}:")
@@ -435,13 +435,13 @@ class PkgWriter(object):
                 ed = self._import("google.protobuf.descriptor", "EnumDescriptor")
                 wl(f"DESCRIPTOR: {ed}")
                 self.write_enum_values(
-                    [(i, v) for i, v in enumerate(enum.value) if v.name not in PROTO_ENUM_RESERVED],
+                    [(i, v) for i, v in enumerate(enum_proto.value) if v.name not in PROTO_ENUM_RESERVED],
                     value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
                 )
             wl("")
 
-            if enum.options.deprecated:
+            if enum_proto.options.deprecated:
                 self._write_deprecation_warning(
                     scl + [d.EnumDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
                     "This enum has been marked as deprecated using proto enum options.",
@@ -457,7 +457,7 @@ class PkgWriter(object):
                     wl("")
 
             self.write_enum_values(
-                enumerate(enum.value),
+                enumerate(enum_proto.value),
                 value_type_fq,
                 scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
             )
