@@ -27,5 +27,5 @@ class AsyncOnlyServicer(dummy_pb2_grpc.DummyServiceServicer):
 
 async def noop() -> None:
     """Don't actually run anything; this is just for type-checking."""
-    stub = dummy_pb2_grpc.DummyServiceStub(channel=grpc.aio.insecure_channel("localhost:50051"))
+    stub = dummy_pb2_grpc.DummyServiceAsyncStub(channel=grpc.aio.insecure_channel("localhost:50051"))
     await stub.UnaryUnary(dummy_pb2.DummyRequest(value="test"))
