@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ast
+import enum
 import sys
 from collections import defaultdict
 from contextlib import contextmanager
