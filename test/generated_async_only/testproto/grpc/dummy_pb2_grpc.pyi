@@ -20,7 +20,7 @@ else:
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
 
-class DummyServiceAsyncStub:
+class DummyServiceStub:
     """DummyService"""
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
@@ -32,8 +32,6 @@ class DummyServiceAsyncStub:
     """StreamUnary"""
     StreamStream: grpc.aio.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """StreamStream"""
-
-DummyServiceStub = DummyServiceAsyncStub
 
 class DummyServiceServicer(metaclass=abc.ABCMeta):
     """DummyService"""
@@ -73,7 +71,7 @@ class DummyServiceServicer(metaclass=abc.ABCMeta):
 def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: grpc.aio.Server) -> None: ...
 
 @deprecated("""This service is deprecated""")
-class DeprecatedServiceAsyncStub:
+class DeprecatedServiceStub:
     """Marking the service as deprecated"""
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
@@ -81,8 +79,6 @@ class DeprecatedServiceAsyncStub:
     """DeprecatedMethod"""
     DeprecatedMethodNotDeprecatedRequest: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """DeprecatedMethodNotDeprecatedRequest"""
-
-DeprecatedServiceStub = DeprecatedServiceAsyncStub
 
 @deprecated("""This service is deprecated""")
 class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
@@ -107,7 +103,7 @@ class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
 @deprecated("""This service is deprecated""")
 def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: grpc.aio.Server) -> None: ...
 
-class ManyRPCsServiceAsyncStub:
+class ManyRPCsServiceStub:
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
     Method1: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest1, testproto.grpc.dummy_pb2.ManyResponse1]
     Method2: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest2, testproto.grpc.dummy_pb2.ManyResponse2]
@@ -208,8 +204,6 @@ class ManyRPCsServiceAsyncStub:
     Method97: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]
     Method98: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]
     Method99: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]
-
-ManyRPCsServiceStub = ManyRPCsServiceAsyncStub
 
 class ManyRPCsServiceServicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod
@@ -907,10 +901,8 @@ class ManyRPCsServiceServicer(metaclass=abc.ABCMeta):
 
 def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, server: grpc.aio.Server) -> None: ...
 
-class EmptyServiceAsyncStub:
+class EmptyServiceStub:
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
-
-EmptyServiceStub = EmptyServiceAsyncStub
 
 class EmptyServiceServicer(metaclass=abc.ABCMeta):
     ...

@@ -14,7 +14,7 @@ import typing
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
 
-class PythonReservedKeywordsServiceAsyncStub:
+class PythonReservedKeywordsServiceStub:
     """Method name is reserved"""
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
@@ -22,8 +22,6 @@ class PythonReservedKeywordsServiceAsyncStub:
     """valid_method_name1"""
     valid_method_name2: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2.PythonReservedKeywords._r_lambda]
     """valid_method_name2"""
-
-PythonReservedKeywordsServiceStub = PythonReservedKeywordsServiceAsyncStub
 
 class PythonReservedKeywordsServiceServicer(metaclass=abc.ABCMeta):
     """Method name is reserved"""

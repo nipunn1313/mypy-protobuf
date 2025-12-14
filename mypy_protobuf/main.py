@@ -942,7 +942,7 @@ class PkgWriter(object):
         elif self.grpc_type == GRPCType.SYNC:
             return server
         else:
-            raise RuntimeError(f"Impossible, {self.grpc_type=}")  # pragma: no cover
+            raise RuntimeError(f"Impossible, {self.grpc_type=}")
 
     def write_grpc_services(
         self,
@@ -1018,16 +1018,13 @@ class PkgWriter(object):
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
                         self.write_grpc_stub_methods(service, scl, is_async=True, ignore_assignment_errors=True)
                 else:
-                    # ASYNC only - standalone AsyncStub
-                    wl("class {}:", async_class_alias)
+                    # ASYNC only - use Stub name (not AsyncStub) since there's only one type
+                    wl("class {}:", class_name)
                     with self._indent():
                         if self._write_comments(scl):
                             wl("")
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
                         self.write_grpc_stub_methods(service, scl, is_async=True)
-                    wl("")
-                    # Add type alias so runtime Stub name matches type stub AsyncStub name
-                    wl("{} = {}", class_name, async_class_alias)
                 wl("")
 
             # The service definition interface

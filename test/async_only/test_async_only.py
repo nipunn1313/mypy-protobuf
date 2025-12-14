@@ -2,8 +2,7 @@
 Type-checking and runtime test for async_only GRPC stubs.
 
 This module validates that stubs generated with the only_async flag have the correct types:
-- Regular (non-generic) Stub class that only accepts grpc.aio.Channel
-- No SyncStub type alias (the stub itself is async-only)
+- Stub class (not AsyncStub) that only accepts grpc.aio.Channel
 - Servicer methods use AsyncIterator for client streaming (not _MaybeAsyncIterator)
 - add_XXXServicer_to_server accepts grpc.aio.Server
 """
@@ -77,7 +76,7 @@ async def test_async_only_grpc() -> None:
     await server.stop(None)
 
     class TestAttribute:
-        stub: "dummy_pb2_grpc.DummyServiceAsyncStub"
+        stub: "dummy_pb2_grpc.DummyServiceStub"
 
         def __init__(self) -> None:
             self.stub = dummy_pb2_grpc.DummyServiceStub(grpc.aio.insecure_channel(ADDRESS))

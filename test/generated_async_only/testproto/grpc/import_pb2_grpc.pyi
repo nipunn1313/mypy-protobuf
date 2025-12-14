@@ -15,7 +15,7 @@ import typing
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
 
-class SimpleServiceAsyncStub:
+class SimpleServiceStub:
     """SimpleService"""
 
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
@@ -24,8 +24,6 @@ class SimpleServiceAsyncStub:
     UnaryStream: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
     """UnaryStream"""
     NoComment: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
-
-SimpleServiceStub = SimpleServiceAsyncStub
 
 class SimpleServiceServicer(metaclass=abc.ABCMeta):
     """SimpleService"""
