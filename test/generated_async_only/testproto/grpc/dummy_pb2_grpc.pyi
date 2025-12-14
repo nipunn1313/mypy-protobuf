@@ -5,6 +5,7 @@ https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 
 import abc
 import collections.abc
+import grpc
 import grpc.aio
 import sys
 import testproto.grpc.dummy_pb2
@@ -31,6 +32,8 @@ class DummyServiceAsyncStub:
     """StreamUnary"""
     StreamStream: grpc.aio.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """StreamStream"""
+
+DummyServiceStub = DummyServiceAsyncStub
 
 class DummyServiceServicer(metaclass=abc.ABCMeta):
     """DummyService"""
@@ -78,6 +81,8 @@ class DeprecatedServiceAsyncStub:
     """DeprecatedMethod"""
     DeprecatedMethodNotDeprecatedRequest: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """DeprecatedMethodNotDeprecatedRequest"""
+
+DeprecatedServiceStub = DeprecatedServiceAsyncStub
 
 @deprecated("""This service is deprecated""")
 class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
@@ -203,6 +208,8 @@ class ManyRPCsServiceAsyncStub:
     Method97: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]
     Method98: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]
     Method99: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]
+
+ManyRPCsServiceStub = ManyRPCsServiceAsyncStub
 
 class ManyRPCsServiceServicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod
@@ -902,6 +909,8 @@ def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, ser
 
 class EmptyServiceAsyncStub:
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
+
+EmptyServiceStub = EmptyServiceAsyncStub
 
 class EmptyServiceServicer(metaclass=abc.ABCMeta):
     ...

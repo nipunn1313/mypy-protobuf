@@ -5,6 +5,7 @@ Proto 2 test file."""
 
 import abc
 import collections.abc
+import grpc
 import grpc.aio
 import testproto.test_pb2
 import typing
@@ -21,6 +22,8 @@ class PythonReservedKeywordsServiceAsyncStub:
     """valid_method_name1"""
     valid_method_name2: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2.PythonReservedKeywords._r_lambda]
     """valid_method_name2"""
+
+PythonReservedKeywordsServiceStub = PythonReservedKeywordsServiceAsyncStub
 
 class PythonReservedKeywordsServiceServicer(metaclass=abc.ABCMeta):
     """Method name is reserved"""

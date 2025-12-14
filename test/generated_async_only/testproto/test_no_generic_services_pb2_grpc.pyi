@@ -5,6 +5,7 @@ isort:skip_file
 
 import abc
 import collections.abc
+import grpc
 import grpc.aio
 import testproto.test_no_generic_services_pb2
 import typing
@@ -16,6 +17,8 @@ GRPC_VERSION: str
 class ATestService2AsyncStub:
     def __init__(self, channel: grpc.aio.Channel) -> None: ...
     Echo: grpc.aio.UnaryUnaryMultiCallable[testproto.test_no_generic_services_pb2.Simple3, testproto.test_no_generic_services_pb2.Simple3]
+
+ATestService2Stub = ATestService2AsyncStub
 
 class ATestService2Servicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod

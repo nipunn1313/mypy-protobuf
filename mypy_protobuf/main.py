@@ -1025,6 +1025,9 @@ class PkgWriter(object):
                             wl("")
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
                         self.write_grpc_stub_methods(service, scl, is_async=True)
+                    wl("")
+                    # Add type alias so runtime Stub name matches type stub AsyncStub name
+                    wl("{} = {}", class_name, async_class_alias)
                 wl("")
 
             # The service definition interface
