@@ -62,7 +62,7 @@ async def test_async_only_grpc() -> None:
     server = make_server()
     await server.start()
     async with grpc.aio.insecure_channel(ADDRESS) as channel:
-        client = dummy_pb2_grpc.DummyServiceAsyncStub(channel)
+        client = dummy_pb2_grpc.DummyServiceStub(channel)
         request = dummy_pb2.DummyRequest(value="cprg")
         result1 = await client.UnaryUnary(request)
         result2 = client.UnaryStream(dummy_pb2.DummyRequest(value=result1.value))
@@ -80,7 +80,7 @@ async def test_async_only_grpc() -> None:
         stub: "dummy_pb2_grpc.DummyServiceAsyncStub"
 
         def __init__(self) -> None:
-            self.stub = dummy_pb2_grpc.DummyServiceAsyncStub(grpc.aio.insecure_channel(ADDRESS))
+            self.stub = dummy_pb2_grpc.DummyServiceStub(grpc.aio.insecure_channel(ADDRESS))
 
         async def test(self) -> None:
             val = await self.stub.UnaryUnary(dummy_pb2.DummyRequest(value="test"))
