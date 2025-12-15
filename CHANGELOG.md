@@ -7,6 +7,7 @@
   - Protobuf <6.32 still had the edition enums and field options, so it *should* still work. But is untested
 - Add support for editions (up to 2024)
 - Add `generate_concrete_servicer_stubs` option to generate concrete instead of abstract servicer stubs
+- Add `sync_only`/`async_only` options to generate only sync or async version of GRPC stubs
 - Switch to types-grpcio instead of no longer maintained grpc-stubs
 - Add `_HasFieldArgType` and `_ClearFieldArgType` aliases to allow for typing field manipulation functions
 - Add `_WhichOneofArgType_<oneof_name>` and `_WhichOneofReturnType_<oneof_name>` type aliases

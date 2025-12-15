@@ -348,6 +348,21 @@ By default mypy-protobuf will output servicer stubs with abstract methods. To ou
 protoc --python_out=output/location --mypy_grpc_out=generate_concrete_servicer_stubs:output/location
 ```
 
+### `sync_only/async_only`
+
+By default, generated GRPC stubs are compatible with both sync and async variants. If you only 
+want sync or async GRPC stubs, use this option:
+
+```
+protoc --python_out=output/location --mypy_grpc_out=sync_only:output/location
+```
+
+or
+
+```
+protoc --python_out=output/location --mypy_grpc_out=async_only:output/location
+```
+
 ### Output suppression
 
 To suppress output, you can run
