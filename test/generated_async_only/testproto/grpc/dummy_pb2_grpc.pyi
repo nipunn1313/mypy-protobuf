@@ -7,6 +7,7 @@ from collections import abc as _abc
 from grpc import aio as _aio
 from testproto.grpc import dummy_pb2 as _dummy_pb2
 import abc as _abc_1
+import builtins as _builtins
 import sys
 
 if sys.version_info >= (3, 13):
@@ -73,10 +74,17 @@ class DeprecatedServiceStub:
     """Marking the service as deprecated"""
 
     def __init__(self, channel: _aio.Channel) -> None: ...
-    DeprecatedMethod: _aio.UnaryUnaryMultiCallable[_dummy_pb2.DeprecatedRequest, _dummy_pb2.DummyReply]
-    """DeprecatedMethod"""
-    DeprecatedMethodNotDeprecatedRequest: _aio.UnaryUnaryMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]
-    """DeprecatedMethodNotDeprecatedRequest"""
+    @_builtins.property
+    @_deprecated("""This method has been marked as deprecated using proto method options.""")
+    def DeprecatedMethod(self) -> _aio.UnaryUnaryMultiCallable[_dummy_pb2.DeprecatedRequest, _dummy_pb2.DummyReply]:
+        """DeprecatedMethod"""
+    @_builtins.property
+    @_deprecated("""Method is deprecated, but request message is not""")
+    def DeprecatedMethodNotDeprecatedRequest(self) -> _aio.UnaryUnaryMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]:
+        """DeprecatedMethodNotDeprecatedRequest"""
+    @_builtins.property
+    @_deprecated("""This method has been marked as deprecated using proto method options.""")
+    def DeprecatedMethodNoComments(self) -> _aio.UnaryUnaryMultiCallable[_dummy_pb2.DeprecatedRequest, _dummy_pb2.DummyReply]: ...
 
 @_deprecated("""This service is deprecated""")
 class DeprecatedServiceServicer(metaclass=_abc_1.ABCMeta):
@@ -97,6 +105,13 @@ class DeprecatedServiceServicer(metaclass=_abc_1.ABCMeta):
         context: _aio.ServicerContext[_dummy_pb2.DummyRequest, _abc.Awaitable[_dummy_pb2.DummyReply]],
     ) -> _abc.Awaitable[_dummy_pb2.DummyReply]:
         """DeprecatedMethodNotDeprecatedRequest"""
+
+    @_abc_1.abstractmethod
+    def DeprecatedMethodNoComments(
+        self,
+        request: _dummy_pb2.DeprecatedRequest,
+        context: _aio.ServicerContext[_dummy_pb2.DeprecatedRequest, _abc.Awaitable[_dummy_pb2.DummyReply]],
+    ) -> _abc.Awaitable[_dummy_pb2.DummyReply]: ...
 
 @_deprecated("""This service is deprecated""")
 def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: _aio.Server) -> None: ...

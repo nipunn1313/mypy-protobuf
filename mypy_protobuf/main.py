@@ -491,7 +491,7 @@ class PkgWriter(object):
             scl = scl_prefix + [i]
             # Class level
             if class_attributes and val.options.deprecated:
-                self._write_line("@property")
+                self._write_line(self._property())
                 self._write_deprecation_warning(
                     scl + [d.EnumValueDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
                     "This enum value has been marked as deprecated using proto enum value options.",
@@ -646,7 +646,7 @@ class PkgWriter(object):
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         deprecation_scl_field = scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER]
                         if field.options.deprecated:
-                            wl("@property")
+                            wl(self._property())
                             self._write_deprecation_warning(
                                 deprecation_scl_field,
                                 "This field has been marked as deprecated using proto field options.",
@@ -1056,7 +1056,7 @@ class PkgWriter(object):
                 type_annotation = type_str(method, is_async=is_async)
 
             if is_deprecated:
-                wl("@property")
+                wl(self._property())
                 self._write_deprecation_warning(
                     scl + [d.MethodDescriptorProto.OPTIONS_FIELD_NUMBER, d.MethodOptions.DEPRECATED_FIELD_NUMBER],
                     "This method has been marked as deprecated using proto method options.",
