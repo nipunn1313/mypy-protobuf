@@ -9,142 +9,142 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
-import builtins
-import google.protobuf.descriptor
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
 import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _TopLevelEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _TopLevelEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TopLevelEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TopLevelEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_TopLevelEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     TOP_LEVEL_UNKNOWN: _TopLevelEnum.ValueType  # 0
 
 class TopLevelEnum(_TopLevelEnum, metaclass=_TopLevelEnumEnumTypeWrapper): ...
 
 TOP_LEVEL_UNKNOWN: TopLevelEnum.ValueType  # 0
-Global___TopLevelEnum: typing_extensions.TypeAlias = TopLevelEnum
+Global___TopLevelEnum: _typing_extensions.TypeAlias = TopLevelEnum  # noqa: Y015
 
-@typing.final
-class OptionsMessage(google.protobuf.message.Message):
+@_typing.final
+class OptionsMessage(_google_protobuf_message.Message):
     """Retention attributes set on fields nested within a message"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    PLAIN_FIELD_FIELD_NUMBER: builtins.int
-    RUNTIME_RETENTION_FIELD_FIELD_NUMBER: builtins.int
-    SOURCE_RETENTION_FIELD_FIELD_NUMBER: builtins.int
-    plain_field: builtins.int
-    runtime_retention_field: builtins.int
-    source_retention_field: builtins.int
+    PLAIN_FIELD_FIELD_NUMBER: _builtins.int
+    RUNTIME_RETENTION_FIELD_FIELD_NUMBER: _builtins.int
+    SOURCE_RETENTION_FIELD_FIELD_NUMBER: _builtins.int
+    plain_field: _builtins.int
+    runtime_retention_field: _builtins.int
+    source_retention_field: _builtins.int
     def __init__(
         self,
         *,
-        plain_field: builtins.int | None = ...,
-        runtime_retention_field: builtins.int | None = ...,
-        source_retention_field: builtins.int | None = ...,
+        plain_field: _builtins.int | None = ...,
+        runtime_retention_field: _builtins.int | None = ...,
+        source_retention_field: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["plain_field", b"plain_field", "runtime_retention_field", b"runtime_retention_field", "source_retention_field", b"source_retention_field"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["plain_field", b"plain_field", "runtime_retention_field", b"runtime_retention_field", "source_retention_field", b"source_retention_field"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["plain_field", b"plain_field", "runtime_retention_field", b"runtime_retention_field", "source_retention_field", b"source_retention_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["plain_field", b"plain_field", "runtime_retention_field", b"runtime_retention_field", "source_retention_field", b"source_retention_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OptionsMessage: typing_extensions.TypeAlias = OptionsMessage
+Global___OptionsMessage: _typing_extensions.TypeAlias = OptionsMessage  # noqa: Y015
 
-@typing.final
-class Extendee(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Extendee(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___Extendee: typing_extensions.TypeAlias = Extendee
+Global___Extendee: _typing_extensions.TypeAlias = Extendee  # noqa: Y015
 
-@typing.final
-class TopLevelMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TopLevelMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TopLevelMessage._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TopLevelMessage._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         NESTED_UNKNOWN: TopLevelMessage._NestedEnum.ValueType  # 0
 
     class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper): ...
     NESTED_UNKNOWN: TopLevelMessage.NestedEnum.ValueType  # 0
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
         def __init__(
             self,
         ) -> None: ...
 
-    F_FIELD_NUMBER: builtins.int
-    I_FIELD_NUMBER: builtins.int
-    f: builtins.float
-    i: builtins.int
-    S_FIELD_NUMBER: builtins.int
-    s: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Extendee, builtins.str]
+    F_FIELD_NUMBER: _builtins.int
+    I_FIELD_NUMBER: _builtins.int
+    f: _builtins.float
+    i: _builtins.int
+    S_FIELD_NUMBER: _builtins.int
+    s: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Extendee, _builtins.str]
     def __init__(
         self,
         *,
-        f: builtins.float | None = ...,
-        i: builtins.int | None = ...,
+        f: _builtins.float | None = ...,
+        i: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["f", b"f", "i", b"i", "o", b"o"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["f", b"f", "i", b"i", "o", b"o"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["f", b"f", "i", b"i", "o", b"o"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["f", b"f", "i", b"i", "o", b"o"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_o: typing_extensions.TypeAlias = typing.Literal["i"]
-    _WhichOneofArgType_o: typing_extensions.TypeAlias = typing.Literal["o", b"o"]
+    _WhichOneofReturnType_o: _typing_extensions.TypeAlias = _typing.Literal["i"]  # noqa: Y015
+    _WhichOneofArgType_o: _typing_extensions.TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_o) -> _WhichOneofReturnType_o | None: ...
 
-Global___TopLevelMessage: typing_extensions.TypeAlias = TopLevelMessage
+Global___TopLevelMessage: _typing_extensions.TypeAlias = TopLevelMessage  # noqa: Y015
 
-PLAIN_OPTION_FIELD_NUMBER: builtins.int
-RUNTIME_RETENTION_OPTION_FIELD_NUMBER: builtins.int
-SOURCE_RETENTION_OPTION_FIELD_NUMBER: builtins.int
-FILE_OPTION_FIELD_NUMBER: builtins.int
-REPEATED_OPTIONS_FIELD_NUMBER: builtins.int
-EXTENSION_RANGE_OPTION_FIELD_NUMBER: builtins.int
-MESSAGE_OPTION_FIELD_NUMBER: builtins.int
-FIELD_OPTION_FIELD_NUMBER: builtins.int
-ONEOF_OPTION_FIELD_NUMBER: builtins.int
-ENUM_OPTION_FIELD_NUMBER: builtins.int
-ENUM_ENTRY_OPTION_FIELD_NUMBER: builtins.int
-SERVICE_OPTION_FIELD_NUMBER: builtins.int
-METHOD_OPTION_FIELD_NUMBER: builtins.int
-I_FIELD_NUMBER: builtins.int
-plain_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, builtins.int]
-runtime_retention_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, builtins.int]
-source_retention_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, builtins.int]
-file_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, Global___OptionsMessage]
-repeated_options: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___OptionsMessage]]
-extension_range_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.ExtensionRangeOptions, Global___OptionsMessage]
-message_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___OptionsMessage]
-field_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___OptionsMessage]
-oneof_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.OneofOptions, Global___OptionsMessage]
-enum_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumOptions, Global___OptionsMessage]
-enum_entry_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumValueOptions, Global___OptionsMessage]
-service_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.ServiceOptions, Global___OptionsMessage]
-method_option: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, Global___OptionsMessage]
-i: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Extendee, builtins.int]
+PLAIN_OPTION_FIELD_NUMBER: _builtins.int
+RUNTIME_RETENTION_OPTION_FIELD_NUMBER: _builtins.int
+SOURCE_RETENTION_OPTION_FIELD_NUMBER: _builtins.int
+FILE_OPTION_FIELD_NUMBER: _builtins.int
+REPEATED_OPTIONS_FIELD_NUMBER: _builtins.int
+EXTENSION_RANGE_OPTION_FIELD_NUMBER: _builtins.int
+MESSAGE_OPTION_FIELD_NUMBER: _builtins.int
+FIELD_OPTION_FIELD_NUMBER: _builtins.int
+ONEOF_OPTION_FIELD_NUMBER: _builtins.int
+ENUM_OPTION_FIELD_NUMBER: _builtins.int
+ENUM_ENTRY_OPTION_FIELD_NUMBER: _builtins.int
+SERVICE_OPTION_FIELD_NUMBER: _builtins.int
+METHOD_OPTION_FIELD_NUMBER: _builtins.int
+I_FIELD_NUMBER: _builtins.int
+plain_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
+runtime_retention_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
+source_retention_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
+file_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, Global___OptionsMessage]
+repeated_options: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___OptionsMessage]]
+extension_range_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.ExtensionRangeOptions, Global___OptionsMessage]
+message_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___OptionsMessage]
+field_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___OptionsMessage]
+oneof_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.OneofOptions, Global___OptionsMessage]
+enum_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumOptions, Global___OptionsMessage]
+enum_entry_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumValueOptions, Global___OptionsMessage]
+service_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.ServiceOptions, Global___OptionsMessage]
+method_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, Global___OptionsMessage]
+i: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Extendee, _builtins.int]

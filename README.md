@@ -458,6 +458,26 @@ mypy --target-version=2.7 {files}
 9. `uv run twine upload --repository testpypi dist/*`
 10. `uv run twine upload dist/*`
 
+## 3rd Party Tests
+
+3rd Party proto files can be added to `third_party` using git subtree. These can be used for large scale testing of changes.
+
+### Adding
+
+```bash
+git subtree add --prefix=third_party/googleapis https://github.com/googleapis/googleapis.git master --squash
+```
+
+### Updating
+
+```bash
+git subtree pull --prefix=third_party/googleapis https://github.com/googleapis/googleapis.git master --squash
+```
+
+## 5.0 Breaking change proposals
+
+* De-dot all import statements
+
 ## Contributing
 
 Contributions to the implementation are welcome. Please run tests using `./run_test.sh`.

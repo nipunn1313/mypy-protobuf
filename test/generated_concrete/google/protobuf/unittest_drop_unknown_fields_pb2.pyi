@@ -9,30 +9,30 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class Foo(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Foo(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Foo._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[Foo._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         FOO: Foo._NestedEnum.ValueType  # 0
         BAR: Foo._NestedEnum.ValueType  # 1
         BAZ: Foo._NestedEnum.ValueType  # 2
@@ -42,33 +42,33 @@ class Foo(google.protobuf.message.Message):
     BAR: Foo.NestedEnum.ValueType  # 1
     BAZ: Foo.NestedEnum.ValueType  # 2
 
-    INT32_VALUE_FIELD_NUMBER: builtins.int
-    ENUM_VALUE_FIELD_NUMBER: builtins.int
-    int32_value: builtins.int
+    INT32_VALUE_FIELD_NUMBER: _builtins.int
+    ENUM_VALUE_FIELD_NUMBER: _builtins.int
+    int32_value: _builtins.int
     enum_value: Global___Foo.NestedEnum.ValueType
     def __init__(
         self,
         *,
-        int32_value: builtins.int | None = ...,
+        int32_value: _builtins.int | None = ...,
         enum_value: Global___Foo.NestedEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["enum_value", b"enum_value", "int32_value", b"int32_value"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["enum_value", b"enum_value", "int32_value", b"int32_value"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "int32_value", b"int32_value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "int32_value", b"int32_value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Foo: typing_extensions.TypeAlias = Foo
+Global___Foo: _typing_extensions.TypeAlias = Foo  # noqa: Y015
 
-@typing.final
-class FooWithExtraFields(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FooWithExtraFields(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[FooWithExtraFields._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[FooWithExtraFields._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         FOO: FooWithExtraFields._NestedEnum.ValueType  # 0
         BAR: FooWithExtraFields._NestedEnum.ValueType  # 1
         BAZ: FooWithExtraFields._NestedEnum.ValueType  # 2
@@ -80,22 +80,22 @@ class FooWithExtraFields(google.protobuf.message.Message):
     BAZ: FooWithExtraFields.NestedEnum.ValueType  # 2
     MOO: FooWithExtraFields.NestedEnum.ValueType  # 3
 
-    INT32_VALUE_FIELD_NUMBER: builtins.int
-    ENUM_VALUE_FIELD_NUMBER: builtins.int
-    EXTRA_INT32_VALUE_FIELD_NUMBER: builtins.int
-    int32_value: builtins.int
+    INT32_VALUE_FIELD_NUMBER: _builtins.int
+    ENUM_VALUE_FIELD_NUMBER: _builtins.int
+    EXTRA_INT32_VALUE_FIELD_NUMBER: _builtins.int
+    int32_value: _builtins.int
     enum_value: Global___FooWithExtraFields.NestedEnum.ValueType
-    extra_int32_value: builtins.int
+    extra_int32_value: _builtins.int
     def __init__(
         self,
         *,
-        int32_value: builtins.int | None = ...,
+        int32_value: _builtins.int | None = ...,
         enum_value: Global___FooWithExtraFields.NestedEnum.ValueType | None = ...,
-        extra_int32_value: builtins.int | None = ...,
+        extra_int32_value: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["enum_value", b"enum_value", "extra_int32_value", b"extra_int32_value", "int32_value", b"int32_value"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["enum_value", b"enum_value", "extra_int32_value", b"extra_int32_value", "int32_value", b"int32_value"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "extra_int32_value", b"extra_int32_value", "int32_value", b"int32_value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "extra_int32_value", b"extra_int32_value", "int32_value", b"int32_value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FooWithExtraFields: typing_extensions.TypeAlias = FooWithExtraFields
+Global___FooWithExtraFields: _typing_extensions.TypeAlias = FooWithExtraFields  # noqa: Y015

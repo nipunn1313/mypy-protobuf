@@ -8,46 +8,46 @@ Author: kenton@google.com (Kenton Varda)
 This file contains messages for testing extensions.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class TestExtensionSet(google.protobuf.message.Message):
+@_typing.final
+class TestExtensionSet(_google_protobuf_message.Message):
     """A message with message_set_wire_format."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestExtensionSet: typing_extensions.TypeAlias = TestExtensionSet
+Global___TestExtensionSet: _typing_extensions.TypeAlias = TestExtensionSet  # noqa: Y015
 
-@typing.final
-class TestExtensionSetContainer(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestExtensionSetContainer(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    EXTENSION_FIELD_NUMBER: builtins.int
-    @property
+    EXTENSION_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def extension(self) -> Global___TestExtensionSet: ...
     def __init__(
         self,
         *,
         extension: Global___TestExtensionSet | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["extension", b"extension"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["extension", b"extension"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["extension", b"extension"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["extension", b"extension"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestExtensionSetContainer: typing_extensions.TypeAlias = TestExtensionSetContainer
+Global___TestExtensionSetContainer: _typing_extensions.TypeAlias = TestExtensionSetContainer  # noqa: Y015

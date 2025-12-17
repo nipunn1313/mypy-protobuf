@@ -3,24 +3,24 @@
 isort:skip_file
 """
 
-import google.protobuf.descriptor
-import google.protobuf.message
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class LateLoadedOptionUser(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class LateLoadedOptionUser(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___LateLoadedOptionUser: typing_extensions.TypeAlias = LateLoadedOptionUser
+Global___LateLoadedOptionUser: _typing_extensions.TypeAlias = LateLoadedOptionUser  # noqa: Y015

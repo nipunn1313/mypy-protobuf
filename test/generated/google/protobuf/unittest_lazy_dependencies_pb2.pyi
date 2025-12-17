@@ -6,22 +6,22 @@ that the generated code doesn't depend on being in the proto2 namespace.
 In test_util.h we do "using namespace unittest = proto2_unittest".
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import google.protobuf.unittest_lazy_dependencies_custom_option_pb2
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class ImportedMessage(google.protobuf.message.Message):
+@_typing.final
+class ImportedMessage(_google_protobuf_message.Message):
     """The following are used to test that the proto file
     with the definition of the following field types is
     not built when this proto file is built. Then test
@@ -29,39 +29,39 @@ class ImportedMessage(google.protobuf.message.Message):
     descriptor lazily and return it.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def lazy_message(self) -> google.protobuf.unittest_lazy_dependencies_custom_option_pb2.LazyMessage: ...
     def __init__(
         self,
         *,
         lazy_message: google.protobuf.unittest_lazy_dependencies_custom_option_pb2.LazyMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["lazy_message", b"lazy_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["lazy_message", b"lazy_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["lazy_message", b"lazy_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["lazy_message", b"lazy_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ImportedMessage: typing_extensions.TypeAlias = ImportedMessage
+Global___ImportedMessage: _typing_extensions.TypeAlias = ImportedMessage  # noqa: Y015
 
-@typing.final
-class MessageCustomOption(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    def __init__(
-        self,
-    ) -> None: ...
-
-Global___MessageCustomOption: typing_extensions.TypeAlias = MessageCustomOption
-
-@typing.final
-class MessageCustomOption2(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MessageCustomOption(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___MessageCustomOption2: typing_extensions.TypeAlias = MessageCustomOption2
+Global___MessageCustomOption: _typing_extensions.TypeAlias = MessageCustomOption  # noqa: Y015
+
+@_typing.final
+class MessageCustomOption2(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+Global___MessageCustomOption2: _typing_extensions.TypeAlias = MessageCustomOption2  # noqa: Y015

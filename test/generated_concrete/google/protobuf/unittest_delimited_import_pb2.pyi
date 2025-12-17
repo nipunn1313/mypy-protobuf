@@ -3,36 +3,36 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class MessageImport(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MessageImport(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    a: builtins.int
-    b: builtins.int
+    A_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
+    b: _builtins.int
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
-        b: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
+        b: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___MessageImport: typing_extensions.TypeAlias = MessageImport
+Global___MessageImport: _typing_extensions.TypeAlias = MessageImport  # noqa: Y015

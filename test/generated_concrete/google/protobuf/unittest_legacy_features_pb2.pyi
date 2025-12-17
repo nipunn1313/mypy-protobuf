@@ -3,37 +3,37 @@
 isort:skip_file
 Test that features with legacy descriptor helpers get properly converted."""
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class TestEditionsMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestEditionsMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REQUIRED_FIELD_FIELD_NUMBER: builtins.int
-    DELIMITED_FIELD_FIELD_NUMBER: builtins.int
-    required_field: builtins.int
-    @property
+    REQUIRED_FIELD_FIELD_NUMBER: _builtins.int
+    DELIMITED_FIELD_FIELD_NUMBER: _builtins.int
+    required_field: _builtins.int
+    @_builtins.property
     def delimited_field(self) -> Global___TestEditionsMessage: ...
     def __init__(
         self,
         *,
-        required_field: builtins.int | None = ...,
+        required_field: _builtins.int | None = ...,
         delimited_field: Global___TestEditionsMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestEditionsMessage: typing_extensions.TypeAlias = TestEditionsMessage
+Global___TestEditionsMessage: _typing_extensions.TypeAlias = TestEditionsMessage  # noqa: Y015

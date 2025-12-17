@@ -6,36 +6,36 @@ that the generated code doesn't depend on being in the proto2 namespace.
 In test_util.h we do "using namespace unittest = proto2_unittest".
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import builtins as _builtins
+import collections.abc as _collections_abc
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import google.protobuf.unittest_import_pb2
 import google.protobuf.unittest_import_public_pb2
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
 if sys.version_info >= (3, 13):
-    from warnings import deprecated
+    from warnings import deprecated as _deprecated
 else:
-    from typing_extensions import deprecated
+    from typing_extensions import deprecated as _deprecated
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _ForeignEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _ForeignEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ForeignEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ForeignEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ForeignEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     FOREIGN_FOO: _ForeignEnum.ValueType  # 4
     FOREIGN_BAR: _ForeignEnum.ValueType  # 5
     FOREIGN_BAZ: _ForeignEnum.ValueType  # 6
@@ -53,27 +53,27 @@ FOREIGN_BAX: ForeignEnum.ValueType  # 32
 """(1 << 32) to generate a 64b bitmask would be incorrect."""
 FOREIGN_LARGE: ForeignEnum.ValueType  # 123456
 """Large enough to escape the Boxed Integer cache."""
-Global___ForeignEnum: typing_extensions.TypeAlias = ForeignEnum
+Global___ForeignEnum: _typing_extensions.TypeAlias = ForeignEnum  # noqa: Y015
 
 class _TestReservedEnumFields:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _TestReservedEnumFieldsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TestReservedEnumFields.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TestReservedEnumFieldsEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_TestReservedEnumFields.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     UNKNOWN: _TestReservedEnumFields.ValueType  # 0
 
 class TestReservedEnumFields(_TestReservedEnumFields, metaclass=_TestReservedEnumFieldsEnumTypeWrapper): ...
 
 UNKNOWN: TestReservedEnumFields.ValueType  # 0
-Global___TestReservedEnumFields: typing_extensions.TypeAlias = TestReservedEnumFields
+Global___TestReservedEnumFields: _typing_extensions.TypeAlias = TestReservedEnumFields  # noqa: Y015
 
 class _ForeignOpenEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _ForeignOpenEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ForeignOpenEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ForeignOpenEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ForeignOpenEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     FOREIGN_OPEN_UNKNOWN: _ForeignOpenEnum.ValueType  # 0
     FOREIGN_OPEN_FOO: _ForeignOpenEnum.ValueType  # 4
     FOREIGN_OPEN_BAR: _ForeignOpenEnum.ValueType  # 5
@@ -90,14 +90,14 @@ FOREIGN_OPEN_BAR: ForeignOpenEnum.ValueType  # 5
 FOREIGN_OPEN_BAZ: ForeignOpenEnum.ValueType  # 6
 FOREIGN_OPEN_BAX: ForeignOpenEnum.ValueType  # 32
 """(1 << 32) to generate a 64b bitmask would be"""
-Global___ForeignOpenEnum: typing_extensions.TypeAlias = ForeignOpenEnum
+Global___ForeignOpenEnum: _typing_extensions.TypeAlias = ForeignOpenEnum  # noqa: Y015
 
 class _TestEnumWithDupValue:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _TestEnumWithDupValueEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TestEnumWithDupValue.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TestEnumWithDupValueEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_TestEnumWithDupValue.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     FOO1: _TestEnumWithDupValue.ValueType  # 1
     BAR1: _TestEnumWithDupValue.ValueType  # 2
     BAZ: _TestEnumWithDupValue.ValueType  # 3
@@ -112,14 +112,14 @@ BAR1: TestEnumWithDupValue.ValueType  # 2
 BAZ: TestEnumWithDupValue.ValueType  # 3
 FOO2: TestEnumWithDupValue.ValueType  # 1
 BAR2: TestEnumWithDupValue.ValueType  # 2
-Global___TestEnumWithDupValue: typing_extensions.TypeAlias = TestEnumWithDupValue
+Global___TestEnumWithDupValue: _typing_extensions.TypeAlias = TestEnumWithDupValue  # noqa: Y015
 
 class _TestSparseEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _TestSparseEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TestSparseEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TestSparseEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_TestSparseEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     SPARSE_A: _TestSparseEnum.ValueType  # 123
     SPARSE_B: _TestSparseEnum.ValueType  # 62374
     SPARSE_C: _TestSparseEnum.ValueType  # 12589234
@@ -138,14 +138,14 @@ SPARSE_D: TestSparseEnum.ValueType  # -15
 SPARSE_E: TestSparseEnum.ValueType  # -53452
 SPARSE_F: TestSparseEnum.ValueType  # 0
 SPARSE_G: TestSparseEnum.ValueType  # 2
-Global___TestSparseEnum: typing_extensions.TypeAlias = TestSparseEnum
+Global___TestSparseEnum: _typing_extensions.TypeAlias = TestSparseEnum  # noqa: Y015
 
 class _VeryLargeEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _VeryLargeEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_VeryLargeEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _VeryLargeEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_VeryLargeEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     ENUM_LABEL_DEFAULT: _VeryLargeEnum.ValueType  # 0
     ENUM_LABEL_1: _VeryLargeEnum.ValueType  # 1
     ENUM_LABEL_2: _VeryLargeEnum.ValueType  # 2
@@ -351,22 +351,22 @@ ENUM_LABEL_97: VeryLargeEnum.ValueType  # 97
 ENUM_LABEL_98: VeryLargeEnum.ValueType  # 98
 ENUM_LABEL_99: VeryLargeEnum.ValueType  # 99
 ENUM_LABEL_100: VeryLargeEnum.ValueType  # 100
-Global___VeryLargeEnum: typing_extensions.TypeAlias = VeryLargeEnum
+Global___VeryLargeEnum: _typing_extensions.TypeAlias = VeryLargeEnum  # noqa: Y015
 
-@typing.final
-class TestAllTypes(google.protobuf.message.Message):
+@_typing.final
+class TestAllTypes(_google_protobuf_message.Message):
     """This proto includes every type of field in both singular and repeated
     forms.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestAllTypes._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestAllTypes._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         FOO: TestAllTypes._NestedEnum.ValueType  # 1
         BAR: TestAllTypes._NestedEnum.ValueType  # 2
         BAZ: TestAllTypes._NestedEnum.ValueType  # 3
@@ -380,12 +380,12 @@ class TestAllTypes(google.protobuf.message.Message):
     NEG: TestAllTypes.NestedEnum.ValueType  # -1
     """Intentionally negative."""
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        BB_FIELD_NUMBER: builtins.int
-        bb: builtins.int
+        BB_FIELD_NUMBER: _builtins.int
+        bb: _builtins.int
         """The field name "b" fails to compile in proto1 because it conflicts with
         a local variable named "b" in one of the generated methods.  Doh.
         This file needs to compile in proto1 to test backwards-compatibility.
@@ -393,263 +393,263 @@ class TestAllTypes(google.protobuf.message.Message):
         def __init__(
             self,
             *,
-            bb: builtins.int | None = ...,
+            bb: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class OptionalGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class OptionalGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        a: builtins.int
+        A_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
+            a: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class RepeatedGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class RepeatedGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        a: builtins.int
+        A_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
+            a: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONAL_INT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_SINT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_SINT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_FIXED32_FIELD_NUMBER: builtins.int
-    OPTIONAL_FIXED64_FIELD_NUMBER: builtins.int
-    OPTIONAL_SFIXED32_FIELD_NUMBER: builtins.int
-    OPTIONAL_SFIXED64_FIELD_NUMBER: builtins.int
-    OPTIONAL_FLOAT_FIELD_NUMBER: builtins.int
-    OPTIONAL_DOUBLE_FIELD_NUMBER: builtins.int
-    OPTIONAL_BOOL_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_BYTES_FIELD_NUMBER: builtins.int
-    OPTIONALGROUP_FIELD_NUMBER: builtins.int
-    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_NESTED_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_IMPORT_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_PIECE_FIELD_NUMBER: builtins.int
-    OPTIONAL_CORD_FIELD_NUMBER: builtins.int
-    OPTIONAL_BYTES_CORD_FIELD_NUMBER: builtins.int
-    OPTIONAL_PUBLIC_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_UNVERIFIED_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_FIELD_NUMBER: builtins.int
-    REPEATED_UINT32_FIELD_NUMBER: builtins.int
-    REPEATED_UINT64_FIELD_NUMBER: builtins.int
-    REPEATED_SINT32_FIELD_NUMBER: builtins.int
-    REPEATED_SINT64_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_SFIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_SFIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_FLOAT_FIELD_NUMBER: builtins.int
-    REPEATED_DOUBLE_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_FIELD_NUMBER: builtins.int
-    REPEATED_BYTES_FIELD_NUMBER: builtins.int
-    REPEATEDGROUP_FIELD_NUMBER: builtins.int
-    REPEATED_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_FOREIGN_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_NESTED_ENUM_FIELD_NUMBER: builtins.int
-    REPEATED_FOREIGN_ENUM_FIELD_NUMBER: builtins.int
-    REPEATED_IMPORT_ENUM_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_PIECE_FIELD_NUMBER: builtins.int
-    REPEATED_CORD_FIELD_NUMBER: builtins.int
-    REPEATED_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    DEFAULT_INT32_FIELD_NUMBER: builtins.int
-    DEFAULT_INT64_FIELD_NUMBER: builtins.int
-    DEFAULT_UINT32_FIELD_NUMBER: builtins.int
-    DEFAULT_UINT64_FIELD_NUMBER: builtins.int
-    DEFAULT_SINT32_FIELD_NUMBER: builtins.int
-    DEFAULT_SINT64_FIELD_NUMBER: builtins.int
-    DEFAULT_FIXED32_FIELD_NUMBER: builtins.int
-    DEFAULT_FIXED64_FIELD_NUMBER: builtins.int
-    DEFAULT_SFIXED32_FIELD_NUMBER: builtins.int
-    DEFAULT_SFIXED64_FIELD_NUMBER: builtins.int
-    DEFAULT_FLOAT_FIELD_NUMBER: builtins.int
-    DEFAULT_DOUBLE_FIELD_NUMBER: builtins.int
-    DEFAULT_BOOL_FIELD_NUMBER: builtins.int
-    DEFAULT_STRING_FIELD_NUMBER: builtins.int
-    DEFAULT_BYTES_FIELD_NUMBER: builtins.int
-    DEFAULT_NESTED_ENUM_FIELD_NUMBER: builtins.int
-    DEFAULT_FOREIGN_ENUM_FIELD_NUMBER: builtins.int
-    DEFAULT_IMPORT_ENUM_FIELD_NUMBER: builtins.int
-    DEFAULT_STRING_PIECE_FIELD_NUMBER: builtins.int
-    DEFAULT_CORD_FIELD_NUMBER: builtins.int
-    ONEOF_UINT32_FIELD_NUMBER: builtins.int
-    ONEOF_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    ONEOF_STRING_FIELD_NUMBER: builtins.int
-    ONEOF_BYTES_FIELD_NUMBER: builtins.int
-    ONEOF_CORD_FIELD_NUMBER: builtins.int
-    ONEOF_STRING_PIECE_FIELD_NUMBER: builtins.int
-    ONEOF_LAZY_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    optional_int32: builtins.int
+    OPTIONAL_INT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SINT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SINT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FIXED32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FIXED64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SFIXED32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SFIXED64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FLOAT_FIELD_NUMBER: _builtins.int
+    OPTIONAL_DOUBLE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BOOL_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BYTES_FIELD_NUMBER: _builtins.int
+    OPTIONALGROUP_FIELD_NUMBER: _builtins.int
+    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_IMPORT_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_CORD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BYTES_CORD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_PUBLIC_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UNVERIFIED_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT32_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT64_FIELD_NUMBER: _builtins.int
+    REPEATED_SINT32_FIELD_NUMBER: _builtins.int
+    REPEATED_SINT64_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_SFIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_SFIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_FLOAT_FIELD_NUMBER: _builtins.int
+    REPEATED_DOUBLE_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_FIELD_NUMBER: _builtins.int
+    REPEATED_BYTES_FIELD_NUMBER: _builtins.int
+    REPEATEDGROUP_FIELD_NUMBER: _builtins.int
+    REPEATED_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_FOREIGN_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    REPEATED_FOREIGN_ENUM_FIELD_NUMBER: _builtins.int
+    REPEATED_IMPORT_ENUM_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    REPEATED_CORD_FIELD_NUMBER: _builtins.int
+    REPEATED_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    DEFAULT_INT32_FIELD_NUMBER: _builtins.int
+    DEFAULT_INT64_FIELD_NUMBER: _builtins.int
+    DEFAULT_UINT32_FIELD_NUMBER: _builtins.int
+    DEFAULT_UINT64_FIELD_NUMBER: _builtins.int
+    DEFAULT_SINT32_FIELD_NUMBER: _builtins.int
+    DEFAULT_SINT64_FIELD_NUMBER: _builtins.int
+    DEFAULT_FIXED32_FIELD_NUMBER: _builtins.int
+    DEFAULT_FIXED64_FIELD_NUMBER: _builtins.int
+    DEFAULT_SFIXED32_FIELD_NUMBER: _builtins.int
+    DEFAULT_SFIXED64_FIELD_NUMBER: _builtins.int
+    DEFAULT_FLOAT_FIELD_NUMBER: _builtins.int
+    DEFAULT_DOUBLE_FIELD_NUMBER: _builtins.int
+    DEFAULT_BOOL_FIELD_NUMBER: _builtins.int
+    DEFAULT_STRING_FIELD_NUMBER: _builtins.int
+    DEFAULT_BYTES_FIELD_NUMBER: _builtins.int
+    DEFAULT_NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    DEFAULT_FOREIGN_ENUM_FIELD_NUMBER: _builtins.int
+    DEFAULT_IMPORT_ENUM_FIELD_NUMBER: _builtins.int
+    DEFAULT_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    DEFAULT_CORD_FIELD_NUMBER: _builtins.int
+    ONEOF_UINT32_FIELD_NUMBER: _builtins.int
+    ONEOF_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    ONEOF_STRING_FIELD_NUMBER: _builtins.int
+    ONEOF_BYTES_FIELD_NUMBER: _builtins.int
+    ONEOF_CORD_FIELD_NUMBER: _builtins.int
+    ONEOF_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    ONEOF_LAZY_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    optional_int32: _builtins.int
     """Singular"""
-    optional_int64: builtins.int
-    optional_uint32: builtins.int
-    optional_uint64: builtins.int
-    optional_sint32: builtins.int
-    optional_sint64: builtins.int
-    optional_fixed32: builtins.int
-    optional_fixed64: builtins.int
-    optional_sfixed32: builtins.int
-    optional_sfixed64: builtins.int
-    optional_float: builtins.float
-    optional_double: builtins.float
-    optional_bool: builtins.bool
-    optional_string: builtins.str
-    optional_bytes: builtins.bytes
+    optional_int64: _builtins.int
+    optional_uint32: _builtins.int
+    optional_uint64: _builtins.int
+    optional_sint32: _builtins.int
+    optional_sint64: _builtins.int
+    optional_fixed32: _builtins.int
+    optional_fixed64: _builtins.int
+    optional_sfixed32: _builtins.int
+    optional_sfixed64: _builtins.int
+    optional_float: _builtins.float
+    optional_double: _builtins.float
+    optional_bool: _builtins.bool
+    optional_string: _builtins.str
+    optional_bytes: _builtins.bytes
     optional_nested_enum: Global___TestAllTypes.NestedEnum.ValueType
     optional_foreign_enum: Global___ForeignEnum.ValueType
     optional_import_enum: google.protobuf.unittest_import_pb2.ImportEnum.ValueType
-    optional_string_piece: builtins.str
-    optional_cord: builtins.str
-    optional_bytes_cord: builtins.bytes
-    default_int32: builtins.int
+    optional_string_piece: _builtins.str
+    optional_cord: _builtins.str
+    optional_bytes_cord: _builtins.bytes
+    default_int32: _builtins.int
     """Singular with defaults"""
-    default_int64: builtins.int
-    default_uint32: builtins.int
-    default_uint64: builtins.int
-    default_sint32: builtins.int
-    default_sint64: builtins.int
-    default_fixed32: builtins.int
-    default_fixed64: builtins.int
-    default_sfixed32: builtins.int
-    default_sfixed64: builtins.int
-    default_float: builtins.float
-    default_double: builtins.float
-    default_bool: builtins.bool
-    default_string: builtins.str
-    default_bytes: builtins.bytes
+    default_int64: _builtins.int
+    default_uint32: _builtins.int
+    default_uint64: _builtins.int
+    default_sint32: _builtins.int
+    default_sint64: _builtins.int
+    default_fixed32: _builtins.int
+    default_fixed64: _builtins.int
+    default_sfixed32: _builtins.int
+    default_sfixed64: _builtins.int
+    default_float: _builtins.float
+    default_double: _builtins.float
+    default_bool: _builtins.bool
+    default_string: _builtins.str
+    default_bytes: _builtins.bytes
     default_nested_enum: Global___TestAllTypes.NestedEnum.ValueType
     default_foreign_enum: Global___ForeignEnum.ValueType
     default_import_enum: google.protobuf.unittest_import_pb2.ImportEnum.ValueType
-    default_string_piece: builtins.str
-    default_cord: builtins.str
-    oneof_uint32: builtins.int
-    oneof_string: builtins.str
-    oneof_bytes: builtins.bytes
-    oneof_cord: builtins.str
-    oneof_string_piece: builtins.str
-    @property
+    default_string_piece: _builtins.str
+    default_cord: _builtins.str
+    oneof_uint32: _builtins.int
+    oneof_string: _builtins.str
+    oneof_bytes: _builtins.bytes
+    oneof_cord: _builtins.str
+    oneof_string_piece: _builtins.str
+    @_builtins.property
     def optionalgroup(self) -> Global___TestAllTypes.OptionalGroup: ...
-    @property
+    @_builtins.property
     def optional_nested_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
+    @_builtins.property
     def optional_foreign_message(self) -> Global___ForeignMessage: ...
-    @property
+    @_builtins.property
     def optional_import_message(self) -> google.protobuf.unittest_import_pb2.ImportMessage: ...
-    @property
+    @_builtins.property
     def optional_public_import_message(self) -> google.protobuf.unittest_import_public_pb2.PublicImportMessage:
         """Defined in unittest_import_public.proto"""
 
-    @property
+    @_builtins.property
     def optional_lazy_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
+    @_builtins.property
     def optional_unverified_lazy_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
-    def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    @_builtins.property
+    def repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Repeated"""
 
-    @property
-    def repeated_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_uint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sfixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sfixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def repeated_double(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def repeated_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_bytes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
-    @property
-    def repeatedgroup(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.RepeatedGroup]: ...
-    @property
-    def repeated_nested_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]: ...
-    @property
-    def repeated_foreign_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
-    @property
-    def repeated_import_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_import_pb2.ImportMessage]: ...
-    @property
-    def repeated_nested_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]: ...
-    @property
-    def repeated_foreign_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
-    @property
-    def repeated_import_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[google.protobuf.unittest_import_pb2.ImportEnum.ValueType]: ...
-    @property
-    def repeated_string_piece(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_cord(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_lazy_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]: ...
-    @property
+    @_builtins.property
+    def repeated_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_uint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sfixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sfixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def repeated_double(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def repeated_bool(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def repeated_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_bytes(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
+    @_builtins.property
+    def repeatedgroup(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.RepeatedGroup]: ...
+    @_builtins.property
+    def repeated_nested_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]: ...
+    @_builtins.property
+    def repeated_foreign_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
+    @_builtins.property
+    def repeated_import_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_import_pb2.ImportMessage]: ...
+    @_builtins.property
+    def repeated_nested_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_foreign_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_import_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[google.protobuf.unittest_import_pb2.ImportEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_string_piece(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_cord(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_lazy_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]: ...
+    @_builtins.property
     def oneof_nested_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
+    @_builtins.property
     def oneof_lazy_nested_message(self) -> Global___TestAllTypes.NestedMessage: ...
     def __init__(
         self,
         *,
-        optional_int32: builtins.int | None = ...,
-        optional_int64: builtins.int | None = ...,
-        optional_uint32: builtins.int | None = ...,
-        optional_uint64: builtins.int | None = ...,
-        optional_sint32: builtins.int | None = ...,
-        optional_sint64: builtins.int | None = ...,
-        optional_fixed32: builtins.int | None = ...,
-        optional_fixed64: builtins.int | None = ...,
-        optional_sfixed32: builtins.int | None = ...,
-        optional_sfixed64: builtins.int | None = ...,
-        optional_float: builtins.float | None = ...,
-        optional_double: builtins.float | None = ...,
-        optional_bool: builtins.bool | None = ...,
-        optional_string: builtins.str | None = ...,
-        optional_bytes: builtins.bytes | None = ...,
+        optional_int32: _builtins.int | None = ...,
+        optional_int64: _builtins.int | None = ...,
+        optional_uint32: _builtins.int | None = ...,
+        optional_uint64: _builtins.int | None = ...,
+        optional_sint32: _builtins.int | None = ...,
+        optional_sint64: _builtins.int | None = ...,
+        optional_fixed32: _builtins.int | None = ...,
+        optional_fixed64: _builtins.int | None = ...,
+        optional_sfixed32: _builtins.int | None = ...,
+        optional_sfixed64: _builtins.int | None = ...,
+        optional_float: _builtins.float | None = ...,
+        optional_double: _builtins.float | None = ...,
+        optional_bool: _builtins.bool | None = ...,
+        optional_string: _builtins.str | None = ...,
+        optional_bytes: _builtins.bytes | None = ...,
         optionalgroup: Global___TestAllTypes.OptionalGroup | None = ...,
         optional_nested_message: Global___TestAllTypes.NestedMessage | None = ...,
         optional_foreign_message: Global___ForeignMessage | None = ...,
@@ -657,294 +657,294 @@ class TestAllTypes(google.protobuf.message.Message):
         optional_nested_enum: Global___TestAllTypes.NestedEnum.ValueType | None = ...,
         optional_foreign_enum: Global___ForeignEnum.ValueType | None = ...,
         optional_import_enum: google.protobuf.unittest_import_pb2.ImportEnum.ValueType | None = ...,
-        optional_string_piece: builtins.str | None = ...,
-        optional_cord: builtins.str | None = ...,
-        optional_bytes_cord: builtins.bytes | None = ...,
+        optional_string_piece: _builtins.str | None = ...,
+        optional_cord: _builtins.str | None = ...,
+        optional_bytes_cord: _builtins.bytes | None = ...,
         optional_public_import_message: google.protobuf.unittest_import_public_pb2.PublicImportMessage | None = ...,
         optional_lazy_message: Global___TestAllTypes.NestedMessage | None = ...,
         optional_unverified_lazy_message: Global___TestAllTypes.NestedMessage | None = ...,
-        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_uint32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_uint64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sint32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sint64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_float: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_double: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_bool: collections.abc.Iterable[builtins.bool] | None = ...,
-        repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_bytes: collections.abc.Iterable[builtins.bytes] | None = ...,
-        repeatedgroup: collections.abc.Iterable[Global___TestAllTypes.RepeatedGroup] | None = ...,
-        repeated_nested_message: collections.abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
-        repeated_foreign_message: collections.abc.Iterable[Global___ForeignMessage] | None = ...,
-        repeated_import_message: collections.abc.Iterable[google.protobuf.unittest_import_pb2.ImportMessage] | None = ...,
-        repeated_nested_enum: collections.abc.Iterable[Global___TestAllTypes.NestedEnum.ValueType] | None = ...,
-        repeated_foreign_enum: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
-        repeated_import_enum: collections.abc.Iterable[google.protobuf.unittest_import_pb2.ImportEnum.ValueType] | None = ...,
-        repeated_string_piece: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_cord: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_lazy_message: collections.abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
-        default_int32: builtins.int | None = ...,
-        default_int64: builtins.int | None = ...,
-        default_uint32: builtins.int | None = ...,
-        default_uint64: builtins.int | None = ...,
-        default_sint32: builtins.int | None = ...,
-        default_sint64: builtins.int | None = ...,
-        default_fixed32: builtins.int | None = ...,
-        default_fixed64: builtins.int | None = ...,
-        default_sfixed32: builtins.int | None = ...,
-        default_sfixed64: builtins.int | None = ...,
-        default_float: builtins.float | None = ...,
-        default_double: builtins.float | None = ...,
-        default_bool: builtins.bool | None = ...,
-        default_string: builtins.str | None = ...,
-        default_bytes: builtins.bytes | None = ...,
+        repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_uint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sfixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sfixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_double: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_bool: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        repeated_string: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_bytes: _collections_abc.Iterable[_builtins.bytes] | None = ...,
+        repeatedgroup: _collections_abc.Iterable[Global___TestAllTypes.RepeatedGroup] | None = ...,
+        repeated_nested_message: _collections_abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
+        repeated_foreign_message: _collections_abc.Iterable[Global___ForeignMessage] | None = ...,
+        repeated_import_message: _collections_abc.Iterable[google.protobuf.unittest_import_pb2.ImportMessage] | None = ...,
+        repeated_nested_enum: _collections_abc.Iterable[Global___TestAllTypes.NestedEnum.ValueType] | None = ...,
+        repeated_foreign_enum: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        repeated_import_enum: _collections_abc.Iterable[google.protobuf.unittest_import_pb2.ImportEnum.ValueType] | None = ...,
+        repeated_string_piece: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_cord: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_lazy_message: _collections_abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
+        default_int32: _builtins.int | None = ...,
+        default_int64: _builtins.int | None = ...,
+        default_uint32: _builtins.int | None = ...,
+        default_uint64: _builtins.int | None = ...,
+        default_sint32: _builtins.int | None = ...,
+        default_sint64: _builtins.int | None = ...,
+        default_fixed32: _builtins.int | None = ...,
+        default_fixed64: _builtins.int | None = ...,
+        default_sfixed32: _builtins.int | None = ...,
+        default_sfixed64: _builtins.int | None = ...,
+        default_float: _builtins.float | None = ...,
+        default_double: _builtins.float | None = ...,
+        default_bool: _builtins.bool | None = ...,
+        default_string: _builtins.str | None = ...,
+        default_bytes: _builtins.bytes | None = ...,
         default_nested_enum: Global___TestAllTypes.NestedEnum.ValueType | None = ...,
         default_foreign_enum: Global___ForeignEnum.ValueType | None = ...,
         default_import_enum: google.protobuf.unittest_import_pb2.ImportEnum.ValueType | None = ...,
-        default_string_piece: builtins.str | None = ...,
-        default_cord: builtins.str | None = ...,
-        oneof_uint32: builtins.int | None = ...,
+        default_string_piece: _builtins.str | None = ...,
+        default_cord: _builtins.str | None = ...,
+        oneof_uint32: _builtins.int | None = ...,
         oneof_nested_message: Global___TestAllTypes.NestedMessage | None = ...,
-        oneof_string: builtins.str | None = ...,
-        oneof_bytes: builtins.bytes | None = ...,
-        oneof_cord: builtins.str | None = ...,
-        oneof_string_piece: builtins.str | None = ...,
+        oneof_string: _builtins.str | None = ...,
+        oneof_bytes: _builtins.bytes | None = ...,
+        oneof_cord: _builtins.str | None = ...,
+        oneof_string_piece: _builtins.str | None = ...,
         oneof_lazy_nested_message: Global___TestAllTypes.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["default_bool", b"default_bool", "default_bytes", b"default_bytes", "default_cord", b"default_cord", "default_double", b"default_double", "default_fixed32", b"default_fixed32", "default_fixed64", b"default_fixed64", "default_float", b"default_float", "default_foreign_enum", b"default_foreign_enum", "default_import_enum", b"default_import_enum", "default_int32", b"default_int32", "default_int64", b"default_int64", "default_nested_enum", b"default_nested_enum", "default_sfixed32", b"default_sfixed32", "default_sfixed64", b"default_sfixed64", "default_sint32", b"default_sint32", "default_sint64", b"default_sint64", "default_string", b"default_string", "default_string_piece", b"default_string_piece", "default_uint32", b"default_uint32", "default_uint64", b"default_uint64", "oneof_bytes", b"oneof_bytes", "oneof_cord", b"oneof_cord", "oneof_field", b"oneof_field", "oneof_lazy_nested_message", b"oneof_lazy_nested_message", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_string_piece", b"oneof_string_piece", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_bytes_cord", b"optional_bytes_cord", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_import_enum", b"optional_import_enum", "optional_import_message", b"optional_import_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_lazy_message", b"optional_lazy_message", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "optional_unverified_lazy_message", b"optional_unverified_lazy_message", "optionalgroup", b"optionalgroup", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_foreign_enum", b"repeated_foreign_enum", "repeated_foreign_message", b"repeated_foreign_message", "repeated_import_enum", b"repeated_import_enum", "repeated_import_message", b"repeated_import_message", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_lazy_message", b"repeated_lazy_message", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_string_piece", b"repeated_string_piece", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64", "repeatedgroup", b"repeatedgroup"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["default_bool", b"default_bool", "default_bytes", b"default_bytes", "default_cord", b"default_cord", "default_double", b"default_double", "default_fixed32", b"default_fixed32", "default_fixed64", b"default_fixed64", "default_float", b"default_float", "default_foreign_enum", b"default_foreign_enum", "default_import_enum", b"default_import_enum", "default_int32", b"default_int32", "default_int64", b"default_int64", "default_nested_enum", b"default_nested_enum", "default_sfixed32", b"default_sfixed32", "default_sfixed64", b"default_sfixed64", "default_sint32", b"default_sint32", "default_sint64", b"default_sint64", "default_string", b"default_string", "default_string_piece", b"default_string_piece", "default_uint32", b"default_uint32", "default_uint64", b"default_uint64", "oneof_bytes", b"oneof_bytes", "oneof_cord", b"oneof_cord", "oneof_field", b"oneof_field", "oneof_lazy_nested_message", b"oneof_lazy_nested_message", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_string_piece", b"oneof_string_piece", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_bytes_cord", b"optional_bytes_cord", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_import_enum", b"optional_import_enum", "optional_import_message", b"optional_import_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_lazy_message", b"optional_lazy_message", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "optional_unverified_lazy_message", b"optional_unverified_lazy_message", "optionalgroup", b"optionalgroup", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_foreign_enum", b"repeated_foreign_enum", "repeated_foreign_message", b"repeated_foreign_message", "repeated_import_enum", b"repeated_import_enum", "repeated_import_message", b"repeated_import_message", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_lazy_message", b"repeated_lazy_message", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_string_piece", b"repeated_string_piece", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64", "repeatedgroup", b"repeatedgroup"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["default_bool", b"default_bool", "default_bytes", b"default_bytes", "default_cord", b"default_cord", "default_double", b"default_double", "default_fixed32", b"default_fixed32", "default_fixed64", b"default_fixed64", "default_float", b"default_float", "default_foreign_enum", b"default_foreign_enum", "default_import_enum", b"default_import_enum", "default_int32", b"default_int32", "default_int64", b"default_int64", "default_nested_enum", b"default_nested_enum", "default_sfixed32", b"default_sfixed32", "default_sfixed64", b"default_sfixed64", "default_sint32", b"default_sint32", "default_sint64", b"default_sint64", "default_string", b"default_string", "default_string_piece", b"default_string_piece", "default_uint32", b"default_uint32", "default_uint64", b"default_uint64", "oneof_bytes", b"oneof_bytes", "oneof_cord", b"oneof_cord", "oneof_field", b"oneof_field", "oneof_lazy_nested_message", b"oneof_lazy_nested_message", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_string_piece", b"oneof_string_piece", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_bytes_cord", b"optional_bytes_cord", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_import_enum", b"optional_import_enum", "optional_import_message", b"optional_import_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_lazy_message", b"optional_lazy_message", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "optional_unverified_lazy_message", b"optional_unverified_lazy_message", "optionalgroup", b"optionalgroup", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_foreign_enum", b"repeated_foreign_enum", "repeated_foreign_message", b"repeated_foreign_message", "repeated_import_enum", b"repeated_import_enum", "repeated_import_message", b"repeated_import_message", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_lazy_message", b"repeated_lazy_message", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_string_piece", b"repeated_string_piece", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64", "repeatedgroup", b"repeatedgroup"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["default_bool", b"default_bool", "default_bytes", b"default_bytes", "default_cord", b"default_cord", "default_double", b"default_double", "default_fixed32", b"default_fixed32", "default_fixed64", b"default_fixed64", "default_float", b"default_float", "default_foreign_enum", b"default_foreign_enum", "default_import_enum", b"default_import_enum", "default_int32", b"default_int32", "default_int64", b"default_int64", "default_nested_enum", b"default_nested_enum", "default_sfixed32", b"default_sfixed32", "default_sfixed64", b"default_sfixed64", "default_sint32", b"default_sint32", "default_sint64", b"default_sint64", "default_string", b"default_string", "default_string_piece", b"default_string_piece", "default_uint32", b"default_uint32", "default_uint64", b"default_uint64", "oneof_bytes", b"oneof_bytes", "oneof_cord", b"oneof_cord", "oneof_field", b"oneof_field", "oneof_lazy_nested_message", b"oneof_lazy_nested_message", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_string_piece", b"oneof_string_piece", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_bytes_cord", b"optional_bytes_cord", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_import_enum", b"optional_import_enum", "optional_import_message", b"optional_import_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_lazy_message", b"optional_lazy_message", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "optional_unverified_lazy_message", b"optional_unverified_lazy_message", "optionalgroup", b"optionalgroup", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_foreign_enum", b"repeated_foreign_enum", "repeated_foreign_message", b"repeated_foreign_message", "repeated_import_enum", b"repeated_import_enum", "repeated_import_message", b"repeated_import_message", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_lazy_message", b"repeated_lazy_message", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_string_piece", b"repeated_string_piece", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64", "repeatedgroup", b"repeatedgroup"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_oneof_field: typing_extensions.TypeAlias = typing.Literal["oneof_uint32", "oneof_nested_message", "oneof_string", "oneof_bytes", "oneof_cord", "oneof_string_piece", "oneof_lazy_nested_message"]
-    _WhichOneofArgType_oneof_field: typing_extensions.TypeAlias = typing.Literal["oneof_field", b"oneof_field"]
+    _WhichOneofReturnType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_uint32", "oneof_nested_message", "oneof_string", "oneof_bytes", "oneof_cord", "oneof_string_piece", "oneof_lazy_nested_message"]  # noqa: Y015
+    _WhichOneofArgType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_field", b"oneof_field"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_field) -> _WhichOneofReturnType_oneof_field | None: ...
 
-Global___TestAllTypes: typing_extensions.TypeAlias = TestAllTypes
+Global___TestAllTypes: _typing_extensions.TypeAlias = TestAllTypes  # noqa: Y015
 
-@typing.final
-class NestedTestAllTypes(google.protobuf.message.Message):
+@_typing.final
+class NestedTestAllTypes(_google_protobuf_message.Message):
     """This proto includes a recursively nested message."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    CHILD_FIELD_NUMBER: builtins.int
-    PAYLOAD_FIELD_NUMBER: builtins.int
-    REPEATED_CHILD_FIELD_NUMBER: builtins.int
-    LAZY_CHILD_FIELD_NUMBER: builtins.int
-    EAGER_CHILD_FIELD_NUMBER: builtins.int
-    @property
+    CHILD_FIELD_NUMBER: _builtins.int
+    PAYLOAD_FIELD_NUMBER: _builtins.int
+    REPEATED_CHILD_FIELD_NUMBER: _builtins.int
+    LAZY_CHILD_FIELD_NUMBER: _builtins.int
+    EAGER_CHILD_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def child(self) -> Global___NestedTestAllTypes: ...
-    @property
+    @_builtins.property
     def payload(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_child(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___NestedTestAllTypes]: ...
-    @property
+    @_builtins.property
+    def repeated_child(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___NestedTestAllTypes]: ...
+    @_builtins.property
     def lazy_child(self) -> Global___NestedTestAllTypes: ...
-    @property
+    @_builtins.property
     def eager_child(self) -> Global___TestAllTypes: ...
     def __init__(
         self,
         *,
         child: Global___NestedTestAllTypes | None = ...,
         payload: Global___TestAllTypes | None = ...,
-        repeated_child: collections.abc.Iterable[Global___NestedTestAllTypes] | None = ...,
+        repeated_child: _collections_abc.Iterable[Global___NestedTestAllTypes] | None = ...,
         lazy_child: Global___NestedTestAllTypes | None = ...,
         eager_child: Global___TestAllTypes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "eager_child", b"eager_child", "lazy_child", b"lazy_child", "payload", b"payload", "repeated_child", b"repeated_child"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "eager_child", b"eager_child", "lazy_child", b"lazy_child", "payload", b"payload", "repeated_child", b"repeated_child"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "eager_child", b"eager_child", "lazy_child", b"lazy_child", "payload", b"payload", "repeated_child", b"repeated_child"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "eager_child", b"eager_child", "lazy_child", b"lazy_child", "payload", b"payload", "repeated_child", b"repeated_child"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NestedTestAllTypes: typing_extensions.TypeAlias = NestedTestAllTypes
+Global___NestedTestAllTypes: _typing_extensions.TypeAlias = NestedTestAllTypes  # noqa: Y015
 
-@typing.final
-class TestDeprecatedFields(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestDeprecatedFields(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DEPRECATED_INT32_FIELD_NUMBER: builtins.int
-    DEPRECATED_REPEATED_STRING_FIELD_NUMBER: builtins.int
-    DEPRECATED_MESSAGE_FIELD_NUMBER: builtins.int
-    DEPRECATED_INT32_IN_ONEOF_FIELD_NUMBER: builtins.int
-    NESTED_FIELD_NUMBER: builtins.int
-    deprecated_int32: builtins.int
-    deprecated_int32_in_oneof: builtins.int
-    @property
-    def deprecated_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
+    DEPRECATED_INT32_FIELD_NUMBER: _builtins.int
+    DEPRECATED_REPEATED_STRING_FIELD_NUMBER: _builtins.int
+    DEPRECATED_MESSAGE_FIELD_NUMBER: _builtins.int
+    DEPRECATED_INT32_IN_ONEOF_FIELD_NUMBER: _builtins.int
+    NESTED_FIELD_NUMBER: _builtins.int
+    deprecated_int32: _builtins.int
+    deprecated_int32_in_oneof: _builtins.int
+    @_builtins.property
+    def deprecated_repeated_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
     def deprecated_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
+    @_builtins.property
     def nested(self) -> Global___TestDeprecatedFields: ...
     def __init__(
         self,
         *,
-        deprecated_int32: builtins.int | None = ...,
-        deprecated_repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
+        deprecated_int32: _builtins.int | None = ...,
+        deprecated_repeated_string: _collections_abc.Iterable[_builtins.str] | None = ...,
         deprecated_message: Global___TestAllTypes.NestedMessage | None = ...,
-        deprecated_int32_in_oneof: builtins.int | None = ...,
+        deprecated_int32_in_oneof: _builtins.int | None = ...,
         nested: Global___TestDeprecatedFields | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["deprecated_int32", b"deprecated_int32", "deprecated_int32_in_oneof", b"deprecated_int32_in_oneof", "deprecated_message", b"deprecated_message", "deprecated_repeated_string", b"deprecated_repeated_string", "nested", b"nested", "oneof_fields", b"oneof_fields"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["deprecated_int32", b"deprecated_int32", "deprecated_int32_in_oneof", b"deprecated_int32_in_oneof", "deprecated_message", b"deprecated_message", "deprecated_repeated_string", b"deprecated_repeated_string", "nested", b"nested", "oneof_fields", b"oneof_fields"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["deprecated_int32", b"deprecated_int32", "deprecated_int32_in_oneof", b"deprecated_int32_in_oneof", "deprecated_message", b"deprecated_message", "deprecated_repeated_string", b"deprecated_repeated_string", "nested", b"nested", "oneof_fields", b"oneof_fields"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["deprecated_int32", b"deprecated_int32", "deprecated_int32_in_oneof", b"deprecated_int32_in_oneof", "deprecated_message", b"deprecated_message", "deprecated_repeated_string", b"deprecated_repeated_string", "nested", b"nested", "oneof_fields", b"oneof_fields"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_oneof_fields: typing_extensions.TypeAlias = typing.Literal["deprecated_int32_in_oneof"]
-    _WhichOneofArgType_oneof_fields: typing_extensions.TypeAlias = typing.Literal["oneof_fields", b"oneof_fields"]
+    _WhichOneofReturnType_oneof_fields: _typing_extensions.TypeAlias = _typing.Literal["deprecated_int32_in_oneof"]  # noqa: Y015
+    _WhichOneofArgType_oneof_fields: _typing_extensions.TypeAlias = _typing.Literal["oneof_fields", b"oneof_fields"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_fields) -> _WhichOneofReturnType_oneof_fields | None: ...
 
-Global___TestDeprecatedFields: typing_extensions.TypeAlias = TestDeprecatedFields
+Global___TestDeprecatedFields: _typing_extensions.TypeAlias = TestDeprecatedFields  # noqa: Y015
 
-@deprecated("""This message has been marked as deprecated using proto message options.""")
-@typing.final
-class TestDeprecatedMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_deprecated("""This message has been marked as deprecated using proto message options.""")
+@_typing.final
+class TestDeprecatedMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestDeprecatedMessage: typing_extensions.TypeAlias = TestDeprecatedMessage
+Global___TestDeprecatedMessage: _typing_extensions.TypeAlias = TestDeprecatedMessage  # noqa: Y015
 
-@typing.final
-class ForeignMessage(google.protobuf.message.Message):
+@_typing.final
+class ForeignMessage(_google_protobuf_message.Message):
     """Define these after TestAllTypes to make sure the compiler can handle
     that.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    C_FIELD_NUMBER: builtins.int
-    D_FIELD_NUMBER: builtins.int
-    c: builtins.int
-    d: builtins.int
+    C_FIELD_NUMBER: _builtins.int
+    D_FIELD_NUMBER: _builtins.int
+    c: _builtins.int
+    d: _builtins.int
     def __init__(
         self,
         *,
-        c: builtins.int | None = ...,
-        d: builtins.int | None = ...,
+        c: _builtins.int | None = ...,
+        d: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["c", b"c", "d", b"d"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["c", b"c", "d", b"d"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["c", b"c", "d", b"d"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["c", b"c", "d", b"d"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ForeignMessage: typing_extensions.TypeAlias = ForeignMessage
+Global___ForeignMessage: _typing_extensions.TypeAlias = ForeignMessage  # noqa: Y015
 
-@typing.final
-class TestReservedFields(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    def __init__(
-        self,
-    ) -> None: ...
-
-Global___TestReservedFields: typing_extensions.TypeAlias = TestReservedFields
-
-@typing.final
-class TestAllExtensions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestReservedFields(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestAllExtensions: typing_extensions.TypeAlias = TestAllExtensions
+Global___TestReservedFields: _typing_extensions.TypeAlias = TestReservedFields  # noqa: Y015
 
-@typing.final
-class OptionalGroup_extension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestAllExtensions(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    a: builtins.int
+    def __init__(
+        self,
+    ) -> None: ...
+
+Global___TestAllExtensions: _typing_extensions.TypeAlias = TestAllExtensions  # noqa: Y015
+
+@_typing.final
+class OptionalGroup_extension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+
+    A_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OptionalGroup_extension: typing_extensions.TypeAlias = OptionalGroup_extension
+Global___OptionalGroup_extension: _typing_extensions.TypeAlias = OptionalGroup_extension  # noqa: Y015
 
-@typing.final
-class RepeatedGroup_extension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class RepeatedGroup_extension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    a: builtins.int
+    A_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___RepeatedGroup_extension: typing_extensions.TypeAlias = RepeatedGroup_extension
+Global___RepeatedGroup_extension: _typing_extensions.TypeAlias = RepeatedGroup_extension  # noqa: Y015
 
-@typing.final
-class TestMixedFieldsAndExtensions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMixedFieldsAndExtensions(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    a: builtins.int
-    @property
-    def b(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    C_FIELD_NUMBER: builtins.int
-    D_FIELD_NUMBER: builtins.int
-    c: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestMixedFieldsAndExtensions, builtins.int]
-    d: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestMixedFieldsAndExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
+    A_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
+    @_builtins.property
+    def b(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    C_FIELD_NUMBER: _builtins.int
+    D_FIELD_NUMBER: _builtins.int
+    c: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestMixedFieldsAndExtensions, _builtins.int]
+    d: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestMixedFieldsAndExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
-        b: collections.abc.Iterable[builtins.int] | None = ...,
+        a: _builtins.int | None = ...,
+        b: _collections_abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMixedFieldsAndExtensions: typing_extensions.TypeAlias = TestMixedFieldsAndExtensions
+Global___TestMixedFieldsAndExtensions: _typing_extensions.TypeAlias = TestMixedFieldsAndExtensions  # noqa: Y015
 
-@typing.final
-class TestGroup(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestGroup(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class OptionalGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class OptionalGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        ZZ_FIELD_NUMBER: builtins.int
-        a: builtins.int
-        zz: builtins.int
+        A_FIELD_NUMBER: _builtins.int
+        ZZ_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
+        zz: _builtins.int
         """fast table size must be at least 16, for this"""
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
-            zz: builtins.int | None = ...,
+            a: _builtins.int | None = ...,
+            zz: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "zz", b"zz"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "zz", b"zz"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "zz", b"zz"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "zz", b"zz"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONALGROUP_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_ENUM_FIELD_NUMBER: builtins.int
+    OPTIONALGROUP_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_ENUM_FIELD_NUMBER: _builtins.int
     optional_foreign_enum: Global___ForeignEnum.ValueType
-    @property
+    @_builtins.property
     def optionalgroup(self) -> Global___TestGroup.OptionalGroup: ...
     def __init__(
         self,
@@ -952,261 +952,261 @@ class TestGroup(google.protobuf.message.Message):
         optionalgroup: Global___TestGroup.OptionalGroup | None = ...,
         optional_foreign_enum: Global___ForeignEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_foreign_enum", b"optional_foreign_enum", "optionalgroup", b"optionalgroup"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_foreign_enum", b"optional_foreign_enum", "optionalgroup", b"optionalgroup"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_foreign_enum", b"optional_foreign_enum", "optionalgroup", b"optionalgroup"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_foreign_enum", b"optional_foreign_enum", "optionalgroup", b"optionalgroup"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestGroup: typing_extensions.TypeAlias = TestGroup
+Global___TestGroup: _typing_extensions.TypeAlias = TestGroup  # noqa: Y015
 
-@typing.final
-class TestGroupExtension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestGroupExtension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestGroupExtension: typing_extensions.TypeAlias = TestGroupExtension
+Global___TestGroupExtension: _typing_extensions.TypeAlias = TestGroupExtension  # noqa: Y015
 
-@typing.final
-class TestNestedExtension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestNestedExtension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class OptionalGroup_extension(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class OptionalGroup_extension(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        a: builtins.int
+        A_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
+            a: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    TEST_FIELD_NUMBER: builtins.int
-    NESTED_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-    OPTIONALGROUP_EXTENSION_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-    test: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
+    TEST_FIELD_NUMBER: _builtins.int
+    NESTED_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+    OPTIONALGROUP_EXTENSION_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+    test: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
     """Check for bug where string extensions declared in tested scope did not
     compile.
     """
-    nested_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
+    nested_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
     """Used to test if generated extension name is correct when there are
     underscores.
     """
-    optionalgroup_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestGroupExtension, Global___TestNestedExtension.OptionalGroup_extension]
-    optional_foreign_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestGroupExtension, Global___ForeignEnum.ValueType]
+    optionalgroup_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestGroupExtension, Global___TestNestedExtension.OptionalGroup_extension]
+    optional_foreign_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestGroupExtension, Global___ForeignEnum.ValueType]
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestNestedExtension: typing_extensions.TypeAlias = TestNestedExtension
+Global___TestNestedExtension: _typing_extensions.TypeAlias = TestNestedExtension  # noqa: Y015
 
-@typing.final
-class TestChildExtension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestChildExtension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    OPTIONAL_EXTENSION_FIELD_NUMBER: builtins.int
-    a: builtins.str
-    b: builtins.str
-    @property
+    A_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    OPTIONAL_EXTENSION_FIELD_NUMBER: _builtins.int
+    a: _builtins.str
+    b: _builtins.str
+    @_builtins.property
     def optional_extension(self) -> Global___TestAllExtensions: ...
     def __init__(
         self,
         *,
-        a: builtins.str | None = ...,
-        b: builtins.str | None = ...,
+        a: _builtins.str | None = ...,
+        b: _builtins.str | None = ...,
         optional_extension: Global___TestAllExtensions | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestChildExtension: typing_extensions.TypeAlias = TestChildExtension
+Global___TestChildExtension: _typing_extensions.TypeAlias = TestChildExtension  # noqa: Y015
 
-@typing.final
-class TestChildExtensionData(google.protobuf.message.Message):
+@_typing.final
+class TestChildExtensionData(_google_protobuf_message.Message):
     """Emulates wireformat data of TestChildExtension with dynamic extension
     (DynamicExtension).
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class NestedTestAllExtensionsData(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedTestAllExtensionsData(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        @typing.final
-        class NestedDynamicExtensions(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class NestedDynamicExtensions(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            A_FIELD_NUMBER: builtins.int
-            B_FIELD_NUMBER: builtins.int
-            a: builtins.int
-            b: builtins.int
+            A_FIELD_NUMBER: _builtins.int
+            B_FIELD_NUMBER: _builtins.int
+            a: _builtins.int
+            b: _builtins.int
             def __init__(
                 self,
                 *,
-                a: builtins.int | None = ...,
-                b: builtins.int | None = ...,
+                a: _builtins.int | None = ...,
+                b: _builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        DYNAMIC_FIELD_NUMBER: builtins.int
-        @property
+        DYNAMIC_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def dynamic(self) -> Global___TestChildExtensionData.NestedTestAllExtensionsData.NestedDynamicExtensions: ...
         def __init__(
             self,
             *,
             dynamic: Global___TestChildExtensionData.NestedTestAllExtensionsData.NestedDynamicExtensions | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["dynamic", b"dynamic"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["dynamic", b"dynamic"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dynamic", b"dynamic"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dynamic", b"dynamic"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    A_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    OPTIONAL_EXTENSION_FIELD_NUMBER: builtins.int
-    a: builtins.str
-    b: builtins.str
-    @property
+    A_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    OPTIONAL_EXTENSION_FIELD_NUMBER: _builtins.int
+    a: _builtins.str
+    b: _builtins.str
+    @_builtins.property
     def optional_extension(self) -> Global___TestChildExtensionData.NestedTestAllExtensionsData: ...
     def __init__(
         self,
         *,
-        a: builtins.str | None = ...,
-        b: builtins.str | None = ...,
+        a: _builtins.str | None = ...,
+        b: _builtins.str | None = ...,
         optional_extension: Global___TestChildExtensionData.NestedTestAllExtensionsData | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "optional_extension", b"optional_extension"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestChildExtensionData: typing_extensions.TypeAlias = TestChildExtensionData
+Global___TestChildExtensionData: _typing_extensions.TypeAlias = TestChildExtensionData  # noqa: Y015
 
-@typing.final
-class TestNestedChildExtension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestNestedChildExtension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    CHILD_FIELD_NUMBER: builtins.int
-    a: builtins.int
-    @property
+    A_FIELD_NUMBER: _builtins.int
+    CHILD_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
+    @_builtins.property
     def child(self) -> Global___TestChildExtension: ...
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
         child: Global___TestChildExtension | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "child", b"child"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "child", b"child"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "child", b"child"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "child", b"child"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedChildExtension: typing_extensions.TypeAlias = TestNestedChildExtension
+Global___TestNestedChildExtension: _typing_extensions.TypeAlias = TestNestedChildExtension  # noqa: Y015
 
-@typing.final
-class TestNestedChildExtensionData(google.protobuf.message.Message):
+@_typing.final
+class TestNestedChildExtensionData(_google_protobuf_message.Message):
     """Emulates wireformat data of TestNestedChildExtension with dynamic extension
     (DynamicExtension).
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    CHILD_FIELD_NUMBER: builtins.int
-    a: builtins.int
-    @property
+    A_FIELD_NUMBER: _builtins.int
+    CHILD_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
+    @_builtins.property
     def child(self) -> Global___TestChildExtensionData: ...
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
         child: Global___TestChildExtensionData | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "child", b"child"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "child", b"child"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "child", b"child"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "child", b"child"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedChildExtensionData: typing_extensions.TypeAlias = TestNestedChildExtensionData
+Global___TestNestedChildExtensionData: _typing_extensions.TypeAlias = TestNestedChildExtensionData  # noqa: Y015
 
-@typing.final
-class TestRequiredEnum(google.protobuf.message.Message):
+@_typing.final
+class TestRequiredEnum(_google_protobuf_message.Message):
     """Required and closed enum fields are considered unknown fields if the value is
     not valid. We need to make sure it functions as expected.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REQUIRED_ENUM_FIELD_NUMBER: builtins.int
-    A_FIELD_NUMBER: builtins.int
+    REQUIRED_ENUM_FIELD_NUMBER: _builtins.int
+    A_FIELD_NUMBER: _builtins.int
     required_enum: Global___ForeignEnum.ValueType
-    a: builtins.int
+    a: _builtins.int
     """A dummy optional field."""
     def __init__(
         self,
         *,
         required_enum: Global___ForeignEnum.ValueType | None = ...,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "required_enum", b"required_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "required_enum", b"required_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "required_enum", b"required_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "required_enum", b"required_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredEnum: typing_extensions.TypeAlias = TestRequiredEnum
+Global___TestRequiredEnum: _typing_extensions.TypeAlias = TestRequiredEnum  # noqa: Y015
 
-@typing.final
-class TestRequiredOpenEnum(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredOpenEnum(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REQUIRED_ENUM_FIELD_NUMBER: builtins.int
-    A_FIELD_NUMBER: builtins.int
+    REQUIRED_ENUM_FIELD_NUMBER: _builtins.int
+    A_FIELD_NUMBER: _builtins.int
     required_enum: Global___ForeignOpenEnum.ValueType
-    a: builtins.int
+    a: _builtins.int
     """A dummy optional field."""
     def __init__(
         self,
         *,
         required_enum: Global___ForeignOpenEnum.ValueType | None = ...,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "required_enum", b"required_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "required_enum", b"required_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "required_enum", b"required_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "required_enum", b"required_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredOpenEnum: typing_extensions.TypeAlias = TestRequiredOpenEnum
+Global___TestRequiredOpenEnum: _typing_extensions.TypeAlias = TestRequiredOpenEnum  # noqa: Y015
 
-@typing.final
-class TestRequiredEnumNoMask(google.protobuf.message.Message):
+@_typing.final
+class TestRequiredEnumNoMask(_google_protobuf_message.Message):
     """TestRequiredEnum + using enum values that won't fit to 64 bitmask."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestRequiredEnumNoMask._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestRequiredEnumNoMask._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNSPECIFIED: TestRequiredEnumNoMask._NestedEnum.ValueType  # 0
         FOO: TestRequiredEnumNoMask._NestedEnum.ValueType  # 2
         BAR: TestRequiredEnumNoMask._NestedEnum.ValueType  # 100
@@ -1220,34 +1220,34 @@ class TestRequiredEnumNoMask(google.protobuf.message.Message):
     BAZ: TestRequiredEnumNoMask.NestedEnum.ValueType  # -1
     """Intentionally negative."""
 
-    REQUIRED_ENUM_FIELD_NUMBER: builtins.int
-    A_FIELD_NUMBER: builtins.int
+    REQUIRED_ENUM_FIELD_NUMBER: _builtins.int
+    A_FIELD_NUMBER: _builtins.int
     required_enum: Global___TestRequiredEnumNoMask.NestedEnum.ValueType
-    a: builtins.int
+    a: _builtins.int
     """A dummy optional field."""
     def __init__(
         self,
         *,
         required_enum: Global___TestRequiredEnumNoMask.NestedEnum.ValueType | None = ...,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "required_enum", b"required_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "required_enum", b"required_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "required_enum", b"required_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "required_enum", b"required_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredEnumNoMask: typing_extensions.TypeAlias = TestRequiredEnumNoMask
+Global___TestRequiredEnumNoMask: _typing_extensions.TypeAlias = TestRequiredEnumNoMask  # noqa: Y015
 
-@typing.final
-class TestRequiredEnumMulti(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredEnumMulti(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestRequiredEnumMulti._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestRequiredEnumMulti._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNSPECIFIED: TestRequiredEnumMulti._NestedEnum.ValueType  # 0
         FOO: TestRequiredEnumMulti._NestedEnum.ValueType  # 1
         BAR: TestRequiredEnumMulti._NestedEnum.ValueType  # 2
@@ -1259,42 +1259,42 @@ class TestRequiredEnumMulti(google.protobuf.message.Message):
     BAR: TestRequiredEnumMulti.NestedEnum.ValueType  # 2
     BAZ: TestRequiredEnumMulti.NestedEnum.ValueType  # 100
 
-    REQUIRED_ENUM_4_FIELD_NUMBER: builtins.int
-    A_3_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_2_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_1_FIELD_NUMBER: builtins.int
+    REQUIRED_ENUM_4_FIELD_NUMBER: _builtins.int
+    A_3_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_2_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_1_FIELD_NUMBER: _builtins.int
     required_enum_4: Global___TestRequiredEnumMulti.NestedEnum.ValueType
     """Intentionally placed in descending field number to force sorting in closed
     enum verification.
     """
-    a_3: builtins.int
+    a_3: _builtins.int
     required_enum_2: Global___TestRequiredEnumMulti.NestedEnum.ValueType
     required_enum_1: Global___ForeignEnum.ValueType
     def __init__(
         self,
         *,
         required_enum_4: Global___TestRequiredEnumMulti.NestedEnum.ValueType | None = ...,
-        a_3: builtins.int | None = ...,
+        a_3: _builtins.int | None = ...,
         required_enum_2: Global___TestRequiredEnumMulti.NestedEnum.ValueType | None = ...,
         required_enum_1: Global___ForeignEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredEnumMulti: typing_extensions.TypeAlias = TestRequiredEnumMulti
+Global___TestRequiredEnumMulti: _typing_extensions.TypeAlias = TestRequiredEnumMulti  # noqa: Y015
 
-@typing.final
-class TestRequiredNoMaskMulti(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredNoMaskMulti(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestRequiredNoMaskMulti._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestRequiredNoMaskMulti._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNSPECIFIED: TestRequiredNoMaskMulti._NestedEnum.ValueType  # 0
         FOO: TestRequiredNoMaskMulti._NestedEnum.ValueType  # 1
         BAR: TestRequiredNoMaskMulti._NestedEnum.ValueType  # 2
@@ -1306,44 +1306,44 @@ class TestRequiredNoMaskMulti(google.protobuf.message.Message):
     BAR: TestRequiredNoMaskMulti.NestedEnum.ValueType  # 2
     BAZ: TestRequiredNoMaskMulti.NestedEnum.ValueType  # 100
 
-    REQUIRED_FIXED32_80_FIELD_NUMBER: builtins.int
-    REQUIRED_FIXED32_70_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_64_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_4_FIELD_NUMBER: builtins.int
-    A_3_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_2_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_1_FIELD_NUMBER: builtins.int
-    required_fixed32_80: builtins.int
+    REQUIRED_FIXED32_80_FIELD_NUMBER: _builtins.int
+    REQUIRED_FIXED32_70_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_64_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_4_FIELD_NUMBER: _builtins.int
+    A_3_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_2_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_1_FIELD_NUMBER: _builtins.int
+    required_fixed32_80: _builtins.int
     """Intentionally placed in descending field number to force sorting in closed
     enum verification. Also, using large field numbers to use tag only
     matching for required fields.
     """
-    required_fixed32_70: builtins.int
+    required_fixed32_70: _builtins.int
     required_enum_64: Global___TestRequiredNoMaskMulti.NestedEnum.ValueType
     required_enum_4: Global___TestRequiredNoMaskMulti.NestedEnum.ValueType
-    a_3: builtins.int
+    a_3: _builtins.int
     required_enum_2: Global___TestRequiredNoMaskMulti.NestedEnum.ValueType
     required_enum_1: Global___ForeignEnum.ValueType
     def __init__(
         self,
         *,
-        required_fixed32_80: builtins.int | None = ...,
-        required_fixed32_70: builtins.int | None = ...,
+        required_fixed32_80: _builtins.int | None = ...,
+        required_fixed32_70: _builtins.int | None = ...,
         required_enum_64: Global___TestRequiredNoMaskMulti.NestedEnum.ValueType | None = ...,
         required_enum_4: Global___TestRequiredNoMaskMulti.NestedEnum.ValueType | None = ...,
-        a_3: builtins.int | None = ...,
+        a_3: _builtins.int | None = ...,
         required_enum_2: Global___TestRequiredNoMaskMulti.NestedEnum.ValueType | None = ...,
         required_enum_1: Global___ForeignEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4", "required_enum_64", b"required_enum_64", "required_fixed32_70", b"required_fixed32_70", "required_fixed32_80", b"required_fixed32_80"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4", "required_enum_64", b"required_enum_64", "required_fixed32_70", b"required_fixed32_70", "required_fixed32_80", b"required_fixed32_80"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4", "required_enum_64", b"required_enum_64", "required_fixed32_70", b"required_fixed32_70", "required_fixed32_80", b"required_fixed32_80"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a_3", b"a_3", "required_enum_1", b"required_enum_1", "required_enum_2", b"required_enum_2", "required_enum_4", b"required_enum_4", "required_enum_64", b"required_enum_64", "required_fixed32_70", b"required_fixed32_70", "required_fixed32_80", b"required_fixed32_80"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredNoMaskMulti: typing_extensions.TypeAlias = TestRequiredNoMaskMulti
+Global___TestRequiredNoMaskMulti: _typing_extensions.TypeAlias = TestRequiredNoMaskMulti  # noqa: Y015
 
-@typing.final
-class TestRequired(google.protobuf.message.Message):
+@_typing.final
+class TestRequired(_google_protobuf_message.Message):
     """We have separate messages for testing required fields because it's
     annoying to have to fill in required fields in TestProto in order to
     do anything with it.  Note that we don't need to test every type of
@@ -1351,169 +1351,169 @@ class TestRequired(google.protobuf.message.Message):
     optional fields for all types.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class MapFieldEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class MapFieldEntry(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        @property
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        @_builtins.property
         def value(self) -> Global___TestRequired: ...
         def __init__(
             self,
             *,
-            key: builtins.str | None = ...,
+            key: _builtins.str | None = ...,
             value: Global___TestRequired | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    A_FIELD_NUMBER: builtins.int
-    DUMMY2_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    DUMMY4_FIELD_NUMBER: builtins.int
-    DUMMY5_FIELD_NUMBER: builtins.int
-    DUMMY6_FIELD_NUMBER: builtins.int
-    DUMMY7_FIELD_NUMBER: builtins.int
-    DUMMY8_FIELD_NUMBER: builtins.int
-    DUMMY9_FIELD_NUMBER: builtins.int
-    DUMMY10_FIELD_NUMBER: builtins.int
-    DUMMY11_FIELD_NUMBER: builtins.int
-    DUMMY12_FIELD_NUMBER: builtins.int
-    DUMMY13_FIELD_NUMBER: builtins.int
-    DUMMY14_FIELD_NUMBER: builtins.int
-    DUMMY15_FIELD_NUMBER: builtins.int
-    DUMMY16_FIELD_NUMBER: builtins.int
-    DUMMY17_FIELD_NUMBER: builtins.int
-    DUMMY18_FIELD_NUMBER: builtins.int
-    DUMMY19_FIELD_NUMBER: builtins.int
-    DUMMY20_FIELD_NUMBER: builtins.int
-    DUMMY21_FIELD_NUMBER: builtins.int
-    DUMMY22_FIELD_NUMBER: builtins.int
-    DUMMY23_FIELD_NUMBER: builtins.int
-    DUMMY24_FIELD_NUMBER: builtins.int
-    DUMMY25_FIELD_NUMBER: builtins.int
-    DUMMY26_FIELD_NUMBER: builtins.int
-    DUMMY27_FIELD_NUMBER: builtins.int
-    DUMMY28_FIELD_NUMBER: builtins.int
-    DUMMY29_FIELD_NUMBER: builtins.int
-    DUMMY30_FIELD_NUMBER: builtins.int
-    DUMMY31_FIELD_NUMBER: builtins.int
-    DUMMY32_FIELD_NUMBER: builtins.int
-    C_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_FIELD_NUMBER: builtins.int
-    MAP_FIELD_FIELD_NUMBER: builtins.int
-    a: builtins.int
-    dummy2: builtins.int
-    b: builtins.int
-    dummy4: builtins.int
+    A_FIELD_NUMBER: _builtins.int
+    DUMMY2_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    DUMMY4_FIELD_NUMBER: _builtins.int
+    DUMMY5_FIELD_NUMBER: _builtins.int
+    DUMMY6_FIELD_NUMBER: _builtins.int
+    DUMMY7_FIELD_NUMBER: _builtins.int
+    DUMMY8_FIELD_NUMBER: _builtins.int
+    DUMMY9_FIELD_NUMBER: _builtins.int
+    DUMMY10_FIELD_NUMBER: _builtins.int
+    DUMMY11_FIELD_NUMBER: _builtins.int
+    DUMMY12_FIELD_NUMBER: _builtins.int
+    DUMMY13_FIELD_NUMBER: _builtins.int
+    DUMMY14_FIELD_NUMBER: _builtins.int
+    DUMMY15_FIELD_NUMBER: _builtins.int
+    DUMMY16_FIELD_NUMBER: _builtins.int
+    DUMMY17_FIELD_NUMBER: _builtins.int
+    DUMMY18_FIELD_NUMBER: _builtins.int
+    DUMMY19_FIELD_NUMBER: _builtins.int
+    DUMMY20_FIELD_NUMBER: _builtins.int
+    DUMMY21_FIELD_NUMBER: _builtins.int
+    DUMMY22_FIELD_NUMBER: _builtins.int
+    DUMMY23_FIELD_NUMBER: _builtins.int
+    DUMMY24_FIELD_NUMBER: _builtins.int
+    DUMMY25_FIELD_NUMBER: _builtins.int
+    DUMMY26_FIELD_NUMBER: _builtins.int
+    DUMMY27_FIELD_NUMBER: _builtins.int
+    DUMMY28_FIELD_NUMBER: _builtins.int
+    DUMMY29_FIELD_NUMBER: _builtins.int
+    DUMMY30_FIELD_NUMBER: _builtins.int
+    DUMMY31_FIELD_NUMBER: _builtins.int
+    DUMMY32_FIELD_NUMBER: _builtins.int
+    C_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_FIELD_NUMBER: _builtins.int
+    MAP_FIELD_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
+    dummy2: _builtins.int
+    b: _builtins.int
+    dummy4: _builtins.int
     """Pad the field count to 32 so that we can test that IsInitialized()
     properly checks multiple elements of has_bits_.
     """
-    dummy5: builtins.int
-    dummy6: builtins.int
-    dummy7: builtins.int
-    dummy8: builtins.int
-    dummy9: builtins.int
-    dummy10: builtins.int
-    dummy11: builtins.int
-    dummy12: builtins.int
-    dummy13: builtins.int
-    dummy14: builtins.int
-    dummy15: builtins.int
-    dummy16: builtins.int
-    dummy17: builtins.int
-    dummy18: builtins.int
-    dummy19: builtins.int
-    dummy20: builtins.int
-    dummy21: builtins.int
-    dummy22: builtins.int
-    dummy23: builtins.int
-    dummy24: builtins.int
-    dummy25: builtins.int
-    dummy26: builtins.int
-    dummy27: builtins.int
-    dummy28: builtins.int
-    dummy29: builtins.int
-    dummy30: builtins.int
-    dummy31: builtins.int
-    dummy32: builtins.int
-    c: builtins.int
-    @property
+    dummy5: _builtins.int
+    dummy6: _builtins.int
+    dummy7: _builtins.int
+    dummy8: _builtins.int
+    dummy9: _builtins.int
+    dummy10: _builtins.int
+    dummy11: _builtins.int
+    dummy12: _builtins.int
+    dummy13: _builtins.int
+    dummy14: _builtins.int
+    dummy15: _builtins.int
+    dummy16: _builtins.int
+    dummy17: _builtins.int
+    dummy18: _builtins.int
+    dummy19: _builtins.int
+    dummy20: _builtins.int
+    dummy21: _builtins.int
+    dummy22: _builtins.int
+    dummy23: _builtins.int
+    dummy24: _builtins.int
+    dummy25: _builtins.int
+    dummy26: _builtins.int
+    dummy27: _builtins.int
+    dummy28: _builtins.int
+    dummy29: _builtins.int
+    dummy30: _builtins.int
+    dummy31: _builtins.int
+    dummy32: _builtins.int
+    c: _builtins.int
+    @_builtins.property
     def optional_foreign(self) -> Global___ForeignMessage:
         """Add an optional child message to make this non-trivial for go/pdlazy."""
 
-    @property
-    def map_field(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, Global___TestRequired]: ...
-    SINGLE_FIELD_NUMBER: builtins.int
-    MULTI_FIELD_NUMBER: builtins.int
-    single: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestRequired]
-    multi: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestRequired]]
+    @_builtins.property
+    def map_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.str, Global___TestRequired]: ...
+    SINGLE_FIELD_NUMBER: _builtins.int
+    MULTI_FIELD_NUMBER: _builtins.int
+    single: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestRequired]
+    multi: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestRequired]]
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
-        dummy2: builtins.int | None = ...,
-        b: builtins.int | None = ...,
-        dummy4: builtins.int | None = ...,
-        dummy5: builtins.int | None = ...,
-        dummy6: builtins.int | None = ...,
-        dummy7: builtins.int | None = ...,
-        dummy8: builtins.int | None = ...,
-        dummy9: builtins.int | None = ...,
-        dummy10: builtins.int | None = ...,
-        dummy11: builtins.int | None = ...,
-        dummy12: builtins.int | None = ...,
-        dummy13: builtins.int | None = ...,
-        dummy14: builtins.int | None = ...,
-        dummy15: builtins.int | None = ...,
-        dummy16: builtins.int | None = ...,
-        dummy17: builtins.int | None = ...,
-        dummy18: builtins.int | None = ...,
-        dummy19: builtins.int | None = ...,
-        dummy20: builtins.int | None = ...,
-        dummy21: builtins.int | None = ...,
-        dummy22: builtins.int | None = ...,
-        dummy23: builtins.int | None = ...,
-        dummy24: builtins.int | None = ...,
-        dummy25: builtins.int | None = ...,
-        dummy26: builtins.int | None = ...,
-        dummy27: builtins.int | None = ...,
-        dummy28: builtins.int | None = ...,
-        dummy29: builtins.int | None = ...,
-        dummy30: builtins.int | None = ...,
-        dummy31: builtins.int | None = ...,
-        dummy32: builtins.int | None = ...,
-        c: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
+        dummy2: _builtins.int | None = ...,
+        b: _builtins.int | None = ...,
+        dummy4: _builtins.int | None = ...,
+        dummy5: _builtins.int | None = ...,
+        dummy6: _builtins.int | None = ...,
+        dummy7: _builtins.int | None = ...,
+        dummy8: _builtins.int | None = ...,
+        dummy9: _builtins.int | None = ...,
+        dummy10: _builtins.int | None = ...,
+        dummy11: _builtins.int | None = ...,
+        dummy12: _builtins.int | None = ...,
+        dummy13: _builtins.int | None = ...,
+        dummy14: _builtins.int | None = ...,
+        dummy15: _builtins.int | None = ...,
+        dummy16: _builtins.int | None = ...,
+        dummy17: _builtins.int | None = ...,
+        dummy18: _builtins.int | None = ...,
+        dummy19: _builtins.int | None = ...,
+        dummy20: _builtins.int | None = ...,
+        dummy21: _builtins.int | None = ...,
+        dummy22: _builtins.int | None = ...,
+        dummy23: _builtins.int | None = ...,
+        dummy24: _builtins.int | None = ...,
+        dummy25: _builtins.int | None = ...,
+        dummy26: _builtins.int | None = ...,
+        dummy27: _builtins.int | None = ...,
+        dummy28: _builtins.int | None = ...,
+        dummy29: _builtins.int | None = ...,
+        dummy30: _builtins.int | None = ...,
+        dummy31: _builtins.int | None = ...,
+        dummy32: _builtins.int | None = ...,
+        c: _builtins.int | None = ...,
         optional_foreign: Global___ForeignMessage | None = ...,
-        map_field: collections.abc.Mapping[builtins.str, Global___TestRequired] | None = ...,
+        map_field: _collections_abc.Mapping[_builtins.str, Global___TestRequired] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "c", b"c", "dummy10", b"dummy10", "dummy11", b"dummy11", "dummy12", b"dummy12", "dummy13", b"dummy13", "dummy14", b"dummy14", "dummy15", b"dummy15", "dummy16", b"dummy16", "dummy17", b"dummy17", "dummy18", b"dummy18", "dummy19", b"dummy19", "dummy2", b"dummy2", "dummy20", b"dummy20", "dummy21", b"dummy21", "dummy22", b"dummy22", "dummy23", b"dummy23", "dummy24", b"dummy24", "dummy25", b"dummy25", "dummy26", b"dummy26", "dummy27", b"dummy27", "dummy28", b"dummy28", "dummy29", b"dummy29", "dummy30", b"dummy30", "dummy31", b"dummy31", "dummy32", b"dummy32", "dummy4", b"dummy4", "dummy5", b"dummy5", "dummy6", b"dummy6", "dummy7", b"dummy7", "dummy8", b"dummy8", "dummy9", b"dummy9", "map_field", b"map_field", "optional_foreign", b"optional_foreign"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "c", b"c", "dummy10", b"dummy10", "dummy11", b"dummy11", "dummy12", b"dummy12", "dummy13", b"dummy13", "dummy14", b"dummy14", "dummy15", b"dummy15", "dummy16", b"dummy16", "dummy17", b"dummy17", "dummy18", b"dummy18", "dummy19", b"dummy19", "dummy2", b"dummy2", "dummy20", b"dummy20", "dummy21", b"dummy21", "dummy22", b"dummy22", "dummy23", b"dummy23", "dummy24", b"dummy24", "dummy25", b"dummy25", "dummy26", b"dummy26", "dummy27", b"dummy27", "dummy28", b"dummy28", "dummy29", b"dummy29", "dummy30", b"dummy30", "dummy31", b"dummy31", "dummy32", b"dummy32", "dummy4", b"dummy4", "dummy5", b"dummy5", "dummy6", b"dummy6", "dummy7", b"dummy7", "dummy8", b"dummy8", "dummy9", b"dummy9", "map_field", b"map_field", "optional_foreign", b"optional_foreign"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "c", b"c", "dummy10", b"dummy10", "dummy11", b"dummy11", "dummy12", b"dummy12", "dummy13", b"dummy13", "dummy14", b"dummy14", "dummy15", b"dummy15", "dummy16", b"dummy16", "dummy17", b"dummy17", "dummy18", b"dummy18", "dummy19", b"dummy19", "dummy2", b"dummy2", "dummy20", b"dummy20", "dummy21", b"dummy21", "dummy22", b"dummy22", "dummy23", b"dummy23", "dummy24", b"dummy24", "dummy25", b"dummy25", "dummy26", b"dummy26", "dummy27", b"dummy27", "dummy28", b"dummy28", "dummy29", b"dummy29", "dummy30", b"dummy30", "dummy31", b"dummy31", "dummy32", b"dummy32", "dummy4", b"dummy4", "dummy5", b"dummy5", "dummy6", b"dummy6", "dummy7", b"dummy7", "dummy8", b"dummy8", "dummy9", b"dummy9", "map_field", b"map_field", "optional_foreign", b"optional_foreign"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "c", b"c", "dummy10", b"dummy10", "dummy11", b"dummy11", "dummy12", b"dummy12", "dummy13", b"dummy13", "dummy14", b"dummy14", "dummy15", b"dummy15", "dummy16", b"dummy16", "dummy17", b"dummy17", "dummy18", b"dummy18", "dummy19", b"dummy19", "dummy2", b"dummy2", "dummy20", b"dummy20", "dummy21", b"dummy21", "dummy22", b"dummy22", "dummy23", b"dummy23", "dummy24", b"dummy24", "dummy25", b"dummy25", "dummy26", b"dummy26", "dummy27", b"dummy27", "dummy28", b"dummy28", "dummy29", b"dummy29", "dummy30", b"dummy30", "dummy31", b"dummy31", "dummy32", b"dummy32", "dummy4", b"dummy4", "dummy5", b"dummy5", "dummy6", b"dummy6", "dummy7", b"dummy7", "dummy8", b"dummy8", "dummy9", b"dummy9", "map_field", b"map_field", "optional_foreign", b"optional_foreign"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequired: typing_extensions.TypeAlias = TestRequired
+Global___TestRequired: _typing_extensions.TypeAlias = TestRequired  # noqa: Y015
 
-@typing.final
-class TestRequiredForeign(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredForeign(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_MESSAGE_FIELD_NUMBER: builtins.int
-    DUMMY_FIELD_NUMBER: builtins.int
-    OPTIONAL_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    dummy: builtins.int
-    @property
+    OPTIONAL_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_MESSAGE_FIELD_NUMBER: _builtins.int
+    DUMMY_FIELD_NUMBER: _builtins.int
+    OPTIONAL_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    dummy: _builtins.int
+    @_builtins.property
     def optional_message(self) -> Global___TestRequired: ...
-    @property
-    def repeated_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestRequired]: ...
-    @property
+    @_builtins.property
+    def repeated_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestRequired]: ...
+    @_builtins.property
     def optional_lazy_message(self) -> Global___NestedTestAllTypes:
         """Missing required fields must not affect verification of child messages."""
 
@@ -1521,53 +1521,53 @@ class TestRequiredForeign(google.protobuf.message.Message):
         self,
         *,
         optional_message: Global___TestRequired | None = ...,
-        repeated_message: collections.abc.Iterable[Global___TestRequired] | None = ...,
-        dummy: builtins.int | None = ...,
+        repeated_message: _collections_abc.Iterable[Global___TestRequired] | None = ...,
+        dummy: _builtins.int | None = ...,
         optional_lazy_message: Global___NestedTestAllTypes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["dummy", b"dummy", "optional_lazy_message", b"optional_lazy_message", "optional_message", b"optional_message", "repeated_message", b"repeated_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["dummy", b"dummy", "optional_lazy_message", b"optional_lazy_message", "optional_message", b"optional_message", "repeated_message", b"repeated_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dummy", b"dummy", "optional_lazy_message", b"optional_lazy_message", "optional_message", b"optional_message", "repeated_message", b"repeated_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dummy", b"dummy", "optional_lazy_message", b"optional_lazy_message", "optional_message", b"optional_message", "repeated_message", b"repeated_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredForeign: typing_extensions.TypeAlias = TestRequiredForeign
+Global___TestRequiredForeign: _typing_extensions.TypeAlias = TestRequiredForeign  # noqa: Y015
 
-@typing.final
-class TestRequiredMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_MESSAGE_FIELD_NUMBER: builtins.int
-    REQUIRED_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    OPTIONAL_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_MESSAGE_FIELD_NUMBER: _builtins.int
+    REQUIRED_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def optional_message(self) -> Global___TestRequired: ...
-    @property
-    def repeated_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestRequired]: ...
-    @property
+    @_builtins.property
+    def repeated_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestRequired]: ...
+    @_builtins.property
     def required_message(self) -> Global___TestRequired: ...
     def __init__(
         self,
         *,
         optional_message: Global___TestRequired | None = ...,
-        repeated_message: collections.abc.Iterable[Global___TestRequired] | None = ...,
+        repeated_message: _collections_abc.Iterable[Global___TestRequired] | None = ...,
         required_message: Global___TestRequired | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_message", b"optional_message", "repeated_message", b"repeated_message", "required_message", b"required_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_message", b"optional_message", "repeated_message", b"repeated_message", "required_message", b"required_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_message", b"optional_message", "repeated_message", b"repeated_message", "required_message", b"required_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_message", b"optional_message", "repeated_message", b"repeated_message", "required_message", b"required_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredMessage: typing_extensions.TypeAlias = TestRequiredMessage
+Global___TestRequiredMessage: _typing_extensions.TypeAlias = TestRequiredMessage  # noqa: Y015
 
-@typing.final
-class TestRequiredLazyMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredLazyMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    CHILD_FIELD_NUMBER: builtins.int
-    RECURSE_FIELD_NUMBER: builtins.int
-    @property
+    CHILD_FIELD_NUMBER: _builtins.int
+    RECURSE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def child(self) -> Global___TestRequired: ...
-    @property
+    @_builtins.property
     def recurse(self) -> Global___TestRequiredLazyMessage: ...
     def __init__(
         self,
@@ -1575,240 +1575,240 @@ class TestRequiredLazyMessage(google.protobuf.message.Message):
         child: Global___TestRequired | None = ...,
         recurse: Global___TestRequiredLazyMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "recurse", b"recurse"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "recurse", b"recurse"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "recurse", b"recurse"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "recurse", b"recurse"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredLazyMessage: typing_extensions.TypeAlias = TestRequiredLazyMessage
+Global___TestRequiredLazyMessage: _typing_extensions.TypeAlias = TestRequiredLazyMessage  # noqa: Y015
 
-@typing.final
-class TestNestedRequiredForeign(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestNestedRequiredForeign(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    CHILD_FIELD_NUMBER: builtins.int
-    PAYLOAD_FIELD_NUMBER: builtins.int
-    DUMMY_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_NO_MASK_FIELD_NUMBER: builtins.int
-    REQUIRED_ENUM_MULTI_FIELD_NUMBER: builtins.int
-    REQUIRED_NO_MASK_FIELD_NUMBER: builtins.int
-    dummy: builtins.int
-    @property
+    CHILD_FIELD_NUMBER: _builtins.int
+    PAYLOAD_FIELD_NUMBER: _builtins.int
+    DUMMY_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_NO_MASK_FIELD_NUMBER: _builtins.int
+    REQUIRED_ENUM_MULTI_FIELD_NUMBER: _builtins.int
+    REQUIRED_NO_MASK_FIELD_NUMBER: _builtins.int
+    dummy: _builtins.int
+    @_builtins.property
     def child(self) -> Global___TestNestedRequiredForeign: ...
-    @property
+    @_builtins.property
     def payload(self) -> Global___TestRequiredForeign: ...
-    @property
+    @_builtins.property
     def required_enum(self) -> Global___TestRequiredEnum:
         """optional message to test required closed enum."""
 
-    @property
+    @_builtins.property
     def required_enum_no_mask(self) -> Global___TestRequiredEnumNoMask: ...
-    @property
+    @_builtins.property
     def required_enum_multi(self) -> Global___TestRequiredEnumMulti: ...
-    @property
+    @_builtins.property
     def required_no_mask(self) -> Global___TestRequiredNoMaskMulti: ...
     def __init__(
         self,
         *,
         child: Global___TestNestedRequiredForeign | None = ...,
         payload: Global___TestRequiredForeign | None = ...,
-        dummy: builtins.int | None = ...,
+        dummy: _builtins.int | None = ...,
         required_enum: Global___TestRequiredEnum | None = ...,
         required_enum_no_mask: Global___TestRequiredEnumNoMask | None = ...,
         required_enum_multi: Global___TestRequiredEnumMulti | None = ...,
         required_no_mask: Global___TestRequiredNoMaskMulti | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "dummy", b"dummy", "payload", b"payload", "required_enum", b"required_enum", "required_enum_multi", b"required_enum_multi", "required_enum_no_mask", b"required_enum_no_mask", "required_no_mask", b"required_no_mask"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "dummy", b"dummy", "payload", b"payload", "required_enum", b"required_enum", "required_enum_multi", b"required_enum_multi", "required_enum_no_mask", b"required_enum_no_mask", "required_no_mask", b"required_no_mask"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "dummy", b"dummy", "payload", b"payload", "required_enum", b"required_enum", "required_enum_multi", b"required_enum_multi", "required_enum_no_mask", b"required_enum_no_mask", "required_no_mask", b"required_no_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "dummy", b"dummy", "payload", b"payload", "required_enum", b"required_enum", "required_enum_multi", b"required_enum_multi", "required_enum_no_mask", b"required_enum_no_mask", "required_no_mask", b"required_no_mask"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedRequiredForeign: typing_extensions.TypeAlias = TestNestedRequiredForeign
+Global___TestNestedRequiredForeign: _typing_extensions.TypeAlias = TestNestedRequiredForeign  # noqa: Y015
 
-@typing.final
-class TestForeignNested(google.protobuf.message.Message):
+@_typing.final
+class TestForeignNested(_google_protobuf_message.Message):
     """Test that we can use NestedMessage from outside TestAllTypes."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    FOREIGN_NESTED_FIELD_NUMBER: builtins.int
-    @property
+    FOREIGN_NESTED_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def foreign_nested(self) -> Global___TestAllTypes.NestedMessage: ...
     def __init__(
         self,
         *,
         foreign_nested: Global___TestAllTypes.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foreign_nested", b"foreign_nested"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foreign_nested", b"foreign_nested"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foreign_nested", b"foreign_nested"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foreign_nested", b"foreign_nested"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestForeignNested: typing_extensions.TypeAlias = TestForeignNested
+Global___TestForeignNested: _typing_extensions.TypeAlias = TestForeignNested  # noqa: Y015
 
-@typing.final
-class TestEmptyMessage(google.protobuf.message.Message):
+@_typing.final
+class TestEmptyMessage(_google_protobuf_message.Message):
     """TestEmptyMessage is used to test unknown field support."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestEmptyMessage: typing_extensions.TypeAlias = TestEmptyMessage
+Global___TestEmptyMessage: _typing_extensions.TypeAlias = TestEmptyMessage  # noqa: Y015
 
-@typing.final
-class TestEmptyMessageWithExtensions(google.protobuf.message.Message):
+@_typing.final
+class TestEmptyMessageWithExtensions(_google_protobuf_message.Message):
     """Like above, but declare all field numbers as potential extensions.  No
     actual extensions should ever be defined for this type.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestEmptyMessageWithExtensions: typing_extensions.TypeAlias = TestEmptyMessageWithExtensions
+Global___TestEmptyMessageWithExtensions: _typing_extensions.TypeAlias = TestEmptyMessageWithExtensions  # noqa: Y015
 
-@typing.final
-class TestPickleNestedMessage(google.protobuf.message.Message):
+@_typing.final
+class TestPickleNestedMessage(_google_protobuf_message.Message):
     """Needed for a Python test."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        @typing.final
-        class NestedNestedMessage(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class NestedNestedMessage(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            CC_FIELD_NUMBER: builtins.int
-            cc: builtins.int
+            CC_FIELD_NUMBER: _builtins.int
+            cc: _builtins.int
             def __init__(
                 self,
                 *,
-                cc: builtins.int | None = ...,
+                cc: _builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["cc", b"cc"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["cc", b"cc"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["cc", b"cc"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["cc", b"cc"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        BB_FIELD_NUMBER: builtins.int
-        bb: builtins.int
+        BB_FIELD_NUMBER: _builtins.int
+        bb: _builtins.int
         def __init__(
             self,
             *,
-            bb: builtins.int | None = ...,
+            bb: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestPickleNestedMessage: typing_extensions.TypeAlias = TestPickleNestedMessage
+Global___TestPickleNestedMessage: _typing_extensions.TypeAlias = TestPickleNestedMessage  # noqa: Y015
 
-@typing.final
-class TestMultipleExtensionRanges(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMultipleExtensionRanges(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestMultipleExtensionRanges: typing_extensions.TypeAlias = TestMultipleExtensionRanges
+Global___TestMultipleExtensionRanges: _typing_extensions.TypeAlias = TestMultipleExtensionRanges  # noqa: Y015
 
-@typing.final
-class TestReallyLargeTagNumber(google.protobuf.message.Message):
+@_typing.final
+class TestReallyLargeTagNumber(_google_protobuf_message.Message):
     """Test that really large tag numbers don't break anything."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    BB_FIELD_NUMBER: builtins.int
-    a: builtins.int
+    A_FIELD_NUMBER: _builtins.int
+    BB_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
     """The largest possible tag number is 2^28 - 1, since the wire format uses
     three bits to communicate wire type.
     """
-    bb: builtins.int
+    bb: _builtins.int
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
-        bb: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
+        bb: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "bb", b"bb"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "bb", b"bb"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "bb", b"bb"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "bb", b"bb"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestReallyLargeTagNumber: typing_extensions.TypeAlias = TestReallyLargeTagNumber
+Global___TestReallyLargeTagNumber: _typing_extensions.TypeAlias = TestReallyLargeTagNumber  # noqa: Y015
 
-@typing.final
-class TestRecursiveMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRecursiveMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    I_FIELD_NUMBER: builtins.int
-    i: builtins.int
-    @property
+    A_FIELD_NUMBER: _builtins.int
+    I_FIELD_NUMBER: _builtins.int
+    i: _builtins.int
+    @_builtins.property
     def a(self) -> Global___TestRecursiveMessage: ...
     def __init__(
         self,
         *,
         a: Global___TestRecursiveMessage | None = ...,
-        i: builtins.int | None = ...,
+        i: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "i", b"i"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "i", b"i"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "i", b"i"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "i", b"i"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRecursiveMessage: typing_extensions.TypeAlias = TestRecursiveMessage
+Global___TestRecursiveMessage: _typing_extensions.TypeAlias = TestRecursiveMessage  # noqa: Y015
 
-@typing.final
-class TestMutualRecursionA(google.protobuf.message.Message):
+@_typing.final
+class TestMutualRecursionA(_google_protobuf_message.Message):
     """Test that mutual recursion works."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class SubMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class SubMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        B_FIELD_NUMBER: builtins.int
-        @property
+        B_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def b(self) -> Global___TestMutualRecursionB: ...
         def __init__(
             self,
             *,
             b: Global___TestMutualRecursionB | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["b", b"b"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["b", b"b"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["b", b"b"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["b", b"b"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class SubGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class SubGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        SUB_MESSAGE_FIELD_NUMBER: builtins.int
-        NOT_IN_THIS_SCC_FIELD_NUMBER: builtins.int
-        @property
+        SUB_MESSAGE_FIELD_NUMBER: _builtins.int
+        NOT_IN_THIS_SCC_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def sub_message(self) -> Global___TestMutualRecursionA.SubMessage:
             """Needed because of bug in javatest"""
 
-        @property
+        @_builtins.property
         def not_in_this_scc(self) -> Global___TestAllTypes: ...
         def __init__(
             self,
@@ -1816,127 +1816,127 @@ class TestMutualRecursionA(google.protobuf.message.Message):
             sub_message: Global___TestMutualRecursionA.SubMessage | None = ...,
             not_in_this_scc: Global___TestAllTypes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["not_in_this_scc", b"not_in_this_scc", "sub_message", b"sub_message"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["not_in_this_scc", b"not_in_this_scc", "sub_message", b"sub_message"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["not_in_this_scc", b"not_in_this_scc", "sub_message", b"sub_message"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["not_in_this_scc", b"not_in_this_scc", "sub_message", b"sub_message"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class SubGroupR(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class SubGroupR(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        PAYLOAD_FIELD_NUMBER: builtins.int
-        @property
+        PAYLOAD_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def payload(self) -> Global___TestAllTypes: ...
         def __init__(
             self,
             *,
             payload: Global___TestAllTypes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["payload", b"payload"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["payload", b"payload"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["payload", b"payload"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["payload", b"payload"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    BB_FIELD_NUMBER: builtins.int
-    SUBGROUP_FIELD_NUMBER: builtins.int
-    SUBGROUPR_FIELD_NUMBER: builtins.int
-    @property
+    BB_FIELD_NUMBER: _builtins.int
+    SUBGROUP_FIELD_NUMBER: _builtins.int
+    SUBGROUPR_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def bb(self) -> Global___TestMutualRecursionB: ...
-    @property
+    @_builtins.property
     def subgroup(self) -> Global___TestMutualRecursionA.SubGroup: ...
-    @property
-    def subgroupr(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestMutualRecursionA.SubGroupR]: ...
+    @_builtins.property
+    def subgroupr(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestMutualRecursionA.SubGroupR]: ...
     def __init__(
         self,
         *,
         bb: Global___TestMutualRecursionB | None = ...,
         subgroup: Global___TestMutualRecursionA.SubGroup | None = ...,
-        subgroupr: collections.abc.Iterable[Global___TestMutualRecursionA.SubGroupR] | None = ...,
+        subgroupr: _collections_abc.Iterable[Global___TestMutualRecursionA.SubGroupR] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb", "subgroup", b"subgroup", "subgroupr", b"subgroupr"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb", "subgroup", b"subgroup", "subgroupr", b"subgroupr"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb", "subgroup", b"subgroup", "subgroupr", b"subgroupr"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb", "subgroup", b"subgroup", "subgroupr", b"subgroupr"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMutualRecursionA: typing_extensions.TypeAlias = TestMutualRecursionA
+Global___TestMutualRecursionA: _typing_extensions.TypeAlias = TestMutualRecursionA  # noqa: Y015
 
-@typing.final
-class TestMutualRecursionB(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMutualRecursionB(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_FIELD_NUMBER: builtins.int
-    optional_int32: builtins.int
-    @property
+    A_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_FIELD_NUMBER: _builtins.int
+    optional_int32: _builtins.int
+    @_builtins.property
     def a(self) -> Global___TestMutualRecursionA: ...
     def __init__(
         self,
         *,
         a: Global___TestMutualRecursionA | None = ...,
-        optional_int32: builtins.int | None = ...,
+        optional_int32: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "optional_int32", b"optional_int32"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "optional_int32", b"optional_int32"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "optional_int32", b"optional_int32"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "optional_int32", b"optional_int32"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMutualRecursionB: typing_extensions.TypeAlias = TestMutualRecursionB
+Global___TestMutualRecursionB: _typing_extensions.TypeAlias = TestMutualRecursionB  # noqa: Y015
 
-@typing.final
-class TestIsInitialized(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestIsInitialized(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class SubMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class SubMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        @typing.final
-        class SubGroup(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class SubGroup(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            I_FIELD_NUMBER: builtins.int
-            i: builtins.int
+            I_FIELD_NUMBER: _builtins.int
+            i: _builtins.int
             def __init__(
                 self,
                 *,
-                i: builtins.int | None = ...,
+                i: _builtins.int | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["i", b"i"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["i", b"i"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["i", b"i"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["i", b"i"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        SUBGROUP_FIELD_NUMBER: builtins.int
-        @property
+        SUBGROUP_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def subgroup(self) -> Global___TestIsInitialized.SubMessage.SubGroup: ...
         def __init__(
             self,
             *,
             subgroup: Global___TestIsInitialized.SubMessage.SubGroup | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["subgroup", b"subgroup"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["subgroup", b"subgroup"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["subgroup", b"subgroup"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["subgroup", b"subgroup"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    SUB_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    SUB_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def sub_message(self) -> Global___TestIsInitialized.SubMessage: ...
     def __init__(
         self,
         *,
         sub_message: Global___TestIsInitialized.SubMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["sub_message", b"sub_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["sub_message", b"sub_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sub_message", b"sub_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sub_message", b"sub_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestIsInitialized: typing_extensions.TypeAlias = TestIsInitialized
+Global___TestIsInitialized: _typing_extensions.TypeAlias = TestIsInitialized  # noqa: Y015
 
-@typing.final
-class TestDupFieldNumber(google.protobuf.message.Message):
+@_typing.final
+class TestDupFieldNumber(_google_protobuf_message.Message):
     """Test that groups have disjoint field numbers from their siblings and
     parents.  This is NOT possible in proto1; only google.protobuf.  When attempting
     to compile with proto1, this will emit an error; so we only include it
@@ -1944,131 +1944,131 @@ class TestDupFieldNumber(google.protobuf.message.Message):
     NO_PROTO1
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class Foo(google.protobuf.message.Message):
+    @_typing.final
+    class Foo(_google_protobuf_message.Message):
         """NO_PROTO1"""
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        a: builtins.int
-        """NO_PROTO1"""
-        def __init__(
-            self,
-            *,
-            a: builtins.int | None = ...,
-        ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-
-    @typing.final
-    class Bar(google.protobuf.message.Message):
-        """NO_PROTO1"""
-
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        A_FIELD_NUMBER: builtins.int
-        a: builtins.int
+        A_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
         """NO_PROTO1"""
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
+            a: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    A_FIELD_NUMBER: builtins.int
-    FOO_FIELD_NUMBER: builtins.int
-    BAR_FIELD_NUMBER: builtins.int
-    a: builtins.int
+    @_typing.final
+    class Bar(_google_protobuf_message.Message):
+        """NO_PROTO1"""
+
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+
+        A_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
+        """NO_PROTO1"""
+        def __init__(
+            self,
+            *,
+            a: _builtins.int | None = ...,
+        ) -> None: ...
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+
+    A_FIELD_NUMBER: _builtins.int
+    FOO_FIELD_NUMBER: _builtins.int
+    BAR_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
     """NO_PROTO1"""
-    @property
+    @_builtins.property
     def foo(self) -> Global___TestDupFieldNumber.Foo:
         """NO_PROTO1"""
 
-    @property
+    @_builtins.property
     def bar(self) -> Global___TestDupFieldNumber.Bar:
         """NO_PROTO1"""
 
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
         foo: Global___TestDupFieldNumber.Foo | None = ...,
         bar: Global___TestDupFieldNumber.Bar | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "bar", b"bar", "foo", b"foo"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "bar", b"bar", "foo", b"foo"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "bar", b"bar", "foo", b"foo"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "bar", b"bar", "foo", b"foo"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestDupFieldNumber: typing_extensions.TypeAlias = TestDupFieldNumber
+Global___TestDupFieldNumber: _typing_extensions.TypeAlias = TestDupFieldNumber  # noqa: Y015
 
-@typing.final
-class TestEagerMessage(google.protobuf.message.Message):
+@_typing.final
+class TestEagerMessage(_google_protobuf_message.Message):
     """Additional messages for testing lazy fields."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    SUB_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    SUB_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def sub_message(self) -> Global___TestAllTypes: ...
     def __init__(
         self,
         *,
         sub_message: Global___TestAllTypes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["sub_message", b"sub_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["sub_message", b"sub_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sub_message", b"sub_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sub_message", b"sub_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestEagerMessage: typing_extensions.TypeAlias = TestEagerMessage
+Global___TestEagerMessage: _typing_extensions.TypeAlias = TestEagerMessage  # noqa: Y015
 
-@typing.final
-class TestLazyMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestLazyMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    SUB_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    SUB_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def sub_message(self) -> Global___TestAllTypes: ...
     def __init__(
         self,
         *,
         sub_message: Global___TestAllTypes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["sub_message", b"sub_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["sub_message", b"sub_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sub_message", b"sub_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sub_message", b"sub_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestLazyMessage: typing_extensions.TypeAlias = TestLazyMessage
+Global___TestLazyMessage: _typing_extensions.TypeAlias = TestLazyMessage  # noqa: Y015
 
-@typing.final
-class TestLazyRequiredEnum(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestLazyRequiredEnum(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_REQUIRED_OPEN_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_REQUIRED_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_REQUIRED_ENUM_NO_MASK_FIELD_NUMBER: builtins.int
-    OPTIONAL_REQUIRED_ENUM_MULTI_FIELD_NUMBER: builtins.int
-    OPTIONAL_REQUIRED_NO_MASK_FIELD_NUMBER: builtins.int
-    @property
+    OPTIONAL_REQUIRED_OPEN_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REQUIRED_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REQUIRED_ENUM_NO_MASK_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REQUIRED_ENUM_MULTI_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REQUIRED_NO_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def optional_required_open_enum(self) -> Global___TestRequiredOpenEnum: ...
-    @property
+    @_builtins.property
     def optional_required_enum(self) -> Global___TestRequiredEnum: ...
-    @property
+    @_builtins.property
     def optional_required_enum_no_mask(self) -> Global___TestRequiredEnumNoMask: ...
-    @property
+    @_builtins.property
     def optional_required_enum_multi(self) -> Global___TestRequiredEnumMulti: ...
-    @property
+    @_builtins.property
     def optional_required_no_mask(self) -> Global___TestRequiredNoMaskMulti: ...
     def __init__(
         self,
@@ -2079,61 +2079,61 @@ class TestLazyRequiredEnum(google.protobuf.message.Message):
         optional_required_enum_multi: Global___TestRequiredEnumMulti | None = ...,
         optional_required_no_mask: Global___TestRequiredNoMaskMulti | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_required_enum", b"optional_required_enum", "optional_required_enum_multi", b"optional_required_enum_multi", "optional_required_enum_no_mask", b"optional_required_enum_no_mask", "optional_required_no_mask", b"optional_required_no_mask", "optional_required_open_enum", b"optional_required_open_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_required_enum", b"optional_required_enum", "optional_required_enum_multi", b"optional_required_enum_multi", "optional_required_enum_no_mask", b"optional_required_enum_no_mask", "optional_required_no_mask", b"optional_required_no_mask", "optional_required_open_enum", b"optional_required_open_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_required_enum", b"optional_required_enum", "optional_required_enum_multi", b"optional_required_enum_multi", "optional_required_enum_no_mask", b"optional_required_enum_no_mask", "optional_required_no_mask", b"optional_required_no_mask", "optional_required_open_enum", b"optional_required_open_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_required_enum", b"optional_required_enum", "optional_required_enum_multi", b"optional_required_enum_multi", "optional_required_enum_no_mask", b"optional_required_enum_no_mask", "optional_required_no_mask", b"optional_required_no_mask", "optional_required_open_enum", b"optional_required_open_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestLazyRequiredEnum: typing_extensions.TypeAlias = TestLazyRequiredEnum
+Global___TestLazyRequiredEnum: _typing_extensions.TypeAlias = TestLazyRequiredEnum  # noqa: Y015
 
-@typing.final
-class TestLazyMessageRepeated(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestLazyMessageRepeated(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestLazyMessage]: ...
+    REPEATED_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestLazyMessage]: ...
     def __init__(
         self,
         *,
-        repeated_message: collections.abc.Iterable[Global___TestLazyMessage] | None = ...,
+        repeated_message: _collections_abc.Iterable[Global___TestLazyMessage] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_message", b"repeated_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_message", b"repeated_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_message", b"repeated_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_message", b"repeated_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestLazyMessageRepeated: typing_extensions.TypeAlias = TestLazyMessageRepeated
+Global___TestLazyMessageRepeated: _typing_extensions.TypeAlias = TestLazyMessageRepeated  # noqa: Y015
 
-@typing.final
-class TestEagerMaybeLazy(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestEagerMaybeLazy(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        PACKED_FIELD_NUMBER: builtins.int
-        @property
+        PACKED_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def packed(self) -> Global___TestPackedTypes: ...
         def __init__(
             self,
             *,
             packed: Global___TestPackedTypes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["packed", b"packed"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["packed", b"packed"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["packed", b"packed"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["packed", b"packed"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    MESSAGE_FOO_FIELD_NUMBER: builtins.int
-    MESSAGE_BAR_FIELD_NUMBER: builtins.int
-    MESSAGE_BAZ_FIELD_NUMBER: builtins.int
-    @property
+    MESSAGE_FOO_FIELD_NUMBER: _builtins.int
+    MESSAGE_BAR_FIELD_NUMBER: _builtins.int
+    MESSAGE_BAZ_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def message_foo(self) -> Global___TestAllTypes: ...
-    @property
+    @_builtins.property
     def message_bar(self) -> Global___TestAllTypes: ...
-    @property
+    @_builtins.property
     def message_baz(self) -> Global___TestEagerMaybeLazy.NestedMessage: ...
     def __init__(
         self,
@@ -2142,133 +2142,133 @@ class TestEagerMaybeLazy(google.protobuf.message.Message):
         message_bar: Global___TestAllTypes | None = ...,
         message_baz: Global___TestEagerMaybeLazy.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["message_bar", b"message_bar", "message_baz", b"message_baz", "message_foo", b"message_foo"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["message_bar", b"message_bar", "message_baz", b"message_baz", "message_foo", b"message_foo"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message_bar", b"message_bar", "message_baz", b"message_baz", "message_foo", b"message_foo"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message_bar", b"message_bar", "message_baz", b"message_baz", "message_foo", b"message_foo"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestEagerMaybeLazy: typing_extensions.TypeAlias = TestEagerMaybeLazy
+Global___TestEagerMaybeLazy: _typing_extensions.TypeAlias = TestEagerMaybeLazy  # noqa: Y015
 
-@typing.final
-class TestNestedMessageHasBits(google.protobuf.message.Message):
+@_typing.final
+class TestNestedMessageHasBits(_google_protobuf_message.Message):
     """Needed for a Python test."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        NESTEDMESSAGE_REPEATED_INT32_FIELD_NUMBER: builtins.int
-        NESTEDMESSAGE_REPEATED_FOREIGNMESSAGE_FIELD_NUMBER: builtins.int
-        @property
-        def nestedmessage_repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-        @property
-        def nestedmessage_repeated_foreignmessage(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
+        NESTEDMESSAGE_REPEATED_INT32_FIELD_NUMBER: _builtins.int
+        NESTEDMESSAGE_REPEATED_FOREIGNMESSAGE_FIELD_NUMBER: _builtins.int
+        @_builtins.property
+        def nestedmessage_repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+        @_builtins.property
+        def nestedmessage_repeated_foreignmessage(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
         def __init__(
             self,
             *,
-            nestedmessage_repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
-            nestedmessage_repeated_foreignmessage: collections.abc.Iterable[Global___ForeignMessage] | None = ...,
+            nestedmessage_repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+            nestedmessage_repeated_foreignmessage: _collections_abc.Iterable[Global___ForeignMessage] | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["nestedmessage_repeated_foreignmessage", b"nestedmessage_repeated_foreignmessage", "nestedmessage_repeated_int32", b"nestedmessage_repeated_int32"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["nestedmessage_repeated_foreignmessage", b"nestedmessage_repeated_foreignmessage", "nestedmessage_repeated_int32", b"nestedmessage_repeated_int32"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["nestedmessage_repeated_foreignmessage", b"nestedmessage_repeated_foreignmessage", "nestedmessage_repeated_int32", b"nestedmessage_repeated_int32"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["nestedmessage_repeated_foreignmessage", b"nestedmessage_repeated_foreignmessage", "nestedmessage_repeated_int32", b"nestedmessage_repeated_int32"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def optional_nested_message(self) -> Global___TestNestedMessageHasBits.NestedMessage: ...
     def __init__(
         self,
         *,
         optional_nested_message: Global___TestNestedMessageHasBits.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_nested_message", b"optional_nested_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_nested_message", b"optional_nested_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_nested_message", b"optional_nested_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_nested_message", b"optional_nested_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedMessageHasBits: typing_extensions.TypeAlias = TestNestedMessageHasBits
+Global___TestNestedMessageHasBits: _typing_extensions.TypeAlias = TestNestedMessageHasBits  # noqa: Y015
 
-@typing.final
-class TestCamelCaseFieldNames(google.protobuf.message.Message):
+@_typing.final
+class TestCamelCaseFieldNames(_google_protobuf_message.Message):
     """Test message with CamelCase field names.  This violates Protocol Buffer
     standard style.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    PRIMITIVEFIELD_FIELD_NUMBER: builtins.int
-    STRINGFIELD_FIELD_NUMBER: builtins.int
-    ENUMFIELD_FIELD_NUMBER: builtins.int
-    MESSAGEFIELD_FIELD_NUMBER: builtins.int
-    STRINGPIECEFIELD_FIELD_NUMBER: builtins.int
-    CORDFIELD_FIELD_NUMBER: builtins.int
-    REPEATEDPRIMITIVEFIELD_FIELD_NUMBER: builtins.int
-    REPEATEDSTRINGFIELD_FIELD_NUMBER: builtins.int
-    REPEATEDENUMFIELD_FIELD_NUMBER: builtins.int
-    REPEATEDMESSAGEFIELD_FIELD_NUMBER: builtins.int
-    REPEATEDSTRINGPIECEFIELD_FIELD_NUMBER: builtins.int
-    REPEATEDCORDFIELD_FIELD_NUMBER: builtins.int
-    PrimitiveField: builtins.int
-    StringField: builtins.str
+    PRIMITIVEFIELD_FIELD_NUMBER: _builtins.int
+    STRINGFIELD_FIELD_NUMBER: _builtins.int
+    ENUMFIELD_FIELD_NUMBER: _builtins.int
+    MESSAGEFIELD_FIELD_NUMBER: _builtins.int
+    STRINGPIECEFIELD_FIELD_NUMBER: _builtins.int
+    CORDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATEDPRIMITIVEFIELD_FIELD_NUMBER: _builtins.int
+    REPEATEDSTRINGFIELD_FIELD_NUMBER: _builtins.int
+    REPEATEDENUMFIELD_FIELD_NUMBER: _builtins.int
+    REPEATEDMESSAGEFIELD_FIELD_NUMBER: _builtins.int
+    REPEATEDSTRINGPIECEFIELD_FIELD_NUMBER: _builtins.int
+    REPEATEDCORDFIELD_FIELD_NUMBER: _builtins.int
+    PrimitiveField: _builtins.int
+    StringField: _builtins.str
     EnumField: Global___ForeignEnum.ValueType
-    StringPieceField: builtins.str
-    CordField: builtins.str
-    @property
+    StringPieceField: _builtins.str
+    CordField: _builtins.str
+    @_builtins.property
     def MessageField(self) -> Global___ForeignMessage: ...
-    @property
-    def RepeatedPrimitiveField(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def RepeatedStringField(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def RepeatedEnumField(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
-    @property
-    def RepeatedMessageField(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
-    @property
-    def RepeatedStringPieceField(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def RepeatedCordField(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @_builtins.property
+    def RepeatedPrimitiveField(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def RepeatedStringField(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def RepeatedEnumField(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    @_builtins.property
+    def RepeatedMessageField(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
+    @_builtins.property
+    def RepeatedStringPieceField(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def RepeatedCordField(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
         self,
         *,
-        PrimitiveField: builtins.int | None = ...,
-        StringField: builtins.str | None = ...,
+        PrimitiveField: _builtins.int | None = ...,
+        StringField: _builtins.str | None = ...,
         EnumField: Global___ForeignEnum.ValueType | None = ...,
         MessageField: Global___ForeignMessage | None = ...,
-        StringPieceField: builtins.str | None = ...,
-        CordField: builtins.str | None = ...,
-        RepeatedPrimitiveField: collections.abc.Iterable[builtins.int] | None = ...,
-        RepeatedStringField: collections.abc.Iterable[builtins.str] | None = ...,
-        RepeatedEnumField: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
-        RepeatedMessageField: collections.abc.Iterable[Global___ForeignMessage] | None = ...,
-        RepeatedStringPieceField: collections.abc.Iterable[builtins.str] | None = ...,
-        RepeatedCordField: collections.abc.Iterable[builtins.str] | None = ...,
+        StringPieceField: _builtins.str | None = ...,
+        CordField: _builtins.str | None = ...,
+        RepeatedPrimitiveField: _collections_abc.Iterable[_builtins.int] | None = ...,
+        RepeatedStringField: _collections_abc.Iterable[_builtins.str] | None = ...,
+        RepeatedEnumField: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        RepeatedMessageField: _collections_abc.Iterable[Global___ForeignMessage] | None = ...,
+        RepeatedStringPieceField: _collections_abc.Iterable[_builtins.str] | None = ...,
+        RepeatedCordField: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["CordField", b"CordField", "EnumField", b"EnumField", "MessageField", b"MessageField", "PrimitiveField", b"PrimitiveField", "RepeatedCordField", b"RepeatedCordField", "RepeatedEnumField", b"RepeatedEnumField", "RepeatedMessageField", b"RepeatedMessageField", "RepeatedPrimitiveField", b"RepeatedPrimitiveField", "RepeatedStringField", b"RepeatedStringField", "RepeatedStringPieceField", b"RepeatedStringPieceField", "StringField", b"StringField", "StringPieceField", b"StringPieceField"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["CordField", b"CordField", "EnumField", b"EnumField", "MessageField", b"MessageField", "PrimitiveField", b"PrimitiveField", "RepeatedCordField", b"RepeatedCordField", "RepeatedEnumField", b"RepeatedEnumField", "RepeatedMessageField", b"RepeatedMessageField", "RepeatedPrimitiveField", b"RepeatedPrimitiveField", "RepeatedStringField", b"RepeatedStringField", "RepeatedStringPieceField", b"RepeatedStringPieceField", "StringField", b"StringField", "StringPieceField", b"StringPieceField"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["CordField", b"CordField", "EnumField", b"EnumField", "MessageField", b"MessageField", "PrimitiveField", b"PrimitiveField", "RepeatedCordField", b"RepeatedCordField", "RepeatedEnumField", b"RepeatedEnumField", "RepeatedMessageField", b"RepeatedMessageField", "RepeatedPrimitiveField", b"RepeatedPrimitiveField", "RepeatedStringField", b"RepeatedStringField", "RepeatedStringPieceField", b"RepeatedStringPieceField", "StringField", b"StringField", "StringPieceField", b"StringPieceField"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["CordField", b"CordField", "EnumField", b"EnumField", "MessageField", b"MessageField", "PrimitiveField", b"PrimitiveField", "RepeatedCordField", b"RepeatedCordField", "RepeatedEnumField", b"RepeatedEnumField", "RepeatedMessageField", b"RepeatedMessageField", "RepeatedPrimitiveField", b"RepeatedPrimitiveField", "RepeatedStringField", b"RepeatedStringField", "RepeatedStringPieceField", b"RepeatedStringPieceField", "StringField", b"StringField", "StringPieceField", b"StringPieceField"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestCamelCaseFieldNames: typing_extensions.TypeAlias = TestCamelCaseFieldNames
+Global___TestCamelCaseFieldNames: _typing_extensions.TypeAlias = TestCamelCaseFieldNames  # noqa: Y015
 
-@typing.final
-class TestFieldOrderings(google.protobuf.message.Message):
+@_typing.final
+class TestFieldOrderings(_google_protobuf_message.Message):
     """We list fields out of order, to ensure that we're using field number and not
     field index to determine serialization order.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        OO_FIELD_NUMBER: builtins.int
-        BB_FIELD_NUMBER: builtins.int
-        oo: builtins.int
-        bb: builtins.int
+        OO_FIELD_NUMBER: _builtins.int
+        BB_FIELD_NUMBER: _builtins.int
+        oo: _builtins.int
+        bb: _builtins.int
         """The field name "b" fails to compile in proto1 because it conflicts with
         a local variable named "b" in one of the generated methods.  Doh.
         This file needs to compile in proto1 to test backwards-compatibility.
@@ -2276,614 +2276,614 @@ class TestFieldOrderings(google.protobuf.message.Message):
         def __init__(
             self,
             *,
-            oo: builtins.int | None = ...,
-            bb: builtins.int | None = ...,
+            oo: _builtins.int | None = ...,
+            bb: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb", "oo", b"oo"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb", "oo", b"oo"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb", "oo", b"oo"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb", "oo", b"oo"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    MY_STRING_FIELD_NUMBER: builtins.int
-    MY_INT_FIELD_NUMBER: builtins.int
-    MY_FLOAT_FIELD_NUMBER: builtins.int
-    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    my_string: builtins.str
-    my_int: builtins.int
-    my_float: builtins.float
-    @property
+    MY_STRING_FIELD_NUMBER: _builtins.int
+    MY_INT_FIELD_NUMBER: _builtins.int
+    MY_FLOAT_FIELD_NUMBER: _builtins.int
+    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    my_string: _builtins.str
+    my_int: _builtins.int
+    my_float: _builtins.float
+    @_builtins.property
     def optional_nested_message(self) -> Global___TestFieldOrderings.NestedMessage: ...
     def __init__(
         self,
         *,
-        my_string: builtins.str | None = ...,
-        my_int: builtins.int | None = ...,
-        my_float: builtins.float | None = ...,
+        my_string: _builtins.str | None = ...,
+        my_int: _builtins.int | None = ...,
+        my_float: _builtins.float | None = ...,
         optional_nested_message: Global___TestFieldOrderings.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_float", b"my_float", "my_int", b"my_int", "my_string", b"my_string", "optional_nested_message", b"optional_nested_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_float", b"my_float", "my_int", b"my_int", "my_string", b"my_string", "optional_nested_message", b"optional_nested_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_float", b"my_float", "my_int", b"my_int", "my_string", b"my_string", "optional_nested_message", b"optional_nested_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_float", b"my_float", "my_int", b"my_int", "my_string", b"my_string", "optional_nested_message", b"optional_nested_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestFieldOrderings: typing_extensions.TypeAlias = TestFieldOrderings
+Global___TestFieldOrderings: _typing_extensions.TypeAlias = TestFieldOrderings  # noqa: Y015
 
-@typing.final
-class TestExtensionOrderings1(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestExtensionOrderings1(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    MY_STRING_FIELD_NUMBER: builtins.int
-    my_string: builtins.str
-    TEST_EXT_ORDERINGS1_FIELD_NUMBER: builtins.int
-    test_ext_orderings1: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, Global___TestExtensionOrderings1]
+    MY_STRING_FIELD_NUMBER: _builtins.int
+    my_string: _builtins.str
+    TEST_EXT_ORDERINGS1_FIELD_NUMBER: _builtins.int
+    test_ext_orderings1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, Global___TestExtensionOrderings1]
     def __init__(
         self,
         *,
-        my_string: builtins.str | None = ...,
+        my_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_string", b"my_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_string", b"my_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_string", b"my_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_string", b"my_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestExtensionOrderings1: typing_extensions.TypeAlias = TestExtensionOrderings1
+Global___TestExtensionOrderings1: _typing_extensions.TypeAlias = TestExtensionOrderings1  # noqa: Y015
 
-@typing.final
-class TestExtensionOrderings2(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestExtensionOrderings2(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class TestExtensionOrderings3(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class TestExtensionOrderings3(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        MY_STRING_FIELD_NUMBER: builtins.int
-        my_string: builtins.str
-        TEST_EXT_ORDERINGS3_FIELD_NUMBER: builtins.int
-        test_ext_orderings3: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, Global___TestExtensionOrderings2.TestExtensionOrderings3]
+        MY_STRING_FIELD_NUMBER: _builtins.int
+        my_string: _builtins.str
+        TEST_EXT_ORDERINGS3_FIELD_NUMBER: _builtins.int
+        test_ext_orderings3: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, Global___TestExtensionOrderings2.TestExtensionOrderings3]
         def __init__(
             self,
             *,
-            my_string: builtins.str | None = ...,
+            my_string: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_string", b"my_string"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_string", b"my_string"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_string", b"my_string"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_string", b"my_string"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    MY_STRING_FIELD_NUMBER: builtins.int
-    my_string: builtins.str
-    TEST_EXT_ORDERINGS2_FIELD_NUMBER: builtins.int
-    test_ext_orderings2: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, Global___TestExtensionOrderings2]
+    MY_STRING_FIELD_NUMBER: _builtins.int
+    my_string: _builtins.str
+    TEST_EXT_ORDERINGS2_FIELD_NUMBER: _builtins.int
+    test_ext_orderings2: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, Global___TestExtensionOrderings2]
     def __init__(
         self,
         *,
-        my_string: builtins.str | None = ...,
+        my_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_string", b"my_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["my_string", b"my_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_string", b"my_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["my_string", b"my_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestExtensionOrderings2: typing_extensions.TypeAlias = TestExtensionOrderings2
+Global___TestExtensionOrderings2: _typing_extensions.TypeAlias = TestExtensionOrderings2  # noqa: Y015
 
-@typing.final
-class TestExtremeDefaultValues(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestExtremeDefaultValues(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    ESCAPED_BYTES_FIELD_NUMBER: builtins.int
-    LARGE_UINT32_FIELD_NUMBER: builtins.int
-    LARGE_UINT64_FIELD_NUMBER: builtins.int
-    SMALL_INT32_FIELD_NUMBER: builtins.int
-    SMALL_INT64_FIELD_NUMBER: builtins.int
-    REALLY_SMALL_INT32_FIELD_NUMBER: builtins.int
-    REALLY_SMALL_INT64_FIELD_NUMBER: builtins.int
-    UTF8_STRING_FIELD_NUMBER: builtins.int
-    ZERO_FLOAT_FIELD_NUMBER: builtins.int
-    ONE_FLOAT_FIELD_NUMBER: builtins.int
-    SMALL_FLOAT_FIELD_NUMBER: builtins.int
-    NEGATIVE_ONE_FLOAT_FIELD_NUMBER: builtins.int
-    NEGATIVE_FLOAT_FIELD_NUMBER: builtins.int
-    LARGE_FLOAT_FIELD_NUMBER: builtins.int
-    SMALL_NEGATIVE_FLOAT_FIELD_NUMBER: builtins.int
-    INF_DOUBLE_FIELD_NUMBER: builtins.int
-    NEG_INF_DOUBLE_FIELD_NUMBER: builtins.int
-    NAN_DOUBLE_FIELD_NUMBER: builtins.int
-    INF_FLOAT_FIELD_NUMBER: builtins.int
-    NEG_INF_FLOAT_FIELD_NUMBER: builtins.int
-    NAN_FLOAT_FIELD_NUMBER: builtins.int
-    CPP_TRIGRAPH_FIELD_NUMBER: builtins.int
-    STRING_WITH_ZERO_FIELD_NUMBER: builtins.int
-    BYTES_WITH_ZERO_FIELD_NUMBER: builtins.int
-    STRING_PIECE_WITH_ZERO_FIELD_NUMBER: builtins.int
-    CORD_WITH_ZERO_FIELD_NUMBER: builtins.int
-    REPLACEMENT_STRING_FIELD_NUMBER: builtins.int
-    escaped_bytes: builtins.bytes
-    large_uint32: builtins.int
-    large_uint64: builtins.int
-    small_int32: builtins.int
-    small_int64: builtins.int
-    really_small_int32: builtins.int
-    really_small_int64: builtins.int
-    utf8_string: builtins.str
+    ESCAPED_BYTES_FIELD_NUMBER: _builtins.int
+    LARGE_UINT32_FIELD_NUMBER: _builtins.int
+    LARGE_UINT64_FIELD_NUMBER: _builtins.int
+    SMALL_INT32_FIELD_NUMBER: _builtins.int
+    SMALL_INT64_FIELD_NUMBER: _builtins.int
+    REALLY_SMALL_INT32_FIELD_NUMBER: _builtins.int
+    REALLY_SMALL_INT64_FIELD_NUMBER: _builtins.int
+    UTF8_STRING_FIELD_NUMBER: _builtins.int
+    ZERO_FLOAT_FIELD_NUMBER: _builtins.int
+    ONE_FLOAT_FIELD_NUMBER: _builtins.int
+    SMALL_FLOAT_FIELD_NUMBER: _builtins.int
+    NEGATIVE_ONE_FLOAT_FIELD_NUMBER: _builtins.int
+    NEGATIVE_FLOAT_FIELD_NUMBER: _builtins.int
+    LARGE_FLOAT_FIELD_NUMBER: _builtins.int
+    SMALL_NEGATIVE_FLOAT_FIELD_NUMBER: _builtins.int
+    INF_DOUBLE_FIELD_NUMBER: _builtins.int
+    NEG_INF_DOUBLE_FIELD_NUMBER: _builtins.int
+    NAN_DOUBLE_FIELD_NUMBER: _builtins.int
+    INF_FLOAT_FIELD_NUMBER: _builtins.int
+    NEG_INF_FLOAT_FIELD_NUMBER: _builtins.int
+    NAN_FLOAT_FIELD_NUMBER: _builtins.int
+    CPP_TRIGRAPH_FIELD_NUMBER: _builtins.int
+    STRING_WITH_ZERO_FIELD_NUMBER: _builtins.int
+    BYTES_WITH_ZERO_FIELD_NUMBER: _builtins.int
+    STRING_PIECE_WITH_ZERO_FIELD_NUMBER: _builtins.int
+    CORD_WITH_ZERO_FIELD_NUMBER: _builtins.int
+    REPLACEMENT_STRING_FIELD_NUMBER: _builtins.int
+    escaped_bytes: _builtins.bytes
+    large_uint32: _builtins.int
+    large_uint64: _builtins.int
+    small_int32: _builtins.int
+    small_int64: _builtins.int
+    really_small_int32: _builtins.int
+    really_small_int64: _builtins.int
+    utf8_string: _builtins.str
     """The default value here is UTF-8 for "\\u1234".  (We could also just type
     the UTF-8 text directly into this text file rather than escape it, but
     lots of people use editors that would be confused by this.)
     """
-    zero_float: builtins.float
+    zero_float: _builtins.float
     """Tests for single-precision floating-point values."""
-    one_float: builtins.float
-    small_float: builtins.float
-    negative_one_float: builtins.float
-    negative_float: builtins.float
-    large_float: builtins.float
+    one_float: _builtins.float
+    small_float: _builtins.float
+    negative_one_float: _builtins.float
+    negative_float: _builtins.float
+    large_float: _builtins.float
     """Using exponents"""
-    small_negative_float: builtins.float
-    inf_double: builtins.float
+    small_negative_float: _builtins.float
+    inf_double: _builtins.float
     """Text for nonfinite floating-point values."""
-    neg_inf_double: builtins.float
-    nan_double: builtins.float
-    inf_float: builtins.float
-    neg_inf_float: builtins.float
-    nan_float: builtins.float
-    cpp_trigraph: builtins.str
+    neg_inf_double: _builtins.float
+    nan_double: _builtins.float
+    inf_float: _builtins.float
+    neg_inf_float: _builtins.float
+    nan_float: _builtins.float
+    cpp_trigraph: _builtins.str
     """Tests for C++ trigraphs.
     Trigraphs should be escaped in C++ generated files, but they should not be
     escaped for other languages.
     Note that in .proto file, "\\?" is a valid way to escape ? in string
     literals.
     """
-    string_with_zero: builtins.str
+    string_with_zero: _builtins.str
     """String defaults containing the character '\\000'"""
-    bytes_with_zero: builtins.bytes
-    string_piece_with_zero: builtins.str
-    cord_with_zero: builtins.str
-    replacement_string: builtins.str
+    bytes_with_zero: _builtins.bytes
+    string_piece_with_zero: _builtins.str
+    cord_with_zero: _builtins.str
+    replacement_string: _builtins.str
     def __init__(
         self,
         *,
-        escaped_bytes: builtins.bytes | None = ...,
-        large_uint32: builtins.int | None = ...,
-        large_uint64: builtins.int | None = ...,
-        small_int32: builtins.int | None = ...,
-        small_int64: builtins.int | None = ...,
-        really_small_int32: builtins.int | None = ...,
-        really_small_int64: builtins.int | None = ...,
-        utf8_string: builtins.str | None = ...,
-        zero_float: builtins.float | None = ...,
-        one_float: builtins.float | None = ...,
-        small_float: builtins.float | None = ...,
-        negative_one_float: builtins.float | None = ...,
-        negative_float: builtins.float | None = ...,
-        large_float: builtins.float | None = ...,
-        small_negative_float: builtins.float | None = ...,
-        inf_double: builtins.float | None = ...,
-        neg_inf_double: builtins.float | None = ...,
-        nan_double: builtins.float | None = ...,
-        inf_float: builtins.float | None = ...,
-        neg_inf_float: builtins.float | None = ...,
-        nan_float: builtins.float | None = ...,
-        cpp_trigraph: builtins.str | None = ...,
-        string_with_zero: builtins.str | None = ...,
-        bytes_with_zero: builtins.bytes | None = ...,
-        string_piece_with_zero: builtins.str | None = ...,
-        cord_with_zero: builtins.str | None = ...,
-        replacement_string: builtins.str | None = ...,
+        escaped_bytes: _builtins.bytes | None = ...,
+        large_uint32: _builtins.int | None = ...,
+        large_uint64: _builtins.int | None = ...,
+        small_int32: _builtins.int | None = ...,
+        small_int64: _builtins.int | None = ...,
+        really_small_int32: _builtins.int | None = ...,
+        really_small_int64: _builtins.int | None = ...,
+        utf8_string: _builtins.str | None = ...,
+        zero_float: _builtins.float | None = ...,
+        one_float: _builtins.float | None = ...,
+        small_float: _builtins.float | None = ...,
+        negative_one_float: _builtins.float | None = ...,
+        negative_float: _builtins.float | None = ...,
+        large_float: _builtins.float | None = ...,
+        small_negative_float: _builtins.float | None = ...,
+        inf_double: _builtins.float | None = ...,
+        neg_inf_double: _builtins.float | None = ...,
+        nan_double: _builtins.float | None = ...,
+        inf_float: _builtins.float | None = ...,
+        neg_inf_float: _builtins.float | None = ...,
+        nan_float: _builtins.float | None = ...,
+        cpp_trigraph: _builtins.str | None = ...,
+        string_with_zero: _builtins.str | None = ...,
+        bytes_with_zero: _builtins.bytes | None = ...,
+        string_piece_with_zero: _builtins.str | None = ...,
+        cord_with_zero: _builtins.str | None = ...,
+        replacement_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bytes_with_zero", b"bytes_with_zero", "cord_with_zero", b"cord_with_zero", "cpp_trigraph", b"cpp_trigraph", "escaped_bytes", b"escaped_bytes", "inf_double", b"inf_double", "inf_float", b"inf_float", "large_float", b"large_float", "large_uint32", b"large_uint32", "large_uint64", b"large_uint64", "nan_double", b"nan_double", "nan_float", b"nan_float", "neg_inf_double", b"neg_inf_double", "neg_inf_float", b"neg_inf_float", "negative_float", b"negative_float", "negative_one_float", b"negative_one_float", "one_float", b"one_float", "really_small_int32", b"really_small_int32", "really_small_int64", b"really_small_int64", "replacement_string", b"replacement_string", "small_float", b"small_float", "small_int32", b"small_int32", "small_int64", b"small_int64", "small_negative_float", b"small_negative_float", "string_piece_with_zero", b"string_piece_with_zero", "string_with_zero", b"string_with_zero", "utf8_string", b"utf8_string", "zero_float", b"zero_float"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bytes_with_zero", b"bytes_with_zero", "cord_with_zero", b"cord_with_zero", "cpp_trigraph", b"cpp_trigraph", "escaped_bytes", b"escaped_bytes", "inf_double", b"inf_double", "inf_float", b"inf_float", "large_float", b"large_float", "large_uint32", b"large_uint32", "large_uint64", b"large_uint64", "nan_double", b"nan_double", "nan_float", b"nan_float", "neg_inf_double", b"neg_inf_double", "neg_inf_float", b"neg_inf_float", "negative_float", b"negative_float", "negative_one_float", b"negative_one_float", "one_float", b"one_float", "really_small_int32", b"really_small_int32", "really_small_int64", b"really_small_int64", "replacement_string", b"replacement_string", "small_float", b"small_float", "small_int32", b"small_int32", "small_int64", b"small_int64", "small_negative_float", b"small_negative_float", "string_piece_with_zero", b"string_piece_with_zero", "string_with_zero", b"string_with_zero", "utf8_string", b"utf8_string", "zero_float", b"zero_float"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bytes_with_zero", b"bytes_with_zero", "cord_with_zero", b"cord_with_zero", "cpp_trigraph", b"cpp_trigraph", "escaped_bytes", b"escaped_bytes", "inf_double", b"inf_double", "inf_float", b"inf_float", "large_float", b"large_float", "large_uint32", b"large_uint32", "large_uint64", b"large_uint64", "nan_double", b"nan_double", "nan_float", b"nan_float", "neg_inf_double", b"neg_inf_double", "neg_inf_float", b"neg_inf_float", "negative_float", b"negative_float", "negative_one_float", b"negative_one_float", "one_float", b"one_float", "really_small_int32", b"really_small_int32", "really_small_int64", b"really_small_int64", "replacement_string", b"replacement_string", "small_float", b"small_float", "small_int32", b"small_int32", "small_int64", b"small_int64", "small_negative_float", b"small_negative_float", "string_piece_with_zero", b"string_piece_with_zero", "string_with_zero", b"string_with_zero", "utf8_string", b"utf8_string", "zero_float", b"zero_float"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bytes_with_zero", b"bytes_with_zero", "cord_with_zero", b"cord_with_zero", "cpp_trigraph", b"cpp_trigraph", "escaped_bytes", b"escaped_bytes", "inf_double", b"inf_double", "inf_float", b"inf_float", "large_float", b"large_float", "large_uint32", b"large_uint32", "large_uint64", b"large_uint64", "nan_double", b"nan_double", "nan_float", b"nan_float", "neg_inf_double", b"neg_inf_double", "neg_inf_float", b"neg_inf_float", "negative_float", b"negative_float", "negative_one_float", b"negative_one_float", "one_float", b"one_float", "really_small_int32", b"really_small_int32", "really_small_int64", b"really_small_int64", "replacement_string", b"replacement_string", "small_float", b"small_float", "small_int32", b"small_int32", "small_int64", b"small_int64", "small_negative_float", b"small_negative_float", "string_piece_with_zero", b"string_piece_with_zero", "string_with_zero", b"string_with_zero", "utf8_string", b"utf8_string", "zero_float", b"zero_float"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestExtremeDefaultValues: typing_extensions.TypeAlias = TestExtremeDefaultValues
+Global___TestExtremeDefaultValues: _typing_extensions.TypeAlias = TestExtremeDefaultValues  # noqa: Y015
 
-@typing.final
-class SparseEnumMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class SparseEnumMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    SPARSE_ENUM_FIELD_NUMBER: builtins.int
+    SPARSE_ENUM_FIELD_NUMBER: _builtins.int
     sparse_enum: Global___TestSparseEnum.ValueType
     def __init__(
         self,
         *,
         sparse_enum: Global___TestSparseEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["sparse_enum", b"sparse_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["sparse_enum", b"sparse_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sparse_enum", b"sparse_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["sparse_enum", b"sparse_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___SparseEnumMessage: typing_extensions.TypeAlias = SparseEnumMessage
+Global___SparseEnumMessage: _typing_extensions.TypeAlias = SparseEnumMessage  # noqa: Y015
 
-@typing.final
-class OneString(google.protobuf.message.Message):
+@_typing.final
+class OneString(_google_protobuf_message.Message):
     """Test String and Bytes: string is for valid UTF-8 strings"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.str
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.str
     def __init__(
         self,
         *,
-        data: builtins.str | None = ...,
+        data: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OneString: typing_extensions.TypeAlias = OneString
+Global___OneString: _typing_extensions.TypeAlias = OneString  # noqa: Y015
 
-@typing.final
-class MoreString(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MoreString(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    @property
-    def data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    DATA_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def data(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
         self,
         *,
-        data: collections.abc.Iterable[builtins.str] | None = ...,
+        data: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___MoreString: typing_extensions.TypeAlias = MoreString
+Global___MoreString: _typing_extensions.TypeAlias = MoreString  # noqa: Y015
 
-@typing.final
-class OneBytes(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class OneBytes(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.bytes
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.bytes
     def __init__(
         self,
         *,
-        data: builtins.bytes | None = ...,
+        data: _builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OneBytes: typing_extensions.TypeAlias = OneBytes
+Global___OneBytes: _typing_extensions.TypeAlias = OneBytes  # noqa: Y015
 
-@typing.final
-class MoreBytes(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MoreBytes(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    @property
-    def data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
+    DATA_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def data(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
     def __init__(
         self,
         *,
-        data: collections.abc.Iterable[builtins.bytes] | None = ...,
+        data: _collections_abc.Iterable[_builtins.bytes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___MoreBytes: typing_extensions.TypeAlias = MoreBytes
+Global___MoreBytes: _typing_extensions.TypeAlias = MoreBytes  # noqa: Y015
 
-@typing.final
-class ManyOptionalString(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class ManyOptionalString(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    STR1_FIELD_NUMBER: builtins.int
-    STR2_FIELD_NUMBER: builtins.int
-    STR3_FIELD_NUMBER: builtins.int
-    STR4_FIELD_NUMBER: builtins.int
-    STR5_FIELD_NUMBER: builtins.int
-    STR6_FIELD_NUMBER: builtins.int
-    STR7_FIELD_NUMBER: builtins.int
-    STR8_FIELD_NUMBER: builtins.int
-    STR9_FIELD_NUMBER: builtins.int
-    STR10_FIELD_NUMBER: builtins.int
-    STR11_FIELD_NUMBER: builtins.int
-    STR12_FIELD_NUMBER: builtins.int
-    STR13_FIELD_NUMBER: builtins.int
-    STR14_FIELD_NUMBER: builtins.int
-    STR15_FIELD_NUMBER: builtins.int
-    STR16_FIELD_NUMBER: builtins.int
-    STR17_FIELD_NUMBER: builtins.int
-    STR18_FIELD_NUMBER: builtins.int
-    STR19_FIELD_NUMBER: builtins.int
-    STR20_FIELD_NUMBER: builtins.int
-    STR21_FIELD_NUMBER: builtins.int
-    STR22_FIELD_NUMBER: builtins.int
-    STR23_FIELD_NUMBER: builtins.int
-    STR24_FIELD_NUMBER: builtins.int
-    STR25_FIELD_NUMBER: builtins.int
-    STR26_FIELD_NUMBER: builtins.int
-    STR27_FIELD_NUMBER: builtins.int
-    STR28_FIELD_NUMBER: builtins.int
-    STR29_FIELD_NUMBER: builtins.int
-    STR30_FIELD_NUMBER: builtins.int
-    STR31_FIELD_NUMBER: builtins.int
-    STR32_FIELD_NUMBER: builtins.int
-    str1: builtins.str
-    str2: builtins.str
-    str3: builtins.str
-    str4: builtins.str
-    str5: builtins.str
-    str6: builtins.str
-    str7: builtins.str
-    str8: builtins.str
-    str9: builtins.str
-    str10: builtins.str
-    str11: builtins.str
-    str12: builtins.str
-    str13: builtins.str
-    str14: builtins.str
-    str15: builtins.str
-    str16: builtins.str
-    str17: builtins.str
-    str18: builtins.str
-    str19: builtins.str
-    str20: builtins.str
-    str21: builtins.str
-    str22: builtins.str
-    str23: builtins.str
-    str24: builtins.str
-    str25: builtins.str
-    str26: builtins.str
-    str27: builtins.str
-    str28: builtins.str
-    str29: builtins.str
-    str30: builtins.str
-    str31: builtins.str
-    str32: builtins.str
+    STR1_FIELD_NUMBER: _builtins.int
+    STR2_FIELD_NUMBER: _builtins.int
+    STR3_FIELD_NUMBER: _builtins.int
+    STR4_FIELD_NUMBER: _builtins.int
+    STR5_FIELD_NUMBER: _builtins.int
+    STR6_FIELD_NUMBER: _builtins.int
+    STR7_FIELD_NUMBER: _builtins.int
+    STR8_FIELD_NUMBER: _builtins.int
+    STR9_FIELD_NUMBER: _builtins.int
+    STR10_FIELD_NUMBER: _builtins.int
+    STR11_FIELD_NUMBER: _builtins.int
+    STR12_FIELD_NUMBER: _builtins.int
+    STR13_FIELD_NUMBER: _builtins.int
+    STR14_FIELD_NUMBER: _builtins.int
+    STR15_FIELD_NUMBER: _builtins.int
+    STR16_FIELD_NUMBER: _builtins.int
+    STR17_FIELD_NUMBER: _builtins.int
+    STR18_FIELD_NUMBER: _builtins.int
+    STR19_FIELD_NUMBER: _builtins.int
+    STR20_FIELD_NUMBER: _builtins.int
+    STR21_FIELD_NUMBER: _builtins.int
+    STR22_FIELD_NUMBER: _builtins.int
+    STR23_FIELD_NUMBER: _builtins.int
+    STR24_FIELD_NUMBER: _builtins.int
+    STR25_FIELD_NUMBER: _builtins.int
+    STR26_FIELD_NUMBER: _builtins.int
+    STR27_FIELD_NUMBER: _builtins.int
+    STR28_FIELD_NUMBER: _builtins.int
+    STR29_FIELD_NUMBER: _builtins.int
+    STR30_FIELD_NUMBER: _builtins.int
+    STR31_FIELD_NUMBER: _builtins.int
+    STR32_FIELD_NUMBER: _builtins.int
+    str1: _builtins.str
+    str2: _builtins.str
+    str3: _builtins.str
+    str4: _builtins.str
+    str5: _builtins.str
+    str6: _builtins.str
+    str7: _builtins.str
+    str8: _builtins.str
+    str9: _builtins.str
+    str10: _builtins.str
+    str11: _builtins.str
+    str12: _builtins.str
+    str13: _builtins.str
+    str14: _builtins.str
+    str15: _builtins.str
+    str16: _builtins.str
+    str17: _builtins.str
+    str18: _builtins.str
+    str19: _builtins.str
+    str20: _builtins.str
+    str21: _builtins.str
+    str22: _builtins.str
+    str23: _builtins.str
+    str24: _builtins.str
+    str25: _builtins.str
+    str26: _builtins.str
+    str27: _builtins.str
+    str28: _builtins.str
+    str29: _builtins.str
+    str30: _builtins.str
+    str31: _builtins.str
+    str32: _builtins.str
     def __init__(
         self,
         *,
-        str1: builtins.str | None = ...,
-        str2: builtins.str | None = ...,
-        str3: builtins.str | None = ...,
-        str4: builtins.str | None = ...,
-        str5: builtins.str | None = ...,
-        str6: builtins.str | None = ...,
-        str7: builtins.str | None = ...,
-        str8: builtins.str | None = ...,
-        str9: builtins.str | None = ...,
-        str10: builtins.str | None = ...,
-        str11: builtins.str | None = ...,
-        str12: builtins.str | None = ...,
-        str13: builtins.str | None = ...,
-        str14: builtins.str | None = ...,
-        str15: builtins.str | None = ...,
-        str16: builtins.str | None = ...,
-        str17: builtins.str | None = ...,
-        str18: builtins.str | None = ...,
-        str19: builtins.str | None = ...,
-        str20: builtins.str | None = ...,
-        str21: builtins.str | None = ...,
-        str22: builtins.str | None = ...,
-        str23: builtins.str | None = ...,
-        str24: builtins.str | None = ...,
-        str25: builtins.str | None = ...,
-        str26: builtins.str | None = ...,
-        str27: builtins.str | None = ...,
-        str28: builtins.str | None = ...,
-        str29: builtins.str | None = ...,
-        str30: builtins.str | None = ...,
-        str31: builtins.str | None = ...,
-        str32: builtins.str | None = ...,
+        str1: _builtins.str | None = ...,
+        str2: _builtins.str | None = ...,
+        str3: _builtins.str | None = ...,
+        str4: _builtins.str | None = ...,
+        str5: _builtins.str | None = ...,
+        str6: _builtins.str | None = ...,
+        str7: _builtins.str | None = ...,
+        str8: _builtins.str | None = ...,
+        str9: _builtins.str | None = ...,
+        str10: _builtins.str | None = ...,
+        str11: _builtins.str | None = ...,
+        str12: _builtins.str | None = ...,
+        str13: _builtins.str | None = ...,
+        str14: _builtins.str | None = ...,
+        str15: _builtins.str | None = ...,
+        str16: _builtins.str | None = ...,
+        str17: _builtins.str | None = ...,
+        str18: _builtins.str | None = ...,
+        str19: _builtins.str | None = ...,
+        str20: _builtins.str | None = ...,
+        str21: _builtins.str | None = ...,
+        str22: _builtins.str | None = ...,
+        str23: _builtins.str | None = ...,
+        str24: _builtins.str | None = ...,
+        str25: _builtins.str | None = ...,
+        str26: _builtins.str | None = ...,
+        str27: _builtins.str | None = ...,
+        str28: _builtins.str | None = ...,
+        str29: _builtins.str | None = ...,
+        str30: _builtins.str | None = ...,
+        str31: _builtins.str | None = ...,
+        str32: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["str1", b"str1", "str10", b"str10", "str11", b"str11", "str12", b"str12", "str13", b"str13", "str14", b"str14", "str15", b"str15", "str16", b"str16", "str17", b"str17", "str18", b"str18", "str19", b"str19", "str2", b"str2", "str20", b"str20", "str21", b"str21", "str22", b"str22", "str23", b"str23", "str24", b"str24", "str25", b"str25", "str26", b"str26", "str27", b"str27", "str28", b"str28", "str29", b"str29", "str3", b"str3", "str30", b"str30", "str31", b"str31", "str32", b"str32", "str4", b"str4", "str5", b"str5", "str6", b"str6", "str7", b"str7", "str8", b"str8", "str9", b"str9"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["str1", b"str1", "str10", b"str10", "str11", b"str11", "str12", b"str12", "str13", b"str13", "str14", b"str14", "str15", b"str15", "str16", b"str16", "str17", b"str17", "str18", b"str18", "str19", b"str19", "str2", b"str2", "str20", b"str20", "str21", b"str21", "str22", b"str22", "str23", b"str23", "str24", b"str24", "str25", b"str25", "str26", b"str26", "str27", b"str27", "str28", b"str28", "str29", b"str29", "str3", b"str3", "str30", b"str30", "str31", b"str31", "str32", b"str32", "str4", b"str4", "str5", b"str5", "str6", b"str6", "str7", b"str7", "str8", b"str8", "str9", b"str9"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["str1", b"str1", "str10", b"str10", "str11", b"str11", "str12", b"str12", "str13", b"str13", "str14", b"str14", "str15", b"str15", "str16", b"str16", "str17", b"str17", "str18", b"str18", "str19", b"str19", "str2", b"str2", "str20", b"str20", "str21", b"str21", "str22", b"str22", "str23", b"str23", "str24", b"str24", "str25", b"str25", "str26", b"str26", "str27", b"str27", "str28", b"str28", "str29", b"str29", "str3", b"str3", "str30", b"str30", "str31", b"str31", "str32", b"str32", "str4", b"str4", "str5", b"str5", "str6", b"str6", "str7", b"str7", "str8", b"str8", "str9", b"str9"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["str1", b"str1", "str10", b"str10", "str11", b"str11", "str12", b"str12", "str13", b"str13", "str14", b"str14", "str15", b"str15", "str16", b"str16", "str17", b"str17", "str18", b"str18", "str19", b"str19", "str2", b"str2", "str20", b"str20", "str21", b"str21", "str22", b"str22", "str23", b"str23", "str24", b"str24", "str25", b"str25", "str26", b"str26", "str27", b"str27", "str28", b"str28", "str29", b"str29", "str3", b"str3", "str30", b"str30", "str31", b"str31", "str32", b"str32", "str4", b"str4", "str5", b"str5", "str6", b"str6", "str7", b"str7", "str8", b"str8", "str9", b"str9"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ManyOptionalString: typing_extensions.TypeAlias = ManyOptionalString
+Global___ManyOptionalString: _typing_extensions.TypeAlias = ManyOptionalString  # noqa: Y015
 
-@typing.final
-class Int32Message(google.protobuf.message.Message):
+@_typing.final
+class Int32Message(_google_protobuf_message.Message):
     """Test int32, uint32, int64, uint64, and bool are all compatible"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.int
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.int
     def __init__(
         self,
         *,
-        data: builtins.int | None = ...,
+        data: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Int32Message: typing_extensions.TypeAlias = Int32Message
+Global___Int32Message: _typing_extensions.TypeAlias = Int32Message  # noqa: Y015
 
-@typing.final
-class Uint32Message(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Uint32Message(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.int
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.int
     def __init__(
         self,
         *,
-        data: builtins.int | None = ...,
+        data: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Uint32Message: typing_extensions.TypeAlias = Uint32Message
+Global___Uint32Message: _typing_extensions.TypeAlias = Uint32Message  # noqa: Y015
 
-@typing.final
-class Int64Message(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Int64Message(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.int
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.int
     def __init__(
         self,
         *,
-        data: builtins.int | None = ...,
+        data: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Int64Message: typing_extensions.TypeAlias = Int64Message
+Global___Int64Message: _typing_extensions.TypeAlias = Int64Message  # noqa: Y015
 
-@typing.final
-class Uint64Message(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Uint64Message(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.int
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.int
     def __init__(
         self,
         *,
-        data: builtins.int | None = ...,
+        data: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Uint64Message: typing_extensions.TypeAlias = Uint64Message
+Global___Uint64Message: _typing_extensions.TypeAlias = Uint64Message  # noqa: Y015
 
-@typing.final
-class BoolMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class BoolMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DATA_FIELD_NUMBER: builtins.int
-    data: builtins.bool
+    DATA_FIELD_NUMBER: _builtins.int
+    data: _builtins.bool
     def __init__(
         self,
         *,
-        data: builtins.bool | None = ...,
+        data: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["data", b"data"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["data", b"data"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___BoolMessage: typing_extensions.TypeAlias = BoolMessage
+Global___BoolMessage: _typing_extensions.TypeAlias = BoolMessage  # noqa: Y015
 
-@typing.final
-class TestOneof(google.protobuf.message.Message):
+@_typing.final
+class TestOneof(_google_protobuf_message.Message):
     """Test oneofs."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class FooGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class FooGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        B_FIELD_NUMBER: builtins.int
-        a: builtins.int
-        b: builtins.str
+        A_FIELD_NUMBER: _builtins.int
+        B_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
+        b: _builtins.str
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
-            b: builtins.str | None = ...,
+            a: _builtins.int | None = ...,
+            b: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    FOO_INT_FIELD_NUMBER: builtins.int
-    FOO_STRING_FIELD_NUMBER: builtins.int
-    FOO_MESSAGE_FIELD_NUMBER: builtins.int
-    FOOGROUP_FIELD_NUMBER: builtins.int
-    foo_int: builtins.int
-    foo_string: builtins.str
-    @property
+    FOO_INT_FIELD_NUMBER: _builtins.int
+    FOO_STRING_FIELD_NUMBER: _builtins.int
+    FOO_MESSAGE_FIELD_NUMBER: _builtins.int
+    FOOGROUP_FIELD_NUMBER: _builtins.int
+    foo_int: _builtins.int
+    foo_string: _builtins.str
+    @_builtins.property
     def foo_message(self) -> Global___TestAllTypes: ...
-    @property
+    @_builtins.property
     def foogroup(self) -> Global___TestOneof.FooGroup: ...
     def __init__(
         self,
         *,
-        foo_int: builtins.int | None = ...,
-        foo_string: builtins.str | None = ...,
+        foo_int: _builtins.int | None = ...,
+        foo_string: _builtins.str | None = ...,
         foo_message: Global___TestAllTypes | None = ...,
         foogroup: Global___TestOneof.FooGroup | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_foo: typing_extensions.TypeAlias = typing.Literal["foo_int", "foo_string", "foo_message", "foogroup"]
-    _WhichOneofArgType_foo: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    _WhichOneofReturnType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo_int", "foo_string", "foo_message", "foogroup"]  # noqa: Y015
+    _WhichOneofArgType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_foo) -> _WhichOneofReturnType_foo | None: ...
 
-Global___TestOneof: typing_extensions.TypeAlias = TestOneof
+Global___TestOneof: _typing_extensions.TypeAlias = TestOneof  # noqa: Y015
 
-@typing.final
-class TestOneofBackwardsCompatible(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestOneofBackwardsCompatible(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class FooGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class FooGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        B_FIELD_NUMBER: builtins.int
-        a: builtins.int
-        b: builtins.str
+        A_FIELD_NUMBER: _builtins.int
+        B_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
+        b: _builtins.str
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
-            b: builtins.str | None = ...,
+            a: _builtins.int | None = ...,
+            b: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    FOO_INT_FIELD_NUMBER: builtins.int
-    FOO_STRING_FIELD_NUMBER: builtins.int
-    FOO_MESSAGE_FIELD_NUMBER: builtins.int
-    FOOGROUP_FIELD_NUMBER: builtins.int
-    foo_int: builtins.int
-    foo_string: builtins.str
-    @property
+    FOO_INT_FIELD_NUMBER: _builtins.int
+    FOO_STRING_FIELD_NUMBER: _builtins.int
+    FOO_MESSAGE_FIELD_NUMBER: _builtins.int
+    FOOGROUP_FIELD_NUMBER: _builtins.int
+    foo_int: _builtins.int
+    foo_string: _builtins.str
+    @_builtins.property
     def foo_message(self) -> Global___TestAllTypes: ...
-    @property
+    @_builtins.property
     def foogroup(self) -> Global___TestOneofBackwardsCompatible.FooGroup: ...
     def __init__(
         self,
         *,
-        foo_int: builtins.int | None = ...,
-        foo_string: builtins.str | None = ...,
+        foo_int: _builtins.int | None = ...,
+        foo_string: _builtins.str | None = ...,
         foo_message: Global___TestAllTypes | None = ...,
         foogroup: Global___TestOneofBackwardsCompatible.FooGroup | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo_int", b"foo_int", "foo_message", b"foo_message", "foo_string", b"foo_string", "foogroup", b"foogroup"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestOneofBackwardsCompatible: typing_extensions.TypeAlias = TestOneofBackwardsCompatible
+Global___TestOneofBackwardsCompatible: _typing_extensions.TypeAlias = TestOneofBackwardsCompatible  # noqa: Y015
 
-@typing.final
-class TestOneof2(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestOneof2(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestOneof2._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestOneof2._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         FOO: TestOneof2._NestedEnum.ValueType  # 1
         BAR: TestOneof2._NestedEnum.ValueType  # 2
         BAZ: TestOneof2._NestedEnum.ValueType  # 3
@@ -2893,368 +2893,368 @@ class TestOneof2(google.protobuf.message.Message):
     BAR: TestOneof2.NestedEnum.ValueType  # 2
     BAZ: TestOneof2.NestedEnum.ValueType  # 3
 
-    @typing.final
-    class FooGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class FooGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        A_FIELD_NUMBER: builtins.int
-        B_FIELD_NUMBER: builtins.int
-        a: builtins.int
-        b: builtins.str
+        A_FIELD_NUMBER: _builtins.int
+        B_FIELD_NUMBER: _builtins.int
+        a: _builtins.int
+        b: _builtins.str
         def __init__(
             self,
             *,
-            a: builtins.int | None = ...,
-            b: builtins.str | None = ...,
+            a: _builtins.int | None = ...,
+            b: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        MOO_INT_FIELD_NUMBER: builtins.int
-        CORGE_INT_FIELD_NUMBER: builtins.int
-        CHILD_FIELD_NUMBER: builtins.int
-        moo_int: builtins.int
-        @property
-        def corge_int(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-        @property
+        MOO_INT_FIELD_NUMBER: _builtins.int
+        CORGE_INT_FIELD_NUMBER: _builtins.int
+        CHILD_FIELD_NUMBER: _builtins.int
+        moo_int: _builtins.int
+        @_builtins.property
+        def corge_int(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+        @_builtins.property
         def child(self) -> Global___TestOneof2.NestedMessage: ...
         def __init__(
             self,
             *,
-            moo_int: builtins.int | None = ...,
-            corge_int: collections.abc.Iterable[builtins.int] | None = ...,
+            moo_int: _builtins.int | None = ...,
+            corge_int: _collections_abc.Iterable[_builtins.int] | None = ...,
             child: Global___TestOneof2.NestedMessage | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "corge_int", b"corge_int", "moo_int", b"moo_int"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "corge_int", b"corge_int", "moo_int", b"moo_int"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "corge_int", b"corge_int", "moo_int", b"moo_int"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "corge_int", b"corge_int", "moo_int", b"moo_int"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    FOO_INT_FIELD_NUMBER: builtins.int
-    FOO_STRING_FIELD_NUMBER: builtins.int
-    FOO_CORD_FIELD_NUMBER: builtins.int
-    FOO_STRING_PIECE_FIELD_NUMBER: builtins.int
-    FOO_BYTES_FIELD_NUMBER: builtins.int
-    FOO_ENUM_FIELD_NUMBER: builtins.int
-    FOO_MESSAGE_FIELD_NUMBER: builtins.int
-    FOOGROUP_FIELD_NUMBER: builtins.int
-    FOO_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    FOO_BYTES_CORD_FIELD_NUMBER: builtins.int
-    BAR_INT_FIELD_NUMBER: builtins.int
-    BAR_STRING_FIELD_NUMBER: builtins.int
-    BAR_CORD_FIELD_NUMBER: builtins.int
-    BAR_STRING_PIECE_FIELD_NUMBER: builtins.int
-    BAR_BYTES_FIELD_NUMBER: builtins.int
-    BAR_ENUM_FIELD_NUMBER: builtins.int
-    BAR_STRING_WITH_EMPTY_DEFAULT_FIELD_NUMBER: builtins.int
-    BAR_CORD_WITH_EMPTY_DEFAULT_FIELD_NUMBER: builtins.int
-    BAR_STRING_PIECE_WITH_EMPTY_DEFAULT_FIELD_NUMBER: builtins.int
-    BAR_BYTES_WITH_EMPTY_DEFAULT_FIELD_NUMBER: builtins.int
-    BAZ_INT_FIELD_NUMBER: builtins.int
-    BAZ_STRING_FIELD_NUMBER: builtins.int
-    foo_int: builtins.int
-    foo_string: builtins.str
-    foo_cord: builtins.str
-    foo_string_piece: builtins.str
-    foo_bytes: builtins.bytes
+    FOO_INT_FIELD_NUMBER: _builtins.int
+    FOO_STRING_FIELD_NUMBER: _builtins.int
+    FOO_CORD_FIELD_NUMBER: _builtins.int
+    FOO_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    FOO_BYTES_FIELD_NUMBER: _builtins.int
+    FOO_ENUM_FIELD_NUMBER: _builtins.int
+    FOO_MESSAGE_FIELD_NUMBER: _builtins.int
+    FOOGROUP_FIELD_NUMBER: _builtins.int
+    FOO_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    FOO_BYTES_CORD_FIELD_NUMBER: _builtins.int
+    BAR_INT_FIELD_NUMBER: _builtins.int
+    BAR_STRING_FIELD_NUMBER: _builtins.int
+    BAR_CORD_FIELD_NUMBER: _builtins.int
+    BAR_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    BAR_BYTES_FIELD_NUMBER: _builtins.int
+    BAR_ENUM_FIELD_NUMBER: _builtins.int
+    BAR_STRING_WITH_EMPTY_DEFAULT_FIELD_NUMBER: _builtins.int
+    BAR_CORD_WITH_EMPTY_DEFAULT_FIELD_NUMBER: _builtins.int
+    BAR_STRING_PIECE_WITH_EMPTY_DEFAULT_FIELD_NUMBER: _builtins.int
+    BAR_BYTES_WITH_EMPTY_DEFAULT_FIELD_NUMBER: _builtins.int
+    BAZ_INT_FIELD_NUMBER: _builtins.int
+    BAZ_STRING_FIELD_NUMBER: _builtins.int
+    foo_int: _builtins.int
+    foo_string: _builtins.str
+    foo_cord: _builtins.str
+    foo_string_piece: _builtins.str
+    foo_bytes: _builtins.bytes
     foo_enum: Global___TestOneof2.NestedEnum.ValueType
-    foo_bytes_cord: builtins.bytes
-    bar_int: builtins.int
-    bar_string: builtins.str
-    bar_cord: builtins.str
-    bar_string_piece: builtins.str
-    bar_bytes: builtins.bytes
+    foo_bytes_cord: _builtins.bytes
+    bar_int: _builtins.int
+    bar_string: _builtins.str
+    bar_cord: _builtins.str
+    bar_string_piece: _builtins.str
+    bar_bytes: _builtins.bytes
     bar_enum: Global___TestOneof2.NestedEnum.ValueType
-    bar_string_with_empty_default: builtins.str
-    bar_cord_with_empty_default: builtins.str
-    bar_string_piece_with_empty_default: builtins.str
-    bar_bytes_with_empty_default: builtins.bytes
-    baz_int: builtins.int
-    baz_string: builtins.str
-    @property
+    bar_string_with_empty_default: _builtins.str
+    bar_cord_with_empty_default: _builtins.str
+    bar_string_piece_with_empty_default: _builtins.str
+    bar_bytes_with_empty_default: _builtins.bytes
+    baz_int: _builtins.int
+    baz_string: _builtins.str
+    @_builtins.property
     def foo_message(self) -> Global___TestOneof2.NestedMessage: ...
-    @property
+    @_builtins.property
     def foogroup(self) -> Global___TestOneof2.FooGroup: ...
-    @property
+    @_builtins.property
     def foo_lazy_message(self) -> Global___TestOneof2.NestedMessage: ...
     def __init__(
         self,
         *,
-        foo_int: builtins.int | None = ...,
-        foo_string: builtins.str | None = ...,
-        foo_cord: builtins.str | None = ...,
-        foo_string_piece: builtins.str | None = ...,
-        foo_bytes: builtins.bytes | None = ...,
+        foo_int: _builtins.int | None = ...,
+        foo_string: _builtins.str | None = ...,
+        foo_cord: _builtins.str | None = ...,
+        foo_string_piece: _builtins.str | None = ...,
+        foo_bytes: _builtins.bytes | None = ...,
         foo_enum: Global___TestOneof2.NestedEnum.ValueType | None = ...,
         foo_message: Global___TestOneof2.NestedMessage | None = ...,
         foogroup: Global___TestOneof2.FooGroup | None = ...,
         foo_lazy_message: Global___TestOneof2.NestedMessage | None = ...,
-        foo_bytes_cord: builtins.bytes | None = ...,
-        bar_int: builtins.int | None = ...,
-        bar_string: builtins.str | None = ...,
-        bar_cord: builtins.str | None = ...,
-        bar_string_piece: builtins.str | None = ...,
-        bar_bytes: builtins.bytes | None = ...,
+        foo_bytes_cord: _builtins.bytes | None = ...,
+        bar_int: _builtins.int | None = ...,
+        bar_string: _builtins.str | None = ...,
+        bar_cord: _builtins.str | None = ...,
+        bar_string_piece: _builtins.str | None = ...,
+        bar_bytes: _builtins.bytes | None = ...,
         bar_enum: Global___TestOneof2.NestedEnum.ValueType | None = ...,
-        bar_string_with_empty_default: builtins.str | None = ...,
-        bar_cord_with_empty_default: builtins.str | None = ...,
-        bar_string_piece_with_empty_default: builtins.str | None = ...,
-        bar_bytes_with_empty_default: builtins.bytes | None = ...,
-        baz_int: builtins.int | None = ...,
-        baz_string: builtins.str | None = ...,
+        bar_string_with_empty_default: _builtins.str | None = ...,
+        bar_cord_with_empty_default: _builtins.str | None = ...,
+        bar_string_piece_with_empty_default: _builtins.str | None = ...,
+        bar_bytes_with_empty_default: _builtins.bytes | None = ...,
+        baz_int: _builtins.int | None = ...,
+        baz_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bar", b"bar", "bar_bytes", b"bar_bytes", "bar_bytes_with_empty_default", b"bar_bytes_with_empty_default", "bar_cord", b"bar_cord", "bar_cord_with_empty_default", b"bar_cord_with_empty_default", "bar_enum", b"bar_enum", "bar_int", b"bar_int", "bar_string", b"bar_string", "bar_string_piece", b"bar_string_piece", "bar_string_piece_with_empty_default", b"bar_string_piece_with_empty_default", "bar_string_with_empty_default", b"bar_string_with_empty_default", "baz_int", b"baz_int", "baz_string", b"baz_string", "foo", b"foo", "foo_bytes", b"foo_bytes", "foo_bytes_cord", b"foo_bytes_cord", "foo_cord", b"foo_cord", "foo_enum", b"foo_enum", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string", "foo_string_piece", b"foo_string_piece", "foogroup", b"foogroup"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bar", b"bar", "bar_bytes", b"bar_bytes", "bar_bytes_with_empty_default", b"bar_bytes_with_empty_default", "bar_cord", b"bar_cord", "bar_cord_with_empty_default", b"bar_cord_with_empty_default", "bar_enum", b"bar_enum", "bar_int", b"bar_int", "bar_string", b"bar_string", "bar_string_piece", b"bar_string_piece", "bar_string_piece_with_empty_default", b"bar_string_piece_with_empty_default", "bar_string_with_empty_default", b"bar_string_with_empty_default", "baz_int", b"baz_int", "baz_string", b"baz_string", "foo", b"foo", "foo_bytes", b"foo_bytes", "foo_bytes_cord", b"foo_bytes_cord", "foo_cord", b"foo_cord", "foo_enum", b"foo_enum", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string", "foo_string_piece", b"foo_string_piece", "foogroup", b"foogroup"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar", "bar_bytes", b"bar_bytes", "bar_bytes_with_empty_default", b"bar_bytes_with_empty_default", "bar_cord", b"bar_cord", "bar_cord_with_empty_default", b"bar_cord_with_empty_default", "bar_enum", b"bar_enum", "bar_int", b"bar_int", "bar_string", b"bar_string", "bar_string_piece", b"bar_string_piece", "bar_string_piece_with_empty_default", b"bar_string_piece_with_empty_default", "bar_string_with_empty_default", b"bar_string_with_empty_default", "baz_int", b"baz_int", "baz_string", b"baz_string", "foo", b"foo", "foo_bytes", b"foo_bytes", "foo_bytes_cord", b"foo_bytes_cord", "foo_cord", b"foo_cord", "foo_enum", b"foo_enum", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string", "foo_string_piece", b"foo_string_piece", "foogroup", b"foogroup"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar", "bar_bytes", b"bar_bytes", "bar_bytes_with_empty_default", b"bar_bytes_with_empty_default", "bar_cord", b"bar_cord", "bar_cord_with_empty_default", b"bar_cord_with_empty_default", "bar_enum", b"bar_enum", "bar_int", b"bar_int", "bar_string", b"bar_string", "bar_string_piece", b"bar_string_piece", "bar_string_piece_with_empty_default", b"bar_string_piece_with_empty_default", "bar_string_with_empty_default", b"bar_string_with_empty_default", "baz_int", b"baz_int", "baz_string", b"baz_string", "foo", b"foo", "foo_bytes", b"foo_bytes", "foo_bytes_cord", b"foo_bytes_cord", "foo_cord", b"foo_cord", "foo_enum", b"foo_enum", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string", "foo_string_piece", b"foo_string_piece", "foogroup", b"foogroup"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_bar: typing_extensions.TypeAlias = typing.Literal["bar_int", "bar_string", "bar_cord", "bar_string_piece", "bar_bytes", "bar_enum", "bar_string_with_empty_default", "bar_cord_with_empty_default", "bar_string_piece_with_empty_default", "bar_bytes_with_empty_default"]
-    _WhichOneofArgType_bar: typing_extensions.TypeAlias = typing.Literal["bar", b"bar"]
-    _WhichOneofReturnType_foo: typing_extensions.TypeAlias = typing.Literal["foo_int", "foo_string", "foo_cord", "foo_string_piece", "foo_bytes", "foo_enum", "foo_message", "foogroup", "foo_lazy_message", "foo_bytes_cord"]
-    _WhichOneofArgType_foo: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
-    @typing.overload
+    _WhichOneofReturnType_bar: _typing_extensions.TypeAlias = _typing.Literal["bar_int", "bar_string", "bar_cord", "bar_string_piece", "bar_bytes", "bar_enum", "bar_string_with_empty_default", "bar_cord_with_empty_default", "bar_string_piece_with_empty_default", "bar_bytes_with_empty_default"]  # noqa: Y015
+    _WhichOneofArgType_bar: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar"]  # noqa: Y015
+    _WhichOneofReturnType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo_int", "foo_string", "foo_cord", "foo_string_piece", "foo_bytes", "foo_enum", "foo_message", "foogroup", "foo_lazy_message", "foo_bytes_cord"]  # noqa: Y015
+    _WhichOneofArgType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType_bar) -> _WhichOneofReturnType_bar | None: ...
-    @typing.overload
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType_foo) -> _WhichOneofReturnType_foo | None: ...
 
-Global___TestOneof2: typing_extensions.TypeAlias = TestOneof2
+Global___TestOneof2: _typing_extensions.TypeAlias = TestOneof2  # noqa: Y015
 
-@typing.final
-class TestRequiredOneof(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRequiredOneof(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        REQUIRED_DOUBLE_FIELD_NUMBER: builtins.int
-        required_double: builtins.float
+        REQUIRED_DOUBLE_FIELD_NUMBER: _builtins.int
+        required_double: _builtins.float
         def __init__(
             self,
             *,
-            required_double: builtins.float | None = ...,
+            required_double: _builtins.float | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["required_double", b"required_double"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["required_double", b"required_double"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["required_double", b"required_double"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["required_double", b"required_double"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    FOO_INT_FIELD_NUMBER: builtins.int
-    FOO_STRING_FIELD_NUMBER: builtins.int
-    FOO_MESSAGE_FIELD_NUMBER: builtins.int
-    FOO_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    foo_int: builtins.int
-    foo_string: builtins.str
-    @property
+    FOO_INT_FIELD_NUMBER: _builtins.int
+    FOO_STRING_FIELD_NUMBER: _builtins.int
+    FOO_MESSAGE_FIELD_NUMBER: _builtins.int
+    FOO_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    foo_int: _builtins.int
+    foo_string: _builtins.str
+    @_builtins.property
     def foo_message(self) -> Global___TestRequiredOneof.NestedMessage: ...
-    @property
+    @_builtins.property
     def foo_lazy_message(self) -> Global___TestRequiredOneof.NestedMessage: ...
     def __init__(
         self,
         *,
-        foo_int: builtins.int | None = ...,
-        foo_string: builtins.str | None = ...,
+        foo_int: _builtins.int | None = ...,
+        foo_string: _builtins.str | None = ...,
         foo_message: Global___TestRequiredOneof.NestedMessage | None = ...,
         foo_lazy_message: Global___TestRequiredOneof.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo_int", b"foo_int", "foo_lazy_message", b"foo_lazy_message", "foo_message", b"foo_message", "foo_string", b"foo_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_foo: typing_extensions.TypeAlias = typing.Literal["foo_int", "foo_string", "foo_message", "foo_lazy_message"]
-    _WhichOneofArgType_foo: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    _WhichOneofReturnType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo_int", "foo_string", "foo_message", "foo_lazy_message"]  # noqa: Y015
+    _WhichOneofArgType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_foo) -> _WhichOneofReturnType_foo | None: ...
 
-Global___TestRequiredOneof: typing_extensions.TypeAlias = TestRequiredOneof
+Global___TestRequiredOneof: _typing_extensions.TypeAlias = TestRequiredOneof  # noqa: Y015
 
-@typing.final
-class TestPackedTypes(google.protobuf.message.Message):
+@_typing.final
+class TestPackedTypes(_google_protobuf_message.Message):
     """Test messages for packed fields"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    PACKED_INT32_FIELD_NUMBER: builtins.int
-    PACKED_INT64_FIELD_NUMBER: builtins.int
-    PACKED_UINT32_FIELD_NUMBER: builtins.int
-    PACKED_UINT64_FIELD_NUMBER: builtins.int
-    PACKED_SINT32_FIELD_NUMBER: builtins.int
-    PACKED_SINT64_FIELD_NUMBER: builtins.int
-    PACKED_FIXED32_FIELD_NUMBER: builtins.int
-    PACKED_FIXED64_FIELD_NUMBER: builtins.int
-    PACKED_SFIXED32_FIELD_NUMBER: builtins.int
-    PACKED_SFIXED64_FIELD_NUMBER: builtins.int
-    PACKED_FLOAT_FIELD_NUMBER: builtins.int
-    PACKED_DOUBLE_FIELD_NUMBER: builtins.int
-    PACKED_BOOL_FIELD_NUMBER: builtins.int
-    PACKED_ENUM_FIELD_NUMBER: builtins.int
-    @property
-    def packed_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_uint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sfixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sfixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def packed_double(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def packed_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def packed_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    PACKED_INT32_FIELD_NUMBER: _builtins.int
+    PACKED_INT64_FIELD_NUMBER: _builtins.int
+    PACKED_UINT32_FIELD_NUMBER: _builtins.int
+    PACKED_UINT64_FIELD_NUMBER: _builtins.int
+    PACKED_SINT32_FIELD_NUMBER: _builtins.int
+    PACKED_SINT64_FIELD_NUMBER: _builtins.int
+    PACKED_FIXED32_FIELD_NUMBER: _builtins.int
+    PACKED_FIXED64_FIELD_NUMBER: _builtins.int
+    PACKED_SFIXED32_FIELD_NUMBER: _builtins.int
+    PACKED_SFIXED64_FIELD_NUMBER: _builtins.int
+    PACKED_FLOAT_FIELD_NUMBER: _builtins.int
+    PACKED_DOUBLE_FIELD_NUMBER: _builtins.int
+    PACKED_BOOL_FIELD_NUMBER: _builtins.int
+    PACKED_ENUM_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def packed_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_uint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sfixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sfixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def packed_double(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def packed_bool(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def packed_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
     def __init__(
         self,
         *,
-        packed_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_uint32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_uint64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sint32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sint64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_float: collections.abc.Iterable[builtins.float] | None = ...,
-        packed_double: collections.abc.Iterable[builtins.float] | None = ...,
-        packed_bool: collections.abc.Iterable[builtins.bool] | None = ...,
-        packed_enum: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        packed_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_uint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sfixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sfixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        packed_double: _collections_abc.Iterable[_builtins.float] | None = ...,
+        packed_bool: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        packed_enum: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["packed_bool", b"packed_bool", "packed_double", b"packed_double", "packed_enum", b"packed_enum", "packed_fixed32", b"packed_fixed32", "packed_fixed64", b"packed_fixed64", "packed_float", b"packed_float", "packed_int32", b"packed_int32", "packed_int64", b"packed_int64", "packed_sfixed32", b"packed_sfixed32", "packed_sfixed64", b"packed_sfixed64", "packed_sint32", b"packed_sint32", "packed_sint64", b"packed_sint64", "packed_uint32", b"packed_uint32", "packed_uint64", b"packed_uint64"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["packed_bool", b"packed_bool", "packed_double", b"packed_double", "packed_enum", b"packed_enum", "packed_fixed32", b"packed_fixed32", "packed_fixed64", b"packed_fixed64", "packed_float", b"packed_float", "packed_int32", b"packed_int32", "packed_int64", b"packed_int64", "packed_sfixed32", b"packed_sfixed32", "packed_sfixed64", b"packed_sfixed64", "packed_sint32", b"packed_sint32", "packed_sint64", b"packed_sint64", "packed_uint32", b"packed_uint32", "packed_uint64", b"packed_uint64"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["packed_bool", b"packed_bool", "packed_double", b"packed_double", "packed_enum", b"packed_enum", "packed_fixed32", b"packed_fixed32", "packed_fixed64", b"packed_fixed64", "packed_float", b"packed_float", "packed_int32", b"packed_int32", "packed_int64", b"packed_int64", "packed_sfixed32", b"packed_sfixed32", "packed_sfixed64", b"packed_sfixed64", "packed_sint32", b"packed_sint32", "packed_sint64", b"packed_sint64", "packed_uint32", b"packed_uint32", "packed_uint64", b"packed_uint64"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["packed_bool", b"packed_bool", "packed_double", b"packed_double", "packed_enum", b"packed_enum", "packed_fixed32", b"packed_fixed32", "packed_fixed64", b"packed_fixed64", "packed_float", b"packed_float", "packed_int32", b"packed_int32", "packed_int64", b"packed_int64", "packed_sfixed32", b"packed_sfixed32", "packed_sfixed64", b"packed_sfixed64", "packed_sint32", b"packed_sint32", "packed_sint64", b"packed_sint64", "packed_uint32", b"packed_uint32", "packed_uint64", b"packed_uint64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestPackedTypes: typing_extensions.TypeAlias = TestPackedTypes
+Global___TestPackedTypes: _typing_extensions.TypeAlias = TestPackedTypes  # noqa: Y015
 
-@typing.final
-class TestUnpackedTypes(google.protobuf.message.Message):
+@_typing.final
+class TestUnpackedTypes(_google_protobuf_message.Message):
     """A message with the same fields as TestPackedTypes, but without packing. Used
     to test packed <-> unpacked wire compatibility.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    UNPACKED_INT32_FIELD_NUMBER: builtins.int
-    UNPACKED_INT64_FIELD_NUMBER: builtins.int
-    UNPACKED_UINT32_FIELD_NUMBER: builtins.int
-    UNPACKED_UINT64_FIELD_NUMBER: builtins.int
-    UNPACKED_SINT32_FIELD_NUMBER: builtins.int
-    UNPACKED_SINT64_FIELD_NUMBER: builtins.int
-    UNPACKED_FIXED32_FIELD_NUMBER: builtins.int
-    UNPACKED_FIXED64_FIELD_NUMBER: builtins.int
-    UNPACKED_SFIXED32_FIELD_NUMBER: builtins.int
-    UNPACKED_SFIXED64_FIELD_NUMBER: builtins.int
-    UNPACKED_FLOAT_FIELD_NUMBER: builtins.int
-    UNPACKED_DOUBLE_FIELD_NUMBER: builtins.int
-    UNPACKED_BOOL_FIELD_NUMBER: builtins.int
-    UNPACKED_ENUM_FIELD_NUMBER: builtins.int
-    @property
-    def unpacked_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_uint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_sint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_sint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_sfixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_sfixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def unpacked_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def unpacked_double(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def unpacked_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def unpacked_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    UNPACKED_INT32_FIELD_NUMBER: _builtins.int
+    UNPACKED_INT64_FIELD_NUMBER: _builtins.int
+    UNPACKED_UINT32_FIELD_NUMBER: _builtins.int
+    UNPACKED_UINT64_FIELD_NUMBER: _builtins.int
+    UNPACKED_SINT32_FIELD_NUMBER: _builtins.int
+    UNPACKED_SINT64_FIELD_NUMBER: _builtins.int
+    UNPACKED_FIXED32_FIELD_NUMBER: _builtins.int
+    UNPACKED_FIXED64_FIELD_NUMBER: _builtins.int
+    UNPACKED_SFIXED32_FIELD_NUMBER: _builtins.int
+    UNPACKED_SFIXED64_FIELD_NUMBER: _builtins.int
+    UNPACKED_FLOAT_FIELD_NUMBER: _builtins.int
+    UNPACKED_DOUBLE_FIELD_NUMBER: _builtins.int
+    UNPACKED_BOOL_FIELD_NUMBER: _builtins.int
+    UNPACKED_ENUM_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def unpacked_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_uint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_sint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_sint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_sfixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_sfixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def unpacked_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def unpacked_double(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def unpacked_bool(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def unpacked_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
     def __init__(
         self,
         *,
-        unpacked_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_uint32: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_uint64: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_sint32: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_sint64: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        unpacked_float: collections.abc.Iterable[builtins.float] | None = ...,
-        unpacked_double: collections.abc.Iterable[builtins.float] | None = ...,
-        unpacked_bool: collections.abc.Iterable[builtins.bool] | None = ...,
-        unpacked_enum: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        unpacked_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_uint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_sint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_sint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_sfixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_sfixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        unpacked_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        unpacked_double: _collections_abc.Iterable[_builtins.float] | None = ...,
+        unpacked_bool: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        unpacked_enum: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["unpacked_bool", b"unpacked_bool", "unpacked_double", b"unpacked_double", "unpacked_enum", b"unpacked_enum", "unpacked_fixed32", b"unpacked_fixed32", "unpacked_fixed64", b"unpacked_fixed64", "unpacked_float", b"unpacked_float", "unpacked_int32", b"unpacked_int32", "unpacked_int64", b"unpacked_int64", "unpacked_sfixed32", b"unpacked_sfixed32", "unpacked_sfixed64", b"unpacked_sfixed64", "unpacked_sint32", b"unpacked_sint32", "unpacked_sint64", b"unpacked_sint64", "unpacked_uint32", b"unpacked_uint32", "unpacked_uint64", b"unpacked_uint64"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["unpacked_bool", b"unpacked_bool", "unpacked_double", b"unpacked_double", "unpacked_enum", b"unpacked_enum", "unpacked_fixed32", b"unpacked_fixed32", "unpacked_fixed64", b"unpacked_fixed64", "unpacked_float", b"unpacked_float", "unpacked_int32", b"unpacked_int32", "unpacked_int64", b"unpacked_int64", "unpacked_sfixed32", b"unpacked_sfixed32", "unpacked_sfixed64", b"unpacked_sfixed64", "unpacked_sint32", b"unpacked_sint32", "unpacked_sint64", b"unpacked_sint64", "unpacked_uint32", b"unpacked_uint32", "unpacked_uint64", b"unpacked_uint64"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["unpacked_bool", b"unpacked_bool", "unpacked_double", b"unpacked_double", "unpacked_enum", b"unpacked_enum", "unpacked_fixed32", b"unpacked_fixed32", "unpacked_fixed64", b"unpacked_fixed64", "unpacked_float", b"unpacked_float", "unpacked_int32", b"unpacked_int32", "unpacked_int64", b"unpacked_int64", "unpacked_sfixed32", b"unpacked_sfixed32", "unpacked_sfixed64", b"unpacked_sfixed64", "unpacked_sint32", b"unpacked_sint32", "unpacked_sint64", b"unpacked_sint64", "unpacked_uint32", b"unpacked_uint32", "unpacked_uint64", b"unpacked_uint64"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["unpacked_bool", b"unpacked_bool", "unpacked_double", b"unpacked_double", "unpacked_enum", b"unpacked_enum", "unpacked_fixed32", b"unpacked_fixed32", "unpacked_fixed64", b"unpacked_fixed64", "unpacked_float", b"unpacked_float", "unpacked_int32", b"unpacked_int32", "unpacked_int64", b"unpacked_int64", "unpacked_sfixed32", b"unpacked_sfixed32", "unpacked_sfixed64", b"unpacked_sfixed64", "unpacked_sint32", b"unpacked_sint32", "unpacked_sint64", b"unpacked_sint64", "unpacked_uint32", b"unpacked_uint32", "unpacked_uint64", b"unpacked_uint64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestUnpackedTypes: typing_extensions.TypeAlias = TestUnpackedTypes
+Global___TestUnpackedTypes: _typing_extensions.TypeAlias = TestUnpackedTypes  # noqa: Y015
 
-@typing.final
-class TestPackedExtensions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    def __init__(
-        self,
-    ) -> None: ...
-
-Global___TestPackedExtensions: typing_extensions.TypeAlias = TestPackedExtensions
-
-@typing.final
-class TestUnpackedExtensions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestPackedExtensions(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestUnpackedExtensions: typing_extensions.TypeAlias = TestUnpackedExtensions
+Global___TestPackedExtensions: _typing_extensions.TypeAlias = TestPackedExtensions  # noqa: Y015
 
-@typing.final
-class TestDynamicExtensions(google.protobuf.message.Message):
+@_typing.final
+class TestUnpackedExtensions(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+Global___TestUnpackedExtensions: _typing_extensions.TypeAlias = TestUnpackedExtensions  # noqa: Y015
+
+@_typing.final
+class TestDynamicExtensions(_google_protobuf_message.Message):
     """Used by ExtensionSetTest/DynamicExtensions.  The test actually builds
     a set of extensions to TestAllExtensions dynamically, based on the fields
     of this message type.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _DynamicEnumType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _DynamicEnumTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestDynamicExtensions._DynamicEnumType.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _DynamicEnumTypeEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestDynamicExtensions._DynamicEnumType.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         DYNAMIC_FOO: TestDynamicExtensions._DynamicEnumType.ValueType  # 2200
         DYNAMIC_BAR: TestDynamicExtensions._DynamicEnumType.ValueType  # 2201
         DYNAMIC_BAZ: TestDynamicExtensions._DynamicEnumType.ValueType  # 2202
@@ -3264,149 +3264,149 @@ class TestDynamicExtensions(google.protobuf.message.Message):
     DYNAMIC_BAR: TestDynamicExtensions.DynamicEnumType.ValueType  # 2201
     DYNAMIC_BAZ: TestDynamicExtensions.DynamicEnumType.ValueType  # 2202
 
-    @typing.final
-    class DynamicMessageType(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class DynamicMessageType(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        DYNAMIC_FIELD_FIELD_NUMBER: builtins.int
-        dynamic_field: builtins.int
+        DYNAMIC_FIELD_FIELD_NUMBER: _builtins.int
+        dynamic_field: _builtins.int
         def __init__(
             self,
             *,
-            dynamic_field: builtins.int | None = ...,
+            dynamic_field: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["dynamic_field", b"dynamic_field"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["dynamic_field", b"dynamic_field"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dynamic_field", b"dynamic_field"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dynamic_field", b"dynamic_field"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    SCALAR_EXTENSION_FIELD_NUMBER: builtins.int
-    ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-    DYNAMIC_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-    MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-    DYNAMIC_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-    REPEATED_EXTENSION_FIELD_NUMBER: builtins.int
-    PACKED_EXTENSION_FIELD_NUMBER: builtins.int
-    scalar_extension: builtins.int
+    SCALAR_EXTENSION_FIELD_NUMBER: _builtins.int
+    ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+    DYNAMIC_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+    MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+    DYNAMIC_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+    REPEATED_EXTENSION_FIELD_NUMBER: _builtins.int
+    PACKED_EXTENSION_FIELD_NUMBER: _builtins.int
+    scalar_extension: _builtins.int
     enum_extension: Global___ForeignEnum.ValueType
     dynamic_enum_extension: Global___TestDynamicExtensions.DynamicEnumType.ValueType
-    @property
+    @_builtins.property
     def message_extension(self) -> Global___ForeignMessage: ...
-    @property
+    @_builtins.property
     def dynamic_message_extension(self) -> Global___TestDynamicExtensions.DynamicMessageType: ...
-    @property
-    def repeated_extension(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def packed_extension(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    @_builtins.property
+    def repeated_extension(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def packed_extension(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        scalar_extension: builtins.int | None = ...,
+        scalar_extension: _builtins.int | None = ...,
         enum_extension: Global___ForeignEnum.ValueType | None = ...,
         dynamic_enum_extension: Global___TestDynamicExtensions.DynamicEnumType.ValueType | None = ...,
         message_extension: Global___ForeignMessage | None = ...,
         dynamic_message_extension: Global___TestDynamicExtensions.DynamicMessageType | None = ...,
-        repeated_extension: collections.abc.Iterable[builtins.str] | None = ...,
-        packed_extension: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_extension: _collections_abc.Iterable[_builtins.str] | None = ...,
+        packed_extension: _collections_abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["dynamic_enum_extension", b"dynamic_enum_extension", "dynamic_message_extension", b"dynamic_message_extension", "enum_extension", b"enum_extension", "message_extension", b"message_extension", "packed_extension", b"packed_extension", "repeated_extension", b"repeated_extension", "scalar_extension", b"scalar_extension"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["dynamic_enum_extension", b"dynamic_enum_extension", "dynamic_message_extension", b"dynamic_message_extension", "enum_extension", b"enum_extension", "message_extension", b"message_extension", "packed_extension", b"packed_extension", "repeated_extension", b"repeated_extension", "scalar_extension", b"scalar_extension"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dynamic_enum_extension", b"dynamic_enum_extension", "dynamic_message_extension", b"dynamic_message_extension", "enum_extension", b"enum_extension", "message_extension", b"message_extension", "packed_extension", b"packed_extension", "repeated_extension", b"repeated_extension", "scalar_extension", b"scalar_extension"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dynamic_enum_extension", b"dynamic_enum_extension", "dynamic_message_extension", b"dynamic_message_extension", "enum_extension", b"enum_extension", "message_extension", b"message_extension", "packed_extension", b"packed_extension", "repeated_extension", b"repeated_extension", "scalar_extension", b"scalar_extension"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestDynamicExtensions: typing_extensions.TypeAlias = TestDynamicExtensions
+Global___TestDynamicExtensions: _typing_extensions.TypeAlias = TestDynamicExtensions  # noqa: Y015
 
-@typing.final
-class TestRepeatedString(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRepeatedString(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_STRING1_FIELD_NUMBER: builtins.int
-    REPEATED_STRING2_FIELD_NUMBER: builtins.int
-    REPEATED_BYTES11_FIELD_NUMBER: builtins.int
-    REPEATED_BYTES12_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_string1(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string2(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_bytes11(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
-    @property
-    def repeated_bytes12(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
+    REPEATED_STRING1_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING2_FIELD_NUMBER: _builtins.int
+    REPEATED_BYTES11_FIELD_NUMBER: _builtins.int
+    REPEATED_BYTES12_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_string1(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string2(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_bytes11(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
+    @_builtins.property
+    def repeated_bytes12(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
     def __init__(
         self,
         *,
-        repeated_string1: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string2: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_bytes11: collections.abc.Iterable[builtins.bytes] | None = ...,
-        repeated_bytes12: collections.abc.Iterable[builtins.bytes] | None = ...,
+        repeated_string1: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string2: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_bytes11: _collections_abc.Iterable[_builtins.bytes] | None = ...,
+        repeated_bytes12: _collections_abc.Iterable[_builtins.bytes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_bytes11", b"repeated_bytes11", "repeated_bytes12", b"repeated_bytes12", "repeated_string1", b"repeated_string1", "repeated_string2", b"repeated_string2"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_bytes11", b"repeated_bytes11", "repeated_bytes12", b"repeated_bytes12", "repeated_string1", b"repeated_string1", "repeated_string2", b"repeated_string2"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_bytes11", b"repeated_bytes11", "repeated_bytes12", b"repeated_bytes12", "repeated_string1", b"repeated_string1", "repeated_string2", b"repeated_string2"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_bytes11", b"repeated_bytes11", "repeated_bytes12", b"repeated_bytes12", "repeated_string1", b"repeated_string1", "repeated_string2", b"repeated_string2"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRepeatedString: typing_extensions.TypeAlias = TestRepeatedString
+Global___TestRepeatedString: _typing_extensions.TypeAlias = TestRepeatedString  # noqa: Y015
 
-@typing.final
-class TestRepeatedScalarDifferentTagSizes(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRepeatedScalarDifferentTagSizes(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_FIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_FIELD_NUMBER: builtins.int
-    REPEATED_FLOAT_FIELD_NUMBER: builtins.int
-    REPEATED_UINT64_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    REPEATED_FIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_FIELD_NUMBER: _builtins.int
+    REPEATED_FLOAT_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT64_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Parsing repeated fixed size values used to fail. This message needs to be
         used in order to get a tag of the right size; all of the repeated fields
         in TestAllTypes didn't trigger the check.
         """
 
-    @property
-    def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    @_builtins.property
+    def repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Check for a varint type, just for good measure."""
 
-    @property
-    def repeated_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    @_builtins.property
+    def repeated_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]:
         """These have two-byte tags."""
 
-    @property
-    def repeated_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+    @_builtins.property
+    def repeated_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]:
         """Three byte tags."""
 
-    @property
-    def repeated_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    @_builtins.property
+    def repeated_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        repeated_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_float: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_uint64: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_uint64", b"repeated_uint64"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_uint64", b"repeated_uint64"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_uint64", b"repeated_uint64"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_uint64", b"repeated_uint64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRepeatedScalarDifferentTagSizes: typing_extensions.TypeAlias = TestRepeatedScalarDifferentTagSizes
+Global___TestRepeatedScalarDifferentTagSizes: _typing_extensions.TypeAlias = TestRepeatedScalarDifferentTagSizes  # noqa: Y015
 
-@typing.final
-class TestParsingMerge(google.protobuf.message.Message):
+@_typing.final
+class TestParsingMerge(_google_protobuf_message.Message):
     """Test that if an optional or required message/group field appears multiple
     times in the input, they need to be merged.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class RepeatedFieldsGenerator(google.protobuf.message.Message):
+    @_typing.final
+    class RepeatedFieldsGenerator(_google_protobuf_message.Message):
         """RepeatedFieldsGenerator defines matching field types as TestParsingMerge,
         except that all fields are repeated. In the tests, we will serialize the
         RepeatedFieldsGenerator to bytes, and parse the bytes to TestParsingMerge.
@@ -3414,237 +3414,237 @@ class TestParsingMerge(google.protobuf.message.Message):
         the corresponding required/optional fields in TestParsingMerge.
         """
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        @typing.final
-        class Group1(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class Group1(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            FIELD1_FIELD_NUMBER: builtins.int
-            @property
+            FIELD1_FIELD_NUMBER: _builtins.int
+            @_builtins.property
             def field1(self) -> Global___TestAllTypes: ...
             def __init__(
                 self,
                 *,
                 field1: Global___TestAllTypes | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["field1", b"field1"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["field1", b"field1"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["field1", b"field1"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["field1", b"field1"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        @typing.final
-        class Group2(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class Group2(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            FIELD1_FIELD_NUMBER: builtins.int
-            @property
+            FIELD1_FIELD_NUMBER: _builtins.int
+            @_builtins.property
             def field1(self) -> Global___TestAllTypes: ...
             def __init__(
                 self,
                 *,
                 field1: Global___TestAllTypes | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["field1", b"field1"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["field1", b"field1"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["field1", b"field1"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["field1", b"field1"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        FIELD1_FIELD_NUMBER: builtins.int
-        FIELD2_FIELD_NUMBER: builtins.int
-        FIELD3_FIELD_NUMBER: builtins.int
-        GROUP1_FIELD_NUMBER: builtins.int
-        GROUP2_FIELD_NUMBER: builtins.int
-        EXT1_FIELD_NUMBER: builtins.int
-        EXT2_FIELD_NUMBER: builtins.int
-        @property
-        def field1(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
-        @property
-        def field2(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
-        @property
-        def field3(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
-        @property
-        def group1(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestParsingMerge.RepeatedFieldsGenerator.Group1]: ...
-        @property
-        def group2(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestParsingMerge.RepeatedFieldsGenerator.Group2]: ...
-        @property
-        def ext1(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
-        @property
-        def ext2(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+        FIELD1_FIELD_NUMBER: _builtins.int
+        FIELD2_FIELD_NUMBER: _builtins.int
+        FIELD3_FIELD_NUMBER: _builtins.int
+        GROUP1_FIELD_NUMBER: _builtins.int
+        GROUP2_FIELD_NUMBER: _builtins.int
+        EXT1_FIELD_NUMBER: _builtins.int
+        EXT2_FIELD_NUMBER: _builtins.int
+        @_builtins.property
+        def field1(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+        @_builtins.property
+        def field2(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+        @_builtins.property
+        def field3(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+        @_builtins.property
+        def group1(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestParsingMerge.RepeatedFieldsGenerator.Group1]: ...
+        @_builtins.property
+        def group2(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestParsingMerge.RepeatedFieldsGenerator.Group2]: ...
+        @_builtins.property
+        def ext1(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+        @_builtins.property
+        def ext2(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
         def __init__(
             self,
             *,
-            field1: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
-            field2: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
-            field3: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
-            group1: collections.abc.Iterable[Global___TestParsingMerge.RepeatedFieldsGenerator.Group1] | None = ...,
-            group2: collections.abc.Iterable[Global___TestParsingMerge.RepeatedFieldsGenerator.Group2] | None = ...,
-            ext1: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
-            ext2: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+            field1: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
+            field2: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
+            field3: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
+            group1: _collections_abc.Iterable[Global___TestParsingMerge.RepeatedFieldsGenerator.Group1] | None = ...,
+            group2: _collections_abc.Iterable[Global___TestParsingMerge.RepeatedFieldsGenerator.Group2] | None = ...,
+            ext1: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
+            ext2: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["ext1", b"ext1", "ext2", b"ext2", "field1", b"field1", "field2", b"field2", "field3", b"field3", "group1", b"group1", "group2", b"group2"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["ext1", b"ext1", "ext2", b"ext2", "field1", b"field1", "field2", b"field2", "field3", b"field3", "group1", b"group1", "group2", b"group2"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["ext1", b"ext1", "ext2", b"ext2", "field1", b"field1", "field2", b"field2", "field3", b"field3", "group1", b"group1", "group2", b"group2"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["ext1", b"ext1", "ext2", b"ext2", "field1", b"field1", "field2", b"field2", "field3", b"field3", "group1", b"group1", "group2", b"group2"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class OptionalGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class OptionalGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        OPTIONAL_GROUP_ALL_TYPES_FIELD_NUMBER: builtins.int
-        @property
+        OPTIONAL_GROUP_ALL_TYPES_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def optional_group_all_types(self) -> Global___TestAllTypes: ...
         def __init__(
             self,
             *,
             optional_group_all_types: Global___TestAllTypes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_group_all_types", b"optional_group_all_types"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_group_all_types", b"optional_group_all_types"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_group_all_types", b"optional_group_all_types"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_group_all_types", b"optional_group_all_types"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class RepeatedGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class RepeatedGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        REPEATED_GROUP_ALL_TYPES_FIELD_NUMBER: builtins.int
-        @property
+        REPEATED_GROUP_ALL_TYPES_FIELD_NUMBER: _builtins.int
+        @_builtins.property
         def repeated_group_all_types(self) -> Global___TestAllTypes: ...
         def __init__(
             self,
             *,
             repeated_group_all_types: Global___TestAllTypes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_group_all_types", b"repeated_group_all_types"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_group_all_types", b"repeated_group_all_types"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_group_all_types", b"repeated_group_all_types"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_group_all_types", b"repeated_group_all_types"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    REQUIRED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    OPTIONALGROUP_FIELD_NUMBER: builtins.int
-    REPEATEDGROUP_FIELD_NUMBER: builtins.int
-    @property
+    REQUIRED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    OPTIONALGROUP_FIELD_NUMBER: _builtins.int
+    REPEATEDGROUP_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def required_all_types(self) -> Global___TestAllTypes: ...
-    @property
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
-    @property
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
     def optionalgroup(self) -> Global___TestParsingMerge.OptionalGroup: ...
-    @property
-    def repeatedgroup(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestParsingMerge.RepeatedGroup]: ...
-    OPTIONAL_EXT_FIELD_NUMBER: builtins.int
-    REPEATED_EXT_FIELD_NUMBER: builtins.int
-    optional_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestParsingMerge, Global___TestAllTypes]
-    repeated_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestParsingMerge, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]]
+    @_builtins.property
+    def repeatedgroup(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestParsingMerge.RepeatedGroup]: ...
+    OPTIONAL_EXT_FIELD_NUMBER: _builtins.int
+    REPEATED_EXT_FIELD_NUMBER: _builtins.int
+    optional_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestParsingMerge, Global___TestAllTypes]
+    repeated_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestParsingMerge, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]]
     def __init__(
         self,
         *,
         required_all_types: Global___TestAllTypes | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
         optionalgroup: Global___TestParsingMerge.OptionalGroup | None = ...,
-        repeatedgroup: collections.abc.Iterable[Global___TestParsingMerge.RepeatedGroup] | None = ...,
+        repeatedgroup: _collections_abc.Iterable[Global___TestParsingMerge.RepeatedGroup] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optionalgroup", b"optionalgroup", "repeated_all_types", b"repeated_all_types", "repeatedgroup", b"repeatedgroup", "required_all_types", b"required_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optionalgroup", b"optionalgroup", "repeated_all_types", b"repeated_all_types", "repeatedgroup", b"repeatedgroup", "required_all_types", b"required_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optionalgroup", b"optionalgroup", "repeated_all_types", b"repeated_all_types", "repeatedgroup", b"repeatedgroup", "required_all_types", b"required_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optionalgroup", b"optionalgroup", "repeated_all_types", b"repeated_all_types", "repeatedgroup", b"repeatedgroup", "required_all_types", b"required_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestParsingMerge: typing_extensions.TypeAlias = TestParsingMerge
+Global___TestParsingMerge: _typing_extensions.TypeAlias = TestParsingMerge  # noqa: Y015
 
-@typing.final
-class TestMergeException(google.protobuf.message.Message):
+@_typing.final
+class TestMergeException(_google_protobuf_message.Message):
     """Test that the correct exception is thrown by parseFrom in a corner case
     involving merging, extensions, and required fields.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    ALL_EXTENSIONS_FIELD_NUMBER: builtins.int
-    @property
+    ALL_EXTENSIONS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def all_extensions(self) -> Global___TestAllExtensions: ...
     def __init__(
         self,
         *,
         all_extensions: Global___TestAllExtensions | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["all_extensions", b"all_extensions"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["all_extensions", b"all_extensions"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["all_extensions", b"all_extensions"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["all_extensions", b"all_extensions"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMergeException: typing_extensions.TypeAlias = TestMergeException
+Global___TestMergeException: _typing_extensions.TypeAlias = TestMergeException  # noqa: Y015
 
-@typing.final
-class TestCommentInjectionMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestCommentInjectionMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    a: builtins.str
+    A_FIELD_NUMBER: _builtins.int
+    a: _builtins.str
     """*/ <- This should not close the generated doc comment"""
     def __init__(
         self,
         *,
-        a: builtins.str | None = ...,
+        a: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestCommentInjectionMessage: typing_extensions.TypeAlias = TestCommentInjectionMessage
+Global___TestCommentInjectionMessage: _typing_extensions.TypeAlias = TestCommentInjectionMessage  # noqa: Y015
 
-@typing.final
-class TestMessageSize(google.protobuf.message.Message):
+@_typing.final
+class TestMessageSize(_google_protobuf_message.Message):
     """Used to check that the c++ code generator re-orders messages to reduce
     padding.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    M1_FIELD_NUMBER: builtins.int
-    M2_FIELD_NUMBER: builtins.int
-    M3_FIELD_NUMBER: builtins.int
-    M4_FIELD_NUMBER: builtins.int
-    M5_FIELD_NUMBER: builtins.int
-    M6_FIELD_NUMBER: builtins.int
-    m1: builtins.bool
-    m2: builtins.int
-    m3: builtins.bool
-    m4: builtins.str
-    m5: builtins.int
-    m6: builtins.int
+    M1_FIELD_NUMBER: _builtins.int
+    M2_FIELD_NUMBER: _builtins.int
+    M3_FIELD_NUMBER: _builtins.int
+    M4_FIELD_NUMBER: _builtins.int
+    M5_FIELD_NUMBER: _builtins.int
+    M6_FIELD_NUMBER: _builtins.int
+    m1: _builtins.bool
+    m2: _builtins.int
+    m3: _builtins.bool
+    m4: _builtins.str
+    m5: _builtins.int
+    m6: _builtins.int
     def __init__(
         self,
         *,
-        m1: builtins.bool | None = ...,
-        m2: builtins.int | None = ...,
-        m3: builtins.bool | None = ...,
-        m4: builtins.str | None = ...,
-        m5: builtins.int | None = ...,
-        m6: builtins.int | None = ...,
+        m1: _builtins.bool | None = ...,
+        m2: _builtins.int | None = ...,
+        m3: _builtins.bool | None = ...,
+        m4: _builtins.str | None = ...,
+        m5: _builtins.int | None = ...,
+        m6: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["m1", b"m1", "m2", b"m2", "m3", b"m3", "m4", b"m4", "m5", b"m5", "m6", b"m6"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["m1", b"m1", "m2", b"m2", "m3", b"m3", "m4", b"m4", "m5", b"m5", "m6", b"m6"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["m1", b"m1", "m2", b"m2", "m3", b"m3", "m4", b"m4", "m5", b"m5", "m6", b"m6"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["m1", b"m1", "m2", b"m2", "m3", b"m3", "m4", b"m4", "m5", b"m5", "m6", b"m6"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageSize: typing_extensions.TypeAlias = TestMessageSize
+Global___TestMessageSize: _typing_extensions.TypeAlias = TestMessageSize  # noqa: Y015
 
-@typing.final
-class OpenEnumMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class OpenEnumMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _TestEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _TestEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OpenEnumMessage._TestEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _TestEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[OpenEnumMessage._TestEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNKNOWN: OpenEnumMessage._TestEnum.ValueType  # 0
         FOO: OpenEnumMessage._TestEnum.ValueType  # 1
         BAR: OpenEnumMessage._TestEnum.ValueType  # 2
@@ -3656,911 +3656,911 @@ class OpenEnumMessage(google.protobuf.message.Message):
     BAR: OpenEnumMessage.TestEnum.ValueType  # 2
     BAZ: OpenEnumMessage.TestEnum.ValueType  # 3
 
-    OPT_OPEN_FIELD_NUMBER: builtins.int
-    OPT_CLOSED_FIELD_NUMBER: builtins.int
-    REPEATED_OPEN_FIELD_NUMBER: builtins.int
-    REPEATED_CLOSED_FIELD_NUMBER: builtins.int
+    OPT_OPEN_FIELD_NUMBER: _builtins.int
+    OPT_CLOSED_FIELD_NUMBER: _builtins.int
+    REPEATED_OPEN_FIELD_NUMBER: _builtins.int
+    REPEATED_CLOSED_FIELD_NUMBER: _builtins.int
     opt_open: Global___OpenEnumMessage.TestEnum.ValueType
     opt_closed: Global___ForeignEnum.ValueType
-    @property
-    def repeated_open(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___OpenEnumMessage.TestEnum.ValueType]: ...
-    @property
-    def repeated_closed(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_open(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___OpenEnumMessage.TestEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_closed(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
     def __init__(
         self,
         *,
         opt_open: Global___OpenEnumMessage.TestEnum.ValueType | None = ...,
         opt_closed: Global___ForeignEnum.ValueType | None = ...,
-        repeated_open: collections.abc.Iterable[Global___OpenEnumMessage.TestEnum.ValueType] | None = ...,
-        repeated_closed: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        repeated_open: _collections_abc.Iterable[Global___OpenEnumMessage.TestEnum.ValueType] | None = ...,
+        repeated_closed: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["opt_closed", b"opt_closed", "opt_open", b"opt_open", "repeated_closed", b"repeated_closed", "repeated_open", b"repeated_open"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["opt_closed", b"opt_closed", "opt_open", b"opt_open", "repeated_closed", b"repeated_closed", "repeated_open", b"repeated_open"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["opt_closed", b"opt_closed", "opt_open", b"opt_open", "repeated_closed", b"repeated_closed", "repeated_open", b"repeated_open"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["opt_closed", b"opt_closed", "opt_open", b"opt_open", "repeated_closed", b"repeated_closed", "repeated_open", b"repeated_open"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OpenEnumMessage: typing_extensions.TypeAlias = OpenEnumMessage
+Global___OpenEnumMessage: _typing_extensions.TypeAlias = OpenEnumMessage  # noqa: Y015
 
-@typing.final
-class TestEagerlyVerifiedLazyMessage(google.protobuf.message.Message):
+@_typing.final
+class TestEagerlyVerifiedLazyMessage(_google_protobuf_message.Message):
     """Tests eager verification of a lazy message field."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class LazyMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class LazyMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        BYTES_FIELD_FIELD_NUMBER: builtins.int
-        bytes_field: builtins.bytes
+        BYTES_FIELD_FIELD_NUMBER: _builtins.int
+        bytes_field: _builtins.bytes
         def __init__(
             self,
             *,
-            bytes_field: builtins.bytes | None = ...,
+            bytes_field: _builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bytes_field", b"bytes_field"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bytes_field", b"bytes_field"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bytes_field", b"bytes_field"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bytes_field", b"bytes_field"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
+    LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def lazy_message(self) -> Global___TestEagerlyVerifiedLazyMessage.LazyMessage: ...
     def __init__(
         self,
         *,
         lazy_message: Global___TestEagerlyVerifiedLazyMessage.LazyMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["lazy_message", b"lazy_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["lazy_message", b"lazy_message"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["lazy_message", b"lazy_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["lazy_message", b"lazy_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestEagerlyVerifiedLazyMessage: typing_extensions.TypeAlias = TestEagerlyVerifiedLazyMessage
+Global___TestEagerlyVerifiedLazyMessage: _typing_extensions.TypeAlias = TestEagerlyVerifiedLazyMessage  # noqa: Y015
 
-@typing.final
-class FooRequest(google.protobuf.message.Message):
+@_typing.final
+class FooRequest(_google_protobuf_message.Message):
     """Test that RPC services work."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___FooRequest: typing_extensions.TypeAlias = FooRequest
+Global___FooRequest: _typing_extensions.TypeAlias = FooRequest  # noqa: Y015
 
-@typing.final
-class FooResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    def __init__(
-        self,
-    ) -> None: ...
-
-Global___FooResponse: typing_extensions.TypeAlias = FooResponse
-
-@typing.final
-class FooClientMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FooResponse(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___FooClientMessage: typing_extensions.TypeAlias = FooClientMessage
+Global___FooResponse: _typing_extensions.TypeAlias = FooResponse  # noqa: Y015
 
-@typing.final
-class FooServerMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    def __init__(
-        self,
-    ) -> None: ...
-
-Global___FooServerMessage: typing_extensions.TypeAlias = FooServerMessage
-
-@typing.final
-class BarRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FooClientMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___BarRequest: typing_extensions.TypeAlias = BarRequest
+Global___FooClientMessage: _typing_extensions.TypeAlias = FooClientMessage  # noqa: Y015
 
-@typing.final
-class BarResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FooServerMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___BarResponse: typing_extensions.TypeAlias = BarResponse
+Global___FooServerMessage: _typing_extensions.TypeAlias = FooServerMessage  # noqa: Y015
 
-@typing.final
-class TestJsonName(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class BarRequest(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    FIELD_NAME1_FIELD_NUMBER: builtins.int
-    FIELDNAME2_FIELD_NUMBER: builtins.int
-    FIELDNAME3_FIELD_NUMBER: builtins.int
-    _FIELD_NAME4_FIELD_NUMBER: builtins.int
-    FIELD_NAME5_FIELD_NUMBER: builtins.int
-    FIELD_NAME6_FIELD_NUMBER: builtins.int
-    FIELDNAME7_FIELD_NUMBER: builtins.int
-    field_name1: builtins.int
-    fieldName2: builtins.int
-    FieldName3: builtins.int
-    _field_name4: builtins.int
-    FIELD_NAME5: builtins.int
-    field_name6: builtins.int
-    fieldname7: builtins.int
+    def __init__(
+        self,
+    ) -> None: ...
+
+Global___BarRequest: _typing_extensions.TypeAlias = BarRequest  # noqa: Y015
+
+@_typing.final
+class BarResponse(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+Global___BarResponse: _typing_extensions.TypeAlias = BarResponse  # noqa: Y015
+
+@_typing.final
+class TestJsonName(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+
+    FIELD_NAME1_FIELD_NUMBER: _builtins.int
+    FIELDNAME2_FIELD_NUMBER: _builtins.int
+    FIELDNAME3_FIELD_NUMBER: _builtins.int
+    _FIELD_NAME4_FIELD_NUMBER: _builtins.int
+    FIELD_NAME5_FIELD_NUMBER: _builtins.int
+    FIELD_NAME6_FIELD_NUMBER: _builtins.int
+    FIELDNAME7_FIELD_NUMBER: _builtins.int
+    field_name1: _builtins.int
+    fieldName2: _builtins.int
+    FieldName3: _builtins.int
+    _field_name4: _builtins.int
+    FIELD_NAME5: _builtins.int
+    field_name6: _builtins.int
+    fieldname7: _builtins.int
     def __init__(
         self,
         *,
-        field_name1: builtins.int | None = ...,
-        fieldName2: builtins.int | None = ...,
-        FieldName3: builtins.int | None = ...,
-        _field_name4: builtins.int | None = ...,
-        FIELD_NAME5: builtins.int | None = ...,
-        field_name6: builtins.int | None = ...,
-        fieldname7: builtins.int | None = ...,
+        field_name1: _builtins.int | None = ...,
+        fieldName2: _builtins.int | None = ...,
+        FieldName3: _builtins.int | None = ...,
+        _field_name4: _builtins.int | None = ...,
+        FIELD_NAME5: _builtins.int | None = ...,
+        field_name6: _builtins.int | None = ...,
+        fieldname7: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["FIELD_NAME5", b"FIELD_NAME5", "FieldName3", b"FieldName3", "_field_name4", b"_field_name4", "fieldName2", b"fieldName2", "field_name1", b"field_name1", "field_name6", b"field_name6", "fieldname7", b"fieldname7"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["FIELD_NAME5", b"FIELD_NAME5", "FieldName3", b"FieldName3", "_field_name4", b"_field_name4", "fieldName2", b"fieldName2", "field_name1", b"field_name1", "field_name6", b"field_name6", "fieldname7", b"fieldname7"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["FIELD_NAME5", b"FIELD_NAME5", "FieldName3", b"FieldName3", "_field_name4", b"_field_name4", "fieldName2", b"fieldName2", "field_name1", b"field_name1", "field_name6", b"field_name6", "fieldname7", b"fieldname7"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["FIELD_NAME5", b"FIELD_NAME5", "FieldName3", b"FieldName3", "_field_name4", b"_field_name4", "fieldName2", b"fieldName2", "field_name1", b"field_name1", "field_name6", b"field_name6", "fieldname7", b"fieldname7"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestJsonName: typing_extensions.TypeAlias = TestJsonName
+Global___TestJsonName: _typing_extensions.TypeAlias = TestJsonName  # noqa: Y015
 
-@typing.final
-class TestHugeFieldNumbers(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestHugeFieldNumbers(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class OptionalGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class OptionalGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        GROUP_A_FIELD_NUMBER: builtins.int
-        group_a: builtins.int
+        GROUP_A_FIELD_NUMBER: _builtins.int
+        group_a: _builtins.int
         def __init__(
             self,
             *,
-            group_a: builtins.int | None = ...,
+            group_a: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["group_a", b"group_a"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["group_a", b"group_a"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["group_a", b"group_a"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["group_a", b"group_a"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class StringStringMapEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class StringStringMapEntry(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.str | None = ...,
-            value: builtins.str | None = ...,
+            key: _builtins.str | None = ...,
+            value: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONAL_INT32_FIELD_NUMBER: builtins.int
-    FIXED_32_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_FIELD_NUMBER: builtins.int
-    PACKED_INT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_BYTES_FIELD_NUMBER: builtins.int
-    OPTIONAL_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONALGROUP_FIELD_NUMBER: builtins.int
-    STRING_STRING_MAP_FIELD_NUMBER: builtins.int
-    ONEOF_UINT32_FIELD_NUMBER: builtins.int
-    ONEOF_TEST_ALL_TYPES_FIELD_NUMBER: builtins.int
-    ONEOF_STRING_FIELD_NUMBER: builtins.int
-    ONEOF_BYTES_FIELD_NUMBER: builtins.int
-    OPTIONAL_BOOL_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_FLOAT_FIELD_NUMBER: builtins.int
-    OPTIONAL_DOUBLE_FIELD_NUMBER: builtins.int
-    OPTIONAL_UTF8_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_CORD_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_PIECE_FIELD_NUMBER: builtins.int
-    REPEATED_UTF8_STRING_FIELD_NUMBER: builtins.int
-    optional_int32: builtins.int
-    fixed_32: builtins.int
+    OPTIONAL_INT32_FIELD_NUMBER: _builtins.int
+    FIXED_32_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_FIELD_NUMBER: _builtins.int
+    PACKED_INT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BYTES_FIELD_NUMBER: _builtins.int
+    OPTIONAL_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONALGROUP_FIELD_NUMBER: _builtins.int
+    STRING_STRING_MAP_FIELD_NUMBER: _builtins.int
+    ONEOF_UINT32_FIELD_NUMBER: _builtins.int
+    ONEOF_TEST_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    ONEOF_STRING_FIELD_NUMBER: _builtins.int
+    ONEOF_BYTES_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BOOL_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FLOAT_FIELD_NUMBER: _builtins.int
+    OPTIONAL_DOUBLE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UTF8_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_CORD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    REPEATED_UTF8_STRING_FIELD_NUMBER: _builtins.int
+    optional_int32: _builtins.int
+    fixed_32: _builtins.int
     optional_enum: Global___ForeignEnum.ValueType
-    optional_string: builtins.str
-    optional_bytes: builtins.bytes
-    oneof_uint32: builtins.int
-    oneof_string: builtins.str
-    oneof_bytes: builtins.bytes
-    optional_bool: builtins.bool
-    optional_int64: builtins.int
-    optional_float: builtins.float
-    optional_double: builtins.float
-    optional_utf8_string: builtins.str
-    optional_cord: builtins.str
-    optional_string_piece: builtins.str
-    @property
-    def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
+    optional_string: _builtins.str
+    optional_bytes: _builtins.bytes
+    oneof_uint32: _builtins.int
+    oneof_string: _builtins.str
+    oneof_bytes: _builtins.bytes
+    optional_bool: _builtins.bool
+    optional_int64: _builtins.int
+    optional_float: _builtins.float
+    optional_double: _builtins.float
+    optional_utf8_string: _builtins.str
+    optional_cord: _builtins.str
+    optional_string_piece: _builtins.str
+    @_builtins.property
+    def repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
     def optional_message(self) -> Global___ForeignMessage: ...
-    @property
+    @_builtins.property
     def optionalgroup(self) -> Global___TestHugeFieldNumbers.OptionalGroup: ...
-    @property
-    def string_string_map(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]: ...
-    @property
+    @_builtins.property
+    def string_string_map(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.str, _builtins.str]: ...
+    @_builtins.property
     def oneof_test_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_utf8_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @_builtins.property
+    def repeated_utf8_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
         self,
         *,
-        optional_int32: builtins.int | None = ...,
-        fixed_32: builtins.int | None = ...,
-        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int32: collections.abc.Iterable[builtins.int] | None = ...,
+        optional_int32: _builtins.int | None = ...,
+        fixed_32: _builtins.int | None = ...,
+        repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
         optional_enum: Global___ForeignEnum.ValueType | None = ...,
-        optional_string: builtins.str | None = ...,
-        optional_bytes: builtins.bytes | None = ...,
+        optional_string: _builtins.str | None = ...,
+        optional_bytes: _builtins.bytes | None = ...,
         optional_message: Global___ForeignMessage | None = ...,
         optionalgroup: Global___TestHugeFieldNumbers.OptionalGroup | None = ...,
-        string_string_map: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-        oneof_uint32: builtins.int | None = ...,
+        string_string_map: _collections_abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        oneof_uint32: _builtins.int | None = ...,
         oneof_test_all_types: Global___TestAllTypes | None = ...,
-        oneof_string: builtins.str | None = ...,
-        oneof_bytes: builtins.bytes | None = ...,
-        optional_bool: builtins.bool | None = ...,
-        optional_int64: builtins.int | None = ...,
-        optional_float: builtins.float | None = ...,
-        optional_double: builtins.float | None = ...,
-        optional_utf8_string: builtins.str | None = ...,
-        optional_cord: builtins.str | None = ...,
-        optional_string_piece: builtins.str | None = ...,
-        repeated_utf8_string: collections.abc.Iterable[builtins.str] | None = ...,
+        oneof_string: _builtins.str | None = ...,
+        oneof_bytes: _builtins.bytes | None = ...,
+        optional_bool: _builtins.bool | None = ...,
+        optional_int64: _builtins.int | None = ...,
+        optional_float: _builtins.float | None = ...,
+        optional_double: _builtins.float | None = ...,
+        optional_utf8_string: _builtins.str | None = ...,
+        optional_cord: _builtins.str | None = ...,
+        optional_string_piece: _builtins.str | None = ...,
+        repeated_utf8_string: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["fixed_32", b"fixed_32", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_string", b"oneof_string", "oneof_test_all_types", b"oneof_test_all_types", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_enum", b"optional_enum", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_message", b"optional_message", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_utf8_string", b"optional_utf8_string", "optionalgroup", b"optionalgroup", "packed_int32", b"packed_int32", "repeated_int32", b"repeated_int32", "repeated_utf8_string", b"repeated_utf8_string", "string_string_map", b"string_string_map"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["fixed_32", b"fixed_32", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_string", b"oneof_string", "oneof_test_all_types", b"oneof_test_all_types", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_enum", b"optional_enum", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_message", b"optional_message", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_utf8_string", b"optional_utf8_string", "optionalgroup", b"optionalgroup", "packed_int32", b"packed_int32", "repeated_int32", b"repeated_int32", "repeated_utf8_string", b"repeated_utf8_string", "string_string_map", b"string_string_map"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["fixed_32", b"fixed_32", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_string", b"oneof_string", "oneof_test_all_types", b"oneof_test_all_types", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_enum", b"optional_enum", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_message", b"optional_message", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_utf8_string", b"optional_utf8_string", "optionalgroup", b"optionalgroup", "packed_int32", b"packed_int32", "repeated_int32", b"repeated_int32", "repeated_utf8_string", b"repeated_utf8_string", "string_string_map", b"string_string_map"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["fixed_32", b"fixed_32", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_string", b"oneof_string", "oneof_test_all_types", b"oneof_test_all_types", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_enum", b"optional_enum", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_message", b"optional_message", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_utf8_string", b"optional_utf8_string", "optionalgroup", b"optionalgroup", "packed_int32", b"packed_int32", "repeated_int32", b"repeated_int32", "repeated_utf8_string", b"repeated_utf8_string", "string_string_map", b"string_string_map"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_oneof_field: typing_extensions.TypeAlias = typing.Literal["oneof_uint32", "oneof_test_all_types", "oneof_string", "oneof_bytes"]
-    _WhichOneofArgType_oneof_field: typing_extensions.TypeAlias = typing.Literal["oneof_field", b"oneof_field"]
+    _WhichOneofReturnType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_uint32", "oneof_test_all_types", "oneof_string", "oneof_bytes"]  # noqa: Y015
+    _WhichOneofArgType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_field", b"oneof_field"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_field) -> _WhichOneofReturnType_oneof_field | None: ...
 
-Global___TestHugeFieldNumbers: typing_extensions.TypeAlias = TestHugeFieldNumbers
+Global___TestHugeFieldNumbers: _typing_extensions.TypeAlias = TestHugeFieldNumbers  # noqa: Y015
 
-@typing.final
-class TestExtensionInsideTable(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestExtensionInsideTable(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    FIELD1_FIELD_NUMBER: builtins.int
-    FIELD2_FIELD_NUMBER: builtins.int
-    FIELD3_FIELD_NUMBER: builtins.int
-    FIELD4_FIELD_NUMBER: builtins.int
-    FIELD6_FIELD_NUMBER: builtins.int
-    FIELD7_FIELD_NUMBER: builtins.int
-    FIELD8_FIELD_NUMBER: builtins.int
-    FIELD9_FIELD_NUMBER: builtins.int
-    FIELD10_FIELD_NUMBER: builtins.int
-    field1: builtins.int
-    field2: builtins.int
-    field3: builtins.int
-    field4: builtins.int
-    field6: builtins.int
-    field7: builtins.int
-    field8: builtins.int
-    field9: builtins.int
-    field10: builtins.int
+    FIELD1_FIELD_NUMBER: _builtins.int
+    FIELD2_FIELD_NUMBER: _builtins.int
+    FIELD3_FIELD_NUMBER: _builtins.int
+    FIELD4_FIELD_NUMBER: _builtins.int
+    FIELD6_FIELD_NUMBER: _builtins.int
+    FIELD7_FIELD_NUMBER: _builtins.int
+    FIELD8_FIELD_NUMBER: _builtins.int
+    FIELD9_FIELD_NUMBER: _builtins.int
+    FIELD10_FIELD_NUMBER: _builtins.int
+    field1: _builtins.int
+    field2: _builtins.int
+    field3: _builtins.int
+    field4: _builtins.int
+    field6: _builtins.int
+    field7: _builtins.int
+    field8: _builtins.int
+    field9: _builtins.int
+    field10: _builtins.int
     def __init__(
         self,
         *,
-        field1: builtins.int | None = ...,
-        field2: builtins.int | None = ...,
-        field3: builtins.int | None = ...,
-        field4: builtins.int | None = ...,
-        field6: builtins.int | None = ...,
-        field7: builtins.int | None = ...,
-        field8: builtins.int | None = ...,
-        field9: builtins.int | None = ...,
-        field10: builtins.int | None = ...,
+        field1: _builtins.int | None = ...,
+        field2: _builtins.int | None = ...,
+        field3: _builtins.int | None = ...,
+        field4: _builtins.int | None = ...,
+        field6: _builtins.int | None = ...,
+        field7: _builtins.int | None = ...,
+        field8: _builtins.int | None = ...,
+        field9: _builtins.int | None = ...,
+        field10: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["field1", b"field1", "field10", b"field10", "field2", b"field2", "field3", b"field3", "field4", b"field4", "field6", b"field6", "field7", b"field7", "field8", b"field8", "field9", b"field9"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["field1", b"field1", "field10", b"field10", "field2", b"field2", "field3", b"field3", "field4", b"field4", "field6", b"field6", "field7", b"field7", "field8", b"field8", "field9", b"field9"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["field1", b"field1", "field10", b"field10", "field2", b"field2", "field3", b"field3", "field4", b"field4", "field6", b"field6", "field7", b"field7", "field8", b"field8", "field9", b"field9"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["field1", b"field1", "field10", b"field10", "field2", b"field2", "field3", b"field3", "field4", b"field4", "field6", b"field6", "field7", b"field7", "field8", b"field8", "field9", b"field9"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestExtensionInsideTable: typing_extensions.TypeAlias = TestExtensionInsideTable
+Global___TestExtensionInsideTable: _typing_extensions.TypeAlias = TestExtensionInsideTable  # noqa: Y015
 
-@typing.final
-class TestNestedGroupExtensionOuter(google.protobuf.message.Message):
+@_typing.final
+class TestNestedGroupExtensionOuter(_google_protobuf_message.Message):
     """NOTE: Intentionally nested to mirror go/glep."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class Layer1OptionalGroup(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class Layer1OptionalGroup(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        @typing.final
-        class Layer2RepeatedGroup(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class Layer2RepeatedGroup(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            ANOTHER_FIELD_FIELD_NUMBER: builtins.int
-            another_field: builtins.str
+            ANOTHER_FIELD_FIELD_NUMBER: _builtins.int
+            another_field: _builtins.str
             def __init__(
                 self,
                 *,
-                another_field: builtins.str | None = ...,
+                another_field: _builtins.str | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["another_field", b"another_field"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["another_field", b"another_field"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["another_field", b"another_field"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["another_field", b"another_field"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        @typing.final
-        class Layer2AnotherOptionalRepeatedGroup(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        @_typing.final
+        class Layer2AnotherOptionalRepeatedGroup(_google_protobuf_message.Message):
+            DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-            BUT_WHY_THO_FIELD_NUMBER: builtins.int
-            but_why_tho: builtins.str
+            BUT_WHY_THO_FIELD_NUMBER: _builtins.int
+            but_why_tho: _builtins.str
             def __init__(
                 self,
                 *,
-                but_why_tho: builtins.str | None = ...,
+                but_why_tho: _builtins.str | None = ...,
             ) -> None: ...
-            _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["but_why_tho", b"but_why_tho"]
-            def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-            _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["but_why_tho", b"but_why_tho"]
+            _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["but_why_tho", b"but_why_tho"]  # noqa: Y015
+            def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+            _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["but_why_tho", b"but_why_tho"]  # noqa: Y015
             def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-        LAYER2REPEATEDGROUP_FIELD_NUMBER: builtins.int
-        LAYER2ANOTHEROPTIONALREPEATEDGROUP_FIELD_NUMBER: builtins.int
-        @property
-        def layer2repeatedgroup(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2RepeatedGroup]: ...
-        @property
-        def layer2anotheroptionalrepeatedgroup(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2AnotherOptionalRepeatedGroup]: ...
+        LAYER2REPEATEDGROUP_FIELD_NUMBER: _builtins.int
+        LAYER2ANOTHEROPTIONALREPEATEDGROUP_FIELD_NUMBER: _builtins.int
+        @_builtins.property
+        def layer2repeatedgroup(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2RepeatedGroup]: ...
+        @_builtins.property
+        def layer2anotheroptionalrepeatedgroup(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2AnotherOptionalRepeatedGroup]: ...
         def __init__(
             self,
             *,
-            layer2repeatedgroup: collections.abc.Iterable[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2RepeatedGroup] | None = ...,
-            layer2anotheroptionalrepeatedgroup: collections.abc.Iterable[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2AnotherOptionalRepeatedGroup] | None = ...,
+            layer2repeatedgroup: _collections_abc.Iterable[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2RepeatedGroup] | None = ...,
+            layer2anotheroptionalrepeatedgroup: _collections_abc.Iterable[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2AnotherOptionalRepeatedGroup] | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["layer2anotheroptionalrepeatedgroup", b"layer2anotheroptionalrepeatedgroup", "layer2repeatedgroup", b"layer2repeatedgroup"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["layer2anotheroptionalrepeatedgroup", b"layer2anotheroptionalrepeatedgroup", "layer2repeatedgroup", b"layer2repeatedgroup"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["layer2anotheroptionalrepeatedgroup", b"layer2anotheroptionalrepeatedgroup", "layer2repeatedgroup", b"layer2repeatedgroup"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["layer2anotheroptionalrepeatedgroup", b"layer2anotheroptionalrepeatedgroup", "layer2repeatedgroup", b"layer2repeatedgroup"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    LAYER1OPTIONALGROUP_FIELD_NUMBER: builtins.int
-    @property
+    LAYER1OPTIONALGROUP_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def layer1optionalgroup(self) -> Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup: ...
     def __init__(
         self,
         *,
         layer1optionalgroup: Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["layer1optionalgroup", b"layer1optionalgroup"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["layer1optionalgroup", b"layer1optionalgroup"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["layer1optionalgroup", b"layer1optionalgroup"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["layer1optionalgroup", b"layer1optionalgroup"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedGroupExtensionOuter: typing_extensions.TypeAlias = TestNestedGroupExtensionOuter
+Global___TestNestedGroupExtensionOuter: _typing_extensions.TypeAlias = TestNestedGroupExtensionOuter  # noqa: Y015
 
-@typing.final
-class TestNestedGroupExtensionInnerExtension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestNestedGroupExtensionInnerExtension(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    INNER_NAME_FIELD_NUMBER: builtins.int
-    inner_name: builtins.str
+    INNER_NAME_FIELD_NUMBER: _builtins.int
+    inner_name: _builtins.str
     def __init__(
         self,
         *,
-        inner_name: builtins.str | None = ...,
+        inner_name: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["inner_name", b"inner_name"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["inner_name", b"inner_name"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["inner_name", b"inner_name"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["inner_name", b"inner_name"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedGroupExtensionInnerExtension: typing_extensions.TypeAlias = TestNestedGroupExtensionInnerExtension
+Global___TestNestedGroupExtensionInnerExtension: _typing_extensions.TypeAlias = TestNestedGroupExtensionInnerExtension  # noqa: Y015
 
-@typing.final
-class TestExtensionRangeSerialize(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestExtensionRangeSerialize(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    FOO_ONE_FIELD_NUMBER: builtins.int
-    FOO_TWO_FIELD_NUMBER: builtins.int
-    FOO_THREE_FIELD_NUMBER: builtins.int
-    FOO_FOUR_FIELD_NUMBER: builtins.int
-    foo_one: builtins.int
-    foo_two: builtins.int
-    foo_three: builtins.int
-    foo_four: builtins.int
-    BAR_ONE_FIELD_NUMBER: builtins.int
-    BAR_TWO_FIELD_NUMBER: builtins.int
-    BAR_THREE_FIELD_NUMBER: builtins.int
-    BAR_FOUR_FIELD_NUMBER: builtins.int
-    BAR_FIVE_FIELD_NUMBER: builtins.int
-    bar_one: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, builtins.int]
-    bar_two: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, builtins.int]
-    bar_three: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, builtins.int]
-    bar_four: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, builtins.int]
-    bar_five: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, builtins.int]
+    FOO_ONE_FIELD_NUMBER: _builtins.int
+    FOO_TWO_FIELD_NUMBER: _builtins.int
+    FOO_THREE_FIELD_NUMBER: _builtins.int
+    FOO_FOUR_FIELD_NUMBER: _builtins.int
+    foo_one: _builtins.int
+    foo_two: _builtins.int
+    foo_three: _builtins.int
+    foo_four: _builtins.int
+    BAR_ONE_FIELD_NUMBER: _builtins.int
+    BAR_TWO_FIELD_NUMBER: _builtins.int
+    BAR_THREE_FIELD_NUMBER: _builtins.int
+    BAR_FOUR_FIELD_NUMBER: _builtins.int
+    BAR_FIVE_FIELD_NUMBER: _builtins.int
+    bar_one: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, _builtins.int]
+    bar_two: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, _builtins.int]
+    bar_three: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, _builtins.int]
+    bar_four: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, _builtins.int]
+    bar_five: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestExtensionRangeSerialize, _builtins.int]
     def __init__(
         self,
         *,
-        foo_one: builtins.int | None = ...,
-        foo_two: builtins.int | None = ...,
-        foo_three: builtins.int | None = ...,
-        foo_four: builtins.int | None = ...,
+        foo_one: _builtins.int | None = ...,
+        foo_two: _builtins.int | None = ...,
+        foo_three: _builtins.int | None = ...,
+        foo_four: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo_four", b"foo_four", "foo_one", b"foo_one", "foo_three", b"foo_three", "foo_two", b"foo_two"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo_four", b"foo_four", "foo_one", b"foo_one", "foo_three", b"foo_three", "foo_two", b"foo_two"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo_four", b"foo_four", "foo_one", b"foo_one", "foo_three", b"foo_three", "foo_two", b"foo_two"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo_four", b"foo_four", "foo_one", b"foo_one", "foo_three", b"foo_three", "foo_two", b"foo_two"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestExtensionRangeSerialize: typing_extensions.TypeAlias = TestExtensionRangeSerialize
+Global___TestExtensionRangeSerialize: _typing_extensions.TypeAlias = TestExtensionRangeSerialize  # noqa: Y015
 
-@typing.final
-class TestVerifyInt32Simple(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyInt32Simple(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_64_FIELD_NUMBER: builtins.int
-    optional_int32_1: builtins.int
-    optional_int32_2: builtins.int
-    optional_int32_63: builtins.int
-    optional_int32_64: builtins.int
+    OPTIONAL_INT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_64_FIELD_NUMBER: _builtins.int
+    optional_int32_1: _builtins.int
+    optional_int32_2: _builtins.int
+    optional_int32_63: _builtins.int
+    optional_int32_64: _builtins.int
     def __init__(
         self,
         *,
-        optional_int32_1: builtins.int | None = ...,
-        optional_int32_2: builtins.int | None = ...,
-        optional_int32_63: builtins.int | None = ...,
-        optional_int32_64: builtins.int | None = ...,
+        optional_int32_1: _builtins.int | None = ...,
+        optional_int32_2: _builtins.int | None = ...,
+        optional_int32_63: _builtins.int | None = ...,
+        optional_int32_64: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyInt32Simple: typing_extensions.TypeAlias = TestVerifyInt32Simple
+Global___TestVerifyInt32Simple: _typing_extensions.TypeAlias = TestVerifyInt32Simple  # noqa: Y015
 
-@typing.final
-class TestVerifyInt32(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyInt32(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_int32_1: builtins.int
-    optional_int32_2: builtins.int
-    optional_int32_63: builtins.int
-    optional_int32_64: builtins.int
-    @property
+    OPTIONAL_INT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_int32_1: _builtins.int
+    optional_int32_2: _builtins.int
+    optional_int32_63: _builtins.int
+    optional_int32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_int32_1: builtins.int | None = ...,
-        optional_int32_2: builtins.int | None = ...,
-        optional_int32_63: builtins.int | None = ...,
-        optional_int32_64: builtins.int | None = ...,
+        optional_int32_1: _builtins.int | None = ...,
+        optional_int32_2: _builtins.int | None = ...,
+        optional_int32_63: _builtins.int | None = ...,
+        optional_int32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyInt32: typing_extensions.TypeAlias = TestVerifyInt32
+Global___TestVerifyInt32: _typing_extensions.TypeAlias = TestVerifyInt32  # noqa: Y015
 
-@typing.final
-class TestVerifyMostlyInt32(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyMostlyInt32(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT64_30_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_3_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_4_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_int64_30: builtins.int
-    optional_int32_1: builtins.int
-    optional_int32_2: builtins.int
-    optional_int32_3: builtins.int
-    optional_int32_4: builtins.int
-    optional_int32_63: builtins.int
-    optional_int32_64: builtins.int
-    @property
+    OPTIONAL_INT64_30_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_3_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_4_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_int64_30: _builtins.int
+    optional_int32_1: _builtins.int
+    optional_int32_2: _builtins.int
+    optional_int32_3: _builtins.int
+    optional_int32_4: _builtins.int
+    optional_int32_63: _builtins.int
+    optional_int32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_int64_30: builtins.int | None = ...,
-        optional_int32_1: builtins.int | None = ...,
-        optional_int32_2: builtins.int | None = ...,
-        optional_int32_3: builtins.int | None = ...,
-        optional_int32_4: builtins.int | None = ...,
-        optional_int32_63: builtins.int | None = ...,
-        optional_int32_64: builtins.int | None = ...,
+        optional_int64_30: _builtins.int | None = ...,
+        optional_int32_1: _builtins.int | None = ...,
+        optional_int32_2: _builtins.int | None = ...,
+        optional_int32_3: _builtins.int | None = ...,
+        optional_int32_4: _builtins.int | None = ...,
+        optional_int32_63: _builtins.int | None = ...,
+        optional_int32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyMostlyInt32: typing_extensions.TypeAlias = TestVerifyMostlyInt32
+Global___TestVerifyMostlyInt32: _typing_extensions.TypeAlias = TestVerifyMostlyInt32  # noqa: Y015
 
-@typing.final
-class TestVerifyMostlyInt32BigFieldNumber(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyMostlyInt32BigFieldNumber(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT64_30_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_300_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_3_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_4_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_int64_30: builtins.int
-    optional_int32_300: builtins.int
-    optional_int32_1: builtins.int
-    optional_int32_2: builtins.int
-    optional_int32_3: builtins.int
-    optional_int32_4: builtins.int
-    optional_int32_63: builtins.int
-    optional_int32_64: builtins.int
-    @property
+    OPTIONAL_INT64_30_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_300_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_3_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_4_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_int64_30: _builtins.int
+    optional_int32_300: _builtins.int
+    optional_int32_1: _builtins.int
+    optional_int32_2: _builtins.int
+    optional_int32_3: _builtins.int
+    optional_int32_4: _builtins.int
+    optional_int32_63: _builtins.int
+    optional_int32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_int64_30: builtins.int | None = ...,
-        optional_int32_300: builtins.int | None = ...,
-        optional_int32_1: builtins.int | None = ...,
-        optional_int32_2: builtins.int | None = ...,
-        optional_int32_3: builtins.int | None = ...,
-        optional_int32_4: builtins.int | None = ...,
-        optional_int32_63: builtins.int | None = ...,
-        optional_int32_64: builtins.int | None = ...,
+        optional_int64_30: _builtins.int | None = ...,
+        optional_int32_300: _builtins.int | None = ...,
+        optional_int32_1: _builtins.int | None = ...,
+        optional_int32_2: _builtins.int | None = ...,
+        optional_int32_3: _builtins.int | None = ...,
+        optional_int32_4: _builtins.int | None = ...,
+        optional_int32_63: _builtins.int | None = ...,
+        optional_int32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_300", b"optional_int32_300", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_300", b"optional_int32_300", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_300", b"optional_int32_300", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_2", b"optional_int32_2", "optional_int32_3", b"optional_int32_3", "optional_int32_300", b"optional_int32_300", "optional_int32_4", b"optional_int32_4", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int64_30", b"optional_int64_30", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyMostlyInt32BigFieldNumber: typing_extensions.TypeAlias = TestVerifyMostlyInt32BigFieldNumber
+Global___TestVerifyMostlyInt32BigFieldNumber: _typing_extensions.TypeAlias = TestVerifyMostlyInt32BigFieldNumber  # noqa: Y015
 
-@typing.final
-class TestVerifyUint32Simple(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyUint32Simple(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_UINT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_64_FIELD_NUMBER: builtins.int
-    optional_uint32_1: builtins.int
-    optional_uint32_2: builtins.int
-    optional_uint32_63: builtins.int
-    optional_uint32_64: builtins.int
+    OPTIONAL_UINT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_64_FIELD_NUMBER: _builtins.int
+    optional_uint32_1: _builtins.int
+    optional_uint32_2: _builtins.int
+    optional_uint32_63: _builtins.int
+    optional_uint32_64: _builtins.int
     def __init__(
         self,
         *,
-        optional_uint32_1: builtins.int | None = ...,
-        optional_uint32_2: builtins.int | None = ...,
-        optional_uint32_63: builtins.int | None = ...,
-        optional_uint32_64: builtins.int | None = ...,
+        optional_uint32_1: _builtins.int | None = ...,
+        optional_uint32_2: _builtins.int | None = ...,
+        optional_uint32_63: _builtins.int | None = ...,
+        optional_uint32_64: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyUint32Simple: typing_extensions.TypeAlias = TestVerifyUint32Simple
+Global___TestVerifyUint32Simple: _typing_extensions.TypeAlias = TestVerifyUint32Simple  # noqa: Y015
 
-@typing.final
-class TestVerifyUint32(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyUint32(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_UINT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_uint32_1: builtins.int
-    optional_uint32_2: builtins.int
-    optional_uint32_63: builtins.int
-    optional_uint32_64: builtins.int
-    @property
+    OPTIONAL_UINT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_uint32_1: _builtins.int
+    optional_uint32_2: _builtins.int
+    optional_uint32_63: _builtins.int
+    optional_uint32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_uint32_1: builtins.int | None = ...,
-        optional_uint32_2: builtins.int | None = ...,
-        optional_uint32_63: builtins.int | None = ...,
-        optional_uint32_64: builtins.int | None = ...,
+        optional_uint32_1: _builtins.int | None = ...,
+        optional_uint32_2: _builtins.int | None = ...,
+        optional_uint32_63: _builtins.int | None = ...,
+        optional_uint32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyUint32: typing_extensions.TypeAlias = TestVerifyUint32
+Global___TestVerifyUint32: _typing_extensions.TypeAlias = TestVerifyUint32  # noqa: Y015
 
-@typing.final
-class TestVerifyOneUint32(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyOneUint32(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_UINT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_uint32_1: builtins.int
-    optional_int32_2: builtins.int
-    optional_int32_63: builtins.int
-    optional_int32_64: builtins.int
-    @property
+    OPTIONAL_UINT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_uint32_1: _builtins.int
+    optional_int32_2: _builtins.int
+    optional_int32_63: _builtins.int
+    optional_int32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_uint32_1: builtins.int | None = ...,
-        optional_int32_2: builtins.int | None = ...,
-        optional_int32_63: builtins.int | None = ...,
-        optional_int32_64: builtins.int | None = ...,
+        optional_uint32_1: _builtins.int | None = ...,
+        optional_int32_2: _builtins.int | None = ...,
+        optional_int32_63: _builtins.int | None = ...,
+        optional_int32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_uint32_1", b"optional_uint32_1", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_uint32_1", b"optional_uint32_1", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_uint32_1", b"optional_uint32_1", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_uint32_1", b"optional_uint32_1", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyOneUint32: typing_extensions.TypeAlias = TestVerifyOneUint32
+Global___TestVerifyOneUint32: _typing_extensions.TypeAlias = TestVerifyOneUint32  # noqa: Y015
 
-@typing.final
-class TestVerifyOneInt32BigFieldNumber(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyOneInt32BigFieldNumber(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT32_65_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_int32_65: builtins.int
-    optional_int64_1: builtins.int
-    optional_int64_2: builtins.int
-    optional_int64_63: builtins.int
-    optional_int64_64: builtins.int
-    @property
+    OPTIONAL_INT32_65_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_int32_65: _builtins.int
+    optional_int64_1: _builtins.int
+    optional_int64_2: _builtins.int
+    optional_int64_63: _builtins.int
+    optional_int64_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_int32_65: builtins.int | None = ...,
-        optional_int64_1: builtins.int | None = ...,
-        optional_int64_2: builtins.int | None = ...,
-        optional_int64_63: builtins.int | None = ...,
-        optional_int64_64: builtins.int | None = ...,
+        optional_int32_65: _builtins.int | None = ...,
+        optional_int64_1: _builtins.int | None = ...,
+        optional_int64_2: _builtins.int | None = ...,
+        optional_int64_63: _builtins.int | None = ...,
+        optional_int64_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_65", b"optional_int32_65", "optional_int64_1", b"optional_int64_1", "optional_int64_2", b"optional_int64_2", "optional_int64_63", b"optional_int64_63", "optional_int64_64", b"optional_int64_64", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_65", b"optional_int32_65", "optional_int64_1", b"optional_int64_1", "optional_int64_2", b"optional_int64_2", "optional_int64_63", b"optional_int64_63", "optional_int64_64", b"optional_int64_64", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_65", b"optional_int32_65", "optional_int64_1", b"optional_int64_1", "optional_int64_2", b"optional_int64_2", "optional_int64_63", b"optional_int64_63", "optional_int64_64", b"optional_int64_64", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_65", b"optional_int32_65", "optional_int64_1", b"optional_int64_1", "optional_int64_2", b"optional_int64_2", "optional_int64_63", b"optional_int64_63", "optional_int64_64", b"optional_int64_64", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyOneInt32BigFieldNumber: typing_extensions.TypeAlias = TestVerifyOneInt32BigFieldNumber
+Global___TestVerifyOneInt32BigFieldNumber: _typing_extensions.TypeAlias = TestVerifyOneInt32BigFieldNumber  # noqa: Y015
 
-@typing.final
-class TestVerifyInt32BigFieldNumber(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyInt32BigFieldNumber(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT32_1000_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_65_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_int32_1000: builtins.int
-    optional_int32_65: builtins.int
-    optional_int32_1: builtins.int
-    optional_int32_2: builtins.int
-    optional_int32_63: builtins.int
-    optional_int32_64: builtins.int
-    @property
+    OPTIONAL_INT32_1000_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_65_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_int32_1000: _builtins.int
+    optional_int32_65: _builtins.int
+    optional_int32_1: _builtins.int
+    optional_int32_2: _builtins.int
+    optional_int32_63: _builtins.int
+    optional_int32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_int32_1000: builtins.int | None = ...,
-        optional_int32_65: builtins.int | None = ...,
-        optional_int32_1: builtins.int | None = ...,
-        optional_int32_2: builtins.int | None = ...,
-        optional_int32_63: builtins.int | None = ...,
-        optional_int32_64: builtins.int | None = ...,
+        optional_int32_1000: _builtins.int | None = ...,
+        optional_int32_65: _builtins.int | None = ...,
+        optional_int32_1: _builtins.int | None = ...,
+        optional_int32_2: _builtins.int | None = ...,
+        optional_int32_63: _builtins.int | None = ...,
+        optional_int32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_1000", b"optional_int32_1000", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int32_65", b"optional_int32_65", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_1000", b"optional_int32_1000", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int32_65", b"optional_int32_65", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_1000", b"optional_int32_1000", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int32_65", b"optional_int32_65", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_int32_1", b"optional_int32_1", "optional_int32_1000", b"optional_int32_1000", "optional_int32_2", b"optional_int32_2", "optional_int32_63", b"optional_int32_63", "optional_int32_64", b"optional_int32_64", "optional_int32_65", b"optional_int32_65", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyInt32BigFieldNumber: typing_extensions.TypeAlias = TestVerifyInt32BigFieldNumber
+Global___TestVerifyInt32BigFieldNumber: _typing_extensions.TypeAlias = TestVerifyInt32BigFieldNumber  # noqa: Y015
 
-@typing.final
-class TestVerifyUint32BigFieldNumber(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyUint32BigFieldNumber(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_UINT32_1000_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_65_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_1_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_2_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_63_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_64_FIELD_NUMBER: builtins.int
-    OPTIONAL_ALL_TYPES_FIELD_NUMBER: builtins.int
-    REPEATED_ALL_TYPES_FIELD_NUMBER: builtins.int
-    optional_uint32_1000: builtins.int
-    optional_uint32_65: builtins.int
-    optional_uint32_1: builtins.int
-    optional_uint32_2: builtins.int
-    optional_uint32_63: builtins.int
-    optional_uint32_64: builtins.int
-    @property
+    OPTIONAL_UINT32_1000_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_65_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_1_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_2_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_63_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    REPEATED_ALL_TYPES_FIELD_NUMBER: _builtins.int
+    optional_uint32_1000: _builtins.int
+    optional_uint32_65: _builtins.int
+    optional_uint32_1: _builtins.int
+    optional_uint32_2: _builtins.int
+    optional_uint32_63: _builtins.int
+    optional_uint32_64: _builtins.int
+    @_builtins.property
     def optional_all_types(self) -> Global___TestAllTypes: ...
-    @property
-    def repeated_all_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
+    @_builtins.property
+    def repeated_all_types(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes]: ...
     def __init__(
         self,
         *,
-        optional_uint32_1000: builtins.int | None = ...,
-        optional_uint32_65: builtins.int | None = ...,
-        optional_uint32_1: builtins.int | None = ...,
-        optional_uint32_2: builtins.int | None = ...,
-        optional_uint32_63: builtins.int | None = ...,
-        optional_uint32_64: builtins.int | None = ...,
+        optional_uint32_1000: _builtins.int | None = ...,
+        optional_uint32_65: _builtins.int | None = ...,
+        optional_uint32_1: _builtins.int | None = ...,
+        optional_uint32_2: _builtins.int | None = ...,
+        optional_uint32_63: _builtins.int | None = ...,
+        optional_uint32_64: _builtins.int | None = ...,
         optional_all_types: Global___TestAllTypes | None = ...,
-        repeated_all_types: collections.abc.Iterable[Global___TestAllTypes] | None = ...,
+        repeated_all_types: _collections_abc.Iterable[Global___TestAllTypes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "repeated_all_types", b"repeated_all_types"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "repeated_all_types", b"repeated_all_types"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_all_types", b"optional_all_types", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "repeated_all_types", b"repeated_all_types"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyUint32BigFieldNumber: typing_extensions.TypeAlias = TestVerifyUint32BigFieldNumber
+Global___TestVerifyUint32BigFieldNumber: _typing_extensions.TypeAlias = TestVerifyUint32BigFieldNumber  # noqa: Y015
 
-@typing.final
-class TestVerifyBigFieldNumberUint32(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestVerifyBigFieldNumberUint32(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class Nested(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class Nested(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        OPTIONAL_UINT32_5000_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_1000_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_66_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_65_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_1_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_2_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_63_FIELD_NUMBER: builtins.int
-        OPTIONAL_UINT32_64_FIELD_NUMBER: builtins.int
-        OPTIONAL_NESTED_FIELD_NUMBER: builtins.int
-        REPEATED_NESTED_FIELD_NUMBER: builtins.int
-        optional_uint32_5000: builtins.int
-        optional_uint32_1000: builtins.int
-        optional_uint32_66: builtins.int
-        optional_uint32_65: builtins.int
-        optional_uint32_1: builtins.int
-        optional_uint32_2: builtins.int
-        optional_uint32_63: builtins.int
-        optional_uint32_64: builtins.int
-        @property
+        OPTIONAL_UINT32_5000_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_1000_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_66_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_65_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_1_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_2_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_63_FIELD_NUMBER: _builtins.int
+        OPTIONAL_UINT32_64_FIELD_NUMBER: _builtins.int
+        OPTIONAL_NESTED_FIELD_NUMBER: _builtins.int
+        REPEATED_NESTED_FIELD_NUMBER: _builtins.int
+        optional_uint32_5000: _builtins.int
+        optional_uint32_1000: _builtins.int
+        optional_uint32_66: _builtins.int
+        optional_uint32_65: _builtins.int
+        optional_uint32_1: _builtins.int
+        optional_uint32_2: _builtins.int
+        optional_uint32_63: _builtins.int
+        optional_uint32_64: _builtins.int
+        @_builtins.property
         def optional_nested(self) -> Global___TestVerifyBigFieldNumberUint32.Nested: ...
-        @property
-        def repeated_nested(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestVerifyBigFieldNumberUint32.Nested]: ...
+        @_builtins.property
+        def repeated_nested(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestVerifyBigFieldNumberUint32.Nested]: ...
         def __init__(
             self,
             *,
-            optional_uint32_5000: builtins.int | None = ...,
-            optional_uint32_1000: builtins.int | None = ...,
-            optional_uint32_66: builtins.int | None = ...,
-            optional_uint32_65: builtins.int | None = ...,
-            optional_uint32_1: builtins.int | None = ...,
-            optional_uint32_2: builtins.int | None = ...,
-            optional_uint32_63: builtins.int | None = ...,
-            optional_uint32_64: builtins.int | None = ...,
+            optional_uint32_5000: _builtins.int | None = ...,
+            optional_uint32_1000: _builtins.int | None = ...,
+            optional_uint32_66: _builtins.int | None = ...,
+            optional_uint32_65: _builtins.int | None = ...,
+            optional_uint32_1: _builtins.int | None = ...,
+            optional_uint32_2: _builtins.int | None = ...,
+            optional_uint32_63: _builtins.int | None = ...,
+            optional_uint32_64: _builtins.int | None = ...,
             optional_nested: Global___TestVerifyBigFieldNumberUint32.Nested | None = ...,
-            repeated_nested: collections.abc.Iterable[Global___TestVerifyBigFieldNumberUint32.Nested] | None = ...,
+            repeated_nested: _collections_abc.Iterable[Global___TestVerifyBigFieldNumberUint32.Nested] | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_nested", b"optional_nested", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_5000", b"optional_uint32_5000", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "optional_uint32_66", b"optional_uint32_66", "repeated_nested", b"repeated_nested"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_nested", b"optional_nested", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_5000", b"optional_uint32_5000", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "optional_uint32_66", b"optional_uint32_66", "repeated_nested", b"repeated_nested"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_nested", b"optional_nested", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_5000", b"optional_uint32_5000", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "optional_uint32_66", b"optional_uint32_66", "repeated_nested", b"repeated_nested"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_nested", b"optional_nested", "optional_uint32_1", b"optional_uint32_1", "optional_uint32_1000", b"optional_uint32_1000", "optional_uint32_2", b"optional_uint32_2", "optional_uint32_5000", b"optional_uint32_5000", "optional_uint32_63", b"optional_uint32_63", "optional_uint32_64", b"optional_uint32_64", "optional_uint32_65", b"optional_uint32_65", "optional_uint32_66", b"optional_uint32_66", "repeated_nested", b"repeated_nested"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONAL_NESTED_FIELD_NUMBER: builtins.int
-    @property
+    OPTIONAL_NESTED_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def optional_nested(self) -> Global___TestVerifyBigFieldNumberUint32.Nested: ...
     def __init__(
         self,
         *,
         optional_nested: Global___TestVerifyBigFieldNumberUint32.Nested | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_nested", b"optional_nested"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_nested", b"optional_nested"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_nested", b"optional_nested"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_nested", b"optional_nested"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestVerifyBigFieldNumberUint32: typing_extensions.TypeAlias = TestVerifyBigFieldNumberUint32
+Global___TestVerifyBigFieldNumberUint32: _typing_extensions.TypeAlias = TestVerifyBigFieldNumberUint32  # noqa: Y015
 
-@typing.final
-class EnumParseTester(google.protobuf.message.Message):
+@_typing.final
+class EnumParseTester(_google_protobuf_message.Message):
     """This message contains different kind of enums to exercise the different
     parsers in table-driven.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _SeqSmall0:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _SeqSmall0EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumParseTester._SeqSmall0.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _SeqSmall0EnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumParseTester._SeqSmall0.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         SEQ_SMALL_0_DEFAULT: EnumParseTester._SeqSmall0.ValueType  # 0
         SEQ_SMALL_0_1: EnumParseTester._SeqSmall0.ValueType  # 1
         SEQ_SMALL_0_2: EnumParseTester._SeqSmall0.ValueType  # 2
@@ -4571,11 +4571,11 @@ class EnumParseTester(google.protobuf.message.Message):
     SEQ_SMALL_0_2: EnumParseTester.SeqSmall0.ValueType  # 2
 
     class _SeqSmall1:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _SeqSmall1EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumParseTester._SeqSmall1.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _SeqSmall1EnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumParseTester._SeqSmall1.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         SEQ_SMALL_1_DEFAULT: EnumParseTester._SeqSmall1.ValueType  # 1
         SEQ_SMALL_1_2: EnumParseTester._SeqSmall1.ValueType  # 2
         SEQ_SMALL_1_3: EnumParseTester._SeqSmall1.ValueType  # 3
@@ -4586,11 +4586,11 @@ class EnumParseTester(google.protobuf.message.Message):
     SEQ_SMALL_1_3: EnumParseTester.SeqSmall1.ValueType  # 3
 
     class _SeqLarge:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _SeqLargeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumParseTester._SeqLarge.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _SeqLargeEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumParseTester._SeqLarge.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         SEQ_LARGE_DEFAULT: EnumParseTester._SeqLarge.ValueType  # -1
         SEQ_LARGE_0: EnumParseTester._SeqLarge.ValueType  # 0
         SEQ_LARGE_1: EnumParseTester._SeqLarge.ValueType  # 1
@@ -4665,11 +4665,11 @@ class EnumParseTester(google.protobuf.message.Message):
     SEQ_LARGE_33: EnumParseTester.SeqLarge.ValueType  # 33
 
     class _Arbitrary:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _ArbitraryEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumParseTester._Arbitrary.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _ArbitraryEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumParseTester._Arbitrary.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         ARBITRARY_DEFAULT: EnumParseTester._Arbitrary.ValueType  # -123123
         ARBITRARY_1: EnumParseTester._Arbitrary.ValueType  # -123
         ARBITRARY_2: EnumParseTester._Arbitrary.ValueType  # 213
@@ -4685,43 +4685,43 @@ class EnumParseTester(google.protobuf.message.Message):
     ARBITRARY_MIN: EnumParseTester.Arbitrary.ValueType  # -2147483648
     ARBITRARY_MAX: EnumParseTester.Arbitrary.ValueType  # 2147483647
 
-    OPTIONAL_SEQ_SMALL_0_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_SMALL_0_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_SMALL_0_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_SMALL_0_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_SMALL_0_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_SMALL_0_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_SMALL_0_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_SMALL_0_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_SMALL_0_HIFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_SMALL_1_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_SMALL_1_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_SMALL_1_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_SMALL_1_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_SMALL_1_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_SMALL_1_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_SMALL_1_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_SMALL_1_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_SMALL_1_HIFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_LARGE_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_LARGE_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_SEQ_LARGE_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_LARGE_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_LARGE_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_SEQ_LARGE_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_LARGE_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_LARGE_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_SEQ_LARGE_HIFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_ARBITRARY_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_ARBITRARY_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_ARBITRARY_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_ARBITRARY_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_ARBITRARY_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_ARBITRARY_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_ARBITRARY_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_ARBITRARY_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_ARBITRARY_HIFIELD_FIELD_NUMBER: builtins.int
-    OTHER_FIELD_FIELD_NUMBER: builtins.int
+    OPTIONAL_SEQ_SMALL_0_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_SMALL_0_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_SMALL_0_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_SMALL_0_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_SMALL_0_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_SMALL_0_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_SMALL_0_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_SMALL_0_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_SMALL_0_HIFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_SMALL_1_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_SMALL_1_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_SMALL_1_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_SMALL_1_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_SMALL_1_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_SMALL_1_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_SMALL_1_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_SMALL_1_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_SMALL_1_HIFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_LARGE_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_LARGE_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SEQ_LARGE_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_LARGE_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_LARGE_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_SEQ_LARGE_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_LARGE_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_LARGE_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_SEQ_LARGE_HIFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ARBITRARY_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ARBITRARY_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_ARBITRARY_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_ARBITRARY_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_ARBITRARY_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_ARBITRARY_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_ARBITRARY_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_ARBITRARY_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_ARBITRARY_HIFIELD_FIELD_NUMBER: _builtins.int
+    OTHER_FIELD_FIELD_NUMBER: _builtins.int
     optional_seq_small_0_lowfield: Global___EnumParseTester.SeqSmall0.ValueType
     optional_seq_small_0_midfield: Global___EnumParseTester.SeqSmall0.ValueType
     optional_seq_small_0_hifield: Global___EnumParseTester.SeqSmall0.ValueType
@@ -4734,546 +4734,546 @@ class EnumParseTester(google.protobuf.message.Message):
     optional_arbitrary_lowfield: Global___EnumParseTester.Arbitrary.ValueType
     optional_arbitrary_midfield: Global___EnumParseTester.Arbitrary.ValueType
     optional_arbitrary_hifield: Global___EnumParseTester.Arbitrary.ValueType
-    other_field: builtins.int
+    other_field: _builtins.int
     """An arbitrary field we can append to to break the runs of repeated fields."""
-    @property
-    def repeated_seq_small_0_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
-    @property
-    def repeated_seq_small_0_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
-    @property
-    def repeated_seq_small_0_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
-    @property
-    def packed_seq_small_0_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
-    @property
-    def packed_seq_small_0_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
-    @property
-    def packed_seq_small_0_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
-    @property
-    def repeated_seq_small_1_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
-    @property
-    def repeated_seq_small_1_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
-    @property
-    def repeated_seq_small_1_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
-    @property
-    def packed_seq_small_1_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
-    @property
-    def packed_seq_small_1_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
-    @property
-    def packed_seq_small_1_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
-    @property
-    def repeated_seq_large_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
-    @property
-    def repeated_seq_large_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
-    @property
-    def repeated_seq_large_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
-    @property
-    def packed_seq_large_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
-    @property
-    def packed_seq_large_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
-    @property
-    def packed_seq_large_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
-    @property
-    def repeated_arbitrary_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
-    @property
-    def repeated_arbitrary_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
-    @property
-    def repeated_arbitrary_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
-    @property
-    def packed_arbitrary_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
-    @property
-    def packed_arbitrary_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
-    @property
-    def packed_arbitrary_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
-    OPTIONAL_ARBITRARY_EXT_FIELD_NUMBER: builtins.int
-    REPEATED_ARBITRARY_EXT_FIELD_NUMBER: builtins.int
-    PACKED_ARBITRARY_EXT_FIELD_NUMBER: builtins.int
-    optional_arbitrary_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___EnumParseTester, Global___EnumParseTester.Arbitrary.ValueType]
-    repeated_arbitrary_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___EnumParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]]
-    packed_arbitrary_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___EnumParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]]
+    @_builtins.property
+    def repeated_seq_small_0_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_small_0_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_small_0_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
+    @_builtins.property
+    def packed_seq_small_0_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
+    @_builtins.property
+    def packed_seq_small_0_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
+    @_builtins.property
+    def packed_seq_small_0_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall0.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_small_1_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_small_1_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_small_1_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
+    @_builtins.property
+    def packed_seq_small_1_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
+    @_builtins.property
+    def packed_seq_small_1_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
+    @_builtins.property
+    def packed_seq_small_1_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqSmall1.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_large_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_large_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
+    @_builtins.property
+    def repeated_seq_large_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
+    @_builtins.property
+    def packed_seq_large_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
+    @_builtins.property
+    def packed_seq_large_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
+    @_builtins.property
+    def packed_seq_large_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.SeqLarge.ValueType]: ...
+    @_builtins.property
+    def repeated_arbitrary_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
+    @_builtins.property
+    def repeated_arbitrary_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
+    @_builtins.property
+    def repeated_arbitrary_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
+    @_builtins.property
+    def packed_arbitrary_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
+    @_builtins.property
+    def packed_arbitrary_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
+    @_builtins.property
+    def packed_arbitrary_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]: ...
+    OPTIONAL_ARBITRARY_EXT_FIELD_NUMBER: _builtins.int
+    REPEATED_ARBITRARY_EXT_FIELD_NUMBER: _builtins.int
+    PACKED_ARBITRARY_EXT_FIELD_NUMBER: _builtins.int
+    optional_arbitrary_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___EnumParseTester, Global___EnumParseTester.Arbitrary.ValueType]
+    repeated_arbitrary_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___EnumParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]]
+    packed_arbitrary_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___EnumParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___EnumParseTester.Arbitrary.ValueType]]
     def __init__(
         self,
         *,
         optional_seq_small_0_lowfield: Global___EnumParseTester.SeqSmall0.ValueType | None = ...,
         optional_seq_small_0_midfield: Global___EnumParseTester.SeqSmall0.ValueType | None = ...,
         optional_seq_small_0_hifield: Global___EnumParseTester.SeqSmall0.ValueType | None = ...,
-        repeated_seq_small_0_lowfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
-        repeated_seq_small_0_midfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
-        repeated_seq_small_0_hifield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
-        packed_seq_small_0_lowfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
-        packed_seq_small_0_midfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
-        packed_seq_small_0_hifield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
+        repeated_seq_small_0_lowfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
+        repeated_seq_small_0_midfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
+        repeated_seq_small_0_hifield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
+        packed_seq_small_0_lowfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
+        packed_seq_small_0_midfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
+        packed_seq_small_0_hifield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall0.ValueType] | None = ...,
         optional_seq_small_1_lowfield: Global___EnumParseTester.SeqSmall1.ValueType | None = ...,
         optional_seq_small_1_midfield: Global___EnumParseTester.SeqSmall1.ValueType | None = ...,
         optional_seq_small_1_hifield: Global___EnumParseTester.SeqSmall1.ValueType | None = ...,
-        repeated_seq_small_1_lowfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
-        repeated_seq_small_1_midfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
-        repeated_seq_small_1_hifield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
-        packed_seq_small_1_lowfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
-        packed_seq_small_1_midfield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
-        packed_seq_small_1_hifield: collections.abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
+        repeated_seq_small_1_lowfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
+        repeated_seq_small_1_midfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
+        repeated_seq_small_1_hifield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
+        packed_seq_small_1_lowfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
+        packed_seq_small_1_midfield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
+        packed_seq_small_1_hifield: _collections_abc.Iterable[Global___EnumParseTester.SeqSmall1.ValueType] | None = ...,
         optional_seq_large_lowfield: Global___EnumParseTester.SeqLarge.ValueType | None = ...,
         optional_seq_large_midfield: Global___EnumParseTester.SeqLarge.ValueType | None = ...,
         optional_seq_large_hifield: Global___EnumParseTester.SeqLarge.ValueType | None = ...,
-        repeated_seq_large_lowfield: collections.abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
-        repeated_seq_large_midfield: collections.abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
-        repeated_seq_large_hifield: collections.abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
-        packed_seq_large_lowfield: collections.abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
-        packed_seq_large_midfield: collections.abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
-        packed_seq_large_hifield: collections.abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
+        repeated_seq_large_lowfield: _collections_abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
+        repeated_seq_large_midfield: _collections_abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
+        repeated_seq_large_hifield: _collections_abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
+        packed_seq_large_lowfield: _collections_abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
+        packed_seq_large_midfield: _collections_abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
+        packed_seq_large_hifield: _collections_abc.Iterable[Global___EnumParseTester.SeqLarge.ValueType] | None = ...,
         optional_arbitrary_lowfield: Global___EnumParseTester.Arbitrary.ValueType | None = ...,
         optional_arbitrary_midfield: Global___EnumParseTester.Arbitrary.ValueType | None = ...,
         optional_arbitrary_hifield: Global___EnumParseTester.Arbitrary.ValueType | None = ...,
-        repeated_arbitrary_lowfield: collections.abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
-        repeated_arbitrary_midfield: collections.abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
-        repeated_arbitrary_hifield: collections.abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
-        packed_arbitrary_lowfield: collections.abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
-        packed_arbitrary_midfield: collections.abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
-        packed_arbitrary_hifield: collections.abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
-        other_field: builtins.int | None = ...,
+        repeated_arbitrary_lowfield: _collections_abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
+        repeated_arbitrary_midfield: _collections_abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
+        repeated_arbitrary_hifield: _collections_abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
+        packed_arbitrary_lowfield: _collections_abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
+        packed_arbitrary_midfield: _collections_abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
+        packed_arbitrary_hifield: _collections_abc.Iterable[Global___EnumParseTester.Arbitrary.ValueType] | None = ...,
+        other_field: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_arbitrary_hifield", b"optional_arbitrary_hifield", "optional_arbitrary_lowfield", b"optional_arbitrary_lowfield", "optional_arbitrary_midfield", b"optional_arbitrary_midfield", "optional_seq_large_hifield", b"optional_seq_large_hifield", "optional_seq_large_lowfield", b"optional_seq_large_lowfield", "optional_seq_large_midfield", b"optional_seq_large_midfield", "optional_seq_small_0_hifield", b"optional_seq_small_0_hifield", "optional_seq_small_0_lowfield", b"optional_seq_small_0_lowfield", "optional_seq_small_0_midfield", b"optional_seq_small_0_midfield", "optional_seq_small_1_hifield", b"optional_seq_small_1_hifield", "optional_seq_small_1_lowfield", b"optional_seq_small_1_lowfield", "optional_seq_small_1_midfield", b"optional_seq_small_1_midfield", "other_field", b"other_field", "packed_arbitrary_hifield", b"packed_arbitrary_hifield", "packed_arbitrary_lowfield", b"packed_arbitrary_lowfield", "packed_arbitrary_midfield", b"packed_arbitrary_midfield", "packed_seq_large_hifield", b"packed_seq_large_hifield", "packed_seq_large_lowfield", b"packed_seq_large_lowfield", "packed_seq_large_midfield", b"packed_seq_large_midfield", "packed_seq_small_0_hifield", b"packed_seq_small_0_hifield", "packed_seq_small_0_lowfield", b"packed_seq_small_0_lowfield", "packed_seq_small_0_midfield", b"packed_seq_small_0_midfield", "packed_seq_small_1_hifield", b"packed_seq_small_1_hifield", "packed_seq_small_1_lowfield", b"packed_seq_small_1_lowfield", "packed_seq_small_1_midfield", b"packed_seq_small_1_midfield", "repeated_arbitrary_hifield", b"repeated_arbitrary_hifield", "repeated_arbitrary_lowfield", b"repeated_arbitrary_lowfield", "repeated_arbitrary_midfield", b"repeated_arbitrary_midfield", "repeated_seq_large_hifield", b"repeated_seq_large_hifield", "repeated_seq_large_lowfield", b"repeated_seq_large_lowfield", "repeated_seq_large_midfield", b"repeated_seq_large_midfield", "repeated_seq_small_0_hifield", b"repeated_seq_small_0_hifield", "repeated_seq_small_0_lowfield", b"repeated_seq_small_0_lowfield", "repeated_seq_small_0_midfield", b"repeated_seq_small_0_midfield", "repeated_seq_small_1_hifield", b"repeated_seq_small_1_hifield", "repeated_seq_small_1_lowfield", b"repeated_seq_small_1_lowfield", "repeated_seq_small_1_midfield", b"repeated_seq_small_1_midfield"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_arbitrary_hifield", b"optional_arbitrary_hifield", "optional_arbitrary_lowfield", b"optional_arbitrary_lowfield", "optional_arbitrary_midfield", b"optional_arbitrary_midfield", "optional_seq_large_hifield", b"optional_seq_large_hifield", "optional_seq_large_lowfield", b"optional_seq_large_lowfield", "optional_seq_large_midfield", b"optional_seq_large_midfield", "optional_seq_small_0_hifield", b"optional_seq_small_0_hifield", "optional_seq_small_0_lowfield", b"optional_seq_small_0_lowfield", "optional_seq_small_0_midfield", b"optional_seq_small_0_midfield", "optional_seq_small_1_hifield", b"optional_seq_small_1_hifield", "optional_seq_small_1_lowfield", b"optional_seq_small_1_lowfield", "optional_seq_small_1_midfield", b"optional_seq_small_1_midfield", "other_field", b"other_field", "packed_arbitrary_hifield", b"packed_arbitrary_hifield", "packed_arbitrary_lowfield", b"packed_arbitrary_lowfield", "packed_arbitrary_midfield", b"packed_arbitrary_midfield", "packed_seq_large_hifield", b"packed_seq_large_hifield", "packed_seq_large_lowfield", b"packed_seq_large_lowfield", "packed_seq_large_midfield", b"packed_seq_large_midfield", "packed_seq_small_0_hifield", b"packed_seq_small_0_hifield", "packed_seq_small_0_lowfield", b"packed_seq_small_0_lowfield", "packed_seq_small_0_midfield", b"packed_seq_small_0_midfield", "packed_seq_small_1_hifield", b"packed_seq_small_1_hifield", "packed_seq_small_1_lowfield", b"packed_seq_small_1_lowfield", "packed_seq_small_1_midfield", b"packed_seq_small_1_midfield", "repeated_arbitrary_hifield", b"repeated_arbitrary_hifield", "repeated_arbitrary_lowfield", b"repeated_arbitrary_lowfield", "repeated_arbitrary_midfield", b"repeated_arbitrary_midfield", "repeated_seq_large_hifield", b"repeated_seq_large_hifield", "repeated_seq_large_lowfield", b"repeated_seq_large_lowfield", "repeated_seq_large_midfield", b"repeated_seq_large_midfield", "repeated_seq_small_0_hifield", b"repeated_seq_small_0_hifield", "repeated_seq_small_0_lowfield", b"repeated_seq_small_0_lowfield", "repeated_seq_small_0_midfield", b"repeated_seq_small_0_midfield", "repeated_seq_small_1_hifield", b"repeated_seq_small_1_hifield", "repeated_seq_small_1_lowfield", b"repeated_seq_small_1_lowfield", "repeated_seq_small_1_midfield", b"repeated_seq_small_1_midfield"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_arbitrary_hifield", b"optional_arbitrary_hifield", "optional_arbitrary_lowfield", b"optional_arbitrary_lowfield", "optional_arbitrary_midfield", b"optional_arbitrary_midfield", "optional_seq_large_hifield", b"optional_seq_large_hifield", "optional_seq_large_lowfield", b"optional_seq_large_lowfield", "optional_seq_large_midfield", b"optional_seq_large_midfield", "optional_seq_small_0_hifield", b"optional_seq_small_0_hifield", "optional_seq_small_0_lowfield", b"optional_seq_small_0_lowfield", "optional_seq_small_0_midfield", b"optional_seq_small_0_midfield", "optional_seq_small_1_hifield", b"optional_seq_small_1_hifield", "optional_seq_small_1_lowfield", b"optional_seq_small_1_lowfield", "optional_seq_small_1_midfield", b"optional_seq_small_1_midfield", "other_field", b"other_field", "packed_arbitrary_hifield", b"packed_arbitrary_hifield", "packed_arbitrary_lowfield", b"packed_arbitrary_lowfield", "packed_arbitrary_midfield", b"packed_arbitrary_midfield", "packed_seq_large_hifield", b"packed_seq_large_hifield", "packed_seq_large_lowfield", b"packed_seq_large_lowfield", "packed_seq_large_midfield", b"packed_seq_large_midfield", "packed_seq_small_0_hifield", b"packed_seq_small_0_hifield", "packed_seq_small_0_lowfield", b"packed_seq_small_0_lowfield", "packed_seq_small_0_midfield", b"packed_seq_small_0_midfield", "packed_seq_small_1_hifield", b"packed_seq_small_1_hifield", "packed_seq_small_1_lowfield", b"packed_seq_small_1_lowfield", "packed_seq_small_1_midfield", b"packed_seq_small_1_midfield", "repeated_arbitrary_hifield", b"repeated_arbitrary_hifield", "repeated_arbitrary_lowfield", b"repeated_arbitrary_lowfield", "repeated_arbitrary_midfield", b"repeated_arbitrary_midfield", "repeated_seq_large_hifield", b"repeated_seq_large_hifield", "repeated_seq_large_lowfield", b"repeated_seq_large_lowfield", "repeated_seq_large_midfield", b"repeated_seq_large_midfield", "repeated_seq_small_0_hifield", b"repeated_seq_small_0_hifield", "repeated_seq_small_0_lowfield", b"repeated_seq_small_0_lowfield", "repeated_seq_small_0_midfield", b"repeated_seq_small_0_midfield", "repeated_seq_small_1_hifield", b"repeated_seq_small_1_hifield", "repeated_seq_small_1_lowfield", b"repeated_seq_small_1_lowfield", "repeated_seq_small_1_midfield", b"repeated_seq_small_1_midfield"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_arbitrary_hifield", b"optional_arbitrary_hifield", "optional_arbitrary_lowfield", b"optional_arbitrary_lowfield", "optional_arbitrary_midfield", b"optional_arbitrary_midfield", "optional_seq_large_hifield", b"optional_seq_large_hifield", "optional_seq_large_lowfield", b"optional_seq_large_lowfield", "optional_seq_large_midfield", b"optional_seq_large_midfield", "optional_seq_small_0_hifield", b"optional_seq_small_0_hifield", "optional_seq_small_0_lowfield", b"optional_seq_small_0_lowfield", "optional_seq_small_0_midfield", b"optional_seq_small_0_midfield", "optional_seq_small_1_hifield", b"optional_seq_small_1_hifield", "optional_seq_small_1_lowfield", b"optional_seq_small_1_lowfield", "optional_seq_small_1_midfield", b"optional_seq_small_1_midfield", "other_field", b"other_field", "packed_arbitrary_hifield", b"packed_arbitrary_hifield", "packed_arbitrary_lowfield", b"packed_arbitrary_lowfield", "packed_arbitrary_midfield", b"packed_arbitrary_midfield", "packed_seq_large_hifield", b"packed_seq_large_hifield", "packed_seq_large_lowfield", b"packed_seq_large_lowfield", "packed_seq_large_midfield", b"packed_seq_large_midfield", "packed_seq_small_0_hifield", b"packed_seq_small_0_hifield", "packed_seq_small_0_lowfield", b"packed_seq_small_0_lowfield", "packed_seq_small_0_midfield", b"packed_seq_small_0_midfield", "packed_seq_small_1_hifield", b"packed_seq_small_1_hifield", "packed_seq_small_1_lowfield", b"packed_seq_small_1_lowfield", "packed_seq_small_1_midfield", b"packed_seq_small_1_midfield", "repeated_arbitrary_hifield", b"repeated_arbitrary_hifield", "repeated_arbitrary_lowfield", b"repeated_arbitrary_lowfield", "repeated_arbitrary_midfield", b"repeated_arbitrary_midfield", "repeated_seq_large_hifield", b"repeated_seq_large_hifield", "repeated_seq_large_lowfield", b"repeated_seq_large_lowfield", "repeated_seq_large_midfield", b"repeated_seq_large_midfield", "repeated_seq_small_0_hifield", b"repeated_seq_small_0_hifield", "repeated_seq_small_0_lowfield", b"repeated_seq_small_0_lowfield", "repeated_seq_small_0_midfield", b"repeated_seq_small_0_midfield", "repeated_seq_small_1_hifield", b"repeated_seq_small_1_hifield", "repeated_seq_small_1_lowfield", b"repeated_seq_small_1_lowfield", "repeated_seq_small_1_midfield", b"repeated_seq_small_1_midfield"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___EnumParseTester: typing_extensions.TypeAlias = EnumParseTester
+Global___EnumParseTester: _typing_extensions.TypeAlias = EnumParseTester  # noqa: Y015
 
-@typing.final
-class BoolParseTester(google.protobuf.message.Message):
+@_typing.final
+class BoolParseTester(_google_protobuf_message.Message):
     """This message contains different kind of bool fields to exercise the different
     parsers in table-drived.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_BOOL_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_BOOL_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_BOOL_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_BOOL_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_BOOL_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_BOOL_HIFIELD_FIELD_NUMBER: builtins.int
-    OTHER_FIELD_FIELD_NUMBER: builtins.int
-    optional_bool_lowfield: builtins.bool
-    optional_bool_midfield: builtins.bool
-    optional_bool_hifield: builtins.bool
-    other_field: builtins.int
+    OPTIONAL_BOOL_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BOOL_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BOOL_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_BOOL_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_BOOL_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_BOOL_HIFIELD_FIELD_NUMBER: _builtins.int
+    OTHER_FIELD_FIELD_NUMBER: _builtins.int
+    optional_bool_lowfield: _builtins.bool
+    optional_bool_midfield: _builtins.bool
+    optional_bool_hifield: _builtins.bool
+    other_field: _builtins.int
     """An arbitrary field we can append to to break the runs of repeated fields."""
-    @property
-    def repeated_bool_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def repeated_bool_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def repeated_bool_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def packed_bool_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def packed_bool_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def packed_bool_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    OPTIONAL_BOOL_EXT_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_EXT_FIELD_NUMBER: builtins.int
-    PACKED_BOOL_EXT_FIELD_NUMBER: builtins.int
-    optional_bool_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___BoolParseTester, builtins.bool]
-    repeated_bool_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___BoolParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]]
-    packed_bool_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___BoolParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]]
+    @_builtins.property
+    def repeated_bool_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def repeated_bool_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def repeated_bool_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def packed_bool_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def packed_bool_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def packed_bool_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    OPTIONAL_BOOL_EXT_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_EXT_FIELD_NUMBER: _builtins.int
+    PACKED_BOOL_EXT_FIELD_NUMBER: _builtins.int
+    optional_bool_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___BoolParseTester, _builtins.bool]
+    repeated_bool_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___BoolParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]]
+    packed_bool_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___BoolParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]]
     def __init__(
         self,
         *,
-        optional_bool_lowfield: builtins.bool | None = ...,
-        optional_bool_midfield: builtins.bool | None = ...,
-        optional_bool_hifield: builtins.bool | None = ...,
-        repeated_bool_lowfield: collections.abc.Iterable[builtins.bool] | None = ...,
-        repeated_bool_midfield: collections.abc.Iterable[builtins.bool] | None = ...,
-        repeated_bool_hifield: collections.abc.Iterable[builtins.bool] | None = ...,
-        packed_bool_lowfield: collections.abc.Iterable[builtins.bool] | None = ...,
-        packed_bool_midfield: collections.abc.Iterable[builtins.bool] | None = ...,
-        packed_bool_hifield: collections.abc.Iterable[builtins.bool] | None = ...,
-        other_field: builtins.int | None = ...,
+        optional_bool_lowfield: _builtins.bool | None = ...,
+        optional_bool_midfield: _builtins.bool | None = ...,
+        optional_bool_hifield: _builtins.bool | None = ...,
+        repeated_bool_lowfield: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        repeated_bool_midfield: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        repeated_bool_hifield: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        packed_bool_lowfield: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        packed_bool_midfield: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        packed_bool_hifield: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        other_field: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_bool_hifield", b"optional_bool_hifield", "optional_bool_lowfield", b"optional_bool_lowfield", "optional_bool_midfield", b"optional_bool_midfield", "other_field", b"other_field", "packed_bool_hifield", b"packed_bool_hifield", "packed_bool_lowfield", b"packed_bool_lowfield", "packed_bool_midfield", b"packed_bool_midfield", "repeated_bool_hifield", b"repeated_bool_hifield", "repeated_bool_lowfield", b"repeated_bool_lowfield", "repeated_bool_midfield", b"repeated_bool_midfield"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_bool_hifield", b"optional_bool_hifield", "optional_bool_lowfield", b"optional_bool_lowfield", "optional_bool_midfield", b"optional_bool_midfield", "other_field", b"other_field", "packed_bool_hifield", b"packed_bool_hifield", "packed_bool_lowfield", b"packed_bool_lowfield", "packed_bool_midfield", b"packed_bool_midfield", "repeated_bool_hifield", b"repeated_bool_hifield", "repeated_bool_lowfield", b"repeated_bool_lowfield", "repeated_bool_midfield", b"repeated_bool_midfield"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_bool_hifield", b"optional_bool_hifield", "optional_bool_lowfield", b"optional_bool_lowfield", "optional_bool_midfield", b"optional_bool_midfield", "other_field", b"other_field", "packed_bool_hifield", b"packed_bool_hifield", "packed_bool_lowfield", b"packed_bool_lowfield", "packed_bool_midfield", b"packed_bool_midfield", "repeated_bool_hifield", b"repeated_bool_hifield", "repeated_bool_lowfield", b"repeated_bool_lowfield", "repeated_bool_midfield", b"repeated_bool_midfield"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_bool_hifield", b"optional_bool_hifield", "optional_bool_lowfield", b"optional_bool_lowfield", "optional_bool_midfield", b"optional_bool_midfield", "other_field", b"other_field", "packed_bool_hifield", b"packed_bool_hifield", "packed_bool_lowfield", b"packed_bool_lowfield", "packed_bool_midfield", b"packed_bool_midfield", "repeated_bool_hifield", b"repeated_bool_hifield", "repeated_bool_lowfield", b"repeated_bool_lowfield", "repeated_bool_midfield", b"repeated_bool_midfield"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___BoolParseTester: typing_extensions.TypeAlias = BoolParseTester
+Global___BoolParseTester: _typing_extensions.TypeAlias = BoolParseTester  # noqa: Y015
 
-@typing.final
-class Int32ParseTester(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Int32ParseTester(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT32_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT32_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_INT32_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_INT32_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_INT32_HIFIELD_FIELD_NUMBER: builtins.int
-    OTHER_FIELD_FIELD_NUMBER: builtins.int
-    optional_int32_lowfield: builtins.int
-    optional_int32_midfield: builtins.int
-    optional_int32_hifield: builtins.int
-    other_field: builtins.int
+    OPTIONAL_INT32_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT32_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_INT32_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_INT32_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_INT32_HIFIELD_FIELD_NUMBER: _builtins.int
+    OTHER_FIELD_FIELD_NUMBER: _builtins.int
+    optional_int32_lowfield: _builtins.int
+    optional_int32_midfield: _builtins.int
+    optional_int32_hifield: _builtins.int
+    other_field: _builtins.int
     """An arbitrary field we can append to to break the runs of repeated fields."""
-    @property
-    def repeated_int32_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_int32_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_int32_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int32_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int32_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int32_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    OPTIONAL_INT32_EXT_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_EXT_FIELD_NUMBER: builtins.int
-    PACKED_INT32_EXT_FIELD_NUMBER: builtins.int
-    optional_int32_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Int32ParseTester, builtins.int]
-    repeated_int32_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Int32ParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-    packed_int32_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Int32ParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
+    @_builtins.property
+    def repeated_int32_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_int32_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_int32_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int32_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int32_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int32_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    OPTIONAL_INT32_EXT_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_EXT_FIELD_NUMBER: _builtins.int
+    PACKED_INT32_EXT_FIELD_NUMBER: _builtins.int
+    optional_int32_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Int32ParseTester, _builtins.int]
+    repeated_int32_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Int32ParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+    packed_int32_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Int32ParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
     def __init__(
         self,
         *,
-        optional_int32_lowfield: builtins.int | None = ...,
-        optional_int32_midfield: builtins.int | None = ...,
-        optional_int32_hifield: builtins.int | None = ...,
-        repeated_int32_lowfield: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int32_midfield: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int32_hifield: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int32_lowfield: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int32_midfield: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int32_hifield: collections.abc.Iterable[builtins.int] | None = ...,
-        other_field: builtins.int | None = ...,
+        optional_int32_lowfield: _builtins.int | None = ...,
+        optional_int32_midfield: _builtins.int | None = ...,
+        optional_int32_hifield: _builtins.int | None = ...,
+        repeated_int32_lowfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int32_midfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int32_hifield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int32_lowfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int32_midfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int32_hifield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        other_field: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_int32_hifield", b"optional_int32_hifield", "optional_int32_lowfield", b"optional_int32_lowfield", "optional_int32_midfield", b"optional_int32_midfield", "other_field", b"other_field", "packed_int32_hifield", b"packed_int32_hifield", "packed_int32_lowfield", b"packed_int32_lowfield", "packed_int32_midfield", b"packed_int32_midfield", "repeated_int32_hifield", b"repeated_int32_hifield", "repeated_int32_lowfield", b"repeated_int32_lowfield", "repeated_int32_midfield", b"repeated_int32_midfield"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_int32_hifield", b"optional_int32_hifield", "optional_int32_lowfield", b"optional_int32_lowfield", "optional_int32_midfield", b"optional_int32_midfield", "other_field", b"other_field", "packed_int32_hifield", b"packed_int32_hifield", "packed_int32_lowfield", b"packed_int32_lowfield", "packed_int32_midfield", b"packed_int32_midfield", "repeated_int32_hifield", b"repeated_int32_hifield", "repeated_int32_lowfield", b"repeated_int32_lowfield", "repeated_int32_midfield", b"repeated_int32_midfield"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_int32_hifield", b"optional_int32_hifield", "optional_int32_lowfield", b"optional_int32_lowfield", "optional_int32_midfield", b"optional_int32_midfield", "other_field", b"other_field", "packed_int32_hifield", b"packed_int32_hifield", "packed_int32_lowfield", b"packed_int32_lowfield", "packed_int32_midfield", b"packed_int32_midfield", "repeated_int32_hifield", b"repeated_int32_hifield", "repeated_int32_lowfield", b"repeated_int32_lowfield", "repeated_int32_midfield", b"repeated_int32_midfield"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_int32_hifield", b"optional_int32_hifield", "optional_int32_lowfield", b"optional_int32_lowfield", "optional_int32_midfield", b"optional_int32_midfield", "other_field", b"other_field", "packed_int32_hifield", b"packed_int32_hifield", "packed_int32_lowfield", b"packed_int32_lowfield", "packed_int32_midfield", b"packed_int32_midfield", "repeated_int32_hifield", b"repeated_int32_hifield", "repeated_int32_lowfield", b"repeated_int32_lowfield", "repeated_int32_midfield", b"repeated_int32_midfield"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Int32ParseTester: typing_extensions.TypeAlias = Int32ParseTester
+Global___Int32ParseTester: _typing_extensions.TypeAlias = Int32ParseTester  # noqa: Y015
 
-@typing.final
-class Int64ParseTester(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Int64ParseTester(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_INT64_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_HIFIELD_FIELD_NUMBER: builtins.int
-    PACKED_INT64_LOWFIELD_FIELD_NUMBER: builtins.int
-    PACKED_INT64_MIDFIELD_FIELD_NUMBER: builtins.int
-    PACKED_INT64_HIFIELD_FIELD_NUMBER: builtins.int
-    OTHER_FIELD_FIELD_NUMBER: builtins.int
-    optional_int64_lowfield: builtins.int
-    optional_int64_midfield: builtins.int
-    optional_int64_hifield: builtins.int
-    other_field: builtins.int
+    OPTIONAL_INT64_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_HIFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_INT64_LOWFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_INT64_MIDFIELD_FIELD_NUMBER: _builtins.int
+    PACKED_INT64_HIFIELD_FIELD_NUMBER: _builtins.int
+    OTHER_FIELD_FIELD_NUMBER: _builtins.int
+    optional_int64_lowfield: _builtins.int
+    optional_int64_midfield: _builtins.int
+    optional_int64_hifield: _builtins.int
+    other_field: _builtins.int
     """An arbitrary field we can append to to break the runs of repeated fields."""
-    @property
-    def repeated_int64_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_int64_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_int64_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int64_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int64_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int64_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    OPTIONAL_INT64_EXT_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_EXT_FIELD_NUMBER: builtins.int
-    PACKED_INT64_EXT_FIELD_NUMBER: builtins.int
-    optional_int64_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Int64ParseTester, builtins.int]
-    repeated_int64_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Int64ParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-    packed_int64_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___Int64ParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
+    @_builtins.property
+    def repeated_int64_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_int64_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_int64_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int64_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int64_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int64_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    OPTIONAL_INT64_EXT_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_EXT_FIELD_NUMBER: _builtins.int
+    PACKED_INT64_EXT_FIELD_NUMBER: _builtins.int
+    optional_int64_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Int64ParseTester, _builtins.int]
+    repeated_int64_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Int64ParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+    packed_int64_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___Int64ParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
     def __init__(
         self,
         *,
-        optional_int64_lowfield: builtins.int | None = ...,
-        optional_int64_midfield: builtins.int | None = ...,
-        optional_int64_hifield: builtins.int | None = ...,
-        repeated_int64_lowfield: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int64_midfield: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int64_hifield: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int64_lowfield: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int64_midfield: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int64_hifield: collections.abc.Iterable[builtins.int] | None = ...,
-        other_field: builtins.int | None = ...,
+        optional_int64_lowfield: _builtins.int | None = ...,
+        optional_int64_midfield: _builtins.int | None = ...,
+        optional_int64_hifield: _builtins.int | None = ...,
+        repeated_int64_lowfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int64_midfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int64_hifield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int64_lowfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int64_midfield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int64_hifield: _collections_abc.Iterable[_builtins.int] | None = ...,
+        other_field: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_int64_hifield", b"optional_int64_hifield", "optional_int64_lowfield", b"optional_int64_lowfield", "optional_int64_midfield", b"optional_int64_midfield", "other_field", b"other_field", "packed_int64_hifield", b"packed_int64_hifield", "packed_int64_lowfield", b"packed_int64_lowfield", "packed_int64_midfield", b"packed_int64_midfield", "repeated_int64_hifield", b"repeated_int64_hifield", "repeated_int64_lowfield", b"repeated_int64_lowfield", "repeated_int64_midfield", b"repeated_int64_midfield"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_int64_hifield", b"optional_int64_hifield", "optional_int64_lowfield", b"optional_int64_lowfield", "optional_int64_midfield", b"optional_int64_midfield", "other_field", b"other_field", "packed_int64_hifield", b"packed_int64_hifield", "packed_int64_lowfield", b"packed_int64_lowfield", "packed_int64_midfield", b"packed_int64_midfield", "repeated_int64_hifield", b"repeated_int64_hifield", "repeated_int64_lowfield", b"repeated_int64_lowfield", "repeated_int64_midfield", b"repeated_int64_midfield"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_int64_hifield", b"optional_int64_hifield", "optional_int64_lowfield", b"optional_int64_lowfield", "optional_int64_midfield", b"optional_int64_midfield", "other_field", b"other_field", "packed_int64_hifield", b"packed_int64_hifield", "packed_int64_lowfield", b"packed_int64_lowfield", "packed_int64_midfield", b"packed_int64_midfield", "repeated_int64_hifield", b"repeated_int64_hifield", "repeated_int64_lowfield", b"repeated_int64_lowfield", "repeated_int64_midfield", b"repeated_int64_midfield"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_int64_hifield", b"optional_int64_hifield", "optional_int64_lowfield", b"optional_int64_lowfield", "optional_int64_midfield", b"optional_int64_midfield", "other_field", b"other_field", "packed_int64_hifield", b"packed_int64_hifield", "packed_int64_lowfield", b"packed_int64_lowfield", "packed_int64_midfield", b"packed_int64_midfield", "repeated_int64_hifield", b"repeated_int64_hifield", "repeated_int64_lowfield", b"repeated_int64_lowfield", "repeated_int64_midfield", b"repeated_int64_midfield"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Int64ParseTester: typing_extensions.TypeAlias = Int64ParseTester
+Global___Int64ParseTester: _typing_extensions.TypeAlias = Int64ParseTester  # noqa: Y015
 
-@typing.final
-class InlinedStringIdxRegressionProto(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class InlinedStringIdxRegressionProto(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    STR1_FIELD_NUMBER: builtins.int
-    SUB_FIELD_NUMBER: builtins.int
-    STR2_FIELD_NUMBER: builtins.int
-    STR3_FIELD_NUMBER: builtins.int
-    str1: builtins.str
+    STR1_FIELD_NUMBER: _builtins.int
+    SUB_FIELD_NUMBER: _builtins.int
+    STR2_FIELD_NUMBER: _builtins.int
+    STR3_FIELD_NUMBER: _builtins.int
+    str1: _builtins.str
     """We mix data to make sure aux ids and inlined string idx do not match.
     aux_idx == inlined_string_idx == 1
     """
-    str2: builtins.str
+    str2: _builtins.str
     """aux_idx == 3, inlined_string_idx == 2"""
-    str3: builtins.bytes
+    str3: _builtins.bytes
     """aux_idx == 4, inlined_string_idx == 3"""
-    @property
+    @_builtins.property
     def sub(self) -> Global___InlinedStringIdxRegressionProto:
         """aux_idx == 2"""
 
     def __init__(
         self,
         *,
-        str1: builtins.str | None = ...,
+        str1: _builtins.str | None = ...,
         sub: Global___InlinedStringIdxRegressionProto | None = ...,
-        str2: builtins.str | None = ...,
-        str3: builtins.bytes | None = ...,
+        str2: _builtins.str | None = ...,
+        str3: _builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["str1", b"str1", "str2", b"str2", "str3", b"str3", "sub", b"sub"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["str1", b"str1", "str2", b"str2", "str3", b"str3", "sub", b"sub"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["str1", b"str1", "str2", b"str2", "str3", b"str3", "sub", b"sub"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["str1", b"str1", "str2", b"str2", "str3", b"str3", "sub", b"sub"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___InlinedStringIdxRegressionProto: typing_extensions.TypeAlias = InlinedStringIdxRegressionProto
+Global___InlinedStringIdxRegressionProto: _typing_extensions.TypeAlias = InlinedStringIdxRegressionProto  # noqa: Y015
 
-@typing.final
-class StringParseTester(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class StringParseTester(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_STRING_LOWFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_MIDFIELD_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_HIFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_LOWFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_MIDFIELD_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_HIFIELD_FIELD_NUMBER: builtins.int
-    optional_string_lowfield: builtins.str
-    optional_string_midfield: builtins.str
-    optional_string_hifield: builtins.str
-    @property
-    def repeated_string_lowfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_midfield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_hifield(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    OPTIONAL_STRING_EXT_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_EXT_FIELD_NUMBER: builtins.int
-    optional_string_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___StringParseTester, builtins.str]
-    repeated_string_ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___StringParseTester, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]]
+    OPTIONAL_STRING_LOWFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_MIDFIELD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_HIFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_LOWFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_MIDFIELD_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_HIFIELD_FIELD_NUMBER: _builtins.int
+    optional_string_lowfield: _builtins.str
+    optional_string_midfield: _builtins.str
+    optional_string_hifield: _builtins.str
+    @_builtins.property
+    def repeated_string_lowfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_midfield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_hifield(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    OPTIONAL_STRING_EXT_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_EXT_FIELD_NUMBER: _builtins.int
+    optional_string_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___StringParseTester, _builtins.str]
+    repeated_string_ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___StringParseTester, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
     def __init__(
         self,
         *,
-        optional_string_lowfield: builtins.str | None = ...,
-        optional_string_midfield: builtins.str | None = ...,
-        optional_string_hifield: builtins.str | None = ...,
-        repeated_string_lowfield: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_midfield: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_hifield: collections.abc.Iterable[builtins.str] | None = ...,
+        optional_string_lowfield: _builtins.str | None = ...,
+        optional_string_midfield: _builtins.str | None = ...,
+        optional_string_hifield: _builtins.str | None = ...,
+        repeated_string_lowfield: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_midfield: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_hifield: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_string_hifield", b"optional_string_hifield", "optional_string_lowfield", b"optional_string_lowfield", "optional_string_midfield", b"optional_string_midfield", "repeated_string_hifield", b"repeated_string_hifield", "repeated_string_lowfield", b"repeated_string_lowfield", "repeated_string_midfield", b"repeated_string_midfield"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_string_hifield", b"optional_string_hifield", "optional_string_lowfield", b"optional_string_lowfield", "optional_string_midfield", b"optional_string_midfield", "repeated_string_hifield", b"repeated_string_hifield", "repeated_string_lowfield", b"repeated_string_lowfield", "repeated_string_midfield", b"repeated_string_midfield"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_string_hifield", b"optional_string_hifield", "optional_string_lowfield", b"optional_string_lowfield", "optional_string_midfield", b"optional_string_midfield", "repeated_string_hifield", b"repeated_string_hifield", "repeated_string_lowfield", b"repeated_string_lowfield", "repeated_string_midfield", b"repeated_string_midfield"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_string_hifield", b"optional_string_hifield", "optional_string_lowfield", b"optional_string_lowfield", "optional_string_midfield", b"optional_string_midfield", "repeated_string_hifield", b"repeated_string_hifield", "repeated_string_lowfield", b"repeated_string_lowfield", "repeated_string_midfield", b"repeated_string_midfield"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___StringParseTester: typing_extensions.TypeAlias = StringParseTester
+Global___StringParseTester: _typing_extensions.TypeAlias = StringParseTester  # noqa: Y015
 
-@typing.final
-class BadFieldNames(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class BadFieldNames(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONALINT32_FIELD_NUMBER: builtins.int
-    FOR_FIELD_NUMBER: builtins.int
-    OptionalInt32: builtins.int
+    OPTIONALINT32_FIELD_NUMBER: _builtins.int
+    FOR_FIELD_NUMBER: _builtins.int
+    OptionalInt32: _builtins.int
     def __init__(
         self,
         *,
-        OptionalInt32: builtins.int | None = ...,
+        OptionalInt32: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["OptionalInt32", b"OptionalInt32", "for", b"for"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["OptionalInt32", b"OptionalInt32", "for", b"for"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["OptionalInt32", b"OptionalInt32", "for", b"for"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["OptionalInt32", b"OptionalInt32", "for", b"for"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___BadFieldNames: typing_extensions.TypeAlias = BadFieldNames
+Global___BadFieldNames: _typing_extensions.TypeAlias = BadFieldNames  # noqa: Y015
 
-@typing.final
-class TestNestedMessageRedaction(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestNestedMessageRedaction(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_UNREDACTED_NESTED_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_REDACTED_NESTED_STRING_FIELD_NUMBER: builtins.int
-    optional_unredacted_nested_string: builtins.str
-    optional_redacted_nested_string: builtins.str
+    OPTIONAL_UNREDACTED_NESTED_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REDACTED_NESTED_STRING_FIELD_NUMBER: _builtins.int
+    optional_unredacted_nested_string: _builtins.str
+    optional_redacted_nested_string: _builtins.str
     def __init__(
         self,
         *,
-        optional_unredacted_nested_string: builtins.str | None = ...,
-        optional_redacted_nested_string: builtins.str | None = ...,
+        optional_unredacted_nested_string: _builtins.str | None = ...,
+        optional_redacted_nested_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_redacted_nested_string", b"optional_redacted_nested_string", "optional_unredacted_nested_string", b"optional_unredacted_nested_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_redacted_nested_string", b"optional_redacted_nested_string", "optional_unredacted_nested_string", b"optional_unredacted_nested_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_redacted_nested_string", b"optional_redacted_nested_string", "optional_unredacted_nested_string", b"optional_unredacted_nested_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_redacted_nested_string", b"optional_redacted_nested_string", "optional_unredacted_nested_string", b"optional_unredacted_nested_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedMessageRedaction: typing_extensions.TypeAlias = TestNestedMessageRedaction
+Global___TestNestedMessageRedaction: _typing_extensions.TypeAlias = TestNestedMessageRedaction  # noqa: Y015
 
-@typing.final
-class RedactedFields(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class RedactedFields(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class MapRedactedStringEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class MapRedactedStringEntry(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.str | None = ...,
-            value: builtins.str | None = ...,
+            key: _builtins.str | None = ...,
+            value: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class MapUnredactedStringEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class MapUnredactedStringEntry(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.str | None = ...,
-            value: builtins.str | None = ...,
+            key: _builtins.str | None = ...,
+            value: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONAL_REDACTED_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_UNREDACTED_STRING_FIELD_NUMBER: builtins.int
-    REPEATED_REDACTED_STRING_FIELD_NUMBER: builtins.int
-    REPEATED_UNREDACTED_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_REDACTED_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_UNREDACTED_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_REDACTED_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_UNREDACTED_MESSAGE_FIELD_NUMBER: builtins.int
-    MAP_REDACTED_STRING_FIELD_NUMBER: builtins.int
-    MAP_UNREDACTED_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_REDACTED_FALSE_STRING_FIELD_NUMBER: builtins.int
-    optional_redacted_string: builtins.str
-    optional_unredacted_string: builtins.str
-    optional_redacted_false_string: builtins.str
-    @property
-    def repeated_redacted_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_unredacted_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
+    OPTIONAL_REDACTED_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UNREDACTED_STRING_FIELD_NUMBER: _builtins.int
+    REPEATED_REDACTED_STRING_FIELD_NUMBER: _builtins.int
+    REPEATED_UNREDACTED_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REDACTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UNREDACTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_REDACTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_UNREDACTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    MAP_REDACTED_STRING_FIELD_NUMBER: _builtins.int
+    MAP_UNREDACTED_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_REDACTED_FALSE_STRING_FIELD_NUMBER: _builtins.int
+    optional_redacted_string: _builtins.str
+    optional_unredacted_string: _builtins.str
+    optional_redacted_false_string: _builtins.str
+    @_builtins.property
+    def repeated_redacted_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_unredacted_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
     def optional_redacted_message(self) -> Global___TestNestedMessageRedaction: ...
-    @property
+    @_builtins.property
     def optional_unredacted_message(self) -> Global___TestNestedMessageRedaction: ...
-    @property
-    def repeated_redacted_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestNestedMessageRedaction]: ...
-    @property
-    def repeated_unredacted_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestNestedMessageRedaction]: ...
-    @property
-    def map_redacted_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]: ...
-    @property
-    def map_unredacted_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]: ...
+    @_builtins.property
+    def repeated_redacted_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestNestedMessageRedaction]: ...
+    @_builtins.property
+    def repeated_unredacted_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestNestedMessageRedaction]: ...
+    @_builtins.property
+    def map_redacted_string(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.str, _builtins.str]: ...
+    @_builtins.property
+    def map_unredacted_string(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.str, _builtins.str]: ...
     def __init__(
         self,
         *,
-        optional_redacted_string: builtins.str | None = ...,
-        optional_unredacted_string: builtins.str | None = ...,
-        repeated_redacted_string: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_unredacted_string: collections.abc.Iterable[builtins.str] | None = ...,
+        optional_redacted_string: _builtins.str | None = ...,
+        optional_unredacted_string: _builtins.str | None = ...,
+        repeated_redacted_string: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_unredacted_string: _collections_abc.Iterable[_builtins.str] | None = ...,
         optional_redacted_message: Global___TestNestedMessageRedaction | None = ...,
         optional_unredacted_message: Global___TestNestedMessageRedaction | None = ...,
-        repeated_redacted_message: collections.abc.Iterable[Global___TestNestedMessageRedaction] | None = ...,
-        repeated_unredacted_message: collections.abc.Iterable[Global___TestNestedMessageRedaction] | None = ...,
-        map_redacted_string: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-        map_unredacted_string: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-        optional_redacted_false_string: builtins.str | None = ...,
+        repeated_redacted_message: _collections_abc.Iterable[Global___TestNestedMessageRedaction] | None = ...,
+        repeated_unredacted_message: _collections_abc.Iterable[Global___TestNestedMessageRedaction] | None = ...,
+        map_redacted_string: _collections_abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        map_unredacted_string: _collections_abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        optional_redacted_false_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["map_redacted_string", b"map_redacted_string", "map_unredacted_string", b"map_unredacted_string", "optional_redacted_false_string", b"optional_redacted_false_string", "optional_redacted_message", b"optional_redacted_message", "optional_redacted_string", b"optional_redacted_string", "optional_unredacted_message", b"optional_unredacted_message", "optional_unredacted_string", b"optional_unredacted_string", "repeated_redacted_message", b"repeated_redacted_message", "repeated_redacted_string", b"repeated_redacted_string", "repeated_unredacted_message", b"repeated_unredacted_message", "repeated_unredacted_string", b"repeated_unredacted_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["map_redacted_string", b"map_redacted_string", "map_unredacted_string", b"map_unredacted_string", "optional_redacted_false_string", b"optional_redacted_false_string", "optional_redacted_message", b"optional_redacted_message", "optional_redacted_string", b"optional_redacted_string", "optional_unredacted_message", b"optional_unredacted_message", "optional_unredacted_string", b"optional_unredacted_string", "repeated_redacted_message", b"repeated_redacted_message", "repeated_redacted_string", b"repeated_redacted_string", "repeated_unredacted_message", b"repeated_unredacted_message", "repeated_unredacted_string", b"repeated_unredacted_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["map_redacted_string", b"map_redacted_string", "map_unredacted_string", b"map_unredacted_string", "optional_redacted_false_string", b"optional_redacted_false_string", "optional_redacted_message", b"optional_redacted_message", "optional_redacted_string", b"optional_redacted_string", "optional_unredacted_message", b"optional_unredacted_message", "optional_unredacted_string", b"optional_unredacted_string", "repeated_redacted_message", b"repeated_redacted_message", "repeated_redacted_string", b"repeated_redacted_string", "repeated_unredacted_message", b"repeated_unredacted_message", "repeated_unredacted_string", b"repeated_unredacted_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["map_redacted_string", b"map_redacted_string", "map_unredacted_string", b"map_unredacted_string", "optional_redacted_false_string", b"optional_redacted_false_string", "optional_redacted_message", b"optional_redacted_message", "optional_redacted_string", b"optional_redacted_string", "optional_unredacted_message", b"optional_unredacted_message", "optional_unredacted_string", b"optional_unredacted_string", "repeated_redacted_message", b"repeated_redacted_message", "repeated_redacted_string", b"repeated_redacted_string", "repeated_unredacted_message", b"repeated_unredacted_message", "repeated_unredacted_string", b"repeated_unredacted_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___RedactedFields: typing_extensions.TypeAlias = RedactedFields
+Global___RedactedFields: _typing_extensions.TypeAlias = RedactedFields  # noqa: Y015
 
-@typing.final
-class TestString(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestString(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-    optional_string: builtins.str
+    OPTIONAL_STRING_FIELD_NUMBER: _builtins.int
+    optional_string: _builtins.str
     def __init__(
         self,
         *,
-        optional_string: builtins.str | None = ...,
+        optional_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_string", b"optional_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_string", b"optional_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_string", b"optional_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_string", b"optional_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestString: typing_extensions.TypeAlias = TestString
+Global___TestString: _typing_extensions.TypeAlias = TestString  # noqa: Y015
 
-@typing.final
-class TestCord(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestCord(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    OPTIONAL_BYTES_CORD_FIELD_NUMBER: builtins.int
-    OPTIONAL_BYTES_CORD_DEFAULT_FIELD_NUMBER: builtins.int
-    optional_bytes_cord: builtins.bytes
-    optional_bytes_cord_default: builtins.bytes
+    OPTIONAL_BYTES_CORD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BYTES_CORD_DEFAULT_FIELD_NUMBER: _builtins.int
+    optional_bytes_cord: _builtins.bytes
+    optional_bytes_cord_default: _builtins.bytes
     def __init__(
         self,
         *,
-        optional_bytes_cord: builtins.bytes | None = ...,
-        optional_bytes_cord_default: builtins.bytes | None = ...,
+        optional_bytes_cord: _builtins.bytes | None = ...,
+        optional_bytes_cord_default: _builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_bytes_cord", b"optional_bytes_cord", "optional_bytes_cord_default", b"optional_bytes_cord_default"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["optional_bytes_cord", b"optional_bytes_cord", "optional_bytes_cord_default", b"optional_bytes_cord_default"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_bytes_cord", b"optional_bytes_cord", "optional_bytes_cord_default", b"optional_bytes_cord_default"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_bytes_cord", b"optional_bytes_cord", "optional_bytes_cord_default", b"optional_bytes_cord_default"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestCord: typing_extensions.TypeAlias = TestCord
+Global___TestCord: _typing_extensions.TypeAlias = TestCord  # noqa: Y015
 
-@typing.final
-class TestPackedEnumSmallRange(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestPackedEnumSmallRange(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestPackedEnumSmallRange._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestPackedEnumSmallRange._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNSPECIFIED: TestPackedEnumSmallRange._NestedEnum.ValueType  # 0
         FOO: TestPackedEnumSmallRange._NestedEnum.ValueType  # 1
         BAR: TestPackedEnumSmallRange._NestedEnum.ValueType  # 2
@@ -5285,31 +5285,31 @@ class TestPackedEnumSmallRange(google.protobuf.message.Message):
     BAR: TestPackedEnumSmallRange.NestedEnum.ValueType  # 2
     BAZ: TestPackedEnumSmallRange.NestedEnum.ValueType  # 3
 
-    VALS_FIELD_NUMBER: builtins.int
-    @property
-    def vals(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___TestPackedEnumSmallRange.NestedEnum.ValueType]: ...
+    VALS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def vals(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___TestPackedEnumSmallRange.NestedEnum.ValueType]: ...
     def __init__(
         self,
         *,
-        vals: collections.abc.Iterable[Global___TestPackedEnumSmallRange.NestedEnum.ValueType] | None = ...,
+        vals: _collections_abc.Iterable[Global___TestPackedEnumSmallRange.NestedEnum.ValueType] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["vals", b"vals"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["vals", b"vals"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["vals", b"vals"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["vals", b"vals"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestPackedEnumSmallRange: typing_extensions.TypeAlias = TestPackedEnumSmallRange
+Global___TestPackedEnumSmallRange: _typing_extensions.TypeAlias = TestPackedEnumSmallRange  # noqa: Y015
 
-@typing.final
-class EnumsForBenchmark(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class EnumsForBenchmark(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _Flat:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _FlatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumsForBenchmark._Flat.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _FlatEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumsForBenchmark._Flat.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         A0: EnumsForBenchmark._Flat.ValueType  # 0
         A1: EnumsForBenchmark._Flat.ValueType  # 1
         A2: EnumsForBenchmark._Flat.ValueType  # 2
@@ -5346,11 +5346,11 @@ class EnumsForBenchmark(google.protobuf.message.Message):
     A15: EnumsForBenchmark.Flat.ValueType  # 15
 
     class _AlmostFlat:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _AlmostFlatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumsForBenchmark._AlmostFlat.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _AlmostFlatEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumsForBenchmark._AlmostFlat.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         B0: EnumsForBenchmark._AlmostFlat.ValueType  # 0
         B1: EnumsForBenchmark._AlmostFlat.ValueType  # 1
         B2: EnumsForBenchmark._AlmostFlat.ValueType  # 2
@@ -5389,11 +5389,11 @@ class EnumsForBenchmark(google.protobuf.message.Message):
     B19: EnumsForBenchmark.AlmostFlat.ValueType  # 19
 
     class _Sparse:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _SparseEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EnumsForBenchmark._Sparse.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _SparseEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[EnumsForBenchmark._Sparse.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         C536: EnumsForBenchmark._Sparse.ValueType  # 536
         C8387: EnumsForBenchmark._Sparse.ValueType  # 8387
         C9673: EnumsForBenchmark._Sparse.ValueType  # 9673
@@ -5433,706 +5433,706 @@ class EnumsForBenchmark(google.protobuf.message.Message):
         self,
     ) -> None: ...
 
-Global___EnumsForBenchmark: typing_extensions.TypeAlias = EnumsForBenchmark
+Global___EnumsForBenchmark: _typing_extensions.TypeAlias = EnumsForBenchmark  # noqa: Y015
 
-@typing.final
-class TestMessageWithManyRepeatedPtrFields(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMessageWithManyRepeatedPtrFields(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_STRING_1_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_2_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_3_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_4_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_5_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_6_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_7_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_8_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_9_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_10_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_11_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_12_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_13_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_14_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_15_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_16_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_17_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_18_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_19_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_20_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_21_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_22_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_23_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_24_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_25_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_26_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_27_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_28_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_29_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_30_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_31_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_32_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_string_1(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_2(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_3(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_4(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_5(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_6(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_7(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_8(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_9(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_10(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_11(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_12(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_13(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_14(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_15(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_16(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_17(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_18(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_19(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_20(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_21(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_22(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_23(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_24(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_25(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_26(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_27(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_28(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_29(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_30(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_31(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_string_32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    REPEATED_STRING_1_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_2_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_3_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_4_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_5_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_6_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_7_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_8_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_9_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_10_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_11_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_12_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_13_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_14_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_15_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_16_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_17_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_18_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_19_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_20_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_21_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_22_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_23_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_24_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_25_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_26_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_27_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_28_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_29_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_30_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_31_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_32_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_string_1(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_2(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_3(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_4(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_5(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_6(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_7(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_8(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_9(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_10(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_11(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_12(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_13(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_14(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_15(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_16(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_17(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_18(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_19(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_20(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_21(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_22(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_23(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_24(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_25(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_26(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_27(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_28(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_29(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_30(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_31(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_string_32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
         self,
         *,
-        repeated_string_1: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_2: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_3: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_4: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_5: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_6: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_7: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_8: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_9: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_10: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_11: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_12: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_13: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_14: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_15: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_16: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_17: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_18: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_19: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_20: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_21: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_22: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_23: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_24: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_25: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_26: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_27: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_28: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_29: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_30: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_31: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_string_32: collections.abc.Iterable[builtins.str] | None = ...,
+        repeated_string_1: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_2: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_3: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_4: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_5: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_6: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_7: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_8: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_9: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_10: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_11: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_12: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_13: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_14: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_15: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_16: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_17: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_18: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_19: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_20: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_21: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_22: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_23: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_24: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_25: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_26: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_27: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_28: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_29: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_30: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_31: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_string_32: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_string_1", b"repeated_string_1", "repeated_string_10", b"repeated_string_10", "repeated_string_11", b"repeated_string_11", "repeated_string_12", b"repeated_string_12", "repeated_string_13", b"repeated_string_13", "repeated_string_14", b"repeated_string_14", "repeated_string_15", b"repeated_string_15", "repeated_string_16", b"repeated_string_16", "repeated_string_17", b"repeated_string_17", "repeated_string_18", b"repeated_string_18", "repeated_string_19", b"repeated_string_19", "repeated_string_2", b"repeated_string_2", "repeated_string_20", b"repeated_string_20", "repeated_string_21", b"repeated_string_21", "repeated_string_22", b"repeated_string_22", "repeated_string_23", b"repeated_string_23", "repeated_string_24", b"repeated_string_24", "repeated_string_25", b"repeated_string_25", "repeated_string_26", b"repeated_string_26", "repeated_string_27", b"repeated_string_27", "repeated_string_28", b"repeated_string_28", "repeated_string_29", b"repeated_string_29", "repeated_string_3", b"repeated_string_3", "repeated_string_30", b"repeated_string_30", "repeated_string_31", b"repeated_string_31", "repeated_string_32", b"repeated_string_32", "repeated_string_4", b"repeated_string_4", "repeated_string_5", b"repeated_string_5", "repeated_string_6", b"repeated_string_6", "repeated_string_7", b"repeated_string_7", "repeated_string_8", b"repeated_string_8", "repeated_string_9", b"repeated_string_9"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_string_1", b"repeated_string_1", "repeated_string_10", b"repeated_string_10", "repeated_string_11", b"repeated_string_11", "repeated_string_12", b"repeated_string_12", "repeated_string_13", b"repeated_string_13", "repeated_string_14", b"repeated_string_14", "repeated_string_15", b"repeated_string_15", "repeated_string_16", b"repeated_string_16", "repeated_string_17", b"repeated_string_17", "repeated_string_18", b"repeated_string_18", "repeated_string_19", b"repeated_string_19", "repeated_string_2", b"repeated_string_2", "repeated_string_20", b"repeated_string_20", "repeated_string_21", b"repeated_string_21", "repeated_string_22", b"repeated_string_22", "repeated_string_23", b"repeated_string_23", "repeated_string_24", b"repeated_string_24", "repeated_string_25", b"repeated_string_25", "repeated_string_26", b"repeated_string_26", "repeated_string_27", b"repeated_string_27", "repeated_string_28", b"repeated_string_28", "repeated_string_29", b"repeated_string_29", "repeated_string_3", b"repeated_string_3", "repeated_string_30", b"repeated_string_30", "repeated_string_31", b"repeated_string_31", "repeated_string_32", b"repeated_string_32", "repeated_string_4", b"repeated_string_4", "repeated_string_5", b"repeated_string_5", "repeated_string_6", b"repeated_string_6", "repeated_string_7", b"repeated_string_7", "repeated_string_8", b"repeated_string_8", "repeated_string_9", b"repeated_string_9"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_string_1", b"repeated_string_1", "repeated_string_10", b"repeated_string_10", "repeated_string_11", b"repeated_string_11", "repeated_string_12", b"repeated_string_12", "repeated_string_13", b"repeated_string_13", "repeated_string_14", b"repeated_string_14", "repeated_string_15", b"repeated_string_15", "repeated_string_16", b"repeated_string_16", "repeated_string_17", b"repeated_string_17", "repeated_string_18", b"repeated_string_18", "repeated_string_19", b"repeated_string_19", "repeated_string_2", b"repeated_string_2", "repeated_string_20", b"repeated_string_20", "repeated_string_21", b"repeated_string_21", "repeated_string_22", b"repeated_string_22", "repeated_string_23", b"repeated_string_23", "repeated_string_24", b"repeated_string_24", "repeated_string_25", b"repeated_string_25", "repeated_string_26", b"repeated_string_26", "repeated_string_27", b"repeated_string_27", "repeated_string_28", b"repeated_string_28", "repeated_string_29", b"repeated_string_29", "repeated_string_3", b"repeated_string_3", "repeated_string_30", b"repeated_string_30", "repeated_string_31", b"repeated_string_31", "repeated_string_32", b"repeated_string_32", "repeated_string_4", b"repeated_string_4", "repeated_string_5", b"repeated_string_5", "repeated_string_6", b"repeated_string_6", "repeated_string_7", b"repeated_string_7", "repeated_string_8", b"repeated_string_8", "repeated_string_9", b"repeated_string_9"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_string_1", b"repeated_string_1", "repeated_string_10", b"repeated_string_10", "repeated_string_11", b"repeated_string_11", "repeated_string_12", b"repeated_string_12", "repeated_string_13", b"repeated_string_13", "repeated_string_14", b"repeated_string_14", "repeated_string_15", b"repeated_string_15", "repeated_string_16", b"repeated_string_16", "repeated_string_17", b"repeated_string_17", "repeated_string_18", b"repeated_string_18", "repeated_string_19", b"repeated_string_19", "repeated_string_2", b"repeated_string_2", "repeated_string_20", b"repeated_string_20", "repeated_string_21", b"repeated_string_21", "repeated_string_22", b"repeated_string_22", "repeated_string_23", b"repeated_string_23", "repeated_string_24", b"repeated_string_24", "repeated_string_25", b"repeated_string_25", "repeated_string_26", b"repeated_string_26", "repeated_string_27", b"repeated_string_27", "repeated_string_28", b"repeated_string_28", "repeated_string_29", b"repeated_string_29", "repeated_string_3", b"repeated_string_3", "repeated_string_30", b"repeated_string_30", "repeated_string_31", b"repeated_string_31", "repeated_string_32", b"repeated_string_32", "repeated_string_4", b"repeated_string_4", "repeated_string_5", b"repeated_string_5", "repeated_string_6", b"repeated_string_6", "repeated_string_7", b"repeated_string_7", "repeated_string_8", b"repeated_string_8", "repeated_string_9", b"repeated_string_9"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageWithManyRepeatedPtrFields: typing_extensions.TypeAlias = TestMessageWithManyRepeatedPtrFields
+Global___TestMessageWithManyRepeatedPtrFields: _typing_extensions.TypeAlias = TestMessageWithManyRepeatedPtrFields  # noqa: Y015
 
-@typing.final
-class MessageCreatorZeroInit(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MessageCreatorZeroInit(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    I_FIELD_NUMBER: builtins.int
-    D_FIELD_NUMBER: builtins.int
-    M_FIELD_NUMBER: builtins.int
-    OS_FIELD_NUMBER: builtins.int
-    OC_FIELD_NUMBER: builtins.int
-    OF_FIELD_NUMBER: builtins.int
-    OL_FIELD_NUMBER: builtins.int
-    i: builtins.int
-    d: builtins.float
-    os: builtins.str
-    oc: builtins.str
-    of: builtins.int
-    @property
+    I_FIELD_NUMBER: _builtins.int
+    D_FIELD_NUMBER: _builtins.int
+    M_FIELD_NUMBER: _builtins.int
+    OS_FIELD_NUMBER: _builtins.int
+    OC_FIELD_NUMBER: _builtins.int
+    OF_FIELD_NUMBER: _builtins.int
+    OL_FIELD_NUMBER: _builtins.int
+    i: _builtins.int
+    d: _builtins.float
+    os: _builtins.str
+    oc: _builtins.str
+    of: _builtins.int
+    @_builtins.property
     def m(self) -> Global___MessageCreatorZeroInit: ...
-    @property
+    @_builtins.property
     def ol(self) -> Global___MessageCreatorZeroInit: ...
     def __init__(
         self,
         *,
-        i: builtins.int | None = ...,
-        d: builtins.float | None = ...,
+        i: _builtins.int | None = ...,
+        d: _builtins.float | None = ...,
         m: Global___MessageCreatorZeroInit | None = ...,
-        os: builtins.str | None = ...,
-        oc: builtins.str | None = ...,
-        of: builtins.int | None = ...,
+        os: _builtins.str | None = ...,
+        oc: _builtins.str | None = ...,
+        of: _builtins.int | None = ...,
         ol: Global___MessageCreatorZeroInit | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["d", b"d", "i", b"i", "m", b"m", "oc", b"oc", "of", b"of", "ol", b"ol", "one", b"one", "os", b"os"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["d", b"d", "i", b"i", "m", b"m", "oc", b"oc", "of", b"of", "ol", b"ol", "one", b"one", "os", b"os"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d", "i", b"i", "m", b"m", "oc", b"oc", "of", b"of", "ol", b"ol", "one", b"one", "os", b"os"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d", "i", b"i", "m", b"m", "oc", b"oc", "of", b"of", "ol", b"ol", "one", b"one", "os", b"os"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_one: typing_extensions.TypeAlias = typing.Literal["os", "oc", "of", "ol"]
-    _WhichOneofArgType_one: typing_extensions.TypeAlias = typing.Literal["one", b"one"]
+    _WhichOneofReturnType_one: _typing_extensions.TypeAlias = _typing.Literal["os", "oc", "of", "ol"]  # noqa: Y015
+    _WhichOneofArgType_one: _typing_extensions.TypeAlias = _typing.Literal["one", b"one"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_one) -> _WhichOneofReturnType_one | None: ...
 
-Global___MessageCreatorZeroInit: typing_extensions.TypeAlias = MessageCreatorZeroInit
+Global___MessageCreatorZeroInit: _typing_extensions.TypeAlias = MessageCreatorZeroInit  # noqa: Y015
 
-@typing.final
-class MessageCreatorMemcpy(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MessageCreatorMemcpy(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class M2Entry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class M2Entry(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.int
-        value: builtins.int
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.int
+        value: _builtins.int
         def __init__(
             self,
             *,
-            key: builtins.int | None = ...,
-            value: builtins.int | None = ...,
+            key: _builtins.int | None = ...,
+            value: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    S_FIELD_NUMBER: builtins.int
-    I_FIELD_NUMBER: builtins.int
-    M_FIELD_NUMBER: builtins.int
-    M2_FIELD_NUMBER: builtins.int
-    s: builtins.str
-    @property
-    def i(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
+    S_FIELD_NUMBER: _builtins.int
+    I_FIELD_NUMBER: _builtins.int
+    M_FIELD_NUMBER: _builtins.int
+    M2_FIELD_NUMBER: _builtins.int
+    s: _builtins.str
+    @_builtins.property
+    def i(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
     def m(self) -> Global___MessageCreatorMemcpy: ...
-    @property
-    def m2(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.int]: ...
+    @_builtins.property
+    def m2(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.int, _builtins.int]: ...
     def __init__(
         self,
         *,
-        s: builtins.str | None = ...,
-        i: collections.abc.Iterable[builtins.int] | None = ...,
+        s: _builtins.str | None = ...,
+        i: _collections_abc.Iterable[_builtins.int] | None = ...,
         m: Global___MessageCreatorMemcpy | None = ...,
-        m2: collections.abc.Mapping[builtins.int, builtins.int] | None = ...,
+        m2: _collections_abc.Mapping[_builtins.int, _builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["i", b"i", "m", b"m", "m2", b"m2", "s", b"s"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["i", b"i", "m", b"m", "m2", b"m2", "s", b"s"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["i", b"i", "m", b"m", "m2", b"m2", "s", b"s"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["i", b"i", "m", b"m", "m2", b"m2", "s", b"s"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___MessageCreatorMemcpy: typing_extensions.TypeAlias = MessageCreatorMemcpy
+Global___MessageCreatorMemcpy: _typing_extensions.TypeAlias = MessageCreatorMemcpy  # noqa: Y015
 
-@typing.final
-class MessageCreatorFunc(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MessageCreatorFunc(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    C_FIELD_NUMBER: builtins.int
-    c: builtins.str
+    C_FIELD_NUMBER: _builtins.int
+    c: _builtins.str
     """This one is ArenaDtorNeeds::kRequired so we must run the constructor."""
     def __init__(
         self,
         *,
-        c: builtins.str | None = ...,
+        c: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["c", b"c"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["c", b"c"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["c", b"c"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["c", b"c"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___MessageCreatorFunc: typing_extensions.TypeAlias = MessageCreatorFunc
+Global___MessageCreatorFunc: _typing_extensions.TypeAlias = MessageCreatorFunc  # noqa: Y015
 
-@typing.final
-class FastParseTableCompression(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FastParseTableCompression(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    IMPORTANT_FIELD_1_FIELD_NUMBER: builtins.int
-    IMPORTANT_FIELD_2_FIELD_NUMBER: builtins.int
-    UNIMPORTANT_FIELD_3_FIELD_NUMBER: builtins.int
-    UNIMPORTANT_FIELD_4_FIELD_NUMBER: builtins.int
-    UNIMPORTANT_FIELD_5_FIELD_NUMBER: builtins.int
-    UNIMPORTANT_FIELD_9_FIELD_NUMBER: builtins.int
-    IMPORTANT_FIELD_11_FIELD_NUMBER: builtins.int
-    UNIMPORTANT_FIELD_12_FIELD_NUMBER: builtins.int
-    IMPORTANT_FIELD_14_FIELD_NUMBER: builtins.int
-    UNIMPORTANT_FIELD_15_FIELD_NUMBER: builtins.int
-    important_field_1: builtins.int
-    important_field_2: builtins.int
-    unimportant_field_3: builtins.int
-    unimportant_field_4: builtins.int
-    unimportant_field_5: builtins.int
-    unimportant_field_9: builtins.int
-    important_field_11: builtins.int
-    unimportant_field_12: builtins.int
-    important_field_14: builtins.int
-    unimportant_field_15: builtins.int
+    IMPORTANT_FIELD_1_FIELD_NUMBER: _builtins.int
+    IMPORTANT_FIELD_2_FIELD_NUMBER: _builtins.int
+    UNIMPORTANT_FIELD_3_FIELD_NUMBER: _builtins.int
+    UNIMPORTANT_FIELD_4_FIELD_NUMBER: _builtins.int
+    UNIMPORTANT_FIELD_5_FIELD_NUMBER: _builtins.int
+    UNIMPORTANT_FIELD_9_FIELD_NUMBER: _builtins.int
+    IMPORTANT_FIELD_11_FIELD_NUMBER: _builtins.int
+    UNIMPORTANT_FIELD_12_FIELD_NUMBER: _builtins.int
+    IMPORTANT_FIELD_14_FIELD_NUMBER: _builtins.int
+    UNIMPORTANT_FIELD_15_FIELD_NUMBER: _builtins.int
+    important_field_1: _builtins.int
+    important_field_2: _builtins.int
+    unimportant_field_3: _builtins.int
+    unimportant_field_4: _builtins.int
+    unimportant_field_5: _builtins.int
+    unimportant_field_9: _builtins.int
+    important_field_11: _builtins.int
+    unimportant_field_12: _builtins.int
+    important_field_14: _builtins.int
+    unimportant_field_15: _builtins.int
     def __init__(
         self,
         *,
-        important_field_1: builtins.int | None = ...,
-        important_field_2: builtins.int | None = ...,
-        unimportant_field_3: builtins.int | None = ...,
-        unimportant_field_4: builtins.int | None = ...,
-        unimportant_field_5: builtins.int | None = ...,
-        unimportant_field_9: builtins.int | None = ...,
-        important_field_11: builtins.int | None = ...,
-        unimportant_field_12: builtins.int | None = ...,
-        important_field_14: builtins.int | None = ...,
-        unimportant_field_15: builtins.int | None = ...,
+        important_field_1: _builtins.int | None = ...,
+        important_field_2: _builtins.int | None = ...,
+        unimportant_field_3: _builtins.int | None = ...,
+        unimportant_field_4: _builtins.int | None = ...,
+        unimportant_field_5: _builtins.int | None = ...,
+        unimportant_field_9: _builtins.int | None = ...,
+        important_field_11: _builtins.int | None = ...,
+        unimportant_field_12: _builtins.int | None = ...,
+        important_field_14: _builtins.int | None = ...,
+        unimportant_field_15: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["important_field_1", b"important_field_1", "important_field_11", b"important_field_11", "important_field_14", b"important_field_14", "important_field_2", b"important_field_2", "unimportant_field_12", b"unimportant_field_12", "unimportant_field_15", b"unimportant_field_15", "unimportant_field_3", b"unimportant_field_3", "unimportant_field_4", b"unimportant_field_4", "unimportant_field_5", b"unimportant_field_5", "unimportant_field_9", b"unimportant_field_9"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["important_field_1", b"important_field_1", "important_field_11", b"important_field_11", "important_field_14", b"important_field_14", "important_field_2", b"important_field_2", "unimportant_field_12", b"unimportant_field_12", "unimportant_field_15", b"unimportant_field_15", "unimportant_field_3", b"unimportant_field_3", "unimportant_field_4", b"unimportant_field_4", "unimportant_field_5", b"unimportant_field_5", "unimportant_field_9", b"unimportant_field_9"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["important_field_1", b"important_field_1", "important_field_11", b"important_field_11", "important_field_14", b"important_field_14", "important_field_2", b"important_field_2", "unimportant_field_12", b"unimportant_field_12", "unimportant_field_15", b"unimportant_field_15", "unimportant_field_3", b"unimportant_field_3", "unimportant_field_4", b"unimportant_field_4", "unimportant_field_5", b"unimportant_field_5", "unimportant_field_9", b"unimportant_field_9"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["important_field_1", b"important_field_1", "important_field_11", b"important_field_11", "important_field_14", b"important_field_14", "important_field_2", b"important_field_2", "unimportant_field_12", b"unimportant_field_12", "unimportant_field_15", b"unimportant_field_15", "unimportant_field_3", b"unimportant_field_3", "unimportant_field_4", b"unimportant_field_4", "unimportant_field_5", b"unimportant_field_5", "unimportant_field_9", b"unimportant_field_9"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FastParseTableCompression: typing_extensions.TypeAlias = FastParseTableCompression
+Global___FastParseTableCompression: _typing_extensions.TypeAlias = FastParseTableCompression  # noqa: Y015
 
-@typing.final
-class TestMessageForMove_Small(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMessageForMove_Small(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    a: builtins.int
-    b: builtins.int
+    A_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
+    b: _builtins.int
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
-        b: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
+        b: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageForMove_Small: typing_extensions.TypeAlias = TestMessageForMove_Small
+Global___TestMessageForMove_Small: _typing_extensions.TypeAlias = TestMessageForMove_Small  # noqa: Y015
 
-@typing.final
-class TestMessageForMove_Large(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMessageForMove_Large(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A1_FIELD_NUMBER: builtins.int
-    A2_FIELD_NUMBER: builtins.int
-    A3_FIELD_NUMBER: builtins.int
-    A4_FIELD_NUMBER: builtins.int
-    A5_FIELD_NUMBER: builtins.int
-    A6_FIELD_NUMBER: builtins.int
-    A7_FIELD_NUMBER: builtins.int
-    A8_FIELD_NUMBER: builtins.int
-    A9_FIELD_NUMBER: builtins.int
-    A11_FIELD_NUMBER: builtins.int
-    A12_FIELD_NUMBER: builtins.int
-    A13_FIELD_NUMBER: builtins.int
-    A14_FIELD_NUMBER: builtins.int
-    A15_FIELD_NUMBER: builtins.int
-    A16_FIELD_NUMBER: builtins.int
-    A17_FIELD_NUMBER: builtins.int
-    A18_FIELD_NUMBER: builtins.int
-    A19_FIELD_NUMBER: builtins.int
-    S101_FIELD_NUMBER: builtins.int
-    S102_FIELD_NUMBER: builtins.int
-    S103_FIELD_NUMBER: builtins.int
-    S104_FIELD_NUMBER: builtins.int
-    S105_FIELD_NUMBER: builtins.int
-    S106_FIELD_NUMBER: builtins.int
-    S107_FIELD_NUMBER: builtins.int
-    S108_FIELD_NUMBER: builtins.int
-    S109_FIELD_NUMBER: builtins.int
-    S111_FIELD_NUMBER: builtins.int
-    S112_FIELD_NUMBER: builtins.int
-    S113_FIELD_NUMBER: builtins.int
-    S114_FIELD_NUMBER: builtins.int
-    S115_FIELD_NUMBER: builtins.int
-    S116_FIELD_NUMBER: builtins.int
-    S117_FIELD_NUMBER: builtins.int
-    S118_FIELD_NUMBER: builtins.int
-    S119_FIELD_NUMBER: builtins.int
-    a1: builtins.int
-    a2: builtins.int
-    a3: builtins.int
-    a4: builtins.int
-    a5: builtins.int
-    a6: builtins.int
-    a7: builtins.int
-    a8: builtins.int
-    a9: builtins.int
-    s101: builtins.str
-    s102: builtins.str
-    s103: builtins.str
-    s104: builtins.str
-    s105: builtins.str
-    s106: builtins.str
-    s107: builtins.str
-    s108: builtins.str
-    s109: builtins.str
-    @property
-    def a11(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a12(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a13(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a14(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a15(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a16(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a17(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a18(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def a19(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def s111(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s112(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s113(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s114(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s115(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s116(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s117(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s118(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def s119(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    A1_FIELD_NUMBER: _builtins.int
+    A2_FIELD_NUMBER: _builtins.int
+    A3_FIELD_NUMBER: _builtins.int
+    A4_FIELD_NUMBER: _builtins.int
+    A5_FIELD_NUMBER: _builtins.int
+    A6_FIELD_NUMBER: _builtins.int
+    A7_FIELD_NUMBER: _builtins.int
+    A8_FIELD_NUMBER: _builtins.int
+    A9_FIELD_NUMBER: _builtins.int
+    A11_FIELD_NUMBER: _builtins.int
+    A12_FIELD_NUMBER: _builtins.int
+    A13_FIELD_NUMBER: _builtins.int
+    A14_FIELD_NUMBER: _builtins.int
+    A15_FIELD_NUMBER: _builtins.int
+    A16_FIELD_NUMBER: _builtins.int
+    A17_FIELD_NUMBER: _builtins.int
+    A18_FIELD_NUMBER: _builtins.int
+    A19_FIELD_NUMBER: _builtins.int
+    S101_FIELD_NUMBER: _builtins.int
+    S102_FIELD_NUMBER: _builtins.int
+    S103_FIELD_NUMBER: _builtins.int
+    S104_FIELD_NUMBER: _builtins.int
+    S105_FIELD_NUMBER: _builtins.int
+    S106_FIELD_NUMBER: _builtins.int
+    S107_FIELD_NUMBER: _builtins.int
+    S108_FIELD_NUMBER: _builtins.int
+    S109_FIELD_NUMBER: _builtins.int
+    S111_FIELD_NUMBER: _builtins.int
+    S112_FIELD_NUMBER: _builtins.int
+    S113_FIELD_NUMBER: _builtins.int
+    S114_FIELD_NUMBER: _builtins.int
+    S115_FIELD_NUMBER: _builtins.int
+    S116_FIELD_NUMBER: _builtins.int
+    S117_FIELD_NUMBER: _builtins.int
+    S118_FIELD_NUMBER: _builtins.int
+    S119_FIELD_NUMBER: _builtins.int
+    a1: _builtins.int
+    a2: _builtins.int
+    a3: _builtins.int
+    a4: _builtins.int
+    a5: _builtins.int
+    a6: _builtins.int
+    a7: _builtins.int
+    a8: _builtins.int
+    a9: _builtins.int
+    s101: _builtins.str
+    s102: _builtins.str
+    s103: _builtins.str
+    s104: _builtins.str
+    s105: _builtins.str
+    s106: _builtins.str
+    s107: _builtins.str
+    s108: _builtins.str
+    s109: _builtins.str
+    @_builtins.property
+    def a11(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a12(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a13(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a14(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a15(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a16(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a17(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a18(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def a19(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def s111(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s112(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s113(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s114(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s115(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s116(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s117(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s118(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def s119(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     def __init__(
         self,
         *,
-        a1: builtins.int | None = ...,
-        a2: builtins.int | None = ...,
-        a3: builtins.int | None = ...,
-        a4: builtins.int | None = ...,
-        a5: builtins.int | None = ...,
-        a6: builtins.int | None = ...,
-        a7: builtins.int | None = ...,
-        a8: builtins.int | None = ...,
-        a9: builtins.int | None = ...,
-        a11: collections.abc.Iterable[builtins.int] | None = ...,
-        a12: collections.abc.Iterable[builtins.int] | None = ...,
-        a13: collections.abc.Iterable[builtins.int] | None = ...,
-        a14: collections.abc.Iterable[builtins.int] | None = ...,
-        a15: collections.abc.Iterable[builtins.int] | None = ...,
-        a16: collections.abc.Iterable[builtins.int] | None = ...,
-        a17: collections.abc.Iterable[builtins.int] | None = ...,
-        a18: collections.abc.Iterable[builtins.int] | None = ...,
-        a19: collections.abc.Iterable[builtins.int] | None = ...,
-        s101: builtins.str | None = ...,
-        s102: builtins.str | None = ...,
-        s103: builtins.str | None = ...,
-        s104: builtins.str | None = ...,
-        s105: builtins.str | None = ...,
-        s106: builtins.str | None = ...,
-        s107: builtins.str | None = ...,
-        s108: builtins.str | None = ...,
-        s109: builtins.str | None = ...,
-        s111: collections.abc.Iterable[builtins.str] | None = ...,
-        s112: collections.abc.Iterable[builtins.str] | None = ...,
-        s113: collections.abc.Iterable[builtins.str] | None = ...,
-        s114: collections.abc.Iterable[builtins.str] | None = ...,
-        s115: collections.abc.Iterable[builtins.str] | None = ...,
-        s116: collections.abc.Iterable[builtins.str] | None = ...,
-        s117: collections.abc.Iterable[builtins.str] | None = ...,
-        s118: collections.abc.Iterable[builtins.str] | None = ...,
-        s119: collections.abc.Iterable[builtins.str] | None = ...,
+        a1: _builtins.int | None = ...,
+        a2: _builtins.int | None = ...,
+        a3: _builtins.int | None = ...,
+        a4: _builtins.int | None = ...,
+        a5: _builtins.int | None = ...,
+        a6: _builtins.int | None = ...,
+        a7: _builtins.int | None = ...,
+        a8: _builtins.int | None = ...,
+        a9: _builtins.int | None = ...,
+        a11: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a12: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a13: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a14: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a15: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a16: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a17: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a18: _collections_abc.Iterable[_builtins.int] | None = ...,
+        a19: _collections_abc.Iterable[_builtins.int] | None = ...,
+        s101: _builtins.str | None = ...,
+        s102: _builtins.str | None = ...,
+        s103: _builtins.str | None = ...,
+        s104: _builtins.str | None = ...,
+        s105: _builtins.str | None = ...,
+        s106: _builtins.str | None = ...,
+        s107: _builtins.str | None = ...,
+        s108: _builtins.str | None = ...,
+        s109: _builtins.str | None = ...,
+        s111: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s112: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s113: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s114: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s115: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s116: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s117: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s118: _collections_abc.Iterable[_builtins.str] | None = ...,
+        s119: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a1", b"a1", "a11", b"a11", "a12", b"a12", "a13", b"a13", "a14", b"a14", "a15", b"a15", "a16", b"a16", "a17", b"a17", "a18", b"a18", "a19", b"a19", "a2", b"a2", "a3", b"a3", "a4", b"a4", "a5", b"a5", "a6", b"a6", "a7", b"a7", "a8", b"a8", "a9", b"a9", "s101", b"s101", "s102", b"s102", "s103", b"s103", "s104", b"s104", "s105", b"s105", "s106", b"s106", "s107", b"s107", "s108", b"s108", "s109", b"s109", "s111", b"s111", "s112", b"s112", "s113", b"s113", "s114", b"s114", "s115", b"s115", "s116", b"s116", "s117", b"s117", "s118", b"s118", "s119", b"s119"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a1", b"a1", "a11", b"a11", "a12", b"a12", "a13", b"a13", "a14", b"a14", "a15", b"a15", "a16", b"a16", "a17", b"a17", "a18", b"a18", "a19", b"a19", "a2", b"a2", "a3", b"a3", "a4", b"a4", "a5", b"a5", "a6", b"a6", "a7", b"a7", "a8", b"a8", "a9", b"a9", "s101", b"s101", "s102", b"s102", "s103", b"s103", "s104", b"s104", "s105", b"s105", "s106", b"s106", "s107", b"s107", "s108", b"s108", "s109", b"s109", "s111", b"s111", "s112", b"s112", "s113", b"s113", "s114", b"s114", "s115", b"s115", "s116", b"s116", "s117", b"s117", "s118", b"s118", "s119", b"s119"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a1", b"a1", "a11", b"a11", "a12", b"a12", "a13", b"a13", "a14", b"a14", "a15", b"a15", "a16", b"a16", "a17", b"a17", "a18", b"a18", "a19", b"a19", "a2", b"a2", "a3", b"a3", "a4", b"a4", "a5", b"a5", "a6", b"a6", "a7", b"a7", "a8", b"a8", "a9", b"a9", "s101", b"s101", "s102", b"s102", "s103", b"s103", "s104", b"s104", "s105", b"s105", "s106", b"s106", "s107", b"s107", "s108", b"s108", "s109", b"s109", "s111", b"s111", "s112", b"s112", "s113", b"s113", "s114", b"s114", "s115", b"s115", "s116", b"s116", "s117", b"s117", "s118", b"s118", "s119", b"s119"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a1", b"a1", "a11", b"a11", "a12", b"a12", "a13", b"a13", "a14", b"a14", "a15", b"a15", "a16", b"a16", "a17", b"a17", "a18", b"a18", "a19", b"a19", "a2", b"a2", "a3", b"a3", "a4", b"a4", "a5", b"a5", "a6", b"a6", "a7", b"a7", "a8", b"a8", "a9", b"a9", "s101", b"s101", "s102", b"s102", "s103", b"s103", "s104", b"s104", "s105", b"s105", "s106", b"s106", "s107", b"s107", "s108", b"s108", "s109", b"s109", "s111", b"s111", "s112", b"s112", "s113", b"s113", "s114", b"s114", "s115", b"s115", "s116", b"s116", "s117", b"s117", "s118", b"s118", "s119", b"s119"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageForMove_Large: typing_extensions.TypeAlias = TestMessageForMove_Large
+Global___TestMessageForMove_Large: _typing_extensions.TypeAlias = TestMessageForMove_Large  # noqa: Y015
 
-OPTIONAL_INT32_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_INT64_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_UINT32_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_UINT64_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_SINT32_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_SINT64_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_FIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_FIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_SFIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_SFIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_FLOAT_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_DOUBLE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_BOOL_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_BYTES_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONALGROUP_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_NESTED_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_FOREIGN_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_IMPORT_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_NESTED_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_IMPORT_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_STRING_PIECE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_CORD_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_BYTES_CORD_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_PUBLIC_IMPORT_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_LAZY_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_UNVERIFIED_LAZY_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_INT32_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_INT64_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_UINT32_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_UINT64_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_SINT32_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_SINT64_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_FIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_FIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_SFIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_SFIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_FLOAT_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_DOUBLE_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_BOOL_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_BYTES_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATEDGROUP_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_NESTED_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_FOREIGN_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_IMPORT_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_NESTED_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_IMPORT_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_STRING_PIECE_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_CORD_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_LAZY_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_INT32_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_INT64_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_UINT32_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_UINT64_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_SINT32_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_SINT64_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_FIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_FIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_SFIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_SFIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_FLOAT_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_DOUBLE_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_BOOL_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_BYTES_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_NESTED_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_IMPORT_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_STRING_PIECE_EXTENSION_FIELD_NUMBER: builtins.int
-DEFAULT_CORD_EXTENSION_FIELD_NUMBER: builtins.int
-ONEOF_UINT32_EXTENSION_FIELD_NUMBER: builtins.int
-ONEOF_NESTED_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-ONEOF_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-ONEOF_BYTES_EXTENSION_FIELD_NUMBER: builtins.int
-OPTIONAL_UTF8_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-REPEATED_UTF8_STRING_EXTENSION_FIELD_NUMBER: builtins.int
-REQUIRED_MESSAGE_EXTENSION_FIELD_NUMBER: builtins.int
-MY_EXTENSION_STRING_FIELD_NUMBER: builtins.int
-MY_EXTENSION_INT_FIELD_NUMBER: builtins.int
-PACKED_INT32_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_INT64_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_UINT32_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_UINT64_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_SINT32_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_SINT64_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_FIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_FIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_SFIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_SFIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_FLOAT_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_DOUBLE_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_BOOL_EXTENSION_FIELD_NUMBER: builtins.int
-PACKED_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_INT32_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_INT64_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_UINT32_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_UINT64_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_SINT32_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_SINT64_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_FIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_FIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_SFIXED32_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_SFIXED64_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_FLOAT_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_DOUBLE_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_BOOL_EXTENSION_FIELD_NUMBER: builtins.int
-UNPACKED_ENUM_EXTENSION_FIELD_NUMBER: builtins.int
-TEST_ALL_TYPES_FIELD_NUMBER: builtins.int
-TEST_EXTENSION_INSIDE_TABLE_EXTENSION_FIELD_NUMBER: builtins.int
-INNER_FIELD_NUMBER: builtins.int
-REDACTED_EXTENSION_FIELD_NUMBER: builtins.int
-optional_int32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
+OPTIONAL_INT32_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_INT64_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_UINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_UINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_SINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_SINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_FIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_FIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_SFIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_SFIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_FLOAT_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_DOUBLE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_BOOL_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_BYTES_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONALGROUP_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_NESTED_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_FOREIGN_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_IMPORT_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_NESTED_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_IMPORT_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_STRING_PIECE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_CORD_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_BYTES_CORD_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_PUBLIC_IMPORT_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_LAZY_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_UNVERIFIED_LAZY_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_INT32_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_INT64_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_UINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_UINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_SINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_SINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_FIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_FIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_SFIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_SFIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_FLOAT_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_DOUBLE_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_BOOL_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_BYTES_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATEDGROUP_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_NESTED_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_FOREIGN_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_IMPORT_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_NESTED_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_IMPORT_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_STRING_PIECE_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_CORD_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_LAZY_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_INT32_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_INT64_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_UINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_UINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_SINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_SINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_FIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_FIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_SFIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_SFIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_FLOAT_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_DOUBLE_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_BOOL_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_BYTES_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_NESTED_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_FOREIGN_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_IMPORT_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_STRING_PIECE_EXTENSION_FIELD_NUMBER: _builtins.int
+DEFAULT_CORD_EXTENSION_FIELD_NUMBER: _builtins.int
+ONEOF_UINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+ONEOF_NESTED_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+ONEOF_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+ONEOF_BYTES_EXTENSION_FIELD_NUMBER: _builtins.int
+OPTIONAL_UTF8_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+REPEATED_UTF8_STRING_EXTENSION_FIELD_NUMBER: _builtins.int
+REQUIRED_MESSAGE_EXTENSION_FIELD_NUMBER: _builtins.int
+MY_EXTENSION_STRING_FIELD_NUMBER: _builtins.int
+MY_EXTENSION_INT_FIELD_NUMBER: _builtins.int
+PACKED_INT32_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_INT64_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_UINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_UINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_SINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_SINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_FIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_FIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_SFIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_SFIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_FLOAT_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_DOUBLE_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_BOOL_EXTENSION_FIELD_NUMBER: _builtins.int
+PACKED_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_INT32_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_INT64_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_UINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_UINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_SINT32_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_SINT64_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_FIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_FIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_SFIXED32_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_SFIXED64_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_FLOAT_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_DOUBLE_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_BOOL_EXTENSION_FIELD_NUMBER: _builtins.int
+UNPACKED_ENUM_EXTENSION_FIELD_NUMBER: _builtins.int
+TEST_ALL_TYPES_FIELD_NUMBER: _builtins.int
+TEST_EXTENSION_INSIDE_TABLE_EXTENSION_FIELD_NUMBER: _builtins.int
+INNER_FIELD_NUMBER: _builtins.int
+REDACTED_EXTENSION_FIELD_NUMBER: _builtins.int
+optional_int32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
 """Singular"""
-optional_int64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_uint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_uint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_sint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_sint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_fixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_fixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_sfixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_sfixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-optional_float_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.float]
-optional_double_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.float]
-optional_bool_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.bool]
-optional_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
-optional_bytes_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.bytes]
-optionalgroup_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___OptionalGroup_extension]
-optional_nested_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
-optional_foreign_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___ForeignMessage]
-optional_import_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_pb2.ImportMessage]
-optional_nested_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedEnum.ValueType]
-optional_foreign_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___ForeignEnum.ValueType]
-optional_import_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_pb2.ImportEnum.ValueType]
-optional_string_piece_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
-optional_cord_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
+optional_int64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_uint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_uint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_sint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_sint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_fixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_fixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_sfixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_sfixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+optional_float_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.float]
+optional_double_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.float]
+optional_bool_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.bool]
+optional_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
+optional_bytes_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.bytes]
+optionalgroup_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___OptionalGroup_extension]
+optional_nested_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
+optional_foreign_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___ForeignMessage]
+optional_import_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_pb2.ImportMessage]
+optional_nested_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedEnum.ValueType]
+optional_foreign_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___ForeignEnum.ValueType]
+optional_import_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_pb2.ImportEnum.ValueType]
+optional_string_piece_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
+optional_cord_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
 """TODO: ctype=CORD is not supported for extension. Add
 ctype=CORD option back after it is supported.
 """
-optional_bytes_cord_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.bytes]
-optional_public_import_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_public_pb2.PublicImportMessage]
-optional_lazy_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
-optional_unverified_lazy_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
-repeated_int32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
+optional_bytes_cord_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.bytes]
+optional_public_import_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_public_pb2.PublicImportMessage]
+optional_lazy_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
+optional_unverified_lazy_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
+repeated_int32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
 """Repeated"""
-repeated_int64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_uint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_uint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_sint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_sint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_fixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_fixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_sfixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_sfixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-repeated_float_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]]
-repeated_double_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]]
-repeated_bool_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]]
-repeated_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]]
-repeated_bytes_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]]
-repeatedgroup_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___RepeatedGroup_extension]]
-repeated_nested_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]]
-repeated_foreign_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]]
-repeated_import_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_import_pb2.ImportMessage]]
-repeated_nested_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]]
-repeated_foreign_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]]
-repeated_import_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[google.protobuf.unittest_import_pb2.ImportEnum.ValueType]]
-repeated_string_piece_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]]
-repeated_cord_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]]
+repeated_int64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_uint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_uint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_sint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_sint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_fixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_fixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_sfixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_sfixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+repeated_float_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]]
+repeated_double_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]]
+repeated_bool_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]]
+repeated_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
+repeated_bytes_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]]
+repeatedgroup_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___RepeatedGroup_extension]]
+repeated_nested_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]]
+repeated_foreign_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]]
+repeated_import_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_import_pb2.ImportMessage]]
+repeated_nested_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]]
+repeated_foreign_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]]
+repeated_import_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[google.protobuf.unittest_import_pb2.ImportEnum.ValueType]]
+repeated_string_piece_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
+repeated_cord_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
 """TODO: ctype=CORD is not supported for extension. Add
 ctype=CORD option back after it is supported.
 """
-repeated_lazy_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]]
-default_int32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
+repeated_lazy_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]]
+default_int32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
 """Singular with defaults"""
-default_int64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_uint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_uint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_sint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_sint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_fixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_fixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_sfixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_sfixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
-default_float_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.float]
-default_double_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.float]
-default_bool_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.bool]
-default_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
-default_bytes_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.bytes]
-default_nested_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedEnum.ValueType]
-default_foreign_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___ForeignEnum.ValueType]
-default_import_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_pb2.ImportEnum.ValueType]
-default_string_piece_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
-default_cord_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
+default_int64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_uint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_uint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_sint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_sint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_fixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_fixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_sfixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_sfixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
+default_float_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.float]
+default_double_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.float]
+default_bool_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.bool]
+default_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
+default_bytes_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.bytes]
+default_nested_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedEnum.ValueType]
+default_foreign_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___ForeignEnum.ValueType]
+default_import_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.unittest_import_pb2.ImportEnum.ValueType]
+default_string_piece_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
+default_cord_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
 """TODO: ctype=CORD is not supported for extension. Add
 ctype=CORD option back after it is supported.
 """
-oneof_uint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.int]
+oneof_uint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.int]
 """For oneof test"""
-oneof_nested_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
-oneof_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
-oneof_bytes_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.bytes]
-optional_utf8_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, builtins.str]
-repeated_utf8_string_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]]
-required_message_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestRequired]
+oneof_nested_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestAllTypes.NestedMessage]
+oneof_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
+oneof_bytes_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.bytes]
+optional_utf8_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _builtins.str]
+repeated_utf8_string_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
+required_message_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestAllExtensions, Global___TestRequired]
 """Singular message containing required fields; used to test initialization."""
-my_extension_string: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, builtins.str]
-my_extension_int: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, builtins.int]
-packed_int32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_int64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_uint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_uint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_sint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_sint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_fixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_fixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_sfixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_sfixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-packed_float_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]]
-packed_double_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]]
-packed_bool_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]]
-packed_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]]
-unpacked_int32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_int64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_uint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_uint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_sint32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_sint64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_fixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_fixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_sfixed32_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_sfixed64_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
-unpacked_float_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]]
-unpacked_double_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]]
-unpacked_bool_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]]
-unpacked_enum_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]]
-test_all_types: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestHugeFieldNumbers, Global___TestAllTypes]
-test_extension_inside_table_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestExtensionInsideTable, builtins.int]
-inner: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2RepeatedGroup, Global___TestNestedGroupExtensionInnerExtension]
-redacted_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___RedactedFields, builtins.str]
+my_extension_string: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, _builtins.str]
+my_extension_int: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestFieldOrderings, _builtins.int]
+packed_int32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_int64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_uint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_uint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_sint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_sint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_fixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_fixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_sfixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_sfixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+packed_float_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]]
+packed_double_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]]
+packed_bool_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]]
+packed_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestPackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]]
+unpacked_int32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_int64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_uint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_uint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_sint32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_sint64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_fixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_fixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_sfixed32_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_sfixed64_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+unpacked_float_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]]
+unpacked_double_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]]
+unpacked_bool_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]]
+unpacked_enum_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestUnpackedExtensions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]]
+test_all_types: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestHugeFieldNumbers, Global___TestAllTypes]
+test_extension_inside_table_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestExtensionInsideTable, _builtins.int]
+inner: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestNestedGroupExtensionOuter.Layer1OptionalGroup.Layer2RepeatedGroup, Global___TestNestedGroupExtensionInnerExtension]
+redacted_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___RedactedFields, _builtins.str]

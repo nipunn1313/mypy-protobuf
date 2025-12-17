@@ -3,7 +3,7 @@
 isort:skip_file
 """
 
-import google.protobuf.descriptor
+import google.protobuf.descriptor as _google_protobuf_descriptor
 from google.protobuf.empty_pb2 import (
     Empty as Empty,
 )
@@ -16,4 +16,4 @@ from testproto.test3_pb2 import (
     UNKNOWN as UNKNOWN,
 )
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor

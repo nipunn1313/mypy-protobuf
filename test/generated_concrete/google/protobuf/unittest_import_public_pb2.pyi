@@ -3,33 +3,33 @@
 isort:skip_file
 Author: liujisi@google.com (Pherl Liu)"""
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class PublicImportMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class PublicImportMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    E_FIELD_NUMBER: builtins.int
-    e: builtins.int
+    E_FIELD_NUMBER: _builtins.int
+    e: _builtins.int
     def __init__(
         self,
         *,
-        e: builtins.int | None = ...,
+        e: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["e", b"e"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["e", b"e"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["e", b"e"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["e", b"e"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___PublicImportMessage: typing_extensions.TypeAlias = PublicImportMessage
+Global___PublicImportMessage: _typing_extensions.TypeAlias = PublicImportMessage  # noqa: Y015

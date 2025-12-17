@@ -16,6 +16,6 @@ This file intentionally left blank.  (At one point this wouldn't compile
 correctly.)
 """
 
-import google.protobuf.descriptor
+import google.protobuf.descriptor as _google_protobuf_descriptor
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor

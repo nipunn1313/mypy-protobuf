@@ -9,30 +9,30 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+import builtins as _builtins
+import collections.abc as _collections_abc
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.message as _google_protobuf_message
 import google.protobuf.unittest_import_pb2
 import google.protobuf.unittest_import_public_pb2
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _ForeignEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _ForeignEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ForeignEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ForeignEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ForeignEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     FOREIGN_ZERO: _ForeignEnum.ValueType  # 0
     FOREIGN_FOO: _ForeignEnum.ValueType  # 4
     FOREIGN_BAR: _ForeignEnum.ValueType  # 5
@@ -48,22 +48,22 @@ FOREIGN_BAR: ForeignEnum.ValueType  # 5
 FOREIGN_BAZ: ForeignEnum.ValueType  # 6
 FOREIGN_LARGE: ForeignEnum.ValueType  # 123456
 """Large enough to escape the Boxed Integer cache."""
-Global___ForeignEnum: typing_extensions.TypeAlias = ForeignEnum
+Global___ForeignEnum: _typing_extensions.TypeAlias = ForeignEnum  # noqa: Y015
 
-@typing.final
-class TestAllTypes(google.protobuf.message.Message):
+@_typing.final
+class TestAllTypes(_google_protobuf_message.Message):
     """This proto includes every type of field in both singular and repeated
     forms.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestAllTypes._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestAllTypes._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         ZERO: TestAllTypes._NestedEnum.ValueType  # 0
         FOO: TestAllTypes._NestedEnum.ValueType  # 1
         BAR: TestAllTypes._NestedEnum.ValueType  # 2
@@ -79,12 +79,12 @@ class TestAllTypes(google.protobuf.message.Message):
     NEG: TestAllTypes.NestedEnum.ValueType  # -1
     """Intentionally negative."""
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        BB_FIELD_NUMBER: builtins.int
-        bb: builtins.int
+        BB_FIELD_NUMBER: _builtins.int
+        bb: _builtins.int
         """The field name "b" fails to compile in proto1 because it conflicts with
         a local variable named "b" in one of the generated methods.  Doh.
         This file needs to compile in proto1 to test backwards-compatibility.
@@ -92,93 +92,93 @@ class TestAllTypes(google.protobuf.message.Message):
         def __init__(
             self,
             *,
-            bb: builtins.int = ...,
+            bb: _builtins.int = ...,
         ) -> None: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bb", b"bb"]
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bb", b"bb"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    OPTIONAL_INT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_INT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_UINT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_SINT32_FIELD_NUMBER: builtins.int
-    OPTIONAL_SINT64_FIELD_NUMBER: builtins.int
-    OPTIONAL_FIXED32_FIELD_NUMBER: builtins.int
-    OPTIONAL_FIXED64_FIELD_NUMBER: builtins.int
-    OPTIONAL_SFIXED32_FIELD_NUMBER: builtins.int
-    OPTIONAL_SFIXED64_FIELD_NUMBER: builtins.int
-    OPTIONAL_FLOAT_FIELD_NUMBER: builtins.int
-    OPTIONAL_DOUBLE_FIELD_NUMBER: builtins.int
-    OPTIONAL_BOOL_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-    OPTIONAL_BYTES_FIELD_NUMBER: builtins.int
-    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_NESTED_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_FOREIGN_ENUM_FIELD_NUMBER: builtins.int
-    OPTIONAL_STRING_PIECE_FIELD_NUMBER: builtins.int
-    OPTIONAL_CORD_FIELD_NUMBER: builtins.int
-    OPTIONAL_PUBLIC_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_UNVERIFIED_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    OPTIONAL_LAZY_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_INT32_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_FIELD_NUMBER: builtins.int
-    REPEATED_UINT32_FIELD_NUMBER: builtins.int
-    REPEATED_UINT64_FIELD_NUMBER: builtins.int
-    REPEATED_SINT32_FIELD_NUMBER: builtins.int
-    REPEATED_SINT64_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_SFIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_SFIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_FLOAT_FIELD_NUMBER: builtins.int
-    REPEATED_DOUBLE_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_FIELD_NUMBER: builtins.int
-    REPEATED_BYTES_FIELD_NUMBER: builtins.int
-    REPEATED_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_FOREIGN_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_IMPORT_MESSAGE_FIELD_NUMBER: builtins.int
-    REPEATED_NESTED_ENUM_FIELD_NUMBER: builtins.int
-    REPEATED_FOREIGN_ENUM_FIELD_NUMBER: builtins.int
-    REPEATED_STRING_PIECE_FIELD_NUMBER: builtins.int
-    REPEATED_CORD_FIELD_NUMBER: builtins.int
-    REPEATED_LAZY_MESSAGE_FIELD_NUMBER: builtins.int
-    ONEOF_UINT32_FIELD_NUMBER: builtins.int
-    ONEOF_NESTED_MESSAGE_FIELD_NUMBER: builtins.int
-    ONEOF_STRING_FIELD_NUMBER: builtins.int
-    ONEOF_BYTES_FIELD_NUMBER: builtins.int
-    optional_int32: builtins.int
+    OPTIONAL_INT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_INT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UINT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SINT32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SINT64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FIXED32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FIXED64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SFIXED32_FIELD_NUMBER: _builtins.int
+    OPTIONAL_SFIXED64_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FLOAT_FIELD_NUMBER: _builtins.int
+    OPTIONAL_DOUBLE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BOOL_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_FIELD_NUMBER: _builtins.int
+    OPTIONAL_BYTES_FIELD_NUMBER: _builtins.int
+    OPTIONAL_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_FOREIGN_ENUM_FIELD_NUMBER: _builtins.int
+    OPTIONAL_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_CORD_FIELD_NUMBER: _builtins.int
+    OPTIONAL_PUBLIC_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_UNVERIFIED_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    OPTIONAL_LAZY_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_INT32_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT32_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT64_FIELD_NUMBER: _builtins.int
+    REPEATED_SINT32_FIELD_NUMBER: _builtins.int
+    REPEATED_SINT64_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_SFIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_SFIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_FLOAT_FIELD_NUMBER: _builtins.int
+    REPEATED_DOUBLE_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_FIELD_NUMBER: _builtins.int
+    REPEATED_BYTES_FIELD_NUMBER: _builtins.int
+    REPEATED_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_FOREIGN_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_IMPORT_MESSAGE_FIELD_NUMBER: _builtins.int
+    REPEATED_NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    REPEATED_FOREIGN_ENUM_FIELD_NUMBER: _builtins.int
+    REPEATED_STRING_PIECE_FIELD_NUMBER: _builtins.int
+    REPEATED_CORD_FIELD_NUMBER: _builtins.int
+    REPEATED_LAZY_MESSAGE_FIELD_NUMBER: _builtins.int
+    ONEOF_UINT32_FIELD_NUMBER: _builtins.int
+    ONEOF_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
+    ONEOF_STRING_FIELD_NUMBER: _builtins.int
+    ONEOF_BYTES_FIELD_NUMBER: _builtins.int
+    optional_int32: _builtins.int
     """Singular"""
-    optional_int64: builtins.int
-    optional_uint32: builtins.int
-    optional_uint64: builtins.int
-    optional_sint32: builtins.int
-    optional_sint64: builtins.int
-    optional_fixed32: builtins.int
-    optional_fixed64: builtins.int
-    optional_sfixed32: builtins.int
-    optional_sfixed64: builtins.int
-    optional_float: builtins.float
-    optional_double: builtins.float
-    optional_bool: builtins.bool
-    optional_string: builtins.str
-    optional_bytes: builtins.bytes
+    optional_int64: _builtins.int
+    optional_uint32: _builtins.int
+    optional_uint64: _builtins.int
+    optional_sint32: _builtins.int
+    optional_sint64: _builtins.int
+    optional_fixed32: _builtins.int
+    optional_fixed64: _builtins.int
+    optional_sfixed32: _builtins.int
+    optional_sfixed64: _builtins.int
+    optional_float: _builtins.float
+    optional_double: _builtins.float
+    optional_bool: _builtins.bool
+    optional_string: _builtins.str
+    optional_bytes: _builtins.bytes
     optional_nested_enum: Global___TestAllTypes.NestedEnum.ValueType
     optional_foreign_enum: Global___ForeignEnum.ValueType
-    optional_string_piece: builtins.str
+    optional_string_piece: _builtins.str
     """Omitted (compared to unittest.proto) because proto2 enums are not allowed
     inside proto2 messages.
 
     optional proto2_unittest_import.ImportEnum    optional_import_enum  = 23;
     """
-    optional_cord: builtins.str
-    oneof_uint32: builtins.int
-    oneof_string: builtins.str
-    oneof_bytes: builtins.bytes
-    @property
+    optional_cord: _builtins.str
+    oneof_uint32: _builtins.int
+    oneof_string: _builtins.str
+    oneof_bytes: _builtins.bytes
+    @_builtins.property
     def optional_nested_message(self) -> Global___TestAllTypes.NestedMessage:
         """Groups are not allowed in proto3.
         optional group OptionalGroup = 16 {
@@ -186,307 +186,307 @@ class TestAllTypes(google.protobuf.message.Message):
         }
         """
 
-    @property
+    @_builtins.property
     def optional_foreign_message(self) -> Global___ForeignMessage: ...
-    @property
+    @_builtins.property
     def optional_import_message(self) -> google.protobuf.unittest_import_pb2.ImportMessage: ...
-    @property
+    @_builtins.property
     def optional_public_import_message(self) -> google.protobuf.unittest_import_public_pb2.PublicImportMessage:
         """Defined in unittest_import_public.proto"""
 
-    @property
+    @_builtins.property
     def optional_lazy_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
+    @_builtins.property
     def optional_unverified_lazy_message(self) -> Global___TestAllTypes.NestedMessage: ...
-    @property
+    @_builtins.property
     def optional_lazy_import_message(self) -> google.protobuf.unittest_import_pb2.ImportMessage: ...
-    @property
-    def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    @_builtins.property
+    def repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Repeated"""
 
-    @property
-    def repeated_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_uint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sfixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sfixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def repeated_double(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def repeated_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_bytes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
-    @property
-    def repeated_nested_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]:
+    @_builtins.property
+    def repeated_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_uint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sfixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sfixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def repeated_double(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def repeated_bool(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def repeated_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_bytes(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
+    @_builtins.property
+    def repeated_nested_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]:
         """Groups are not allowed in proto3.
         repeated group RepeatedGroup = 46 {
           optional int32 a = 47;
         }
         """
 
-    @property
-    def repeated_foreign_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
-    @property
-    def repeated_import_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_import_pb2.ImportMessage]: ...
-    @property
-    def repeated_nested_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]: ...
-    @property
-    def repeated_foreign_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
-    @property
-    def repeated_string_piece(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def repeated_foreign_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___ForeignMessage]: ...
+    @_builtins.property
+    def repeated_import_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_import_pb2.ImportMessage]: ...
+    @_builtins.property
+    def repeated_nested_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_foreign_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    @_builtins.property
+    def repeated_string_piece(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Omitted (compared to unittest.proto) because proto2 enums are not allowed
         inside proto2 messages.
 
         repeated proto2_unittest_import.ImportEnum    repeated_import_enum  = 53;
         """
 
-    @property
-    def repeated_cord(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
-    def repeated_lazy_message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]: ...
-    @property
+    @_builtins.property
+    def repeated_cord(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
+    def repeated_lazy_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___TestAllTypes.NestedMessage]: ...
+    @_builtins.property
     def oneof_nested_message(self) -> Global___TestAllTypes.NestedMessage: ...
     def __init__(
         self,
         *,
-        optional_int32: builtins.int = ...,
-        optional_int64: builtins.int = ...,
-        optional_uint32: builtins.int = ...,
-        optional_uint64: builtins.int = ...,
-        optional_sint32: builtins.int = ...,
-        optional_sint64: builtins.int = ...,
-        optional_fixed32: builtins.int = ...,
-        optional_fixed64: builtins.int = ...,
-        optional_sfixed32: builtins.int = ...,
-        optional_sfixed64: builtins.int = ...,
-        optional_float: builtins.float = ...,
-        optional_double: builtins.float = ...,
-        optional_bool: builtins.bool = ...,
-        optional_string: builtins.str = ...,
-        optional_bytes: builtins.bytes = ...,
+        optional_int32: _builtins.int = ...,
+        optional_int64: _builtins.int = ...,
+        optional_uint32: _builtins.int = ...,
+        optional_uint64: _builtins.int = ...,
+        optional_sint32: _builtins.int = ...,
+        optional_sint64: _builtins.int = ...,
+        optional_fixed32: _builtins.int = ...,
+        optional_fixed64: _builtins.int = ...,
+        optional_sfixed32: _builtins.int = ...,
+        optional_sfixed64: _builtins.int = ...,
+        optional_float: _builtins.float = ...,
+        optional_double: _builtins.float = ...,
+        optional_bool: _builtins.bool = ...,
+        optional_string: _builtins.str = ...,
+        optional_bytes: _builtins.bytes = ...,
         optional_nested_message: Global___TestAllTypes.NestedMessage | None = ...,
         optional_foreign_message: Global___ForeignMessage | None = ...,
         optional_import_message: google.protobuf.unittest_import_pb2.ImportMessage | None = ...,
         optional_nested_enum: Global___TestAllTypes.NestedEnum.ValueType = ...,
         optional_foreign_enum: Global___ForeignEnum.ValueType = ...,
-        optional_string_piece: builtins.str = ...,
-        optional_cord: builtins.str = ...,
+        optional_string_piece: _builtins.str = ...,
+        optional_cord: _builtins.str = ...,
         optional_public_import_message: google.protobuf.unittest_import_public_pb2.PublicImportMessage | None = ...,
         optional_lazy_message: Global___TestAllTypes.NestedMessage | None = ...,
         optional_unverified_lazy_message: Global___TestAllTypes.NestedMessage | None = ...,
         optional_lazy_import_message: google.protobuf.unittest_import_pb2.ImportMessage | None = ...,
-        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_uint32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_uint64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sint32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sint64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_float: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_double: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_bool: collections.abc.Iterable[builtins.bool] | None = ...,
-        repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_bytes: collections.abc.Iterable[builtins.bytes] | None = ...,
-        repeated_nested_message: collections.abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
-        repeated_foreign_message: collections.abc.Iterable[Global___ForeignMessage] | None = ...,
-        repeated_import_message: collections.abc.Iterable[google.protobuf.unittest_import_pb2.ImportMessage] | None = ...,
-        repeated_nested_enum: collections.abc.Iterable[Global___TestAllTypes.NestedEnum.ValueType] | None = ...,
-        repeated_foreign_enum: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
-        repeated_string_piece: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_cord: collections.abc.Iterable[builtins.str] | None = ...,
-        repeated_lazy_message: collections.abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
-        oneof_uint32: builtins.int = ...,
+        repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_uint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sfixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sfixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_double: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_bool: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        repeated_string: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_bytes: _collections_abc.Iterable[_builtins.bytes] | None = ...,
+        repeated_nested_message: _collections_abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
+        repeated_foreign_message: _collections_abc.Iterable[Global___ForeignMessage] | None = ...,
+        repeated_import_message: _collections_abc.Iterable[google.protobuf.unittest_import_pb2.ImportMessage] | None = ...,
+        repeated_nested_enum: _collections_abc.Iterable[Global___TestAllTypes.NestedEnum.ValueType] | None = ...,
+        repeated_foreign_enum: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        repeated_string_piece: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_cord: _collections_abc.Iterable[_builtins.str] | None = ...,
+        repeated_lazy_message: _collections_abc.Iterable[Global___TestAllTypes.NestedMessage] | None = ...,
+        oneof_uint32: _builtins.int = ...,
         oneof_nested_message: Global___TestAllTypes.NestedMessage | None = ...,
-        oneof_string: builtins.str = ...,
-        oneof_bytes: builtins.bytes = ...,
+        oneof_string: _builtins.str = ...,
+        oneof_bytes: _builtins.bytes = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["_optional_nested_message", b"_optional_nested_message", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_uint32", b"oneof_uint32", "optional_foreign_message", b"optional_foreign_message", "optional_import_message", b"optional_import_message", "optional_lazy_import_message", b"optional_lazy_import_message", "optional_lazy_message", b"optional_lazy_message", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_unverified_lazy_message", b"optional_unverified_lazy_message"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["_optional_nested_message", b"_optional_nested_message", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_import_message", b"optional_import_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_lazy_import_message", b"optional_lazy_import_message", "optional_lazy_message", b"optional_lazy_message", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "optional_unverified_lazy_message", b"optional_unverified_lazy_message", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_foreign_enum", b"repeated_foreign_enum", "repeated_foreign_message", b"repeated_foreign_message", "repeated_import_message", b"repeated_import_message", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_lazy_message", b"repeated_lazy_message", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_string_piece", b"repeated_string_piece", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_uint32", b"oneof_uint32", "optional_foreign_message", b"optional_foreign_message", "optional_import_message", b"optional_import_message", "optional_lazy_import_message", b"optional_lazy_import_message", "optional_lazy_message", b"optional_lazy_message", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_unverified_lazy_message", b"optional_unverified_lazy_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message", "oneof_bytes", b"oneof_bytes", "oneof_field", b"oneof_field", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_import_message", b"optional_import_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_lazy_import_message", b"optional_lazy_import_message", "optional_lazy_message", b"optional_lazy_message", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_public_import_message", b"optional_public_import_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_string_piece", b"optional_string_piece", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "optional_unverified_lazy_message", b"optional_unverified_lazy_message", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_foreign_enum", b"repeated_foreign_enum", "repeated_foreign_message", b"repeated_foreign_message", "repeated_import_message", b"repeated_import_message", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_lazy_message", b"repeated_lazy_message", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_string_piece", b"repeated_string_piece", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType__optional_nested_message: typing_extensions.TypeAlias = typing.Literal["optional_nested_message"]
-    _WhichOneofArgType__optional_nested_message: typing_extensions.TypeAlias = typing.Literal["_optional_nested_message", b"_optional_nested_message"]
-    _WhichOneofReturnType_oneof_field: typing_extensions.TypeAlias = typing.Literal["oneof_uint32", "oneof_nested_message", "oneof_string", "oneof_bytes"]
-    _WhichOneofArgType_oneof_field: typing_extensions.TypeAlias = typing.Literal["oneof_field", b"oneof_field"]
-    @typing.overload
+    _WhichOneofReturnType__optional_nested_message: _typing_extensions.TypeAlias = _typing.Literal["optional_nested_message"]  # noqa: Y015
+    _WhichOneofArgType__optional_nested_message: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_uint32", "oneof_nested_message", "oneof_string", "oneof_bytes"]  # noqa: Y015
+    _WhichOneofArgType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_field", b"oneof_field"]  # noqa: Y015
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType__optional_nested_message) -> _WhichOneofReturnType__optional_nested_message | None: ...
-    @typing.overload
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_field) -> _WhichOneofReturnType_oneof_field | None: ...
 
-Global___TestAllTypes: typing_extensions.TypeAlias = TestAllTypes
+Global___TestAllTypes: _typing_extensions.TypeAlias = TestAllTypes  # noqa: Y015
 
-@typing.final
-class TestPackedTypes(google.protobuf.message.Message):
+@_typing.final
+class TestPackedTypes(_google_protobuf_message.Message):
     """Test messages for packed fields"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    PACKED_INT32_FIELD_NUMBER: builtins.int
-    PACKED_INT64_FIELD_NUMBER: builtins.int
-    PACKED_UINT32_FIELD_NUMBER: builtins.int
-    PACKED_UINT64_FIELD_NUMBER: builtins.int
-    PACKED_SINT32_FIELD_NUMBER: builtins.int
-    PACKED_SINT64_FIELD_NUMBER: builtins.int
-    PACKED_FIXED32_FIELD_NUMBER: builtins.int
-    PACKED_FIXED64_FIELD_NUMBER: builtins.int
-    PACKED_SFIXED32_FIELD_NUMBER: builtins.int
-    PACKED_SFIXED64_FIELD_NUMBER: builtins.int
-    PACKED_FLOAT_FIELD_NUMBER: builtins.int
-    PACKED_DOUBLE_FIELD_NUMBER: builtins.int
-    PACKED_BOOL_FIELD_NUMBER: builtins.int
-    PACKED_ENUM_FIELD_NUMBER: builtins.int
-    @property
-    def packed_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_uint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sfixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_sfixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def packed_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def packed_double(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def packed_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def packed_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
+    PACKED_INT32_FIELD_NUMBER: _builtins.int
+    PACKED_INT64_FIELD_NUMBER: _builtins.int
+    PACKED_UINT32_FIELD_NUMBER: _builtins.int
+    PACKED_UINT64_FIELD_NUMBER: _builtins.int
+    PACKED_SINT32_FIELD_NUMBER: _builtins.int
+    PACKED_SINT64_FIELD_NUMBER: _builtins.int
+    PACKED_FIXED32_FIELD_NUMBER: _builtins.int
+    PACKED_FIXED64_FIELD_NUMBER: _builtins.int
+    PACKED_SFIXED32_FIELD_NUMBER: _builtins.int
+    PACKED_SFIXED64_FIELD_NUMBER: _builtins.int
+    PACKED_FLOAT_FIELD_NUMBER: _builtins.int
+    PACKED_DOUBLE_FIELD_NUMBER: _builtins.int
+    PACKED_BOOL_FIELD_NUMBER: _builtins.int
+    PACKED_ENUM_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def packed_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_uint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sfixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_sfixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def packed_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def packed_double(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def packed_bool(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def packed_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___ForeignEnum.ValueType]: ...
     def __init__(
         self,
         *,
-        packed_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_uint32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_uint64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sint32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sint64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        packed_float: collections.abc.Iterable[builtins.float] | None = ...,
-        packed_double: collections.abc.Iterable[builtins.float] | None = ...,
-        packed_bool: collections.abc.Iterable[builtins.bool] | None = ...,
-        packed_enum: collections.abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
+        packed_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_uint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sfixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_sfixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        packed_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        packed_double: _collections_abc.Iterable[_builtins.float] | None = ...,
+        packed_bool: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        packed_enum: _collections_abc.Iterable[Global___ForeignEnum.ValueType] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["packed_bool", b"packed_bool", "packed_double", b"packed_double", "packed_enum", b"packed_enum", "packed_fixed32", b"packed_fixed32", "packed_fixed64", b"packed_fixed64", "packed_float", b"packed_float", "packed_int32", b"packed_int32", "packed_int64", b"packed_int64", "packed_sfixed32", b"packed_sfixed32", "packed_sfixed64", b"packed_sfixed64", "packed_sint32", b"packed_sint32", "packed_sint64", b"packed_sint64", "packed_uint32", b"packed_uint32", "packed_uint64", b"packed_uint64"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["packed_bool", b"packed_bool", "packed_double", b"packed_double", "packed_enum", b"packed_enum", "packed_fixed32", b"packed_fixed32", "packed_fixed64", b"packed_fixed64", "packed_float", b"packed_float", "packed_int32", b"packed_int32", "packed_int64", b"packed_int64", "packed_sfixed32", b"packed_sfixed32", "packed_sfixed64", b"packed_sfixed64", "packed_sint32", b"packed_sint32", "packed_sint64", b"packed_sint64", "packed_uint32", b"packed_uint32", "packed_uint64", b"packed_uint64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestPackedTypes: typing_extensions.TypeAlias = TestPackedTypes
+Global___TestPackedTypes: _typing_extensions.TypeAlias = TestPackedTypes  # noqa: Y015
 
-@typing.final
-class TestUnpackedTypes(google.protobuf.message.Message):
+@_typing.final
+class TestUnpackedTypes(_google_protobuf_message.Message):
     """Explicitly set packed to false"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_INT32_FIELD_NUMBER: builtins.int
-    REPEATED_INT64_FIELD_NUMBER: builtins.int
-    REPEATED_UINT32_FIELD_NUMBER: builtins.int
-    REPEATED_UINT64_FIELD_NUMBER: builtins.int
-    REPEATED_SINT32_FIELD_NUMBER: builtins.int
-    REPEATED_SINT64_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_FIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_SFIXED32_FIELD_NUMBER: builtins.int
-    REPEATED_SFIXED64_FIELD_NUMBER: builtins.int
-    REPEATED_FLOAT_FIELD_NUMBER: builtins.int
-    REPEATED_DOUBLE_FIELD_NUMBER: builtins.int
-    REPEATED_BOOL_FIELD_NUMBER: builtins.int
-    REPEATED_NESTED_ENUM_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_uint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_uint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sint32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sint64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_fixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_fixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sfixed32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_sfixed64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def repeated_float(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def repeated_double(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-    @property
-    def repeated_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
-    @property
-    def repeated_nested_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]: ...
+    REPEATED_INT32_FIELD_NUMBER: _builtins.int
+    REPEATED_INT64_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT32_FIELD_NUMBER: _builtins.int
+    REPEATED_UINT64_FIELD_NUMBER: _builtins.int
+    REPEATED_SINT32_FIELD_NUMBER: _builtins.int
+    REPEATED_SINT64_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_FIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_SFIXED32_FIELD_NUMBER: _builtins.int
+    REPEATED_SFIXED64_FIELD_NUMBER: _builtins.int
+    REPEATED_FLOAT_FIELD_NUMBER: _builtins.int
+    REPEATED_DOUBLE_FIELD_NUMBER: _builtins.int
+    REPEATED_BOOL_FIELD_NUMBER: _builtins.int
+    REPEATED_NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_int64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_uint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_uint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sint32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sint64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_fixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_fixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sfixed32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_sfixed64(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def repeated_float(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def repeated_double(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.float]: ...
+    @_builtins.property
+    def repeated_bool(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bool]: ...
+    @_builtins.property
+    def repeated_nested_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___TestAllTypes.NestedEnum.ValueType]: ...
     def __init__(
         self,
         *,
-        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_int64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_uint32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_uint64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sint32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sint64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
-        repeated_float: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_double: collections.abc.Iterable[builtins.float] | None = ...,
-        repeated_bool: collections.abc.Iterable[builtins.bool] | None = ...,
-        repeated_nested_enum: collections.abc.Iterable[Global___TestAllTypes.NestedEnum.ValueType] | None = ...,
+        repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_int64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_uint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_uint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sint32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sint64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_fixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sfixed32: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_sfixed64: _collections_abc.Iterable[_builtins.int] | None = ...,
+        repeated_float: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_double: _collections_abc.Iterable[_builtins.float] | None = ...,
+        repeated_bool: _collections_abc.Iterable[_builtins.bool] | None = ...,
+        repeated_nested_enum: _collections_abc.Iterable[Global___TestAllTypes.NestedEnum.ValueType] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_bool", b"repeated_bool", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_nested_enum", b"repeated_nested_enum", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_bool", b"repeated_bool", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_nested_enum", b"repeated_nested_enum", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestUnpackedTypes: typing_extensions.TypeAlias = TestUnpackedTypes
+Global___TestUnpackedTypes: _typing_extensions.TypeAlias = TestUnpackedTypes  # noqa: Y015
 
-@typing.final
-class NestedTestAllTypes(google.protobuf.message.Message):
+@_typing.final
+class NestedTestAllTypes(_google_protobuf_message.Message):
     """This proto includes a recursively nested message."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    CHILD_FIELD_NUMBER: builtins.int
-    PAYLOAD_FIELD_NUMBER: builtins.int
-    @property
+    CHILD_FIELD_NUMBER: _builtins.int
+    PAYLOAD_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def child(self) -> Global___NestedTestAllTypes: ...
-    @property
+    @_builtins.property
     def payload(self) -> Global___TestAllTypes: ...
     def __init__(
         self,
@@ -494,80 +494,80 @@ class NestedTestAllTypes(google.protobuf.message.Message):
         child: Global___NestedTestAllTypes | None = ...,
         payload: Global___TestAllTypes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "payload", b"payload"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child", "payload", b"payload"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "payload", b"payload"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "payload", b"payload"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NestedTestAllTypes: typing_extensions.TypeAlias = NestedTestAllTypes
+Global___NestedTestAllTypes: _typing_extensions.TypeAlias = NestedTestAllTypes  # noqa: Y015
 
-@typing.final
-class ForeignMessage(google.protobuf.message.Message):
+@_typing.final
+class ForeignMessage(_google_protobuf_message.Message):
     """Define these after TestAllTypes to make sure the compiler can handle
     that.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    C_FIELD_NUMBER: builtins.int
-    c: builtins.int
+    C_FIELD_NUMBER: _builtins.int
+    c: _builtins.int
     def __init__(
         self,
         *,
-        c: builtins.int = ...,
+        c: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["c", b"c"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["c", b"c"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ForeignMessage: typing_extensions.TypeAlias = ForeignMessage
+Global___ForeignMessage: _typing_extensions.TypeAlias = ForeignMessage  # noqa: Y015
 
-@typing.final
-class TestEmptyMessage(google.protobuf.message.Message):
+@_typing.final
+class TestEmptyMessage(_google_protobuf_message.Message):
     """TestEmptyMessage is used to test behavior of unknown fields."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestEmptyMessage: typing_extensions.TypeAlias = TestEmptyMessage
+Global___TestEmptyMessage: _typing_extensions.TypeAlias = TestEmptyMessage  # noqa: Y015
 
-@typing.final
-class TestMessageWithDummy(google.protobuf.message.Message):
+@_typing.final
+class TestMessageWithDummy(_google_protobuf_message.Message):
     """TestMessageWithDummy is also used to test behavior of unknown fields."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DUMMY_FIELD_NUMBER: builtins.int
-    dummy: builtins.bool
+    DUMMY_FIELD_NUMBER: _builtins.int
+    dummy: _builtins.bool
     """This field is only here for triggering copy-on-write; it's not intended to
     be serialized.
     """
     def __init__(
         self,
         *,
-        dummy: builtins.bool = ...,
+        dummy: _builtins.bool = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["dummy", b"dummy"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["dummy", b"dummy"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageWithDummy: typing_extensions.TypeAlias = TestMessageWithDummy
+Global___TestMessageWithDummy: _typing_extensions.TypeAlias = TestMessageWithDummy  # noqa: Y015
 
-@typing.final
-class TestOneof2(google.protobuf.message.Message):
+@_typing.final
+class TestOneof2(_google_protobuf_message.Message):
     """Same layout as TestOneof2 in unittest.proto to test unknown enum value
     parsing behavior in oneof.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestOneof2._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestOneof2._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNKNOWN: TestOneof2._NestedEnum.ValueType  # 0
         FOO: TestOneof2._NestedEnum.ValueType  # 1
         BAR: TestOneof2._NestedEnum.ValueType  # 2
@@ -579,250 +579,250 @@ class TestOneof2(google.protobuf.message.Message):
     BAR: TestOneof2.NestedEnum.ValueType  # 2
     BAZ: TestOneof2.NestedEnum.ValueType  # 3
 
-    FOO_ENUM_FIELD_NUMBER: builtins.int
+    FOO_ENUM_FIELD_NUMBER: _builtins.int
     foo_enum: Global___TestOneof2.NestedEnum.ValueType
     def __init__(
         self,
         *,
         foo_enum: Global___TestOneof2.NestedEnum.ValueType = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo", "foo_enum", b"foo_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo", "foo_enum", b"foo_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo_enum", b"foo_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo_enum", b"foo_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_foo: typing_extensions.TypeAlias = typing.Literal["foo_enum"]
-    _WhichOneofArgType_foo: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    _WhichOneofReturnType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo_enum"]  # noqa: Y015
+    _WhichOneofArgType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_foo) -> _WhichOneofReturnType_foo | None: ...
 
-Global___TestOneof2: typing_extensions.TypeAlias = TestOneof2
+Global___TestOneof2: _typing_extensions.TypeAlias = TestOneof2  # noqa: Y015
 
-@typing.final
-class TestHasbits(google.protobuf.message.Message):
+@_typing.final
+class TestHasbits(_google_protobuf_message.Message):
     """If bool fields are incorrectly assumed to have hasbits, InternalSwap would
     result in swapping N more 32bit hasbits incorrectly. Considering padding, we
     need many bool fields to stress this.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    B1_FIELD_NUMBER: builtins.int
-    B2_FIELD_NUMBER: builtins.int
-    B3_FIELD_NUMBER: builtins.int
-    B4_FIELD_NUMBER: builtins.int
-    B5_FIELD_NUMBER: builtins.int
-    B6_FIELD_NUMBER: builtins.int
-    B7_FIELD_NUMBER: builtins.int
-    B8_FIELD_NUMBER: builtins.int
-    B9_FIELD_NUMBER: builtins.int
-    B10_FIELD_NUMBER: builtins.int
-    B11_FIELD_NUMBER: builtins.int
-    B12_FIELD_NUMBER: builtins.int
-    B13_FIELD_NUMBER: builtins.int
-    B14_FIELD_NUMBER: builtins.int
-    B15_FIELD_NUMBER: builtins.int
-    B16_FIELD_NUMBER: builtins.int
-    B17_FIELD_NUMBER: builtins.int
-    B18_FIELD_NUMBER: builtins.int
-    B19_FIELD_NUMBER: builtins.int
-    B20_FIELD_NUMBER: builtins.int
-    B21_FIELD_NUMBER: builtins.int
-    B22_FIELD_NUMBER: builtins.int
-    B23_FIELD_NUMBER: builtins.int
-    B24_FIELD_NUMBER: builtins.int
-    B25_FIELD_NUMBER: builtins.int
-    B26_FIELD_NUMBER: builtins.int
-    B27_FIELD_NUMBER: builtins.int
-    B28_FIELD_NUMBER: builtins.int
-    B29_FIELD_NUMBER: builtins.int
-    B30_FIELD_NUMBER: builtins.int
-    B31_FIELD_NUMBER: builtins.int
-    B32_FIELD_NUMBER: builtins.int
-    B33_FIELD_NUMBER: builtins.int
-    B34_FIELD_NUMBER: builtins.int
-    B35_FIELD_NUMBER: builtins.int
-    B36_FIELD_NUMBER: builtins.int
-    B37_FIELD_NUMBER: builtins.int
-    B38_FIELD_NUMBER: builtins.int
-    B39_FIELD_NUMBER: builtins.int
-    B40_FIELD_NUMBER: builtins.int
-    B41_FIELD_NUMBER: builtins.int
-    B42_FIELD_NUMBER: builtins.int
-    B43_FIELD_NUMBER: builtins.int
-    B44_FIELD_NUMBER: builtins.int
-    B45_FIELD_NUMBER: builtins.int
-    B46_FIELD_NUMBER: builtins.int
-    B47_FIELD_NUMBER: builtins.int
-    B48_FIELD_NUMBER: builtins.int
-    B49_FIELD_NUMBER: builtins.int
-    B50_FIELD_NUMBER: builtins.int
-    B51_FIELD_NUMBER: builtins.int
-    B52_FIELD_NUMBER: builtins.int
-    B53_FIELD_NUMBER: builtins.int
-    B54_FIELD_NUMBER: builtins.int
-    B55_FIELD_NUMBER: builtins.int
-    B56_FIELD_NUMBER: builtins.int
-    B57_FIELD_NUMBER: builtins.int
-    B58_FIELD_NUMBER: builtins.int
-    B59_FIELD_NUMBER: builtins.int
-    B60_FIELD_NUMBER: builtins.int
-    B61_FIELD_NUMBER: builtins.int
-    B62_FIELD_NUMBER: builtins.int
-    B63_FIELD_NUMBER: builtins.int
-    B64_FIELD_NUMBER: builtins.int
-    B65_FIELD_NUMBER: builtins.int
-    B66_FIELD_NUMBER: builtins.int
-    B67_FIELD_NUMBER: builtins.int
-    B68_FIELD_NUMBER: builtins.int
-    B69_FIELD_NUMBER: builtins.int
-    CHILD_FIELD_NUMBER: builtins.int
-    b1: builtins.bool
-    b2: builtins.bool
-    b3: builtins.bool
-    b4: builtins.bool
-    b5: builtins.bool
-    b6: builtins.bool
-    b7: builtins.bool
-    b8: builtins.bool
-    b9: builtins.bool
-    b10: builtins.bool
-    b11: builtins.bool
-    b12: builtins.bool
-    b13: builtins.bool
-    b14: builtins.bool
-    b15: builtins.bool
-    b16: builtins.bool
-    b17: builtins.bool
-    b18: builtins.bool
-    b19: builtins.bool
-    b20: builtins.bool
-    b21: builtins.bool
-    b22: builtins.bool
-    b23: builtins.bool
-    b24: builtins.bool
-    b25: builtins.bool
-    b26: builtins.bool
-    b27: builtins.bool
-    b28: builtins.bool
-    b29: builtins.bool
-    b30: builtins.bool
-    b31: builtins.bool
-    b32: builtins.bool
-    b33: builtins.bool
-    b34: builtins.bool
-    b35: builtins.bool
-    b36: builtins.bool
-    b37: builtins.bool
-    b38: builtins.bool
-    b39: builtins.bool
-    b40: builtins.bool
-    b41: builtins.bool
-    b42: builtins.bool
-    b43: builtins.bool
-    b44: builtins.bool
-    b45: builtins.bool
-    b46: builtins.bool
-    b47: builtins.bool
-    b48: builtins.bool
-    b49: builtins.bool
-    b50: builtins.bool
-    b51: builtins.bool
-    b52: builtins.bool
-    b53: builtins.bool
-    b54: builtins.bool
-    b55: builtins.bool
-    b56: builtins.bool
-    b57: builtins.bool
-    b58: builtins.bool
-    b59: builtins.bool
-    b60: builtins.bool
-    b61: builtins.bool
-    b62: builtins.bool
-    b63: builtins.bool
-    b64: builtins.bool
-    b65: builtins.bool
-    b66: builtins.bool
-    b67: builtins.bool
-    b68: builtins.bool
-    b69: builtins.bool
-    @property
+    B1_FIELD_NUMBER: _builtins.int
+    B2_FIELD_NUMBER: _builtins.int
+    B3_FIELD_NUMBER: _builtins.int
+    B4_FIELD_NUMBER: _builtins.int
+    B5_FIELD_NUMBER: _builtins.int
+    B6_FIELD_NUMBER: _builtins.int
+    B7_FIELD_NUMBER: _builtins.int
+    B8_FIELD_NUMBER: _builtins.int
+    B9_FIELD_NUMBER: _builtins.int
+    B10_FIELD_NUMBER: _builtins.int
+    B11_FIELD_NUMBER: _builtins.int
+    B12_FIELD_NUMBER: _builtins.int
+    B13_FIELD_NUMBER: _builtins.int
+    B14_FIELD_NUMBER: _builtins.int
+    B15_FIELD_NUMBER: _builtins.int
+    B16_FIELD_NUMBER: _builtins.int
+    B17_FIELD_NUMBER: _builtins.int
+    B18_FIELD_NUMBER: _builtins.int
+    B19_FIELD_NUMBER: _builtins.int
+    B20_FIELD_NUMBER: _builtins.int
+    B21_FIELD_NUMBER: _builtins.int
+    B22_FIELD_NUMBER: _builtins.int
+    B23_FIELD_NUMBER: _builtins.int
+    B24_FIELD_NUMBER: _builtins.int
+    B25_FIELD_NUMBER: _builtins.int
+    B26_FIELD_NUMBER: _builtins.int
+    B27_FIELD_NUMBER: _builtins.int
+    B28_FIELD_NUMBER: _builtins.int
+    B29_FIELD_NUMBER: _builtins.int
+    B30_FIELD_NUMBER: _builtins.int
+    B31_FIELD_NUMBER: _builtins.int
+    B32_FIELD_NUMBER: _builtins.int
+    B33_FIELD_NUMBER: _builtins.int
+    B34_FIELD_NUMBER: _builtins.int
+    B35_FIELD_NUMBER: _builtins.int
+    B36_FIELD_NUMBER: _builtins.int
+    B37_FIELD_NUMBER: _builtins.int
+    B38_FIELD_NUMBER: _builtins.int
+    B39_FIELD_NUMBER: _builtins.int
+    B40_FIELD_NUMBER: _builtins.int
+    B41_FIELD_NUMBER: _builtins.int
+    B42_FIELD_NUMBER: _builtins.int
+    B43_FIELD_NUMBER: _builtins.int
+    B44_FIELD_NUMBER: _builtins.int
+    B45_FIELD_NUMBER: _builtins.int
+    B46_FIELD_NUMBER: _builtins.int
+    B47_FIELD_NUMBER: _builtins.int
+    B48_FIELD_NUMBER: _builtins.int
+    B49_FIELD_NUMBER: _builtins.int
+    B50_FIELD_NUMBER: _builtins.int
+    B51_FIELD_NUMBER: _builtins.int
+    B52_FIELD_NUMBER: _builtins.int
+    B53_FIELD_NUMBER: _builtins.int
+    B54_FIELD_NUMBER: _builtins.int
+    B55_FIELD_NUMBER: _builtins.int
+    B56_FIELD_NUMBER: _builtins.int
+    B57_FIELD_NUMBER: _builtins.int
+    B58_FIELD_NUMBER: _builtins.int
+    B59_FIELD_NUMBER: _builtins.int
+    B60_FIELD_NUMBER: _builtins.int
+    B61_FIELD_NUMBER: _builtins.int
+    B62_FIELD_NUMBER: _builtins.int
+    B63_FIELD_NUMBER: _builtins.int
+    B64_FIELD_NUMBER: _builtins.int
+    B65_FIELD_NUMBER: _builtins.int
+    B66_FIELD_NUMBER: _builtins.int
+    B67_FIELD_NUMBER: _builtins.int
+    B68_FIELD_NUMBER: _builtins.int
+    B69_FIELD_NUMBER: _builtins.int
+    CHILD_FIELD_NUMBER: _builtins.int
+    b1: _builtins.bool
+    b2: _builtins.bool
+    b3: _builtins.bool
+    b4: _builtins.bool
+    b5: _builtins.bool
+    b6: _builtins.bool
+    b7: _builtins.bool
+    b8: _builtins.bool
+    b9: _builtins.bool
+    b10: _builtins.bool
+    b11: _builtins.bool
+    b12: _builtins.bool
+    b13: _builtins.bool
+    b14: _builtins.bool
+    b15: _builtins.bool
+    b16: _builtins.bool
+    b17: _builtins.bool
+    b18: _builtins.bool
+    b19: _builtins.bool
+    b20: _builtins.bool
+    b21: _builtins.bool
+    b22: _builtins.bool
+    b23: _builtins.bool
+    b24: _builtins.bool
+    b25: _builtins.bool
+    b26: _builtins.bool
+    b27: _builtins.bool
+    b28: _builtins.bool
+    b29: _builtins.bool
+    b30: _builtins.bool
+    b31: _builtins.bool
+    b32: _builtins.bool
+    b33: _builtins.bool
+    b34: _builtins.bool
+    b35: _builtins.bool
+    b36: _builtins.bool
+    b37: _builtins.bool
+    b38: _builtins.bool
+    b39: _builtins.bool
+    b40: _builtins.bool
+    b41: _builtins.bool
+    b42: _builtins.bool
+    b43: _builtins.bool
+    b44: _builtins.bool
+    b45: _builtins.bool
+    b46: _builtins.bool
+    b47: _builtins.bool
+    b48: _builtins.bool
+    b49: _builtins.bool
+    b50: _builtins.bool
+    b51: _builtins.bool
+    b52: _builtins.bool
+    b53: _builtins.bool
+    b54: _builtins.bool
+    b55: _builtins.bool
+    b56: _builtins.bool
+    b57: _builtins.bool
+    b58: _builtins.bool
+    b59: _builtins.bool
+    b60: _builtins.bool
+    b61: _builtins.bool
+    b62: _builtins.bool
+    b63: _builtins.bool
+    b64: _builtins.bool
+    b65: _builtins.bool
+    b66: _builtins.bool
+    b67: _builtins.bool
+    b68: _builtins.bool
+    b69: _builtins.bool
+    @_builtins.property
     def child(self) -> Global___TestAllTypes: ...
     def __init__(
         self,
         *,
-        b1: builtins.bool = ...,
-        b2: builtins.bool = ...,
-        b3: builtins.bool = ...,
-        b4: builtins.bool = ...,
-        b5: builtins.bool = ...,
-        b6: builtins.bool = ...,
-        b7: builtins.bool = ...,
-        b8: builtins.bool = ...,
-        b9: builtins.bool = ...,
-        b10: builtins.bool = ...,
-        b11: builtins.bool = ...,
-        b12: builtins.bool = ...,
-        b13: builtins.bool = ...,
-        b14: builtins.bool = ...,
-        b15: builtins.bool = ...,
-        b16: builtins.bool = ...,
-        b17: builtins.bool = ...,
-        b18: builtins.bool = ...,
-        b19: builtins.bool = ...,
-        b20: builtins.bool = ...,
-        b21: builtins.bool = ...,
-        b22: builtins.bool = ...,
-        b23: builtins.bool = ...,
-        b24: builtins.bool = ...,
-        b25: builtins.bool = ...,
-        b26: builtins.bool = ...,
-        b27: builtins.bool = ...,
-        b28: builtins.bool = ...,
-        b29: builtins.bool = ...,
-        b30: builtins.bool = ...,
-        b31: builtins.bool = ...,
-        b32: builtins.bool = ...,
-        b33: builtins.bool = ...,
-        b34: builtins.bool = ...,
-        b35: builtins.bool = ...,
-        b36: builtins.bool = ...,
-        b37: builtins.bool = ...,
-        b38: builtins.bool = ...,
-        b39: builtins.bool = ...,
-        b40: builtins.bool = ...,
-        b41: builtins.bool = ...,
-        b42: builtins.bool = ...,
-        b43: builtins.bool = ...,
-        b44: builtins.bool = ...,
-        b45: builtins.bool = ...,
-        b46: builtins.bool = ...,
-        b47: builtins.bool = ...,
-        b48: builtins.bool = ...,
-        b49: builtins.bool = ...,
-        b50: builtins.bool = ...,
-        b51: builtins.bool = ...,
-        b52: builtins.bool = ...,
-        b53: builtins.bool = ...,
-        b54: builtins.bool = ...,
-        b55: builtins.bool = ...,
-        b56: builtins.bool = ...,
-        b57: builtins.bool = ...,
-        b58: builtins.bool = ...,
-        b59: builtins.bool = ...,
-        b60: builtins.bool = ...,
-        b61: builtins.bool = ...,
-        b62: builtins.bool = ...,
-        b63: builtins.bool = ...,
-        b64: builtins.bool = ...,
-        b65: builtins.bool = ...,
-        b66: builtins.bool = ...,
-        b67: builtins.bool = ...,
-        b68: builtins.bool = ...,
-        b69: builtins.bool = ...,
+        b1: _builtins.bool = ...,
+        b2: _builtins.bool = ...,
+        b3: _builtins.bool = ...,
+        b4: _builtins.bool = ...,
+        b5: _builtins.bool = ...,
+        b6: _builtins.bool = ...,
+        b7: _builtins.bool = ...,
+        b8: _builtins.bool = ...,
+        b9: _builtins.bool = ...,
+        b10: _builtins.bool = ...,
+        b11: _builtins.bool = ...,
+        b12: _builtins.bool = ...,
+        b13: _builtins.bool = ...,
+        b14: _builtins.bool = ...,
+        b15: _builtins.bool = ...,
+        b16: _builtins.bool = ...,
+        b17: _builtins.bool = ...,
+        b18: _builtins.bool = ...,
+        b19: _builtins.bool = ...,
+        b20: _builtins.bool = ...,
+        b21: _builtins.bool = ...,
+        b22: _builtins.bool = ...,
+        b23: _builtins.bool = ...,
+        b24: _builtins.bool = ...,
+        b25: _builtins.bool = ...,
+        b26: _builtins.bool = ...,
+        b27: _builtins.bool = ...,
+        b28: _builtins.bool = ...,
+        b29: _builtins.bool = ...,
+        b30: _builtins.bool = ...,
+        b31: _builtins.bool = ...,
+        b32: _builtins.bool = ...,
+        b33: _builtins.bool = ...,
+        b34: _builtins.bool = ...,
+        b35: _builtins.bool = ...,
+        b36: _builtins.bool = ...,
+        b37: _builtins.bool = ...,
+        b38: _builtins.bool = ...,
+        b39: _builtins.bool = ...,
+        b40: _builtins.bool = ...,
+        b41: _builtins.bool = ...,
+        b42: _builtins.bool = ...,
+        b43: _builtins.bool = ...,
+        b44: _builtins.bool = ...,
+        b45: _builtins.bool = ...,
+        b46: _builtins.bool = ...,
+        b47: _builtins.bool = ...,
+        b48: _builtins.bool = ...,
+        b49: _builtins.bool = ...,
+        b50: _builtins.bool = ...,
+        b51: _builtins.bool = ...,
+        b52: _builtins.bool = ...,
+        b53: _builtins.bool = ...,
+        b54: _builtins.bool = ...,
+        b55: _builtins.bool = ...,
+        b56: _builtins.bool = ...,
+        b57: _builtins.bool = ...,
+        b58: _builtins.bool = ...,
+        b59: _builtins.bool = ...,
+        b60: _builtins.bool = ...,
+        b61: _builtins.bool = ...,
+        b62: _builtins.bool = ...,
+        b63: _builtins.bool = ...,
+        b64: _builtins.bool = ...,
+        b65: _builtins.bool = ...,
+        b66: _builtins.bool = ...,
+        b67: _builtins.bool = ...,
+        b68: _builtins.bool = ...,
+        b69: _builtins.bool = ...,
         child: Global___TestAllTypes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["child", b"child"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["b1", b"b1", "b10", b"b10", "b11", b"b11", "b12", b"b12", "b13", b"b13", "b14", b"b14", "b15", b"b15", "b16", b"b16", "b17", b"b17", "b18", b"b18", "b19", b"b19", "b2", b"b2", "b20", b"b20", "b21", b"b21", "b22", b"b22", "b23", b"b23", "b24", b"b24", "b25", b"b25", "b26", b"b26", "b27", b"b27", "b28", b"b28", "b29", b"b29", "b3", b"b3", "b30", b"b30", "b31", b"b31", "b32", b"b32", "b33", b"b33", "b34", b"b34", "b35", b"b35", "b36", b"b36", "b37", b"b37", "b38", b"b38", "b39", b"b39", "b4", b"b4", "b40", b"b40", "b41", b"b41", "b42", b"b42", "b43", b"b43", "b44", b"b44", "b45", b"b45", "b46", b"b46", "b47", b"b47", "b48", b"b48", "b49", b"b49", "b5", b"b5", "b50", b"b50", "b51", b"b51", "b52", b"b52", "b53", b"b53", "b54", b"b54", "b55", b"b55", "b56", b"b56", "b57", b"b57", "b58", b"b58", "b59", b"b59", "b6", b"b6", "b60", b"b60", "b61", b"b61", "b62", b"b62", "b63", b"b63", "b64", b"b64", "b65", b"b65", "b66", b"b66", "b67", b"b67", "b68", b"b68", "b69", b"b69", "b7", b"b7", "b8", b"b8", "b9", b"b9", "child", b"child"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["b1", b"b1", "b10", b"b10", "b11", b"b11", "b12", b"b12", "b13", b"b13", "b14", b"b14", "b15", b"b15", "b16", b"b16", "b17", b"b17", "b18", b"b18", "b19", b"b19", "b2", b"b2", "b20", b"b20", "b21", b"b21", "b22", b"b22", "b23", b"b23", "b24", b"b24", "b25", b"b25", "b26", b"b26", "b27", b"b27", "b28", b"b28", "b29", b"b29", "b3", b"b3", "b30", b"b30", "b31", b"b31", "b32", b"b32", "b33", b"b33", "b34", b"b34", "b35", b"b35", "b36", b"b36", "b37", b"b37", "b38", b"b38", "b39", b"b39", "b4", b"b4", "b40", b"b40", "b41", b"b41", "b42", b"b42", "b43", b"b43", "b44", b"b44", "b45", b"b45", "b46", b"b46", "b47", b"b47", "b48", b"b48", "b49", b"b49", "b5", b"b5", "b50", b"b50", "b51", b"b51", "b52", b"b52", "b53", b"b53", "b54", b"b54", "b55", b"b55", "b56", b"b56", "b57", b"b57", "b58", b"b58", "b59", b"b59", "b6", b"b6", "b60", b"b60", "b61", b"b61", "b62", b"b62", "b63", b"b63", "b64", b"b64", "b65", b"b65", "b66", b"b66", "b67", b"b67", "b68", b"b68", "b69", b"b69", "b7", b"b7", "b8", b"b8", "b9", b"b9", "child", b"child"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestHasbits: typing_extensions.TypeAlias = TestHasbits
+Global___TestHasbits: _typing_extensions.TypeAlias = TestHasbits  # noqa: Y015

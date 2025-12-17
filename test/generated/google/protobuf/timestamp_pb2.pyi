@@ -32,22 +32,22 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.well_known_types
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class Timestamp(google.protobuf.message.Message, google.protobuf.internal.well_known_types.Timestamp):
+@_typing.final
+class Timestamp(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.Timestamp):
     """A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at
     nanosecond resolution. The count is relative to an epoch at UTC midnight on
@@ -139,16 +139,16 @@ class Timestamp(google.protobuf.message.Message, google.protobuf.internal.well_k
     ) to obtain a formatter capable of generating timestamps in this format.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    SECONDS_FIELD_NUMBER: builtins.int
-    NANOS_FIELD_NUMBER: builtins.int
-    seconds: builtins.int
+    SECONDS_FIELD_NUMBER: _builtins.int
+    NANOS_FIELD_NUMBER: _builtins.int
+    seconds: _builtins.int
     """Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must
     be between -62135596800 and 253402300799 inclusive (which corresponds to
     0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).
     """
-    nanos: builtins.int
+    nanos: _builtins.int
     """Non-negative fractions of a second at nanosecond resolution. This field is
     the nanosecond portion of the duration, not an alternative to seconds.
     Negative second values with fractions must still have non-negative nanos
@@ -158,10 +158,10 @@ class Timestamp(google.protobuf.message.Message, google.protobuf.internal.well_k
     def __init__(
         self,
         *,
-        seconds: builtins.int = ...,
-        nanos: builtins.int = ...,
+        seconds: _builtins.int = ...,
+        nanos: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["nanos", b"nanos", "seconds", b"seconds"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["nanos", b"nanos", "seconds", b"seconds"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Timestamp: typing_extensions.TypeAlias = Timestamp
+Global___Timestamp: _typing_extensions.TypeAlias = Timestamp  # noqa: Y015

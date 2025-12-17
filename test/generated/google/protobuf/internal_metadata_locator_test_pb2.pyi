@@ -3,38 +3,38 @@
 isort:skip_file
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.message
+import builtins as _builtins
+import collections.abc as _collections_abc
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class TestOneRepeatedField(google.protobuf.message.Message):
+@_typing.final
+class TestOneRepeatedField(_google_protobuf_message.Message):
     """The test that uses this message requires that the message has only one field."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_INT32_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    REPEATED_INT32_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_int32(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_int32: _collections_abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_int32", b"repeated_int32"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_int32", b"repeated_int32"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_int32", b"repeated_int32"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_int32", b"repeated_int32"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestOneRepeatedField: typing_extensions.TypeAlias = TestOneRepeatedField
+Global___TestOneRepeatedField: _typing_extensions.TypeAlias = TestOneRepeatedField  # noqa: Y015

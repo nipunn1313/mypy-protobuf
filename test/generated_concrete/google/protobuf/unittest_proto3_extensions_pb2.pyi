@@ -3,34 +3,34 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
 import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class Proto3FileExtensions(google.protobuf.message.Message):
+@_typing.final
+class Proto3FileExtensions(_google_protobuf_message.Message):
     """For testing proto3 extension behaviors."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    SINGULAR_INT_FIELD_NUMBER: builtins.int
-    REPEATED_INT_FIELD_NUMBER: builtins.int
-    singular_int: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, builtins.int]
-    repeated_int: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]]
+    SINGULAR_INT_FIELD_NUMBER: _builtins.int
+    REPEATED_INT_FIELD_NUMBER: _builtins.int
+    singular_int: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
+    repeated_int: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
     def __init__(
         self,
     ) -> None: ...
 
-Global___Proto3FileExtensions: typing_extensions.TypeAlias = Proto3FileExtensions
+Global___Proto3FileExtensions: _typing_extensions.TypeAlias = Proto3FileExtensions  # noqa: Y015

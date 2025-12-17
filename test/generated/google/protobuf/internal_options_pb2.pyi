@@ -9,38 +9,38 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
-import builtins
-import google.protobuf.descriptor
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
 import google.protobuf.descriptor_pb2
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class InternalOptionsForce(google.protobuf.message.Message):
+@_typing.final
+class InternalOptionsForce(_google_protobuf_message.Message):
     """Internal options for testing only.
     These are used to turn on/off certain features that are not normally
     controlled from the .proto file, but we want to be able to control them for
     unit tests of said features.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _Enum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _EnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[InternalOptionsForce._Enum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _EnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[InternalOptionsForce._Enum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         UNSPECIFIED: InternalOptionsForce._Enum.ValueType  # 0
         FORCE_ON: InternalOptionsForce._Enum.ValueType  # 1
         FORCE_OFF: InternalOptionsForce._Enum.ValueType  # 2
@@ -54,36 +54,36 @@ class InternalOptionsForce(google.protobuf.message.Message):
         self,
     ) -> None: ...
 
-Global___InternalOptionsForce: typing_extensions.TypeAlias = InternalOptionsForce
+Global___InternalOptionsForce: _typing_extensions.TypeAlias = InternalOptionsForce  # noqa: Y015
 
-@typing.final
-class InternalFieldOptionsCpp(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class InternalFieldOptionsCpp(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___InternalFieldOptionsCpp: typing_extensions.TypeAlias = InternalFieldOptionsCpp
+Global___InternalFieldOptionsCpp: _typing_extensions.TypeAlias = InternalFieldOptionsCpp  # noqa: Y015
 
-@typing.final
-class InternalFieldOptions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class InternalFieldOptions(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    CPP_FIELD_NUMBER: builtins.int
-    @property
+    CPP_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def cpp(self) -> Global___InternalFieldOptionsCpp: ...
     def __init__(
         self,
         *,
         cpp: Global___InternalFieldOptionsCpp | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["cpp", b"cpp"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["cpp", b"cpp"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["cpp", b"cpp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["cpp", b"cpp"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___InternalFieldOptions: typing_extensions.TypeAlias = InternalFieldOptions
+Global___InternalFieldOptions: _typing_extensions.TypeAlias = InternalFieldOptions  # noqa: Y015
 
-INTERNAL_FIELD_OPTIONS_FIELD_NUMBER: builtins.int
-internal_field_options: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___InternalFieldOptions]
+INTERNAL_FIELD_OPTIONS_FIELD_NUMBER: _builtins.int
+internal_field_options: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___InternalFieldOptions]

@@ -32,24 +32,24 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.well_known_types
-import google.protobuf.message
+import builtins as _builtins
+import collections.abc as _collections_abc
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class FieldMask(google.protobuf.message.Message, google.protobuf.internal.well_known_types.FieldMask):
+@_typing.final
+class FieldMask(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.FieldMask):
     """`FieldMask` represents a set of symbolic field paths, for example:
 
         paths: "f.a"
@@ -251,19 +251,19 @@ class FieldMask(google.protobuf.message.Message, google.protobuf.internal.well_k
     `INVALID_ARGUMENT` error if any path is unmappable.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    PATHS_FIELD_NUMBER: builtins.int
-    @property
-    def paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PATHS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def paths(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The set of field mask paths."""
 
     def __init__(
         self,
         *,
-        paths: collections.abc.Iterable[builtins.str] | None = ...,
+        paths: _collections_abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["paths", b"paths"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["paths", b"paths"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FieldMask: typing_extensions.TypeAlias = FieldMask
+Global___FieldMask: _typing_extensions.TypeAlias = FieldMask  # noqa: Y015

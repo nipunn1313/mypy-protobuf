@@ -7,29 +7,29 @@ In test_util.h we do
 "using namespace unittest_import = proto2_unittest_import".
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 from google.protobuf.unittest_import_public_pb2 import (
     PublicImportMessage as PublicImportMessage,
 )
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _ImportEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _ImportEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ImportEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ImportEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ImportEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     IMPORT_FOO: _ImportEnum.ValueType  # 7
     IMPORT_BAR: _ImportEnum.ValueType  # 8
     IMPORT_BAZ: _ImportEnum.ValueType  # 9
@@ -39,14 +39,14 @@ class ImportEnum(_ImportEnum, metaclass=_ImportEnumEnumTypeWrapper): ...
 IMPORT_FOO: ImportEnum.ValueType  # 7
 IMPORT_BAR: ImportEnum.ValueType  # 8
 IMPORT_BAZ: ImportEnum.ValueType  # 9
-Global___ImportEnum: typing_extensions.TypeAlias = ImportEnum
+Global___ImportEnum: _typing_extensions.TypeAlias = ImportEnum  # noqa: Y015
 
 class _ImportEnumForMap:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _ImportEnumForMapEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ImportEnumForMap.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ImportEnumForMapEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ImportEnumForMap.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     UNKNOWN: _ImportEnumForMap.ValueType  # 0
     FOO: _ImportEnumForMap.ValueType  # 1
     BAR: _ImportEnumForMap.ValueType  # 2
@@ -57,22 +57,22 @@ class ImportEnumForMap(_ImportEnumForMap, metaclass=_ImportEnumForMapEnumTypeWra
 UNKNOWN: ImportEnumForMap.ValueType  # 0
 FOO: ImportEnumForMap.ValueType  # 1
 BAR: ImportEnumForMap.ValueType  # 2
-Global___ImportEnumForMap: typing_extensions.TypeAlias = ImportEnumForMap
+Global___ImportEnumForMap: _typing_extensions.TypeAlias = ImportEnumForMap  # noqa: Y015
 
-@typing.final
-class ImportMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class ImportMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    D_FIELD_NUMBER: builtins.int
-    d: builtins.int
+    D_FIELD_NUMBER: _builtins.int
+    d: _builtins.int
     def __init__(
         self,
         *,
-        d: builtins.int | None = ...,
+        d: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["d", b"d"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["d", b"d"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ImportMessage: typing_extensions.TypeAlias = ImportMessage
+Global___ImportMessage: _typing_extensions.TypeAlias = ImportMessage  # noqa: Y015

@@ -74,6 +74,11 @@ message Simple1 {
     (mypy_protobuf.valuetype)="test/test_generated_mypy.Email"
   ];
 
+  optional string property = 24;
+  optional string collections = 25;
+  // This only works when all imports are de-dotted. Consider for a breaking release
+  // optional string testproto = 26;
+
   extensions 1000 to max;
 }
 

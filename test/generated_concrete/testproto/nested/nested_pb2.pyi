@@ -3,47 +3,47 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.message as _google_protobuf_message
 import sys
 import testproto.test3_pb2
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class Nested(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Nested(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
+    A_FIELD_NUMBER: _builtins.int
     a: testproto.test3_pb2.OuterEnum.ValueType
     def __init__(
         self,
         *,
         a: testproto.test3_pb2.OuterEnum.ValueType = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Nested: typing_extensions.TypeAlias = Nested
+Global___Nested: _typing_extensions.TypeAlias = Nested  # noqa: Y015
 
-@typing.final
-class AnotherNested(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class AnotherNested(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _NestedEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AnotherNested._NestedEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[AnotherNested._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         INVALID: AnotherNested._NestedEnum.ValueType  # 0
         ONE: AnotherNested._NestedEnum.ValueType  # 1
         TWO: AnotherNested._NestedEnum.ValueType  # 2
@@ -53,16 +53,16 @@ class AnotherNested(google.protobuf.message.Message):
     ONE: AnotherNested.NestedEnum.ValueType  # 1
     TWO: AnotherNested.NestedEnum.ValueType  # 2
 
-    @typing.final
-    class NestedMessage(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class NestedMessage(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
         class _NestedEnum2:
-            ValueType = typing.NewType("ValueType", builtins.int)
-            V: typing_extensions.TypeAlias = ValueType
+            ValueType = _typing.NewType("ValueType", _builtins.int)
+            V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-        class _NestedEnum2EnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AnotherNested.NestedMessage._NestedEnum2.ValueType], builtins.type):
-            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        class _NestedEnum2EnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[AnotherNested.NestedMessage._NestedEnum2.ValueType], _builtins.type):
+            DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
             UNDEFINED: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 0
             NESTED_ENUM1: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 1
             NESTED_ENUM2: AnotherNested.NestedMessage._NestedEnum2.ValueType  # 2
@@ -72,27 +72,27 @@ class AnotherNested(google.protobuf.message.Message):
         NESTED_ENUM1: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 1
         NESTED_ENUM2: AnotherNested.NestedMessage.NestedEnum2.ValueType  # 2
 
-        S_FIELD_NUMBER: builtins.int
-        B_FIELD_NUMBER: builtins.int
-        NE_FIELD_NUMBER: builtins.int
-        NE2_FIELD_NUMBER: builtins.int
-        s: builtins.str
-        b: builtins.bool
+        S_FIELD_NUMBER: _builtins.int
+        B_FIELD_NUMBER: _builtins.int
+        NE_FIELD_NUMBER: _builtins.int
+        NE2_FIELD_NUMBER: _builtins.int
+        s: _builtins.str
+        b: _builtins.bool
         ne: Global___AnotherNested.NestedEnum.ValueType
         ne2: Global___AnotherNested.NestedMessage.NestedEnum2.ValueType
         def __init__(
             self,
             *,
-            s: builtins.str = ...,
-            b: builtins.bool = ...,
+            s: _builtins.str = ...,
+            b: _builtins.bool = ...,
             ne: Global___AnotherNested.NestedEnum.ValueType = ...,
             ne2: Global___AnotherNested.NestedMessage.NestedEnum2.ValueType = ...,
         ) -> None: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["b", b"b", "ne", b"ne", "ne2", b"ne2", "s", b"s"]
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["b", b"b", "ne", b"ne", "ne2", b"ne2", "s", b"s"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___AnotherNested: typing_extensions.TypeAlias = AnotherNested
+Global___AnotherNested: _typing_extensions.TypeAlias = AnotherNested  # noqa: Y015

@@ -3,53 +3,53 @@
 isort:skip_file
 Author: kenton@google.com (Kenton Varda)"""
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _TestEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _TestEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TestEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TestEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_TestEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     FOO: _TestEnum.ValueType  # 1
 
 class TestEnum(_TestEnum, metaclass=_TestEnumEnumTypeWrapper): ...
 
 FOO: TestEnum.ValueType  # 1
-Global___TestEnum: typing_extensions.TypeAlias = TestEnum
+Global___TestEnum: _typing_extensions.TypeAlias = TestEnum  # noqa: Y015
 
-@typing.final
-class TestMessage(google.protobuf.message.Message):
+@_typing.final
+class TestMessage(_google_protobuf_message.Message):
     """*_generic_services are false by default."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    a: builtins.int
+    A_FIELD_NUMBER: _builtins.int
+    a: _builtins.int
     def __init__(
         self,
         *,
-        a: builtins.int | None = ...,
+        a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessage: typing_extensions.TypeAlias = TestMessage
+Global___TestMessage: _typing_extensions.TypeAlias = TestMessage  # noqa: Y015
 
-TEST_EXTENSION_FIELD_NUMBER: builtins.int
-test_extension: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[Global___TestMessage, builtins.int]
+TEST_EXTENSION_FIELD_NUMBER: _builtins.int
+test_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestMessage, _builtins.int]

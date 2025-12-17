@@ -32,30 +32,30 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import collections.abc
+import builtins as _builtins
+import collections.abc as _collections_abc
 import google.protobuf.any_pb2
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.message as _google_protobuf_message
 import google.protobuf.source_context_pb2
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _Syntax:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _SyntaxEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Syntax.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _SyntaxEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_Syntax.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     SYNTAX_PROTO2: _Syntax.ValueType  # 0
     """Syntax `proto2`."""
     SYNTAX_PROTO3: _Syntax.ValueType  # 1
@@ -72,10 +72,10 @@ SYNTAX_PROTO3: Syntax.ValueType  # 1
 """Syntax `proto3`."""
 SYNTAX_EDITIONS: Syntax.ValueType  # 2
 """Syntax `editions`."""
-Global___Syntax: typing_extensions.TypeAlias = Syntax
+Global___Syntax: _typing_extensions.TypeAlias = Syntax  # noqa: Y015
 
-@typing.final
-class Type(google.protobuf.message.Message):
+@_typing.final
+class Type(_google_protobuf_message.Message):
     """A protocol buffer message type.
 
     New usages of this message as an alternative to DescriptorProto are strongly
@@ -84,57 +84,57 @@ class Type(google.protobuf.message.Message):
     FileDescriptorSet which preserves the necessary information.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    FIELDS_FIELD_NUMBER: builtins.int
-    ONEOFS_FIELD_NUMBER: builtins.int
-    OPTIONS_FIELD_NUMBER: builtins.int
-    SOURCE_CONTEXT_FIELD_NUMBER: builtins.int
-    SYNTAX_FIELD_NUMBER: builtins.int
-    EDITION_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    FIELDS_FIELD_NUMBER: _builtins.int
+    ONEOFS_FIELD_NUMBER: _builtins.int
+    OPTIONS_FIELD_NUMBER: _builtins.int
+    SOURCE_CONTEXT_FIELD_NUMBER: _builtins.int
+    SYNTAX_FIELD_NUMBER: _builtins.int
+    EDITION_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The fully qualified message name."""
     syntax: Global___Syntax.ValueType
     """The source syntax."""
-    edition: builtins.str
+    edition: _builtins.str
     """The source edition string, only valid when syntax is SYNTAX_EDITIONS."""
-    @property
-    def fields(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Field]:
+    @_builtins.property
+    def fields(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___Field]:
         """The list of fields."""
 
-    @property
-    def oneofs(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def oneofs(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The list of types appearing in `oneof` definitions in this type."""
 
-    @property
-    def options(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Option]:
+    @_builtins.property
+    def options(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___Option]:
         """The protocol buffer options."""
 
-    @property
+    @_builtins.property
     def source_context(self) -> google.protobuf.source_context_pb2.SourceContext:
         """The source context."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        fields: collections.abc.Iterable[Global___Field] | None = ...,
-        oneofs: collections.abc.Iterable[builtins.str] | None = ...,
-        options: collections.abc.Iterable[Global___Option] | None = ...,
+        name: _builtins.str = ...,
+        fields: _collections_abc.Iterable[Global___Field] | None = ...,
+        oneofs: _collections_abc.Iterable[_builtins.str] | None = ...,
+        options: _collections_abc.Iterable[Global___Option] | None = ...,
         source_context: google.protobuf.source_context_pb2.SourceContext | None = ...,
         syntax: Global___Syntax.ValueType = ...,
-        edition: builtins.str = ...,
+        edition: _builtins.str = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["source_context", b"source_context"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["edition", b"edition", "fields", b"fields", "name", b"name", "oneofs", b"oneofs", "options", b"options", "source_context", b"source_context", "syntax", b"syntax"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["source_context", b"source_context"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["edition", b"edition", "fields", b"fields", "name", b"name", "oneofs", b"oneofs", "options", b"options", "source_context", b"source_context", "syntax", b"syntax"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Type: typing_extensions.TypeAlias = Type
+Global___Type: _typing_extensions.TypeAlias = Type  # noqa: Y015
 
-@typing.final
-class Field(google.protobuf.message.Message):
+@_typing.final
+class Field(_google_protobuf_message.Message):
     """A single field of a message type.
 
     New usages of this message as an alternative to FieldDescriptorProto are
@@ -143,14 +143,14 @@ class Field(google.protobuf.message.Message):
     make use of FileDescriptorSet which preserves the necessary information.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     class _Kind:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _KindEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Field._Kind.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _KindEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[Field._Kind.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         TYPE_UNKNOWN: Field._Kind.ValueType  # 0
         """Field type unknown."""
         TYPE_DOUBLE: Field._Kind.ValueType  # 1
@@ -233,11 +233,11 @@ class Field(google.protobuf.message.Message):
     """Field type sint64."""
 
     class _Cardinality:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-    class _CardinalityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Field._Cardinality.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _CardinalityEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[Field._Cardinality.ValueType], _builtins.type):
+        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
         CARDINALITY_UNKNOWN: Field._Cardinality.ValueType  # 0
         """For fields with unknown cardinality."""
         CARDINALITY_OPTIONAL: Field._Cardinality.ValueType  # 1
@@ -259,40 +259,40 @@ class Field(google.protobuf.message.Message):
     CARDINALITY_REPEATED: Field.Cardinality.ValueType  # 3
     """For repeated fields."""
 
-    KIND_FIELD_NUMBER: builtins.int
-    CARDINALITY_FIELD_NUMBER: builtins.int
-    NUMBER_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    TYPE_URL_FIELD_NUMBER: builtins.int
-    ONEOF_INDEX_FIELD_NUMBER: builtins.int
-    PACKED_FIELD_NUMBER: builtins.int
-    OPTIONS_FIELD_NUMBER: builtins.int
-    JSON_NAME_FIELD_NUMBER: builtins.int
-    DEFAULT_VALUE_FIELD_NUMBER: builtins.int
+    KIND_FIELD_NUMBER: _builtins.int
+    CARDINALITY_FIELD_NUMBER: _builtins.int
+    NUMBER_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    TYPE_URL_FIELD_NUMBER: _builtins.int
+    ONEOF_INDEX_FIELD_NUMBER: _builtins.int
+    PACKED_FIELD_NUMBER: _builtins.int
+    OPTIONS_FIELD_NUMBER: _builtins.int
+    JSON_NAME_FIELD_NUMBER: _builtins.int
+    DEFAULT_VALUE_FIELD_NUMBER: _builtins.int
     kind: Global___Field.Kind.ValueType
     """The field type."""
     cardinality: Global___Field.Cardinality.ValueType
     """The field cardinality."""
-    number: builtins.int
+    number: _builtins.int
     """The field number."""
-    name: builtins.str
+    name: _builtins.str
     """The field name."""
-    type_url: builtins.str
+    type_url: _builtins.str
     """The field type URL, without the scheme, for message or enumeration
     types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
     """
-    oneof_index: builtins.int
+    oneof_index: _builtins.int
     """The index of the field type in `Type.oneofs`, for message or enumeration
     types. The first type has index 1; zero means the type is not in the list.
     """
-    packed: builtins.bool
+    packed: _builtins.bool
     """Whether to use alternative packed wire representation."""
-    json_name: builtins.str
+    json_name: _builtins.str
     """The field JSON name."""
-    default_value: builtins.str
+    default_value: _builtins.str
     """The string value of the default value of this field. Proto2 syntax only."""
-    @property
-    def options(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Option]:
+    @_builtins.property
+    def options(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___Option]:
         """The protocol buffer options."""
 
     def __init__(
@@ -300,22 +300,22 @@ class Field(google.protobuf.message.Message):
         *,
         kind: Global___Field.Kind.ValueType = ...,
         cardinality: Global___Field.Cardinality.ValueType = ...,
-        number: builtins.int = ...,
-        name: builtins.str = ...,
-        type_url: builtins.str = ...,
-        oneof_index: builtins.int = ...,
-        packed: builtins.bool = ...,
-        options: collections.abc.Iterable[Global___Option] | None = ...,
-        json_name: builtins.str = ...,
-        default_value: builtins.str = ...,
+        number: _builtins.int = ...,
+        name: _builtins.str = ...,
+        type_url: _builtins.str = ...,
+        oneof_index: _builtins.int = ...,
+        packed: _builtins.bool = ...,
+        options: _collections_abc.Iterable[Global___Option] | None = ...,
+        json_name: _builtins.str = ...,
+        default_value: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["cardinality", b"cardinality", "default_value", b"default_value", "json_name", b"json_name", "kind", b"kind", "name", b"name", "number", b"number", "oneof_index", b"oneof_index", "options", b"options", "packed", b"packed", "type_url", b"type_url"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["cardinality", b"cardinality", "default_value", b"default_value", "json_name", b"json_name", "kind", b"kind", "name", b"name", "number", b"number", "oneof_index", b"oneof_index", "options", b"options", "packed", b"packed", "type_url", b"type_url"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Field: typing_extensions.TypeAlias = Field
+Global___Field: _typing_extensions.TypeAlias = Field  # noqa: Y015
 
-@typing.final
-class Enum(google.protobuf.message.Message):
+@_typing.final
+class Enum(_google_protobuf_message.Message):
     """Enum type definition.
 
     New usages of this message as an alternative to EnumDescriptorProto are
@@ -324,51 +324,51 @@ class Enum(google.protobuf.message.Message):
     make use of FileDescriptorSet which preserves the necessary information.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    ENUMVALUE_FIELD_NUMBER: builtins.int
-    OPTIONS_FIELD_NUMBER: builtins.int
-    SOURCE_CONTEXT_FIELD_NUMBER: builtins.int
-    SYNTAX_FIELD_NUMBER: builtins.int
-    EDITION_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    ENUMVALUE_FIELD_NUMBER: _builtins.int
+    OPTIONS_FIELD_NUMBER: _builtins.int
+    SOURCE_CONTEXT_FIELD_NUMBER: _builtins.int
+    SYNTAX_FIELD_NUMBER: _builtins.int
+    EDITION_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Enum type name."""
     syntax: Global___Syntax.ValueType
     """The source syntax."""
-    edition: builtins.str
+    edition: _builtins.str
     """The source edition string, only valid when syntax is SYNTAX_EDITIONS."""
-    @property
-    def enumvalue(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___EnumValue]:
+    @_builtins.property
+    def enumvalue(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___EnumValue]:
         """Enum value definitions."""
 
-    @property
-    def options(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Option]:
+    @_builtins.property
+    def options(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___Option]:
         """Protocol buffer options."""
 
-    @property
+    @_builtins.property
     def source_context(self) -> google.protobuf.source_context_pb2.SourceContext:
         """The source context."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        enumvalue: collections.abc.Iterable[Global___EnumValue] | None = ...,
-        options: collections.abc.Iterable[Global___Option] | None = ...,
+        name: _builtins.str = ...,
+        enumvalue: _collections_abc.Iterable[Global___EnumValue] | None = ...,
+        options: _collections_abc.Iterable[Global___Option] | None = ...,
         source_context: google.protobuf.source_context_pb2.SourceContext | None = ...,
         syntax: Global___Syntax.ValueType = ...,
-        edition: builtins.str = ...,
+        edition: _builtins.str = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["source_context", b"source_context"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["edition", b"edition", "enumvalue", b"enumvalue", "name", b"name", "options", b"options", "source_context", b"source_context", "syntax", b"syntax"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["source_context", b"source_context"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["edition", b"edition", "enumvalue", b"enumvalue", "name", b"name", "options", b"options", "source_context", b"source_context", "syntax", b"syntax"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Enum: typing_extensions.TypeAlias = Enum
+Global___Enum: _typing_extensions.TypeAlias = Enum  # noqa: Y015
 
-@typing.final
-class EnumValue(google.protobuf.message.Message):
+@_typing.final
+class EnumValue(_google_protobuf_message.Message):
     """Enum value definition.
 
     New usages of this message as an alternative to EnumValueDescriptorProto are
@@ -377,33 +377,33 @@ class EnumValue(google.protobuf.message.Message):
     make use of FileDescriptorSet which preserves the necessary information.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    NUMBER_FIELD_NUMBER: builtins.int
-    OPTIONS_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    NUMBER_FIELD_NUMBER: _builtins.int
+    OPTIONS_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Enum value name."""
-    number: builtins.int
+    number: _builtins.int
     """Enum value number."""
-    @property
-    def options(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Option]:
+    @_builtins.property
+    def options(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___Option]:
         """Protocol buffer options."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        number: builtins.int = ...,
-        options: collections.abc.Iterable[Global___Option] | None = ...,
+        name: _builtins.str = ...,
+        number: _builtins.int = ...,
+        options: _collections_abc.Iterable[Global___Option] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["name", b"name", "number", b"number", "options", b"options"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["name", b"name", "number", b"number", "options", b"options"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___EnumValue: typing_extensions.TypeAlias = EnumValue
+Global___EnumValue: _typing_extensions.TypeAlias = EnumValue  # noqa: Y015
 
-@typing.final
-class Option(google.protobuf.message.Message):
+@_typing.final
+class Option(_google_protobuf_message.Message):
     """A protocol buffer option, which can be attached to a message, field,
     enumeration, etc.
 
@@ -412,17 +412,17 @@ class Option(google.protobuf.message.Message):
     are strongly discouraged.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    VALUE_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    VALUE_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The option's name. For protobuf built-in options (options defined in
     descriptor.proto), this is the short name. For example, `"map_entry"`.
     For custom options, it should be the fully-qualified name. For example,
     `"google.api.http"`.
     """
-    @property
+    @_builtins.property
     def value(self) -> google.protobuf.any_pb2.Any:
         """The option's value packed in an Any message. If the value is a primitive,
         the corresponding wrapper type defined in google/protobuf/wrappers.proto
@@ -433,12 +433,12 @@ class Option(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
         value: google.protobuf.any_pb2.Any | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["name", b"name", "value", b"value"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["name", b"name", "value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Option: typing_extensions.TypeAlias = Option
+Global___Option: _typing_extensions.TypeAlias = Option  # noqa: Y015

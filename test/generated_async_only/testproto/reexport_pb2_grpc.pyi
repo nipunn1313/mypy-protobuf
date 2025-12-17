@@ -3,7 +3,7 @@
 isort:skip_file
 """
 
-import collections.abc
+import collections.abc as _collections_abc
 from google.protobuf.empty_pb2 import (
     Empty as Empty,
 )

@@ -6,29 +6,29 @@ Author: kenton@google.com (Kenton Varda)
 Tests that a "lite" message can import a regular message.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import google.protobuf.unittest_pb2
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class TestLiteImportsNonlite(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestLiteImportsNonlite(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    MESSAGE_FIELD_NUMBER: builtins.int
-    MESSAGE_WITH_REQUIRED_FIELD_NUMBER: builtins.int
-    @property
+    MESSAGE_FIELD_NUMBER: _builtins.int
+    MESSAGE_WITH_REQUIRED_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def message(self) -> google.protobuf.unittest_pb2.TestAllTypes: ...
-    @property
+    @_builtins.property
     def message_with_required(self) -> google.protobuf.unittest_pb2.TestRequired:
         """Verifies that transitive required fields generates valid code."""
 
@@ -38,9 +38,9 @@ class TestLiteImportsNonlite(google.protobuf.message.Message):
         message: google.protobuf.unittest_pb2.TestAllTypes | None = ...,
         message_with_required: google.protobuf.unittest_pb2.TestRequired | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["message", b"message", "message_with_required", b"message_with_required"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["message", b"message", "message_with_required", b"message_with_required"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message", b"message", "message_with_required", b"message_with_required"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message", b"message", "message_with_required", b"message_with_required"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestLiteImportsNonlite: typing_extensions.TypeAlias = TestLiteImportsNonlite
+Global___TestLiteImportsNonlite: _typing_extensions.TypeAlias = TestLiteImportsNonlite  # noqa: Y015

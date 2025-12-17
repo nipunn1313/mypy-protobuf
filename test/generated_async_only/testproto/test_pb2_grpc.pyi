@@ -3,12 +3,12 @@
 isort:skip_file
 Proto 2 test file."""
 
-import abc
-import collections.abc
-import grpc
-import grpc.aio
+import abc as _abc
+import collections.abc as _collections_abc
+import grpc as _grpc
+import grpc.aio as _grpc_aio
 import testproto.test_pb2
-import typing
+import typing as _typing
 
 
 GRPC_GENERATED_VERSION: str
@@ -17,29 +17,29 @@ GRPC_VERSION: str
 class PythonReservedKeywordsServiceStub:
     """Method name is reserved"""
 
-    def __init__(self, channel: grpc.aio.Channel) -> None: ...
-    valid_method_name1: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2._r_None]
+    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
+    valid_method_name1: _grpc_aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2._r_None]
     """valid_method_name1"""
-    valid_method_name2: grpc.aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2.PythonReservedKeywords._r_lambda]
+    valid_method_name2: _grpc_aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2.PythonReservedKeywords._r_lambda]
     """valid_method_name2"""
 
-class PythonReservedKeywordsServiceServicer(metaclass=abc.ABCMeta):
+class PythonReservedKeywordsServiceServicer(metaclass=_abc.ABCMeta):
     """Method name is reserved"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def valid_method_name1(
         self,
         request: testproto.test_pb2.Simple1,
-        context: grpc.aio.ServicerContext[testproto.test_pb2.Simple1, collections.abc.Awaitable[testproto.test_pb2._r_None]],
-    ) -> collections.abc.Awaitable[testproto.test_pb2._r_None]:
+        context: _grpc_aio.ServicerContext[testproto.test_pb2.Simple1, _collections_abc.Awaitable[testproto.test_pb2._r_None]],
+    ) -> _collections_abc.Awaitable[testproto.test_pb2._r_None]:
         """valid_method_name1"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def valid_method_name2(
         self,
         request: testproto.test_pb2.Simple1,
-        context: grpc.aio.ServicerContext[testproto.test_pb2.Simple1, collections.abc.Awaitable[testproto.test_pb2.PythonReservedKeywords._r_lambda]],
-    ) -> collections.abc.Awaitable[testproto.test_pb2.PythonReservedKeywords._r_lambda]:
+        context: _grpc_aio.ServicerContext[testproto.test_pb2.Simple1, _collections_abc.Awaitable[testproto.test_pb2.PythonReservedKeywords._r_lambda]],
+    ) -> _collections_abc.Awaitable[testproto.test_pb2.PythonReservedKeywords._r_lambda]:
         """valid_method_name2"""
 
-def add_PythonReservedKeywordsServiceServicer_to_server(servicer: PythonReservedKeywordsServiceServicer, server: grpc.aio.Server) -> None: ...
+def add_PythonReservedKeywordsServiceServicer_to_server(servicer: PythonReservedKeywordsServiceServicer, server: _grpc_aio.Server) -> None: ...

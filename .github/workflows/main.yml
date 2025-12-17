@@ -108,6 +108,8 @@ jobs:
         with:
           # By default, shellcheck tries to make sure any external files referenced actually exist
           shellcheck_flags: -e SC1091
+          exclude: |
+            */third_party/*
 
   sanity_check_windows:
     name: Sanity Check Windows Executable

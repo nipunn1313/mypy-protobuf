@@ -6,29 +6,29 @@ Author: kenton@google.com (Kenton Varda)
 This is like unittest_import.proto but with optimize_for = LITE_RUNTIME.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 from google.protobuf.unittest_import_public_lite_pb2 import (
     PublicImportMessageLite as PublicImportMessageLite,
 )
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _ImportEnumLite:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _ImportEnumLiteEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ImportEnumLite.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ImportEnumLiteEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ImportEnumLite.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     IMPORT_LITE_FOO: _ImportEnumLite.ValueType  # 7
     IMPORT_LITE_BAR: _ImportEnumLite.ValueType  # 8
     IMPORT_LITE_BAZ: _ImportEnumLite.ValueType  # 9
@@ -38,22 +38,22 @@ class ImportEnumLite(_ImportEnumLite, metaclass=_ImportEnumLiteEnumTypeWrapper):
 IMPORT_LITE_FOO: ImportEnumLite.ValueType  # 7
 IMPORT_LITE_BAR: ImportEnumLite.ValueType  # 8
 IMPORT_LITE_BAZ: ImportEnumLite.ValueType  # 9
-Global___ImportEnumLite: typing_extensions.TypeAlias = ImportEnumLite
+Global___ImportEnumLite: _typing_extensions.TypeAlias = ImportEnumLite  # noqa: Y015
 
-@typing.final
-class ImportMessageLite(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class ImportMessageLite(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    D_FIELD_NUMBER: builtins.int
-    d: builtins.int
+    D_FIELD_NUMBER: _builtins.int
+    d: _builtins.int
     def __init__(
         self,
         *,
-        d: builtins.int | None = ...,
+        d: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["d", b"d"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["d", b"d"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ImportMessageLite: typing_extensions.TypeAlias = ImportMessageLite
+Global___ImportMessageLite: _typing_extensions.TypeAlias = ImportMessageLite  # noqa: Y015

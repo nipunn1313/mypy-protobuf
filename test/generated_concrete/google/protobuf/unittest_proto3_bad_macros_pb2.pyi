@@ -9,25 +9,25 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _GID:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _GIDEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_GID.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _GIDEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_GID.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     GID_UNUSED: _GID.ValueType  # 0
 
 class GID(_GID, metaclass=_GIDEnumTypeWrapper):
@@ -40,28 +40,28 @@ class GID(_GID, metaclass=_GIDEnumTypeWrapper):
     """
 
 GID_UNUSED: GID.ValueType  # 0
-Global___GID: typing_extensions.TypeAlias = GID
+Global___GID: _typing_extensions.TypeAlias = GID  # noqa: Y015
 
 class _UID:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _UIDEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_UID.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _UIDEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_UID.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     UID_UNUSED: _UID.ValueType  # 0
 
 class UID(_UID, metaclass=_UIDEnumTypeWrapper):
     """This generates `UID_MAX`, which is a mcro in some circumstances."""
 
 UID_UNUSED: UID.ValueType  # 0
-Global___UID: typing_extensions.TypeAlias = UID
+Global___UID: _typing_extensions.TypeAlias = UID  # noqa: Y015
 
 class _BadNames:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _BadNamesEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_BadNames.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _BadNamesEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_BadNames.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     PACKAGE: _BadNames.ValueType  # 0
     """autoheader defines this in some circumstances."""
     PACKED: _BadNames.ValueType  # 1
@@ -149,4 +149,4 @@ TYPE_BOOL: BadNames.ValueType  # 30
 """Sometimed defined in macOS system headers."""
 DEBUG: BadNames.ValueType  # 31
 """Defined in macOS, Windows, and Linux headers."""
-Global___BadNames: typing_extensions.TypeAlias = BadNames
+Global___BadNames: _typing_extensions.TypeAlias = BadNames  # noqa: Y015

@@ -32,22 +32,22 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.well_known_types
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class Any(google.protobuf.message.Message, google.protobuf.internal.well_known_types.Any):
+@_typing.final
+class Any(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.Any):
     """`Any` contains an arbitrary serialized protocol buffer message along with a
     URL that describes the type of the serialized message.
 
@@ -135,11 +135,11 @@ class Any(google.protobuf.message.Message, google.protobuf.internal.well_known_t
         }
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    TYPE_URL_FIELD_NUMBER: builtins.int
-    VALUE_FIELD_NUMBER: builtins.int
-    type_url: builtins.str
+    TYPE_URL_FIELD_NUMBER: _builtins.int
+    VALUE_FIELD_NUMBER: _builtins.int
+    type_url: _builtins.str
     """A URL/resource name that uniquely identifies the type of the serialized
     protocol buffer message. This string must contain at least
     one "/" character. The last segment of the URL's path must represent
@@ -169,15 +169,15 @@ class Any(google.protobuf.message.Message, google.protobuf.internal.well_known_t
     Schemes other than `http`, `https` (or the empty scheme) might be
     used with implementation specific semantics.
     """
-    value: builtins.bytes
+    value: _builtins.bytes
     """Must be a valid serialized protocol buffer of the above specified type."""
     def __init__(
         self,
         *,
-        type_url: builtins.str = ...,
-        value: builtins.bytes = ...,
+        type_url: _builtins.str = ...,
+        value: _builtins.bytes = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["type_url", b"type_url", "value", b"value"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["type_url", b"type_url", "value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Any: typing_extensions.TypeAlias = Any
+Global___Any: _typing_extensions.TypeAlias = Any  # noqa: Y015

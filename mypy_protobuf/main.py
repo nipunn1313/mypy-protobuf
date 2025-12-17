@@ -191,7 +191,7 @@ class PkgWriter(object):
         self.indent = ""
 
         # Set of {x}, where {x} corresponds to to `import {x}`
-        self.imports: Set[str] = set()
+        self.imports: Dict[str, bool] = {}
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
         self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
@@ -201,29 +201,46 @@ class PkgWriter(object):
         # Comments
         self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
 
-    def _import(self, path: str, name: str) -> str:
+    @property
+    def _deprecated_name(self) -> str:
+        return "_deprecated"
+
+    @property
+    def _typing_extensions_name(self) -> str:
+        return "_typing_extensions"
+
+    def _import_alias(self, path: str) -> str:
+        """import as prefixed with underscore to avoid conflicts with message/enum names"""
+        return f"_{path.replace('.', '_')}"
+
+    def _import(self, path: str, name: str, *, alias: bool = True) -> str:
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Literal") -> "Literal"
+
+        If alias is true, then it will prefix the import with an underscore to prevent conflicts with builtin names
         """
         if path == "typing_extensions":
-            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12)}
+            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12), "Self": (3, 11)}
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
-            return "typing_extensions." + name
+            return self._typing_extensions_name + "." + name
 
         if path == "warnings" and name == "deprecated":
             if not self.deprecated_min or self.deprecated_min < (3, 11):
                 self.deprecated_min = (3, 13)
-            return name
+            return self._deprecated_name
 
         imp = path.replace("/", ".")
         if self.readable_stubs:
             self.from_imports[imp].add((name, None))
             return name
         else:
-            self.imports.add(imp)
-            return imp + "." + name
+            self.imports[imp] = alias
+            return (self._import_alias(imp) if alias else imp) + "." + name
+
+    def _property(self) -> str:
+        return f"@{self._import('builtins', 'property')}"
 
     def _import_message(self, name: str) -> str:
         """Import a referenced message and return a handle"""
@@ -252,7 +269,7 @@ class PkgWriter(object):
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
-        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0])
+        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0], alias=False)
 
         remains = ".".join(split[1:])
         if not remains:
@@ -427,7 +444,7 @@ class PkgWriter(object):
                     self._builtin("int"),
                 )
                 # Alias to the classic shorter definition "V"
-                wl("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
+                wl("V: {} = ValueType  # noqa: Y015", self._import("typing_extensions", "TypeAlias"))
             wl("")
             wl(
                 "class {}({}[{}], {}):",
@@ -467,7 +484,7 @@ class PkgWriter(object):
                 scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
             )
             if prefix == "" and not self.readable_stubs:
-                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
+                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}  # noqa: Y015")
             wl("")
 
     def write_messages(
@@ -541,7 +558,7 @@ class PkgWriter(object):
                     if not (is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
-                        wl("@property")
+                        wl(self._property())
                         body = " ..." if not self._has_comments(scl_field) else ""
                         wl(f"def {field.name}(self) -> {field_type}:{body}")
                         if self._has_comments(scl_field):
@@ -577,7 +594,7 @@ class PkgWriter(object):
 
             if prefix == "" and not self.readable_stubs:
                 wl("")
-                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
+                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}  # noqa: Y015")
             wl("")
 
     @staticmethod
@@ -608,13 +625,13 @@ class PkgWriter(object):
             return
 
         if hf_fields:
-            wl("_HasFieldArgType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
+            wl("_HasFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
             wl(
                 "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
                 self._builtin("bool"),
             )
         if cf_fields:
-            wl("_ClearFieldArgType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
+            wl("_ClearFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
             wl(
                 "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
             )
@@ -622,7 +639,7 @@ class PkgWriter(object):
         # Write type aliases first so overloads are not interrupted
         for wo_field, members in sorted(wo_fields.items()):
             wl(
-                "_WhichOneofReturnType_{}: {} = {}[{}]",
+                "_WhichOneofReturnType_{}: {} = {}[{}]  # noqa: Y015",
                 wo_field,
                 self._import("typing_extensions", "TypeAlias"),
                 self._import("typing", "Literal"),
@@ -630,7 +647,7 @@ class PkgWriter(object):
                 ", ".join(f'"{m}"' for m in members),
             )
             wl(
-                "_WhichOneofArgType_{}: {} = {}[{}]",
+                "_WhichOneofArgType_{}: {} = {}[{}]  # noqa: Y015",
                 wo_field,
                 self._import("typing_extensions", "TypeAlias"),
                 self._import("typing", "Literal"),
@@ -755,7 +772,7 @@ class PkgWriter(object):
         split = casttype.split(".")
         assert len(split) == 2, "mypy_protobuf.[casttype,keytype,valuetype] is expected to be of format path/to/file.TypeInFile"
         pkg = split[0].replace("/", ".")
-        return self._import(pkg, split[1])
+        return self._import(pkg, split[1], alias=False)
 
     def _map_key_value_types(
         self,
@@ -987,7 +1004,7 @@ class PkgWriter(object):
                         wl(
                             "def __new__(cls, channel: {}) -> {}: ...",
                             self._import("grpc", "Channel"),
-                            class_name,
+                            self._import("typing_extensions", "Self"),
                         )
 
                         # Write async overload
@@ -1172,21 +1189,25 @@ class PkgWriter(object):
                 self.from_imports[reexport_imp].update((n, n) for n in names)
 
         if self.typing_extensions_min or self.deprecated_min:
-            self.imports.add("sys")
-        for pkg in sorted(self.imports):
-            self._write_line(f"import {pkg}")
+            # Special case for `sys` as it is needed for version checks
+            self.imports["sys"] = False
+        for pkg, dedot in sorted(self.imports.items()):
+            if dedot:
+                self._write_line(f"import {pkg} as {self._import_alias(pkg)}")
+            else:
+                self._write_line(f"import {pkg}")
         if self.typing_extensions_min:
             self._write_line("")
             self._write_line(f"if sys.version_info >= {self.typing_extensions_min}:")
-            self._write_line("    import typing as typing_extensions")
+            self._write_line(f"    import typing as {self._typing_extensions_name}")
             self._write_line("else:")
-            self._write_line("    import typing_extensions")
+            self._write_line(f"    import typing_extensions as {self._typing_extensions_name}")
         if self.deprecated_min:
             self._write_line("")
             self._write_line(f"if sys.version_info >= {self.deprecated_min}:")
-            self._write_line("    from warnings import deprecated")
+            self._write_line(f"    from warnings import deprecated as {self._deprecated_name}")
             self._write_line("else:")
-            self._write_line("    from typing_extensions import deprecated")
+            self._write_line(f"    from typing_extensions import deprecated as {self._deprecated_name}")
 
         for pkg, items in sorted(self.from_imports.items()):
             self._write_line(f"from {pkg} import (")

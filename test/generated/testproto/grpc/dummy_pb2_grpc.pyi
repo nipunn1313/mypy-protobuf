@@ -3,24 +3,29 @@
 isort:skip_file
 https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 
-import abc
-import collections.abc
-import grpc
-import grpc.aio
+import abc as _abc
+import collections.abc as _collections_abc
+import grpc as _grpc
+import grpc.aio as _grpc_aio
 import sys
 import testproto.grpc.dummy_pb2
-import typing
+import typing as _typing
+
+if sys.version_info >= (3, 11):
+    import typing as _typing_extensions
+else:
+    import typing_extensions as _typing_extensions
 
 if sys.version_info >= (3, 13):
-    from warnings import deprecated
+    from warnings import deprecated as _deprecated
 else:
-    from typing_extensions import deprecated
+    from typing_extensions import deprecated as _deprecated
 
-_T = typing.TypeVar("_T")
+_T = _typing.TypeVar("_T")
 
-class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta): ...
+class _MaybeAsyncIterator(_collections_abc.AsyncIterator[_T], _collections_abc.Iterator[_T], metaclass=_abc.ABCMeta): ...
 
-class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore[misc, type-arg]
+class _ServicerContext(_grpc.ServicerContext, _grpc_aio.ServicerContext):  # type: ignore[misc, type-arg]
     ...
 
 GRPC_GENERATED_VERSION: str
@@ -29,1032 +34,1032 @@ GRPC_VERSION: str
 class DummyServiceStub:
     """DummyService"""
 
-    @typing.overload
-    def __new__(cls, channel: grpc.Channel) -> DummyServiceStub: ...
-    @typing.overload
-    def __new__(cls, channel: grpc.aio.Channel) -> DummyServiceAsyncStub: ...
-    UnaryUnary: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    @_typing.overload
+    def __new__(cls, channel: _grpc.Channel) -> _typing_extensions.Self: ...
+    @_typing.overload
+    def __new__(cls, channel: _grpc_aio.Channel) -> DummyServiceAsyncStub: ...
+    UnaryUnary: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """UnaryUnary"""
-    UnaryStream: grpc.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    UnaryStream: _grpc.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """UnaryStream"""
-    StreamUnary: grpc.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    StreamUnary: _grpc.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """StreamUnary"""
-    StreamStream: grpc.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    StreamStream: _grpc.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """StreamStream"""
 
-@typing.type_check_only
+@_typing.type_check_only
 class DummyServiceAsyncStub(DummyServiceStub):
     """DummyService"""
 
-    def __init__(self, channel: grpc.aio.Channel) -> None: ...
-    UnaryUnary: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
+    UnaryUnary: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
     """UnaryUnary"""
-    UnaryStream: grpc.aio.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    UnaryStream: _grpc_aio.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
     """UnaryStream"""
-    StreamUnary: grpc.aio.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    StreamUnary: _grpc_aio.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
     """StreamUnary"""
-    StreamStream: grpc.aio.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    StreamStream: _grpc_aio.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
     """StreamStream"""
 
-class DummyServiceServicer(metaclass=abc.ABCMeta):
+class DummyServiceServicer(metaclass=_abc.ABCMeta):
     """DummyService"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def UnaryUnary(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.DummyReply, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """UnaryUnary"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def UnaryStream(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: _ServicerContext,
-    ) -> typing.Union[collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> _typing.Union[_collections_abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], _collections_abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
         """UnaryStream"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def StreamUnary(
         self,
         request_iterator: _MaybeAsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.DummyReply, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """StreamUnary"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def StreamStream(
         self,
         request_iterator: _MaybeAsyncIterator[testproto.grpc.dummy_pb2.DummyRequest],
         context: _ServicerContext,
-    ) -> typing.Union[collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], collections.abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> _typing.Union[_collections_abc.Iterator[testproto.grpc.dummy_pb2.DummyReply], _collections_abc.AsyncIterator[testproto.grpc.dummy_pb2.DummyReply]]:
         """StreamStream"""
 
-def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
+def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: _typing.Union[_grpc.Server, _grpc_aio.Server]) -> None: ...
 
-@deprecated("""This service is deprecated""")
+@_deprecated("""This service is deprecated""")
 class DeprecatedServiceStub:
     """Marking the service as deprecated"""
 
-    @typing.overload
-    def __new__(cls, channel: grpc.Channel) -> DeprecatedServiceStub: ...
-    @typing.overload
-    def __new__(cls, channel: grpc.aio.Channel) -> DeprecatedServiceAsyncStub: ...
-    DeprecatedMethod: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]
+    @_typing.overload
+    def __new__(cls, channel: _grpc.Channel) -> _typing_extensions.Self: ...
+    @_typing.overload
+    def __new__(cls, channel: _grpc_aio.Channel) -> DeprecatedServiceAsyncStub: ...
+    DeprecatedMethod: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]
     """DeprecatedMethod"""
-    DeprecatedMethodNotDeprecatedRequest: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    DeprecatedMethodNotDeprecatedRequest: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
     """DeprecatedMethodNotDeprecatedRequest"""
 
-@deprecated("""This service is deprecated""")
-@typing.type_check_only
+@_deprecated("""This service is deprecated""")
+@_typing.type_check_only
 class DeprecatedServiceAsyncStub(DeprecatedServiceStub):
     """Marking the service as deprecated"""
 
-    def __init__(self, channel: grpc.aio.Channel) -> None: ...
-    DeprecatedMethod: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
+    DeprecatedMethod: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
     """DeprecatedMethod"""
-    DeprecatedMethodNotDeprecatedRequest: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
+    DeprecatedMethodNotDeprecatedRequest: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]  # type: ignore[assignment]
     """DeprecatedMethodNotDeprecatedRequest"""
 
-@deprecated("""This service is deprecated""")
-class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
+@_deprecated("""This service is deprecated""")
+class DeprecatedServiceServicer(metaclass=_abc.ABCMeta):
     """Marking the service as deprecated"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def DeprecatedMethod(
         self,
         request: testproto.grpc.dummy_pb2.DeprecatedRequest,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.DummyReply, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """DeprecatedMethod"""
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def DeprecatedMethodNotDeprecatedRequest(
         self,
         request: testproto.grpc.dummy_pb2.DummyRequest,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.DummyReply, collections.abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.DummyReply, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.DummyReply]]:
         """DeprecatedMethodNotDeprecatedRequest"""
 
-@deprecated("""This service is deprecated""")
-def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
+@_deprecated("""This service is deprecated""")
+def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: _typing.Union[_grpc.Server, _grpc_aio.Server]) -> None: ...
 
 class ManyRPCsServiceStub:
-    @typing.overload
-    def __new__(cls, channel: grpc.Channel) -> ManyRPCsServiceStub: ...
-    @typing.overload
-    def __new__(cls, channel: grpc.aio.Channel) -> ManyRPCsServiceAsyncStub: ...
-    Method1: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest1, testproto.grpc.dummy_pb2.ManyResponse1]
-    Method2: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest2, testproto.grpc.dummy_pb2.ManyResponse2]
-    Method3: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest3, testproto.grpc.dummy_pb2.ManyResponse3]
-    Method4: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest4, testproto.grpc.dummy_pb2.ManyResponse4]
-    Method5: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest5, testproto.grpc.dummy_pb2.ManyResponse5]
-    Method6: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest6, testproto.grpc.dummy_pb2.ManyResponse6]
-    Method7: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest7, testproto.grpc.dummy_pb2.ManyResponse7]
-    Method8: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest8, testproto.grpc.dummy_pb2.ManyResponse8]
-    Method9: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest9, testproto.grpc.dummy_pb2.ManyResponse9]
-    Method10: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest10, testproto.grpc.dummy_pb2.ManyResponse10]
-    Method11: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest11, testproto.grpc.dummy_pb2.ManyResponse11]
-    Method12: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest12, testproto.grpc.dummy_pb2.ManyResponse12]
-    Method13: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest13, testproto.grpc.dummy_pb2.ManyResponse13]
-    Method14: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest14, testproto.grpc.dummy_pb2.ManyResponse14]
-    Method15: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest15, testproto.grpc.dummy_pb2.ManyResponse15]
-    Method16: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest16, testproto.grpc.dummy_pb2.ManyResponse16]
-    Method17: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest17, testproto.grpc.dummy_pb2.ManyResponse17]
-    Method18: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest18, testproto.grpc.dummy_pb2.ManyResponse18]
-    Method19: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest19, testproto.grpc.dummy_pb2.ManyResponse19]
-    Method20: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest20, testproto.grpc.dummy_pb2.ManyResponse20]
-    Method21: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest21, testproto.grpc.dummy_pb2.ManyResponse21]
-    Method22: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest22, testproto.grpc.dummy_pb2.ManyResponse22]
-    Method23: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest23, testproto.grpc.dummy_pb2.ManyResponse23]
-    Method24: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest24, testproto.grpc.dummy_pb2.ManyResponse24]
-    Method25: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest25, testproto.grpc.dummy_pb2.ManyResponse25]
-    Method26: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest26, testproto.grpc.dummy_pb2.ManyResponse26]
-    Method27: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest27, testproto.grpc.dummy_pb2.ManyResponse27]
-    Method28: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest28, testproto.grpc.dummy_pb2.ManyResponse28]
-    Method29: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest29, testproto.grpc.dummy_pb2.ManyResponse29]
-    Method30: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest30, testproto.grpc.dummy_pb2.ManyResponse30]
-    Method31: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest31, testproto.grpc.dummy_pb2.ManyResponse31]
-    Method32: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest32, testproto.grpc.dummy_pb2.ManyResponse32]
-    Method33: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest33, testproto.grpc.dummy_pb2.ManyResponse33]
-    Method34: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest34, testproto.grpc.dummy_pb2.ManyResponse34]
-    Method35: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest35, testproto.grpc.dummy_pb2.ManyResponse35]
-    Method36: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest36, testproto.grpc.dummy_pb2.ManyResponse36]
-    Method37: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest37, testproto.grpc.dummy_pb2.ManyResponse37]
-    Method38: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest38, testproto.grpc.dummy_pb2.ManyResponse38]
-    Method39: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest39, testproto.grpc.dummy_pb2.ManyResponse39]
-    Method40: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest40, testproto.grpc.dummy_pb2.ManyResponse40]
-    Method41: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest41, testproto.grpc.dummy_pb2.ManyResponse41]
-    Method42: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest42, testproto.grpc.dummy_pb2.ManyResponse42]
-    Method43: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest43, testproto.grpc.dummy_pb2.ManyResponse43]
-    Method44: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest44, testproto.grpc.dummy_pb2.ManyResponse44]
-    Method45: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest45, testproto.grpc.dummy_pb2.ManyResponse45]
-    Method46: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest46, testproto.grpc.dummy_pb2.ManyResponse46]
-    Method47: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest47, testproto.grpc.dummy_pb2.ManyResponse47]
-    Method48: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest48, testproto.grpc.dummy_pb2.ManyResponse48]
-    Method49: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest49, testproto.grpc.dummy_pb2.ManyResponse49]
-    Method50: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest50, testproto.grpc.dummy_pb2.ManyResponse50]
-    Method51: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest51, testproto.grpc.dummy_pb2.ManyResponse51]
-    Method52: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest52, testproto.grpc.dummy_pb2.ManyResponse52]
-    Method53: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest53, testproto.grpc.dummy_pb2.ManyResponse53]
-    Method54: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest54, testproto.grpc.dummy_pb2.ManyResponse54]
-    Method55: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest55, testproto.grpc.dummy_pb2.ManyResponse55]
-    Method56: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest56, testproto.grpc.dummy_pb2.ManyResponse56]
-    Method57: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest57, testproto.grpc.dummy_pb2.ManyResponse57]
-    Method58: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest58, testproto.grpc.dummy_pb2.ManyResponse58]
-    Method59: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest59, testproto.grpc.dummy_pb2.ManyResponse59]
-    Method60: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest60, testproto.grpc.dummy_pb2.ManyResponse60]
-    Method61: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest61, testproto.grpc.dummy_pb2.ManyResponse61]
-    Method62: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest62, testproto.grpc.dummy_pb2.ManyResponse62]
-    Method63: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest63, testproto.grpc.dummy_pb2.ManyResponse63]
-    Method64: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest64, testproto.grpc.dummy_pb2.ManyResponse64]
-    Method65: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest65, testproto.grpc.dummy_pb2.ManyResponse65]
-    Method66: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest66, testproto.grpc.dummy_pb2.ManyResponse66]
-    Method67: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest67, testproto.grpc.dummy_pb2.ManyResponse67]
-    Method68: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest68, testproto.grpc.dummy_pb2.ManyResponse68]
-    Method69: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest69, testproto.grpc.dummy_pb2.ManyResponse69]
-    Method70: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest70, testproto.grpc.dummy_pb2.ManyResponse70]
-    Method71: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest71, testproto.grpc.dummy_pb2.ManyResponse71]
-    Method72: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest72, testproto.grpc.dummy_pb2.ManyResponse72]
-    Method73: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest73, testproto.grpc.dummy_pb2.ManyResponse73]
-    Method74: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest74, testproto.grpc.dummy_pb2.ManyResponse74]
-    Method75: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest75, testproto.grpc.dummy_pb2.ManyResponse75]
-    Method76: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest76, testproto.grpc.dummy_pb2.ManyResponse76]
-    Method77: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest77, testproto.grpc.dummy_pb2.ManyResponse77]
-    Method78: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest78, testproto.grpc.dummy_pb2.ManyResponse78]
-    Method79: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest79, testproto.grpc.dummy_pb2.ManyResponse79]
-    Method80: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest80, testproto.grpc.dummy_pb2.ManyResponse80]
-    Method81: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest81, testproto.grpc.dummy_pb2.ManyResponse81]
-    Method82: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest82, testproto.grpc.dummy_pb2.ManyResponse82]
-    Method83: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest83, testproto.grpc.dummy_pb2.ManyResponse83]
-    Method84: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest84, testproto.grpc.dummy_pb2.ManyResponse84]
-    Method85: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest85, testproto.grpc.dummy_pb2.ManyResponse85]
-    Method86: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest86, testproto.grpc.dummy_pb2.ManyResponse86]
-    Method87: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest87, testproto.grpc.dummy_pb2.ManyResponse87]
-    Method88: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest88, testproto.grpc.dummy_pb2.ManyResponse88]
-    Method89: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest89, testproto.grpc.dummy_pb2.ManyResponse89]
-    Method90: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest90, testproto.grpc.dummy_pb2.ManyResponse90]
-    Method91: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest91, testproto.grpc.dummy_pb2.ManyResponse91]
-    Method92: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest92, testproto.grpc.dummy_pb2.ManyResponse92]
-    Method93: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest93, testproto.grpc.dummy_pb2.ManyResponse93]
-    Method94: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest94, testproto.grpc.dummy_pb2.ManyResponse94]
-    Method95: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest95, testproto.grpc.dummy_pb2.ManyResponse95]
-    Method96: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest96, testproto.grpc.dummy_pb2.ManyResponse96]
-    Method97: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]
-    Method98: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]
-    Method99: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]
+    @_typing.overload
+    def __new__(cls, channel: _grpc.Channel) -> _typing_extensions.Self: ...
+    @_typing.overload
+    def __new__(cls, channel: _grpc_aio.Channel) -> ManyRPCsServiceAsyncStub: ...
+    Method1: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest1, testproto.grpc.dummy_pb2.ManyResponse1]
+    Method2: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest2, testproto.grpc.dummy_pb2.ManyResponse2]
+    Method3: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest3, testproto.grpc.dummy_pb2.ManyResponse3]
+    Method4: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest4, testproto.grpc.dummy_pb2.ManyResponse4]
+    Method5: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest5, testproto.grpc.dummy_pb2.ManyResponse5]
+    Method6: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest6, testproto.grpc.dummy_pb2.ManyResponse6]
+    Method7: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest7, testproto.grpc.dummy_pb2.ManyResponse7]
+    Method8: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest8, testproto.grpc.dummy_pb2.ManyResponse8]
+    Method9: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest9, testproto.grpc.dummy_pb2.ManyResponse9]
+    Method10: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest10, testproto.grpc.dummy_pb2.ManyResponse10]
+    Method11: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest11, testproto.grpc.dummy_pb2.ManyResponse11]
+    Method12: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest12, testproto.grpc.dummy_pb2.ManyResponse12]
+    Method13: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest13, testproto.grpc.dummy_pb2.ManyResponse13]
+    Method14: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest14, testproto.grpc.dummy_pb2.ManyResponse14]
+    Method15: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest15, testproto.grpc.dummy_pb2.ManyResponse15]
+    Method16: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest16, testproto.grpc.dummy_pb2.ManyResponse16]
+    Method17: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest17, testproto.grpc.dummy_pb2.ManyResponse17]
+    Method18: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest18, testproto.grpc.dummy_pb2.ManyResponse18]
+    Method19: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest19, testproto.grpc.dummy_pb2.ManyResponse19]
+    Method20: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest20, testproto.grpc.dummy_pb2.ManyResponse20]
+    Method21: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest21, testproto.grpc.dummy_pb2.ManyResponse21]
+    Method22: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest22, testproto.grpc.dummy_pb2.ManyResponse22]
+    Method23: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest23, testproto.grpc.dummy_pb2.ManyResponse23]
+    Method24: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest24, testproto.grpc.dummy_pb2.ManyResponse24]
+    Method25: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest25, testproto.grpc.dummy_pb2.ManyResponse25]
+    Method26: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest26, testproto.grpc.dummy_pb2.ManyResponse26]
+    Method27: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest27, testproto.grpc.dummy_pb2.ManyResponse27]
+    Method28: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest28, testproto.grpc.dummy_pb2.ManyResponse28]
+    Method29: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest29, testproto.grpc.dummy_pb2.ManyResponse29]
+    Method30: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest30, testproto.grpc.dummy_pb2.ManyResponse30]
+    Method31: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest31, testproto.grpc.dummy_pb2.ManyResponse31]
+    Method32: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest32, testproto.grpc.dummy_pb2.ManyResponse32]
+    Method33: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest33, testproto.grpc.dummy_pb2.ManyResponse33]
+    Method34: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest34, testproto.grpc.dummy_pb2.ManyResponse34]
+    Method35: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest35, testproto.grpc.dummy_pb2.ManyResponse35]
+    Method36: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest36, testproto.grpc.dummy_pb2.ManyResponse36]
+    Method37: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest37, testproto.grpc.dummy_pb2.ManyResponse37]
+    Method38: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest38, testproto.grpc.dummy_pb2.ManyResponse38]
+    Method39: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest39, testproto.grpc.dummy_pb2.ManyResponse39]
+    Method40: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest40, testproto.grpc.dummy_pb2.ManyResponse40]
+    Method41: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest41, testproto.grpc.dummy_pb2.ManyResponse41]
+    Method42: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest42, testproto.grpc.dummy_pb2.ManyResponse42]
+    Method43: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest43, testproto.grpc.dummy_pb2.ManyResponse43]
+    Method44: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest44, testproto.grpc.dummy_pb2.ManyResponse44]
+    Method45: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest45, testproto.grpc.dummy_pb2.ManyResponse45]
+    Method46: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest46, testproto.grpc.dummy_pb2.ManyResponse46]
+    Method47: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest47, testproto.grpc.dummy_pb2.ManyResponse47]
+    Method48: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest48, testproto.grpc.dummy_pb2.ManyResponse48]
+    Method49: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest49, testproto.grpc.dummy_pb2.ManyResponse49]
+    Method50: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest50, testproto.grpc.dummy_pb2.ManyResponse50]
+    Method51: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest51, testproto.grpc.dummy_pb2.ManyResponse51]
+    Method52: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest52, testproto.grpc.dummy_pb2.ManyResponse52]
+    Method53: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest53, testproto.grpc.dummy_pb2.ManyResponse53]
+    Method54: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest54, testproto.grpc.dummy_pb2.ManyResponse54]
+    Method55: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest55, testproto.grpc.dummy_pb2.ManyResponse55]
+    Method56: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest56, testproto.grpc.dummy_pb2.ManyResponse56]
+    Method57: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest57, testproto.grpc.dummy_pb2.ManyResponse57]
+    Method58: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest58, testproto.grpc.dummy_pb2.ManyResponse58]
+    Method59: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest59, testproto.grpc.dummy_pb2.ManyResponse59]
+    Method60: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest60, testproto.grpc.dummy_pb2.ManyResponse60]
+    Method61: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest61, testproto.grpc.dummy_pb2.ManyResponse61]
+    Method62: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest62, testproto.grpc.dummy_pb2.ManyResponse62]
+    Method63: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest63, testproto.grpc.dummy_pb2.ManyResponse63]
+    Method64: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest64, testproto.grpc.dummy_pb2.ManyResponse64]
+    Method65: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest65, testproto.grpc.dummy_pb2.ManyResponse65]
+    Method66: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest66, testproto.grpc.dummy_pb2.ManyResponse66]
+    Method67: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest67, testproto.grpc.dummy_pb2.ManyResponse67]
+    Method68: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest68, testproto.grpc.dummy_pb2.ManyResponse68]
+    Method69: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest69, testproto.grpc.dummy_pb2.ManyResponse69]
+    Method70: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest70, testproto.grpc.dummy_pb2.ManyResponse70]
+    Method71: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest71, testproto.grpc.dummy_pb2.ManyResponse71]
+    Method72: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest72, testproto.grpc.dummy_pb2.ManyResponse72]
+    Method73: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest73, testproto.grpc.dummy_pb2.ManyResponse73]
+    Method74: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest74, testproto.grpc.dummy_pb2.ManyResponse74]
+    Method75: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest75, testproto.grpc.dummy_pb2.ManyResponse75]
+    Method76: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest76, testproto.grpc.dummy_pb2.ManyResponse76]
+    Method77: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest77, testproto.grpc.dummy_pb2.ManyResponse77]
+    Method78: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest78, testproto.grpc.dummy_pb2.ManyResponse78]
+    Method79: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest79, testproto.grpc.dummy_pb2.ManyResponse79]
+    Method80: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest80, testproto.grpc.dummy_pb2.ManyResponse80]
+    Method81: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest81, testproto.grpc.dummy_pb2.ManyResponse81]
+    Method82: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest82, testproto.grpc.dummy_pb2.ManyResponse82]
+    Method83: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest83, testproto.grpc.dummy_pb2.ManyResponse83]
+    Method84: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest84, testproto.grpc.dummy_pb2.ManyResponse84]
+    Method85: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest85, testproto.grpc.dummy_pb2.ManyResponse85]
+    Method86: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest86, testproto.grpc.dummy_pb2.ManyResponse86]
+    Method87: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest87, testproto.grpc.dummy_pb2.ManyResponse87]
+    Method88: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest88, testproto.grpc.dummy_pb2.ManyResponse88]
+    Method89: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest89, testproto.grpc.dummy_pb2.ManyResponse89]
+    Method90: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest90, testproto.grpc.dummy_pb2.ManyResponse90]
+    Method91: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest91, testproto.grpc.dummy_pb2.ManyResponse91]
+    Method92: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest92, testproto.grpc.dummy_pb2.ManyResponse92]
+    Method93: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest93, testproto.grpc.dummy_pb2.ManyResponse93]
+    Method94: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest94, testproto.grpc.dummy_pb2.ManyResponse94]
+    Method95: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest95, testproto.grpc.dummy_pb2.ManyResponse95]
+    Method96: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest96, testproto.grpc.dummy_pb2.ManyResponse96]
+    Method97: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]
+    Method98: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]
+    Method99: _grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]
 
-@typing.type_check_only
+@_typing.type_check_only
 class ManyRPCsServiceAsyncStub(ManyRPCsServiceStub):
-    def __init__(self, channel: grpc.aio.Channel) -> None: ...
-    Method1: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest1, testproto.grpc.dummy_pb2.ManyResponse1]  # type: ignore[assignment]
-    Method2: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest2, testproto.grpc.dummy_pb2.ManyResponse2]  # type: ignore[assignment]
-    Method3: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest3, testproto.grpc.dummy_pb2.ManyResponse3]  # type: ignore[assignment]
-    Method4: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest4, testproto.grpc.dummy_pb2.ManyResponse4]  # type: ignore[assignment]
-    Method5: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest5, testproto.grpc.dummy_pb2.ManyResponse5]  # type: ignore[assignment]
-    Method6: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest6, testproto.grpc.dummy_pb2.ManyResponse6]  # type: ignore[assignment]
-    Method7: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest7, testproto.grpc.dummy_pb2.ManyResponse7]  # type: ignore[assignment]
-    Method8: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest8, testproto.grpc.dummy_pb2.ManyResponse8]  # type: ignore[assignment]
-    Method9: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest9, testproto.grpc.dummy_pb2.ManyResponse9]  # type: ignore[assignment]
-    Method10: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest10, testproto.grpc.dummy_pb2.ManyResponse10]  # type: ignore[assignment]
-    Method11: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest11, testproto.grpc.dummy_pb2.ManyResponse11]  # type: ignore[assignment]
-    Method12: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest12, testproto.grpc.dummy_pb2.ManyResponse12]  # type: ignore[assignment]
-    Method13: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest13, testproto.grpc.dummy_pb2.ManyResponse13]  # type: ignore[assignment]
-    Method14: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest14, testproto.grpc.dummy_pb2.ManyResponse14]  # type: ignore[assignment]
-    Method15: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest15, testproto.grpc.dummy_pb2.ManyResponse15]  # type: ignore[assignment]
-    Method16: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest16, testproto.grpc.dummy_pb2.ManyResponse16]  # type: ignore[assignment]
-    Method17: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest17, testproto.grpc.dummy_pb2.ManyResponse17]  # type: ignore[assignment]
-    Method18: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest18, testproto.grpc.dummy_pb2.ManyResponse18]  # type: ignore[assignment]
-    Method19: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest19, testproto.grpc.dummy_pb2.ManyResponse19]  # type: ignore[assignment]
-    Method20: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest20, testproto.grpc.dummy_pb2.ManyResponse20]  # type: ignore[assignment]
-    Method21: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest21, testproto.grpc.dummy_pb2.ManyResponse21]  # type: ignore[assignment]
-    Method22: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest22, testproto.grpc.dummy_pb2.ManyResponse22]  # type: ignore[assignment]
-    Method23: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest23, testproto.grpc.dummy_pb2.ManyResponse23]  # type: ignore[assignment]
-    Method24: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest24, testproto.grpc.dummy_pb2.ManyResponse24]  # type: ignore[assignment]
-    Method25: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest25, testproto.grpc.dummy_pb2.ManyResponse25]  # type: ignore[assignment]
-    Method26: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest26, testproto.grpc.dummy_pb2.ManyResponse26]  # type: ignore[assignment]
-    Method27: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest27, testproto.grpc.dummy_pb2.ManyResponse27]  # type: ignore[assignment]
-    Method28: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest28, testproto.grpc.dummy_pb2.ManyResponse28]  # type: ignore[assignment]
-    Method29: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest29, testproto.grpc.dummy_pb2.ManyResponse29]  # type: ignore[assignment]
-    Method30: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest30, testproto.grpc.dummy_pb2.ManyResponse30]  # type: ignore[assignment]
-    Method31: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest31, testproto.grpc.dummy_pb2.ManyResponse31]  # type: ignore[assignment]
-    Method32: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest32, testproto.grpc.dummy_pb2.ManyResponse32]  # type: ignore[assignment]
-    Method33: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest33, testproto.grpc.dummy_pb2.ManyResponse33]  # type: ignore[assignment]
-    Method34: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest34, testproto.grpc.dummy_pb2.ManyResponse34]  # type: ignore[assignment]
-    Method35: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest35, testproto.grpc.dummy_pb2.ManyResponse35]  # type: ignore[assignment]
-    Method36: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest36, testproto.grpc.dummy_pb2.ManyResponse36]  # type: ignore[assignment]
-    Method37: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest37, testproto.grpc.dummy_pb2.ManyResponse37]  # type: ignore[assignment]
-    Method38: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest38, testproto.grpc.dummy_pb2.ManyResponse38]  # type: ignore[assignment]
-    Method39: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest39, testproto.grpc.dummy_pb2.ManyResponse39]  # type: ignore[assignment]
-    Method40: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest40, testproto.grpc.dummy_pb2.ManyResponse40]  # type: ignore[assignment]
-    Method41: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest41, testproto.grpc.dummy_pb2.ManyResponse41]  # type: ignore[assignment]
-    Method42: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest42, testproto.grpc.dummy_pb2.ManyResponse42]  # type: ignore[assignment]
-    Method43: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest43, testproto.grpc.dummy_pb2.ManyResponse43]  # type: ignore[assignment]
-    Method44: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest44, testproto.grpc.dummy_pb2.ManyResponse44]  # type: ignore[assignment]
-    Method45: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest45, testproto.grpc.dummy_pb2.ManyResponse45]  # type: ignore[assignment]
-    Method46: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest46, testproto.grpc.dummy_pb2.ManyResponse46]  # type: ignore[assignment]
-    Method47: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest47, testproto.grpc.dummy_pb2.ManyResponse47]  # type: ignore[assignment]
-    Method48: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest48, testproto.grpc.dummy_pb2.ManyResponse48]  # type: ignore[assignment]
-    Method49: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest49, testproto.grpc.dummy_pb2.ManyResponse49]  # type: ignore[assignment]
-    Method50: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest50, testproto.grpc.dummy_pb2.ManyResponse50]  # type: ignore[assignment]
-    Method51: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest51, testproto.grpc.dummy_pb2.ManyResponse51]  # type: ignore[assignment]
-    Method52: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest52, testproto.grpc.dummy_pb2.ManyResponse52]  # type: ignore[assignment]
-    Method53: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest53, testproto.grpc.dummy_pb2.ManyResponse53]  # type: ignore[assignment]
-    Method54: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest54, testproto.grpc.dummy_pb2.ManyResponse54]  # type: ignore[assignment]
-    Method55: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest55, testproto.grpc.dummy_pb2.ManyResponse55]  # type: ignore[assignment]
-    Method56: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest56, testproto.grpc.dummy_pb2.ManyResponse56]  # type: ignore[assignment]
-    Method57: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest57, testproto.grpc.dummy_pb2.ManyResponse57]  # type: ignore[assignment]
-    Method58: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest58, testproto.grpc.dummy_pb2.ManyResponse58]  # type: ignore[assignment]
-    Method59: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest59, testproto.grpc.dummy_pb2.ManyResponse59]  # type: ignore[assignment]
-    Method60: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest60, testproto.grpc.dummy_pb2.ManyResponse60]  # type: ignore[assignment]
-    Method61: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest61, testproto.grpc.dummy_pb2.ManyResponse61]  # type: ignore[assignment]
-    Method62: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest62, testproto.grpc.dummy_pb2.ManyResponse62]  # type: ignore[assignment]
-    Method63: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest63, testproto.grpc.dummy_pb2.ManyResponse63]  # type: ignore[assignment]
-    Method64: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest64, testproto.grpc.dummy_pb2.ManyResponse64]  # type: ignore[assignment]
-    Method65: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest65, testproto.grpc.dummy_pb2.ManyResponse65]  # type: ignore[assignment]
-    Method66: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest66, testproto.grpc.dummy_pb2.ManyResponse66]  # type: ignore[assignment]
-    Method67: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest67, testproto.grpc.dummy_pb2.ManyResponse67]  # type: ignore[assignment]
-    Method68: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest68, testproto.grpc.dummy_pb2.ManyResponse68]  # type: ignore[assignment]
-    Method69: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest69, testproto.grpc.dummy_pb2.ManyResponse69]  # type: ignore[assignment]
-    Method70: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest70, testproto.grpc.dummy_pb2.ManyResponse70]  # type: ignore[assignment]
-    Method71: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest71, testproto.grpc.dummy_pb2.ManyResponse71]  # type: ignore[assignment]
-    Method72: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest72, testproto.grpc.dummy_pb2.ManyResponse72]  # type: ignore[assignment]
-    Method73: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest73, testproto.grpc.dummy_pb2.ManyResponse73]  # type: ignore[assignment]
-    Method74: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest74, testproto.grpc.dummy_pb2.ManyResponse74]  # type: ignore[assignment]
-    Method75: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest75, testproto.grpc.dummy_pb2.ManyResponse75]  # type: ignore[assignment]
-    Method76: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest76, testproto.grpc.dummy_pb2.ManyResponse76]  # type: ignore[assignment]
-    Method77: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest77, testproto.grpc.dummy_pb2.ManyResponse77]  # type: ignore[assignment]
-    Method78: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest78, testproto.grpc.dummy_pb2.ManyResponse78]  # type: ignore[assignment]
-    Method79: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest79, testproto.grpc.dummy_pb2.ManyResponse79]  # type: ignore[assignment]
-    Method80: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest80, testproto.grpc.dummy_pb2.ManyResponse80]  # type: ignore[assignment]
-    Method81: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest81, testproto.grpc.dummy_pb2.ManyResponse81]  # type: ignore[assignment]
-    Method82: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest82, testproto.grpc.dummy_pb2.ManyResponse82]  # type: ignore[assignment]
-    Method83: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest83, testproto.grpc.dummy_pb2.ManyResponse83]  # type: ignore[assignment]
-    Method84: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest84, testproto.grpc.dummy_pb2.ManyResponse84]  # type: ignore[assignment]
-    Method85: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest85, testproto.grpc.dummy_pb2.ManyResponse85]  # type: ignore[assignment]
-    Method86: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest86, testproto.grpc.dummy_pb2.ManyResponse86]  # type: ignore[assignment]
-    Method87: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest87, testproto.grpc.dummy_pb2.ManyResponse87]  # type: ignore[assignment]
-    Method88: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest88, testproto.grpc.dummy_pb2.ManyResponse88]  # type: ignore[assignment]
-    Method89: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest89, testproto.grpc.dummy_pb2.ManyResponse89]  # type: ignore[assignment]
-    Method90: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest90, testproto.grpc.dummy_pb2.ManyResponse90]  # type: ignore[assignment]
-    Method91: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest91, testproto.grpc.dummy_pb2.ManyResponse91]  # type: ignore[assignment]
-    Method92: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest92, testproto.grpc.dummy_pb2.ManyResponse92]  # type: ignore[assignment]
-    Method93: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest93, testproto.grpc.dummy_pb2.ManyResponse93]  # type: ignore[assignment]
-    Method94: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest94, testproto.grpc.dummy_pb2.ManyResponse94]  # type: ignore[assignment]
-    Method95: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest95, testproto.grpc.dummy_pb2.ManyResponse95]  # type: ignore[assignment]
-    Method96: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest96, testproto.grpc.dummy_pb2.ManyResponse96]  # type: ignore[assignment]
-    Method97: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]  # type: ignore[assignment]
-    Method98: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]  # type: ignore[assignment]
-    Method99: grpc.aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]  # type: ignore[assignment]
+    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
+    Method1: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest1, testproto.grpc.dummy_pb2.ManyResponse1]  # type: ignore[assignment]
+    Method2: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest2, testproto.grpc.dummy_pb2.ManyResponse2]  # type: ignore[assignment]
+    Method3: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest3, testproto.grpc.dummy_pb2.ManyResponse3]  # type: ignore[assignment]
+    Method4: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest4, testproto.grpc.dummy_pb2.ManyResponse4]  # type: ignore[assignment]
+    Method5: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest5, testproto.grpc.dummy_pb2.ManyResponse5]  # type: ignore[assignment]
+    Method6: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest6, testproto.grpc.dummy_pb2.ManyResponse6]  # type: ignore[assignment]
+    Method7: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest7, testproto.grpc.dummy_pb2.ManyResponse7]  # type: ignore[assignment]
+    Method8: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest8, testproto.grpc.dummy_pb2.ManyResponse8]  # type: ignore[assignment]
+    Method9: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest9, testproto.grpc.dummy_pb2.ManyResponse9]  # type: ignore[assignment]
+    Method10: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest10, testproto.grpc.dummy_pb2.ManyResponse10]  # type: ignore[assignment]
+    Method11: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest11, testproto.grpc.dummy_pb2.ManyResponse11]  # type: ignore[assignment]
+    Method12: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest12, testproto.grpc.dummy_pb2.ManyResponse12]  # type: ignore[assignment]
+    Method13: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest13, testproto.grpc.dummy_pb2.ManyResponse13]  # type: ignore[assignment]
+    Method14: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest14, testproto.grpc.dummy_pb2.ManyResponse14]  # type: ignore[assignment]
+    Method15: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest15, testproto.grpc.dummy_pb2.ManyResponse15]  # type: ignore[assignment]
+    Method16: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest16, testproto.grpc.dummy_pb2.ManyResponse16]  # type: ignore[assignment]
+    Method17: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest17, testproto.grpc.dummy_pb2.ManyResponse17]  # type: ignore[assignment]
+    Method18: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest18, testproto.grpc.dummy_pb2.ManyResponse18]  # type: ignore[assignment]
+    Method19: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest19, testproto.grpc.dummy_pb2.ManyResponse19]  # type: ignore[assignment]
+    Method20: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest20, testproto.grpc.dummy_pb2.ManyResponse20]  # type: ignore[assignment]
+    Method21: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest21, testproto.grpc.dummy_pb2.ManyResponse21]  # type: ignore[assignment]
+    Method22: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest22, testproto.grpc.dummy_pb2.ManyResponse22]  # type: ignore[assignment]
+    Method23: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest23, testproto.grpc.dummy_pb2.ManyResponse23]  # type: ignore[assignment]
+    Method24: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest24, testproto.grpc.dummy_pb2.ManyResponse24]  # type: ignore[assignment]
+    Method25: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest25, testproto.grpc.dummy_pb2.ManyResponse25]  # type: ignore[assignment]
+    Method26: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest26, testproto.grpc.dummy_pb2.ManyResponse26]  # type: ignore[assignment]
+    Method27: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest27, testproto.grpc.dummy_pb2.ManyResponse27]  # type: ignore[assignment]
+    Method28: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest28, testproto.grpc.dummy_pb2.ManyResponse28]  # type: ignore[assignment]
+    Method29: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest29, testproto.grpc.dummy_pb2.ManyResponse29]  # type: ignore[assignment]
+    Method30: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest30, testproto.grpc.dummy_pb2.ManyResponse30]  # type: ignore[assignment]
+    Method31: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest31, testproto.grpc.dummy_pb2.ManyResponse31]  # type: ignore[assignment]
+    Method32: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest32, testproto.grpc.dummy_pb2.ManyResponse32]  # type: ignore[assignment]
+    Method33: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest33, testproto.grpc.dummy_pb2.ManyResponse33]  # type: ignore[assignment]
+    Method34: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest34, testproto.grpc.dummy_pb2.ManyResponse34]  # type: ignore[assignment]
+    Method35: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest35, testproto.grpc.dummy_pb2.ManyResponse35]  # type: ignore[assignment]
+    Method36: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest36, testproto.grpc.dummy_pb2.ManyResponse36]  # type: ignore[assignment]
+    Method37: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest37, testproto.grpc.dummy_pb2.ManyResponse37]  # type: ignore[assignment]
+    Method38: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest38, testproto.grpc.dummy_pb2.ManyResponse38]  # type: ignore[assignment]
+    Method39: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest39, testproto.grpc.dummy_pb2.ManyResponse39]  # type: ignore[assignment]
+    Method40: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest40, testproto.grpc.dummy_pb2.ManyResponse40]  # type: ignore[assignment]
+    Method41: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest41, testproto.grpc.dummy_pb2.ManyResponse41]  # type: ignore[assignment]
+    Method42: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest42, testproto.grpc.dummy_pb2.ManyResponse42]  # type: ignore[assignment]
+    Method43: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest43, testproto.grpc.dummy_pb2.ManyResponse43]  # type: ignore[assignment]
+    Method44: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest44, testproto.grpc.dummy_pb2.ManyResponse44]  # type: ignore[assignment]
+    Method45: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest45, testproto.grpc.dummy_pb2.ManyResponse45]  # type: ignore[assignment]
+    Method46: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest46, testproto.grpc.dummy_pb2.ManyResponse46]  # type: ignore[assignment]
+    Method47: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest47, testproto.grpc.dummy_pb2.ManyResponse47]  # type: ignore[assignment]
+    Method48: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest48, testproto.grpc.dummy_pb2.ManyResponse48]  # type: ignore[assignment]
+    Method49: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest49, testproto.grpc.dummy_pb2.ManyResponse49]  # type: ignore[assignment]
+    Method50: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest50, testproto.grpc.dummy_pb2.ManyResponse50]  # type: ignore[assignment]
+    Method51: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest51, testproto.grpc.dummy_pb2.ManyResponse51]  # type: ignore[assignment]
+    Method52: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest52, testproto.grpc.dummy_pb2.ManyResponse52]  # type: ignore[assignment]
+    Method53: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest53, testproto.grpc.dummy_pb2.ManyResponse53]  # type: ignore[assignment]
+    Method54: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest54, testproto.grpc.dummy_pb2.ManyResponse54]  # type: ignore[assignment]
+    Method55: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest55, testproto.grpc.dummy_pb2.ManyResponse55]  # type: ignore[assignment]
+    Method56: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest56, testproto.grpc.dummy_pb2.ManyResponse56]  # type: ignore[assignment]
+    Method57: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest57, testproto.grpc.dummy_pb2.ManyResponse57]  # type: ignore[assignment]
+    Method58: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest58, testproto.grpc.dummy_pb2.ManyResponse58]  # type: ignore[assignment]
+    Method59: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest59, testproto.grpc.dummy_pb2.ManyResponse59]  # type: ignore[assignment]
+    Method60: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest60, testproto.grpc.dummy_pb2.ManyResponse60]  # type: ignore[assignment]
+    Method61: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest61, testproto.grpc.dummy_pb2.ManyResponse61]  # type: ignore[assignment]
+    Method62: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest62, testproto.grpc.dummy_pb2.ManyResponse62]  # type: ignore[assignment]
+    Method63: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest63, testproto.grpc.dummy_pb2.ManyResponse63]  # type: ignore[assignment]
+    Method64: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest64, testproto.grpc.dummy_pb2.ManyResponse64]  # type: ignore[assignment]
+    Method65: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest65, testproto.grpc.dummy_pb2.ManyResponse65]  # type: ignore[assignment]
+    Method66: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest66, testproto.grpc.dummy_pb2.ManyResponse66]  # type: ignore[assignment]
+    Method67: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest67, testproto.grpc.dummy_pb2.ManyResponse67]  # type: ignore[assignment]
+    Method68: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest68, testproto.grpc.dummy_pb2.ManyResponse68]  # type: ignore[assignment]
+    Method69: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest69, testproto.grpc.dummy_pb2.ManyResponse69]  # type: ignore[assignment]
+    Method70: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest70, testproto.grpc.dummy_pb2.ManyResponse70]  # type: ignore[assignment]
+    Method71: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest71, testproto.grpc.dummy_pb2.ManyResponse71]  # type: ignore[assignment]
+    Method72: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest72, testproto.grpc.dummy_pb2.ManyResponse72]  # type: ignore[assignment]
+    Method73: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest73, testproto.grpc.dummy_pb2.ManyResponse73]  # type: ignore[assignment]
+    Method74: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest74, testproto.grpc.dummy_pb2.ManyResponse74]  # type: ignore[assignment]
+    Method75: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest75, testproto.grpc.dummy_pb2.ManyResponse75]  # type: ignore[assignment]
+    Method76: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest76, testproto.grpc.dummy_pb2.ManyResponse76]  # type: ignore[assignment]
+    Method77: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest77, testproto.grpc.dummy_pb2.ManyResponse77]  # type: ignore[assignment]
+    Method78: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest78, testproto.grpc.dummy_pb2.ManyResponse78]  # type: ignore[assignment]
+    Method79: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest79, testproto.grpc.dummy_pb2.ManyResponse79]  # type: ignore[assignment]
+    Method80: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest80, testproto.grpc.dummy_pb2.ManyResponse80]  # type: ignore[assignment]
+    Method81: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest81, testproto.grpc.dummy_pb2.ManyResponse81]  # type: ignore[assignment]
+    Method82: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest82, testproto.grpc.dummy_pb2.ManyResponse82]  # type: ignore[assignment]
+    Method83: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest83, testproto.grpc.dummy_pb2.ManyResponse83]  # type: ignore[assignment]
+    Method84: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest84, testproto.grpc.dummy_pb2.ManyResponse84]  # type: ignore[assignment]
+    Method85: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest85, testproto.grpc.dummy_pb2.ManyResponse85]  # type: ignore[assignment]
+    Method86: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest86, testproto.grpc.dummy_pb2.ManyResponse86]  # type: ignore[assignment]
+    Method87: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest87, testproto.grpc.dummy_pb2.ManyResponse87]  # type: ignore[assignment]
+    Method88: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest88, testproto.grpc.dummy_pb2.ManyResponse88]  # type: ignore[assignment]
+    Method89: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest89, testproto.grpc.dummy_pb2.ManyResponse89]  # type: ignore[assignment]
+    Method90: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest90, testproto.grpc.dummy_pb2.ManyResponse90]  # type: ignore[assignment]
+    Method91: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest91, testproto.grpc.dummy_pb2.ManyResponse91]  # type: ignore[assignment]
+    Method92: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest92, testproto.grpc.dummy_pb2.ManyResponse92]  # type: ignore[assignment]
+    Method93: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest93, testproto.grpc.dummy_pb2.ManyResponse93]  # type: ignore[assignment]
+    Method94: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest94, testproto.grpc.dummy_pb2.ManyResponse94]  # type: ignore[assignment]
+    Method95: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest95, testproto.grpc.dummy_pb2.ManyResponse95]  # type: ignore[assignment]
+    Method96: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest96, testproto.grpc.dummy_pb2.ManyResponse96]  # type: ignore[assignment]
+    Method97: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]  # type: ignore[assignment]
+    Method98: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]  # type: ignore[assignment]
+    Method99: _grpc_aio.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]  # type: ignore[assignment]
 
-class ManyRPCsServiceServicer(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
+class ManyRPCsServiceServicer(metaclass=_abc.ABCMeta):
+    @_abc.abstractmethod
     def Method1(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest1,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse1, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse1]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse1, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse1]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method2(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest2,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse2, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse2]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse2, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse2]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method3(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest3,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse3, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse3]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse3, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse3]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method4(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest4,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse4, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse4]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse4, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse4]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method5(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest5,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse5, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse5]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse5, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse5]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method6(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest6,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse6, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse6]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse6, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse6]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method7(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest7,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse7, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse7]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse7, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse7]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method8(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest8,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse8, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse8]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse8, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse8]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method9(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest9,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse9, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse9]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse9, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse9]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method10(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest10,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse10, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse10]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse10, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse10]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method11(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest11,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse11, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse11]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse11, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse11]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method12(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest12,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse12, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse12]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse12, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse12]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method13(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest13,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse13, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse13]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse13, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse13]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method14(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest14,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse14, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse14]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse14, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse14]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method15(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest15,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse15, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse15]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse15, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse15]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method16(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest16,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse16, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse16]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse16, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse16]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method17(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest17,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse17, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse17]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse17, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse17]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method18(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest18,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse18, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse18]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse18, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse18]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method19(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest19,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse19, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse19]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse19, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse19]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method20(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest20,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse20, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse20]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse20, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse20]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method21(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest21,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse21, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse21]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse21, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse21]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method22(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest22,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse22, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse22]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse22, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse22]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method23(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest23,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse23, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse23]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse23, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse23]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method24(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest24,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse24, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse24]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse24, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse24]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method25(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest25,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse25, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse25]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse25, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse25]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method26(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest26,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse26, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse26]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse26, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse26]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method27(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest27,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse27, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse27]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse27, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse27]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method28(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest28,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse28, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse28]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse28, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse28]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method29(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest29,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse29, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse29]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse29, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse29]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method30(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest30,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse30, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse30]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse30, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse30]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method31(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest31,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse31, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse31]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse31, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse31]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method32(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest32,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse32, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse32]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse32, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse32]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method33(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest33,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse33, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse33]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse33, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse33]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method34(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest34,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse34, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse34]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse34, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse34]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method35(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest35,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse35, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse35]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse35, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse35]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method36(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest36,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse36, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse36]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse36, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse36]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method37(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest37,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse37, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse37]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse37, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse37]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method38(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest38,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse38, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse38]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse38, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse38]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method39(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest39,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse39, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse39]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse39, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse39]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method40(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest40,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse40, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse40]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse40, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse40]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method41(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest41,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse41, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse41]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse41, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse41]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method42(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest42,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse42, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse42]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse42, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse42]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method43(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest43,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse43, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse43]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse43, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse43]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method44(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest44,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse44, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse44]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse44, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse44]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method45(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest45,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse45, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse45]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse45, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse45]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method46(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest46,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse46, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse46]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse46, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse46]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method47(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest47,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse47, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse47]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse47, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse47]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method48(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest48,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse48, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse48]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse48, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse48]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method49(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest49,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse49, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse49]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse49, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse49]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method50(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest50,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse50, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse50]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse50, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse50]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method51(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest51,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse51, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse51]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse51, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse51]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method52(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest52,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse52, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse52]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse52, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse52]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method53(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest53,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse53, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse53]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse53, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse53]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method54(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest54,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse54, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse54]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse54, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse54]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method55(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest55,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse55, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse55]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse55, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse55]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method56(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest56,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse56, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse56]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse56, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse56]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method57(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest57,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse57, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse57]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse57, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse57]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method58(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest58,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse58, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse58]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse58, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse58]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method59(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest59,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse59, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse59]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse59, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse59]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method60(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest60,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse60, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse60]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse60, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse60]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method61(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest61,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse61, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse61]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse61, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse61]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method62(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest62,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse62, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse62]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse62, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse62]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method63(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest63,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse63, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse63]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse63, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse63]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method64(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest64,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse64, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse64]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse64, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse64]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method65(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest65,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse65, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse65]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse65, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse65]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method66(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest66,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse66, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse66]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse66, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse66]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method67(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest67,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse67, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse67]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse67, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse67]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method68(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest68,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse68, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse68]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse68, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse68]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method69(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest69,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse69, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse69]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse69, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse69]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method70(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest70,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse70, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse70]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse70, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse70]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method71(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest71,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse71, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse71]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse71, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse71]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method72(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest72,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse72, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse72]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse72, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse72]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method73(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest73,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse73, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse73]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse73, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse73]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method74(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest74,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse74, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse74]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse74, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse74]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method75(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest75,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse75, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse75]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse75, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse75]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method76(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest76,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse76, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse76]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse76, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse76]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method77(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest77,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse77, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse77]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse77, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse77]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method78(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest78,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse78, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse78]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse78, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse78]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method79(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest79,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse79, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse79]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse79, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse79]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method80(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest80,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse80, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse80]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse80, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse80]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method81(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest81,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse81, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse81]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse81, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse81]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method82(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest82,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse82, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse82]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse82, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse82]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method83(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest83,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse83, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse83]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse83, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse83]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method84(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest84,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse84, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse84]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse84, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse84]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method85(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest85,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse85, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse85]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse85, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse85]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method86(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest86,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse86, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse86]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse86, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse86]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method87(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest87,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse87, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse87]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse87, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse87]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method88(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest88,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse88, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse88]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse88, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse88]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method89(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest89,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse89, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse89]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse89, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse89]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method90(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest90,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse90, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse90]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse90, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse90]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method91(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest91,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse91, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse91]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse91, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse91]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method92(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest92,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse92, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse92]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse92, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse92]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method93(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest93,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse93, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse93]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse93, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse93]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method94(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest94,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse94, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse94]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse94, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse94]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method95(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest95,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse95, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse95]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse95, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse95]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method96(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest96,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse96, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse96]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse96, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse96]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method97(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest97,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse97, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse97]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse97, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse97]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method98(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest98,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse98, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse98]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse98, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse98]]: ...
 
-    @abc.abstractmethod
+    @_abc.abstractmethod
     def Method99(
         self,
         request: testproto.grpc.dummy_pb2.ManyRequest99,
         context: _ServicerContext,
-    ) -> typing.Union[testproto.grpc.dummy_pb2.ManyResponse99, collections.abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse99]]: ...
+    ) -> _typing.Union[testproto.grpc.dummy_pb2.ManyResponse99, _collections_abc.Awaitable[testproto.grpc.dummy_pb2.ManyResponse99]]: ...
 
-def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
+def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, server: _typing.Union[_grpc.Server, _grpc_aio.Server]) -> None: ...
 
 class EmptyServiceStub:
-    @typing.overload
-    def __new__(cls, channel: grpc.Channel) -> EmptyServiceStub: ...
-    @typing.overload
-    def __new__(cls, channel: grpc.aio.Channel) -> EmptyServiceAsyncStub: ...
+    @_typing.overload
+    def __new__(cls, channel: _grpc.Channel) -> _typing_extensions.Self: ...
+    @_typing.overload
+    def __new__(cls, channel: _grpc_aio.Channel) -> EmptyServiceAsyncStub: ...
 
-@typing.type_check_only
+@_typing.type_check_only
 class EmptyServiceAsyncStub(EmptyServiceStub):
-    def __init__(self, channel: grpc.aio.Channel) -> None: ...
+    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
 
-class EmptyServiceServicer(metaclass=abc.ABCMeta):
+class EmptyServiceServicer(metaclass=_abc.ABCMeta):
     ...
 
-def add_EmptyServiceServicer_to_server(servicer: EmptyServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
+def add_EmptyServiceServicer_to_server(servicer: EmptyServiceServicer, server: _typing.Union[_grpc.Server, _grpc_aio.Server]) -> None: ...

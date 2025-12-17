@@ -3,25 +3,25 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _OnlyOneEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _OnlyOneEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OnlyOneEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _OnlyOneEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_OnlyOneEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     ONLY_ONE_ENUM_DEFAULT: _OnlyOneEnum.ValueType  # 0
     ONLY_ONE_ENUM_VALID: _OnlyOneEnum.ValueType  # 10
 
@@ -33,4 +33,4 @@ class OnlyOneEnum(_OnlyOneEnum, metaclass=_OnlyOneEnumEnumTypeWrapper):
 
 ONLY_ONE_ENUM_DEFAULT: OnlyOneEnum.ValueType  # 0
 ONLY_ONE_ENUM_VALID: OnlyOneEnum.ValueType  # 10
-Global___OnlyOneEnum: typing_extensions.TypeAlias = OnlyOneEnum
+Global___OnlyOneEnum: _typing_extensions.TypeAlias = OnlyOneEnum  # noqa: Y015

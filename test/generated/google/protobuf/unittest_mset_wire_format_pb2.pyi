@@ -8,46 +8,46 @@ Author: kenton@google.com (Kenton Varda)
 This file contains messages for testing message_set_wire_format.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class TestMessageSet(google.protobuf.message.Message):
+@_typing.final
+class TestMessageSet(_google_protobuf_message.Message):
     """A message with message_set_wire_format."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestMessageSet: typing_extensions.TypeAlias = TestMessageSet
+Global___TestMessageSet: _typing_extensions.TypeAlias = TestMessageSet  # noqa: Y015
 
-@typing.final
-class TestMessageSetWireFormatContainer(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMessageSetWireFormatContainer(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    MESSAGE_SET_FIELD_NUMBER: builtins.int
-    @property
+    MESSAGE_SET_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def message_set(self) -> Global___TestMessageSet: ...
     def __init__(
         self,
         *,
         message_set: Global___TestMessageSet | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["message_set", b"message_set"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["message_set", b"message_set"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message_set", b"message_set"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message_set", b"message_set"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageSetWireFormatContainer: typing_extensions.TypeAlias = TestMessageSetWireFormatContainer
+Global___TestMessageSetWireFormatContainer: _typing_extensions.TypeAlias = TestMessageSetWireFormatContainer  # noqa: Y015

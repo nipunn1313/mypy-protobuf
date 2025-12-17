@@ -5,16 +5,16 @@ We don't put this in a package within proto2 because we need to make sure
 that the generated code doesn't depend on being in the proto2 namespace.
 """
 
-import builtins
-import google.protobuf.descriptor
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
 import google.protobuf.descriptor_pb2
-import google.protobuf.internal.extension_dict
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-FILE_OPT1_FIELD_NUMBER: builtins.int
-MESSAGE_OPT1_FIELD_NUMBER: builtins.int
-FIELD_OPT1_FIELD_NUMBER: builtins.int
-file_opt1: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, builtins.int]
-message_opt1: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, builtins.int]
-field_opt1: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.int]
+FILE_OPT1_FIELD_NUMBER: _builtins.int
+MESSAGE_OPT1_FIELD_NUMBER: _builtins.int
+FIELD_OPT1_FIELD_NUMBER: _builtins.int
+file_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
+message_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
+field_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.int]

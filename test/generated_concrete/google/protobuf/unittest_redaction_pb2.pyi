@@ -3,31 +3,31 @@
 isort:skip_file
 Test proto for redaction"""
 
-import builtins
-import collections.abc
+import builtins as _builtins
+import collections.abc as _collections_abc
 import google.protobuf.any_pb2
-import google.protobuf.descriptor
+import google.protobuf.descriptor as _google_protobuf_descriptor
 import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _MetaAnnotatedEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _MetaAnnotatedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MetaAnnotatedEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _MetaAnnotatedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_MetaAnnotatedEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     TEST_NULL: _MetaAnnotatedEnum.ValueType  # 0
     TEST_REDACTABLE: _MetaAnnotatedEnum.ValueType  # 1
     TEST_NO_REDACT: _MetaAnnotatedEnum.ValueType  # 2
@@ -41,138 +41,138 @@ TEST_REDACTABLE: MetaAnnotatedEnum.ValueType  # 1
 TEST_NO_REDACT: MetaAnnotatedEnum.ValueType  # 2
 TEST_NO_REDACT_AGAIN: MetaAnnotatedEnum.ValueType  # 3
 TEST_REDACTABLE_FALSE: MetaAnnotatedEnum.ValueType  # 4
-Global___MetaAnnotatedEnum: typing_extensions.TypeAlias = MetaAnnotatedEnum
+Global___MetaAnnotatedEnum: _typing_extensions.TypeAlias = MetaAnnotatedEnum  # noqa: Y015
 
-@typing.final
-class TestRedactedNestMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRedactedNestMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    FOO_FIELD_NUMBER: builtins.int
-    foo: builtins.str
+    FOO_FIELD_NUMBER: _builtins.int
+    foo: _builtins.str
     def __init__(
         self,
         *,
-        foo: builtins.str | None = ...,
+        foo: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRedactedNestMessage: typing_extensions.TypeAlias = TestRedactedNestMessage
+Global___TestRedactedNestMessage: _typing_extensions.TypeAlias = TestRedactedNestMessage  # noqa: Y015
 
-@typing.final
-class TestRepeatedRedactedNestMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRepeatedRedactedNestMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    BAR_FIELD_NUMBER: builtins.int
-    bar: builtins.str
+    BAR_FIELD_NUMBER: _builtins.int
+    bar: _builtins.str
     def __init__(
         self,
         *,
-        bar: builtins.str | None = ...,
+        bar: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bar", b"bar"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bar", b"bar"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRepeatedRedactedNestMessage: typing_extensions.TypeAlias = TestRepeatedRedactedNestMessage
+Global___TestRepeatedRedactedNestMessage: _typing_extensions.TypeAlias = TestRepeatedRedactedNestMessage  # noqa: Y015
 
-@typing.final
-class TestMessageEnum(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMessageEnum(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REDACTABLE_ENUM_FIELD_NUMBER: builtins.int
-    @property
-    def redactable_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___MetaAnnotatedEnum.ValueType]: ...
+    REDACTABLE_ENUM_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def redactable_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___MetaAnnotatedEnum.ValueType]: ...
     def __init__(
         self,
         *,
-        redactable_enum: collections.abc.Iterable[Global___MetaAnnotatedEnum.ValueType] | None = ...,
+        redactable_enum: _collections_abc.Iterable[Global___MetaAnnotatedEnum.ValueType] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["redactable_enum", b"redactable_enum"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["redactable_enum", b"redactable_enum"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["redactable_enum", b"redactable_enum"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["redactable_enum", b"redactable_enum"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageEnum: typing_extensions.TypeAlias = TestMessageEnum
+Global___TestMessageEnum: _typing_extensions.TypeAlias = TestMessageEnum  # noqa: Y015
 
-@typing.final
-class TestNestedMessageEnum(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestNestedMessageEnum(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    DIRECT_ENUM_FIELD_NUMBER: builtins.int
-    NESTED_ENUM_FIELD_NUMBER: builtins.int
-    REDACTED_STRING_FIELD_NUMBER: builtins.int
-    redacted_string: builtins.str
-    @property
-    def direct_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___MetaAnnotatedEnum.ValueType]: ...
-    @property
+    DIRECT_ENUM_FIELD_NUMBER: _builtins.int
+    NESTED_ENUM_FIELD_NUMBER: _builtins.int
+    REDACTED_STRING_FIELD_NUMBER: _builtins.int
+    redacted_string: _builtins.str
+    @_builtins.property
+    def direct_enum(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___MetaAnnotatedEnum.ValueType]: ...
+    @_builtins.property
     def nested_enum(self) -> Global___TestMessageEnum: ...
     def __init__(
         self,
         *,
-        direct_enum: collections.abc.Iterable[Global___MetaAnnotatedEnum.ValueType] | None = ...,
+        direct_enum: _collections_abc.Iterable[Global___MetaAnnotatedEnum.ValueType] | None = ...,
         nested_enum: Global___TestMessageEnum | None = ...,
-        redacted_string: builtins.str | None = ...,
+        redacted_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["direct_enum", b"direct_enum", "nested_enum", b"nested_enum", "redacted_string", b"redacted_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["direct_enum", b"direct_enum", "nested_enum", b"nested_enum", "redacted_string", b"redacted_string"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["direct_enum", b"direct_enum", "nested_enum", b"nested_enum", "redacted_string", b"redacted_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["direct_enum", b"direct_enum", "nested_enum", b"nested_enum", "redacted_string", b"redacted_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedMessageEnum: typing_extensions.TypeAlias = TestNestedMessageEnum
+Global___TestNestedMessageEnum: _typing_extensions.TypeAlias = TestNestedMessageEnum  # noqa: Y015
 
-@typing.final
-class TestRedactedMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestRedactedMessage(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    TEXT_FIELD_FIELD_NUMBER: builtins.int
-    META_ANNOTATED_FIELD_NUMBER: builtins.int
-    REPEATED_META_ANNOTATED_FIELD_NUMBER: builtins.int
-    UNREDACTED_REPEATED_ANNOTATIONS_FIELD_NUMBER: builtins.int
-    UNREPORTED_NON_META_DEBUG_REDACT_FIELD_FIELD_NUMBER: builtins.int
-    ANY_FIELD_FIELD_NUMBER: builtins.int
-    REDACTABLE_FALSE_FIELD_NUMBER: builtins.int
-    TEST_DIRECT_MESSAGE_ENUM_FIELD_NUMBER: builtins.int
-    TEST_NESTED_MESSAGE_ENUM_FIELD_NUMBER: builtins.int
-    TEST_REDACTED_MESSAGE_ENUM_FIELD_NUMBER: builtins.int
-    text_field: builtins.str
-    meta_annotated: builtins.str
-    repeated_meta_annotated: builtins.str
-    unredacted_repeated_annotations: builtins.str
-    unreported_non_meta_debug_redact_field: builtins.str
-    redactable_false: builtins.str
-    test_direct_message_enum: builtins.str
-    test_nested_message_enum: builtins.str
-    test_redacted_message_enum: builtins.str
-    @property
+    TEXT_FIELD_FIELD_NUMBER: _builtins.int
+    META_ANNOTATED_FIELD_NUMBER: _builtins.int
+    REPEATED_META_ANNOTATED_FIELD_NUMBER: _builtins.int
+    UNREDACTED_REPEATED_ANNOTATIONS_FIELD_NUMBER: _builtins.int
+    UNREPORTED_NON_META_DEBUG_REDACT_FIELD_FIELD_NUMBER: _builtins.int
+    ANY_FIELD_FIELD_NUMBER: _builtins.int
+    REDACTABLE_FALSE_FIELD_NUMBER: _builtins.int
+    TEST_DIRECT_MESSAGE_ENUM_FIELD_NUMBER: _builtins.int
+    TEST_NESTED_MESSAGE_ENUM_FIELD_NUMBER: _builtins.int
+    TEST_REDACTED_MESSAGE_ENUM_FIELD_NUMBER: _builtins.int
+    text_field: _builtins.str
+    meta_annotated: _builtins.str
+    repeated_meta_annotated: _builtins.str
+    unredacted_repeated_annotations: _builtins.str
+    unreported_non_meta_debug_redact_field: _builtins.str
+    redactable_false: _builtins.str
+    test_direct_message_enum: _builtins.str
+    test_nested_message_enum: _builtins.str
+    test_redacted_message_enum: _builtins.str
+    @_builtins.property
     def any_field(self) -> google.protobuf.any_pb2.Any: ...
     def __init__(
         self,
         *,
-        text_field: builtins.str | None = ...,
-        meta_annotated: builtins.str | None = ...,
-        repeated_meta_annotated: builtins.str | None = ...,
-        unredacted_repeated_annotations: builtins.str | None = ...,
-        unreported_non_meta_debug_redact_field: builtins.str | None = ...,
+        text_field: _builtins.str | None = ...,
+        meta_annotated: _builtins.str | None = ...,
+        repeated_meta_annotated: _builtins.str | None = ...,
+        unredacted_repeated_annotations: _builtins.str | None = ...,
+        unreported_non_meta_debug_redact_field: _builtins.str | None = ...,
         any_field: google.protobuf.any_pb2.Any | None = ...,
-        redactable_false: builtins.str | None = ...,
-        test_direct_message_enum: builtins.str | None = ...,
-        test_nested_message_enum: builtins.str | None = ...,
-        test_redacted_message_enum: builtins.str | None = ...,
+        redactable_false: _builtins.str | None = ...,
+        test_direct_message_enum: _builtins.str | None = ...,
+        test_nested_message_enum: _builtins.str | None = ...,
+        test_redacted_message_enum: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["any_field", b"any_field", "meta_annotated", b"meta_annotated", "redactable_false", b"redactable_false", "repeated_meta_annotated", b"repeated_meta_annotated", "test_direct_message_enum", b"test_direct_message_enum", "test_nested_message_enum", b"test_nested_message_enum", "test_redacted_message_enum", b"test_redacted_message_enum", "text_field", b"text_field", "unredacted_repeated_annotations", b"unredacted_repeated_annotations", "unreported_non_meta_debug_redact_field", b"unreported_non_meta_debug_redact_field"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["any_field", b"any_field", "meta_annotated", b"meta_annotated", "redactable_false", b"redactable_false", "repeated_meta_annotated", b"repeated_meta_annotated", "test_direct_message_enum", b"test_direct_message_enum", "test_nested_message_enum", b"test_nested_message_enum", "test_redacted_message_enum", b"test_redacted_message_enum", "text_field", b"text_field", "unredacted_repeated_annotations", b"unredacted_repeated_annotations", "unreported_non_meta_debug_redact_field", b"unreported_non_meta_debug_redact_field"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "meta_annotated", b"meta_annotated", "redactable_false", b"redactable_false", "repeated_meta_annotated", b"repeated_meta_annotated", "test_direct_message_enum", b"test_direct_message_enum", "test_nested_message_enum", b"test_nested_message_enum", "test_redacted_message_enum", b"test_redacted_message_enum", "text_field", b"text_field", "unredacted_repeated_annotations", b"unredacted_repeated_annotations", "unreported_non_meta_debug_redact_field", b"unreported_non_meta_debug_redact_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "meta_annotated", b"meta_annotated", "redactable_false", b"redactable_false", "repeated_meta_annotated", b"repeated_meta_annotated", "test_direct_message_enum", b"test_direct_message_enum", "test_nested_message_enum", b"test_nested_message_enum", "test_redacted_message_enum", b"test_redacted_message_enum", "text_field", b"text_field", "unredacted_repeated_annotations", b"unredacted_repeated_annotations", "unreported_non_meta_debug_redact_field", b"unreported_non_meta_debug_redact_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRedactedMessage: typing_extensions.TypeAlias = TestRedactedMessage
+Global___TestRedactedMessage: _typing_extensions.TypeAlias = TestRedactedMessage  # noqa: Y015
 
-META_ANNOTATED_ENUM_FIELD_NUMBER: builtins.int
-REPEATED_META_ANNOTATED_ENUM_FIELD_NUMBER: builtins.int
-TEST_NESTED_MESSAGE_ENUM_FIELD_NUMBER: builtins.int
-meta_annotated_enum: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___MetaAnnotatedEnum.ValueType]
-repeated_meta_annotated_enum: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[Global___MetaAnnotatedEnum.ValueType]]
-test_nested_message_enum: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___TestNestedMessageEnum]
+META_ANNOTATED_ENUM_FIELD_NUMBER: _builtins.int
+REPEATED_META_ANNOTATED_ENUM_FIELD_NUMBER: _builtins.int
+TEST_NESTED_MESSAGE_ENUM_FIELD_NUMBER: _builtins.int
+meta_annotated_enum: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___MetaAnnotatedEnum.ValueType]
+repeated_meta_annotated_enum: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___MetaAnnotatedEnum.ValueType]]
+test_nested_message_enum: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___TestNestedMessageEnum]

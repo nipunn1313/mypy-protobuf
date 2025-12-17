@@ -32,38 +32,38 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+import builtins as _builtins
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class SourceContext(google.protobuf.message.Message):
+@_typing.final
+class SourceContext(_google_protobuf_message.Message):
     """`SourceContext` represents information about the source of a
     protobuf element, like the file in which it is defined.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    FILE_NAME_FIELD_NUMBER: builtins.int
-    file_name: builtins.str
+    FILE_NAME_FIELD_NUMBER: _builtins.int
+    file_name: _builtins.str
     """The path-qualified name of the .proto file that contained the associated
     protobuf element.  For example: `"google/protobuf/source_context.proto"`.
     """
     def __init__(
         self,
         *,
-        file_name: builtins.str = ...,
+        file_name: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["file_name", b"file_name"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["file_name", b"file_name"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___SourceContext: typing_extensions.TypeAlias = SourceContext
+Global___SourceContext: _typing_extensions.TypeAlias = SourceContext  # noqa: Y015

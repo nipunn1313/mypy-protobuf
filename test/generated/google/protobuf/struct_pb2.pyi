@@ -32,29 +32,29 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.internal.well_known_types
-import google.protobuf.message
+import builtins as _builtins
+import collections.abc as _collections_abc
+import google.protobuf.descriptor as _google_protobuf_descriptor
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
+import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
 class _NullValue:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
 
-class _NullValueEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NullValue.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _NullValueEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_NullValue.ValueType], _builtins.type):
+    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
     NULL_VALUE: _NullValue.ValueType  # 0
     """Null value."""
 
@@ -67,10 +67,10 @@ class NullValue(_NullValue, metaclass=_NullValueEnumTypeWrapper):
 
 NULL_VALUE: NullValue.ValueType  # 0
 """Null value."""
-Global___NullValue: typing_extensions.TypeAlias = NullValue
+Global___NullValue: _typing_extensions.TypeAlias = NullValue  # noqa: Y015
 
-@typing.final
-class Struct(google.protobuf.message.Message, google.protobuf.internal.well_known_types.Struct):
+@_typing.final
+class Struct(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.Struct):
     """`Struct` represents a structured data value, consisting of fields
     which map to dynamically typed values. In some languages, `Struct`
     might be supported by a native representation. For example, in
@@ -81,45 +81,45 @@ class Struct(google.protobuf.message.Message, google.protobuf.internal.well_know
     The JSON representation for `Struct` is JSON object.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    @typing.final
-    class FieldsEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class FieldsEntry(_google_protobuf_message.Message):
+        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        @property
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        @_builtins.property
         def value(self) -> Global___Value: ...
         def __init__(
             self,
             *,
-            key: builtins.str = ...,
+            key: _builtins.str = ...,
             value: Global___Value | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    FIELDS_FIELD_NUMBER: builtins.int
-    @property
-    def fields(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, Global___Value]:
+    FIELDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def fields(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.str, Global___Value]:
         """Unordered map of dynamically typed values."""
 
     def __init__(
         self,
         *,
-        fields: collections.abc.Mapping[builtins.str, Global___Value] | None = ...,
+        fields: _collections_abc.Mapping[_builtins.str, Global___Value] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["fields", b"fields"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["fields", b"fields"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Struct: typing_extensions.TypeAlias = Struct
+Global___Struct: _typing_extensions.TypeAlias = Struct  # noqa: Y015
 
-@typing.final
-class Value(google.protobuf.message.Message):
+@_typing.final
+class Value(_google_protobuf_message.Message):
     """`Value` represents a dynamically typed value which can be either
     null, a number, a string, a boolean, a recursive struct value, or a
     list of values. A producer of value is expected to set one of these
@@ -128,27 +128,27 @@ class Value(google.protobuf.message.Message):
     The JSON representation for `Value` is JSON value.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    NULL_VALUE_FIELD_NUMBER: builtins.int
-    NUMBER_VALUE_FIELD_NUMBER: builtins.int
-    STRING_VALUE_FIELD_NUMBER: builtins.int
-    BOOL_VALUE_FIELD_NUMBER: builtins.int
-    STRUCT_VALUE_FIELD_NUMBER: builtins.int
-    LIST_VALUE_FIELD_NUMBER: builtins.int
+    NULL_VALUE_FIELD_NUMBER: _builtins.int
+    NUMBER_VALUE_FIELD_NUMBER: _builtins.int
+    STRING_VALUE_FIELD_NUMBER: _builtins.int
+    BOOL_VALUE_FIELD_NUMBER: _builtins.int
+    STRUCT_VALUE_FIELD_NUMBER: _builtins.int
+    LIST_VALUE_FIELD_NUMBER: _builtins.int
     null_value: Global___NullValue.ValueType
     """Represents a null value."""
-    number_value: builtins.float
+    number_value: _builtins.float
     """Represents a double value."""
-    string_value: builtins.str
+    string_value: _builtins.str
     """Represents a string value."""
-    bool_value: builtins.bool
+    bool_value: _builtins.bool
     """Represents a boolean value."""
-    @property
+    @_builtins.property
     def struct_value(self) -> Global___Struct:
         """Represents a structured value."""
 
-    @property
+    @_builtins.property
     def list_value(self) -> Global___ListValue:
         """Represents a repeated `Value`."""
 
@@ -156,42 +156,42 @@ class Value(google.protobuf.message.Message):
         self,
         *,
         null_value: Global___NullValue.ValueType = ...,
-        number_value: builtins.float = ...,
-        string_value: builtins.str = ...,
-        bool_value: builtins.bool = ...,
+        number_value: _builtins.float = ...,
+        string_value: _builtins.str = ...,
+        bool_value: _builtins.bool = ...,
         struct_value: Global___Struct | None = ...,
         list_value: Global___ListValue | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["bool_value", b"bool_value", "kind", b"kind", "list_value", b"list_value", "null_value", b"null_value", "number_value", b"number_value", "string_value", b"string_value", "struct_value", b"struct_value"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["bool_value", b"bool_value", "kind", b"kind", "list_value", b"list_value", "null_value", b"null_value", "number_value", b"number_value", "string_value", b"string_value", "struct_value", b"struct_value"]
+    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bool_value", b"bool_value", "kind", b"kind", "list_value", b"list_value", "null_value", b"null_value", "number_value", b"number_value", "string_value", b"string_value", "struct_value", b"struct_value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bool_value", b"bool_value", "kind", b"kind", "list_value", b"list_value", "null_value", b"null_value", "number_value", b"number_value", "string_value", b"string_value", "struct_value", b"struct_value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_kind: typing_extensions.TypeAlias = typing.Literal["null_value", "number_value", "string_value", "bool_value", "struct_value", "list_value"]
-    _WhichOneofArgType_kind: typing_extensions.TypeAlias = typing.Literal["kind", b"kind"]
+    _WhichOneofReturnType_kind: _typing_extensions.TypeAlias = _typing.Literal["null_value", "number_value", "string_value", "bool_value", "struct_value", "list_value"]  # noqa: Y015
+    _WhichOneofArgType_kind: _typing_extensions.TypeAlias = _typing.Literal["kind", b"kind"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_kind) -> _WhichOneofReturnType_kind | None: ...
 
-Global___Value: typing_extensions.TypeAlias = Value
+Global___Value: _typing_extensions.TypeAlias = Value  # noqa: Y015
 
-@typing.final
-class ListValue(google.protobuf.message.Message, google.protobuf.internal.well_known_types.ListValue):
+@_typing.final
+class ListValue(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.ListValue):
     """`ListValue` is a wrapper around a repeated field of values.
 
     The JSON representation for `ListValue` is JSON array.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    VALUES_FIELD_NUMBER: builtins.int
-    @property
-    def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___Value]:
+    VALUES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def values(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___Value]:
         """Repeated field of dynamically typed values."""
 
     def __init__(
         self,
         *,
-        values: collections.abc.Iterable[Global___Value] | None = ...,
+        values: _collections_abc.Iterable[Global___Value] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["values", b"values"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["values", b"values"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ListValue: typing_extensions.TypeAlias = ListValue
+Global___ListValue: _typing_extensions.TypeAlias = ListValue  # noqa: Y015

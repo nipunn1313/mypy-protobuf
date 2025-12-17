@@ -9,39 +9,39 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
+import builtins as _builtins
+import collections.abc as _collections_abc
+import google.protobuf.descriptor as _google_protobuf_descriptor
 import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+import google.protobuf.internal.containers as _google_protobuf_internal_containers
+import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
+import google.protobuf.message as _google_protobuf_message
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    import typing as _typing_extensions
 else:
-    import typing_extensions
+    import typing_extensions as _typing_extensions
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
 
-@typing.final
-class TestInvalidFeatures(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestInvalidFeatures(_google_protobuf_message.Message):
+    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
 
-    REPEATED_FEATURE_FIELD_NUMBER: builtins.int
-    @property
-    def repeated_feature(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    REPEATED_FEATURE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def repeated_feature(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        repeated_feature: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_feature: _collections_abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["repeated_feature", b"repeated_feature"]
+    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_feature", b"repeated_feature"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestInvalidFeatures: typing_extensions.TypeAlias = TestInvalidFeatures
+Global___TestInvalidFeatures: _typing_extensions.TypeAlias = TestInvalidFeatures  # noqa: Y015
 
-TEST_INVALID_FIELD_NUMBER: builtins.int
-test_invalid: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FeatureSet, Global___TestInvalidFeatures]
+TEST_INVALID_FIELD_NUMBER: _builtins.int
+test_invalid: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FeatureSet, Global___TestInvalidFeatures]
