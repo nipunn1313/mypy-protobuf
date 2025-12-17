@@ -229,7 +229,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         # Run unit tests.
         source "$UNIT_TESTS_VENV"/bin/activate
-        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only -v
+        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only --ignore=third_party -v
     )
 done
 
