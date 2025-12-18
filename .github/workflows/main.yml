@@ -52,6 +52,7 @@ jobs:
           PY_VER_MYPY: ${{matrix.py-ver-mypy-protobuf}}
           PYTHON_PROTOBUF_VERSION: ${{matrix.protobuf-version}}
           VALIDATE: 1
+          TEST_THIRD_PARTY: 1
         run: |
           ./run_test.sh
 
