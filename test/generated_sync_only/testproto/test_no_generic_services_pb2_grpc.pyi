@@ -6,6 +6,7 @@ isort:skip_file
 import abc
 import collections.abc
 import grpc
+import grpc.aio
 import testproto.test_no_generic_services_pb2
 import typing
 

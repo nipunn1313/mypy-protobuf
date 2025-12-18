@@ -6,6 +6,7 @@ https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 import abc
 import collections.abc
 import grpc
+import grpc.aio
 import sys
 import testproto.grpc.dummy_pb2
 import typing

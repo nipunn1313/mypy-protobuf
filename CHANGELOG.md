@@ -13,6 +13,7 @@
 - Add `_WhichOneofArgType_<oneof_name>` and `_WhichOneofReturnType_<oneof_name>` type aliases
 - Use `__new__` overloads for async stubs instead of `TypeVar` based `__init__` overloads.
   - https://github.com/nipunn1313/mypy-protobuf/issues/707
+- Support file level field presence feature setting
 
 ## 3.7.0
 

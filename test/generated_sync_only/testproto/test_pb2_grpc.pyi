@@ -6,6 +6,7 @@ Proto 2 test file."""
 import abc
 import collections.abc
 import grpc
+import grpc.aio
 import testproto.test_pb2
 import typing
 

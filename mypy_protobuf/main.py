@@ -475,6 +475,7 @@ class PkgWriter(object):
         messages: Iterable[d.DescriptorProto],
         prefix: str,
         scl_prefix: SourceCodeLocation,
+        file_field_presence: d.FeatureSet.FieldPresence.ValueType = d.FeatureSet.FieldPresence.FIELD_PRESENCE_UNKNOWN,
     ) -> None:
         wl = self._write_line
 
@@ -518,11 +519,7 @@ class PkgWriter(object):
                     qualified_name + ".",
                     scl + [d.DescriptorProto.ENUM_TYPE_FIELD_NUMBER],
                 )
-                self.write_messages(
-                    desc.nested_type,
-                    qualified_name + ".",
-                    scl + [d.DescriptorProto.NESTED_TYPE_FIELD_NUMBER],
-                )
+                self.write_messages(desc.nested_type, qualified_name + ".", scl + [d.DescriptorProto.NESTED_TYPE_FIELD_NUMBER], file_field_presence=file_field_presence)
 
                 # integer constants  for field numbers
                 for f in desc.field:
@@ -568,7 +565,7 @@ class PkgWriter(object):
                         # See https://github.com/nipunn1313/mypy-protobuf/issues/71
                         wl("*,")
                     for field in constructor_fields:
-                        implicit_presence = field.options.features.field_presence == d.FeatureSet.FieldPresence.IMPLICIT
+                        implicit_presence = self.get_field_presence(file_field_presence, field.options.features) == d.FeatureSet.FieldPresence.IMPLICIT
                         field_type = self.python_type(field, generic_container=True)
                         if (implicit_presence and self.fd.syntax == "editions") or (self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional):
                             wl(f"{field.name}: {field_type} = ...,")
@@ -576,21 +573,28 @@ class PkgWriter(object):
                             wl(f"{field.name}: {field_type} | None = ...,")
                 wl(") -> None: ...")
 
-                self.write_stringly_typed_fields(desc)
+                self.write_stringly_typed_fields(desc, file_field_presence)
 
             if prefix == "" and not self.readable_stubs:
                 wl("")
                 wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
             wl("")
 
-    def write_stringly_typed_fields(self, desc: d.DescriptorProto) -> None:
+    @staticmethod
+    def get_field_presence(file_field_presence: d.FeatureSet.FieldPresence.ValueType, field_feature_set: d.FeatureSet) -> d.FeatureSet.FieldPresence.ValueType:
+        presence = file_field_presence
+        if field_feature_set.HasField("field_presence"):
+            presence = field_feature_set.field_presence
+        return presence
+
+    def write_stringly_typed_fields(self, desc: d.DescriptorProto, file_field_presence: d.FeatureSet.FieldPresence.ValueType) -> None:
         """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
         wl = self._write_line
         # HasField, ClearField, WhichOneof accepts both bytes/str
         # HasField only supports singular. ClearField supports repeated as well
         # In proto3, HasField only supports message fields and optional fields
         # HasField always supports oneof fields
-        hf_fields = [f.name for f in desc.field if f.HasField("oneof_index") or (self.fd.syntax == "editions" and f.options.features.field_presence != d.FeatureSet.FieldPresence.IMPLICIT) or (f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax in ("proto2", "") or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional))]
+        hf_fields = [f.name for f in desc.field if f.HasField("oneof_index") or (self.fd.syntax == "editions" and self.get_field_presence(file_field_presence, f.options.features) != d.FeatureSet.FieldPresence.IMPLICIT) or (f.label != d.FieldDescriptorProto.LABEL_REPEATED and (self.fd.syntax in ("proto2", "") or f.type == d.FieldDescriptorProto.TYPE_MESSAGE or f.proto3_optional))]
         cf_fields = [f.name for f in desc.field]
         wo_fields = {oneof.name: [f.name for f in desc.field if f.HasField("oneof_index") and f.oneof_index == idx] for idx, oneof in enumerate(desc.oneof_decl)}
 
@@ -1229,7 +1233,7 @@ def generate_mypy_stubs(
 
         pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER])
-        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER])
+        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER], fd.options.features.field_presence)
         pkg_writer.write_extensions(fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER])
 
         assert name == fd.name

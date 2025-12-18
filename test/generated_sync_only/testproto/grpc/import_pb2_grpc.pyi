@@ -7,6 +7,7 @@ import abc
 import collections.abc
 import google.protobuf.empty_pb2
 import grpc
+import grpc.aio
 import testproto.test_pb2
 import typing
 
