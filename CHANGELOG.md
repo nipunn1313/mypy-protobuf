@@ -1,4 +1,4 @@
-## Upcoming
+## 3.8.0
 
 - Drop support for `py_generic_services` as it was removed from the protobuf compiler starting in version 6.30
   - https://protobuf.dev/news/2024-10-02/#rpc-service-interfaces
