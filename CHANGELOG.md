@@ -1,6 +1,6 @@
-## 3.8.0
+## 4.0.0
 
-- Drop support for `py_generic_services` as it was removed from the protobuf compiler starting in version 6.30
+- BREAKING: Drop support for `py_generic_services` as it was removed from the protobuf compiler starting in version 6.30
   - https://protobuf.dev/news/2024-10-02/#rpc-service-interfaces
 - Drop testing support for protobuf <6.32 because they don't support editions
   - With some more work this could be added back in a testing refactor
