@@ -10,7 +10,7 @@ These tests can be set up and run by the run_test.sh script
 
 import glob
 import os
-from typing import Any, Generator, NewType, Tuple, Type
+from typing import Any, Generator, NewType, Protocol, Tuple, Type, Union
 
 import pytest
 import testproto.test_pb2 as test_pb2
@@ -68,10 +68,10 @@ def _is_summary(line: str) -> bool:
 
 def test_generate_mypy_matches() -> None:
     proto_files = glob.glob("proto/**/*.proto", recursive=True)
-    assert len(proto_files) == 18  # Just a sanity check that all the files show up
+    assert len(proto_files) == 19  # Just a sanity check that all the files show up
 
     pyi_files = glob.glob("test/generated/**/*.pyi", recursive=True)
-    assert len(pyi_files) == 20  # Should be higher - because grpc files generate extra pyis
+    assert len(pyi_files) == 21  # Should be higher - because grpc files generate extra pyis
 
     failure_check_results = []
     for fn in proto_files:
@@ -531,7 +531,69 @@ def test_editions_2024() -> None:
 
     submsg = Editions2024SubMessage(thing="example")
 
+    # Check type of parameters of class constructor
+    class Editions2024TestProto(Protocol):
+        def __init__(
+            self,
+            *,
+            legacy: Union[str, None] = ...,
+            explicit_singular: Union[str, None] = ...,
+            message_field: Union[Editions2024SubMessage, None] = ...,
+            implicit_singular: str = ...,
+            default_singular: Union[str, None] = ...,
+        ) -> None: ...
+
+    # Type checker verifies the class matches
+    _: type[Editions2024TestProto] = Editions2024Test
+
     testmsg = Editions2024Test(
+        legacy="legacy value",
+        explicit_singular="explicit value",
+        message_field=submsg,
+        implicit_singular="implicit value",
+        default_singular="default value",
+    )
+
+    assert testmsg.legacy == "legacy value"
+    assert testmsg.explicit_singular == "explicit value"
+    assert testmsg.message_field == submsg
+    assert testmsg.implicit_singular == "implicit value"
+    assert testmsg.default_singular == "default value"
+
+    assert testmsg.HasField("explicit_singular")
+    assert testmsg.HasField("message_field")
+    assert testmsg.HasField("legacy")
+    assert testmsg.HasField("default_singular")
+
+    with pytest.raises(ValueError):
+        testmsg.HasField("implicit_singular")  # type: ignore
+
+
+def test_editions_2024_impl_field_pre() -> None:
+    from testproto.edition2024implicitfieldpresence_pb2 import (
+        Editions2024ImplicitFieldPresenceSubMessage,
+        Editions2024ImplicitFieldPresenceTest,
+    )
+
+    submsg = Editions2024ImplicitFieldPresenceSubMessage(thing="example")
+
+    # Check type of parameters of class constructor
+    class Editions2024TestProto(Protocol):
+
+        def __init__(
+            self,
+            *,
+            legacy: Union[str, None] = ...,
+            explicit_singular: Union[str, None] = ...,
+            message_field: Union[Editions2024ImplicitFieldPresenceSubMessage, None] = ...,
+            implicit_singular: str = ...,
+            default_singular: str = ...,
+        ) -> None: ...
+
+    # Type checker verifies the class matches
+    _: type[Editions2024TestProto] = Editions2024ImplicitFieldPresenceTest
+
+    testmsg = Editions2024ImplicitFieldPresenceTest(
         legacy="legacy value",
         explicit_singular="explicit value",
         message_field=submsg,
@@ -547,9 +609,9 @@ def test_editions_2024() -> None:
     assert testmsg.HasField("explicit_singular")
     assert testmsg.HasField("message_field")
     assert testmsg.HasField("legacy")
-    assert testmsg.HasField("default_singular")
 
     with pytest.raises(ValueError):
+        testmsg.HasField("default_singular")  # type: ignore # implicit because of file option
         testmsg.HasField("implicit_singular")  # type: ignore
 
 
