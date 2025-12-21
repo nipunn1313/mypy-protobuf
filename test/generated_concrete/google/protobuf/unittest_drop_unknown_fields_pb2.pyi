@@ -49,11 +49,9 @@ class Foo(_google_protobuf_message.Message):
     def __init__(
         self,
         *,
-        int32_value: _builtins.int | None = ...,
-        enum_value: Global___Foo.NestedEnum.ValueType | None = ...,
+        int32_value: _builtins.int = ...,
+        enum_value: Global___Foo.NestedEnum.ValueType = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "int32_value", b"int32_value"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
     _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "int32_value", b"int32_value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
@@ -89,12 +87,10 @@ class FooWithExtraFields(_google_protobuf_message.Message):
     def __init__(
         self,
         *,
-        int32_value: _builtins.int | None = ...,
-        enum_value: Global___FooWithExtraFields.NestedEnum.ValueType | None = ...,
-        extra_int32_value: _builtins.int | None = ...,
+        int32_value: _builtins.int = ...,
+        enum_value: Global___FooWithExtraFields.NestedEnum.ValueType = ...,
+        extra_int32_value: _builtins.int = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "extra_int32_value", b"extra_int32_value", "int32_value", b"int32_value"]  # noqa: Y015
-    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
     _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_value", b"enum_value", "extra_int32_value", b"extra_int32_value", "int32_value", b"int32_value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
