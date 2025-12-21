@@ -1,9 +1,54 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "wheel",
+    "setuptools>=61.2",
+    "wheel"
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "mypy-protobuf"
+description = "Generate mypy stub files from protobuf specs"
+readme = "README.md"
+keywords = [
+    "mypy proto dropbox",
+]
+authors = [
+    { name = "Nipunn Koorapati", email = "nipunn1313@gmail.com" },
+]
+maintainers = [
+  {name = "Aidan Jensen", email = "aidandj@gmail.com"}
+]
+requires-python = ">=3.8"
+dependencies = [
+    "protobuf>=4.25.3",
+    "types-protobuf>=4.24",
+]
+dynamic = [
+    "version",
+]
+
+[project.license]
+text = "Apache License 2.0"
+
+[project.urls]
+Homepage = "https://github.com/nipunn1313/mypy-protobuf"
+Download = "https://github.com/nipunn1313/mypy-protobuf/releases"
+
+[project.scripts]
+protoc-gen-mypy = "mypy_protobuf.main:main"
+protoc-gen-mypy_grpc = "mypy_protobuf.main:grpc"
+
+[tool.setuptools]
+py-modules = [
+    "mypy_protobuf",
+    "mypy_protobuf.main",
+    "mypy_protobuf.extensions_pb2",
+]
+include-package-data = false
+
+[tool.setuptools.dynamic.version]
+attr = "mypy_protobuf.main.__version__"
+
 
 [tool.black]
 extend-exclude = "(_pb2.py$|_pb2_grpc.py$)"

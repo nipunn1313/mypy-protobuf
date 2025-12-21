@@ -445,6 +445,19 @@ protoc --python_out=output/location --mypy_out=output/location
 mypy --target-version=2.7 {files}
 ```
 
+## Releasing to pypi (TODO: Automate)
+
+1. Checkout the commit you need to release
+2. Make sure it is tagged with the release version
+3. Make sure the working tree is clean
+4. Clean dist (`rm -rf dist`)
+5. `uv venv`
+6. `uv pip install --upgrade build`
+7. `uv run python3 -m build`
+8. `uv pip install --upgrade twine`
+9. `uv run twine upload --repository testpypi dist/*`
+10. `uv run twine upload dist/*`
+
 ## Contributing
 
 Contributions to the implementation are welcome. Please run tests using `./run_test.sh`.
