@@ -15,6 +15,7 @@ from typing import Any, Generator, NewType, Protocol, Tuple, Type, Union
 import pytest
 import testproto.test_pb2 as test_pb2
 from google.protobuf.descriptor import FieldDescriptor
+from google.protobuf.empty_pb2 import Empty
 from google.protobuf.internal import api_implementation
 from google.protobuf.internal.containers import ScalarMap
 from google.protobuf.message import Message
@@ -324,6 +325,8 @@ def test_which_oneof_proto2() -> None:
     s_untyped: Any = s
     with pytest.raises(ValueError, match='Protocol message Simple1 has no "garbage" field.'):
         s_untyped.WhichOneof("garbage")
+
+    s.empty.CopyFrom(Empty())
 
 
 def test_which_oneof_proto3() -> None:

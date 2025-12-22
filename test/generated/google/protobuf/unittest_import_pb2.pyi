@@ -10,6 +10,7 @@ In test_util.h we do
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf.unittest_import_public_pb2 import PublicImportMessage as PublicImportMessage
 import builtins as _builtins
 import sys
 import typing as _typing
@@ -18,9 +19,6 @@ if sys.version_info >= (3, 10):
     from typing import TypeAlias as _TypeAlias
 else:
     from typing_extensions import TypeAlias as _TypeAlias
-from google.protobuf.unittest_import_public_pb2 import (
-    PublicImportMessage as PublicImportMessage,
-)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 

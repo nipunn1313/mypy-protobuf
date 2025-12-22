@@ -16,7 +16,6 @@ from typing import (
     List,
     Optional,
     Sequence,
-    Set,
     Tuple,
 )
 
@@ -211,34 +210,39 @@ class Imports:
             statements.append(f"{orig} as {alias}")
         return statements
 
-    def _name_alias(self, name: str) -> str:
+    def _name_alias(self, name: str, mangle: bool = True) -> str:
         if f"{name}" in self._imported_names:
             count = self._imported_names[name] + 1
             self._imported_names[name] = count
-            return f"_{name}_{count}"
+            return f"{'_' if mangle else ''}{name}_{count}"
         else:
             self._imported_names[name] = 0
-            return f"_{name}"
+            return f"{'_' if mangle else ''}{name}"
 
-    def add_import(self, pkg: str, name: Optional[str] = None) -> str:
-        """Add an import and return the name used for it"""
+    def add_import(self, path: str, name: Optional[str] = None, mangle: bool = True) -> str:
+        """Add an import and return the name used for it
+
+        Examples:
+            add_import("collections.abc.Iterable", "Iterable") -> _abc.Iterable
+
+        """
         if not name:
-            self._imports[pkg] = (None, None, pkg)
-            return pkg
-        if imp := self._imports.get(pkg):
-            alias = imp[1]
+            self._imports[path] = (None, None, path)
+            return path
+        if imp := self._imports.get(path):
+            _alias = imp[1]
         else:
-            parts = pkg.rsplit(".", 1)
+            parts = path.rsplit(".", 1)
             if len(parts) > 1:
-                alias = self._name_alias(parts[-1])
-                self._imports[pkg] = (parts[0], alias, parts[-1])
+                _alias = self._name_alias(parts[-1], mangle=mangle)
+                self._imports[path] = (parts[0], _alias, parts[-1])
             elif len(parts) == 1:
-                alias = self._name_alias(parts[0])
-                self._imports[pkg] = (None, alias, parts[0])
+                _alias = self._name_alias(parts[0], mangle=mangle)
+                self._imports[path] = (None, _alias, parts[0])
             else:
                 raise RuntimeError("Package import string cannot be empty")
 
-        return f"{alias}.{name}"
+        return f"{_alias}.{name}"
 
     def add_typing_import(self, name: str) -> str:
         if name not in self._typing_imports:
@@ -273,9 +277,6 @@ class PkgWriter(object):
 
         # Set of {x: y}, where {x} corresponds to to `from {x} import {y} as _{y}`
         self.imports = Imports()
-        # dictionary of x->(y,z) for `from {x} import {y} as {z}`
-        # if {z} is None, then it shortens to `from {x} import {y}`
-        self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
         self.typing_extensions_min: Optional[Tuple[int, int]] = None
         self.deprecated_min: Optional[Tuple[int, int]] = None
 
@@ -306,8 +307,8 @@ class PkgWriter(object):
 
         imp = path.replace("/", ".")
         if self.readable_stubs:
-            self.from_imports[imp].add((name, None))
-            return name
+            # Do not mangle if readable stubs is set. This can cause conflicts
+            return self.imports.add_import(imp, name, mangle=False)
         else:
             return self.imports.add_import(imp, name)
 
@@ -1251,6 +1252,11 @@ class PkgWriter(object):
         )
         return f"{container}[{field_type}]"
 
+    # import debugpy
+
+    # debugpy.listen(5678)
+    # debugpy.wait_for_client()
+
     def write(self) -> str:
         # save current module content, so that imports and module docstring can be inserted
         saved_lines = self.lines
@@ -1274,8 +1280,8 @@ class PkgWriter(object):
             names = [m.name for m in reexport_fd.message_type] + [m.name for m in reexport_fd.enum_type] + [v.name for m in reexport_fd.enum_type for v in m.value] + [m.name for m in reexport_fd.extension]
 
             if names:
-                # n,n to force a reexport (from x import y as y)
-                self.from_imports[reexport_imp].update((n, n) for n in names)
+                # Add the rexported imports as individual imports to preserve names. Do not mangle
+                [self.imports.add_import(f"{reexport_imp}.{n}", n, mangle=False) for n in names]
 
         if self.typing_extensions_min or self.deprecated_min:
             # Special case for `sys` as it is needed for version checks
@@ -1295,14 +1301,6 @@ class PkgWriter(object):
             self._write_line("else:")
             self._write_line(f"    from typing_extensions import deprecated as {self._deprecated_name}")
 
-        for pkg, items in sorted(self.from_imports.items()):
-            self._write_line(f"from {pkg} import (")
-            for name, reexport_name in sorted(items):
-                if reexport_name is None:
-                    self._write_line(f"    {name},")
-                else:
-                    self._write_line(f"    {name} as {reexport_name},")
-            self._write_line(")")
         self._write_line("")
 
         # restore module content

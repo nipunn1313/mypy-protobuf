@@ -100,6 +100,7 @@ testproto.test_pb2.Simple1.no_package
 testproto.test_pb2.Simple1.outer_message_in_oneof
 testproto.test_pb2.Simple1.rep_inner_enum
 testproto.test_pb2.Simple1.rep_inner_message
+testproto.test_pb2.Simple1.empty
 testproto.edition2024_pb2.Editions2024Test.message_field
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceTest.message_field
 testproto.test_pb2.TestDuplicatePackageMessage.msg

@@ -3,6 +3,7 @@ syntax = "proto2";
 
 package test;
 
+import "google/protobuf/empty.proto";
 import "mypy_protobuf/extensions.proto";
 import "testproto/inner/inner.proto";
 import "testproto/inner/test3.proto";
@@ -77,8 +78,9 @@ message Simple1 {
 
   optional string property = 24;
   optional string collections = 25;
-  // This only works when all imports are de-dotted. Consider for a breaking release
-  // optional string testproto = 26;
+  optional string testproto = 26;
+
+  optional .google.protobuf.Empty empty = 27;
 
   extensions 1000 to max;
 }

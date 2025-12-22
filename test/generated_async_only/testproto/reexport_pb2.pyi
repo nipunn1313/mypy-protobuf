@@ -4,16 +4,12 @@ isort:skip_file
 """
 
 from google.protobuf import descriptor as _descriptor
-from google.protobuf.empty_pb2 import (
-    Empty as Empty,
-)
-from testproto.test3_pb2 import (
-    BAR3 as BAR3,
-    FOO3 as FOO3,
-    OuterEnum as OuterEnum,
-    OuterMessage3 as OuterMessage3,
-    SimpleProto3 as SimpleProto3,
-    UNKNOWN as UNKNOWN,
-)
+from google.protobuf.empty_pb2 import Empty as Empty
+from testproto.test3_pb2 import BAR3 as BAR3
+from testproto.test3_pb2 import FOO3 as FOO3
+from testproto.test3_pb2 import OuterEnum as OuterEnum
+from testproto.test3_pb2 import OuterMessage3 as OuterMessage3
+from testproto.test3_pb2 import SimpleProto3 as SimpleProto3
+from testproto.test3_pb2 import UNKNOWN as UNKNOWN
 
 DESCRIPTOR: _descriptor.FileDescriptor

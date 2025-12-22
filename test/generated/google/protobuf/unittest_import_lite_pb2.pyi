@@ -9,6 +9,7 @@ This is like unittest_import.proto but with optimize_for = LITE_RUNTIME.
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf.unittest_import_public_lite_pb2 import PublicImportMessageLite as PublicImportMessageLite
 import builtins as _builtins
 import sys
 import typing as _typing
@@ -17,9 +18,6 @@ if sys.version_info >= (3, 10):
     from typing import TypeAlias as _TypeAlias
 else:
     from typing_extensions import TypeAlias as _TypeAlias
-from google.protobuf.unittest_import_public_lite_pb2 import (
-    PublicImportMessageLite as PublicImportMessageLite,
-)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
