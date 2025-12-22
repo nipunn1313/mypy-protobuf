@@ -350,7 +350,7 @@ protoc --python_out=output/location --mypy_grpc_out=generate_concrete_servicer_s
 
 ### `sync_only/async_only`
 
-By default, generated GRPC stubs are compatible with both sync and async variants. If you only 
+By default, generated GRPC stubs are compatible with both sync and async variants. If you only
 want sync or async GRPC stubs, use this option:
 
 ```
@@ -460,23 +460,7 @@ mypy --target-version=2.7 {files}
 
 ## 3rd Party Tests
 
-3rd Party proto files can be added to `third_party` using git subtree. These can be used for large scale testing of changes.
-
-### Adding
-
-```bash
-git subtree add --prefix=third_party/googleapis https://github.com/googleapis/googleapis.git master --squash
-```
-
-### Updating
-
-```bash
-git subtree pull --prefix=third_party/googleapis https://github.com/googleapis/googleapis.git master --squash
-```
-
-## 5.0 Breaking change proposals
-
-* De-dot all import statements
+3rd Party proto files can be added in `run_tests.sh`, they should be cloned in, generated, type checked, then cleaned up.
 
 ## Contributing
 

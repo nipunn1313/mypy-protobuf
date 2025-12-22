@@ -153,6 +153,9 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # if TEST_THIRD_PARTY is set to 1 then generate
     if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
+        # Clone googleapis protos
+        mkdir third_party
+        git clone https://github.com/googleapis/googleapis.git third_party/googleapis --branch master --depth 1
         # Generate 3rd party protos
         mkdir -p third_party/out/generated_googleapis
         # Known conflict with extensions proto in googleapis - skip that one
