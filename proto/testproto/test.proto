@@ -3,8 +3,10 @@ syntax = "proto2";
 
 package test;
 
+import "google/protobuf/empty.proto";
 import "mypy_protobuf/extensions.proto";
 import "testproto/inner/inner.proto";
+import "testproto/inner/test3.proto";
 import "testproto/nested/nested.proto";
 import "testproto/nopackage.proto";
 import "testproto/test3.proto";
@@ -73,6 +75,13 @@ message Simple1 {
     (mypy_protobuf.keytype)="test/test_generated_mypy.UserId",
     (mypy_protobuf.valuetype)="test/test_generated_mypy.Email"
   ];
+
+  optional string property = 24;
+  optional string collections = 25;
+  optional string testproto = 26;
+
+  optional .google.protobuf.Empty empty = 27;
+  optional string sys = 28;
 
   extensions 1000 to max;
 }
@@ -175,6 +184,9 @@ message DeprecatedMessage {
     option deprecated = true;
 
     optional string a_string = 1;
+    optional string deprecated_field = 2 [deprecated = true];
+    // This field is deprecated with comment
+    optional string deprecated_field_with_comment = 3 [deprecated = true];
 }
 
 message DeprecatedMessageBadComment {
@@ -193,6 +205,14 @@ enum DeprecatedEnum {
     option deprecated = true;
     // Trailing comment
 
-    DEPRECATED_ONE = 1;
-    DEPRECATED_TWO = 2;
+    DEPRECATED_ONE = 1 [
+      // This enum value is deprecated but this message doesn't show
+      deprecated = true
+      ]; // Trailing comment for enum value
+    DEPRECATED_TWO = 2 [deprecated = true];
+    NOT_DEPRECATED = 3;
+}
+
+message TestDuplicatePackageMessage {
+  required inner.DuplicatePackageMessage msg = 1;
 }

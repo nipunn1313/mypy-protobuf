@@ -3,7 +3,7 @@
 isort:skip_file
 """
 
-import collections.abc
+from collections import abc as _abc
 
 
 GRPC_GENERATED_VERSION: str

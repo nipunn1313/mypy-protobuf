@@ -8,6 +8,7 @@ PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.12.12}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.9.17 3.10.12 3.11.4 3.12.12 3.13.9 3.14.0}"
 PYTHON_PROTOBUF_VERSION=${PYTHON_PROTOBUF_VERSION:=6.32.1}
+TEST_THIRD_PARTY=${TEST_THIRD_PARTY:=0}
 
 # Confirm UV installed
 if ! command -v uv &> /dev/null; then
@@ -149,6 +150,21 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
         exit 1
     fi
+
+    # if TEST_THIRD_PARTY is set to 1 then generate
+    if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
+        # Clone googleapis protos
+        mkdir third_party
+        git clone https://github.com/googleapis/googleapis.git third_party/googleapis --branch master --depth 1
+        # Generate 3rd party protos
+        mkdir -p third_party/out/generated_googleapis
+        # Known conflict with extensions proto in googleapis - skip that one
+        find third_party/googleapis -name "*.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1beta/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1small/compute_small.proto" \
+            -print0 | xargs -0 "$PROTOC" --proto_path=third_party/googleapis --mypy_out=third_party/out/generated_googleapis --mypy_grpc_out=third_party/out/generated_googleapis --python_out=third_party/out/generated_googleapis
+    fi
 )
 
 ERROR_FILE=$(mktemp)
@@ -181,6 +197,16 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         ASYNC_ONLY_MODULES=( -m test.async_only.test_async_only )
         MYPYPATH=$MYPYPATH:test/generated_async_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
 
+        # Run google/protobuf mypy
+        GOOGLE_PROTOBUF=( test/generated/google/protobuf )
+        MYPYPATH=$MYPYPATH:test/generated PYTHONPATH=test/generated mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLE_PROTOBUF[@]}"
+
+        if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
+            # Run googleapis mypy
+            GOOGLEAPIS=( third_party/out/generated_googleapis )
+            MYPYPATH=$MYPYPATH:third_party/out/generated_googleapis mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLEAPIS[@]}"
+        fi
+
         export MYPYPATH=$MYPYPATH:test/generated
 
         # Run mypy
@@ -197,6 +223,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             if [[ "$PY_VER_MYPY" == "3.13.9" ]] || [[ "$PY_VER_MYPY" == "3.14.0" ]]; then
                 echo "Skipping stubtest for Python $PY_VER_MYPY until positional argument decision is made"
             else
+                echo "Running stubtest for Python $PY_VER_MYPY with API implementation: $API_IMPL"
                 PYTHONPATH=test/generated python3 -m mypy.stubtest ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --allowlist stubtest_allowlist.txt testproto
             fi
         fi
@@ -229,9 +256,13 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         # Run unit tests.
         source "$UNIT_TESTS_VENV"/bin/activate
-        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only -v
+        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only --ignore=third_party -v
     )
 done
+
+
+# Clean up third_party
+rm -rf third_party/out/*
 
 # Report all errors at the end
 if [ -s "$ERROR_FILE" ]; then

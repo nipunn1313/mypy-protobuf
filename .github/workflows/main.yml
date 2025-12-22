@@ -52,6 +52,7 @@ jobs:
           PY_VER_MYPY: ${{matrix.py-ver-mypy-protobuf}}
           PYTHON_PROTOBUF_VERSION: ${{matrix.protobuf-version}}
           VALIDATE: 1
+          TEST_THIRD_PARTY: 1
         run: |
           ./run_test.sh
 
@@ -108,6 +109,8 @@ jobs:
         with:
           # By default, shellcheck tries to make sure any external files referenced actually exist
           shellcheck_flags: -e SC1091
+          exclude: |
+            */third_party/*
 
   sanity_check_windows:
     name: Sanity Check Windows Executable

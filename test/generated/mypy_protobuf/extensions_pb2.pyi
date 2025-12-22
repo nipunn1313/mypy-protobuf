@@ -3,53 +3,53 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import extension_dict as _extension_dict
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class FieldOptions(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FieldOptions(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CASTTYPE_FIELD_NUMBER: builtins.int
-    KEYTYPE_FIELD_NUMBER: builtins.int
-    VALUETYPE_FIELD_NUMBER: builtins.int
-    casttype: builtins.str
+    CASTTYPE_FIELD_NUMBER: _builtins.int
+    KEYTYPE_FIELD_NUMBER: _builtins.int
+    VALUETYPE_FIELD_NUMBER: _builtins.int
+    casttype: _builtins.str
     """Tells mypy-protobuf to use a specific newtype rather than the normal type for this field."""
-    keytype: builtins.str
+    keytype: _builtins.str
     """Tells mypy-protobuf to use a specific type for keys; only makes sense on map fields"""
-    valuetype: builtins.str
+    valuetype: _builtins.str
     """Tells mypy-protobuf to use a specific type for values; only makes sense on map fields"""
     def __init__(
         self,
         *,
-        casttype: builtins.str = ...,
-        keytype: builtins.str = ...,
-        valuetype: builtins.str = ...,
+        casttype: _builtins.str = ...,
+        keytype: _builtins.str = ...,
+        valuetype: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FieldOptions: typing_extensions.TypeAlias = FieldOptions
+Global___FieldOptions: _TypeAlias = FieldOptions  # noqa: Y015
 
-OPTIONS_FIELD_NUMBER: builtins.int
-CASTTYPE_FIELD_NUMBER: builtins.int
-KEYTYPE_FIELD_NUMBER: builtins.int
-VALUETYPE_FIELD_NUMBER: builtins.int
-options: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___FieldOptions]
+OPTIONS_FIELD_NUMBER: _builtins.int
+CASTTYPE_FIELD_NUMBER: _builtins.int
+KEYTYPE_FIELD_NUMBER: _builtins.int
+VALUETYPE_FIELD_NUMBER: _builtins.int
+options: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, Global___FieldOptions]
 """Custom field options from mypy-protobuf"""
-casttype: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.str]
+casttype: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]
 """Legacy fields. Prefer to use ones within `options` instead."""
-keytype: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.str]
-valuetype: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.str]
+keytype: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]
+valuetype: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]

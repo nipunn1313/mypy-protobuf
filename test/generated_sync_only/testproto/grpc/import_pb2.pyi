@@ -3,6 +3,6 @@
 isort:skip_file
 """
 
-import google.protobuf.descriptor
+from google.protobuf import descriptor as _descriptor
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor

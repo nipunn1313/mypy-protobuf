@@ -3,70 +3,70 @@
 isort:skip_file
 Edition version of proto2 file"""
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class Editions2024SubMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Editions2024SubMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    THING_FIELD_NUMBER: builtins.int
-    thing: builtins.str
+    THING_FIELD_NUMBER: _builtins.int
+    thing: _builtins.str
     def __init__(
         self,
         *,
-        thing: builtins.str | None = ...,
+        thing: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["thing", b"thing"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["thing", b"thing"]
+    _HasFieldArgType: _TypeAlias = _typing.Literal["thing", b"thing"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["thing", b"thing"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Editions2024SubMessage: typing_extensions.TypeAlias = Editions2024SubMessage
+Global___Editions2024SubMessage: _TypeAlias = Editions2024SubMessage  # noqa: Y015
 
-@typing.final
-class Editions2024Test(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Editions2024Test(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LEGACY_FIELD_NUMBER: builtins.int
-    EXPLICIT_SINGULAR_FIELD_NUMBER: builtins.int
-    MESSAGE_FIELD_FIELD_NUMBER: builtins.int
-    IMPLICIT_SINGULAR_FIELD_NUMBER: builtins.int
-    DEFAULT_SINGULAR_FIELD_NUMBER: builtins.int
-    legacy: builtins.str
+    LEGACY_FIELD_NUMBER: _builtins.int
+    EXPLICIT_SINGULAR_FIELD_NUMBER: _builtins.int
+    MESSAGE_FIELD_FIELD_NUMBER: _builtins.int
+    IMPLICIT_SINGULAR_FIELD_NUMBER: _builtins.int
+    DEFAULT_SINGULAR_FIELD_NUMBER: _builtins.int
+    legacy: _builtins.str
     """Expect to be always set"""
-    explicit_singular: builtins.str
+    explicit_singular: _builtins.str
     """Expect HasField generated"""
-    implicit_singular: builtins.str
+    implicit_singular: _builtins.str
     """Expect implicit field presence, no HasField generated"""
-    default_singular: builtins.str
+    default_singular: _builtins.str
     """Not set, should default to EXPLICIT"""
-    @property
+    @_builtins.property
     def message_field(self) -> Global___Editions2024SubMessage:
         """Expect HasField generated?"""
 
     def __init__(
         self,
         *,
-        legacy: builtins.str | None = ...,
-        explicit_singular: builtins.str | None = ...,
+        legacy: _builtins.str | None = ...,
+        explicit_singular: _builtins.str | None = ...,
         message_field: Global___Editions2024SubMessage | None = ...,
-        implicit_singular: builtins.str = ...,
-        default_singular: builtins.str | None = ...,
+        implicit_singular: _builtins.str = ...,
+        default_singular: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["default_singular", b"default_singular", "explicit_singular", b"explicit_singular", "legacy", b"legacy", "message_field", b"message_field"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["default_singular", b"default_singular", "explicit_singular", b"explicit_singular", "implicit_singular", b"implicit_singular", "legacy", b"legacy", "message_field", b"message_field"]
+    _HasFieldArgType: _TypeAlias = _typing.Literal["default_singular", b"default_singular", "explicit_singular", b"explicit_singular", "legacy", b"legacy", "message_field", b"message_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["default_singular", b"default_singular", "explicit_singular", b"explicit_singular", "implicit_singular", b"implicit_singular", "legacy", b"legacy", "message_field", b"message_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Editions2024Test: typing_extensions.TypeAlias = Editions2024Test
+Global___Editions2024Test: _TypeAlias = Editions2024Test  # noqa: Y015
