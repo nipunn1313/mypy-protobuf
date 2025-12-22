@@ -168,6 +168,7 @@ class Simple1(_message.Message):
     COLLECTIONS_FIELD_NUMBER: _builtins.int
     TESTPROTO_FIELD_NUMBER: _builtins.int
     EMPTY_FIELD_NUMBER: _builtins.int
+    SYS_FIELD_NUMBER: _builtins.int
     a_string: _builtins.str
     a_boolean: _builtins.bool
     a_uint32: _builtins.int
@@ -184,6 +185,7 @@ class Simple1(_message.Message):
     property: _builtins.str
     collections: _builtins.str
     testproto: _builtins.str
+    sys: _builtins.str
     @_builtins.property
     def a_repeated_string(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     @_builtins.property
@@ -236,10 +238,11 @@ class Simple1(_message.Message):
         collections: _builtins.str | None = ...,
         testproto: _builtins.str | None = ...,
         empty: _empty_pb2.Empty | None = ...,
+        sys: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_string", b"a_string", "a_uint32", b"a_uint32", "collections", b"collections", "email", b"email", "empty", b"empty", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "property", b"property", "testproto", b"testproto", "user_id", b"user_id"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_string", b"a_string", "a_uint32", b"a_uint32", "collections", b"collections", "email", b"email", "empty", b"empty", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "property", b"property", "sys", b"sys", "testproto", b"testproto", "user_id", b"user_id"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "a_uint32", b"a_uint32", "collections", b"collections", "email", b"email", "email_by_uid", b"email_by_uid", "empty", b"empty", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "property", b"property", "rep_inner_enum", b"rep_inner_enum", "rep_inner_message", b"rep_inner_message", "testproto", b"testproto", "user_id", b"user_id"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a_boolean", b"a_boolean", "a_enum", b"a_enum", "a_external_enum", b"a_external_enum", "a_inner", b"a_inner", "a_nested", b"a_nested", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "a_uint32", b"a_uint32", "collections", b"collections", "email", b"email", "email_by_uid", b"email_by_uid", "empty", b"empty", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "inner_message", b"inner_message", "nested_enum", b"nested_enum", "nested_message", b"nested_message", "no_package", b"no_package", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message_in_oneof", b"outer_message_in_oneof", "property", b"property", "rep_inner_enum", b"rep_inner_enum", "rep_inner_message", b"rep_inner_message", "sys", b"sys", "testproto", b"testproto", "user_id", b"user_id"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     _WhichOneofReturnType_a_oneof: _TypeAlias = _typing.Literal["a_oneof_1", "a_oneof_2", "outer_message_in_oneof", "outer_enum_in_oneof", "inner_enum_in_oneof"]  # noqa: Y015
     _WhichOneofArgType_a_oneof: _TypeAlias = _typing.Literal["a_oneof", b"a_oneof"]  # noqa: Y015

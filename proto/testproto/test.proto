@@ -81,6 +81,7 @@ message Simple1 {
   optional string testproto = 26;
 
   optional .google.protobuf.Empty empty = 27;
+  optional string sys = 28;
 
   extensions 1000 to max;
 }
