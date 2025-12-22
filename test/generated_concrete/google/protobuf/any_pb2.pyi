@@ -32,22 +32,22 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import well_known_types as _well_known_types
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class Any(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.Any):
+class Any(_message.Message, _well_known_types.Any):
     """`Any` contains an arbitrary serialized protocol buffer message along with a
     URL that describes the type of the serialized message.
 
@@ -135,7 +135,7 @@ class Any(_google_protobuf_message.Message, _google_protobuf_internal_well_known
         }
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     TYPE_URL_FIELD_NUMBER: _builtins.int
     VALUE_FIELD_NUMBER: _builtins.int
@@ -177,7 +177,7 @@ class Any(_google_protobuf_message.Message, _google_protobuf_internal_well_known
         type_url: _builtins.str = ...,
         value: _builtins.bytes = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["type_url", b"type_url", "value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["type_url", b"type_url", "value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Any: _typing_extensions.TypeAlias = Any  # noqa: Y015
+Global___Any: _TypeAlias = Any  # noqa: Y015

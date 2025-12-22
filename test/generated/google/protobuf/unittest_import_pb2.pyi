@@ -7,29 +7,29 @@ In test_util.h we do
 "using namespace unittest_import = proto2_unittest_import".
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 from google.protobuf.unittest_import_public_pb2 import (
     PublicImportMessage as PublicImportMessage,
 )
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _ImportEnum:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ImportEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ImportEnum.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _ImportEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ImportEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     IMPORT_FOO: _ImportEnum.ValueType  # 7
     IMPORT_BAR: _ImportEnum.ValueType  # 8
     IMPORT_BAZ: _ImportEnum.ValueType  # 9
@@ -39,14 +39,14 @@ class ImportEnum(_ImportEnum, metaclass=_ImportEnumEnumTypeWrapper): ...
 IMPORT_FOO: ImportEnum.ValueType  # 7
 IMPORT_BAR: ImportEnum.ValueType  # 8
 IMPORT_BAZ: ImportEnum.ValueType  # 9
-Global___ImportEnum: _typing_extensions.TypeAlias = ImportEnum  # noqa: Y015
+Global___ImportEnum: _TypeAlias = ImportEnum  # noqa: Y015
 
 class _ImportEnumForMap:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ImportEnumForMapEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ImportEnumForMap.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _ImportEnumForMapEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ImportEnumForMap.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     UNKNOWN: _ImportEnumForMap.ValueType  # 0
     FOO: _ImportEnumForMap.ValueType  # 1
     BAR: _ImportEnumForMap.ValueType  # 2
@@ -57,11 +57,11 @@ class ImportEnumForMap(_ImportEnumForMap, metaclass=_ImportEnumForMapEnumTypeWra
 UNKNOWN: ImportEnumForMap.ValueType  # 0
 FOO: ImportEnumForMap.ValueType  # 1
 BAR: ImportEnumForMap.ValueType  # 2
-Global___ImportEnumForMap: _typing_extensions.TypeAlias = ImportEnumForMap  # noqa: Y015
+Global___ImportEnumForMap: _TypeAlias = ImportEnumForMap  # noqa: Y015
 
 @_typing.final
-class ImportMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ImportMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     D_FIELD_NUMBER: _builtins.int
     d: _builtins.int
@@ -70,9 +70,9 @@ class ImportMessage(_google_protobuf_message.Message):
         *,
         d: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ImportMessage: _typing_extensions.TypeAlias = ImportMessage  # noqa: Y015
+Global___ImportMessage: _TypeAlias = ImportMessage  # noqa: Y015

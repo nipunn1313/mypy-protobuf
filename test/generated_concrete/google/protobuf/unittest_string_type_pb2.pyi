@@ -9,22 +9,22 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class EntryProto(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class EntryProto(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.bytes
@@ -33,9 +33,9 @@ class EntryProto(_google_protobuf_message.Message):
         *,
         value: _builtins.bytes | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___EntryProto: _typing_extensions.TypeAlias = EntryProto  # noqa: Y015
+Global___EntryProto: _TypeAlias = EntryProto  # noqa: Y015

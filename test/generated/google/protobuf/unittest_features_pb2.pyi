@@ -9,28 +9,28 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _EnumFeature:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _EnumFeatureEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_EnumFeature.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _EnumFeatureEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_EnumFeature.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TEST_ENUM_FEATURE_UNKNOWN: _EnumFeature.ValueType  # 0
     VALUE1: _EnumFeature.ValueType  # 1
     VALUE2: _EnumFeature.ValueType  # 2
@@ -66,14 +66,14 @@ VALUE12: EnumFeature.ValueType  # 12
 VALUE13: EnumFeature.ValueType  # 13
 VALUE14: EnumFeature.ValueType  # 14
 VALUE15: EnumFeature.ValueType  # 15
-Global___EnumFeature: _typing_extensions.TypeAlias = EnumFeature  # noqa: Y015
+Global___EnumFeature: _TypeAlias = EnumFeature  # noqa: Y015
 
 class _UnstableEnumFeature:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _UnstableEnumFeatureEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_UnstableEnumFeature.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _UnstableEnumFeatureEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_UnstableEnumFeature.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TEST_UNSTABLE_ENUM_FEATURE_UNKNOWN: _UnstableEnumFeature.ValueType  # 0
     UNSTABLE1: _UnstableEnumFeature.ValueType  # 1
     UNSTABLE2: _UnstableEnumFeature.ValueType  # 2
@@ -87,14 +87,14 @@ UNSTABLE1: UnstableEnumFeature.ValueType  # 1
 UNSTABLE2: UnstableEnumFeature.ValueType  # 2
 UNSTABLE3: UnstableEnumFeature.ValueType  # 3
 UNSTABLE4: UnstableEnumFeature.ValueType  # 4
-Global___UnstableEnumFeature: _typing_extensions.TypeAlias = UnstableEnumFeature  # noqa: Y015
+Global___UnstableEnumFeature: _TypeAlias = UnstableEnumFeature  # noqa: Y015
 
 class _ValueLifetimeFeature:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ValueLifetimeFeatureEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_ValueLifetimeFeature.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _ValueLifetimeFeatureEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ValueLifetimeFeature.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TEST_VALUE_LIFETIME_UNKNOWN: _ValueLifetimeFeature.ValueType  # 0
     VALUE_LIFETIME_INHERITED: _ValueLifetimeFeature.ValueType  # 1
     VALUE_LIFETIME_SUPPORT: _ValueLifetimeFeature.ValueType  # 2
@@ -112,33 +112,33 @@ VALUE_LIFETIME_EMPTY_SUPPORT: ValueLifetimeFeature.ValueType  # 3
 VALUE_LIFETIME_FUTURE: ValueLifetimeFeature.ValueType  # 4
 VALUE_LIFETIME_DEPRECATED: ValueLifetimeFeature.ValueType  # 5
 VALUE_LIFETIME_REMOVED: ValueLifetimeFeature.ValueType  # 6
-Global___ValueLifetimeFeature: _typing_extensions.TypeAlias = ValueLifetimeFeature  # noqa: Y015
+Global___ValueLifetimeFeature: _TypeAlias = ValueLifetimeFeature  # noqa: Y015
 
 @_typing.final
-class TestMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class Nested(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class Nested(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         TEST_NESTED_FIELD_NUMBER: _builtins.int
-        test_nested: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FeatureSet, Global___TestNestedFeatures]
+        test_nested: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FeatureSet, Global___TestNestedFeatures]
         def __init__(
             self,
         ) -> None: ...
 
     TEST_MESSAGE_FIELD_NUMBER: _builtins.int
-    test_message: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FeatureSet, Global___TestMessageFeatures]
+    test_message: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FeatureSet, Global___TestMessageFeatures]
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestMessage: _typing_extensions.TypeAlias = TestMessage  # noqa: Y015
+Global___TestMessage: _TypeAlias = TestMessage  # noqa: Y015
 
 @_typing.final
-class TestMessageFeatures(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestMessageFeatures(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     FILE_FEATURE_FIELD_NUMBER: _builtins.int
     file_feature: Global___EnumFeature.ValueType
@@ -147,16 +147,16 @@ class TestMessageFeatures(_google_protobuf_message.Message):
         *,
         file_feature: Global___EnumFeature.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageFeatures: _typing_extensions.TypeAlias = TestMessageFeatures  # noqa: Y015
+Global___TestMessageFeatures: _TypeAlias = TestMessageFeatures  # noqa: Y015
 
 @_typing.final
-class TestNestedFeatures(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestNestedFeatures(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     FILE_FEATURE_FIELD_NUMBER: _builtins.int
     file_feature: Global___EnumFeature.ValueType
@@ -165,16 +165,16 @@ class TestNestedFeatures(_google_protobuf_message.Message):
         *,
         file_feature: Global___EnumFeature.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["file_feature", b"file_feature"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestNestedFeatures: _typing_extensions.TypeAlias = TestNestedFeatures  # noqa: Y015
+Global___TestNestedFeatures: _TypeAlias = TestNestedFeatures  # noqa: Y015
 
 @_typing.final
-class TestFeatures(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestFeatures(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     FILE_FEATURE_FIELD_NUMBER: _builtins.int
     EXTENSION_RANGE_FEATURE_FIELD_NUMBER: _builtins.int
@@ -243,12 +243,12 @@ class TestFeatures(_google_protobuf_message.Message):
         unstable_existing_feature: Global___UnstableEnumFeature.ValueType | None = ...,
         removed_unstable_feature: Global___UnstableEnumFeature.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bool_field_feature", b"bool_field_feature", "enum_entry_feature", b"enum_entry_feature", "enum_feature", b"enum_feature", "extension_range_feature", b"extension_range_feature", "field_feature", b"field_feature", "file_feature", b"file_feature", "future_feature", b"future_feature", "legacy_feature", b"legacy_feature", "message_feature", b"message_feature", "method_feature", b"method_feature", "multiple_feature", b"multiple_feature", "new_unstable_feature", b"new_unstable_feature", "oneof_feature", b"oneof_feature", "removed_feature", b"removed_feature", "removed_unstable_feature", b"removed_unstable_feature", "same_edition_removed_feature", b"same_edition_removed_feature", "service_feature", b"service_feature", "source_feature", b"source_feature", "source_feature2", b"source_feature2", "unstable_existing_feature", b"unstable_existing_feature", "value_lifetime_feature", b"value_lifetime_feature"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["bool_field_feature", b"bool_field_feature", "enum_entry_feature", b"enum_entry_feature", "enum_feature", b"enum_feature", "extension_range_feature", b"extension_range_feature", "field_feature", b"field_feature", "file_feature", b"file_feature", "future_feature", b"future_feature", "legacy_feature", b"legacy_feature", "message_feature", b"message_feature", "method_feature", b"method_feature", "multiple_feature", b"multiple_feature", "new_unstable_feature", b"new_unstable_feature", "oneof_feature", b"oneof_feature", "removed_feature", b"removed_feature", "removed_unstable_feature", b"removed_unstable_feature", "same_edition_removed_feature", b"same_edition_removed_feature", "service_feature", b"service_feature", "source_feature", b"source_feature", "source_feature2", b"source_feature2", "unstable_existing_feature", b"unstable_existing_feature", "value_lifetime_feature", b"value_lifetime_feature"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bool_field_feature", b"bool_field_feature", "enum_entry_feature", b"enum_entry_feature", "enum_feature", b"enum_feature", "extension_range_feature", b"extension_range_feature", "field_feature", b"field_feature", "file_feature", b"file_feature", "future_feature", b"future_feature", "legacy_feature", b"legacy_feature", "message_feature", b"message_feature", "method_feature", b"method_feature", "multiple_feature", b"multiple_feature", "new_unstable_feature", b"new_unstable_feature", "oneof_feature", b"oneof_feature", "removed_feature", b"removed_feature", "removed_unstable_feature", b"removed_unstable_feature", "same_edition_removed_feature", b"same_edition_removed_feature", "service_feature", b"service_feature", "source_feature", b"source_feature", "source_feature2", b"source_feature2", "unstable_existing_feature", b"unstable_existing_feature", "value_lifetime_feature", b"value_lifetime_feature"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bool_field_feature", b"bool_field_feature", "enum_entry_feature", b"enum_entry_feature", "enum_feature", b"enum_feature", "extension_range_feature", b"extension_range_feature", "field_feature", b"field_feature", "file_feature", b"file_feature", "future_feature", b"future_feature", "legacy_feature", b"legacy_feature", "message_feature", b"message_feature", "method_feature", b"method_feature", "multiple_feature", b"multiple_feature", "new_unstable_feature", b"new_unstable_feature", "oneof_feature", b"oneof_feature", "removed_feature", b"removed_feature", "removed_unstable_feature", b"removed_unstable_feature", "same_edition_removed_feature", b"same_edition_removed_feature", "service_feature", b"service_feature", "source_feature", b"source_feature", "source_feature2", b"source_feature2", "unstable_existing_feature", b"unstable_existing_feature", "value_lifetime_feature", b"value_lifetime_feature"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestFeatures: _typing_extensions.TypeAlias = TestFeatures  # noqa: Y015
+Global___TestFeatures: _TypeAlias = TestFeatures  # noqa: Y015
 
 TEST_FIELD_NUMBER: _builtins.int
-test: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FeatureSet, Global___TestFeatures]
+test: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FeatureSet, Global___TestFeatures]

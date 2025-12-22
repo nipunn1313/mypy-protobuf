@@ -3,37 +3,37 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import extension_dict as _extension_dict
+from testproto import test_pb2 as _test_pb2
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
-import testproto.test_pb2
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class SeparateFileExtension(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SeparateFileExtension(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     FLAG_FIELD_NUMBER: _builtins.int
     flag: _builtins.bool
     EXT_FIELD_NUMBER: _builtins.int
-    ext: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, Global___SeparateFileExtension]
+    ext: _extension_dict._ExtensionFieldDescriptor[_test_pb2.Simple2, Global___SeparateFileExtension]
     def __init__(
         self,
         *,
         flag: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["flag", b"flag"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["flag", b"flag"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["flag", b"flag"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["flag", b"flag"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___SeparateFileExtension: _typing_extensions.TypeAlias = SeparateFileExtension  # noqa: Y015
+Global___SeparateFileExtension: _TypeAlias = SeparateFileExtension  # noqa: Y015

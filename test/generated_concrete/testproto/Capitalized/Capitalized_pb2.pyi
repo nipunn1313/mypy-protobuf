@@ -3,22 +3,22 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class lower(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class lower(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     a: _builtins.int
@@ -27,14 +27,14 @@ class lower(_google_protobuf_message.Message):
         *,
         a: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___lower: _typing_extensions.TypeAlias = lower  # noqa: Y015
+Global___lower: _TypeAlias = lower  # noqa: Y015
 
 @_typing.final
-class Upper(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class Upper(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     LOWER_FIELD_NUMBER: _builtins.int
     @_builtins.property
@@ -44,16 +44,16 @@ class Upper(_google_protobuf_message.Message):
         *,
         Lower: Global___lower | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["Lower", b"Lower"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["Lower", b"Lower"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["Lower", b"Lower"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["Lower", b"Lower"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Upper: _typing_extensions.TypeAlias = Upper  # noqa: Y015
+Global___Upper: _TypeAlias = Upper  # noqa: Y015
 
 @_typing.final
-class lower2(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class lower2(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     UPPER_FIELD_NUMBER: _builtins.int
     @_builtins.property
@@ -63,9 +63,9 @@ class lower2(_google_protobuf_message.Message):
         *,
         upper: Global___Upper | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["upper", b"upper"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["upper", b"upper"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["upper", b"upper"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["upper", b"upper"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___lower2: _typing_extensions.TypeAlias = lower2  # noqa: Y015
+Global___lower2: _TypeAlias = lower2  # noqa: Y015

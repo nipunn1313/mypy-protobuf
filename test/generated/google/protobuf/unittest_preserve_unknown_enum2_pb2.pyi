@@ -9,28 +9,28 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _MyEnum:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _MyEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _MyEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     FOO: _MyEnum.ValueType  # 0
     BAR: _MyEnum.ValueType  # 1
     BAZ: _MyEnum.ValueType  # 2
@@ -40,11 +40,11 @@ class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper): ...
 FOO: MyEnum.ValueType  # 0
 BAR: MyEnum.ValueType  # 1
 BAZ: MyEnum.ValueType  # 2
-Global___MyEnum: _typing_extensions.TypeAlias = MyEnum  # noqa: Y015
+Global___MyEnum: _TypeAlias = MyEnum  # noqa: Y015
 
 @_typing.final
-class MyMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class MyMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     E_FIELD_NUMBER: _builtins.int
     REPEATED_E_FIELD_NUMBER: _builtins.int
@@ -56,29 +56,29 @@ class MyMessage(_google_protobuf_message.Message):
     oneof_e_1: Global___MyEnum.ValueType
     oneof_e_2: Global___MyEnum.ValueType
     @_builtins.property
-    def repeated_e(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___MyEnum.ValueType]: ...
+    def repeated_e(self) -> _containers.RepeatedScalarFieldContainer[Global___MyEnum.ValueType]: ...
     @_builtins.property
-    def repeated_packed_e(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___MyEnum.ValueType]: ...
+    def repeated_packed_e(self) -> _containers.RepeatedScalarFieldContainer[Global___MyEnum.ValueType]: ...
     @_builtins.property
-    def repeated_packed_unexpected_e(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[Global___MyEnum.ValueType]:
+    def repeated_packed_unexpected_e(self) -> _containers.RepeatedScalarFieldContainer[Global___MyEnum.ValueType]:
         """not packed"""
 
     def __init__(
         self,
         *,
         e: Global___MyEnum.ValueType | None = ...,
-        repeated_e: _collections_abc.Iterable[Global___MyEnum.ValueType] | None = ...,
-        repeated_packed_e: _collections_abc.Iterable[Global___MyEnum.ValueType] | None = ...,
-        repeated_packed_unexpected_e: _collections_abc.Iterable[Global___MyEnum.ValueType] | None = ...,
+        repeated_e: _abc.Iterable[Global___MyEnum.ValueType] | None = ...,
+        repeated_packed_e: _abc.Iterable[Global___MyEnum.ValueType] | None = ...,
+        repeated_packed_unexpected_e: _abc.Iterable[Global___MyEnum.ValueType] | None = ...,
         oneof_e_1: Global___MyEnum.ValueType | None = ...,
         oneof_e_2: Global___MyEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["e", b"e", "o", b"o", "oneof_e_1", b"oneof_e_1", "oneof_e_2", b"oneof_e_2", "repeated_e", b"repeated_e", "repeated_packed_e", b"repeated_packed_e", "repeated_packed_unexpected_e", b"repeated_packed_unexpected_e"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["e", b"e", "o", b"o", "oneof_e_1", b"oneof_e_1", "oneof_e_2", b"oneof_e_2", "repeated_e", b"repeated_e", "repeated_packed_e", b"repeated_packed_e", "repeated_packed_unexpected_e", b"repeated_packed_unexpected_e"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["e", b"e", "o", b"o", "oneof_e_1", b"oneof_e_1", "oneof_e_2", b"oneof_e_2", "repeated_e", b"repeated_e", "repeated_packed_e", b"repeated_packed_e", "repeated_packed_unexpected_e", b"repeated_packed_unexpected_e"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["e", b"e", "o", b"o", "oneof_e_1", b"oneof_e_1", "oneof_e_2", b"oneof_e_2", "repeated_e", b"repeated_e", "repeated_packed_e", b"repeated_packed_e", "repeated_packed_unexpected_e", b"repeated_packed_unexpected_e"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_o: _typing_extensions.TypeAlias = _typing.Literal["oneof_e_1", "oneof_e_2"]  # noqa: Y015
-    _WhichOneofArgType_o: _typing_extensions.TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
+    _WhichOneofReturnType_o: _TypeAlias = _typing.Literal["oneof_e_1", "oneof_e_2"]  # noqa: Y015
+    _WhichOneofArgType_o: _TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_o) -> _WhichOneofReturnType_o | None: ...
 
-Global___MyMessage: _typing_extensions.TypeAlias = MyMessage  # noqa: Y015
+Global___MyMessage: _TypeAlias = MyMessage  # noqa: Y015

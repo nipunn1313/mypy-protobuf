@@ -3,13 +3,11 @@
 isort:skip_file
 """
 
-import abc as _abc
-import collections.abc as _collections_abc
-import google.protobuf.empty_pb2
-import grpc as _grpc
-import grpc.aio as _grpc_aio
-import testproto.test_pb2
-import typing as _typing
+from collections import abc as _abc
+from google.protobuf import empty_pb2 as _empty_pb2
+from grpc import aio as _aio
+from testproto import test_pb2 as _test_pb2
+import abc as _abc_1
 
 
 GRPC_GENERATED_VERSION: str
@@ -18,37 +16,37 @@ GRPC_VERSION: str
 class SimpleServiceStub:
     """SimpleService"""
 
-    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
-    UnaryUnary: _grpc_aio.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]
+    def __init__(self, channel: _aio.Channel) -> None: ...
+    UnaryUnary: _aio.UnaryUnaryMultiCallable[_empty_pb2.Empty, _test_pb2.Simple1]
     """UnaryUnary"""
-    UnaryStream: _grpc_aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
+    UnaryStream: _aio.UnaryUnaryMultiCallable[_test_pb2.Simple1, _empty_pb2.Empty]
     """UnaryStream"""
-    NoComment: _grpc_aio.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
+    NoComment: _aio.UnaryUnaryMultiCallable[_test_pb2.Simple1, _empty_pb2.Empty]
 
-class SimpleServiceServicer(metaclass=_abc.ABCMeta):
+class SimpleServiceServicer(metaclass=_abc_1.ABCMeta):
     """SimpleService"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def UnaryUnary(
         self,
-        request: google.protobuf.empty_pb2.Empty,
-        context: _grpc_aio.ServicerContext[google.protobuf.empty_pb2.Empty, _collections_abc.Awaitable[testproto.test_pb2.Simple1]],
-    ) -> _collections_abc.Awaitable[testproto.test_pb2.Simple1]:
+        request: _empty_pb2.Empty,
+        context: _aio.ServicerContext[_empty_pb2.Empty, _abc.Awaitable[_test_pb2.Simple1]],
+    ) -> _abc.Awaitable[_test_pb2.Simple1]:
         """UnaryUnary"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def UnaryStream(
         self,
-        request: testproto.test_pb2.Simple1,
-        context: _grpc_aio.ServicerContext[testproto.test_pb2.Simple1, _collections_abc.Awaitable[google.protobuf.empty_pb2.Empty]],
-    ) -> _collections_abc.Awaitable[google.protobuf.empty_pb2.Empty]:
+        request: _test_pb2.Simple1,
+        context: _aio.ServicerContext[_test_pb2.Simple1, _abc.Awaitable[_empty_pb2.Empty]],
+    ) -> _abc.Awaitable[_empty_pb2.Empty]:
         """UnaryStream"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def NoComment(
         self,
-        request: testproto.test_pb2.Simple1,
-        context: _grpc_aio.ServicerContext[testproto.test_pb2.Simple1, _collections_abc.Awaitable[google.protobuf.empty_pb2.Empty]],
-    ) -> _collections_abc.Awaitable[google.protobuf.empty_pb2.Empty]: ...
+        request: _test_pb2.Simple1,
+        context: _aio.ServicerContext[_test_pb2.Simple1, _abc.Awaitable[_empty_pb2.Empty]],
+    ) -> _abc.Awaitable[_empty_pb2.Empty]: ...
 
-def add_SimpleServiceServicer_to_server(servicer: SimpleServiceServicer, server: _grpc_aio.Server) -> None: ...
+def add_SimpleServiceServicer_to_server(servicer: SimpleServiceServicer, server: _aio.Server) -> None: ...

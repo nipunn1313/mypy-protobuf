@@ -8,24 +8,24 @@ Author: kenton@google.com (Kenton Varda)
 A proto file which uses optimize_for = CODE_SIZE.
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import unittest_pb2 as _unittest_pb2
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
-import google.protobuf.unittest_pb2
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestOptimizedForSize(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestOptimizedForSize(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     I_FIELD_NUMBER: _builtins.int
     MSG_FIELD_NUMBER: _builtins.int
@@ -35,32 +35,32 @@ class TestOptimizedForSize(_google_protobuf_message.Message):
     integer_field: _builtins.int
     string_field: _builtins.str
     @_builtins.property
-    def msg(self) -> google.protobuf.unittest_pb2.ForeignMessage: ...
+    def msg(self) -> _unittest_pb2.ForeignMessage: ...
     TEST_EXTENSION_FIELD_NUMBER: _builtins.int
     TEST_EXTENSION2_FIELD_NUMBER: _builtins.int
-    test_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestOptimizedForSize, _builtins.int]
-    test_extension2: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestOptimizedForSize, Global___TestRequiredOptimizedForSize]
+    test_extension: _extension_dict._ExtensionFieldDescriptor[Global___TestOptimizedForSize, _builtins.int]
+    test_extension2: _extension_dict._ExtensionFieldDescriptor[Global___TestOptimizedForSize, Global___TestRequiredOptimizedForSize]
     def __init__(
         self,
         *,
         i: _builtins.int | None = ...,
-        msg: google.protobuf.unittest_pb2.ForeignMessage | None = ...,
+        msg: _unittest_pb2.ForeignMessage | None = ...,
         integer_field: _builtins.int | None = ...,
         string_field: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "i", b"i", "integer_field", b"integer_field", "msg", b"msg", "string_field", b"string_field"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["foo", b"foo", "i", b"i", "integer_field", b"integer_field", "msg", b"msg", "string_field", b"string_field"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "i", b"i", "integer_field", b"integer_field", "msg", b"msg", "string_field", b"string_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["foo", b"foo", "i", b"i", "integer_field", b"integer_field", "msg", b"msg", "string_field", b"string_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_foo: _typing_extensions.TypeAlias = _typing.Literal["integer_field", "string_field"]  # noqa: Y015
-    _WhichOneofArgType_foo: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
+    _WhichOneofReturnType_foo: _TypeAlias = _typing.Literal["integer_field", "string_field"]  # noqa: Y015
+    _WhichOneofArgType_foo: _TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_foo) -> _WhichOneofReturnType_foo | None: ...
 
-Global___TestOptimizedForSize: _typing_extensions.TypeAlias = TestOptimizedForSize  # noqa: Y015
+Global___TestOptimizedForSize: _TypeAlias = TestOptimizedForSize  # noqa: Y015
 
 @_typing.final
-class TestRequiredOptimizedForSize(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestRequiredOptimizedForSize(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     X_FIELD_NUMBER: _builtins.int
     x: _builtins.int
@@ -69,16 +69,16 @@ class TestRequiredOptimizedForSize(_google_protobuf_message.Message):
         *,
         x: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["x", b"x"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["x", b"x"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["x", b"x"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["x", b"x"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestRequiredOptimizedForSize: _typing_extensions.TypeAlias = TestRequiredOptimizedForSize  # noqa: Y015
+Global___TestRequiredOptimizedForSize: _TypeAlias = TestRequiredOptimizedForSize  # noqa: Y015
 
 @_typing.final
-class TestOptionalOptimizedForSize(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestOptionalOptimizedForSize(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     O_FIELD_NUMBER: _builtins.int
     @_builtins.property
@@ -88,9 +88,9 @@ class TestOptionalOptimizedForSize(_google_protobuf_message.Message):
         *,
         o: Global___TestRequiredOptimizedForSize | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["o", b"o"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestOptionalOptimizedForSize: _typing_extensions.TypeAlias = TestOptionalOptimizedForSize  # noqa: Y015
+Global___TestOptionalOptimizedForSize: _TypeAlias = TestOptionalOptimizedForSize  # noqa: Y015

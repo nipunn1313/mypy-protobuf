@@ -3,28 +3,28 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import unittest_delimited_import_pb2 as _unittest_delimited_import_pb2
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
-import google.protobuf.unittest_delimited_import_pb2
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class LengthPrefixed(_google_protobuf_message.Message):
+class LengthPrefixed(_message.Message):
     """Test various scenarios that are now possible in edition 2023+ that weren't in
     google.protobuf.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     B_FIELD_NUMBER: _builtins.int
@@ -36,16 +36,16 @@ class LengthPrefixed(_google_protobuf_message.Message):
         a: _builtins.int | None = ...,
         b: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___LengthPrefixed: _typing_extensions.TypeAlias = LengthPrefixed  # noqa: Y015
+Global___LengthPrefixed: _TypeAlias = LengthPrefixed  # noqa: Y015
 
 @_typing.final
-class NotGroupLikeScope(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class NotGroupLikeScope(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     B_FIELD_NUMBER: _builtins.int
@@ -57,16 +57,16 @@ class NotGroupLikeScope(_google_protobuf_message.Message):
         a: _builtins.int | None = ...,
         b: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NotGroupLikeScope: _typing_extensions.TypeAlias = NotGroupLikeScope  # noqa: Y015
+Global___NotGroupLikeScope: _TypeAlias = NotGroupLikeScope  # noqa: Y015
 
 @_typing.final
-class GroupLikeFileScope(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class GroupLikeFileScope(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     B_FIELD_NUMBER: _builtins.int
@@ -78,20 +78,20 @@ class GroupLikeFileScope(_google_protobuf_message.Message):
         a: _builtins.int | None = ...,
         b: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___GroupLikeFileScope: _typing_extensions.TypeAlias = GroupLikeFileScope  # noqa: Y015
+Global___GroupLikeFileScope: _TypeAlias = GroupLikeFileScope  # noqa: Y015
 
 @_typing.final
-class TestDelimited(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestDelimited(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class LengthPrefixed(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class LengthPrefixed(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         A_FIELD_NUMBER: _builtins.int
         B_FIELD_NUMBER: _builtins.int
@@ -103,14 +103,14 @@ class TestDelimited(_google_protobuf_message.Message):
             a: _builtins.int | None = ...,
             b: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class GroupLike(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class GroupLike(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         A_FIELD_NUMBER: _builtins.int
         B_FIELD_NUMBER: _builtins.int
@@ -122,9 +122,9 @@ class TestDelimited(_google_protobuf_message.Message):
             a: _builtins.int | None = ...,
             b: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     LENGTHPREFIXED_FIELD_NUMBER: _builtins.int
@@ -154,7 +154,7 @@ class TestDelimited(_google_protobuf_message.Message):
         """Delimited field that isn't group-like because of the scope of its type."""
 
     @_builtins.property
-    def messageimport(self) -> google.protobuf.unittest_delimited_import_pb2.MessageImport:
+    def messageimport(self) -> _unittest_delimited_import_pb2.MessageImport:
         """Delimited field that's grouplike except that it's an imported type."""
 
     def __init__(
@@ -165,27 +165,27 @@ class TestDelimited(_google_protobuf_message.Message):
         grouplike: Global___TestDelimited.GroupLike | None = ...,
         notgrouplike: Global___TestDelimited.GroupLike | None = ...,
         notgrouplikescope: Global___NotGroupLikeScope | None = ...,
-        messageimport: google.protobuf.unittest_delimited_import_pb2.MessageImport | None = ...,
+        messageimport: _unittest_delimited_import_pb2.MessageImport | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["grouplike", b"grouplike", "lengthprefixed", b"lengthprefixed", "messageimport", b"messageimport", "nested", b"nested", "notgrouplike", b"notgrouplike", "notgrouplikescope", b"notgrouplikescope"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["grouplike", b"grouplike", "lengthprefixed", b"lengthprefixed", "messageimport", b"messageimport", "nested", b"nested", "notgrouplike", b"notgrouplike", "notgrouplikescope", b"notgrouplikescope"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["grouplike", b"grouplike", "lengthprefixed", b"lengthprefixed", "messageimport", b"messageimport", "nested", b"nested", "notgrouplike", b"notgrouplike", "notgrouplikescope", b"notgrouplikescope"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["grouplike", b"grouplike", "lengthprefixed", b"lengthprefixed", "messageimport", b"messageimport", "nested", b"nested", "notgrouplike", b"notgrouplike", "notgrouplikescope", b"notgrouplikescope"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestDelimited: _typing_extensions.TypeAlias = TestDelimited  # noqa: Y015
+Global___TestDelimited: _TypeAlias = TestDelimited  # noqa: Y015
 
 LENGTHPREFIXED_FIELD_NUMBER: _builtins.int
 GROUPLIKEFILESCOPE_FIELD_NUMBER: _builtins.int
 NOT_GROUP_LIKE_SCOPE_FIELD_NUMBER: _builtins.int
 GROUPLIKE_FIELD_NUMBER: _builtins.int
 MESSAGEIMPORT_FIELD_NUMBER: _builtins.int
-lengthprefixed: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___LengthPrefixed]
+lengthprefixed: _extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___LengthPrefixed]
 """Non-delimited field that otherwise looks group-like."""
-grouplikefilescope: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___GroupLikeFileScope]
+grouplikefilescope: _extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___GroupLikeFileScope]
 """Truly group-like extension."""
-not_group_like_scope: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___NotGroupLikeScope]
+not_group_like_scope: _extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___NotGroupLikeScope]
 """Delimited extension that isn't group-like because of its name."""
-grouplike: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___TestDelimited.GroupLike]
+grouplike: _extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, Global___TestDelimited.GroupLike]
 """Delimited extension that isn't group-like because of the scope of its type."""
-messageimport: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, google.protobuf.unittest_delimited_import_pb2.MessageImport]
+messageimport: _extension_dict._ExtensionFieldDescriptor[Global___TestDelimited, _unittest_delimited_import_pb2.MessageImport]
 """Delimited extension that's grouplike except that it's an imported type."""

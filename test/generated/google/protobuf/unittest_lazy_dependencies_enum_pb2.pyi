@@ -6,25 +6,25 @@ that the generated code doesn't depend on being in the proto2 namespace.
 In test_util.h we do "using namespace unittest = proto2_unittest".
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _LazyEnum:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _LazyEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_LazyEnum.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _LazyEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_LazyEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     LAZY_ENUM_0: _LazyEnum.ValueType  # 0
     LAZY_ENUM_1: _LazyEnum.ValueType  # 1
 
@@ -32,4 +32,4 @@ class LazyEnum(_LazyEnum, metaclass=_LazyEnumEnumTypeWrapper): ...
 
 LAZY_ENUM_0: LazyEnum.ValueType  # 0
 LAZY_ENUM_1: LazyEnum.ValueType  # 1
-Global___LazyEnum: _typing_extensions.TypeAlias = LazyEnum  # noqa: Y015
+Global___LazyEnum: _TypeAlias = LazyEnum  # noqa: Y015

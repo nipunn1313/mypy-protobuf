@@ -3,13 +3,11 @@
 isort:skip_file
 """
 
-import abc as _abc
-import collections.abc as _collections_abc
-import google.protobuf.empty_pb2
+from collections import abc as _abc
+from google.protobuf import empty_pb2 as _empty_pb2
+from testproto import test_pb2 as _test_pb2
+import abc as _abc_1
 import grpc as _grpc
-import grpc.aio as _grpc_aio
-import testproto.test_pb2
-import typing as _typing
 
 
 GRPC_GENERATED_VERSION: str
@@ -19,36 +17,36 @@ class SimpleServiceStub:
     """SimpleService"""
 
     def __init__(self, channel: _grpc.Channel) -> None: ...
-    UnaryUnary: _grpc.UnaryUnaryMultiCallable[google.protobuf.empty_pb2.Empty, testproto.test_pb2.Simple1]
+    UnaryUnary: _grpc.UnaryUnaryMultiCallable[_empty_pb2.Empty, _test_pb2.Simple1]
     """UnaryUnary"""
-    UnaryStream: _grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
+    UnaryStream: _grpc.UnaryUnaryMultiCallable[_test_pb2.Simple1, _empty_pb2.Empty]
     """UnaryStream"""
-    NoComment: _grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, google.protobuf.empty_pb2.Empty]
+    NoComment: _grpc.UnaryUnaryMultiCallable[_test_pb2.Simple1, _empty_pb2.Empty]
 
-class SimpleServiceServicer(metaclass=_abc.ABCMeta):
+class SimpleServiceServicer(metaclass=_abc_1.ABCMeta):
     """SimpleService"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def UnaryUnary(
         self,
-        request: google.protobuf.empty_pb2.Empty,
+        request: _empty_pb2.Empty,
         context: _grpc.ServicerContext,
-    ) -> testproto.test_pb2.Simple1:
+    ) -> _test_pb2.Simple1:
         """UnaryUnary"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def UnaryStream(
         self,
-        request: testproto.test_pb2.Simple1,
+        request: _test_pb2.Simple1,
         context: _grpc.ServicerContext,
-    ) -> google.protobuf.empty_pb2.Empty:
+    ) -> _empty_pb2.Empty:
         """UnaryStream"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def NoComment(
         self,
-        request: testproto.test_pb2.Simple1,
+        request: _test_pb2.Simple1,
         context: _grpc.ServicerContext,
-    ) -> google.protobuf.empty_pb2.Empty: ...
+    ) -> _empty_pb2.Empty: ...
 
 def add_SimpleServiceServicer_to_server(servicer: SimpleServiceServicer, server: _grpc.Server) -> None: ...

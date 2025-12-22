@@ -9,45 +9,45 @@ This file is similar to unittest_mset_wire_format.proto, but does not
 have a TestMessageSet, so it can be downgraded to proto1.
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import unittest_mset_wire_format_pb2 as _unittest_mset_wire_format_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
-import google.protobuf.unittest_mset_wire_format_pb2
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestMessageSetContainer(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestMessageSetContainer(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     MESSAGE_SET_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def message_set(self) -> google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet: ...
+    def message_set(self) -> _unittest_mset_wire_format_pb2.TestMessageSet: ...
     def __init__(
         self,
         *,
-        message_set: google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet | None = ...,
+        message_set: _unittest_mset_wire_format_pb2.TestMessageSet | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message_set", b"message_set"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["message_set", b"message_set"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message_set", b"message_set"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["message_set", b"message_set"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageSetContainer: _typing_extensions.TypeAlias = TestMessageSetContainer  # noqa: Y015
+Global___TestMessageSetContainer: _TypeAlias = TestMessageSetContainer  # noqa: Y015
 
 @_typing.final
-class NestedTestMessageSetContainer(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class NestedTestMessageSetContainer(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     CONTAINER_FIELD_NUMBER: _builtins.int
     CHILD_FIELD_NUMBER: _builtins.int
@@ -65,16 +65,16 @@ class NestedTestMessageSetContainer(_google_protobuf_message.Message):
         child: Global___NestedTestMessageSetContainer | None = ...,
         lazy_child: Global___NestedTestMessageSetContainer | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "container", b"container", "lazy_child", b"lazy_child"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["child", b"child", "container", b"container", "lazy_child", b"lazy_child"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["child", b"child", "container", b"container", "lazy_child", b"lazy_child"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["child", b"child", "container", b"container", "lazy_child", b"lazy_child"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NestedTestMessageSetContainer: _typing_extensions.TypeAlias = NestedTestMessageSetContainer  # noqa: Y015
+Global___NestedTestMessageSetContainer: _TypeAlias = NestedTestMessageSetContainer  # noqa: Y015
 
 @_typing.final
-class NestedTestInt(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class NestedTestInt(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     B_FIELD_NUMBER: _builtins.int
@@ -90,16 +90,16 @@ class NestedTestInt(_google_protobuf_message.Message):
         b: _builtins.int | None = ...,
         child: Global___NestedTestInt | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "child", b"child"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b", "child", b"child"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "child", b"child"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b", "child", b"child"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NestedTestInt: _typing_extensions.TypeAlias = NestedTestInt  # noqa: Y015
+Global___NestedTestInt: _TypeAlias = NestedTestInt  # noqa: Y015
 
 @_typing.final
-class TestMessageSetExtension1(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestMessageSetExtension1(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     I_FIELD_NUMBER: _builtins.int
     RECURSIVE_FIELD_NUMBER: _builtins.int
@@ -107,46 +107,46 @@ class TestMessageSetExtension1(_google_protobuf_message.Message):
     i: _builtins.int
     test_aliasing: _builtins.str
     @_builtins.property
-    def recursive(self) -> google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet: ...
+    def recursive(self) -> _unittest_mset_wire_format_pb2.TestMessageSet: ...
     MESSAGE_SET_EXTENSION_FIELD_NUMBER: _builtins.int
-    message_set_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet, Global___TestMessageSetExtension1]
+    message_set_extension: _extension_dict._ExtensionFieldDescriptor[_unittest_mset_wire_format_pb2.TestMessageSet, Global___TestMessageSetExtension1]
     def __init__(
         self,
         *,
         i: _builtins.int | None = ...,
-        recursive: google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet | None = ...,
+        recursive: _unittest_mset_wire_format_pb2.TestMessageSet | None = ...,
         test_aliasing: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["i", b"i", "recursive", b"recursive", "test_aliasing", b"test_aliasing"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["i", b"i", "recursive", b"recursive", "test_aliasing", b"test_aliasing"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["i", b"i", "recursive", b"recursive", "test_aliasing", b"test_aliasing"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["i", b"i", "recursive", b"recursive", "test_aliasing", b"test_aliasing"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageSetExtension1: _typing_extensions.TypeAlias = TestMessageSetExtension1  # noqa: Y015
+Global___TestMessageSetExtension1: _TypeAlias = TestMessageSetExtension1  # noqa: Y015
 
 @_typing.final
-class TestMessageSetExtension2(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestMessageSetExtension2(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     STR_FIELD_NUMBER: _builtins.int
     str: _builtins.str
     MESSAGE_SET_EXTENSION_FIELD_NUMBER: _builtins.int
-    message_set_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet, Global___TestMessageSetExtension2]
+    message_set_extension: _extension_dict._ExtensionFieldDescriptor[_unittest_mset_wire_format_pb2.TestMessageSet, Global___TestMessageSetExtension2]
     def __init__(
         self,
         *,
         str: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["str", b"str"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["str", b"str"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["str", b"str"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["str", b"str"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageSetExtension2: _typing_extensions.TypeAlias = TestMessageSetExtension2  # noqa: Y015
+Global___TestMessageSetExtension2: _TypeAlias = TestMessageSetExtension2  # noqa: Y015
 
 @_typing.final
-class TestMessageSetExtension3(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestMessageSetExtension3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     MSG_FIELD_NUMBER: _builtins.int
     REQUIRED_INT_FIELD_NUMBER: _builtins.int
@@ -154,22 +154,22 @@ class TestMessageSetExtension3(_google_protobuf_message.Message):
     @_builtins.property
     def msg(self) -> Global___NestedTestInt: ...
     MESSAGE_SET_EXTENSION_FIELD_NUMBER: _builtins.int
-    message_set_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.unittest_mset_wire_format_pb2.TestMessageSet, Global___TestMessageSetExtension3]
+    message_set_extension: _extension_dict._ExtensionFieldDescriptor[_unittest_mset_wire_format_pb2.TestMessageSet, Global___TestMessageSetExtension3]
     def __init__(
         self,
         *,
         msg: Global___NestedTestInt | None = ...,
         required_int: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["msg", b"msg", "required_int", b"required_int"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["msg", b"msg", "required_int", b"required_int"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["msg", b"msg", "required_int", b"required_int"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["msg", b"msg", "required_int", b"required_int"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessageSetExtension3: _typing_extensions.TypeAlias = TestMessageSetExtension3  # noqa: Y015
+Global___TestMessageSetExtension3: _TypeAlias = TestMessageSetExtension3  # noqa: Y015
 
 @_typing.final
-class RawMessageSet(_google_protobuf_message.Message):
+class RawMessageSet(_message.Message):
     """This message was used to generate
     //net/proto2/python/internal/testdata/message_set_message, but is commented
     out since it must not actually exist in code, to simulate an "unknown"
@@ -184,11 +184,11 @@ class RawMessageSet(_google_protobuf_message.Message):
     MessageSet wire format is equivalent to this.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class Item(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class Item(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         TYPE_ID_FIELD_NUMBER: _builtins.int
         MESSAGE_FIELD_NUMBER: _builtins.int
@@ -200,20 +200,20 @@ class RawMessageSet(_google_protobuf_message.Message):
             type_id: _builtins.int | None = ...,
             message: _builtins.bytes | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message", b"message", "type_id", b"type_id"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["message", b"message", "type_id", b"type_id"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["message", b"message", "type_id", b"type_id"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["message", b"message", "type_id", b"type_id"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     ITEM_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def item(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___RawMessageSet.Item]: ...
+    def item(self) -> _containers.RepeatedCompositeFieldContainer[Global___RawMessageSet.Item]: ...
     def __init__(
         self,
         *,
-        item: _collections_abc.Iterable[Global___RawMessageSet.Item] | None = ...,
+        item: _abc.Iterable[Global___RawMessageSet.Item] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["item", b"item"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["item", b"item"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___RawMessageSet: _typing_extensions.TypeAlias = RawMessageSet  # noqa: Y015
+Global___RawMessageSet: _TypeAlias = RawMessageSet  # noqa: Y015

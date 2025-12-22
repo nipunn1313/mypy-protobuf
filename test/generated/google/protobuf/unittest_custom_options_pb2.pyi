@@ -5,31 +5,31 @@ We don't put this in a package within proto2 because we need to make sure
 that the generated code doesn't depend on being in the proto2 namespace.
 """
 
+from collections import abc as _abc
+from google.protobuf import any_pb2 as _any_pb2
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.any_pb2
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _MethodOpt1:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _MethodOpt1EnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_MethodOpt1.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _MethodOpt1EnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_MethodOpt1.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     METHODOPT1_VAL1: _MethodOpt1.ValueType  # 1
     METHODOPT1_VAL2: _MethodOpt1.ValueType  # 2
 
@@ -37,35 +37,35 @@ class MethodOpt1(_MethodOpt1, metaclass=_MethodOpt1EnumTypeWrapper): ...
 
 METHODOPT1_VAL1: MethodOpt1.ValueType  # 1
 METHODOPT1_VAL2: MethodOpt1.ValueType  # 2
-Global___MethodOpt1: _typing_extensions.TypeAlias = MethodOpt1  # noqa: Y015
+Global___MethodOpt1: _TypeAlias = MethodOpt1  # noqa: Y015
 
 class _AggregateEnum:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _AggregateEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_AggregateEnum.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _AggregateEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_AggregateEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     VALUE: _AggregateEnum.ValueType  # 1
 
 class AggregateEnum(_AggregateEnum, metaclass=_AggregateEnumEnumTypeWrapper): ...
 
 VALUE: AggregateEnum.ValueType  # 1
-Global___AggregateEnum: _typing_extensions.TypeAlias = AggregateEnum  # noqa: Y015
+Global___AggregateEnum: _TypeAlias = AggregateEnum  # noqa: Y015
 
 @_typing.final
-class TestMessageWithCustomOptions(_google_protobuf_message.Message):
+class TestMessageWithCustomOptions(_message.Message):
     """A test message with custom options at all possible locations (and also some
     regular options, to make sure they interact nicely).
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _AnEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _AnEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestMessageWithCustomOptions._AnEnum.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _AnEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[TestMessageWithCustomOptions._AnEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         ANENUM_VAL1: TestMessageWithCustomOptions._AnEnum.ValueType  # 1
         ANENUM_VAL2: TestMessageWithCustomOptions._AnEnum.ValueType  # 2
 
@@ -74,8 +74,8 @@ class TestMessageWithCustomOptions(_google_protobuf_message.Message):
     ANENUM_VAL2: TestMessageWithCustomOptions.AnEnum.ValueType  # 2
 
     @_typing.final
-    class MapFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class MapFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -87,9 +87,9 @@ class TestMessageWithCustomOptions(_google_protobuf_message.Message):
             key: _builtins.str | None = ...,
             value: _builtins.str | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     FIELD1_FIELD_NUMBER: _builtins.int
@@ -98,80 +98,80 @@ class TestMessageWithCustomOptions(_google_protobuf_message.Message):
     field1: _builtins.str
     oneof_field: _builtins.int
     @_builtins.property
-    def map_field(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.str, _builtins.str]: ...
+    def map_field(self) -> _containers.ScalarMap[_builtins.str, _builtins.str]: ...
     def __init__(
         self,
         *,
         field1: _builtins.str | None = ...,
         oneof_field: _builtins.int | None = ...,
-        map_field: _collections_abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        map_field: _abc.Mapping[_builtins.str, _builtins.str] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["AnOneof", b"AnOneof", "field1", b"field1", "oneof_field", b"oneof_field"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["AnOneof", b"AnOneof", "field1", b"field1", "oneof_field", b"oneof_field"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["AnOneof", b"AnOneof", "field1", b"field1", "map_field", b"map_field", "oneof_field", b"oneof_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["AnOneof", b"AnOneof", "field1", b"field1", "map_field", b"map_field", "oneof_field", b"oneof_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_AnOneof: _typing_extensions.TypeAlias = _typing.Literal["oneof_field"]  # noqa: Y015
-    _WhichOneofArgType_AnOneof: _typing_extensions.TypeAlias = _typing.Literal["AnOneof", b"AnOneof"]  # noqa: Y015
+    _WhichOneofReturnType_AnOneof: _TypeAlias = _typing.Literal["oneof_field"]  # noqa: Y015
+    _WhichOneofArgType_AnOneof: _TypeAlias = _typing.Literal["AnOneof", b"AnOneof"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_AnOneof) -> _WhichOneofReturnType_AnOneof | None: ...
 
-Global___TestMessageWithCustomOptions: _typing_extensions.TypeAlias = TestMessageWithCustomOptions  # noqa: Y015
+Global___TestMessageWithCustomOptions: _TypeAlias = TestMessageWithCustomOptions  # noqa: Y015
 
 @_typing.final
-class CustomOptionFooRequest(_google_protobuf_message.Message):
+class CustomOptionFooRequest(_message.Message):
     """A test RPC service with custom options at all possible locations (and also
     some regular options, to make sure they interact nicely).
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionFooRequest: _typing_extensions.TypeAlias = CustomOptionFooRequest  # noqa: Y015
+Global___CustomOptionFooRequest: _TypeAlias = CustomOptionFooRequest  # noqa: Y015
 
 @_typing.final
-class CustomOptionFooResponse(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CustomOptionFooResponse(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionFooResponse: _typing_extensions.TypeAlias = CustomOptionFooResponse  # noqa: Y015
+Global___CustomOptionFooResponse: _TypeAlias = CustomOptionFooResponse  # noqa: Y015
 
 @_typing.final
-class CustomOptionFooClientMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CustomOptionFooClientMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionFooClientMessage: _typing_extensions.TypeAlias = CustomOptionFooClientMessage  # noqa: Y015
+Global___CustomOptionFooClientMessage: _TypeAlias = CustomOptionFooClientMessage  # noqa: Y015
 
 @_typing.final
-class CustomOptionFooServerMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CustomOptionFooServerMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionFooServerMessage: _typing_extensions.TypeAlias = CustomOptionFooServerMessage  # noqa: Y015
+Global___CustomOptionFooServerMessage: _TypeAlias = CustomOptionFooServerMessage  # noqa: Y015
 
 @_typing.final
-class DummyMessageContainingEnum(_google_protobuf_message.Message):
+class DummyMessageContainingEnum(_message.Message):
     """Options of every possible field type, so we can test them all exhaustively."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _TestEnumType:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _TestEnumTypeEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[DummyMessageContainingEnum._TestEnumType.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _TestEnumTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[DummyMessageContainingEnum._TestEnumType.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         TEST_OPTION_ENUM_TYPE1: DummyMessageContainingEnum._TestEnumType.ValueType  # 22
         TEST_OPTION_ENUM_TYPE2: DummyMessageContainingEnum._TestEnumType.ValueType  # -23
 
@@ -183,115 +183,115 @@ class DummyMessageContainingEnum(_google_protobuf_message.Message):
         self,
     ) -> None: ...
 
-Global___DummyMessageContainingEnum: _typing_extensions.TypeAlias = DummyMessageContainingEnum  # noqa: Y015
+Global___DummyMessageContainingEnum: _TypeAlias = DummyMessageContainingEnum  # noqa: Y015
 
 @_typing.final
-class DummyMessageInvalidAsOptionType(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class DummyMessageInvalidAsOptionType(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___DummyMessageInvalidAsOptionType: _typing_extensions.TypeAlias = DummyMessageInvalidAsOptionType  # noqa: Y015
+Global___DummyMessageInvalidAsOptionType: _TypeAlias = DummyMessageInvalidAsOptionType  # noqa: Y015
 
 @_typing.final
-class CustomOptionMinIntegerValues(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CustomOptionMinIntegerValues(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionMinIntegerValues: _typing_extensions.TypeAlias = CustomOptionMinIntegerValues  # noqa: Y015
+Global___CustomOptionMinIntegerValues: _TypeAlias = CustomOptionMinIntegerValues  # noqa: Y015
 
 @_typing.final
-class CustomOptionMaxIntegerValues(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CustomOptionMaxIntegerValues(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionMaxIntegerValues: _typing_extensions.TypeAlias = CustomOptionMaxIntegerValues  # noqa: Y015
+Global___CustomOptionMaxIntegerValues: _TypeAlias = CustomOptionMaxIntegerValues  # noqa: Y015
 
 @_typing.final
-class CustomOptionOtherValues(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CustomOptionOtherValues(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___CustomOptionOtherValues: _typing_extensions.TypeAlias = CustomOptionOtherValues  # noqa: Y015
+Global___CustomOptionOtherValues: _TypeAlias = CustomOptionOtherValues  # noqa: Y015
 
 @_typing.final
-class SettingRealsFromPositiveInts(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SettingRealsFromPositiveInts(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___SettingRealsFromPositiveInts: _typing_extensions.TypeAlias = SettingRealsFromPositiveInts  # noqa: Y015
+Global___SettingRealsFromPositiveInts: _TypeAlias = SettingRealsFromPositiveInts  # noqa: Y015
 
 @_typing.final
-class SettingRealsFromNegativeInts(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SettingRealsFromNegativeInts(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___SettingRealsFromNegativeInts: _typing_extensions.TypeAlias = SettingRealsFromNegativeInts  # noqa: Y015
+Global___SettingRealsFromNegativeInts: _TypeAlias = SettingRealsFromNegativeInts  # noqa: Y015
 
 @_typing.final
-class SettingRealsFromInf(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SettingRealsFromInf(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___SettingRealsFromInf: _typing_extensions.TypeAlias = SettingRealsFromInf  # noqa: Y015
+Global___SettingRealsFromInf: _TypeAlias = SettingRealsFromInf  # noqa: Y015
 
 @_typing.final
-class SettingRealsFromNegativeInf(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SettingRealsFromNegativeInf(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___SettingRealsFromNegativeInf: _typing_extensions.TypeAlias = SettingRealsFromNegativeInf  # noqa: Y015
+Global___SettingRealsFromNegativeInf: _TypeAlias = SettingRealsFromNegativeInf  # noqa: Y015
 
 @_typing.final
-class SettingRealsFromNan(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SettingRealsFromNan(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___SettingRealsFromNan: _typing_extensions.TypeAlias = SettingRealsFromNan  # noqa: Y015
+Global___SettingRealsFromNan: _TypeAlias = SettingRealsFromNan  # noqa: Y015
 
 @_typing.final
-class SettingRealsFromNegativeNan(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class SettingRealsFromNegativeNan(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___SettingRealsFromNegativeNan: _typing_extensions.TypeAlias = SettingRealsFromNegativeNan  # noqa: Y015
+Global___SettingRealsFromNegativeNan: _TypeAlias = SettingRealsFromNegativeNan  # noqa: Y015
 
 @_typing.final
-class ComplexOptionType1(_google_protobuf_message.Message):
+class ComplexOptionType1(_message.Message):
     """Options of complex message types, themselves combined and extended in
     various ways.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     FOO_FIELD_NUMBER: _builtins.int
     FOO2_FIELD_NUMBER: _builtins.int
@@ -301,42 +301,42 @@ class ComplexOptionType1(_google_protobuf_message.Message):
     foo2: _builtins.int
     foo3: _builtins.int
     @_builtins.property
-    def foo4(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    def foo4(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
         foo: _builtins.int | None = ...,
         foo2: _builtins.int | None = ...,
         foo3: _builtins.int | None = ...,
-        foo4: _collections_abc.Iterable[_builtins.int] | None = ...,
+        foo4: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo2", b"foo2", "foo3", b"foo3"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["foo", b"foo", "foo2", b"foo2", "foo3", b"foo3"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["foo", b"foo", "foo2", b"foo2", "foo3", b"foo3", "foo4", b"foo4"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["foo", b"foo", "foo2", b"foo2", "foo3", b"foo3", "foo4", b"foo4"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ComplexOptionType1: _typing_extensions.TypeAlias = ComplexOptionType1  # noqa: Y015
+Global___ComplexOptionType1: _TypeAlias = ComplexOptionType1  # noqa: Y015
 
 @_typing.final
-class ComplexOptionType2(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ComplexOptionType2(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class ComplexOptionType4(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class ComplexOptionType4(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         WALDO_FIELD_NUMBER: _builtins.int
         waldo: _builtins.int
         COMPLEX_OPT4_FIELD_NUMBER: _builtins.int
-        complex_opt4: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___ComplexOptionType2.ComplexOptionType4]
+        complex_opt4: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___ComplexOptionType2.ComplexOptionType4]
         def __init__(
             self,
             *,
             waldo: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["waldo", b"waldo"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["waldo", b"waldo"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["waldo", b"waldo"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["waldo", b"waldo"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     BAR_FIELD_NUMBER: _builtins.int
@@ -349,29 +349,29 @@ class ComplexOptionType2(_google_protobuf_message.Message):
     @_builtins.property
     def fred(self) -> Global___ComplexOptionType2.ComplexOptionType4: ...
     @_builtins.property
-    def barney(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___ComplexOptionType2.ComplexOptionType4]: ...
+    def barney(self) -> _containers.RepeatedCompositeFieldContainer[Global___ComplexOptionType2.ComplexOptionType4]: ...
     def __init__(
         self,
         *,
         bar: Global___ComplexOptionType1 | None = ...,
         baz: _builtins.int | None = ...,
         fred: Global___ComplexOptionType2.ComplexOptionType4 | None = ...,
-        barney: _collections_abc.Iterable[Global___ComplexOptionType2.ComplexOptionType4] | None = ...,
+        barney: _abc.Iterable[Global___ComplexOptionType2.ComplexOptionType4] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar", "baz", b"baz", "fred", b"fred"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["bar", b"bar", "baz", b"baz", "fred", b"fred"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["bar", b"bar", "barney", b"barney", "baz", b"baz", "fred", b"fred"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bar", b"bar", "barney", b"barney", "baz", b"baz", "fred", b"fred"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ComplexOptionType2: _typing_extensions.TypeAlias = ComplexOptionType2  # noqa: Y015
+Global___ComplexOptionType2: _TypeAlias = ComplexOptionType2  # noqa: Y015
 
 @_typing.final
-class ComplexOptionType3(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ComplexOptionType3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class ComplexOptionType5(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class ComplexOptionType5(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         PLUGH_FIELD_NUMBER: _builtins.int
         plugh: _builtins.int
@@ -380,9 +380,9 @@ class ComplexOptionType3(_google_protobuf_message.Message):
             *,
             plugh: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["plugh", b"plugh"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["plugh", b"plugh"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["plugh", b"plugh"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["plugh", b"plugh"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     MOO_FIELD_NUMBER: _builtins.int
@@ -396,16 +396,16 @@ class ComplexOptionType3(_google_protobuf_message.Message):
         moo: _builtins.int | None = ...,
         complexoptiontype5: Global___ComplexOptionType3.ComplexOptionType5 | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["complexoptiontype5", b"complexoptiontype5", "moo", b"moo"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["complexoptiontype5", b"complexoptiontype5", "moo", b"moo"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["complexoptiontype5", b"complexoptiontype5", "moo", b"moo"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["complexoptiontype5", b"complexoptiontype5", "moo", b"moo"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ComplexOptionType3: _typing_extensions.TypeAlias = ComplexOptionType3  # noqa: Y015
+Global___ComplexOptionType3: _TypeAlias = ComplexOptionType3  # noqa: Y015
 
 @_typing.final
-class ComplexOpt6(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ComplexOpt6(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     XYZZY_FIELD_NUMBER: _builtins.int
     xyzzy: _builtins.int
@@ -414,65 +414,65 @@ class ComplexOpt6(_google_protobuf_message.Message):
         *,
         xyzzy: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["xyzzy", b"xyzzy"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["xyzzy", b"xyzzy"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["xyzzy", b"xyzzy"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["xyzzy", b"xyzzy"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ComplexOpt6: _typing_extensions.TypeAlias = ComplexOpt6  # noqa: Y015
+Global___ComplexOpt6: _TypeAlias = ComplexOpt6  # noqa: Y015
 
 @_typing.final
-class VariousComplexOptions(_google_protobuf_message.Message):
+class VariousComplexOptions(_message.Message):
     """Note that we try various different ways of naming the same extension."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___VariousComplexOptions: _typing_extensions.TypeAlias = VariousComplexOptions  # noqa: Y015
+Global___VariousComplexOptions: _TypeAlias = VariousComplexOptions  # noqa: Y015
 
 @_typing.final
-class AggregateMessageSet(_google_protobuf_message.Message):
+class AggregateMessageSet(_message.Message):
     """------------------------------------------------------
     Definitions for testing aggregate option parsing.
     See descriptor_unittest.cc.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___AggregateMessageSet: _typing_extensions.TypeAlias = AggregateMessageSet  # noqa: Y015
+Global___AggregateMessageSet: _TypeAlias = AggregateMessageSet  # noqa: Y015
 
 @_typing.final
-class AggregateMessageSetElement(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class AggregateMessageSetElement(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     S_FIELD_NUMBER: _builtins.int
     s: _builtins.str
     MESSAGE_SET_EXTENSION_FIELD_NUMBER: _builtins.int
-    message_set_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___AggregateMessageSet, Global___AggregateMessageSetElement]
+    message_set_extension: _extension_dict._ExtensionFieldDescriptor[Global___AggregateMessageSet, Global___AggregateMessageSetElement]
     def __init__(
         self,
         *,
         s: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["s", b"s"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["s", b"s"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["s", b"s"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["s", b"s"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___AggregateMessageSetElement: _typing_extensions.TypeAlias = AggregateMessageSetElement  # noqa: Y015
+Global___AggregateMessageSetElement: _TypeAlias = AggregateMessageSetElement  # noqa: Y015
 
 @_typing.final
-class Aggregate(_google_protobuf_message.Message):
+class Aggregate(_message.Message):
     """A helper type used to test aggregate option parsing"""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     I_FIELD_NUMBER: _builtins.int
     S_FIELD_NUMBER: _builtins.int
@@ -487,7 +487,7 @@ class Aggregate(_google_protobuf_message.Message):
         """A nested object"""
 
     @_builtins.property
-    def file(self) -> google.protobuf.descriptor_pb2.FileOptions:
+    def file(self) -> _descriptor_pb2.FileOptions:
         """To test the parsing of extensions inside aggregate values"""
 
     @_builtins.property
@@ -495,31 +495,31 @@ class Aggregate(_google_protobuf_message.Message):
         """An embedded message set"""
 
     @_builtins.property
-    def any(self) -> google.protobuf.any_pb2.Any:
+    def any(self) -> _any_pb2.Any:
         """An any"""
 
     NESTED_FIELD_NUMBER: _builtins.int
-    nested: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, Global___Aggregate]
+    nested: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FileOptions, Global___Aggregate]
     def __init__(
         self,
         *,
         i: _builtins.int | None = ...,
         s: _builtins.str | None = ...,
         sub: Global___Aggregate | None = ...,
-        file: google.protobuf.descriptor_pb2.FileOptions | None = ...,
+        file: _descriptor_pb2.FileOptions | None = ...,
         mset: Global___AggregateMessageSet | None = ...,
-        any: google.protobuf.any_pb2.Any | None = ...,
+        any: _any_pb2.Any | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any", b"any", "file", b"file", "i", b"i", "mset", b"mset", "s", b"s", "sub", b"sub"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["any", b"any", "file", b"file", "i", b"i", "mset", b"mset", "s", b"s", "sub", b"sub"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any", b"any", "file", b"file", "i", b"i", "mset", b"mset", "s", b"s", "sub", b"sub"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["any", b"any", "file", b"file", "i", b"i", "mset", b"mset", "s", b"s", "sub", b"sub"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Aggregate: _typing_extensions.TypeAlias = Aggregate  # noqa: Y015
+Global___Aggregate: _TypeAlias = Aggregate  # noqa: Y015
 
 @_typing.final
-class AggregateMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class AggregateMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     FIELDNAME_FIELD_NUMBER: _builtins.int
     fieldname: _builtins.int
@@ -528,33 +528,33 @@ class AggregateMessage(_google_protobuf_message.Message):
         *,
         fieldname: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["fieldname", b"fieldname"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["fieldname", b"fieldname"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["fieldname", b"fieldname"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["fieldname", b"fieldname"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___AggregateMessage: _typing_extensions.TypeAlias = AggregateMessage  # noqa: Y015
+Global___AggregateMessage: _TypeAlias = AggregateMessage  # noqa: Y015
 
 @_typing.final
-class NestedOptionType(_google_protobuf_message.Message):
+class NestedOptionType(_message.Message):
     """Test custom options for nested type."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _NestedEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[NestedOptionType._NestedEnum.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[NestedOptionType._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         NESTED_ENUM_VALUE: NestedOptionType._NestedEnum.ValueType  # 1
 
     class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper): ...
     NESTED_ENUM_VALUE: NestedOptionType.NestedEnum.ValueType  # 1
 
     @_typing.final
-    class NestedMessage(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class NestedMessage(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         NESTED_FIELD_FIELD_NUMBER: _builtins.int
         nested_field: _builtins.int
@@ -563,33 +563,33 @@ class NestedOptionType(_google_protobuf_message.Message):
             *,
             nested_field: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["nested_field", b"nested_field"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["nested_field", b"nested_field"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["nested_field", b"nested_field"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["nested_field", b"nested_field"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     NESTED_EXTENSION_FIELD_NUMBER: _builtins.int
-    nested_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
+    nested_extension: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FileOptions, _builtins.int]
     def __init__(
         self,
     ) -> None: ...
 
-Global___NestedOptionType: _typing_extensions.TypeAlias = NestedOptionType  # noqa: Y015
+Global___NestedOptionType: _TypeAlias = NestedOptionType  # noqa: Y015
 
 @_typing.final
-class OldOptionType(_google_protobuf_message.Message):
+class OldOptionType(_message.Message):
     """Custom message option that has a required enum field.
     WARNING: this is strongly discouraged!
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _TestEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _TestEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[OldOptionType._TestEnum.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _TestEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[OldOptionType._TestEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         OLD_VALUE: OldOptionType._TestEnum.ValueType  # 0
 
     class TestEnum(_TestEnum, metaclass=_TestEnumEnumTypeWrapper): ...
@@ -602,25 +602,25 @@ class OldOptionType(_google_protobuf_message.Message):
         *,
         value: Global___OldOptionType.TestEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OldOptionType: _typing_extensions.TypeAlias = OldOptionType  # noqa: Y015
+Global___OldOptionType: _TypeAlias = OldOptionType  # noqa: Y015
 
 @_typing.final
-class NewOptionType(_google_protobuf_message.Message):
+class NewOptionType(_message.Message):
     """Updated version of the custom option above."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _TestEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _TestEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[NewOptionType._TestEnum.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _TestEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[NewOptionType._TestEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         OLD_VALUE: NewOptionType._TestEnum.ValueType  # 0
         NEW_VALUE: NewOptionType._TestEnum.ValueType  # 1
 
@@ -635,24 +635,24 @@ class NewOptionType(_google_protobuf_message.Message):
         *,
         value: Global___NewOptionType.TestEnum.ValueType | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NewOptionType: _typing_extensions.TypeAlias = NewOptionType  # noqa: Y015
+Global___NewOptionType: _TypeAlias = NewOptionType  # noqa: Y015
 
 @_typing.final
-class TestMessageWithRequiredEnumOption(_google_protobuf_message.Message):
+class TestMessageWithRequiredEnumOption(_message.Message):
     """Test message using the "required_enum_opt" option defined above."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestMessageWithRequiredEnumOption: _typing_extensions.TypeAlias = TestMessageWithRequiredEnumOption  # noqa: Y015
+Global___TestMessageWithRequiredEnumOption: _TypeAlias = TestMessageWithRequiredEnumOption  # noqa: Y015
 
 FILE_OPT1_FIELD_NUMBER: _builtins.int
 MESSAGE_OPT1_FIELD_NUMBER: _builtins.int
@@ -696,48 +696,48 @@ ENUMVALOPT_FIELD_NUMBER: _builtins.int
 SERVICEOPT_FIELD_NUMBER: _builtins.int
 METHODOPT_FIELD_NUMBER: _builtins.int
 REQUIRED_ENUM_OPT_FIELD_NUMBER: _builtins.int
-file_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
-message_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-field_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.int]
-field_opt2: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.int]
+file_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FileOptions, _builtins.int]
+message_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+field_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.int]
+field_opt2: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.int]
 """This is useful for testing that we correctly register default values for
 extension options.
 """
-oneof_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.OneofOptions, _builtins.int]
-enum_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumOptions, _builtins.int]
-enum_value_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumValueOptions, _builtins.int]
-service_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.ServiceOptions, _builtins.int]
-method_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, Global___MethodOpt1.ValueType]
-bool_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.bool]
-int32_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-int64_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-uint32_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-uint64_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-sint32_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-sint64_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-fixed32_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-fixed64_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-sfixed32_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-sfixed64_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-float_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.float]
-double_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.float]
-string_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.str]
-bytes_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.bytes]
-enum_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___DummyMessageContainingEnum.TestEnumType.ValueType]
-message_type_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___DummyMessageInvalidAsOptionType]
-mooo: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType1, _builtins.int]
-corge: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType1, Global___ComplexOptionType3]
-grault: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType2, _builtins.int]
-garply: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType2, Global___ComplexOptionType1]
-complex_opt1: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___ComplexOptionType1]
-complex_opt2: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___ComplexOptionType2]
-complex_opt3: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___ComplexOptionType3]
-complexopt6: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___ComplexOpt6]
-fileopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, Global___Aggregate]
-msgopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___Aggregate]
-fieldopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___Aggregate]
-enumopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumOptions, Global___Aggregate]
-enumvalopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumValueOptions, Global___Aggregate]
-serviceopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.ServiceOptions, Global___Aggregate]
-methodopt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, Global___Aggregate]
-required_enum_opt: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, Global___OldOptionType]
+oneof_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.OneofOptions, _builtins.int]
+enum_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.EnumOptions, _builtins.int]
+enum_value_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.EnumValueOptions, _builtins.int]
+service_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.ServiceOptions, _builtins.int]
+method_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MethodOptions, Global___MethodOpt1.ValueType]
+bool_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.bool]
+int32_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+int64_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+uint32_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+uint64_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+sint32_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+sint64_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+fixed32_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+fixed64_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+sfixed32_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+sfixed64_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+float_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.float]
+double_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.float]
+string_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.str]
+bytes_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.bytes]
+enum_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___DummyMessageContainingEnum.TestEnumType.ValueType]
+message_type_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___DummyMessageInvalidAsOptionType]
+mooo: _extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType1, _builtins.int]
+corge: _extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType1, Global___ComplexOptionType3]
+grault: _extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType2, _builtins.int]
+garply: _extension_dict._ExtensionFieldDescriptor[Global___ComplexOptionType2, Global___ComplexOptionType1]
+complex_opt1: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___ComplexOptionType1]
+complex_opt2: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___ComplexOptionType2]
+complex_opt3: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___ComplexOptionType3]
+complexopt6: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___ComplexOpt6]
+fileopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FileOptions, Global___Aggregate]
+msgopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___Aggregate]
+fieldopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, Global___Aggregate]
+enumopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.EnumOptions, Global___Aggregate]
+enumvalopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.EnumValueOptions, Global___Aggregate]
+serviceopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.ServiceOptions, Global___Aggregate]
+methodopt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MethodOptions, Global___Aggregate]
+required_enum_opt: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, Global___OldOptionType]

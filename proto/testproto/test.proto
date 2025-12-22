@@ -5,6 +5,7 @@ package test;
 
 import "mypy_protobuf/extensions.proto";
 import "testproto/inner/inner.proto";
+import "testproto/inner/test3.proto";
 import "testproto/nested/nested.proto";
 import "testproto/nopackage.proto";
 import "testproto/test3.proto";
@@ -200,4 +201,8 @@ enum DeprecatedEnum {
 
     DEPRECATED_ONE = 1;
     DEPRECATED_TWO = 2;
+}
+
+message TestDuplicatePackageMessage {
+  required inner.DuplicatePackageMessage msg = 1;
 }

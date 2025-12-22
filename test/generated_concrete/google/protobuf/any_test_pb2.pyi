@@ -9,25 +9,25 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from collections import abc as _abc
+from google.protobuf import any_pb2 as _any_pb2
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.any_pb2
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestAny(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestAny(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     INT32_VALUE_FIELD_NUMBER: _builtins.int
     ANY_VALUE_FIELD_NUMBER: _builtins.int
@@ -36,20 +36,20 @@ class TestAny(_google_protobuf_message.Message):
     int32_value: _builtins.int
     text: _builtins.str
     @_builtins.property
-    def any_value(self) -> google.protobuf.any_pb2.Any: ...
+    def any_value(self) -> _any_pb2.Any: ...
     @_builtins.property
-    def repeated_any_value(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.any_pb2.Any]: ...
+    def repeated_any_value(self) -> _containers.RepeatedCompositeFieldContainer[_any_pb2.Any]: ...
     def __init__(
         self,
         *,
         int32_value: _builtins.int = ...,
-        any_value: google.protobuf.any_pb2.Any | None = ...,
-        repeated_any_value: _collections_abc.Iterable[google.protobuf.any_pb2.Any] | None = ...,
+        any_value: _any_pb2.Any | None = ...,
+        repeated_any_value: _abc.Iterable[_any_pb2.Any] | None = ...,
         text: _builtins.str = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_value", b"any_value"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["any_value", b"any_value"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_value", b"any_value", "int32_value", b"int32_value", "repeated_any_value", b"repeated_any_value", "text", b"text"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["any_value", b"any_value", "int32_value", b"int32_value", "repeated_any_value", b"repeated_any_value", "text", b"text"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestAny: _typing_extensions.TypeAlias = TestAny  # noqa: Y015
+Global___TestAny: _TypeAlias = TestAny  # noqa: Y015

@@ -8,28 +8,28 @@ that the generated code doesn't depend on being in the proto2 namespace.
 In map_test_util.h we do "using namespace unittest = proto2_unittest".
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestProto3BytesMap(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestProto3BytesMap(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class MapBytesEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class MapBytesEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -41,12 +41,12 @@ class TestProto3BytesMap(_google_protobuf_message.Message):
             key: _builtins.int = ...,
             value: _builtins.bytes = ...,
         ) -> None: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class MapStringEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class MapStringEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -58,33 +58,33 @@ class TestProto3BytesMap(_google_protobuf_message.Message):
             key: _builtins.int = ...,
             value: _builtins.str = ...,
         ) -> None: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     MAP_BYTES_FIELD_NUMBER: _builtins.int
     MAP_STRING_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def map_bytes(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.int, _builtins.bytes]: ...
+    def map_bytes(self) -> _containers.ScalarMap[_builtins.int, _builtins.bytes]: ...
     @_builtins.property
-    def map_string(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.int, _builtins.str]: ...
+    def map_string(self) -> _containers.ScalarMap[_builtins.int, _builtins.str]: ...
     def __init__(
         self,
         *,
-        map_bytes: _collections_abc.Mapping[_builtins.int, _builtins.bytes] = ...,
-        map_string: _collections_abc.Mapping[_builtins.int, _builtins.str] = ...,
+        map_bytes: _abc.Mapping[_builtins.int, _builtins.bytes] = ...,
+        map_string: _abc.Mapping[_builtins.int, _builtins.str] = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["map_bytes", b"map_bytes", "map_string", b"map_string"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["map_bytes", b"map_bytes", "map_string", b"map_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestProto3BytesMap: _typing_extensions.TypeAlias = TestProto3BytesMap  # noqa: Y015
+Global___TestProto3BytesMap: _TypeAlias = TestProto3BytesMap  # noqa: Y015
 
 @_typing.final
-class TestI32StrMap(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestI32StrMap(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class M32StrEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class M32StrEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -96,18 +96,18 @@ class TestI32StrMap(_google_protobuf_message.Message):
             key: _builtins.int = ...,
             value: _builtins.str = ...,
         ) -> None: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     M_32_STR_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def m_32_str(self) -> _google_protobuf_internal_containers.ScalarMap[_builtins.int, _builtins.str]: ...
+    def m_32_str(self) -> _containers.ScalarMap[_builtins.int, _builtins.str]: ...
     def __init__(
         self,
         *,
-        m_32_str: _collections_abc.Mapping[_builtins.int, _builtins.str] = ...,
+        m_32_str: _abc.Mapping[_builtins.int, _builtins.str] = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["m_32_str", b"m_32_str"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["m_32_str", b"m_32_str"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestI32StrMap: _typing_extensions.TypeAlias = TestI32StrMap  # noqa: Y015
+Global___TestI32StrMap: _TypeAlias = TestI32StrMap  # noqa: Y015

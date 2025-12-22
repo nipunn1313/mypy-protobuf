@@ -32,24 +32,24 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import well_known_types as _well_known_types
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class FieldMask(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.FieldMask):
+class FieldMask(_message.Message, _well_known_types.FieldMask):
     """`FieldMask` represents a set of symbolic field paths, for example:
 
         paths: "f.a"
@@ -251,19 +251,19 @@ class FieldMask(_google_protobuf_message.Message, _google_protobuf_internal_well
     `INVALID_ARGUMENT` error if any path is unmappable.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     PATHS_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def paths(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]:
+    def paths(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The set of field mask paths."""
 
     def __init__(
         self,
         *,
-        paths: _collections_abc.Iterable[_builtins.str] | None = ...,
+        paths: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["paths", b"paths"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["paths", b"paths"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FieldMask: _typing_extensions.TypeAlias = FieldMask  # noqa: Y015
+Global___FieldMask: _TypeAlias = FieldMask  # noqa: Y015

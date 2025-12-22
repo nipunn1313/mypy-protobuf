@@ -3,22 +3,22 @@
 isort:skip_file
 Test that features with legacy descriptor helpers get properly converted."""
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestEditionsMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestEditionsMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     REQUIRED_FIELD_FIELD_NUMBER: _builtins.int
     DELIMITED_FIELD_FIELD_NUMBER: _builtins.int
@@ -31,9 +31,9 @@ class TestEditionsMessage(_google_protobuf_message.Message):
         required_field: _builtins.int | None = ...,
         delimited_field: Global___TestEditionsMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["delimited_field", b"delimited_field", "required_field", b"required_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestEditionsMessage: _typing_extensions.TypeAlias = TestEditionsMessage  # noqa: Y015
+Global___TestEditionsMessage: _TypeAlias = TestEditionsMessage  # noqa: Y015

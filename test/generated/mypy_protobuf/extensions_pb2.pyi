@@ -3,24 +3,24 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class FieldOptions(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class FieldOptions(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     CASTTYPE_FIELD_NUMBER: _builtins.int
     KEYTYPE_FIELD_NUMBER: _builtins.int
@@ -38,18 +38,18 @@ class FieldOptions(_google_protobuf_message.Message):
         keytype: _builtins.str = ...,
         valuetype: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["casttype", b"casttype", "keytype", b"keytype", "valuetype", b"valuetype"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FieldOptions: _typing_extensions.TypeAlias = FieldOptions  # noqa: Y015
+Global___FieldOptions: _TypeAlias = FieldOptions  # noqa: Y015
 
 OPTIONS_FIELD_NUMBER: _builtins.int
 CASTTYPE_FIELD_NUMBER: _builtins.int
 KEYTYPE_FIELD_NUMBER: _builtins.int
 VALUETYPE_FIELD_NUMBER: _builtins.int
-options: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, Global___FieldOptions]
+options: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, Global___FieldOptions]
 """Custom field options from mypy-protobuf"""
-casttype: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.str]
+casttype: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]
 """Legacy fields. Prefer to use ones within `options` instead."""
-keytype: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.str]
-valuetype: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.str]
+keytype: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]
+valuetype: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]

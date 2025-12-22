@@ -3,25 +3,25 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _MyEnum:
     ValueType = _typing.NewType("ValueType", _builtins.int)
-    V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _MyEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], _builtins.type):
-    DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+class _MyEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_MyEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     HELLO: _MyEnum.ValueType  # 0
     WORLD: _MyEnum.ValueType  # 1
 
@@ -29,4 +29,4 @@ class MyEnum(_MyEnum, metaclass=_MyEnumEnumTypeWrapper): ...
 
 HELLO: MyEnum.ValueType  # 0
 WORLD: MyEnum.ValueType  # 1
-Global___MyEnum: _typing_extensions.TypeAlias = MyEnum  # noqa: Y015
+Global___MyEnum: _TypeAlias = MyEnum  # noqa: Y015

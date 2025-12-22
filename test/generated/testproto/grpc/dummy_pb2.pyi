@@ -3,27 +3,27 @@
 isort:skip_file
 https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
 if sys.version_info >= (3, 13):
     from warnings import deprecated as _deprecated
 else:
     from typing_extensions import deprecated as _deprecated
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class DummyRequest(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class DummyRequest(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.str
@@ -32,14 +32,14 @@ class DummyRequest(_google_protobuf_message.Message):
         *,
         value: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___DummyRequest: _typing_extensions.TypeAlias = DummyRequest  # noqa: Y015
+Global___DummyRequest: _TypeAlias = DummyRequest  # noqa: Y015
 
 @_typing.final
-class DummyReply(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class DummyReply(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.str
@@ -48,15 +48,15 @@ class DummyReply(_google_protobuf_message.Message):
         *,
         value: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___DummyReply: _typing_extensions.TypeAlias = DummyReply  # noqa: Y015
+Global___DummyReply: _TypeAlias = DummyReply  # noqa: Y015
 
 @_deprecated("""This message has been marked as deprecated using proto message options.""")
 @_typing.final
-class DeprecatedRequest(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class DeprecatedRequest(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     OLD_FIELD_FIELD_NUMBER: _builtins.int
     old_field: _builtins.str
@@ -65,1987 +65,1987 @@ class DeprecatedRequest(_google_protobuf_message.Message):
         *,
         old_field: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["old_field", b"old_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["old_field", b"old_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___DeprecatedRequest: _typing_extensions.TypeAlias = DeprecatedRequest  # noqa: Y015
+Global___DeprecatedRequest: _TypeAlias = DeprecatedRequest  # noqa: Y015
 
 @_typing.final
-class ManyRequest1(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest1(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest1: _typing_extensions.TypeAlias = ManyRequest1  # noqa: Y015
+Global___ManyRequest1: _TypeAlias = ManyRequest1  # noqa: Y015
 
 @_typing.final
-class ManyResponse1(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse1(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse1: _typing_extensions.TypeAlias = ManyResponse1  # noqa: Y015
+Global___ManyResponse1: _TypeAlias = ManyResponse1  # noqa: Y015
 
 @_typing.final
-class ManyRequest2(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest2(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest2: _typing_extensions.TypeAlias = ManyRequest2  # noqa: Y015
+Global___ManyRequest2: _TypeAlias = ManyRequest2  # noqa: Y015
 
 @_typing.final
-class ManyResponse2(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse2(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse2: _typing_extensions.TypeAlias = ManyResponse2  # noqa: Y015
+Global___ManyResponse2: _TypeAlias = ManyResponse2  # noqa: Y015
 
 @_typing.final
-class ManyRequest3(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest3: _typing_extensions.TypeAlias = ManyRequest3  # noqa: Y015
+Global___ManyRequest3: _TypeAlias = ManyRequest3  # noqa: Y015
 
 @_typing.final
-class ManyResponse3(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse3: _typing_extensions.TypeAlias = ManyResponse3  # noqa: Y015
+Global___ManyResponse3: _TypeAlias = ManyResponse3  # noqa: Y015
 
 @_typing.final
-class ManyRequest4(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest4(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest4: _typing_extensions.TypeAlias = ManyRequest4  # noqa: Y015
+Global___ManyRequest4: _TypeAlias = ManyRequest4  # noqa: Y015
 
 @_typing.final
-class ManyResponse4(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse4(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse4: _typing_extensions.TypeAlias = ManyResponse4  # noqa: Y015
+Global___ManyResponse4: _TypeAlias = ManyResponse4  # noqa: Y015
 
 @_typing.final
-class ManyRequest5(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest5(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest5: _typing_extensions.TypeAlias = ManyRequest5  # noqa: Y015
+Global___ManyRequest5: _TypeAlias = ManyRequest5  # noqa: Y015
 
 @_typing.final
-class ManyResponse5(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse5(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse5: _typing_extensions.TypeAlias = ManyResponse5  # noqa: Y015
+Global___ManyResponse5: _TypeAlias = ManyResponse5  # noqa: Y015
 
 @_typing.final
-class ManyRequest6(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest6(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest6: _typing_extensions.TypeAlias = ManyRequest6  # noqa: Y015
+Global___ManyRequest6: _TypeAlias = ManyRequest6  # noqa: Y015
 
 @_typing.final
-class ManyResponse6(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse6(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse6: _typing_extensions.TypeAlias = ManyResponse6  # noqa: Y015
+Global___ManyResponse6: _TypeAlias = ManyResponse6  # noqa: Y015
 
 @_typing.final
-class ManyRequest7(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest7(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest7: _typing_extensions.TypeAlias = ManyRequest7  # noqa: Y015
+Global___ManyRequest7: _TypeAlias = ManyRequest7  # noqa: Y015
 
 @_typing.final
-class ManyResponse7(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse7(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse7: _typing_extensions.TypeAlias = ManyResponse7  # noqa: Y015
+Global___ManyResponse7: _TypeAlias = ManyResponse7  # noqa: Y015
 
 @_typing.final
-class ManyRequest8(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest8(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest8: _typing_extensions.TypeAlias = ManyRequest8  # noqa: Y015
+Global___ManyRequest8: _TypeAlias = ManyRequest8  # noqa: Y015
 
 @_typing.final
-class ManyResponse8(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse8(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse8: _typing_extensions.TypeAlias = ManyResponse8  # noqa: Y015
+Global___ManyResponse8: _TypeAlias = ManyResponse8  # noqa: Y015
 
 @_typing.final
-class ManyRequest9(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest9(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest9: _typing_extensions.TypeAlias = ManyRequest9  # noqa: Y015
+Global___ManyRequest9: _TypeAlias = ManyRequest9  # noqa: Y015
 
 @_typing.final
-class ManyResponse9(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse9(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse9: _typing_extensions.TypeAlias = ManyResponse9  # noqa: Y015
+Global___ManyResponse9: _TypeAlias = ManyResponse9  # noqa: Y015
 
 @_typing.final
-class ManyRequest10(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest10(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest10: _typing_extensions.TypeAlias = ManyRequest10  # noqa: Y015
+Global___ManyRequest10: _TypeAlias = ManyRequest10  # noqa: Y015
 
 @_typing.final
-class ManyResponse10(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse10(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse10: _typing_extensions.TypeAlias = ManyResponse10  # noqa: Y015
+Global___ManyResponse10: _TypeAlias = ManyResponse10  # noqa: Y015
 
 @_typing.final
-class ManyRequest11(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest11(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest11: _typing_extensions.TypeAlias = ManyRequest11  # noqa: Y015
+Global___ManyRequest11: _TypeAlias = ManyRequest11  # noqa: Y015
 
 @_typing.final
-class ManyResponse11(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse11(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse11: _typing_extensions.TypeAlias = ManyResponse11  # noqa: Y015
+Global___ManyResponse11: _TypeAlias = ManyResponse11  # noqa: Y015
 
 @_typing.final
-class ManyRequest12(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest12(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest12: _typing_extensions.TypeAlias = ManyRequest12  # noqa: Y015
+Global___ManyRequest12: _TypeAlias = ManyRequest12  # noqa: Y015
 
 @_typing.final
-class ManyResponse12(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse12(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse12: _typing_extensions.TypeAlias = ManyResponse12  # noqa: Y015
+Global___ManyResponse12: _TypeAlias = ManyResponse12  # noqa: Y015
 
 @_typing.final
-class ManyRequest13(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest13(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest13: _typing_extensions.TypeAlias = ManyRequest13  # noqa: Y015
+Global___ManyRequest13: _TypeAlias = ManyRequest13  # noqa: Y015
 
 @_typing.final
-class ManyResponse13(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse13(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse13: _typing_extensions.TypeAlias = ManyResponse13  # noqa: Y015
+Global___ManyResponse13: _TypeAlias = ManyResponse13  # noqa: Y015
 
 @_typing.final
-class ManyRequest14(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest14(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest14: _typing_extensions.TypeAlias = ManyRequest14  # noqa: Y015
+Global___ManyRequest14: _TypeAlias = ManyRequest14  # noqa: Y015
 
 @_typing.final
-class ManyResponse14(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse14(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse14: _typing_extensions.TypeAlias = ManyResponse14  # noqa: Y015
+Global___ManyResponse14: _TypeAlias = ManyResponse14  # noqa: Y015
 
 @_typing.final
-class ManyRequest15(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest15(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest15: _typing_extensions.TypeAlias = ManyRequest15  # noqa: Y015
+Global___ManyRequest15: _TypeAlias = ManyRequest15  # noqa: Y015
 
 @_typing.final
-class ManyResponse15(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse15(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse15: _typing_extensions.TypeAlias = ManyResponse15  # noqa: Y015
+Global___ManyResponse15: _TypeAlias = ManyResponse15  # noqa: Y015
 
 @_typing.final
-class ManyRequest16(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest16(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest16: _typing_extensions.TypeAlias = ManyRequest16  # noqa: Y015
+Global___ManyRequest16: _TypeAlias = ManyRequest16  # noqa: Y015
 
 @_typing.final
-class ManyResponse16(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse16(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse16: _typing_extensions.TypeAlias = ManyResponse16  # noqa: Y015
+Global___ManyResponse16: _TypeAlias = ManyResponse16  # noqa: Y015
 
 @_typing.final
-class ManyRequest17(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest17(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest17: _typing_extensions.TypeAlias = ManyRequest17  # noqa: Y015
+Global___ManyRequest17: _TypeAlias = ManyRequest17  # noqa: Y015
 
 @_typing.final
-class ManyResponse17(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse17(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse17: _typing_extensions.TypeAlias = ManyResponse17  # noqa: Y015
+Global___ManyResponse17: _TypeAlias = ManyResponse17  # noqa: Y015
 
 @_typing.final
-class ManyRequest18(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest18(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest18: _typing_extensions.TypeAlias = ManyRequest18  # noqa: Y015
+Global___ManyRequest18: _TypeAlias = ManyRequest18  # noqa: Y015
 
 @_typing.final
-class ManyResponse18(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse18(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse18: _typing_extensions.TypeAlias = ManyResponse18  # noqa: Y015
+Global___ManyResponse18: _TypeAlias = ManyResponse18  # noqa: Y015
 
 @_typing.final
-class ManyRequest19(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest19(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest19: _typing_extensions.TypeAlias = ManyRequest19  # noqa: Y015
+Global___ManyRequest19: _TypeAlias = ManyRequest19  # noqa: Y015
 
 @_typing.final
-class ManyResponse19(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse19(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse19: _typing_extensions.TypeAlias = ManyResponse19  # noqa: Y015
+Global___ManyResponse19: _TypeAlias = ManyResponse19  # noqa: Y015
 
 @_typing.final
-class ManyRequest20(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest20(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest20: _typing_extensions.TypeAlias = ManyRequest20  # noqa: Y015
+Global___ManyRequest20: _TypeAlias = ManyRequest20  # noqa: Y015
 
 @_typing.final
-class ManyResponse20(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse20(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse20: _typing_extensions.TypeAlias = ManyResponse20  # noqa: Y015
+Global___ManyResponse20: _TypeAlias = ManyResponse20  # noqa: Y015
 
 @_typing.final
-class ManyRequest21(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest21(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest21: _typing_extensions.TypeAlias = ManyRequest21  # noqa: Y015
+Global___ManyRequest21: _TypeAlias = ManyRequest21  # noqa: Y015
 
 @_typing.final
-class ManyResponse21(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse21(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse21: _typing_extensions.TypeAlias = ManyResponse21  # noqa: Y015
+Global___ManyResponse21: _TypeAlias = ManyResponse21  # noqa: Y015
 
 @_typing.final
-class ManyRequest22(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest22(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest22: _typing_extensions.TypeAlias = ManyRequest22  # noqa: Y015
+Global___ManyRequest22: _TypeAlias = ManyRequest22  # noqa: Y015
 
 @_typing.final
-class ManyResponse22(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse22(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse22: _typing_extensions.TypeAlias = ManyResponse22  # noqa: Y015
+Global___ManyResponse22: _TypeAlias = ManyResponse22  # noqa: Y015
 
 @_typing.final
-class ManyRequest23(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest23(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest23: _typing_extensions.TypeAlias = ManyRequest23  # noqa: Y015
+Global___ManyRequest23: _TypeAlias = ManyRequest23  # noqa: Y015
 
 @_typing.final
-class ManyResponse23(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse23(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse23: _typing_extensions.TypeAlias = ManyResponse23  # noqa: Y015
+Global___ManyResponse23: _TypeAlias = ManyResponse23  # noqa: Y015
 
 @_typing.final
-class ManyRequest24(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest24(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest24: _typing_extensions.TypeAlias = ManyRequest24  # noqa: Y015
+Global___ManyRequest24: _TypeAlias = ManyRequest24  # noqa: Y015
 
 @_typing.final
-class ManyResponse24(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse24(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse24: _typing_extensions.TypeAlias = ManyResponse24  # noqa: Y015
+Global___ManyResponse24: _TypeAlias = ManyResponse24  # noqa: Y015
 
 @_typing.final
-class ManyRequest25(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest25(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest25: _typing_extensions.TypeAlias = ManyRequest25  # noqa: Y015
+Global___ManyRequest25: _TypeAlias = ManyRequest25  # noqa: Y015
 
 @_typing.final
-class ManyResponse25(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse25(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse25: _typing_extensions.TypeAlias = ManyResponse25  # noqa: Y015
+Global___ManyResponse25: _TypeAlias = ManyResponse25  # noqa: Y015
 
 @_typing.final
-class ManyRequest26(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest26(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest26: _typing_extensions.TypeAlias = ManyRequest26  # noqa: Y015
+Global___ManyRequest26: _TypeAlias = ManyRequest26  # noqa: Y015
 
 @_typing.final
-class ManyResponse26(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse26(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse26: _typing_extensions.TypeAlias = ManyResponse26  # noqa: Y015
+Global___ManyResponse26: _TypeAlias = ManyResponse26  # noqa: Y015
 
 @_typing.final
-class ManyRequest27(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest27(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest27: _typing_extensions.TypeAlias = ManyRequest27  # noqa: Y015
+Global___ManyRequest27: _TypeAlias = ManyRequest27  # noqa: Y015
 
 @_typing.final
-class ManyResponse27(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse27(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse27: _typing_extensions.TypeAlias = ManyResponse27  # noqa: Y015
+Global___ManyResponse27: _TypeAlias = ManyResponse27  # noqa: Y015
 
 @_typing.final
-class ManyRequest28(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest28(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest28: _typing_extensions.TypeAlias = ManyRequest28  # noqa: Y015
+Global___ManyRequest28: _TypeAlias = ManyRequest28  # noqa: Y015
 
 @_typing.final
-class ManyResponse28(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse28(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse28: _typing_extensions.TypeAlias = ManyResponse28  # noqa: Y015
+Global___ManyResponse28: _TypeAlias = ManyResponse28  # noqa: Y015
 
 @_typing.final
-class ManyRequest29(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest29(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest29: _typing_extensions.TypeAlias = ManyRequest29  # noqa: Y015
+Global___ManyRequest29: _TypeAlias = ManyRequest29  # noqa: Y015
 
 @_typing.final
-class ManyResponse29(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse29(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse29: _typing_extensions.TypeAlias = ManyResponse29  # noqa: Y015
+Global___ManyResponse29: _TypeAlias = ManyResponse29  # noqa: Y015
 
 @_typing.final
-class ManyRequest30(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest30(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest30: _typing_extensions.TypeAlias = ManyRequest30  # noqa: Y015
+Global___ManyRequest30: _TypeAlias = ManyRequest30  # noqa: Y015
 
 @_typing.final
-class ManyResponse30(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse30(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse30: _typing_extensions.TypeAlias = ManyResponse30  # noqa: Y015
+Global___ManyResponse30: _TypeAlias = ManyResponse30  # noqa: Y015
 
 @_typing.final
-class ManyRequest31(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest31(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest31: _typing_extensions.TypeAlias = ManyRequest31  # noqa: Y015
+Global___ManyRequest31: _TypeAlias = ManyRequest31  # noqa: Y015
 
 @_typing.final
-class ManyResponse31(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse31(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse31: _typing_extensions.TypeAlias = ManyResponse31  # noqa: Y015
+Global___ManyResponse31: _TypeAlias = ManyResponse31  # noqa: Y015
 
 @_typing.final
-class ManyRequest32(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest32(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest32: _typing_extensions.TypeAlias = ManyRequest32  # noqa: Y015
+Global___ManyRequest32: _TypeAlias = ManyRequest32  # noqa: Y015
 
 @_typing.final
-class ManyResponse32(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse32(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse32: _typing_extensions.TypeAlias = ManyResponse32  # noqa: Y015
+Global___ManyResponse32: _TypeAlias = ManyResponse32  # noqa: Y015
 
 @_typing.final
-class ManyRequest33(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest33(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest33: _typing_extensions.TypeAlias = ManyRequest33  # noqa: Y015
+Global___ManyRequest33: _TypeAlias = ManyRequest33  # noqa: Y015
 
 @_typing.final
-class ManyResponse33(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse33(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse33: _typing_extensions.TypeAlias = ManyResponse33  # noqa: Y015
+Global___ManyResponse33: _TypeAlias = ManyResponse33  # noqa: Y015
 
 @_typing.final
-class ManyRequest34(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest34(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest34: _typing_extensions.TypeAlias = ManyRequest34  # noqa: Y015
+Global___ManyRequest34: _TypeAlias = ManyRequest34  # noqa: Y015
 
 @_typing.final
-class ManyResponse34(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse34(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse34: _typing_extensions.TypeAlias = ManyResponse34  # noqa: Y015
+Global___ManyResponse34: _TypeAlias = ManyResponse34  # noqa: Y015
 
 @_typing.final
-class ManyRequest35(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest35(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest35: _typing_extensions.TypeAlias = ManyRequest35  # noqa: Y015
+Global___ManyRequest35: _TypeAlias = ManyRequest35  # noqa: Y015
 
 @_typing.final
-class ManyResponse35(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse35(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse35: _typing_extensions.TypeAlias = ManyResponse35  # noqa: Y015
+Global___ManyResponse35: _TypeAlias = ManyResponse35  # noqa: Y015
 
 @_typing.final
-class ManyRequest36(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest36(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest36: _typing_extensions.TypeAlias = ManyRequest36  # noqa: Y015
+Global___ManyRequest36: _TypeAlias = ManyRequest36  # noqa: Y015
 
 @_typing.final
-class ManyResponse36(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse36(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse36: _typing_extensions.TypeAlias = ManyResponse36  # noqa: Y015
+Global___ManyResponse36: _TypeAlias = ManyResponse36  # noqa: Y015
 
 @_typing.final
-class ManyRequest37(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest37(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest37: _typing_extensions.TypeAlias = ManyRequest37  # noqa: Y015
+Global___ManyRequest37: _TypeAlias = ManyRequest37  # noqa: Y015
 
 @_typing.final
-class ManyResponse37(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse37(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse37: _typing_extensions.TypeAlias = ManyResponse37  # noqa: Y015
+Global___ManyResponse37: _TypeAlias = ManyResponse37  # noqa: Y015
 
 @_typing.final
-class ManyRequest38(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest38(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest38: _typing_extensions.TypeAlias = ManyRequest38  # noqa: Y015
+Global___ManyRequest38: _TypeAlias = ManyRequest38  # noqa: Y015
 
 @_typing.final
-class ManyResponse38(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse38(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse38: _typing_extensions.TypeAlias = ManyResponse38  # noqa: Y015
+Global___ManyResponse38: _TypeAlias = ManyResponse38  # noqa: Y015
 
 @_typing.final
-class ManyRequest39(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest39(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest39: _typing_extensions.TypeAlias = ManyRequest39  # noqa: Y015
+Global___ManyRequest39: _TypeAlias = ManyRequest39  # noqa: Y015
 
 @_typing.final
-class ManyResponse39(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse39(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse39: _typing_extensions.TypeAlias = ManyResponse39  # noqa: Y015
+Global___ManyResponse39: _TypeAlias = ManyResponse39  # noqa: Y015
 
 @_typing.final
-class ManyRequest40(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest40(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest40: _typing_extensions.TypeAlias = ManyRequest40  # noqa: Y015
+Global___ManyRequest40: _TypeAlias = ManyRequest40  # noqa: Y015
 
 @_typing.final
-class ManyResponse40(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse40(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse40: _typing_extensions.TypeAlias = ManyResponse40  # noqa: Y015
+Global___ManyResponse40: _TypeAlias = ManyResponse40  # noqa: Y015
 
 @_typing.final
-class ManyRequest41(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest41(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest41: _typing_extensions.TypeAlias = ManyRequest41  # noqa: Y015
+Global___ManyRequest41: _TypeAlias = ManyRequest41  # noqa: Y015
 
 @_typing.final
-class ManyResponse41(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse41(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse41: _typing_extensions.TypeAlias = ManyResponse41  # noqa: Y015
+Global___ManyResponse41: _TypeAlias = ManyResponse41  # noqa: Y015
 
 @_typing.final
-class ManyRequest42(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest42(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest42: _typing_extensions.TypeAlias = ManyRequest42  # noqa: Y015
+Global___ManyRequest42: _TypeAlias = ManyRequest42  # noqa: Y015
 
 @_typing.final
-class ManyResponse42(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse42(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse42: _typing_extensions.TypeAlias = ManyResponse42  # noqa: Y015
+Global___ManyResponse42: _TypeAlias = ManyResponse42  # noqa: Y015
 
 @_typing.final
-class ManyRequest43(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest43(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest43: _typing_extensions.TypeAlias = ManyRequest43  # noqa: Y015
+Global___ManyRequest43: _TypeAlias = ManyRequest43  # noqa: Y015
 
 @_typing.final
-class ManyResponse43(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse43(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse43: _typing_extensions.TypeAlias = ManyResponse43  # noqa: Y015
+Global___ManyResponse43: _TypeAlias = ManyResponse43  # noqa: Y015
 
 @_typing.final
-class ManyRequest44(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest44(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest44: _typing_extensions.TypeAlias = ManyRequest44  # noqa: Y015
+Global___ManyRequest44: _TypeAlias = ManyRequest44  # noqa: Y015
 
 @_typing.final
-class ManyResponse44(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse44(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse44: _typing_extensions.TypeAlias = ManyResponse44  # noqa: Y015
+Global___ManyResponse44: _TypeAlias = ManyResponse44  # noqa: Y015
 
 @_typing.final
-class ManyRequest45(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest45(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest45: _typing_extensions.TypeAlias = ManyRequest45  # noqa: Y015
+Global___ManyRequest45: _TypeAlias = ManyRequest45  # noqa: Y015
 
 @_typing.final
-class ManyResponse45(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse45(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse45: _typing_extensions.TypeAlias = ManyResponse45  # noqa: Y015
+Global___ManyResponse45: _TypeAlias = ManyResponse45  # noqa: Y015
 
 @_typing.final
-class ManyRequest46(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest46(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest46: _typing_extensions.TypeAlias = ManyRequest46  # noqa: Y015
+Global___ManyRequest46: _TypeAlias = ManyRequest46  # noqa: Y015
 
 @_typing.final
-class ManyResponse46(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse46(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse46: _typing_extensions.TypeAlias = ManyResponse46  # noqa: Y015
+Global___ManyResponse46: _TypeAlias = ManyResponse46  # noqa: Y015
 
 @_typing.final
-class ManyRequest47(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest47(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest47: _typing_extensions.TypeAlias = ManyRequest47  # noqa: Y015
+Global___ManyRequest47: _TypeAlias = ManyRequest47  # noqa: Y015
 
 @_typing.final
-class ManyResponse47(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse47(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse47: _typing_extensions.TypeAlias = ManyResponse47  # noqa: Y015
+Global___ManyResponse47: _TypeAlias = ManyResponse47  # noqa: Y015
 
 @_typing.final
-class ManyRequest48(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest48(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest48: _typing_extensions.TypeAlias = ManyRequest48  # noqa: Y015
+Global___ManyRequest48: _TypeAlias = ManyRequest48  # noqa: Y015
 
 @_typing.final
-class ManyResponse48(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse48(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse48: _typing_extensions.TypeAlias = ManyResponse48  # noqa: Y015
+Global___ManyResponse48: _TypeAlias = ManyResponse48  # noqa: Y015
 
 @_typing.final
-class ManyRequest49(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest49(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest49: _typing_extensions.TypeAlias = ManyRequest49  # noqa: Y015
+Global___ManyRequest49: _TypeAlias = ManyRequest49  # noqa: Y015
 
 @_typing.final
-class ManyResponse49(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse49(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse49: _typing_extensions.TypeAlias = ManyResponse49  # noqa: Y015
+Global___ManyResponse49: _TypeAlias = ManyResponse49  # noqa: Y015
 
 @_typing.final
-class ManyRequest50(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest50(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest50: _typing_extensions.TypeAlias = ManyRequest50  # noqa: Y015
+Global___ManyRequest50: _TypeAlias = ManyRequest50  # noqa: Y015
 
 @_typing.final
-class ManyResponse50(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse50(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse50: _typing_extensions.TypeAlias = ManyResponse50  # noqa: Y015
+Global___ManyResponse50: _TypeAlias = ManyResponse50  # noqa: Y015
 
 @_typing.final
-class ManyRequest51(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest51(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest51: _typing_extensions.TypeAlias = ManyRequest51  # noqa: Y015
+Global___ManyRequest51: _TypeAlias = ManyRequest51  # noqa: Y015
 
 @_typing.final
-class ManyResponse51(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse51(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse51: _typing_extensions.TypeAlias = ManyResponse51  # noqa: Y015
+Global___ManyResponse51: _TypeAlias = ManyResponse51  # noqa: Y015
 
 @_typing.final
-class ManyRequest52(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest52(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest52: _typing_extensions.TypeAlias = ManyRequest52  # noqa: Y015
+Global___ManyRequest52: _TypeAlias = ManyRequest52  # noqa: Y015
 
 @_typing.final
-class ManyResponse52(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse52(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse52: _typing_extensions.TypeAlias = ManyResponse52  # noqa: Y015
+Global___ManyResponse52: _TypeAlias = ManyResponse52  # noqa: Y015
 
 @_typing.final
-class ManyRequest53(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest53(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest53: _typing_extensions.TypeAlias = ManyRequest53  # noqa: Y015
+Global___ManyRequest53: _TypeAlias = ManyRequest53  # noqa: Y015
 
 @_typing.final
-class ManyResponse53(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse53(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse53: _typing_extensions.TypeAlias = ManyResponse53  # noqa: Y015
+Global___ManyResponse53: _TypeAlias = ManyResponse53  # noqa: Y015
 
 @_typing.final
-class ManyRequest54(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest54(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest54: _typing_extensions.TypeAlias = ManyRequest54  # noqa: Y015
+Global___ManyRequest54: _TypeAlias = ManyRequest54  # noqa: Y015
 
 @_typing.final
-class ManyResponse54(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse54(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse54: _typing_extensions.TypeAlias = ManyResponse54  # noqa: Y015
+Global___ManyResponse54: _TypeAlias = ManyResponse54  # noqa: Y015
 
 @_typing.final
-class ManyRequest55(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest55(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest55: _typing_extensions.TypeAlias = ManyRequest55  # noqa: Y015
+Global___ManyRequest55: _TypeAlias = ManyRequest55  # noqa: Y015
 
 @_typing.final
-class ManyResponse55(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse55(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse55: _typing_extensions.TypeAlias = ManyResponse55  # noqa: Y015
+Global___ManyResponse55: _TypeAlias = ManyResponse55  # noqa: Y015
 
 @_typing.final
-class ManyRequest56(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest56(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest56: _typing_extensions.TypeAlias = ManyRequest56  # noqa: Y015
+Global___ManyRequest56: _TypeAlias = ManyRequest56  # noqa: Y015
 
 @_typing.final
-class ManyResponse56(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse56(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse56: _typing_extensions.TypeAlias = ManyResponse56  # noqa: Y015
+Global___ManyResponse56: _TypeAlias = ManyResponse56  # noqa: Y015
 
 @_typing.final
-class ManyRequest57(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest57(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest57: _typing_extensions.TypeAlias = ManyRequest57  # noqa: Y015
+Global___ManyRequest57: _TypeAlias = ManyRequest57  # noqa: Y015
 
 @_typing.final
-class ManyResponse57(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse57(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse57: _typing_extensions.TypeAlias = ManyResponse57  # noqa: Y015
+Global___ManyResponse57: _TypeAlias = ManyResponse57  # noqa: Y015
 
 @_typing.final
-class ManyRequest58(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest58(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest58: _typing_extensions.TypeAlias = ManyRequest58  # noqa: Y015
+Global___ManyRequest58: _TypeAlias = ManyRequest58  # noqa: Y015
 
 @_typing.final
-class ManyResponse58(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse58(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse58: _typing_extensions.TypeAlias = ManyResponse58  # noqa: Y015
+Global___ManyResponse58: _TypeAlias = ManyResponse58  # noqa: Y015
 
 @_typing.final
-class ManyRequest59(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest59(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest59: _typing_extensions.TypeAlias = ManyRequest59  # noqa: Y015
+Global___ManyRequest59: _TypeAlias = ManyRequest59  # noqa: Y015
 
 @_typing.final
-class ManyResponse59(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse59(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse59: _typing_extensions.TypeAlias = ManyResponse59  # noqa: Y015
+Global___ManyResponse59: _TypeAlias = ManyResponse59  # noqa: Y015
 
 @_typing.final
-class ManyRequest60(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest60(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest60: _typing_extensions.TypeAlias = ManyRequest60  # noqa: Y015
+Global___ManyRequest60: _TypeAlias = ManyRequest60  # noqa: Y015
 
 @_typing.final
-class ManyResponse60(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse60(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse60: _typing_extensions.TypeAlias = ManyResponse60  # noqa: Y015
+Global___ManyResponse60: _TypeAlias = ManyResponse60  # noqa: Y015
 
 @_typing.final
-class ManyRequest61(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest61(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest61: _typing_extensions.TypeAlias = ManyRequest61  # noqa: Y015
+Global___ManyRequest61: _TypeAlias = ManyRequest61  # noqa: Y015
 
 @_typing.final
-class ManyResponse61(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse61(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse61: _typing_extensions.TypeAlias = ManyResponse61  # noqa: Y015
+Global___ManyResponse61: _TypeAlias = ManyResponse61  # noqa: Y015
 
 @_typing.final
-class ManyRequest62(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest62(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest62: _typing_extensions.TypeAlias = ManyRequest62  # noqa: Y015
+Global___ManyRequest62: _TypeAlias = ManyRequest62  # noqa: Y015
 
 @_typing.final
-class ManyResponse62(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse62(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse62: _typing_extensions.TypeAlias = ManyResponse62  # noqa: Y015
+Global___ManyResponse62: _TypeAlias = ManyResponse62  # noqa: Y015
 
 @_typing.final
-class ManyRequest63(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest63(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest63: _typing_extensions.TypeAlias = ManyRequest63  # noqa: Y015
+Global___ManyRequest63: _TypeAlias = ManyRequest63  # noqa: Y015
 
 @_typing.final
-class ManyResponse63(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse63(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse63: _typing_extensions.TypeAlias = ManyResponse63  # noqa: Y015
+Global___ManyResponse63: _TypeAlias = ManyResponse63  # noqa: Y015
 
 @_typing.final
-class ManyRequest64(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest64(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest64: _typing_extensions.TypeAlias = ManyRequest64  # noqa: Y015
+Global___ManyRequest64: _TypeAlias = ManyRequest64  # noqa: Y015
 
 @_typing.final
-class ManyResponse64(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse64(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse64: _typing_extensions.TypeAlias = ManyResponse64  # noqa: Y015
+Global___ManyResponse64: _TypeAlias = ManyResponse64  # noqa: Y015
 
 @_typing.final
-class ManyRequest65(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest65(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest65: _typing_extensions.TypeAlias = ManyRequest65  # noqa: Y015
+Global___ManyRequest65: _TypeAlias = ManyRequest65  # noqa: Y015
 
 @_typing.final
-class ManyResponse65(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse65(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse65: _typing_extensions.TypeAlias = ManyResponse65  # noqa: Y015
+Global___ManyResponse65: _TypeAlias = ManyResponse65  # noqa: Y015
 
 @_typing.final
-class ManyRequest66(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest66(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest66: _typing_extensions.TypeAlias = ManyRequest66  # noqa: Y015
+Global___ManyRequest66: _TypeAlias = ManyRequest66  # noqa: Y015
 
 @_typing.final
-class ManyResponse66(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse66(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse66: _typing_extensions.TypeAlias = ManyResponse66  # noqa: Y015
+Global___ManyResponse66: _TypeAlias = ManyResponse66  # noqa: Y015
 
 @_typing.final
-class ManyRequest67(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest67(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest67: _typing_extensions.TypeAlias = ManyRequest67  # noqa: Y015
+Global___ManyRequest67: _TypeAlias = ManyRequest67  # noqa: Y015
 
 @_typing.final
-class ManyResponse67(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse67(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse67: _typing_extensions.TypeAlias = ManyResponse67  # noqa: Y015
+Global___ManyResponse67: _TypeAlias = ManyResponse67  # noqa: Y015
 
 @_typing.final
-class ManyRequest68(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest68(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest68: _typing_extensions.TypeAlias = ManyRequest68  # noqa: Y015
+Global___ManyRequest68: _TypeAlias = ManyRequest68  # noqa: Y015
 
 @_typing.final
-class ManyResponse68(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse68(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse68: _typing_extensions.TypeAlias = ManyResponse68  # noqa: Y015
+Global___ManyResponse68: _TypeAlias = ManyResponse68  # noqa: Y015
 
 @_typing.final
-class ManyRequest69(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest69(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest69: _typing_extensions.TypeAlias = ManyRequest69  # noqa: Y015
+Global___ManyRequest69: _TypeAlias = ManyRequest69  # noqa: Y015
 
 @_typing.final
-class ManyResponse69(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse69(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse69: _typing_extensions.TypeAlias = ManyResponse69  # noqa: Y015
+Global___ManyResponse69: _TypeAlias = ManyResponse69  # noqa: Y015
 
 @_typing.final
-class ManyRequest70(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest70(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest70: _typing_extensions.TypeAlias = ManyRequest70  # noqa: Y015
+Global___ManyRequest70: _TypeAlias = ManyRequest70  # noqa: Y015
 
 @_typing.final
-class ManyResponse70(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse70(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse70: _typing_extensions.TypeAlias = ManyResponse70  # noqa: Y015
+Global___ManyResponse70: _TypeAlias = ManyResponse70  # noqa: Y015
 
 @_typing.final
-class ManyRequest71(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest71(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest71: _typing_extensions.TypeAlias = ManyRequest71  # noqa: Y015
+Global___ManyRequest71: _TypeAlias = ManyRequest71  # noqa: Y015
 
 @_typing.final
-class ManyResponse71(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse71(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse71: _typing_extensions.TypeAlias = ManyResponse71  # noqa: Y015
+Global___ManyResponse71: _TypeAlias = ManyResponse71  # noqa: Y015
 
 @_typing.final
-class ManyRequest72(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest72(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest72: _typing_extensions.TypeAlias = ManyRequest72  # noqa: Y015
+Global___ManyRequest72: _TypeAlias = ManyRequest72  # noqa: Y015
 
 @_typing.final
-class ManyResponse72(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse72(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse72: _typing_extensions.TypeAlias = ManyResponse72  # noqa: Y015
+Global___ManyResponse72: _TypeAlias = ManyResponse72  # noqa: Y015
 
 @_typing.final
-class ManyRequest73(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest73(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest73: _typing_extensions.TypeAlias = ManyRequest73  # noqa: Y015
+Global___ManyRequest73: _TypeAlias = ManyRequest73  # noqa: Y015
 
 @_typing.final
-class ManyResponse73(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse73(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse73: _typing_extensions.TypeAlias = ManyResponse73  # noqa: Y015
+Global___ManyResponse73: _TypeAlias = ManyResponse73  # noqa: Y015
 
 @_typing.final
-class ManyRequest74(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest74(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest74: _typing_extensions.TypeAlias = ManyRequest74  # noqa: Y015
+Global___ManyRequest74: _TypeAlias = ManyRequest74  # noqa: Y015
 
 @_typing.final
-class ManyResponse74(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse74(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse74: _typing_extensions.TypeAlias = ManyResponse74  # noqa: Y015
+Global___ManyResponse74: _TypeAlias = ManyResponse74  # noqa: Y015
 
 @_typing.final
-class ManyRequest75(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest75(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest75: _typing_extensions.TypeAlias = ManyRequest75  # noqa: Y015
+Global___ManyRequest75: _TypeAlias = ManyRequest75  # noqa: Y015
 
 @_typing.final
-class ManyResponse75(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse75(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse75: _typing_extensions.TypeAlias = ManyResponse75  # noqa: Y015
+Global___ManyResponse75: _TypeAlias = ManyResponse75  # noqa: Y015
 
 @_typing.final
-class ManyRequest76(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest76(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest76: _typing_extensions.TypeAlias = ManyRequest76  # noqa: Y015
+Global___ManyRequest76: _TypeAlias = ManyRequest76  # noqa: Y015
 
 @_typing.final
-class ManyResponse76(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse76(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse76: _typing_extensions.TypeAlias = ManyResponse76  # noqa: Y015
+Global___ManyResponse76: _TypeAlias = ManyResponse76  # noqa: Y015
 
 @_typing.final
-class ManyRequest77(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest77(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest77: _typing_extensions.TypeAlias = ManyRequest77  # noqa: Y015
+Global___ManyRequest77: _TypeAlias = ManyRequest77  # noqa: Y015
 
 @_typing.final
-class ManyResponse77(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse77(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse77: _typing_extensions.TypeAlias = ManyResponse77  # noqa: Y015
+Global___ManyResponse77: _TypeAlias = ManyResponse77  # noqa: Y015
 
 @_typing.final
-class ManyRequest78(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest78(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest78: _typing_extensions.TypeAlias = ManyRequest78  # noqa: Y015
+Global___ManyRequest78: _TypeAlias = ManyRequest78  # noqa: Y015
 
 @_typing.final
-class ManyResponse78(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse78(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse78: _typing_extensions.TypeAlias = ManyResponse78  # noqa: Y015
+Global___ManyResponse78: _TypeAlias = ManyResponse78  # noqa: Y015
 
 @_typing.final
-class ManyRequest79(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest79(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest79: _typing_extensions.TypeAlias = ManyRequest79  # noqa: Y015
+Global___ManyRequest79: _TypeAlias = ManyRequest79  # noqa: Y015
 
 @_typing.final
-class ManyResponse79(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse79(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse79: _typing_extensions.TypeAlias = ManyResponse79  # noqa: Y015
+Global___ManyResponse79: _TypeAlias = ManyResponse79  # noqa: Y015
 
 @_typing.final
-class ManyRequest80(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest80(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest80: _typing_extensions.TypeAlias = ManyRequest80  # noqa: Y015
+Global___ManyRequest80: _TypeAlias = ManyRequest80  # noqa: Y015
 
 @_typing.final
-class ManyResponse80(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse80(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse80: _typing_extensions.TypeAlias = ManyResponse80  # noqa: Y015
+Global___ManyResponse80: _TypeAlias = ManyResponse80  # noqa: Y015
 
 @_typing.final
-class ManyRequest81(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest81(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest81: _typing_extensions.TypeAlias = ManyRequest81  # noqa: Y015
+Global___ManyRequest81: _TypeAlias = ManyRequest81  # noqa: Y015
 
 @_typing.final
-class ManyResponse81(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse81(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse81: _typing_extensions.TypeAlias = ManyResponse81  # noqa: Y015
+Global___ManyResponse81: _TypeAlias = ManyResponse81  # noqa: Y015
 
 @_typing.final
-class ManyRequest82(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest82(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest82: _typing_extensions.TypeAlias = ManyRequest82  # noqa: Y015
+Global___ManyRequest82: _TypeAlias = ManyRequest82  # noqa: Y015
 
 @_typing.final
-class ManyResponse82(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse82(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse82: _typing_extensions.TypeAlias = ManyResponse82  # noqa: Y015
+Global___ManyResponse82: _TypeAlias = ManyResponse82  # noqa: Y015
 
 @_typing.final
-class ManyRequest83(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest83(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest83: _typing_extensions.TypeAlias = ManyRequest83  # noqa: Y015
+Global___ManyRequest83: _TypeAlias = ManyRequest83  # noqa: Y015
 
 @_typing.final
-class ManyResponse83(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse83(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse83: _typing_extensions.TypeAlias = ManyResponse83  # noqa: Y015
+Global___ManyResponse83: _TypeAlias = ManyResponse83  # noqa: Y015
 
 @_typing.final
-class ManyRequest84(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest84(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest84: _typing_extensions.TypeAlias = ManyRequest84  # noqa: Y015
+Global___ManyRequest84: _TypeAlias = ManyRequest84  # noqa: Y015
 
 @_typing.final
-class ManyResponse84(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse84(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse84: _typing_extensions.TypeAlias = ManyResponse84  # noqa: Y015
+Global___ManyResponse84: _TypeAlias = ManyResponse84  # noqa: Y015
 
 @_typing.final
-class ManyRequest85(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest85(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest85: _typing_extensions.TypeAlias = ManyRequest85  # noqa: Y015
+Global___ManyRequest85: _TypeAlias = ManyRequest85  # noqa: Y015
 
 @_typing.final
-class ManyResponse85(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse85(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse85: _typing_extensions.TypeAlias = ManyResponse85  # noqa: Y015
+Global___ManyResponse85: _TypeAlias = ManyResponse85  # noqa: Y015
 
 @_typing.final
-class ManyRequest86(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest86(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest86: _typing_extensions.TypeAlias = ManyRequest86  # noqa: Y015
+Global___ManyRequest86: _TypeAlias = ManyRequest86  # noqa: Y015
 
 @_typing.final
-class ManyResponse86(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse86(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse86: _typing_extensions.TypeAlias = ManyResponse86  # noqa: Y015
+Global___ManyResponse86: _TypeAlias = ManyResponse86  # noqa: Y015
 
 @_typing.final
-class ManyRequest87(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest87(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest87: _typing_extensions.TypeAlias = ManyRequest87  # noqa: Y015
+Global___ManyRequest87: _TypeAlias = ManyRequest87  # noqa: Y015
 
 @_typing.final
-class ManyResponse87(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse87(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse87: _typing_extensions.TypeAlias = ManyResponse87  # noqa: Y015
+Global___ManyResponse87: _TypeAlias = ManyResponse87  # noqa: Y015
 
 @_typing.final
-class ManyRequest88(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest88(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest88: _typing_extensions.TypeAlias = ManyRequest88  # noqa: Y015
+Global___ManyRequest88: _TypeAlias = ManyRequest88  # noqa: Y015
 
 @_typing.final
-class ManyResponse88(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse88(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse88: _typing_extensions.TypeAlias = ManyResponse88  # noqa: Y015
+Global___ManyResponse88: _TypeAlias = ManyResponse88  # noqa: Y015
 
 @_typing.final
-class ManyRequest89(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest89(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest89: _typing_extensions.TypeAlias = ManyRequest89  # noqa: Y015
+Global___ManyRequest89: _TypeAlias = ManyRequest89  # noqa: Y015
 
 @_typing.final
-class ManyResponse89(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse89(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse89: _typing_extensions.TypeAlias = ManyResponse89  # noqa: Y015
+Global___ManyResponse89: _TypeAlias = ManyResponse89  # noqa: Y015
 
 @_typing.final
-class ManyRequest90(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest90(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest90: _typing_extensions.TypeAlias = ManyRequest90  # noqa: Y015
+Global___ManyRequest90: _TypeAlias = ManyRequest90  # noqa: Y015
 
 @_typing.final
-class ManyResponse90(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse90(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse90: _typing_extensions.TypeAlias = ManyResponse90  # noqa: Y015
+Global___ManyResponse90: _TypeAlias = ManyResponse90  # noqa: Y015
 
 @_typing.final
-class ManyRequest91(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest91(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest91: _typing_extensions.TypeAlias = ManyRequest91  # noqa: Y015
+Global___ManyRequest91: _TypeAlias = ManyRequest91  # noqa: Y015
 
 @_typing.final
-class ManyResponse91(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse91(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse91: _typing_extensions.TypeAlias = ManyResponse91  # noqa: Y015
+Global___ManyResponse91: _TypeAlias = ManyResponse91  # noqa: Y015
 
 @_typing.final
-class ManyRequest92(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest92(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest92: _typing_extensions.TypeAlias = ManyRequest92  # noqa: Y015
+Global___ManyRequest92: _TypeAlias = ManyRequest92  # noqa: Y015
 
 @_typing.final
-class ManyResponse92(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse92(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse92: _typing_extensions.TypeAlias = ManyResponse92  # noqa: Y015
+Global___ManyResponse92: _TypeAlias = ManyResponse92  # noqa: Y015
 
 @_typing.final
-class ManyRequest93(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest93(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest93: _typing_extensions.TypeAlias = ManyRequest93  # noqa: Y015
+Global___ManyRequest93: _TypeAlias = ManyRequest93  # noqa: Y015
 
 @_typing.final
-class ManyResponse93(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse93(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse93: _typing_extensions.TypeAlias = ManyResponse93  # noqa: Y015
+Global___ManyResponse93: _TypeAlias = ManyResponse93  # noqa: Y015
 
 @_typing.final
-class ManyRequest94(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest94(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest94: _typing_extensions.TypeAlias = ManyRequest94  # noqa: Y015
+Global___ManyRequest94: _TypeAlias = ManyRequest94  # noqa: Y015
 
 @_typing.final
-class ManyResponse94(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse94(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse94: _typing_extensions.TypeAlias = ManyResponse94  # noqa: Y015
+Global___ManyResponse94: _TypeAlias = ManyResponse94  # noqa: Y015
 
 @_typing.final
-class ManyRequest95(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest95(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest95: _typing_extensions.TypeAlias = ManyRequest95  # noqa: Y015
+Global___ManyRequest95: _TypeAlias = ManyRequest95  # noqa: Y015
 
 @_typing.final
-class ManyResponse95(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse95(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse95: _typing_extensions.TypeAlias = ManyResponse95  # noqa: Y015
+Global___ManyResponse95: _TypeAlias = ManyResponse95  # noqa: Y015
 
 @_typing.final
-class ManyRequest96(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest96(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest96: _typing_extensions.TypeAlias = ManyRequest96  # noqa: Y015
+Global___ManyRequest96: _TypeAlias = ManyRequest96  # noqa: Y015
 
 @_typing.final
-class ManyResponse96(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse96(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse96: _typing_extensions.TypeAlias = ManyResponse96  # noqa: Y015
+Global___ManyResponse96: _TypeAlias = ManyResponse96  # noqa: Y015
 
 @_typing.final
-class ManyRequest97(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest97(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest97: _typing_extensions.TypeAlias = ManyRequest97  # noqa: Y015
+Global___ManyRequest97: _TypeAlias = ManyRequest97  # noqa: Y015
 
 @_typing.final
-class ManyResponse97(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse97(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse97: _typing_extensions.TypeAlias = ManyResponse97  # noqa: Y015
+Global___ManyResponse97: _TypeAlias = ManyResponse97  # noqa: Y015
 
 @_typing.final
-class ManyRequest98(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest98(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest98: _typing_extensions.TypeAlias = ManyRequest98  # noqa: Y015
+Global___ManyRequest98: _TypeAlias = ManyRequest98  # noqa: Y015
 
 @_typing.final
-class ManyResponse98(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse98(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse98: _typing_extensions.TypeAlias = ManyResponse98  # noqa: Y015
+Global___ManyResponse98: _TypeAlias = ManyResponse98  # noqa: Y015
 
 @_typing.final
-class ManyRequest99(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyRequest99(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyRequest99: _typing_extensions.TypeAlias = ManyRequest99  # noqa: Y015
+Global___ManyRequest99: _TypeAlias = ManyRequest99  # noqa: Y015
 
 @_typing.final
-class ManyResponse99(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ManyResponse99(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___ManyResponse99: _typing_extensions.TypeAlias = ManyResponse99  # noqa: Y015
+Global___ManyResponse99: _TypeAlias = ManyResponse99  # noqa: Y015

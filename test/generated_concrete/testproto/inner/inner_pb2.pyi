@@ -3,32 +3,32 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from testproto import test3_pb2 as _test3_pb2
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
-import testproto.test3_pb2
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class Inner(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class Inner(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
-    a: testproto.test3_pb2.OuterEnum.ValueType
+    a: _test3_pb2.OuterEnum.ValueType
     def __init__(
         self,
         *,
-        a: testproto.test3_pb2.OuterEnum.ValueType = ...,
+        a: _test3_pb2.OuterEnum.ValueType = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Inner: _typing_extensions.TypeAlias = Inner  # noqa: Y015
+Global___Inner: _TypeAlias = Inner  # noqa: Y015

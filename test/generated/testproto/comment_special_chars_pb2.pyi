@@ -3,22 +3,22 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class Test(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class Test(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     B_FIELD_NUMBER: _builtins.int
@@ -77,7 +77,7 @@ class Test(_google_protobuf_message.Message):
         j: _builtins.str = ...,
         k: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a", "b", b"b", "c", b"c", "d", b"d", "e", b"e", "f", b"f", "g", b"g", "h", b"h", "i", b"i", "j", b"j", "k", b"k"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b", "c", b"c", "d", b"d", "e", b"e", "f", b"f", "g", b"g", "h", b"h", "i", b"i", "j", b"j", "k", b"k"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Test: _typing_extensions.TypeAlias = Test  # noqa: Y015
+Global___Test: _TypeAlias = Test  # noqa: Y015

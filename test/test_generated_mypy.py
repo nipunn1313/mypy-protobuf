@@ -68,10 +68,10 @@ def _is_summary(line: str) -> bool:
 
 def test_generate_mypy_matches() -> None:
     proto_files = glob.glob("proto/**/*.proto", recursive=True)
-    assert len(proto_files) == 89  # Just a sanity check that all the files show up
+    assert len(proto_files) == 92  # Just a sanity check that all the files show up
 
     pyi_files = glob.glob("test/generated/**/*.pyi", recursive=True)
-    assert len(pyi_files) == 91  # Should be higher - because grpc files generate extra pyis
+    assert len(pyi_files) == 94  # Should be higher - because grpc files generate extra pyis
 
     failure_check_results = []
     for fn in proto_files:

@@ -3,27 +3,25 @@
 isort:skip_file
 """
 
-import abc as _abc
-import collections.abc as _collections_abc
-import grpc as _grpc
-import grpc.aio as _grpc_aio
-import testproto.test_no_generic_services_pb2
-import typing as _typing
+from collections import abc as _abc
+from grpc import aio as _aio
+from testproto import test_no_generic_services_pb2 as _test_no_generic_services_pb2
+import abc as _abc_1
 
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
 
 class ATestService2Stub:
-    def __init__(self, channel: _grpc_aio.Channel) -> None: ...
-    Echo: _grpc_aio.UnaryUnaryMultiCallable[testproto.test_no_generic_services_pb2.Simple3, testproto.test_no_generic_services_pb2.Simple3]
+    def __init__(self, channel: _aio.Channel) -> None: ...
+    Echo: _aio.UnaryUnaryMultiCallable[_test_no_generic_services_pb2.Simple3, _test_no_generic_services_pb2.Simple3]
 
-class ATestService2Servicer(metaclass=_abc.ABCMeta):
-    @_abc.abstractmethod
+class ATestService2Servicer(metaclass=_abc_1.ABCMeta):
+    @_abc_1.abstractmethod
     def Echo(
         self,
-        request: testproto.test_no_generic_services_pb2.Simple3,
-        context: _grpc_aio.ServicerContext[testproto.test_no_generic_services_pb2.Simple3, _collections_abc.Awaitable[testproto.test_no_generic_services_pb2.Simple3]],
-    ) -> _collections_abc.Awaitable[testproto.test_no_generic_services_pb2.Simple3]: ...
+        request: _test_no_generic_services_pb2.Simple3,
+        context: _aio.ServicerContext[_test_no_generic_services_pb2.Simple3, _abc.Awaitable[_test_no_generic_services_pb2.Simple3]],
+    ) -> _abc.Awaitable[_test_no_generic_services_pb2.Simple3]: ...
 
-def add_ATestService2Servicer_to_server(servicer: ATestService2Servicer, server: _grpc_aio.Server) -> None: ...
+def add_ATestService2Servicer_to_server(servicer: ATestService2Servicer, server: _aio.Server) -> None: ...

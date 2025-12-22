@@ -3,22 +3,22 @@
 isort:skip_file
 Edition version of proto2 file"""
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class Editions2024ImplicitFieldPresenceSubMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class Editions2024ImplicitFieldPresenceSubMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     THING_FIELD_NUMBER: _builtins.int
     thing: _builtins.str
@@ -27,14 +27,14 @@ class Editions2024ImplicitFieldPresenceSubMessage(_google_protobuf_message.Messa
         *,
         thing: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["thing", b"thing"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["thing", b"thing"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Editions2024ImplicitFieldPresenceSubMessage: _typing_extensions.TypeAlias = Editions2024ImplicitFieldPresenceSubMessage  # noqa: Y015
+Global___Editions2024ImplicitFieldPresenceSubMessage: _TypeAlias = Editions2024ImplicitFieldPresenceSubMessage  # noqa: Y015
 
 @_typing.final
-class Editions2024ImplicitFieldPresenceTest(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class Editions2024ImplicitFieldPresenceTest(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     LEGACY_FIELD_NUMBER: _builtins.int
     EXPLICIT_SINGULAR_FIELD_NUMBER: _builtins.int
@@ -62,9 +62,9 @@ class Editions2024ImplicitFieldPresenceTest(_google_protobuf_message.Message):
         implicit_singular: _builtins.str = ...,
         default_singular: _builtins.str = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["explicit_singular", b"explicit_singular", "legacy", b"legacy", "message_field", b"message_field"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["explicit_singular", b"explicit_singular", "legacy", b"legacy", "message_field", b"message_field"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["default_singular", b"default_singular", "explicit_singular", b"explicit_singular", "implicit_singular", b"implicit_singular", "legacy", b"legacy", "message_field", b"message_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["default_singular", b"default_singular", "explicit_singular", b"explicit_singular", "implicit_singular", b"implicit_singular", "legacy", b"legacy", "message_field", b"message_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Editions2024ImplicitFieldPresenceTest: _typing_extensions.TypeAlias = Editions2024ImplicitFieldPresenceTest  # noqa: Y015
+Global___Editions2024ImplicitFieldPresenceTest: _TypeAlias = Editions2024ImplicitFieldPresenceTest  # noqa: Y015

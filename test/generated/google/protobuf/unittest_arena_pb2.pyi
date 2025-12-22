@@ -9,24 +9,24 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class NestedMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class NestedMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     D_FIELD_NUMBER: _builtins.int
     d: _builtins.int
@@ -35,28 +35,28 @@ class NestedMessage(_google_protobuf_message.Message):
         *,
         d: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["d", b"d"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NestedMessage: _typing_extensions.TypeAlias = NestedMessage  # noqa: Y015
+Global___NestedMessage: _TypeAlias = NestedMessage  # noqa: Y015
 
 @_typing.final
-class ArenaMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class ArenaMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     REPEATED_NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def repeated_nested_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[Global___NestedMessage]: ...
+    def repeated_nested_message(self) -> _containers.RepeatedCompositeFieldContainer[Global___NestedMessage]: ...
     def __init__(
         self,
         *,
-        repeated_nested_message: _collections_abc.Iterable[Global___NestedMessage] | None = ...,
+        repeated_nested_message: _abc.Iterable[Global___NestedMessage] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_nested_message", b"repeated_nested_message"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["repeated_nested_message", b"repeated_nested_message"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_nested_message", b"repeated_nested_message"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["repeated_nested_message", b"repeated_nested_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___ArenaMessage: _typing_extensions.TypeAlias = ArenaMessage  # noqa: Y015
+Global___ArenaMessage: _TypeAlias = ArenaMessage  # noqa: Y015

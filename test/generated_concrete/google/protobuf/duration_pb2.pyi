@@ -32,22 +32,22 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import well_known_types as _well_known_types
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.well_known_types as _google_protobuf_internal_well_known_types
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class Duration(_google_protobuf_message.Message, _google_protobuf_internal_well_known_types.Duration):
+class Duration(_message.Message, _well_known_types.Duration):
     """A Duration represents a signed, fixed-length span of time represented
     as a count of seconds and fractions of seconds at nanosecond
     resolution. It is independent of any calendar and concepts like "day"
@@ -108,7 +108,7 @@ class Duration(_google_protobuf_message.Message, _google_protobuf_internal_well_
     microsecond should be expressed in JSON format as "3.000001s".
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     SECONDS_FIELD_NUMBER: _builtins.int
     NANOS_FIELD_NUMBER: _builtins.int
@@ -131,7 +131,7 @@ class Duration(_google_protobuf_message.Message, _google_protobuf_internal_well_
         seconds: _builtins.int = ...,
         nanos: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["nanos", b"nanos", "seconds", b"seconds"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["nanos", b"nanos", "seconds", b"seconds"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Duration: _typing_extensions.TypeAlias = Duration  # noqa: Y015
+Global___Duration: _TypeAlias = Duration  # noqa: Y015

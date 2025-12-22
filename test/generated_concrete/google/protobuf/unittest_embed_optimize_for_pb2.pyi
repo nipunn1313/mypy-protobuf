@@ -8,45 +8,45 @@ Author: kenton@google.com (Kenton Varda)
 A proto file which imports a proto file that uses optimize_for = CODE_SIZE.
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import unittest_optimize_for_pb2 as _unittest_optimize_for_pb2
+from google.protobuf.internal import containers as _containers
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.message as _google_protobuf_message
-import google.protobuf.unittest_optimize_for_pb2
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestEmbedOptimizedForSize(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestEmbedOptimizedForSize(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     OPTIONAL_MESSAGE_FIELD_NUMBER: _builtins.int
     REPEATED_MESSAGE_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def optional_message(self) -> google.protobuf.unittest_optimize_for_pb2.TestOptimizedForSize:
+    def optional_message(self) -> _unittest_optimize_for_pb2.TestOptimizedForSize:
         """Test that embedding a message which has optimize_for = CODE_SIZE into
         one optimized for speed works.
         """
 
     @_builtins.property
-    def repeated_message(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.unittest_optimize_for_pb2.TestOptimizedForSize]: ...
+    def repeated_message(self) -> _containers.RepeatedCompositeFieldContainer[_unittest_optimize_for_pb2.TestOptimizedForSize]: ...
     def __init__(
         self,
         *,
-        optional_message: google.protobuf.unittest_optimize_for_pb2.TestOptimizedForSize | None = ...,
-        repeated_message: _collections_abc.Iterable[google.protobuf.unittest_optimize_for_pb2.TestOptimizedForSize] | None = ...,
+        optional_message: _unittest_optimize_for_pb2.TestOptimizedForSize | None = ...,
+        repeated_message: _abc.Iterable[_unittest_optimize_for_pb2.TestOptimizedForSize] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_message", b"optional_message"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["optional_message", b"optional_message"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["optional_message", b"optional_message", "repeated_message", b"repeated_message"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["optional_message", b"optional_message", "repeated_message", b"repeated_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestEmbedOptimizedForSize: _typing_extensions.TypeAlias = TestEmbedOptimizedForSize  # noqa: Y015
+Global___TestEmbedOptimizedForSize: _TypeAlias = TestEmbedOptimizedForSize  # noqa: Y015

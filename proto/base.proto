@@ -1,0 +1,13 @@
+/*
+ * This file is used to test an import without a parent
+ * import x instead of from x import y
+ */
+syntax = "proto3";
+
+package test;
+
+import "base_import.proto";
+
+message Test {
+  Message msg = 1;
+}

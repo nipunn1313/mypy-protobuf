@@ -3,12 +3,10 @@
 isort:skip_file
 Proto 2 test file."""
 
-import abc as _abc
-import collections.abc as _collections_abc
+from collections import abc as _abc
+from testproto import test_pb2 as _test_pb2
+import abc as _abc_1
 import grpc as _grpc
-import grpc.aio as _grpc_aio
-import testproto.test_pb2
-import typing as _typing
 
 
 GRPC_GENERATED_VERSION: str
@@ -18,28 +16,28 @@ class PythonReservedKeywordsServiceStub:
     """Method name is reserved"""
 
     def __init__(self, channel: _grpc.Channel) -> None: ...
-    valid_method_name1: _grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2._r_None]
+    valid_method_name1: _grpc.UnaryUnaryMultiCallable[_test_pb2.Simple1, _test_pb2._r_None]
     """valid_method_name1"""
-    valid_method_name2: _grpc.UnaryUnaryMultiCallable[testproto.test_pb2.Simple1, testproto.test_pb2.PythonReservedKeywords._r_lambda]
+    valid_method_name2: _grpc.UnaryUnaryMultiCallable[_test_pb2.Simple1, _test_pb2.PythonReservedKeywords._r_lambda]
     """valid_method_name2"""
 
-class PythonReservedKeywordsServiceServicer(metaclass=_abc.ABCMeta):
+class PythonReservedKeywordsServiceServicer(metaclass=_abc_1.ABCMeta):
     """Method name is reserved"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def valid_method_name1(
         self,
-        request: testproto.test_pb2.Simple1,
+        request: _test_pb2.Simple1,
         context: _grpc.ServicerContext,
-    ) -> testproto.test_pb2._r_None:
+    ) -> _test_pb2._r_None:
         """valid_method_name1"""
 
-    @_abc.abstractmethod
+    @_abc_1.abstractmethod
     def valid_method_name2(
         self,
-        request: testproto.test_pb2.Simple1,
+        request: _test_pb2.Simple1,
         context: _grpc.ServicerContext,
-    ) -> testproto.test_pb2.PythonReservedKeywords._r_lambda:
+    ) -> _test_pb2.PythonReservedKeywords._r_lambda:
         """valid_method_name2"""
 
 def add_PythonReservedKeywordsServiceServicer_to_server(servicer: PythonReservedKeywordsServiceServicer, server: _grpc.Server) -> None: ...

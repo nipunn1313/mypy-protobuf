@@ -165,6 +165,87 @@ class GRPCType(enum.Enum):
         return self in (GRPCType.ASYNC, GRPCType.BOTH)
 
 
+class Imports:
+    # Set of {x: (a, b, c) that maps to either `from {a} import {b} as {c}` or `import {b} as {c}`
+    _imports: Dict[str, Tuple[Optional[str], Optional[str], str]]
+    # Set of imported names, if the same name is imported more than once it gets formatted as _{name}_{count}
+    _imported_names: Dict[str, int] = defaultdict(int)
+    # Set of imported typing statements, form of {<name>: <alias>}
+    _typing_imports: Dict[str, str]
+
+    def __init__(self) -> None:
+        self._imports = {}
+        self._imported_names = defaultdict(int)
+        self._typing_imports = {}
+
+    @property
+    def statements(self) -> List[str]:
+        """Returns a list of import tuples.
+
+            0: From statement, optional
+            1: Import name
+            2: Alias
+
+        Example:
+            self._import("grpc.aio", "Channel") -> ("grpc", "aio", "_aio") -> from grpc import aio as _aio
+            self._import("grpc", "Channel") -> (None, "grpc", "_grpc") -> import grpc as _grpc
+
+        """
+        statements = []
+        for _, (frm, alias, original) in self._imports.items():
+            if frm is None:
+                if alias is None:
+                    statements.append(f"import {original}")
+                else:
+                    statements.append(f"import {original} as {alias}")
+            else:
+                statements.append(f"from {frm} import {original} as {alias}")
+
+        return statements
+
+    @property
+    def typing_statements(self) -> List[str]:
+        """Return a dictionary of typing imports with their aliases."""
+        statements = []
+        for orig, alias in self._typing_imports.items():
+            statements.append(f"{orig} as {alias}")
+        return statements
+
+    def _name_alias(self, name: str) -> str:
+        if f"{name}" in self._imported_names:
+            count = self._imported_names[name] + 1
+            self._imported_names[name] = count
+            return f"_{name}_{count}"
+        else:
+            self._imported_names[name] = 0
+            return f"_{name}"
+
+    def add_import(self, pkg: str, name: Optional[str] = None) -> str:
+        """Add an import and return the name used for it"""
+        if not name:
+            self._imports[pkg] = (None, None, pkg)
+            return pkg
+        if imp := self._imports.get(pkg):
+            alias = imp[1]
+        else:
+            parts = pkg.rsplit(".", 1)
+            if len(parts) > 1:
+                alias = self._name_alias(parts[-1])
+                self._imports[pkg] = (parts[0], alias, parts[-1])
+            elif len(parts) == 1:
+                alias = self._name_alias(parts[0])
+                self._imports[pkg] = (None, alias, parts[0])
+            else:
+                raise RuntimeError("Package import string cannot be empty")
+
+        return f"{alias}.{name}"
+
+    def add_typing_import(self, name: str) -> str:
+        if name not in self._typing_imports:
+            self._typing_imports[name] = self._name_alias(name)
+        return self._typing_imports[name]
+
+
 class PkgWriter(object):
     """Writes a single pyi file"""
 
@@ -190,8 +271,8 @@ class PkgWriter(object):
         self.lines: List[str] = []
         self.indent = ""
 
-        # Set of {x}, where {x} corresponds to to `import {x}`
-        self.imports: Dict[str, bool] = {}
+        # Set of {x: y}, where {x} corresponds to to `from {x} import {y} as _{y}`
+        self.imports = Imports()
         # dictionary of x->(y,z) for `from {x} import {y} as {z}`
         # if {z} is None, then it shortens to `from {x} import {y}`
         self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
@@ -205,15 +286,7 @@ class PkgWriter(object):
     def _deprecated_name(self) -> str:
         return "_deprecated"
 
-    @property
-    def _typing_extensions_name(self) -> str:
-        return "_typing_extensions"
-
-    def _import_alias(self, path: str) -> str:
-        """import as prefixed with underscore to avoid conflicts with message/enum names"""
-        return f"_{path.replace('.', '_')}"
-
-    def _import(self, path: str, name: str, *, alias: bool = True) -> str:
+    def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Literal") -> "Literal"
 
@@ -224,7 +297,7 @@ class PkgWriter(object):
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
-            return self._typing_extensions_name + "." + name
+            return self.imports.add_typing_import(name)
 
         if path == "warnings" and name == "deprecated":
             if not self.deprecated_min or self.deprecated_min < (3, 11):
@@ -236,8 +309,7 @@ class PkgWriter(object):
             self.from_imports[imp].add((name, None))
             return name
         else:
-            self.imports[imp] = alias
-            return (self._import_alias(imp) if alias else imp) + "." + name
+            return self.imports.add_import(imp, name)
 
     def _property(self) -> str:
         return f"@{self._import('builtins', 'property')}"
@@ -269,7 +341,7 @@ class PkgWriter(object):
         # Not in file. Must import
         # Python generated code ignores proto packages, so the only relevant factor is
         # whether it is in the file or not.
-        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0], alias=False)
+        import_name = self._import(message_fd.name[:-6].replace("-", "_") + "_pb2", split[0])
 
         remains = ".".join(split[1:])
         if not remains:
@@ -772,7 +844,7 @@ class PkgWriter(object):
         split = casttype.split(".")
         assert len(split) == 2, "mypy_protobuf.[casttype,keytype,valuetype] is expected to be of format path/to/file.TypeInFile"
         pkg = split[0].replace("/", ".")
-        return self._import(pkg, split[1], alias=False)
+        return self._import(pkg, split[1])
 
     def _map_key_value_types(
         self,
@@ -828,27 +900,40 @@ class PkgWriter(object):
         return result
 
     def _servicer_output_type(self, method: d.MethodDescriptorProto) -> str:
-        result = self._import_message(method.output_type)
+        msg = self._import_message(method.output_type)
+
+        # Don't actually call _import until the end. Otherwise we get unnecessary imports
         if method.server_streaming:
             # Union[Iterator[Resp], AsyncIterator[Resp]] is subtyped by Iterator[Resp] and AsyncIterator[Resp].
             # So both can be used in the covariant function return position.
-            sync = f"{self._import('collections.abc', 'Iterator')}[{result}]"
-            a_sync = f"{self._import('collections.abc', 'AsyncIterator')}[{result}]"
-            result = f"{self._import('typing', 'Union')}[{sync}, {a_sync}]"
+            def sync() -> str:
+                return f"{self._import('collections.abc', 'Iterator')}[{msg}]"
+
+            def a_sync() -> str:
+                return f"{self._import('collections.abc', 'AsyncIterator')}[{msg}]"
+
+            def result() -> str:
+                return f"{self._import('typing', 'Union')}[{sync()}, {a_sync()}]"
+
         else:
             # Union[Resp, Awaitable[Resp]] is subtyped by Resp and Awaitable[Resp].
             # So both can be used in the covariant function return position.
             # Awaitable[Resp] is equivalent to async def.
-            sync = result
-            a_sync = f"{self._import('collections.abc', 'Awaitable')}[{result}]"
-            result = f"{self._import('typing', 'Union')}[{sync}, {a_sync}]"
+            def sync() -> str:
+                return msg
+
+            def a_sync() -> str:
+                return f"{self._import('collections.abc', 'Awaitable')}[{msg}]"
+
+            def result() -> str:
+                return f"{self._import('typing', 'Union')}[{sync()}, {a_sync()}]"
 
         if self.grpc_type == GRPCType.SYNC:
-            return sync
+            return sync()
         elif self.grpc_type == GRPCType.ASYNC:
-            return a_sync
+            return a_sync()
         else:
-            return result
+            return result()
 
     def write_grpc_iterator_type(self) -> None:
         wl = self._write_line
@@ -873,7 +958,7 @@ class PkgWriter(object):
     def get_servicer_context_type(self, input_: str, output: str) -> str:
         """Get the type to use for the context parameter in servicer methods."""
         if self.grpc_type == GRPCType.ASYNC:
-            return self._import("grpc.aio", f"ServicerContext[{input_}, {output}]")
+            return f"{self._import('grpc.aio', 'ServicerContext')}[{input_}, {output}]"
         elif self.grpc_type == GRPCType.SYNC:
             return self._import("grpc", "ServicerContext")
         else:
@@ -953,15 +1038,19 @@ class PkgWriter(object):
             wl("")
 
     def make_server_type(self) -> str:
-        server = self._import("grpc", "Server")
-        aserver = self._import("grpc.aio", "Server")
+        # Don't call the _import call yet, otherwise we get unnecessary imports
+        def server() -> str:
+            return self._import("grpc", "Server")
+
+        def aserver() -> str:
+            return self._import("grpc.aio", "Server")
 
         if self.grpc_type == GRPCType.BOTH:
-            return f"{self._import('typing', 'Union')}[{server}, {aserver}]"
+            return f"{self._import('typing', 'Union')}[{server()}, {aserver()}]"
         elif self.grpc_type == GRPCType.ASYNC:
-            return aserver
+            return aserver()
         elif self.grpc_type == GRPCType.SYNC:
-            return server
+            return server()
         else:
             raise RuntimeError(f"Impossible, {self.grpc_type=}")
 
@@ -1190,18 +1279,15 @@ class PkgWriter(object):
 
         if self.typing_extensions_min or self.deprecated_min:
             # Special case for `sys` as it is needed for version checks
-            self.imports["sys"] = False
-        for pkg, dedot in sorted(self.imports.items()):
-            if dedot:
-                self._write_line(f"import {pkg} as {self._import_alias(pkg)}")
-            else:
-                self._write_line(f"import {pkg}")
+            self.imports.add_import("sys")
+        for statement in sorted(self.imports.statements):
+            self._write_line(statement)
         if self.typing_extensions_min:
             self._write_line("")
             self._write_line(f"if sys.version_info >= {self.typing_extensions_min}:")
-            self._write_line(f"    import typing as {self._typing_extensions_name}")
+            self._write_line(f"    from typing import {', '.join(self.imports.typing_statements)}")
             self._write_line("else:")
-            self._write_line(f"    import typing_extensions as {self._typing_extensions_name}")
+            self._write_line(f"    from typing_extensions import {', '.join(self.imports.typing_statements)}")
         if self.deprecated_min:
             self._write_line("")
             self._write_line(f"if sys.version_info >= {self.deprecated_min}:")

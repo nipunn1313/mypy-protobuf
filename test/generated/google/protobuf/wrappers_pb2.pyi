@@ -49,21 +49,21 @@ These wrappers have no meaningful use within a map or a oneof since
 individual entries of a map or fields of a oneof can already detect presence.
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class DoubleValue(_google_protobuf_message.Message):
+class DoubleValue(_message.Message):
     """Wrapper message for `double`.
 
     The JSON representation for `DoubleValue` is JSON number.
@@ -72,7 +72,7 @@ class DoubleValue(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.float
@@ -82,13 +82,13 @@ class DoubleValue(_google_protobuf_message.Message):
         *,
         value: _builtins.float = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___DoubleValue: _typing_extensions.TypeAlias = DoubleValue  # noqa: Y015
+Global___DoubleValue: _TypeAlias = DoubleValue  # noqa: Y015
 
 @_typing.final
-class FloatValue(_google_protobuf_message.Message):
+class FloatValue(_message.Message):
     """Wrapper message for `float`.
 
     The JSON representation for `FloatValue` is JSON number.
@@ -97,7 +97,7 @@ class FloatValue(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.float
@@ -107,13 +107,13 @@ class FloatValue(_google_protobuf_message.Message):
         *,
         value: _builtins.float = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___FloatValue: _typing_extensions.TypeAlias = FloatValue  # noqa: Y015
+Global___FloatValue: _TypeAlias = FloatValue  # noqa: Y015
 
 @_typing.final
-class Int64Value(_google_protobuf_message.Message):
+class Int64Value(_message.Message):
     """Wrapper message for `int64`.
 
     The JSON representation for `Int64Value` is JSON string.
@@ -122,7 +122,7 @@ class Int64Value(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.int
@@ -132,13 +132,13 @@ class Int64Value(_google_protobuf_message.Message):
         *,
         value: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Int64Value: _typing_extensions.TypeAlias = Int64Value  # noqa: Y015
+Global___Int64Value: _TypeAlias = Int64Value  # noqa: Y015
 
 @_typing.final
-class UInt64Value(_google_protobuf_message.Message):
+class UInt64Value(_message.Message):
     """Wrapper message for `uint64`.
 
     The JSON representation for `UInt64Value` is JSON string.
@@ -147,7 +147,7 @@ class UInt64Value(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.int
@@ -157,13 +157,13 @@ class UInt64Value(_google_protobuf_message.Message):
         *,
         value: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___UInt64Value: _typing_extensions.TypeAlias = UInt64Value  # noqa: Y015
+Global___UInt64Value: _TypeAlias = UInt64Value  # noqa: Y015
 
 @_typing.final
-class Int32Value(_google_protobuf_message.Message):
+class Int32Value(_message.Message):
     """Wrapper message for `int32`.
 
     The JSON representation for `Int32Value` is JSON number.
@@ -172,7 +172,7 @@ class Int32Value(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.int
@@ -182,13 +182,13 @@ class Int32Value(_google_protobuf_message.Message):
         *,
         value: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Int32Value: _typing_extensions.TypeAlias = Int32Value  # noqa: Y015
+Global___Int32Value: _TypeAlias = Int32Value  # noqa: Y015
 
 @_typing.final
-class UInt32Value(_google_protobuf_message.Message):
+class UInt32Value(_message.Message):
     """Wrapper message for `uint32`.
 
     The JSON representation for `UInt32Value` is JSON number.
@@ -197,7 +197,7 @@ class UInt32Value(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.int
@@ -207,13 +207,13 @@ class UInt32Value(_google_protobuf_message.Message):
         *,
         value: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___UInt32Value: _typing_extensions.TypeAlias = UInt32Value  # noqa: Y015
+Global___UInt32Value: _TypeAlias = UInt32Value  # noqa: Y015
 
 @_typing.final
-class BoolValue(_google_protobuf_message.Message):
+class BoolValue(_message.Message):
     """Wrapper message for `bool`.
 
     The JSON representation for `BoolValue` is JSON `true` and `false`.
@@ -222,7 +222,7 @@ class BoolValue(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.bool
@@ -232,13 +232,13 @@ class BoolValue(_google_protobuf_message.Message):
         *,
         value: _builtins.bool = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___BoolValue: _typing_extensions.TypeAlias = BoolValue  # noqa: Y015
+Global___BoolValue: _TypeAlias = BoolValue  # noqa: Y015
 
 @_typing.final
-class StringValue(_google_protobuf_message.Message):
+class StringValue(_message.Message):
     """Wrapper message for `string`.
 
     The JSON representation for `StringValue` is JSON string.
@@ -247,7 +247,7 @@ class StringValue(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.str
@@ -257,13 +257,13 @@ class StringValue(_google_protobuf_message.Message):
         *,
         value: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___StringValue: _typing_extensions.TypeAlias = StringValue  # noqa: Y015
+Global___StringValue: _TypeAlias = StringValue  # noqa: Y015
 
 @_typing.final
-class BytesValue(_google_protobuf_message.Message):
+class BytesValue(_message.Message):
     """Wrapper message for `bytes`.
 
     The JSON representation for `BytesValue` is JSON string.
@@ -272,7 +272,7 @@ class BytesValue(_google_protobuf_message.Message):
     has no plan to be removed.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.bytes
@@ -282,7 +282,7 @@ class BytesValue(_google_protobuf_message.Message):
         *,
         value: _builtins.bytes = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___BytesValue: _typing_extensions.TypeAlias = BytesValue  # noqa: Y015
+Global___BytesValue: _TypeAlias = BytesValue  # noqa: Y015

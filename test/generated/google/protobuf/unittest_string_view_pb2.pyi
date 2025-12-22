@@ -3,27 +3,27 @@
 isort:skip_file
 """
 
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestStringView(_google_protobuf_message.Message):
+class TestStringView(_message.Message):
     """NEXT_TAG = 6;"""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     SINGULAR_STRING_FIELD_NUMBER: _builtins.int
     SINGULAR_BYTES_FIELD_NUMBER: _builtins.int
@@ -34,40 +34,40 @@ class TestStringView(_google_protobuf_message.Message):
     singular_bytes: _builtins.bytes
     implicit_presence: _builtins.str
     @_builtins.property
-    def repeated_string(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    def repeated_string(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
     @_builtins.property
-    def repeated_bytes(self) -> _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
+    def repeated_bytes(self) -> _containers.RepeatedScalarFieldContainer[_builtins.bytes]: ...
     def __init__(
         self,
         *,
         singular_string: _builtins.str | None = ...,
         singular_bytes: _builtins.bytes | None = ...,
         implicit_presence: _builtins.str = ...,
-        repeated_string: _collections_abc.Iterable[_builtins.str] | None = ...,
-        repeated_bytes: _collections_abc.Iterable[_builtins.bytes] | None = ...,
+        repeated_string: _abc.Iterable[_builtins.str] | None = ...,
+        repeated_bytes: _abc.Iterable[_builtins.bytes] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["repeated_bytes", b"repeated_bytes", "repeated_string", b"repeated_string", "singular_bytes", b"singular_bytes", "singular_string", b"singular_string"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["repeated_bytes", b"repeated_bytes", "repeated_string", b"repeated_string", "singular_bytes", b"singular_bytes", "singular_string", b"singular_string"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["implicit_presence", b"implicit_presence", "repeated_bytes", b"repeated_bytes", "repeated_string", b"repeated_string", "singular_bytes", b"singular_bytes", "singular_string", b"singular_string"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["implicit_presence", b"implicit_presence", "repeated_bytes", b"repeated_bytes", "repeated_string", b"repeated_string", "singular_bytes", b"singular_bytes", "singular_string", b"singular_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestStringView: _typing_extensions.TypeAlias = TestStringView  # noqa: Y015
+Global___TestStringView: _TypeAlias = TestStringView  # noqa: Y015
 
 @_typing.final
-class TestStringViewExtension(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestStringViewExtension(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___TestStringViewExtension: _typing_extensions.TypeAlias = TestStringViewExtension  # noqa: Y015
+Global___TestStringViewExtension: _TypeAlias = TestStringViewExtension  # noqa: Y015
 
 SINGULAR_STRING_VIEW_EXTENSION_FIELD_NUMBER: _builtins.int
 SINGULAR_BYTES_VIEW_EXTENSION_FIELD_NUMBER: _builtins.int
 REPEATED_STRING_VIEW_EXTENSION_FIELD_NUMBER: _builtins.int
 REPEATED_BYTES_VIEW_EXTENSION_FIELD_NUMBER: _builtins.int
-singular_string_view_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _builtins.str]
-singular_bytes_view_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _builtins.bytes]
-repeated_string_view_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
-repeated_bytes_view_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.bytes]]
+singular_string_view_extension: _extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _builtins.str]
+singular_bytes_view_extension: _extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _builtins.bytes]
+repeated_string_view_extension: _extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _containers.RepeatedScalarFieldContainer[_builtins.str]]
+repeated_bytes_view_extension: _extension_dict._ExtensionFieldDescriptor[Global___TestStringViewExtension, _containers.RepeatedScalarFieldContainer[_builtins.bytes]]

@@ -3,34 +3,34 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class Proto3FileExtensions(_google_protobuf_message.Message):
+class Proto3FileExtensions(_message.Message):
     """For testing proto3 extension behaviors."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     SINGULAR_INT_FIELD_NUMBER: _builtins.int
     REPEATED_INT_FIELD_NUMBER: _builtins.int
-    singular_int: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _builtins.int]
-    repeated_int: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FileOptions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.int]]
+    singular_int: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FileOptions, _builtins.int]
+    repeated_int: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FileOptions, _containers.RepeatedScalarFieldContainer[_builtins.int]]
     def __init__(
         self,
     ) -> None: ...
 
-Global___Proto3FileExtensions: _typing_extensions.TypeAlias = Proto3FileExtensions  # noqa: Y015
+Global___Proto3FileExtensions: _TypeAlias = Proto3FileExtensions  # noqa: Y015

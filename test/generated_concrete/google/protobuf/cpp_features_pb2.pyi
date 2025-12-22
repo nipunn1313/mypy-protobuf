@@ -9,32 +9,32 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class CppFeatures(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class CppFeatures(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _StringType:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _StringTypeEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[CppFeatures._StringType.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _StringTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[CppFeatures._StringType.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         STRING_TYPE_UNKNOWN: CppFeatures._StringType.ValueType  # 0
         VIEW: CppFeatures._StringType.ValueType  # 1
         CORD: CppFeatures._StringType.ValueType  # 2
@@ -64,12 +64,12 @@ class CppFeatures(_google_protobuf_message.Message):
         string_type: Global___CppFeatures.StringType.ValueType | None = ...,
         enum_name_uses_string_view: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_name_uses_string_view", b"enum_name_uses_string_view", "legacy_closed_enum", b"legacy_closed_enum", "string_type", b"string_type"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["enum_name_uses_string_view", b"enum_name_uses_string_view", "legacy_closed_enum", b"legacy_closed_enum", "string_type", b"string_type"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["enum_name_uses_string_view", b"enum_name_uses_string_view", "legacy_closed_enum", b"legacy_closed_enum", "string_type", b"string_type"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enum_name_uses_string_view", b"enum_name_uses_string_view", "legacy_closed_enum", b"legacy_closed_enum", "string_type", b"string_type"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___CppFeatures: _typing_extensions.TypeAlias = CppFeatures  # noqa: Y015
+Global___CppFeatures: _TypeAlias = CppFeatures  # noqa: Y015
 
 CPP_FIELD_NUMBER: _builtins.int
-cpp: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FeatureSet, Global___CppFeatures]
+cpp: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FeatureSet, Global___CppFeatures]

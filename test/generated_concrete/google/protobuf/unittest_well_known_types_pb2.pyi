@@ -9,39 +9,39 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from collections import abc as _abc
+from google.protobuf import any_pb2 as _any_pb2
+from google.protobuf import api_pb2 as _api_pb2
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import duration_pb2 as _duration_pb2
+from google.protobuf import empty_pb2 as _empty_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import source_context_pb2 as _source_context_pb2
+from google.protobuf import struct_pb2 as _struct_pb2
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf import type_pb2 as _type_pb2
+from google.protobuf import wrappers_pb2 as _wrappers_pb2
+from google.protobuf.internal import containers as _containers
 import builtins as _builtins
-import collections.abc as _collections_abc
-import google.protobuf.any_pb2
-import google.protobuf.api_pb2
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.duration_pb2
-import google.protobuf.empty_pb2
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.message as _google_protobuf_message
-import google.protobuf.source_context_pb2
-import google.protobuf.struct_pb2
-import google.protobuf.timestamp_pb2
-import google.protobuf.type_pb2
-import google.protobuf.wrappers_pb2
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestWellKnownTypes(_google_protobuf_message.Message):
+class TestWellKnownTypes(_message.Message):
     """Test that we can include all well-known types.
     Each wrapper type is included separately, as languages
     map handle different wrappers in different ways.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     ANY_FIELD_FIELD_NUMBER: _builtins.int
     API_FIELD_FIELD_NUMBER: _builtins.int
@@ -63,80 +63,80 @@ class TestWellKnownTypes(_google_protobuf_message.Message):
     BYTES_FIELD_FIELD_NUMBER: _builtins.int
     VALUE_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def any_field(self) -> google.protobuf.any_pb2.Any: ...
+    def any_field(self) -> _any_pb2.Any: ...
     @_builtins.property
-    def api_field(self) -> google.protobuf.api_pb2.Api: ...
+    def api_field(self) -> _api_pb2.Api: ...
     @_builtins.property
-    def duration_field(self) -> google.protobuf.duration_pb2.Duration: ...
+    def duration_field(self) -> _duration_pb2.Duration: ...
     @_builtins.property
-    def empty_field(self) -> google.protobuf.empty_pb2.Empty: ...
+    def empty_field(self) -> _empty_pb2.Empty: ...
     @_builtins.property
-    def field_mask_field(self) -> google.protobuf.field_mask_pb2.FieldMask: ...
+    def field_mask_field(self) -> _field_mask_pb2.FieldMask: ...
     @_builtins.property
-    def source_context_field(self) -> google.protobuf.source_context_pb2.SourceContext: ...
+    def source_context_field(self) -> _source_context_pb2.SourceContext: ...
     @_builtins.property
-    def struct_field(self) -> google.protobuf.struct_pb2.Struct: ...
+    def struct_field(self) -> _struct_pb2.Struct: ...
     @_builtins.property
-    def timestamp_field(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    def timestamp_field(self) -> _timestamp_pb2.Timestamp: ...
     @_builtins.property
-    def type_field(self) -> google.protobuf.type_pb2.Type: ...
+    def type_field(self) -> _type_pb2.Type: ...
     @_builtins.property
-    def double_field(self) -> google.protobuf.wrappers_pb2.DoubleValue: ...
+    def double_field(self) -> _wrappers_pb2.DoubleValue: ...
     @_builtins.property
-    def float_field(self) -> google.protobuf.wrappers_pb2.FloatValue: ...
+    def float_field(self) -> _wrappers_pb2.FloatValue: ...
     @_builtins.property
-    def int64_field(self) -> google.protobuf.wrappers_pb2.Int64Value: ...
+    def int64_field(self) -> _wrappers_pb2.Int64Value: ...
     @_builtins.property
-    def uint64_field(self) -> google.protobuf.wrappers_pb2.UInt64Value: ...
+    def uint64_field(self) -> _wrappers_pb2.UInt64Value: ...
     @_builtins.property
-    def int32_field(self) -> google.protobuf.wrappers_pb2.Int32Value: ...
+    def int32_field(self) -> _wrappers_pb2.Int32Value: ...
     @_builtins.property
-    def uint32_field(self) -> google.protobuf.wrappers_pb2.UInt32Value: ...
+    def uint32_field(self) -> _wrappers_pb2.UInt32Value: ...
     @_builtins.property
-    def bool_field(self) -> google.protobuf.wrappers_pb2.BoolValue: ...
+    def bool_field(self) -> _wrappers_pb2.BoolValue: ...
     @_builtins.property
-    def string_field(self) -> google.protobuf.wrappers_pb2.StringValue: ...
+    def string_field(self) -> _wrappers_pb2.StringValue: ...
     @_builtins.property
-    def bytes_field(self) -> google.protobuf.wrappers_pb2.BytesValue: ...
+    def bytes_field(self) -> _wrappers_pb2.BytesValue: ...
     @_builtins.property
-    def value_field(self) -> google.protobuf.struct_pb2.Value:
+    def value_field(self) -> _struct_pb2.Value:
         """Part of struct, but useful to be able to test separately"""
 
     def __init__(
         self,
         *,
-        any_field: google.protobuf.any_pb2.Any | None = ...,
-        api_field: google.protobuf.api_pb2.Api | None = ...,
-        duration_field: google.protobuf.duration_pb2.Duration | None = ...,
-        empty_field: google.protobuf.empty_pb2.Empty | None = ...,
-        field_mask_field: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        source_context_field: google.protobuf.source_context_pb2.SourceContext | None = ...,
-        struct_field: google.protobuf.struct_pb2.Struct | None = ...,
-        timestamp_field: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        type_field: google.protobuf.type_pb2.Type | None = ...,
-        double_field: google.protobuf.wrappers_pb2.DoubleValue | None = ...,
-        float_field: google.protobuf.wrappers_pb2.FloatValue | None = ...,
-        int64_field: google.protobuf.wrappers_pb2.Int64Value | None = ...,
-        uint64_field: google.protobuf.wrappers_pb2.UInt64Value | None = ...,
-        int32_field: google.protobuf.wrappers_pb2.Int32Value | None = ...,
-        uint32_field: google.protobuf.wrappers_pb2.UInt32Value | None = ...,
-        bool_field: google.protobuf.wrappers_pb2.BoolValue | None = ...,
-        string_field: google.protobuf.wrappers_pb2.StringValue | None = ...,
-        bytes_field: google.protobuf.wrappers_pb2.BytesValue | None = ...,
-        value_field: google.protobuf.struct_pb2.Value | None = ...,
+        any_field: _any_pb2.Any | None = ...,
+        api_field: _api_pb2.Api | None = ...,
+        duration_field: _duration_pb2.Duration | None = ...,
+        empty_field: _empty_pb2.Empty | None = ...,
+        field_mask_field: _field_mask_pb2.FieldMask | None = ...,
+        source_context_field: _source_context_pb2.SourceContext | None = ...,
+        struct_field: _struct_pb2.Struct | None = ...,
+        timestamp_field: _timestamp_pb2.Timestamp | None = ...,
+        type_field: _type_pb2.Type | None = ...,
+        double_field: _wrappers_pb2.DoubleValue | None = ...,
+        float_field: _wrappers_pb2.FloatValue | None = ...,
+        int64_field: _wrappers_pb2.Int64Value | None = ...,
+        uint64_field: _wrappers_pb2.UInt64Value | None = ...,
+        int32_field: _wrappers_pb2.Int32Value | None = ...,
+        uint32_field: _wrappers_pb2.UInt32Value | None = ...,
+        bool_field: _wrappers_pb2.BoolValue | None = ...,
+        string_field: _wrappers_pb2.StringValue | None = ...,
+        bytes_field: _wrappers_pb2.BytesValue | None = ...,
+        value_field: _struct_pb2.Value | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field", "value_field", b"value_field"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field", "value_field", b"value_field"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field", "value_field", b"value_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field", "value_field", b"value_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestWellKnownTypes: _typing_extensions.TypeAlias = TestWellKnownTypes  # noqa: Y015
+Global___TestWellKnownTypes: _TypeAlias = TestWellKnownTypes  # noqa: Y015
 
 @_typing.final
-class RepeatedWellKnownTypes(_google_protobuf_message.Message):
+class RepeatedWellKnownTypes(_message.Message):
     """A repeated field for each well-known type."""
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     ANY_FIELD_FIELD_NUMBER: _builtins.int
     API_FIELD_FIELD_NUMBER: _builtins.int
@@ -157,73 +157,73 @@ class RepeatedWellKnownTypes(_google_protobuf_message.Message):
     STRING_FIELD_FIELD_NUMBER: _builtins.int
     BYTES_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def any_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.any_pb2.Any]: ...
+    def any_field(self) -> _containers.RepeatedCompositeFieldContainer[_any_pb2.Any]: ...
     @_builtins.property
-    def api_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.api_pb2.Api]: ...
+    def api_field(self) -> _containers.RepeatedCompositeFieldContainer[_api_pb2.Api]: ...
     @_builtins.property
-    def duration_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.duration_pb2.Duration]: ...
+    def duration_field(self) -> _containers.RepeatedCompositeFieldContainer[_duration_pb2.Duration]: ...
     @_builtins.property
-    def empty_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.empty_pb2.Empty]: ...
+    def empty_field(self) -> _containers.RepeatedCompositeFieldContainer[_empty_pb2.Empty]: ...
     @_builtins.property
-    def field_mask_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.field_mask_pb2.FieldMask]: ...
+    def field_mask_field(self) -> _containers.RepeatedCompositeFieldContainer[_field_mask_pb2.FieldMask]: ...
     @_builtins.property
-    def source_context_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.source_context_pb2.SourceContext]: ...
+    def source_context_field(self) -> _containers.RepeatedCompositeFieldContainer[_source_context_pb2.SourceContext]: ...
     @_builtins.property
-    def struct_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]: ...
+    def struct_field(self) -> _containers.RepeatedCompositeFieldContainer[_struct_pb2.Struct]: ...
     @_builtins.property
-    def timestamp_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.timestamp_pb2.Timestamp]: ...
+    def timestamp_field(self) -> _containers.RepeatedCompositeFieldContainer[_timestamp_pb2.Timestamp]: ...
     @_builtins.property
-    def type_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.type_pb2.Type]: ...
+    def type_field(self) -> _containers.RepeatedCompositeFieldContainer[_type_pb2.Type]: ...
     @_builtins.property
-    def double_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.DoubleValue]:
+    def double_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.DoubleValue]:
         """These don't actually make a lot of sense, but they're not prohibited..."""
 
     @_builtins.property
-    def float_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.FloatValue]: ...
+    def float_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.FloatValue]: ...
     @_builtins.property
-    def int64_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.Int64Value]: ...
+    def int64_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.Int64Value]: ...
     @_builtins.property
-    def uint64_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.UInt64Value]: ...
+    def uint64_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.UInt64Value]: ...
     @_builtins.property
-    def int32_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.Int32Value]: ...
+    def int32_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.Int32Value]: ...
     @_builtins.property
-    def uint32_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.UInt32Value]: ...
+    def uint32_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.UInt32Value]: ...
     @_builtins.property
-    def bool_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.BoolValue]: ...
+    def bool_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.BoolValue]: ...
     @_builtins.property
-    def string_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.StringValue]: ...
+    def string_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.StringValue]: ...
     @_builtins.property
-    def bytes_field(self) -> _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[google.protobuf.wrappers_pb2.BytesValue]: ...
+    def bytes_field(self) -> _containers.RepeatedCompositeFieldContainer[_wrappers_pb2.BytesValue]: ...
     def __init__(
         self,
         *,
-        any_field: _collections_abc.Iterable[google.protobuf.any_pb2.Any] | None = ...,
-        api_field: _collections_abc.Iterable[google.protobuf.api_pb2.Api] | None = ...,
-        duration_field: _collections_abc.Iterable[google.protobuf.duration_pb2.Duration] | None = ...,
-        empty_field: _collections_abc.Iterable[google.protobuf.empty_pb2.Empty] | None = ...,
-        field_mask_field: _collections_abc.Iterable[google.protobuf.field_mask_pb2.FieldMask] | None = ...,
-        source_context_field: _collections_abc.Iterable[google.protobuf.source_context_pb2.SourceContext] | None = ...,
-        struct_field: _collections_abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
-        timestamp_field: _collections_abc.Iterable[google.protobuf.timestamp_pb2.Timestamp] | None = ...,
-        type_field: _collections_abc.Iterable[google.protobuf.type_pb2.Type] | None = ...,
-        double_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.DoubleValue] | None = ...,
-        float_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.FloatValue] | None = ...,
-        int64_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.Int64Value] | None = ...,
-        uint64_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.UInt64Value] | None = ...,
-        int32_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.Int32Value] | None = ...,
-        uint32_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.UInt32Value] | None = ...,
-        bool_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.BoolValue] | None = ...,
-        string_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.StringValue] | None = ...,
-        bytes_field: _collections_abc.Iterable[google.protobuf.wrappers_pb2.BytesValue] | None = ...,
+        any_field: _abc.Iterable[_any_pb2.Any] | None = ...,
+        api_field: _abc.Iterable[_api_pb2.Api] | None = ...,
+        duration_field: _abc.Iterable[_duration_pb2.Duration] | None = ...,
+        empty_field: _abc.Iterable[_empty_pb2.Empty] | None = ...,
+        field_mask_field: _abc.Iterable[_field_mask_pb2.FieldMask] | None = ...,
+        source_context_field: _abc.Iterable[_source_context_pb2.SourceContext] | None = ...,
+        struct_field: _abc.Iterable[_struct_pb2.Struct] | None = ...,
+        timestamp_field: _abc.Iterable[_timestamp_pb2.Timestamp] | None = ...,
+        type_field: _abc.Iterable[_type_pb2.Type] | None = ...,
+        double_field: _abc.Iterable[_wrappers_pb2.DoubleValue] | None = ...,
+        float_field: _abc.Iterable[_wrappers_pb2.FloatValue] | None = ...,
+        int64_field: _abc.Iterable[_wrappers_pb2.Int64Value] | None = ...,
+        uint64_field: _abc.Iterable[_wrappers_pb2.UInt64Value] | None = ...,
+        int32_field: _abc.Iterable[_wrappers_pb2.Int32Value] | None = ...,
+        uint32_field: _abc.Iterable[_wrappers_pb2.UInt32Value] | None = ...,
+        bool_field: _abc.Iterable[_wrappers_pb2.BoolValue] | None = ...,
+        string_field: _abc.Iterable[_wrappers_pb2.StringValue] | None = ...,
+        bytes_field: _abc.Iterable[_wrappers_pb2.BytesValue] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___RepeatedWellKnownTypes: _typing_extensions.TypeAlias = RepeatedWellKnownTypes  # noqa: Y015
+Global___RepeatedWellKnownTypes: _TypeAlias = RepeatedWellKnownTypes  # noqa: Y015
 
 @_typing.final
-class OneofWellKnownTypes(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class OneofWellKnownTypes(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     ANY_FIELD_FIELD_NUMBER: _builtins.int
     API_FIELD_FIELD_NUMBER: _builtins.int
@@ -244,440 +244,440 @@ class OneofWellKnownTypes(_google_protobuf_message.Message):
     STRING_FIELD_FIELD_NUMBER: _builtins.int
     BYTES_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def any_field(self) -> google.protobuf.any_pb2.Any: ...
+    def any_field(self) -> _any_pb2.Any: ...
     @_builtins.property
-    def api_field(self) -> google.protobuf.api_pb2.Api: ...
+    def api_field(self) -> _api_pb2.Api: ...
     @_builtins.property
-    def duration_field(self) -> google.protobuf.duration_pb2.Duration: ...
+    def duration_field(self) -> _duration_pb2.Duration: ...
     @_builtins.property
-    def empty_field(self) -> google.protobuf.empty_pb2.Empty: ...
+    def empty_field(self) -> _empty_pb2.Empty: ...
     @_builtins.property
-    def field_mask_field(self) -> google.protobuf.field_mask_pb2.FieldMask: ...
+    def field_mask_field(self) -> _field_mask_pb2.FieldMask: ...
     @_builtins.property
-    def source_context_field(self) -> google.protobuf.source_context_pb2.SourceContext: ...
+    def source_context_field(self) -> _source_context_pb2.SourceContext: ...
     @_builtins.property
-    def struct_field(self) -> google.protobuf.struct_pb2.Struct: ...
+    def struct_field(self) -> _struct_pb2.Struct: ...
     @_builtins.property
-    def timestamp_field(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    def timestamp_field(self) -> _timestamp_pb2.Timestamp: ...
     @_builtins.property
-    def type_field(self) -> google.protobuf.type_pb2.Type: ...
+    def type_field(self) -> _type_pb2.Type: ...
     @_builtins.property
-    def double_field(self) -> google.protobuf.wrappers_pb2.DoubleValue: ...
+    def double_field(self) -> _wrappers_pb2.DoubleValue: ...
     @_builtins.property
-    def float_field(self) -> google.protobuf.wrappers_pb2.FloatValue: ...
+    def float_field(self) -> _wrappers_pb2.FloatValue: ...
     @_builtins.property
-    def int64_field(self) -> google.protobuf.wrappers_pb2.Int64Value: ...
+    def int64_field(self) -> _wrappers_pb2.Int64Value: ...
     @_builtins.property
-    def uint64_field(self) -> google.protobuf.wrappers_pb2.UInt64Value: ...
+    def uint64_field(self) -> _wrappers_pb2.UInt64Value: ...
     @_builtins.property
-    def int32_field(self) -> google.protobuf.wrappers_pb2.Int32Value: ...
+    def int32_field(self) -> _wrappers_pb2.Int32Value: ...
     @_builtins.property
-    def uint32_field(self) -> google.protobuf.wrappers_pb2.UInt32Value: ...
+    def uint32_field(self) -> _wrappers_pb2.UInt32Value: ...
     @_builtins.property
-    def bool_field(self) -> google.protobuf.wrappers_pb2.BoolValue: ...
+    def bool_field(self) -> _wrappers_pb2.BoolValue: ...
     @_builtins.property
-    def string_field(self) -> google.protobuf.wrappers_pb2.StringValue: ...
+    def string_field(self) -> _wrappers_pb2.StringValue: ...
     @_builtins.property
-    def bytes_field(self) -> google.protobuf.wrappers_pb2.BytesValue: ...
+    def bytes_field(self) -> _wrappers_pb2.BytesValue: ...
     def __init__(
         self,
         *,
-        any_field: google.protobuf.any_pb2.Any | None = ...,
-        api_field: google.protobuf.api_pb2.Api | None = ...,
-        duration_field: google.protobuf.duration_pb2.Duration | None = ...,
-        empty_field: google.protobuf.empty_pb2.Empty | None = ...,
-        field_mask_field: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        source_context_field: google.protobuf.source_context_pb2.SourceContext | None = ...,
-        struct_field: google.protobuf.struct_pb2.Struct | None = ...,
-        timestamp_field: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        type_field: google.protobuf.type_pb2.Type | None = ...,
-        double_field: google.protobuf.wrappers_pb2.DoubleValue | None = ...,
-        float_field: google.protobuf.wrappers_pb2.FloatValue | None = ...,
-        int64_field: google.protobuf.wrappers_pb2.Int64Value | None = ...,
-        uint64_field: google.protobuf.wrappers_pb2.UInt64Value | None = ...,
-        int32_field: google.protobuf.wrappers_pb2.Int32Value | None = ...,
-        uint32_field: google.protobuf.wrappers_pb2.UInt32Value | None = ...,
-        bool_field: google.protobuf.wrappers_pb2.BoolValue | None = ...,
-        string_field: google.protobuf.wrappers_pb2.StringValue | None = ...,
-        bytes_field: google.protobuf.wrappers_pb2.BytesValue | None = ...,
+        any_field: _any_pb2.Any | None = ...,
+        api_field: _api_pb2.Api | None = ...,
+        duration_field: _duration_pb2.Duration | None = ...,
+        empty_field: _empty_pb2.Empty | None = ...,
+        field_mask_field: _field_mask_pb2.FieldMask | None = ...,
+        source_context_field: _source_context_pb2.SourceContext | None = ...,
+        struct_field: _struct_pb2.Struct | None = ...,
+        timestamp_field: _timestamp_pb2.Timestamp | None = ...,
+        type_field: _type_pb2.Type | None = ...,
+        double_field: _wrappers_pb2.DoubleValue | None = ...,
+        float_field: _wrappers_pb2.FloatValue | None = ...,
+        int64_field: _wrappers_pb2.Int64Value | None = ...,
+        uint64_field: _wrappers_pb2.UInt64Value | None = ...,
+        int32_field: _wrappers_pb2.Int32Value | None = ...,
+        uint32_field: _wrappers_pb2.UInt32Value | None = ...,
+        bool_field: _wrappers_pb2.BoolValue | None = ...,
+        string_field: _wrappers_pb2.StringValue | None = ...,
+        bytes_field: _wrappers_pb2.BytesValue | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "oneof_field", b"oneof_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "oneof_field", b"oneof_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "oneof_field", b"oneof_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "oneof_field", b"oneof_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["any_field", "api_field", "duration_field", "empty_field", "field_mask_field", "source_context_field", "struct_field", "timestamp_field", "type_field", "double_field", "float_field", "int64_field", "uint64_field", "int32_field", "uint32_field", "bool_field", "string_field", "bytes_field"]  # noqa: Y015
-    _WhichOneofArgType_oneof_field: _typing_extensions.TypeAlias = _typing.Literal["oneof_field", b"oneof_field"]  # noqa: Y015
+    _WhichOneofReturnType_oneof_field: _TypeAlias = _typing.Literal["any_field", "api_field", "duration_field", "empty_field", "field_mask_field", "source_context_field", "struct_field", "timestamp_field", "type_field", "double_field", "float_field", "int64_field", "uint64_field", "int32_field", "uint32_field", "bool_field", "string_field", "bytes_field"]  # noqa: Y015
+    _WhichOneofArgType_oneof_field: _TypeAlias = _typing.Literal["oneof_field", b"oneof_field"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType_oneof_field) -> _WhichOneofReturnType_oneof_field | None: ...
 
-Global___OneofWellKnownTypes: _typing_extensions.TypeAlias = OneofWellKnownTypes  # noqa: Y015
+Global___OneofWellKnownTypes: _TypeAlias = OneofWellKnownTypes  # noqa: Y015
 
 @_typing.final
-class MapWellKnownTypes(_google_protobuf_message.Message):
+class MapWellKnownTypes(_message.Message):
     """A map field for each well-known type. We only
     need to worry about the value part of the map being the
     well-known types, as messages can't be map keys.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class AnyFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class AnyFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.any_pb2.Any: ...
+        def value(self) -> _any_pb2.Any: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.any_pb2.Any | None = ...,
+            value: _any_pb2.Any | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class ApiFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class ApiFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.api_pb2.Api: ...
+        def value(self) -> _api_pb2.Api: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.api_pb2.Api | None = ...,
+            value: _api_pb2.Api | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class DurationFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class DurationFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.duration_pb2.Duration: ...
+        def value(self) -> _duration_pb2.Duration: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.duration_pb2.Duration | None = ...,
+            value: _duration_pb2.Duration | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class EmptyFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class EmptyFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.empty_pb2.Empty: ...
+        def value(self) -> _empty_pb2.Empty: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.empty_pb2.Empty | None = ...,
+            value: _empty_pb2.Empty | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class FieldMaskFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class FieldMaskFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.field_mask_pb2.FieldMask: ...
+        def value(self) -> _field_mask_pb2.FieldMask: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+            value: _field_mask_pb2.FieldMask | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class SourceContextFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class SourceContextFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.source_context_pb2.SourceContext: ...
+        def value(self) -> _source_context_pb2.SourceContext: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.source_context_pb2.SourceContext | None = ...,
+            value: _source_context_pb2.SourceContext | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class StructFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class StructFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.struct_pb2.Struct: ...
+        def value(self) -> _struct_pb2.Struct: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.struct_pb2.Struct | None = ...,
+            value: _struct_pb2.Struct | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class TimestampFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class TimestampFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+        def value(self) -> _timestamp_pb2.Timestamp: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            value: _timestamp_pb2.Timestamp | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class TypeFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class TypeFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.type_pb2.Type: ...
+        def value(self) -> _type_pb2.Type: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.type_pb2.Type | None = ...,
+            value: _type_pb2.Type | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class DoubleFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class DoubleFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.DoubleValue: ...
+        def value(self) -> _wrappers_pb2.DoubleValue: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.DoubleValue | None = ...,
+            value: _wrappers_pb2.DoubleValue | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class FloatFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class FloatFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.FloatValue: ...
+        def value(self) -> _wrappers_pb2.FloatValue: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.FloatValue | None = ...,
+            value: _wrappers_pb2.FloatValue | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class Int64FieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class Int64FieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.Int64Value: ...
+        def value(self) -> _wrappers_pb2.Int64Value: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+            value: _wrappers_pb2.Int64Value | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class Uint64FieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class Uint64FieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.UInt64Value: ...
+        def value(self) -> _wrappers_pb2.UInt64Value: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.UInt64Value | None = ...,
+            value: _wrappers_pb2.UInt64Value | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class Int32FieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class Int32FieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.Int32Value: ...
+        def value(self) -> _wrappers_pb2.Int32Value: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.Int32Value | None = ...,
+            value: _wrappers_pb2.Int32Value | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class Uint32FieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class Uint32FieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.UInt32Value: ...
+        def value(self) -> _wrappers_pb2.UInt32Value: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.UInt32Value | None = ...,
+            value: _wrappers_pb2.UInt32Value | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class BoolFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class BoolFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.BoolValue: ...
+        def value(self) -> _wrappers_pb2.BoolValue: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.BoolValue | None = ...,
+            value: _wrappers_pb2.BoolValue | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class StringFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class StringFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.StringValue: ...
+        def value(self) -> _wrappers_pb2.StringValue: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.StringValue | None = ...,
+            value: _wrappers_pb2.StringValue | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     @_typing.final
-    class BytesFieldEntry(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class BytesFieldEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
         key: _builtins.int
         @_builtins.property
-        def value(self) -> google.protobuf.wrappers_pb2.BytesValue: ...
+        def value(self) -> _wrappers_pb2.BytesValue: ...
         def __init__(
             self,
             *,
             key: _builtins.int = ...,
-            value: google.protobuf.wrappers_pb2.BytesValue | None = ...,
+            value: _wrappers_pb2.BytesValue | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     ANY_FIELD_FIELD_NUMBER: _builtins.int
@@ -699,64 +699,64 @@ class MapWellKnownTypes(_google_protobuf_message.Message):
     STRING_FIELD_FIELD_NUMBER: _builtins.int
     BYTES_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property
-    def any_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.any_pb2.Any]: ...
+    def any_field(self) -> _containers.MessageMap[_builtins.int, _any_pb2.Any]: ...
     @_builtins.property
-    def api_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.api_pb2.Api]: ...
+    def api_field(self) -> _containers.MessageMap[_builtins.int, _api_pb2.Api]: ...
     @_builtins.property
-    def duration_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.duration_pb2.Duration]: ...
+    def duration_field(self) -> _containers.MessageMap[_builtins.int, _duration_pb2.Duration]: ...
     @_builtins.property
-    def empty_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.empty_pb2.Empty]: ...
+    def empty_field(self) -> _containers.MessageMap[_builtins.int, _empty_pb2.Empty]: ...
     @_builtins.property
-    def field_mask_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.field_mask_pb2.FieldMask]: ...
+    def field_mask_field(self) -> _containers.MessageMap[_builtins.int, _field_mask_pb2.FieldMask]: ...
     @_builtins.property
-    def source_context_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.source_context_pb2.SourceContext]: ...
+    def source_context_field(self) -> _containers.MessageMap[_builtins.int, _source_context_pb2.SourceContext]: ...
     @_builtins.property
-    def struct_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.struct_pb2.Struct]: ...
+    def struct_field(self) -> _containers.MessageMap[_builtins.int, _struct_pb2.Struct]: ...
     @_builtins.property
-    def timestamp_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.timestamp_pb2.Timestamp]: ...
+    def timestamp_field(self) -> _containers.MessageMap[_builtins.int, _timestamp_pb2.Timestamp]: ...
     @_builtins.property
-    def type_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.type_pb2.Type]: ...
+    def type_field(self) -> _containers.MessageMap[_builtins.int, _type_pb2.Type]: ...
     @_builtins.property
-    def double_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.DoubleValue]: ...
+    def double_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.DoubleValue]: ...
     @_builtins.property
-    def float_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.FloatValue]: ...
+    def float_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.FloatValue]: ...
     @_builtins.property
-    def int64_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.Int64Value]: ...
+    def int64_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.Int64Value]: ...
     @_builtins.property
-    def uint64_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.UInt64Value]: ...
+    def uint64_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.UInt64Value]: ...
     @_builtins.property
-    def int32_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.Int32Value]: ...
+    def int32_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.Int32Value]: ...
     @_builtins.property
-    def uint32_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.UInt32Value]: ...
+    def uint32_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.UInt32Value]: ...
     @_builtins.property
-    def bool_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.BoolValue]: ...
+    def bool_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.BoolValue]: ...
     @_builtins.property
-    def string_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.StringValue]: ...
+    def string_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.StringValue]: ...
     @_builtins.property
-    def bytes_field(self) -> _google_protobuf_internal_containers.MessageMap[_builtins.int, google.protobuf.wrappers_pb2.BytesValue]: ...
+    def bytes_field(self) -> _containers.MessageMap[_builtins.int, _wrappers_pb2.BytesValue]: ...
     def __init__(
         self,
         *,
-        any_field: _collections_abc.Mapping[_builtins.int, google.protobuf.any_pb2.Any] | None = ...,
-        api_field: _collections_abc.Mapping[_builtins.int, google.protobuf.api_pb2.Api] | None = ...,
-        duration_field: _collections_abc.Mapping[_builtins.int, google.protobuf.duration_pb2.Duration] | None = ...,
-        empty_field: _collections_abc.Mapping[_builtins.int, google.protobuf.empty_pb2.Empty] | None = ...,
-        field_mask_field: _collections_abc.Mapping[_builtins.int, google.protobuf.field_mask_pb2.FieldMask] | None = ...,
-        source_context_field: _collections_abc.Mapping[_builtins.int, google.protobuf.source_context_pb2.SourceContext] | None = ...,
-        struct_field: _collections_abc.Mapping[_builtins.int, google.protobuf.struct_pb2.Struct] | None = ...,
-        timestamp_field: _collections_abc.Mapping[_builtins.int, google.protobuf.timestamp_pb2.Timestamp] | None = ...,
-        type_field: _collections_abc.Mapping[_builtins.int, google.protobuf.type_pb2.Type] | None = ...,
-        double_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.DoubleValue] | None = ...,
-        float_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.FloatValue] | None = ...,
-        int64_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.Int64Value] | None = ...,
-        uint64_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.UInt64Value] | None = ...,
-        int32_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.Int32Value] | None = ...,
-        uint32_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.UInt32Value] | None = ...,
-        bool_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.BoolValue] | None = ...,
-        string_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.StringValue] | None = ...,
-        bytes_field: _collections_abc.Mapping[_builtins.int, google.protobuf.wrappers_pb2.BytesValue] | None = ...,
+        any_field: _abc.Mapping[_builtins.int, _any_pb2.Any] | None = ...,
+        api_field: _abc.Mapping[_builtins.int, _api_pb2.Api] | None = ...,
+        duration_field: _abc.Mapping[_builtins.int, _duration_pb2.Duration] | None = ...,
+        empty_field: _abc.Mapping[_builtins.int, _empty_pb2.Empty] | None = ...,
+        field_mask_field: _abc.Mapping[_builtins.int, _field_mask_pb2.FieldMask] | None = ...,
+        source_context_field: _abc.Mapping[_builtins.int, _source_context_pb2.SourceContext] | None = ...,
+        struct_field: _abc.Mapping[_builtins.int, _struct_pb2.Struct] | None = ...,
+        timestamp_field: _abc.Mapping[_builtins.int, _timestamp_pb2.Timestamp] | None = ...,
+        type_field: _abc.Mapping[_builtins.int, _type_pb2.Type] | None = ...,
+        double_field: _abc.Mapping[_builtins.int, _wrappers_pb2.DoubleValue] | None = ...,
+        float_field: _abc.Mapping[_builtins.int, _wrappers_pb2.FloatValue] | None = ...,
+        int64_field: _abc.Mapping[_builtins.int, _wrappers_pb2.Int64Value] | None = ...,
+        uint64_field: _abc.Mapping[_builtins.int, _wrappers_pb2.UInt64Value] | None = ...,
+        int32_field: _abc.Mapping[_builtins.int, _wrappers_pb2.Int32Value] | None = ...,
+        uint32_field: _abc.Mapping[_builtins.int, _wrappers_pb2.UInt32Value] | None = ...,
+        bool_field: _abc.Mapping[_builtins.int, _wrappers_pb2.BoolValue] | None = ...,
+        string_field: _abc.Mapping[_builtins.int, _wrappers_pb2.StringValue] | None = ...,
+        bytes_field: _abc.Mapping[_builtins.int, _wrappers_pb2.BytesValue] | None = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["any_field", b"any_field", "api_field", b"api_field", "bool_field", b"bool_field", "bytes_field", b"bytes_field", "double_field", b"double_field", "duration_field", b"duration_field", "empty_field", b"empty_field", "field_mask_field", b"field_mask_field", "float_field", b"float_field", "int32_field", b"int32_field", "int64_field", b"int64_field", "source_context_field", b"source_context_field", "string_field", b"string_field", "struct_field", b"struct_field", "timestamp_field", b"timestamp_field", "type_field", b"type_field", "uint32_field", b"uint32_field", "uint64_field", b"uint64_field"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___MapWellKnownTypes: _typing_extensions.TypeAlias = MapWellKnownTypes  # noqa: Y015
+Global___MapWellKnownTypes: _TypeAlias = MapWellKnownTypes  # noqa: Y015

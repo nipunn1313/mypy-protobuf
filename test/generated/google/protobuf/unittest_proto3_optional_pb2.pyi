@@ -9,32 +9,32 @@ license that can be found in the LICENSE file or at
 https://developers.google.com/open-source/licenses/bsd
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.enum_type_wrapper as _google_protobuf_internal_enum_type_wrapper
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class TestProto3Optional(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestProto3Optional(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _NestedEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
-        V: _typing_extensions.TypeAlias = ValueType  # noqa: Y015
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _NestedEnumEnumTypeWrapper(_google_protobuf_internal_enum_type_wrapper._EnumTypeWrapper[TestProto3Optional._NestedEnum.ValueType], _builtins.type):
-        DESCRIPTOR: _google_protobuf_descriptor.EnumDescriptor
+    class _NestedEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[TestProto3Optional._NestedEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         UNSPECIFIED: TestProto3Optional._NestedEnum.ValueType  # 0
         FOO: TestProto3Optional._NestedEnum.ValueType  # 1
         BAR: TestProto3Optional._NestedEnum.ValueType  # 2
@@ -51,8 +51,8 @@ class TestProto3Optional(_google_protobuf_message.Message):
     """Intentionally negative."""
 
     @_typing.final
-    class NestedMessage(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class NestedMessage(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         BB_FIELD_NUMBER: _builtins.int
         bb: _builtins.int
@@ -65,12 +65,12 @@ class TestProto3Optional(_google_protobuf_message.Message):
             *,
             bb: _builtins.int | None = ...,
         ) -> None: ...
-        _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_bb", b"_bb", "bb", b"bb"]  # noqa: Y015
+        _HasFieldArgType: _TypeAlias = _typing.Literal["_bb", b"_bb", "bb", b"bb"]  # noqa: Y015
         def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_bb", b"_bb", "bb", b"bb"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["_bb", b"_bb", "bb", b"bb"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-        _WhichOneofReturnType__bb: _typing_extensions.TypeAlias = _typing.Literal["bb"]  # noqa: Y015
-        _WhichOneofArgType__bb: _typing_extensions.TypeAlias = _typing.Literal["_bb", b"_bb"]  # noqa: Y015
+        _WhichOneofReturnType__bb: _TypeAlias = _typing.Literal["bb"]  # noqa: Y015
+        _WhichOneofArgType__bb: _TypeAlias = _typing.Literal["_bb", b"_bb"]  # noqa: Y015
         def WhichOneof(self, oneof_group: _WhichOneofArgType__bb) -> _WhichOneofReturnType__bb | None: ...
 
     OPTIONAL_INT32_FIELD_NUMBER: _builtins.int
@@ -144,48 +144,48 @@ class TestProto3Optional(_google_protobuf_message.Message):
         singular_int32: _builtins.int = ...,
         singular_int64: _builtins.int = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_lazy_nested_message", b"_lazy_nested_message", "_optional_bool", b"_optional_bool", "_optional_bytes", b"_optional_bytes", "_optional_cord", b"_optional_cord", "_optional_double", b"_optional_double", "_optional_fixed32", b"_optional_fixed32", "_optional_fixed64", b"_optional_fixed64", "_optional_float", b"_optional_float", "_optional_int32", b"_optional_int32", "_optional_int64", b"_optional_int64", "_optional_nested_enum", b"_optional_nested_enum", "_optional_nested_message", b"_optional_nested_message", "_optional_sfixed32", b"_optional_sfixed32", "_optional_sfixed64", b"_optional_sfixed64", "_optional_sint32", b"_optional_sint32", "_optional_sint64", b"_optional_sint64", "_optional_string", b"_optional_string", "_optional_uint32", b"_optional_uint32", "_optional_uint64", b"_optional_uint64", "lazy_nested_message", b"lazy_nested_message", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_lazy_nested_message", b"_lazy_nested_message", "_optional_bool", b"_optional_bool", "_optional_bytes", b"_optional_bytes", "_optional_cord", b"_optional_cord", "_optional_double", b"_optional_double", "_optional_fixed32", b"_optional_fixed32", "_optional_fixed64", b"_optional_fixed64", "_optional_float", b"_optional_float", "_optional_int32", b"_optional_int32", "_optional_int64", b"_optional_int64", "_optional_nested_enum", b"_optional_nested_enum", "_optional_nested_message", b"_optional_nested_message", "_optional_sfixed32", b"_optional_sfixed32", "_optional_sfixed64", b"_optional_sfixed64", "_optional_sint32", b"_optional_sint32", "_optional_sint64", b"_optional_sint64", "_optional_string", b"_optional_string", "_optional_uint32", b"_optional_uint32", "_optional_uint64", b"_optional_uint64", "lazy_nested_message", b"lazy_nested_message", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_lazy_nested_message", b"_lazy_nested_message", "_optional_bool", b"_optional_bool", "_optional_bytes", b"_optional_bytes", "_optional_cord", b"_optional_cord", "_optional_double", b"_optional_double", "_optional_fixed32", b"_optional_fixed32", "_optional_fixed64", b"_optional_fixed64", "_optional_float", b"_optional_float", "_optional_int32", b"_optional_int32", "_optional_int64", b"_optional_int64", "_optional_nested_enum", b"_optional_nested_enum", "_optional_nested_message", b"_optional_nested_message", "_optional_sfixed32", b"_optional_sfixed32", "_optional_sfixed64", b"_optional_sfixed64", "_optional_sint32", b"_optional_sint32", "_optional_sint64", b"_optional_sint64", "_optional_string", b"_optional_string", "_optional_uint32", b"_optional_uint32", "_optional_uint64", b"_optional_uint64", "lazy_nested_message", b"lazy_nested_message", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "singular_int32", b"singular_int32", "singular_int64", b"singular_int64"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_lazy_nested_message", b"_lazy_nested_message", "_optional_bool", b"_optional_bool", "_optional_bytes", b"_optional_bytes", "_optional_cord", b"_optional_cord", "_optional_double", b"_optional_double", "_optional_fixed32", b"_optional_fixed32", "_optional_fixed64", b"_optional_fixed64", "_optional_float", b"_optional_float", "_optional_int32", b"_optional_int32", "_optional_int64", b"_optional_int64", "_optional_nested_enum", b"_optional_nested_enum", "_optional_nested_message", b"_optional_nested_message", "_optional_sfixed32", b"_optional_sfixed32", "_optional_sfixed64", b"_optional_sfixed64", "_optional_sint32", b"_optional_sint32", "_optional_sint64", b"_optional_sint64", "_optional_string", b"_optional_string", "_optional_uint32", b"_optional_uint32", "_optional_uint64", b"_optional_uint64", "lazy_nested_message", b"lazy_nested_message", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "singular_int32", b"singular_int32", "singular_int64", b"singular_int64"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType__lazy_nested_message: _typing_extensions.TypeAlias = _typing.Literal["lazy_nested_message"]  # noqa: Y015
-    _WhichOneofArgType__lazy_nested_message: _typing_extensions.TypeAlias = _typing.Literal["_lazy_nested_message", b"_lazy_nested_message"]  # noqa: Y015
-    _WhichOneofReturnType__optional_bool: _typing_extensions.TypeAlias = _typing.Literal["optional_bool"]  # noqa: Y015
-    _WhichOneofArgType__optional_bool: _typing_extensions.TypeAlias = _typing.Literal["_optional_bool", b"_optional_bool"]  # noqa: Y015
-    _WhichOneofReturnType__optional_bytes: _typing_extensions.TypeAlias = _typing.Literal["optional_bytes"]  # noqa: Y015
-    _WhichOneofArgType__optional_bytes: _typing_extensions.TypeAlias = _typing.Literal["_optional_bytes", b"_optional_bytes"]  # noqa: Y015
-    _WhichOneofReturnType__optional_cord: _typing_extensions.TypeAlias = _typing.Literal["optional_cord"]  # noqa: Y015
-    _WhichOneofArgType__optional_cord: _typing_extensions.TypeAlias = _typing.Literal["_optional_cord", b"_optional_cord"]  # noqa: Y015
-    _WhichOneofReturnType__optional_double: _typing_extensions.TypeAlias = _typing.Literal["optional_double"]  # noqa: Y015
-    _WhichOneofArgType__optional_double: _typing_extensions.TypeAlias = _typing.Literal["_optional_double", b"_optional_double"]  # noqa: Y015
-    _WhichOneofReturnType__optional_fixed32: _typing_extensions.TypeAlias = _typing.Literal["optional_fixed32"]  # noqa: Y015
-    _WhichOneofArgType__optional_fixed32: _typing_extensions.TypeAlias = _typing.Literal["_optional_fixed32", b"_optional_fixed32"]  # noqa: Y015
-    _WhichOneofReturnType__optional_fixed64: _typing_extensions.TypeAlias = _typing.Literal["optional_fixed64"]  # noqa: Y015
-    _WhichOneofArgType__optional_fixed64: _typing_extensions.TypeAlias = _typing.Literal["_optional_fixed64", b"_optional_fixed64"]  # noqa: Y015
-    _WhichOneofReturnType__optional_float: _typing_extensions.TypeAlias = _typing.Literal["optional_float"]  # noqa: Y015
-    _WhichOneofArgType__optional_float: _typing_extensions.TypeAlias = _typing.Literal["_optional_float", b"_optional_float"]  # noqa: Y015
-    _WhichOneofReturnType__optional_int32: _typing_extensions.TypeAlias = _typing.Literal["optional_int32"]  # noqa: Y015
-    _WhichOneofArgType__optional_int32: _typing_extensions.TypeAlias = _typing.Literal["_optional_int32", b"_optional_int32"]  # noqa: Y015
-    _WhichOneofReturnType__optional_int64: _typing_extensions.TypeAlias = _typing.Literal["optional_int64"]  # noqa: Y015
-    _WhichOneofArgType__optional_int64: _typing_extensions.TypeAlias = _typing.Literal["_optional_int64", b"_optional_int64"]  # noqa: Y015
-    _WhichOneofReturnType__optional_nested_enum: _typing_extensions.TypeAlias = _typing.Literal["optional_nested_enum"]  # noqa: Y015
-    _WhichOneofArgType__optional_nested_enum: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_enum", b"_optional_nested_enum"]  # noqa: Y015
-    _WhichOneofReturnType__optional_nested_message: _typing_extensions.TypeAlias = _typing.Literal["optional_nested_message"]  # noqa: Y015
-    _WhichOneofArgType__optional_nested_message: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message"]  # noqa: Y015
-    _WhichOneofReturnType__optional_sfixed32: _typing_extensions.TypeAlias = _typing.Literal["optional_sfixed32"]  # noqa: Y015
-    _WhichOneofArgType__optional_sfixed32: _typing_extensions.TypeAlias = _typing.Literal["_optional_sfixed32", b"_optional_sfixed32"]  # noqa: Y015
-    _WhichOneofReturnType__optional_sfixed64: _typing_extensions.TypeAlias = _typing.Literal["optional_sfixed64"]  # noqa: Y015
-    _WhichOneofArgType__optional_sfixed64: _typing_extensions.TypeAlias = _typing.Literal["_optional_sfixed64", b"_optional_sfixed64"]  # noqa: Y015
-    _WhichOneofReturnType__optional_sint32: _typing_extensions.TypeAlias = _typing.Literal["optional_sint32"]  # noqa: Y015
-    _WhichOneofArgType__optional_sint32: _typing_extensions.TypeAlias = _typing.Literal["_optional_sint32", b"_optional_sint32"]  # noqa: Y015
-    _WhichOneofReturnType__optional_sint64: _typing_extensions.TypeAlias = _typing.Literal["optional_sint64"]  # noqa: Y015
-    _WhichOneofArgType__optional_sint64: _typing_extensions.TypeAlias = _typing.Literal["_optional_sint64", b"_optional_sint64"]  # noqa: Y015
-    _WhichOneofReturnType__optional_string: _typing_extensions.TypeAlias = _typing.Literal["optional_string"]  # noqa: Y015
-    _WhichOneofArgType__optional_string: _typing_extensions.TypeAlias = _typing.Literal["_optional_string", b"_optional_string"]  # noqa: Y015
-    _WhichOneofReturnType__optional_uint32: _typing_extensions.TypeAlias = _typing.Literal["optional_uint32"]  # noqa: Y015
-    _WhichOneofArgType__optional_uint32: _typing_extensions.TypeAlias = _typing.Literal["_optional_uint32", b"_optional_uint32"]  # noqa: Y015
-    _WhichOneofReturnType__optional_uint64: _typing_extensions.TypeAlias = _typing.Literal["optional_uint64"]  # noqa: Y015
-    _WhichOneofArgType__optional_uint64: _typing_extensions.TypeAlias = _typing.Literal["_optional_uint64", b"_optional_uint64"]  # noqa: Y015
+    _WhichOneofReturnType__lazy_nested_message: _TypeAlias = _typing.Literal["lazy_nested_message"]  # noqa: Y015
+    _WhichOneofArgType__lazy_nested_message: _TypeAlias = _typing.Literal["_lazy_nested_message", b"_lazy_nested_message"]  # noqa: Y015
+    _WhichOneofReturnType__optional_bool: _TypeAlias = _typing.Literal["optional_bool"]  # noqa: Y015
+    _WhichOneofArgType__optional_bool: _TypeAlias = _typing.Literal["_optional_bool", b"_optional_bool"]  # noqa: Y015
+    _WhichOneofReturnType__optional_bytes: _TypeAlias = _typing.Literal["optional_bytes"]  # noqa: Y015
+    _WhichOneofArgType__optional_bytes: _TypeAlias = _typing.Literal["_optional_bytes", b"_optional_bytes"]  # noqa: Y015
+    _WhichOneofReturnType__optional_cord: _TypeAlias = _typing.Literal["optional_cord"]  # noqa: Y015
+    _WhichOneofArgType__optional_cord: _TypeAlias = _typing.Literal["_optional_cord", b"_optional_cord"]  # noqa: Y015
+    _WhichOneofReturnType__optional_double: _TypeAlias = _typing.Literal["optional_double"]  # noqa: Y015
+    _WhichOneofArgType__optional_double: _TypeAlias = _typing.Literal["_optional_double", b"_optional_double"]  # noqa: Y015
+    _WhichOneofReturnType__optional_fixed32: _TypeAlias = _typing.Literal["optional_fixed32"]  # noqa: Y015
+    _WhichOneofArgType__optional_fixed32: _TypeAlias = _typing.Literal["_optional_fixed32", b"_optional_fixed32"]  # noqa: Y015
+    _WhichOneofReturnType__optional_fixed64: _TypeAlias = _typing.Literal["optional_fixed64"]  # noqa: Y015
+    _WhichOneofArgType__optional_fixed64: _TypeAlias = _typing.Literal["_optional_fixed64", b"_optional_fixed64"]  # noqa: Y015
+    _WhichOneofReturnType__optional_float: _TypeAlias = _typing.Literal["optional_float"]  # noqa: Y015
+    _WhichOneofArgType__optional_float: _TypeAlias = _typing.Literal["_optional_float", b"_optional_float"]  # noqa: Y015
+    _WhichOneofReturnType__optional_int32: _TypeAlias = _typing.Literal["optional_int32"]  # noqa: Y015
+    _WhichOneofArgType__optional_int32: _TypeAlias = _typing.Literal["_optional_int32", b"_optional_int32"]  # noqa: Y015
+    _WhichOneofReturnType__optional_int64: _TypeAlias = _typing.Literal["optional_int64"]  # noqa: Y015
+    _WhichOneofArgType__optional_int64: _TypeAlias = _typing.Literal["_optional_int64", b"_optional_int64"]  # noqa: Y015
+    _WhichOneofReturnType__optional_nested_enum: _TypeAlias = _typing.Literal["optional_nested_enum"]  # noqa: Y015
+    _WhichOneofArgType__optional_nested_enum: _TypeAlias = _typing.Literal["_optional_nested_enum", b"_optional_nested_enum"]  # noqa: Y015
+    _WhichOneofReturnType__optional_nested_message: _TypeAlias = _typing.Literal["optional_nested_message"]  # noqa: Y015
+    _WhichOneofArgType__optional_nested_message: _TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message"]  # noqa: Y015
+    _WhichOneofReturnType__optional_sfixed32: _TypeAlias = _typing.Literal["optional_sfixed32"]  # noqa: Y015
+    _WhichOneofArgType__optional_sfixed32: _TypeAlias = _typing.Literal["_optional_sfixed32", b"_optional_sfixed32"]  # noqa: Y015
+    _WhichOneofReturnType__optional_sfixed64: _TypeAlias = _typing.Literal["optional_sfixed64"]  # noqa: Y015
+    _WhichOneofArgType__optional_sfixed64: _TypeAlias = _typing.Literal["_optional_sfixed64", b"_optional_sfixed64"]  # noqa: Y015
+    _WhichOneofReturnType__optional_sint32: _TypeAlias = _typing.Literal["optional_sint32"]  # noqa: Y015
+    _WhichOneofArgType__optional_sint32: _TypeAlias = _typing.Literal["_optional_sint32", b"_optional_sint32"]  # noqa: Y015
+    _WhichOneofReturnType__optional_sint64: _TypeAlias = _typing.Literal["optional_sint64"]  # noqa: Y015
+    _WhichOneofArgType__optional_sint64: _TypeAlias = _typing.Literal["_optional_sint64", b"_optional_sint64"]  # noqa: Y015
+    _WhichOneofReturnType__optional_string: _TypeAlias = _typing.Literal["optional_string"]  # noqa: Y015
+    _WhichOneofArgType__optional_string: _TypeAlias = _typing.Literal["_optional_string", b"_optional_string"]  # noqa: Y015
+    _WhichOneofReturnType__optional_uint32: _TypeAlias = _typing.Literal["optional_uint32"]  # noqa: Y015
+    _WhichOneofArgType__optional_uint32: _TypeAlias = _typing.Literal["_optional_uint32", b"_optional_uint32"]  # noqa: Y015
+    _WhichOneofReturnType__optional_uint64: _TypeAlias = _typing.Literal["optional_uint64"]  # noqa: Y015
+    _WhichOneofArgType__optional_uint64: _TypeAlias = _typing.Literal["_optional_uint64", b"_optional_uint64"]  # noqa: Y015
     @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType__lazy_nested_message) -> _WhichOneofReturnType__lazy_nested_message | None: ...
     @_typing.overload
@@ -225,15 +225,15 @@ class TestProto3Optional(_google_protobuf_message.Message):
     @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType__optional_uint64) -> _WhichOneofReturnType__optional_uint64 | None: ...
 
-Global___TestProto3Optional: _typing_extensions.TypeAlias = TestProto3Optional  # noqa: Y015
+Global___TestProto3Optional: _TypeAlias = TestProto3Optional  # noqa: Y015
 
 @_typing.final
-class TestProto3OptionalMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class TestProto3OptionalMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     @_typing.final
-    class NestedMessage(_google_protobuf_message.Message):
-        DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    class NestedMessage(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
         S_FIELD_NUMBER: _builtins.int
         s: _builtins.str
@@ -242,7 +242,7 @@ class TestProto3OptionalMessage(_google_protobuf_message.Message):
             *,
             s: _builtins.str = ...,
         ) -> None: ...
-        _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["s", b"s"]  # noqa: Y015
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["s", b"s"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
     NESTED_MESSAGE_FIELD_NUMBER: _builtins.int
@@ -257,26 +257,26 @@ class TestProto3OptionalMessage(_google_protobuf_message.Message):
         nested_message: Global___TestProto3OptionalMessage.NestedMessage | None = ...,
         optional_nested_message: Global___TestProto3OptionalMessage.NestedMessage | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message", "nested_message", b"nested_message", "optional_nested_message", b"optional_nested_message"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message", "nested_message", b"nested_message", "optional_nested_message", b"optional_nested_message"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message", "nested_message", b"nested_message", "optional_nested_message", b"optional_nested_message"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message", "nested_message", b"nested_message", "optional_nested_message", b"optional_nested_message"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType__optional_nested_message: _typing_extensions.TypeAlias = _typing.Literal["optional_nested_message"]  # noqa: Y015
-    _WhichOneofArgType__optional_nested_message: _typing_extensions.TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message"]  # noqa: Y015
+    _WhichOneofReturnType__optional_nested_message: _TypeAlias = _typing.Literal["optional_nested_message"]  # noqa: Y015
+    _WhichOneofArgType__optional_nested_message: _TypeAlias = _typing.Literal["_optional_nested_message", b"_optional_nested_message"]  # noqa: Y015
     def WhichOneof(self, oneof_group: _WhichOneofArgType__optional_nested_message) -> _WhichOneofReturnType__optional_nested_message | None: ...
 
-Global___TestProto3OptionalMessage: _typing_extensions.TypeAlias = TestProto3OptionalMessage  # noqa: Y015
+Global___TestProto3OptionalMessage: _TypeAlias = TestProto3OptionalMessage  # noqa: Y015
 
 @_typing.final
-class Proto3OptionalExtensions(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class Proto3OptionalExtensions(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     EXT_NO_OPTIONAL_FIELD_NUMBER: _builtins.int
     EXT_WITH_OPTIONAL_FIELD_NUMBER: _builtins.int
-    ext_no_optional: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
-    ext_with_optional: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.int]
+    ext_no_optional: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
+    ext_with_optional: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.int]
     def __init__(
         self,
     ) -> None: ...
 
-Global___Proto3OptionalExtensions: _typing_extensions.TypeAlias = Proto3OptionalExtensions  # noqa: Y015
+Global___Proto3OptionalExtensions: _TypeAlias = Proto3OptionalExtensions  # noqa: Y015

@@ -6,25 +6,25 @@ that the generated code doesn't depend on being in the proto2 namespace.
 In test_util.h we do "using namespace unittest = proto2_unittest".
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf import unittest_lazy_dependencies_enum_pb2 as _unittest_lazy_dependencies_enum_pb2
+from google.protobuf.internal import extension_dict as _extension_dict
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
-import google.protobuf.unittest_lazy_dependencies_enum_pb2
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class LazyMessage(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class LazyMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     a: _builtins.int
@@ -33,12 +33,12 @@ class LazyMessage(_google_protobuf_message.Message):
         *,
         a: _builtins.int | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___LazyMessage: _typing_extensions.TypeAlias = LazyMessage  # noqa: Y015
+Global___LazyMessage: _TypeAlias = LazyMessage  # noqa: Y015
 
 LAZY_ENUM_OPTION_FIELD_NUMBER: _builtins.int
-lazy_enum_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, google.protobuf.unittest_lazy_dependencies_enum_pb2.LazyEnum.ValueType]
+lazy_enum_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _unittest_lazy_dependencies_enum_pb2.LazyEnum.ValueType]

@@ -32,26 +32,26 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.message as _google_protobuf_message
 import sys
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class SourceContext(_google_protobuf_message.Message):
+class SourceContext(_message.Message):
     """`SourceContext` represents information about the source of a
     protobuf element, like the file in which it is defined.
     """
 
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     FILE_NAME_FIELD_NUMBER: _builtins.int
     file_name: _builtins.str
@@ -63,7 +63,7 @@ class SourceContext(_google_protobuf_message.Message):
         *,
         file_name: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: _typing_extensions.TypeAlias = _typing.Literal["file_name", b"file_name"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["file_name", b"file_name"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___SourceContext: _typing_extensions.TypeAlias = SourceContext  # noqa: Y015
+Global___SourceContext: _TypeAlias = SourceContext  # noqa: Y015

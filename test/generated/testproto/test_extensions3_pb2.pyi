@@ -3,32 +3,32 @@
 isort:skip_file
 """
 
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pb2 as _descriptor_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import extension_dict as _extension_dict
+from testproto import test3_pb2 as _test3_pb2
 import builtins as _builtins
-import google.protobuf.descriptor as _google_protobuf_descriptor
-import google.protobuf.descriptor_pb2
-import google.protobuf.internal.containers as _google_protobuf_internal_containers
-import google.protobuf.internal.extension_dict as _google_protobuf_internal_extension_dict
-import google.protobuf.message as _google_protobuf_message
 import sys
-import testproto.test3_pb2
 import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as _typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions as _typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: _google_protobuf_descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
-class MessageOptionsTestMsg(_google_protobuf_message.Message):
-    DESCRIPTOR: _google_protobuf_descriptor.Descriptor
+class MessageOptionsTestMsg(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___MessageOptionsTestMsg: _typing_extensions.TypeAlias = MessageOptionsTestMsg  # noqa: Y015
+Global___MessageOptionsTestMsg: _TypeAlias = MessageOptionsTestMsg  # noqa: Y015
 
 TEST_FIELD_EXTENSION_FIELD_NUMBER: _builtins.int
 SCALAR_OPTION_FIELD_NUMBER: _builtins.int
@@ -37,10 +37,10 @@ ENUM_OPTION_FIELD_NUMBER: _builtins.int
 REPEATED_ENUM_OPTION_FIELD_NUMBER: _builtins.int
 MSG_OPTION_FIELD_NUMBER: _builtins.int
 REPEATED_MSG_OPTION_FIELD_NUMBER: _builtins.int
-test_field_extension: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, _builtins.str]
-scalar_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _builtins.str]
-repeated_scalar_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[_builtins.str]]
-enum_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterEnum.ValueType]
-repeated_enum_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _google_protobuf_internal_containers.RepeatedScalarFieldContainer[testproto.test3_pb2.OuterEnum.ValueType]]
-msg_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, testproto.test3_pb2.OuterMessage3]
-repeated_msg_option: _google_protobuf_internal_extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, _google_protobuf_internal_containers.RepeatedCompositeFieldContainer[testproto.test3_pb2.OuterMessage3]]
+test_field_extension: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.FieldOptions, _builtins.str]
+scalar_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _builtins.str]
+repeated_scalar_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _containers.RepeatedScalarFieldContainer[_builtins.str]]
+enum_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _test3_pb2.OuterEnum.ValueType]
+repeated_enum_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _containers.RepeatedScalarFieldContainer[_test3_pb2.OuterEnum.ValueType]]
+msg_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _test3_pb2.OuterMessage3]
+repeated_msg_option: _extension_dict._ExtensionFieldDescriptor[_descriptor_pb2.MessageOptions, _containers.RepeatedCompositeFieldContainer[_test3_pb2.OuterMessage3]]
