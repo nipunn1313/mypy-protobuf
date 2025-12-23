@@ -154,7 +154,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
     # if TEST_THIRD_PARTY is set to 1 then generate
     if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
         # Clone googleapis protos
-        mkdir third_party
+        mkdir -p third_party
         git clone https://github.com/googleapis/googleapis.git third_party/googleapis --branch master --depth 1
         # Generate 3rd party protos
         mkdir -p third_party/out/generated_googleapis
@@ -164,6 +164,23 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
             ! -path "third_party/googleapis/google/cloud/compute/v1beta/compute.proto" \
             ! -path "third_party/googleapis/google/cloud/compute/v1small/compute_small.proto" \
             -print0 | xargs -0 "$PROTOC" --proto_path=third_party/googleapis --mypy_out=third_party/out/generated_googleapis --mypy_grpc_out=third_party/out/generated_googleapis --python_out=third_party/out/generated_googleapis
+
+        # TODO: Use buf?
+        git clone https://github.com/envoyproxy/envoy.git third_party/envoy --branch main --depth 1
+        # Delete everything in envoy other than api/
+        find third_party/envoy -mindepth 1 -maxdepth 1 -not -name 'api' -exec rm -rf {} +
+        git clone https://github.com/cncf/xds.git third_party/xds --branch main --depth 1
+        git clone https://github.com/bufbuild/protoc-gen-validate.git third_party/protoc-gen-validate --branch main --depth 1
+        git clone https://github.com/open-telemetry/opentelemetry-proto.git third_party/opentelemetry-proto --branch main --depth 1
+        git clone https://github.com/google/cel-spec.git third_party/cel-spec --branch master --depth 1
+        git clone https://github.com/prometheus/client_model.git third_party/client_model --branch master --depth 1
+
+        mkdir -p third_party/out/generated_envoy
+        find third_party -name "*.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1beta/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1small/compute_small.proto" \
+            -print0 | xargs -0 "$PROTOC" --proto_path=third_party/client_model --proto_path=third_party/cel-spec/proto --proto_path=third_party/opentelemetry-proto --proto_path=third_party/googleapis --proto_path=third_party/protoc-gen-validate --proto_path=third_party/envoy/api --proto_path=third_party/xds --mypy_out=third_party/out/generated_envoy --mypy_grpc_out=third_party/out/generated_envoy --python_out=third_party/out/generated_envoy
     fi
 )
 
@@ -205,6 +222,8 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
             # Run googleapis mypy
             GOOGLEAPIS=( third_party/out/generated_googleapis )
             MYPYPATH=$MYPYPATH:third_party/out/generated_googleapis mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLEAPIS[@]}"
+            ENVOY=( third_party/out/generated_envoy )
+            MYPYPATH=$MYPYPATH:third_party/out/generated_envoy mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ENVOY[@]}"
         fi
 
         export MYPYPATH=$MYPYPATH:test/generated
@@ -261,7 +280,7 @@ done
 
 
 # Clean up third_party
-rm -rf third_party/out/*
+rm -rf third_party
 
 # Report all errors at the end
 if [ -s "$ERROR_FILE" ]; then
