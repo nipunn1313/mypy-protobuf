@@ -15,7 +15,6 @@ from typing import Any, Generator, NewType, Protocol, Tuple, Type, Union
 import pytest
 import testproto.test_pb2 as test_pb2
 from google.protobuf.descriptor import FieldDescriptor
-from google.protobuf.empty_pb2 import Empty
 from google.protobuf.internal import api_implementation
 from google.protobuf.internal.containers import ScalarMap
 from google.protobuf.message import Message
@@ -69,10 +68,10 @@ def _is_summary(line: str) -> bool:
 
 def test_generate_mypy_matches() -> None:
     proto_files = glob.glob("proto/**/*.proto", recursive=True)
-    assert len(proto_files) == 92  # Just a sanity check that all the files show up
+    assert len(proto_files) == 23  # Just a sanity check that all the files show up
 
     pyi_files = glob.glob("test/generated/**/*.pyi", recursive=True)
-    assert len(pyi_files) == 94  # Should be higher - because grpc files generate extra pyis
+    assert len(pyi_files) == 25  # Should be higher - because grpc files generate extra pyis
 
     failure_check_results = []
     for fn in proto_files:
@@ -325,8 +324,6 @@ def test_which_oneof_proto2() -> None:
     s_untyped: Any = s
     with pytest.raises(ValueError, match='Protocol message Simple1 has no "garbage" field.'):
         s_untyped.WhichOneof("garbage")
-
-    s.empty.CopyFrom(Empty())
 
 
 def test_which_oneof_proto3() -> None:

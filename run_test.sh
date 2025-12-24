@@ -153,8 +153,19 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # if TEST_THIRD_PARTY is set to 1 then generate
     if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
-        # Clone googleapis protos
         mkdir -p third_party
+        # Clone google protos
+        git clone --filter=blob:none --sparse https://github.com/protocolbuffers/protobuf.git --branch main third_party/protobuf
+        pushd third_party/protobuf
+        git sparse-checkout set src/google
+        popd
+        # git clone https://github.com/protocolbuffers/protobuf.git --branch main third_party/protobuf --depth 1
+        # Delete everything not in src
+        # find third_party/protobuf -mindepth 1 -maxdepth 1 -not -name 'src' -exec rm -rf {} +
+        mkdir -p third_party/out/generated_protobuf
+        find third_party/protobuf/src/google/protobuf  -maxdepth 1 -name "*.proto" \
+            -print0 | xargs -0 "$PROTOC" --proto_path=third_party/protobuf/src --mypy_out=third_party/out/generated_protobuf --mypy_grpc_out=third_party/out/generated_protobuf --python_out=third_party/out/generated_protobuf
+        # Clone googleapis protos
         git clone https://github.com/googleapis/googleapis.git third_party/googleapis --branch master --depth 1
         # Generate 3rd party protos
         mkdir -p third_party/out/generated_googleapis
@@ -166,9 +177,10 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
             -print0 | xargs -0 "$PROTOC" --proto_path=third_party/googleapis --mypy_out=third_party/out/generated_googleapis --mypy_grpc_out=third_party/out/generated_googleapis --python_out=third_party/out/generated_googleapis
 
         # TODO: Use buf?
-        git clone https://github.com/envoyproxy/envoy.git third_party/envoy --branch main --depth 1
-        # Delete everything in envoy other than api/
-        find third_party/envoy -mindepth 1 -maxdepth 1 -not -name 'api' -exec rm -rf {} +
+        git clone https://github.com/envoyproxy/envoy.git  --filter=blob:none --sparse third_party/envoy --branch main --depth 1
+        pushd third_party/envoy
+        git sparse-checkout set api
+        popd
         git clone https://github.com/cncf/xds.git third_party/xds --branch main --depth 1
         git clone https://github.com/bufbuild/protoc-gen-validate.git third_party/protoc-gen-validate --branch main --depth 1
         git clone https://github.com/open-telemetry/opentelemetry-proto.git third_party/opentelemetry-proto --branch main --depth 1
@@ -177,6 +189,7 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
         mkdir -p third_party/out/generated_envoy
         find third_party -name "*.proto" \
+            ! -path "third_party/protobuf/*" \
             ! -path "third_party/googleapis/google/cloud/compute/v1/compute.proto" \
             ! -path "third_party/googleapis/google/cloud/compute/v1beta/compute.proto" \
             ! -path "third_party/googleapis/google/cloud/compute/v1small/compute_small.proto" \
@@ -214,12 +227,10 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         ASYNC_ONLY_MODULES=( -m test.async_only.test_async_only )
         MYPYPATH=$MYPYPATH:test/generated_async_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
 
-        # Run google/protobuf mypy
-        GOOGLE_PROTOBUF=( test/generated/google/protobuf )
-        MYPYPATH=$MYPYPATH:test/generated PYTHONPATH=test/generated mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLE_PROTOBUF[@]}"
-
         if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
-            # Run googleapis mypy
+            # Run thirdparty mypy
+            GOOGLE=( third_party/out/generated_protobuf )
+            MYPYPATH=$MYPYPATH:third_party/out/generated_protobuf mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLE[@]}"
             GOOGLEAPIS=( third_party/out/generated_googleapis )
             MYPYPATH=$MYPYPATH:third_party/out/generated_googleapis mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLEAPIS[@]}"
             ENVOY=( third_party/out/generated_envoy )
