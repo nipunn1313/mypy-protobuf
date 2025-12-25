@@ -100,8 +100,10 @@ testproto.test_pb2.Simple1.no_package
 testproto.test_pb2.Simple1.outer_message_in_oneof
 testproto.test_pb2.Simple1.rep_inner_enum
 testproto.test_pb2.Simple1.rep_inner_message
+testproto.test_pb2.Simple1.empty
 testproto.edition2024_pb2.Editions2024Test.message_field
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceTest.message_field
+testproto.test_pb2.TestDuplicatePackageMessage.msg
 
 # All messages now fail with something like this:
 # error: testproto.nested.nested_pb2.Nested is inconsistent, metaclass differs
@@ -155,6 +157,10 @@ testproto.edition2024_pb2.Editions2024SubMessage
 testproto.edition2024_pb2.Editions2024Test
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceSubMessage
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceTest
+testproto.inner.test3_pb2.DESCRIPTOR
+testproto.inner.test3_pb2.DuplicatePackageMessage
+testproto.test_pb2.TestDuplicatePackageMessage
+testproto.test_pb2.TestDuplicatePackageMessage.DESCRIPTOR
 
 # All messages now fail with something like this:
 # error: testproto.nopackage_pb2.NoPackage2.DESCRIPTOR variable differs from runtime type google._upb._message.Descriptor
@@ -223,6 +229,7 @@ testproto.dot.com.test_pb2.DESCRIPTOR
 testproto.comment_special_chars_pb2.DESCRIPTOR
 testproto.Capitalized.Capitalized_pb2.DESCRIPTOR
 testproto.test_extensions3_pb2.DESCRIPTOR
+testproto.inner.test3_pb2.DuplicatePackageMessage.DESCRIPTOR
 
 # All messages now fail with something like this:
 # error: testproto.test_extensions2_pb2.SeparateFileExtension.ext variable differs from runtime type google._upb._message.FieldDescriptor

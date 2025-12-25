@@ -8,6 +8,7 @@ PY_VER_MYPY_PROTOBUF_SHORT=$(echo "$PY_VER_MYPY_PROTOBUF" | cut -d. -f1-2)
 PY_VER_MYPY=${PY_VER_MYPY:=3.12.12}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.9.17 3.10.12 3.11.4 3.12.12 3.13.9 3.14.0}"
 PYTHON_PROTOBUF_VERSION=${PYTHON_PROTOBUF_VERSION:=6.32.1}
+TEST_THIRD_PARTY=${TEST_THIRD_PARTY:=0}
 
 # Confirm UV installed
 if ! command -v uv &> /dev/null; then
@@ -149,6 +150,51 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
         echo -e "${RED}Some .pyi files did not match. Please commit those files${NC}"
         exit 1
     fi
+
+    # if TEST_THIRD_PARTY is set to 1 then generate
+    if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
+        mkdir -p third_party
+        # Clone google protos
+        git clone --filter=blob:none --sparse https://github.com/protocolbuffers/protobuf.git --branch main third_party/protobuf
+        pushd third_party/protobuf
+        git sparse-checkout set src/google
+        popd
+        # git clone https://github.com/protocolbuffers/protobuf.git --branch main third_party/protobuf --depth 1
+        # Delete everything not in src
+        # find third_party/protobuf -mindepth 1 -maxdepth 1 -not -name 'src' -exec rm -rf {} +
+        mkdir -p third_party/out/generated_protobuf
+        find third_party/protobuf/src/google/protobuf  -maxdepth 1 -name "*.proto" \
+            -print0 | xargs -0 "$PROTOC" --proto_path=third_party/protobuf/src --mypy_out=third_party/out/generated_protobuf --mypy_grpc_out=third_party/out/generated_protobuf --python_out=third_party/out/generated_protobuf
+        # Clone googleapis protos
+        git clone https://github.com/googleapis/googleapis.git third_party/googleapis --branch master --depth 1
+        # Generate 3rd party protos
+        mkdir -p third_party/out/generated_googleapis
+        # Known conflict with extensions proto in googleapis - skip that one
+        find third_party/googleapis -name "*.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1beta/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1small/compute_small.proto" \
+            -print0 | xargs -0 "$PROTOC" --proto_path=third_party/googleapis --mypy_out=third_party/out/generated_googleapis --mypy_grpc_out=third_party/out/generated_googleapis --python_out=third_party/out/generated_googleapis
+
+        # TODO: Use buf?
+        git clone https://github.com/envoyproxy/envoy.git  --filter=blob:none --sparse third_party/envoy --branch main --depth 1
+        pushd third_party/envoy
+        git sparse-checkout set api
+        popd
+        git clone https://github.com/cncf/xds.git third_party/xds --branch main --depth 1
+        git clone https://github.com/bufbuild/protoc-gen-validate.git third_party/protoc-gen-validate --branch main --depth 1
+        git clone https://github.com/open-telemetry/opentelemetry-proto.git third_party/opentelemetry-proto --branch main --depth 1
+        git clone https://github.com/google/cel-spec.git third_party/cel-spec --branch master --depth 1
+        git clone https://github.com/prometheus/client_model.git third_party/client_model --branch master --depth 1
+
+        mkdir -p third_party/out/generated_envoy
+        find third_party -name "*.proto" \
+            ! -path "third_party/protobuf/*" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1beta/compute.proto" \
+            ! -path "third_party/googleapis/google/cloud/compute/v1small/compute_small.proto" \
+            -print0 | xargs -0 "$PROTOC" --proto_path=third_party/client_model --proto_path=third_party/cel-spec/proto --proto_path=third_party/opentelemetry-proto --proto_path=third_party/googleapis --proto_path=third_party/protoc-gen-validate --proto_path=third_party/envoy/api --proto_path=third_party/xds --mypy_out=third_party/out/generated_envoy --mypy_grpc_out=third_party/out/generated_envoy --python_out=third_party/out/generated_envoy
+    fi
 )
 
 ERROR_FILE=$(mktemp)
@@ -180,6 +226,16 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
         # Run async_only mypy
         ASYNC_ONLY_MODULES=( -m test.async_only.test_async_only )
         MYPYPATH=$MYPYPATH:test/generated_async_only mypy ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ASYNC_ONLY_MODULES[@]}"
+
+        if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
+            # Run thirdparty mypy
+            GOOGLE=( third_party/out/generated_protobuf )
+            MYPYPATH=$MYPYPATH:third_party/out/generated_protobuf mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLE[@]}"
+            GOOGLEAPIS=( third_party/out/generated_googleapis )
+            MYPYPATH=$MYPYPATH:third_party/out/generated_googleapis mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${GOOGLEAPIS[@]}"
+            ENVOY=( third_party/out/generated_envoy )
+            MYPYPATH=$MYPYPATH:third_party/out/generated_envoy mypy --explicit-package-bases ${CUSTOM_TYPESHED_DIR_ARG:+"$CUSTOM_TYPESHED_DIR_ARG"} --report-deprecated-as-note --python-executable="$UNIT_TESTS_VENV"/bin/python --python-version="$PY_VER_MYPY_TARGET" "${ENVOY[@]}"
+        fi
 
         export MYPYPATH=$MYPYPATH:test/generated
 
@@ -229,9 +285,13 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     (
         # Run unit tests.
         source "$UNIT_TESTS_VENV"/bin/activate
-        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only -v
+        PYTHONPATH=test/generated py.test --ignore=test/generated --ignore=test/generated_sync_only --ignore=test/generated_async_only --ignore=third_party -v
     )
 done
+
+
+# Clean up third_party
+rm -rf third_party
 
 # Report all errors at the end
 if [ -s "$ERROR_FILE" ]; then

@@ -3,37 +3,37 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.extension_dict
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import extension_dict as _extension_dict
+from testproto import test_pb2 as _test_pb2
+import builtins as _builtins
 import sys
-import testproto.test_pb2
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class SeparateFileExtension(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class SeparateFileExtension(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FLAG_FIELD_NUMBER: builtins.int
-    flag: builtins.bool
-    EXT_FIELD_NUMBER: builtins.int
-    ext: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[testproto.test_pb2.Simple2, Global___SeparateFileExtension]
+    FLAG_FIELD_NUMBER: _builtins.int
+    flag: _builtins.bool
+    EXT_FIELD_NUMBER: _builtins.int
+    ext: _extension_dict._ExtensionFieldDescriptor[_test_pb2.Simple2, Global___SeparateFileExtension]
     def __init__(
         self,
         *,
-        flag: builtins.bool | None = ...,
+        flag: _builtins.bool | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["flag", b"flag"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["flag", b"flag"]
+    _HasFieldArgType: _TypeAlias = _typing.Literal["flag", b"flag"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["flag", b"flag"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___SeparateFileExtension: typing_extensions.TypeAlias = SeparateFileExtension
+Global___SeparateFileExtension: _TypeAlias = SeparateFileExtension  # noqa: Y015

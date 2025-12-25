@@ -3,27 +3,25 @@
 isort:skip_file
 """
 
-import abc
-import collections.abc
-import grpc
-import grpc.aio
-import testproto.test_no_generic_services_pb2
-import typing
+from collections import abc as _abc
+from testproto import test_no_generic_services_pb2 as _test_no_generic_services_pb2
+import abc as _abc_1
+import grpc as _grpc
 
 
 GRPC_GENERATED_VERSION: str
 GRPC_VERSION: str
 
 class ATestService2Stub:
-    def __init__(self, channel: grpc.Channel) -> None: ...
-    Echo: grpc.UnaryUnaryMultiCallable[testproto.test_no_generic_services_pb2.Simple3, testproto.test_no_generic_services_pb2.Simple3]
+    def __init__(self, channel: _grpc.Channel) -> None: ...
+    Echo: _grpc.UnaryUnaryMultiCallable[_test_no_generic_services_pb2.Simple3, _test_no_generic_services_pb2.Simple3]
 
-class ATestService2Servicer(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
+class ATestService2Servicer(metaclass=_abc_1.ABCMeta):
+    @_abc_1.abstractmethod
     def Echo(
         self,
-        request: testproto.test_no_generic_services_pb2.Simple3,
-        context: grpc.ServicerContext,
-    ) -> testproto.test_no_generic_services_pb2.Simple3: ...
+        request: _test_no_generic_services_pb2.Simple3,
+        context: _grpc.ServicerContext,
+    ) -> _test_no_generic_services_pb2.Simple3: ...
 
-def add_ATestService2Servicer_to_server(servicer: ATestService2Servicer, server: grpc.Server) -> None: ...
+def add_ATestService2Servicer_to_server(servicer: ATestService2Servicer, server: _grpc.Server) -> None: ...

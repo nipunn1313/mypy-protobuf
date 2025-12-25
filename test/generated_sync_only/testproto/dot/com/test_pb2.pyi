@@ -3,31 +3,31 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class TestMessage(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class TestMessage(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FOO_FIELD_NUMBER: builtins.int
-    foo: builtins.str
+    FOO_FIELD_NUMBER: _builtins.int
+    foo: _builtins.str
     def __init__(
         self,
         *,
-        foo: builtins.str = ...,
+        foo: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["foo", b"foo"]
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["foo", b"foo"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___TestMessage: typing_extensions.TypeAlias = TestMessage
+Global___TestMessage: _TypeAlias = TestMessage  # noqa: Y015

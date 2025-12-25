@@ -1,3 +1,15 @@
+## Upcoming
+
+- Use `builtins.property` to handle conflicts with fields named `property`
+- Mangle all non provided message type imports, this prevents conflicts with field names like `collections`, `builtins`, etc.
+  - Do not mangle message imports, as that would be a breaking change.
+- BREAKING: Refactor import statements
+  - Move to model similar to protoc pyi generator. This prevents name collisions in field names
+    - `from test.a.b import c as _c`
+    - If multiple names collied, append `_{count}`
+      - `from test.a.x import c as _c_1`
+  - Fix bug in duplicate package name imports
+
 ## 4.0.0
 
 - BREAKING: Drop support for `py_generic_services` as it was removed from the protobuf compiler starting in version 6.30

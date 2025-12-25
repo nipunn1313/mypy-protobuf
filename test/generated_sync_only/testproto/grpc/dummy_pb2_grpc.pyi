@@ -3,18 +3,16 @@
 isort:skip_file
 https://github.com/vmagamedov/grpclib/blob/master/tests/dummy.proto"""
 
-import abc
-import collections.abc
-import grpc
-import grpc.aio
+from collections import abc as _abc
+from testproto.grpc import dummy_pb2 as _dummy_pb2
+import abc as _abc_1
+import grpc as _grpc
 import sys
-import testproto.grpc.dummy_pb2
-import typing
 
 if sys.version_info >= (3, 13):
-    from warnings import deprecated
+    from warnings import deprecated as _deprecated
 else:
-    from typing_extensions import deprecated
+    from typing_extensions import deprecated as _deprecated
 
 
 GRPC_GENERATED_VERSION: str
@@ -23,888 +21,888 @@ GRPC_VERSION: str
 class DummyServiceStub:
     """DummyService"""
 
-    def __init__(self, channel: grpc.Channel) -> None: ...
-    UnaryUnary: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    def __init__(self, channel: _grpc.Channel) -> None: ...
+    UnaryUnary: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]
     """UnaryUnary"""
-    UnaryStream: grpc.UnaryStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    UnaryStream: _grpc.UnaryStreamMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]
     """UnaryStream"""
-    StreamUnary: grpc.StreamUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    StreamUnary: _grpc.StreamUnaryMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]
     """StreamUnary"""
-    StreamStream: grpc.StreamStreamMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    StreamStream: _grpc.StreamStreamMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]
     """StreamStream"""
 
-class DummyServiceServicer(metaclass=abc.ABCMeta):
+class DummyServiceServicer(metaclass=_abc_1.ABCMeta):
     """DummyService"""
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def UnaryUnary(
         self,
-        request: testproto.grpc.dummy_pb2.DummyRequest,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.DummyReply:
+        request: _dummy_pb2.DummyRequest,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.DummyReply:
         """UnaryUnary"""
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def UnaryStream(
         self,
-        request: testproto.grpc.dummy_pb2.DummyRequest,
-        context: grpc.ServicerContext,
-    ) -> collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
+        request: _dummy_pb2.DummyRequest,
+        context: _grpc.ServicerContext,
+    ) -> _abc.Iterator[_dummy_pb2.DummyReply]:
         """UnaryStream"""
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def StreamUnary(
         self,
-        request_iterator: collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.DummyReply:
+        request_iterator: _abc.Iterator[_dummy_pb2.DummyRequest],
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.DummyReply:
         """StreamUnary"""
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def StreamStream(
         self,
-        request_iterator: collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyRequest],
-        context: grpc.ServicerContext,
-    ) -> collections.abc.Iterator[testproto.grpc.dummy_pb2.DummyReply]:
+        request_iterator: _abc.Iterator[_dummy_pb2.DummyRequest],
+        context: _grpc.ServicerContext,
+    ) -> _abc.Iterator[_dummy_pb2.DummyReply]:
         """StreamStream"""
 
-def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: grpc.Server) -> None: ...
+def add_DummyServiceServicer_to_server(servicer: DummyServiceServicer, server: _grpc.Server) -> None: ...
 
-@deprecated("""This service is deprecated""")
+@_deprecated("""This service is deprecated""")
 class DeprecatedServiceStub:
     """Marking the service as deprecated"""
 
-    def __init__(self, channel: grpc.Channel) -> None: ...
-    DeprecatedMethod: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DeprecatedRequest, testproto.grpc.dummy_pb2.DummyReply]
+    def __init__(self, channel: _grpc.Channel) -> None: ...
+    DeprecatedMethod: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.DeprecatedRequest, _dummy_pb2.DummyReply]
     """DeprecatedMethod"""
-    DeprecatedMethodNotDeprecatedRequest: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.DummyRequest, testproto.grpc.dummy_pb2.DummyReply]
+    DeprecatedMethodNotDeprecatedRequest: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.DummyRequest, _dummy_pb2.DummyReply]
     """DeprecatedMethodNotDeprecatedRequest"""
 
-@deprecated("""This service is deprecated""")
-class DeprecatedServiceServicer(metaclass=abc.ABCMeta):
+@_deprecated("""This service is deprecated""")
+class DeprecatedServiceServicer(metaclass=_abc_1.ABCMeta):
     """Marking the service as deprecated"""
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def DeprecatedMethod(
         self,
-        request: testproto.grpc.dummy_pb2.DeprecatedRequest,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.DummyReply:
+        request: _dummy_pb2.DeprecatedRequest,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.DummyReply:
         """DeprecatedMethod"""
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def DeprecatedMethodNotDeprecatedRequest(
         self,
-        request: testproto.grpc.dummy_pb2.DummyRequest,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.DummyReply:
+        request: _dummy_pb2.DummyRequest,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.DummyReply:
         """DeprecatedMethodNotDeprecatedRequest"""
 
-@deprecated("""This service is deprecated""")
-def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: grpc.Server) -> None: ...
+@_deprecated("""This service is deprecated""")
+def add_DeprecatedServiceServicer_to_server(servicer: DeprecatedServiceServicer, server: _grpc.Server) -> None: ...
 
 class ManyRPCsServiceStub:
-    def __init__(self, channel: grpc.Channel) -> None: ...
-    Method1: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest1, testproto.grpc.dummy_pb2.ManyResponse1]
-    Method2: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest2, testproto.grpc.dummy_pb2.ManyResponse2]
-    Method3: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest3, testproto.grpc.dummy_pb2.ManyResponse3]
-    Method4: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest4, testproto.grpc.dummy_pb2.ManyResponse4]
-    Method5: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest5, testproto.grpc.dummy_pb2.ManyResponse5]
-    Method6: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest6, testproto.grpc.dummy_pb2.ManyResponse6]
-    Method7: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest7, testproto.grpc.dummy_pb2.ManyResponse7]
-    Method8: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest8, testproto.grpc.dummy_pb2.ManyResponse8]
-    Method9: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest9, testproto.grpc.dummy_pb2.ManyResponse9]
-    Method10: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest10, testproto.grpc.dummy_pb2.ManyResponse10]
-    Method11: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest11, testproto.grpc.dummy_pb2.ManyResponse11]
-    Method12: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest12, testproto.grpc.dummy_pb2.ManyResponse12]
-    Method13: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest13, testproto.grpc.dummy_pb2.ManyResponse13]
-    Method14: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest14, testproto.grpc.dummy_pb2.ManyResponse14]
-    Method15: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest15, testproto.grpc.dummy_pb2.ManyResponse15]
-    Method16: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest16, testproto.grpc.dummy_pb2.ManyResponse16]
-    Method17: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest17, testproto.grpc.dummy_pb2.ManyResponse17]
-    Method18: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest18, testproto.grpc.dummy_pb2.ManyResponse18]
-    Method19: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest19, testproto.grpc.dummy_pb2.ManyResponse19]
-    Method20: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest20, testproto.grpc.dummy_pb2.ManyResponse20]
-    Method21: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest21, testproto.grpc.dummy_pb2.ManyResponse21]
-    Method22: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest22, testproto.grpc.dummy_pb2.ManyResponse22]
-    Method23: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest23, testproto.grpc.dummy_pb2.ManyResponse23]
-    Method24: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest24, testproto.grpc.dummy_pb2.ManyResponse24]
-    Method25: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest25, testproto.grpc.dummy_pb2.ManyResponse25]
-    Method26: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest26, testproto.grpc.dummy_pb2.ManyResponse26]
-    Method27: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest27, testproto.grpc.dummy_pb2.ManyResponse27]
-    Method28: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest28, testproto.grpc.dummy_pb2.ManyResponse28]
-    Method29: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest29, testproto.grpc.dummy_pb2.ManyResponse29]
-    Method30: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest30, testproto.grpc.dummy_pb2.ManyResponse30]
-    Method31: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest31, testproto.grpc.dummy_pb2.ManyResponse31]
-    Method32: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest32, testproto.grpc.dummy_pb2.ManyResponse32]
-    Method33: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest33, testproto.grpc.dummy_pb2.ManyResponse33]
-    Method34: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest34, testproto.grpc.dummy_pb2.ManyResponse34]
-    Method35: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest35, testproto.grpc.dummy_pb2.ManyResponse35]
-    Method36: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest36, testproto.grpc.dummy_pb2.ManyResponse36]
-    Method37: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest37, testproto.grpc.dummy_pb2.ManyResponse37]
-    Method38: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest38, testproto.grpc.dummy_pb2.ManyResponse38]
-    Method39: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest39, testproto.grpc.dummy_pb2.ManyResponse39]
-    Method40: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest40, testproto.grpc.dummy_pb2.ManyResponse40]
-    Method41: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest41, testproto.grpc.dummy_pb2.ManyResponse41]
-    Method42: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest42, testproto.grpc.dummy_pb2.ManyResponse42]
-    Method43: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest43, testproto.grpc.dummy_pb2.ManyResponse43]
-    Method44: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest44, testproto.grpc.dummy_pb2.ManyResponse44]
-    Method45: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest45, testproto.grpc.dummy_pb2.ManyResponse45]
-    Method46: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest46, testproto.grpc.dummy_pb2.ManyResponse46]
-    Method47: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest47, testproto.grpc.dummy_pb2.ManyResponse47]
-    Method48: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest48, testproto.grpc.dummy_pb2.ManyResponse48]
-    Method49: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest49, testproto.grpc.dummy_pb2.ManyResponse49]
-    Method50: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest50, testproto.grpc.dummy_pb2.ManyResponse50]
-    Method51: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest51, testproto.grpc.dummy_pb2.ManyResponse51]
-    Method52: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest52, testproto.grpc.dummy_pb2.ManyResponse52]
-    Method53: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest53, testproto.grpc.dummy_pb2.ManyResponse53]
-    Method54: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest54, testproto.grpc.dummy_pb2.ManyResponse54]
-    Method55: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest55, testproto.grpc.dummy_pb2.ManyResponse55]
-    Method56: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest56, testproto.grpc.dummy_pb2.ManyResponse56]
-    Method57: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest57, testproto.grpc.dummy_pb2.ManyResponse57]
-    Method58: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest58, testproto.grpc.dummy_pb2.ManyResponse58]
-    Method59: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest59, testproto.grpc.dummy_pb2.ManyResponse59]
-    Method60: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest60, testproto.grpc.dummy_pb2.ManyResponse60]
-    Method61: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest61, testproto.grpc.dummy_pb2.ManyResponse61]
-    Method62: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest62, testproto.grpc.dummy_pb2.ManyResponse62]
-    Method63: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest63, testproto.grpc.dummy_pb2.ManyResponse63]
-    Method64: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest64, testproto.grpc.dummy_pb2.ManyResponse64]
-    Method65: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest65, testproto.grpc.dummy_pb2.ManyResponse65]
-    Method66: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest66, testproto.grpc.dummy_pb2.ManyResponse66]
-    Method67: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest67, testproto.grpc.dummy_pb2.ManyResponse67]
-    Method68: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest68, testproto.grpc.dummy_pb2.ManyResponse68]
-    Method69: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest69, testproto.grpc.dummy_pb2.ManyResponse69]
-    Method70: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest70, testproto.grpc.dummy_pb2.ManyResponse70]
-    Method71: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest71, testproto.grpc.dummy_pb2.ManyResponse71]
-    Method72: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest72, testproto.grpc.dummy_pb2.ManyResponse72]
-    Method73: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest73, testproto.grpc.dummy_pb2.ManyResponse73]
-    Method74: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest74, testproto.grpc.dummy_pb2.ManyResponse74]
-    Method75: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest75, testproto.grpc.dummy_pb2.ManyResponse75]
-    Method76: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest76, testproto.grpc.dummy_pb2.ManyResponse76]
-    Method77: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest77, testproto.grpc.dummy_pb2.ManyResponse77]
-    Method78: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest78, testproto.grpc.dummy_pb2.ManyResponse78]
-    Method79: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest79, testproto.grpc.dummy_pb2.ManyResponse79]
-    Method80: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest80, testproto.grpc.dummy_pb2.ManyResponse80]
-    Method81: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest81, testproto.grpc.dummy_pb2.ManyResponse81]
-    Method82: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest82, testproto.grpc.dummy_pb2.ManyResponse82]
-    Method83: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest83, testproto.grpc.dummy_pb2.ManyResponse83]
-    Method84: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest84, testproto.grpc.dummy_pb2.ManyResponse84]
-    Method85: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest85, testproto.grpc.dummy_pb2.ManyResponse85]
-    Method86: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest86, testproto.grpc.dummy_pb2.ManyResponse86]
-    Method87: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest87, testproto.grpc.dummy_pb2.ManyResponse87]
-    Method88: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest88, testproto.grpc.dummy_pb2.ManyResponse88]
-    Method89: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest89, testproto.grpc.dummy_pb2.ManyResponse89]
-    Method90: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest90, testproto.grpc.dummy_pb2.ManyResponse90]
-    Method91: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest91, testproto.grpc.dummy_pb2.ManyResponse91]
-    Method92: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest92, testproto.grpc.dummy_pb2.ManyResponse92]
-    Method93: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest93, testproto.grpc.dummy_pb2.ManyResponse93]
-    Method94: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest94, testproto.grpc.dummy_pb2.ManyResponse94]
-    Method95: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest95, testproto.grpc.dummy_pb2.ManyResponse95]
-    Method96: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest96, testproto.grpc.dummy_pb2.ManyResponse96]
-    Method97: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest97, testproto.grpc.dummy_pb2.ManyResponse97]
-    Method98: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest98, testproto.grpc.dummy_pb2.ManyResponse98]
-    Method99: grpc.UnaryUnaryMultiCallable[testproto.grpc.dummy_pb2.ManyRequest99, testproto.grpc.dummy_pb2.ManyResponse99]
+    def __init__(self, channel: _grpc.Channel) -> None: ...
+    Method1: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest1, _dummy_pb2.ManyResponse1]
+    Method2: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest2, _dummy_pb2.ManyResponse2]
+    Method3: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest3, _dummy_pb2.ManyResponse3]
+    Method4: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest4, _dummy_pb2.ManyResponse4]
+    Method5: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest5, _dummy_pb2.ManyResponse5]
+    Method6: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest6, _dummy_pb2.ManyResponse6]
+    Method7: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest7, _dummy_pb2.ManyResponse7]
+    Method8: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest8, _dummy_pb2.ManyResponse8]
+    Method9: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest9, _dummy_pb2.ManyResponse9]
+    Method10: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest10, _dummy_pb2.ManyResponse10]
+    Method11: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest11, _dummy_pb2.ManyResponse11]
+    Method12: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest12, _dummy_pb2.ManyResponse12]
+    Method13: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest13, _dummy_pb2.ManyResponse13]
+    Method14: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest14, _dummy_pb2.ManyResponse14]
+    Method15: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest15, _dummy_pb2.ManyResponse15]
+    Method16: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest16, _dummy_pb2.ManyResponse16]
+    Method17: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest17, _dummy_pb2.ManyResponse17]
+    Method18: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest18, _dummy_pb2.ManyResponse18]
+    Method19: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest19, _dummy_pb2.ManyResponse19]
+    Method20: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest20, _dummy_pb2.ManyResponse20]
+    Method21: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest21, _dummy_pb2.ManyResponse21]
+    Method22: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest22, _dummy_pb2.ManyResponse22]
+    Method23: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest23, _dummy_pb2.ManyResponse23]
+    Method24: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest24, _dummy_pb2.ManyResponse24]
+    Method25: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest25, _dummy_pb2.ManyResponse25]
+    Method26: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest26, _dummy_pb2.ManyResponse26]
+    Method27: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest27, _dummy_pb2.ManyResponse27]
+    Method28: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest28, _dummy_pb2.ManyResponse28]
+    Method29: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest29, _dummy_pb2.ManyResponse29]
+    Method30: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest30, _dummy_pb2.ManyResponse30]
+    Method31: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest31, _dummy_pb2.ManyResponse31]
+    Method32: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest32, _dummy_pb2.ManyResponse32]
+    Method33: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest33, _dummy_pb2.ManyResponse33]
+    Method34: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest34, _dummy_pb2.ManyResponse34]
+    Method35: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest35, _dummy_pb2.ManyResponse35]
+    Method36: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest36, _dummy_pb2.ManyResponse36]
+    Method37: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest37, _dummy_pb2.ManyResponse37]
+    Method38: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest38, _dummy_pb2.ManyResponse38]
+    Method39: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest39, _dummy_pb2.ManyResponse39]
+    Method40: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest40, _dummy_pb2.ManyResponse40]
+    Method41: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest41, _dummy_pb2.ManyResponse41]
+    Method42: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest42, _dummy_pb2.ManyResponse42]
+    Method43: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest43, _dummy_pb2.ManyResponse43]
+    Method44: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest44, _dummy_pb2.ManyResponse44]
+    Method45: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest45, _dummy_pb2.ManyResponse45]
+    Method46: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest46, _dummy_pb2.ManyResponse46]
+    Method47: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest47, _dummy_pb2.ManyResponse47]
+    Method48: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest48, _dummy_pb2.ManyResponse48]
+    Method49: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest49, _dummy_pb2.ManyResponse49]
+    Method50: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest50, _dummy_pb2.ManyResponse50]
+    Method51: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest51, _dummy_pb2.ManyResponse51]
+    Method52: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest52, _dummy_pb2.ManyResponse52]
+    Method53: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest53, _dummy_pb2.ManyResponse53]
+    Method54: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest54, _dummy_pb2.ManyResponse54]
+    Method55: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest55, _dummy_pb2.ManyResponse55]
+    Method56: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest56, _dummy_pb2.ManyResponse56]
+    Method57: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest57, _dummy_pb2.ManyResponse57]
+    Method58: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest58, _dummy_pb2.ManyResponse58]
+    Method59: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest59, _dummy_pb2.ManyResponse59]
+    Method60: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest60, _dummy_pb2.ManyResponse60]
+    Method61: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest61, _dummy_pb2.ManyResponse61]
+    Method62: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest62, _dummy_pb2.ManyResponse62]
+    Method63: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest63, _dummy_pb2.ManyResponse63]
+    Method64: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest64, _dummy_pb2.ManyResponse64]
+    Method65: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest65, _dummy_pb2.ManyResponse65]
+    Method66: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest66, _dummy_pb2.ManyResponse66]
+    Method67: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest67, _dummy_pb2.ManyResponse67]
+    Method68: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest68, _dummy_pb2.ManyResponse68]
+    Method69: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest69, _dummy_pb2.ManyResponse69]
+    Method70: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest70, _dummy_pb2.ManyResponse70]
+    Method71: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest71, _dummy_pb2.ManyResponse71]
+    Method72: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest72, _dummy_pb2.ManyResponse72]
+    Method73: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest73, _dummy_pb2.ManyResponse73]
+    Method74: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest74, _dummy_pb2.ManyResponse74]
+    Method75: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest75, _dummy_pb2.ManyResponse75]
+    Method76: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest76, _dummy_pb2.ManyResponse76]
+    Method77: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest77, _dummy_pb2.ManyResponse77]
+    Method78: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest78, _dummy_pb2.ManyResponse78]
+    Method79: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest79, _dummy_pb2.ManyResponse79]
+    Method80: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest80, _dummy_pb2.ManyResponse80]
+    Method81: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest81, _dummy_pb2.ManyResponse81]
+    Method82: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest82, _dummy_pb2.ManyResponse82]
+    Method83: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest83, _dummy_pb2.ManyResponse83]
+    Method84: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest84, _dummy_pb2.ManyResponse84]
+    Method85: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest85, _dummy_pb2.ManyResponse85]
+    Method86: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest86, _dummy_pb2.ManyResponse86]
+    Method87: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest87, _dummy_pb2.ManyResponse87]
+    Method88: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest88, _dummy_pb2.ManyResponse88]
+    Method89: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest89, _dummy_pb2.ManyResponse89]
+    Method90: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest90, _dummy_pb2.ManyResponse90]
+    Method91: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest91, _dummy_pb2.ManyResponse91]
+    Method92: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest92, _dummy_pb2.ManyResponse92]
+    Method93: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest93, _dummy_pb2.ManyResponse93]
+    Method94: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest94, _dummy_pb2.ManyResponse94]
+    Method95: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest95, _dummy_pb2.ManyResponse95]
+    Method96: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest96, _dummy_pb2.ManyResponse96]
+    Method97: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest97, _dummy_pb2.ManyResponse97]
+    Method98: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest98, _dummy_pb2.ManyResponse98]
+    Method99: _grpc.UnaryUnaryMultiCallable[_dummy_pb2.ManyRequest99, _dummy_pb2.ManyResponse99]
 
-class ManyRPCsServiceServicer(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
+class ManyRPCsServiceServicer(metaclass=_abc_1.ABCMeta):
+    @_abc_1.abstractmethod
     def Method1(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest1,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse1: ...
+        request: _dummy_pb2.ManyRequest1,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse1: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method2(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest2,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse2: ...
+        request: _dummy_pb2.ManyRequest2,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse2: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method3(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest3,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse3: ...
+        request: _dummy_pb2.ManyRequest3,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse3: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method4(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest4,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse4: ...
+        request: _dummy_pb2.ManyRequest4,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse4: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method5(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest5,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse5: ...
+        request: _dummy_pb2.ManyRequest5,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse5: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method6(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest6,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse6: ...
+        request: _dummy_pb2.ManyRequest6,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse6: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method7(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest7,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse7: ...
+        request: _dummy_pb2.ManyRequest7,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse7: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method8(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest8,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse8: ...
+        request: _dummy_pb2.ManyRequest8,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse8: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method9(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest9,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse9: ...
+        request: _dummy_pb2.ManyRequest9,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse9: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method10(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest10,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse10: ...
+        request: _dummy_pb2.ManyRequest10,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse10: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method11(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest11,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse11: ...
+        request: _dummy_pb2.ManyRequest11,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse11: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method12(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest12,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse12: ...
+        request: _dummy_pb2.ManyRequest12,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse12: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method13(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest13,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse13: ...
+        request: _dummy_pb2.ManyRequest13,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse13: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method14(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest14,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse14: ...
+        request: _dummy_pb2.ManyRequest14,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse14: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method15(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest15,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse15: ...
+        request: _dummy_pb2.ManyRequest15,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse15: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method16(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest16,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse16: ...
+        request: _dummy_pb2.ManyRequest16,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse16: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method17(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest17,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse17: ...
+        request: _dummy_pb2.ManyRequest17,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse17: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method18(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest18,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse18: ...
+        request: _dummy_pb2.ManyRequest18,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse18: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method19(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest19,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse19: ...
+        request: _dummy_pb2.ManyRequest19,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse19: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method20(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest20,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse20: ...
+        request: _dummy_pb2.ManyRequest20,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse20: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method21(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest21,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse21: ...
+        request: _dummy_pb2.ManyRequest21,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse21: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method22(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest22,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse22: ...
+        request: _dummy_pb2.ManyRequest22,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse22: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method23(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest23,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse23: ...
+        request: _dummy_pb2.ManyRequest23,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse23: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method24(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest24,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse24: ...
+        request: _dummy_pb2.ManyRequest24,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse24: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method25(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest25,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse25: ...
+        request: _dummy_pb2.ManyRequest25,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse25: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method26(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest26,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse26: ...
+        request: _dummy_pb2.ManyRequest26,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse26: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method27(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest27,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse27: ...
+        request: _dummy_pb2.ManyRequest27,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse27: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method28(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest28,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse28: ...
+        request: _dummy_pb2.ManyRequest28,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse28: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method29(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest29,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse29: ...
+        request: _dummy_pb2.ManyRequest29,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse29: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method30(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest30,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse30: ...
+        request: _dummy_pb2.ManyRequest30,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse30: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method31(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest31,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse31: ...
+        request: _dummy_pb2.ManyRequest31,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse31: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method32(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest32,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse32: ...
+        request: _dummy_pb2.ManyRequest32,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse32: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method33(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest33,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse33: ...
+        request: _dummy_pb2.ManyRequest33,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse33: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method34(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest34,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse34: ...
+        request: _dummy_pb2.ManyRequest34,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse34: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method35(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest35,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse35: ...
+        request: _dummy_pb2.ManyRequest35,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse35: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method36(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest36,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse36: ...
+        request: _dummy_pb2.ManyRequest36,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse36: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method37(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest37,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse37: ...
+        request: _dummy_pb2.ManyRequest37,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse37: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method38(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest38,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse38: ...
+        request: _dummy_pb2.ManyRequest38,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse38: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method39(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest39,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse39: ...
+        request: _dummy_pb2.ManyRequest39,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse39: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method40(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest40,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse40: ...
+        request: _dummy_pb2.ManyRequest40,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse40: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method41(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest41,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse41: ...
+        request: _dummy_pb2.ManyRequest41,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse41: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method42(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest42,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse42: ...
+        request: _dummy_pb2.ManyRequest42,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse42: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method43(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest43,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse43: ...
+        request: _dummy_pb2.ManyRequest43,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse43: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method44(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest44,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse44: ...
+        request: _dummy_pb2.ManyRequest44,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse44: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method45(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest45,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse45: ...
+        request: _dummy_pb2.ManyRequest45,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse45: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method46(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest46,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse46: ...
+        request: _dummy_pb2.ManyRequest46,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse46: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method47(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest47,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse47: ...
+        request: _dummy_pb2.ManyRequest47,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse47: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method48(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest48,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse48: ...
+        request: _dummy_pb2.ManyRequest48,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse48: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method49(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest49,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse49: ...
+        request: _dummy_pb2.ManyRequest49,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse49: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method50(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest50,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse50: ...
+        request: _dummy_pb2.ManyRequest50,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse50: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method51(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest51,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse51: ...
+        request: _dummy_pb2.ManyRequest51,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse51: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method52(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest52,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse52: ...
+        request: _dummy_pb2.ManyRequest52,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse52: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method53(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest53,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse53: ...
+        request: _dummy_pb2.ManyRequest53,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse53: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method54(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest54,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse54: ...
+        request: _dummy_pb2.ManyRequest54,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse54: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method55(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest55,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse55: ...
+        request: _dummy_pb2.ManyRequest55,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse55: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method56(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest56,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse56: ...
+        request: _dummy_pb2.ManyRequest56,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse56: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method57(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest57,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse57: ...
+        request: _dummy_pb2.ManyRequest57,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse57: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method58(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest58,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse58: ...
+        request: _dummy_pb2.ManyRequest58,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse58: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method59(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest59,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse59: ...
+        request: _dummy_pb2.ManyRequest59,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse59: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method60(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest60,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse60: ...
+        request: _dummy_pb2.ManyRequest60,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse60: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method61(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest61,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse61: ...
+        request: _dummy_pb2.ManyRequest61,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse61: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method62(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest62,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse62: ...
+        request: _dummy_pb2.ManyRequest62,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse62: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method63(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest63,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse63: ...
+        request: _dummy_pb2.ManyRequest63,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse63: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method64(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest64,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse64: ...
+        request: _dummy_pb2.ManyRequest64,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse64: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method65(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest65,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse65: ...
+        request: _dummy_pb2.ManyRequest65,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse65: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method66(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest66,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse66: ...
+        request: _dummy_pb2.ManyRequest66,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse66: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method67(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest67,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse67: ...
+        request: _dummy_pb2.ManyRequest67,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse67: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method68(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest68,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse68: ...
+        request: _dummy_pb2.ManyRequest68,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse68: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method69(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest69,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse69: ...
+        request: _dummy_pb2.ManyRequest69,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse69: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method70(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest70,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse70: ...
+        request: _dummy_pb2.ManyRequest70,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse70: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method71(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest71,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse71: ...
+        request: _dummy_pb2.ManyRequest71,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse71: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method72(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest72,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse72: ...
+        request: _dummy_pb2.ManyRequest72,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse72: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method73(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest73,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse73: ...
+        request: _dummy_pb2.ManyRequest73,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse73: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method74(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest74,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse74: ...
+        request: _dummy_pb2.ManyRequest74,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse74: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method75(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest75,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse75: ...
+        request: _dummy_pb2.ManyRequest75,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse75: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method76(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest76,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse76: ...
+        request: _dummy_pb2.ManyRequest76,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse76: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method77(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest77,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse77: ...
+        request: _dummy_pb2.ManyRequest77,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse77: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method78(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest78,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse78: ...
+        request: _dummy_pb2.ManyRequest78,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse78: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method79(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest79,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse79: ...
+        request: _dummy_pb2.ManyRequest79,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse79: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method80(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest80,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse80: ...
+        request: _dummy_pb2.ManyRequest80,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse80: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method81(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest81,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse81: ...
+        request: _dummy_pb2.ManyRequest81,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse81: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method82(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest82,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse82: ...
+        request: _dummy_pb2.ManyRequest82,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse82: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method83(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest83,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse83: ...
+        request: _dummy_pb2.ManyRequest83,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse83: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method84(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest84,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse84: ...
+        request: _dummy_pb2.ManyRequest84,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse84: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method85(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest85,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse85: ...
+        request: _dummy_pb2.ManyRequest85,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse85: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method86(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest86,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse86: ...
+        request: _dummy_pb2.ManyRequest86,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse86: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method87(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest87,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse87: ...
+        request: _dummy_pb2.ManyRequest87,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse87: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method88(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest88,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse88: ...
+        request: _dummy_pb2.ManyRequest88,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse88: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method89(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest89,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse89: ...
+        request: _dummy_pb2.ManyRequest89,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse89: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method90(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest90,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse90: ...
+        request: _dummy_pb2.ManyRequest90,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse90: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method91(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest91,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse91: ...
+        request: _dummy_pb2.ManyRequest91,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse91: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method92(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest92,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse92: ...
+        request: _dummy_pb2.ManyRequest92,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse92: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method93(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest93,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse93: ...
+        request: _dummy_pb2.ManyRequest93,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse93: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method94(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest94,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse94: ...
+        request: _dummy_pb2.ManyRequest94,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse94: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method95(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest95,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse95: ...
+        request: _dummy_pb2.ManyRequest95,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse95: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method96(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest96,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse96: ...
+        request: _dummy_pb2.ManyRequest96,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse96: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method97(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest97,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse97: ...
+        request: _dummy_pb2.ManyRequest97,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse97: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method98(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest98,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse98: ...
+        request: _dummy_pb2.ManyRequest98,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse98: ...
 
-    @abc.abstractmethod
+    @_abc_1.abstractmethod
     def Method99(
         self,
-        request: testproto.grpc.dummy_pb2.ManyRequest99,
-        context: grpc.ServicerContext,
-    ) -> testproto.grpc.dummy_pb2.ManyResponse99: ...
+        request: _dummy_pb2.ManyRequest99,
+        context: _grpc.ServicerContext,
+    ) -> _dummy_pb2.ManyResponse99: ...
 
-def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, server: grpc.Server) -> None: ...
+def add_ManyRPCsServiceServicer_to_server(servicer: ManyRPCsServiceServicer, server: _grpc.Server) -> None: ...
 
 class EmptyServiceStub:
-    def __init__(self, channel: grpc.Channel) -> None: ...
+    def __init__(self, channel: _grpc.Channel) -> None: ...
 
-class EmptyServiceServicer(metaclass=abc.ABCMeta):
+class EmptyServiceServicer(metaclass=_abc_1.ABCMeta):
     ...
 
-def add_EmptyServiceServicer_to_server(servicer: EmptyServiceServicer, server: grpc.Server) -> None: ...
+def add_EmptyServiceServicer_to_server(servicer: EmptyServiceServicer, server: _grpc.Server) -> None: ...

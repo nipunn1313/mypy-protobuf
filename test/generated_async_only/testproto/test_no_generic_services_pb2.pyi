@@ -3,33 +3,33 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class Simple3(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Simple3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    A_STRING_FIELD_NUMBER: builtins.int
-    a_string: builtins.str
+    A_STRING_FIELD_NUMBER: _builtins.int
+    a_string: _builtins.str
     def __init__(
         self,
         *,
-        a_string: builtins.str | None = ...,
+        a_string: _builtins.str | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Simple3: typing_extensions.TypeAlias = Simple3
+Global___Simple3: _TypeAlias = Simple3  # noqa: Y015
