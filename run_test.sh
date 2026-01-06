@@ -9,6 +9,7 @@ PY_VER_MYPY=${PY_VER_MYPY:=3.12.12}
 PY_VER_UNIT_TESTS="${PY_VER_UNIT_TESTS:=3.9.17 3.10.12 3.11.4 3.12.12 3.13.9 3.14.0}"
 PYTHON_PROTOBUF_VERSION=${PYTHON_PROTOBUF_VERSION:=6.32.1}
 TEST_THIRD_PARTY=${TEST_THIRD_PARTY:=0}
+READABLE_STUBS=${READABLE_STUBS:=0}
 
 # Confirm UV installed
 if ! command -v uv &> /dev/null; then
@@ -124,15 +125,21 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # Sanity check that our flags work
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=quiet:test/generated
-    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=readable_stubs:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=relax_strict_optional_primitives:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=use_default_deprecation_warnings:test/generated
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated
-    # Overwrite w/ run with mypy-protobuf without flags
-    find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
 
-    # Generate grpc protos
-    find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
+    if [[ "$READABLE_STUBS" == "1" ]]; then
+        # Overwrite w/ run with mypy-protobuf with readable_stubs flag
+        find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=readable_stubs:test/generated
+        # Generate grpc protos
+        find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
+    else
+        # Overwrite w/ run with mypy-protobuf without flags
+        find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=test/generated
+        # Generate grpc protos
+        find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_grpc_out=test/generated
+    fi
 
     # Generate with concrete service stubs for testing
     find proto -name "*.proto" -print0 | xargs -0 "$PROTOC" "${PROTOC_ARGS[@]}" --mypy_out=generate_concrete_servicer_stubs:test/generated_concrete
@@ -153,20 +160,30 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
 
     # if TEST_THIRD_PARTY is set to 1 then generate
     if [[ "$TEST_THIRD_PARTY" == "1" ]]; then
+        PROTOBUF_REF=9eb9b36e8a6f0f2766e0fbb9263035642c66d49e
+        GOOGLEAPIS_REF=d4a34bf03d617723146fe3ae15192c4d93981a27
+        ENVOY_REF=87566c14a3f7667be0d6242cc482347a00365b23
+        XDS_REF=ee656c7534f5d7dc23d44dd611689568f72017a6
+        PROTOC_GEN_VALIDATE_REF=010dd2ce8153bdf39bfb97b2ef14de2212ee749a
+        OPENTELEMETRY_PROTO_REF=b80501798339bf5cf4cb49c0027ee8d6bb03eae0
+        CEL_SPEC_REF=121e265b0c5e1d4c7d5c140b33d6048fec754c77
+        CLIENT_MODEL_REF=c6d074b66b267a90cd95607abd123add35b62dda
+
         mkdir -p third_party
         # Clone google protos
-        git clone --filter=blob:none --sparse https://github.com/protocolbuffers/protobuf.git --branch main third_party/protobuf
+        git clone --filter=blob:none --sparse https://github.com/protocolbuffers/protobuf.git third_party/protobuf
         pushd third_party/protobuf
+        git checkout $PROTOBUF_REF
         git sparse-checkout set src/google
         popd
-        # git clone https://github.com/protocolbuffers/protobuf.git --branch main third_party/protobuf --depth 1
-        # Delete everything not in src
-        # find third_party/protobuf -mindepth 1 -maxdepth 1 -not -name 'src' -exec rm -rf {} +
         mkdir -p third_party/out/generated_protobuf
         find third_party/protobuf/src/google/protobuf  -maxdepth 1 -name "*.proto" \
             -print0 | xargs -0 "$PROTOC" --proto_path=third_party/protobuf/src --mypy_out=third_party/out/generated_protobuf --mypy_grpc_out=third_party/out/generated_protobuf --python_out=third_party/out/generated_protobuf
         # Clone googleapis protos
-        git clone https://github.com/googleapis/googleapis.git third_party/googleapis --branch master --depth 1
+        git clone https://github.com/googleapis/googleapis.git third_party/googleapis
+        pushd third_party/googleapis
+        git checkout $GOOGLEAPIS_REF
+        popd
         # Generate 3rd party protos
         mkdir -p third_party/out/generated_googleapis
         # Known conflict with extensions proto in googleapis - skip that one
@@ -177,15 +194,31 @@ MYPY_PROTOBUF_VENV=venv_$PY_VER_MYPY_PROTOBUF
             -print0 | xargs -0 "$PROTOC" --proto_path=third_party/googleapis --mypy_out=third_party/out/generated_googleapis --mypy_grpc_out=third_party/out/generated_googleapis --python_out=third_party/out/generated_googleapis
 
         # TODO: Use buf?
-        git clone https://github.com/envoyproxy/envoy.git  --filter=blob:none --sparse third_party/envoy --branch main --depth 1
+        git clone https://github.com/envoyproxy/envoy.git  --filter=blob:none --sparse third_party/envoy
         pushd third_party/envoy
+        git checkout $ENVOY_REF
         git sparse-checkout set api
         popd
-        git clone https://github.com/cncf/xds.git third_party/xds --branch main --depth 1
-        git clone https://github.com/bufbuild/protoc-gen-validate.git third_party/protoc-gen-validate --branch main --depth 1
-        git clone https://github.com/open-telemetry/opentelemetry-proto.git third_party/opentelemetry-proto --branch main --depth 1
-        git clone https://github.com/google/cel-spec.git third_party/cel-spec --branch master --depth 1
-        git clone https://github.com/prometheus/client_model.git third_party/client_model --branch master --depth 1
+        git clone https://github.com/cncf/xds.git third_party/xds
+        pushd third_party/xds
+        git checkout $XDS_REF
+        popd
+        git clone https://github.com/bufbuild/protoc-gen-validate.git third_party/protoc-gen-validate
+        pushd third_party/protoc-gen-validate
+        git checkout $PROTOC_GEN_VALIDATE_REF
+        popd
+        git clone https://github.com/open-telemetry/opentelemetry-proto.git third_party/opentelemetry-proto
+        pushd third_party/opentelemetry-proto
+        git checkout $OPENTELEMETRY_PROTO_REF
+        popd
+        git clone https://github.com/google/cel-spec.git third_party/cel-spec
+        pushd third_party/cel-spec
+        git checkout $CEL_SPEC_REF
+        popd
+        git clone https://github.com/prometheus/client_model.git third_party/client_model
+        pushd third_party/client_model
+        git checkout $CLIENT_MODEL_REF
+        popd
 
         mkdir -p third_party/out/generated_envoy
         find third_party -name "*.proto" \
