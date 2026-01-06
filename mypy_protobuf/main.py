@@ -1252,11 +1252,6 @@ class PkgWriter(object):
         )
         return f"{container}[{field_type}]"
 
-    # import debugpy
-
-    # debugpy.listen(5678)
-    # debugpy.wait_for_client()
-
     def write(self) -> str:
         # save current module content, so that imports and module docstring can be inserted
         saved_lines = self.lines
