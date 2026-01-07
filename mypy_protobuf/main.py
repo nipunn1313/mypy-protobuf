@@ -1082,6 +1082,8 @@ class PkgWriter(object):
             input_type = self._servicer_input_type(method)
             output_type = self._servicer_output_type(method)
 
+            if method.options.deprecated:
+                self._write_deprecation_warning(scl, "This method has been marked as deprecated using proto method options.")
             if self.generate_concrete_servicer_stubs is False:
                 wl("@{}", self._import("abc", "abstractmethod"))
             wl("def {}(", method.name)

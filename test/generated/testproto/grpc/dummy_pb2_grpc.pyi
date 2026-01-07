@@ -141,6 +141,7 @@ class DeprecatedServiceAsyncStub(DeprecatedServiceStub):
 class DeprecatedServiceServicer(metaclass=_abc_1.ABCMeta):
     """Marking the service as deprecated"""
 
+    @_deprecated("""DeprecatedMethod""")
     @_abc_1.abstractmethod
     def DeprecatedMethod(
         self,
@@ -149,6 +150,7 @@ class DeprecatedServiceServicer(metaclass=_abc_1.ABCMeta):
     ) -> _typing.Union[_dummy_pb2.DummyReply, _abc.Awaitable[_dummy_pb2.DummyReply]]:
         """DeprecatedMethod"""
 
+    @_deprecated("""DeprecatedMethodNotDeprecatedRequest""")
     @_abc_1.abstractmethod
     def DeprecatedMethodNotDeprecatedRequest(
         self,
@@ -157,6 +159,7 @@ class DeprecatedServiceServicer(metaclass=_abc_1.ABCMeta):
     ) -> _typing.Union[_dummy_pb2.DummyReply, _abc.Awaitable[_dummy_pb2.DummyReply]]:
         """DeprecatedMethodNotDeprecatedRequest"""
 
+    @_deprecated("""This method has been marked as deprecated using proto method options.""")
     @_abc_1.abstractmethod
     def DeprecatedMethodNoComments(
         self,
