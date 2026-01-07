@@ -11,7 +11,7 @@ from typing import Generator, Iterator, List
 import grpc
 import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
-from testproto.edition2024_pb2 import Editions2024Test
+from testproto.edition2024_pb2 import Editions2024SubMessage, Editions2024Test
 from testproto.grpc import dummy_pb2_grpc
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
@@ -29,6 +29,7 @@ from testproto.test3_pb2 import OuterEnum, OuterMessage3, SimpleProto3
 from testproto.test_extensions2_pb2 import SeparateFileExtension
 from testproto.test_pb2 import DeprecatedEnum  # E:3.8
 from testproto.test_pb2 import (  # E:3.8
+    DEPRECATED_ONE,
     DESCRIPTOR,
     FOO,
     DeprecatedMessage,
@@ -200,6 +201,8 @@ a_string = "hi"
 a_string = PythonReservedKeywords().valid  # E:3.8
 
 deprecated_message = DeprecatedMessage()
+deprecated_field = deprecated_message.deprecated_field
+deprecated_message.deprecated_field = "test"  # E:3.8
 
 stub0 = DummyServiceStub()  # E:3.8
 channel = grpc.insecure_channel("127.0.0.1:8080")
@@ -310,17 +313,26 @@ class DeprecatedServicer(DeprecatedServiceServicer):
     ) -> DummyReply:
         return DummyReply()
 
+    def DeprecatedMethodNoComments(
+        self,
+        request: DeprecatedRequest,
+        context: grpc.ServicerContext,
+    ) -> DummyReply:
+        return DummyReply()
+
 
 server = grpc.server(thread_pool=concurrent.futures.ThreadPoolExecutor())
 deprecated_servicer = DeprecatedServicer()
 add_DeprecatedServiceServicer_to_server(deprecated_servicer, server)
 stub2 = DeprecatedServiceStub(channel)
-stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))
-stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # Cannot deprecate methods at this time
+stub2.DeprecatedMethod(DeprecatedRequest(old_field="test"))  # E:3.8
+stub2.DeprecatedMethodNotDeprecatedRequest(DummyRequest())  # E:3.8
 async_stub2: "dummy_pb2_grpc.DeprecatedServiceAsyncStub"  # E:3.8
 async_stub2 = DeprecatedServiceStub(grpc.aio.insecure_channel(""))
 
-de = DeprecatedEnum.DEPRECATED_ONE
+de = DeprecatedEnum.DEPRECATED_ONE  # E:3.8
+de2 = DeprecatedEnum.DEPRECATED_TWO  # E:3.8
+de3 = DEPRECATED_ONE  # Cannot mark the global one as deprecated yet
 
 # Edition 2024 tests
 
@@ -357,6 +369,8 @@ def test_clearfield_alias(msg: Editions2024Test, field: "Editions2024Test._Clear
 
 
 test_clearfield_alias(Editions2024Test(), "not_a_field")  # E:3.8
+Editions2024Test().message_field = Editions2024SubMessage()  # E:3.8
+mf = Editions2024Test().message_field
 
 
 def test_whichoneof_alias(

@@ -36,6 +36,7 @@ testproto.nested.nested_pb2.AnotherNested.NestedMessage.NESTED_ENUM2
 testproto.nested.nested_pb2.AnotherNested.INVALID
 testproto.test_pb2.DEPRECATED_ONE
 testproto.test_pb2.DEPRECATED_TWO
+testproto.test_pb2.NOT_DEPRECATED
 
 # Our enum types and helper types aren't there at runtime (Dynamic EnumTypeWrapper at runtime)
 # .*\..*EnumTypeWrapper$
@@ -259,9 +260,14 @@ testproto.test_pb2.Extensions1.ext
 .*_WhichOneofReturnType.*
 .*_WhichOneofArgType.*
 
-#
-testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.__init__
-testproto.grpc.dummy_pb2_grpc.DummyServiceStub.__init__
-testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceStub.__init__
-testproto.grpc.import_pb2_grpc.SimpleServiceStub.__init__
+# Because we represent methods as properties, they do not exist at runtime
+testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub.*
+testproto.grpc.dummy_pb2_grpc.DummyServiceStub.*
+testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceStub.*
+testproto.grpc.import_pb2_grpc.SimpleServiceStub.*
 testproto.grpc.dummy_pb2_grpc.EmptyServiceStub.__init__
+
+# Because we generate message fields as properties when deprecated they do not exist at runtime
+testproto.grpc.dummy_pb2.DeprecatedRequest.old_field
+testproto.test_pb2.DeprecatedMessage.deprecated_field
+testproto.test_pb2.DeprecatedMessage.deprecated_field_with_comment

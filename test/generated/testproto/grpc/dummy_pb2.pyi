@@ -59,7 +59,12 @@ class DeprecatedRequest(_message.Message):
     DESCRIPTOR: _descriptor.Descriptor
 
     OLD_FIELD_FIELD_NUMBER: _builtins.int
-    old_field: _builtins.str
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def old_field(self) -> _builtins.str: ...
+    @old_field.setter
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def old_field(self, value: _builtins.str) -> None: ...
     def __init__(
         self,
         *,

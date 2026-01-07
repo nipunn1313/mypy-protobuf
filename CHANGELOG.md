@@ -9,6 +9,9 @@
     - If multiple names collied, append `_{count}`
       - `from test.a.x import c as _c_1`
   - Fix bug in duplicate package name imports
+- Export stub methods as properties instead of attributes if deprecated and mark as such
+- Export enum fields as properties on class level (not module level) enums if deprecated and mark as such
+- Export fields as properties with getters/setters if deprecated and mark as such
 
 ## 4.0.0
 

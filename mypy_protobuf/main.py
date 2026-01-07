@@ -405,7 +405,7 @@ class PkgWriter(object):
 
         return lines
 
-    def _write_deprecation_warning(self, scl: SourceCodeLocation, default_message: str) -> None:
+    def _get_deprecation_message(self, scl: SourceCodeLocation, default_message: str) -> str:
         msg = default_message
         if not self.use_default_depreaction_warnings and (comments := self._get_comments(scl)):
             # Make sure the comment string is a valid python string literal
@@ -417,6 +417,10 @@ class PkgWriter(object):
             except SyntaxError as e:
                 print(f"Warning: Deprecation comment {joined} could not be parsed as a python string literal. Using default deprecation message. {e}", file=sys.stderr)
                 pass
+        return msg
+
+    def _write_deprecation_warning(self, scl: SourceCodeLocation, default_message: str) -> None:
+        msg = self._get_deprecation_message(scl, default_message)
         self._write_line(
             '@{}("""{}""")',
             self._import("warnings", "deprecated"),
@@ -477,16 +481,32 @@ class PkgWriter(object):
         values: Iterable[Tuple[int, d.EnumValueDescriptorProto]],
         value_type: str,
         scl_prefix: SourceCodeLocation,
+        *,
+        class_attributes: bool = False,
     ) -> None:
         for i, val in values:
             if val.name in PYTHON_RESERVED:
                 continue
 
             scl = scl_prefix + [i]
-            self._write_line(
-                f"{val.name}: {value_type}  # {val.number}",
-            )
-            self._write_comments(scl)
+            # Class level
+            if class_attributes and val.options.deprecated:
+                self._write_line(self._property())
+                self._write_deprecation_warning(
+                    scl + [d.EnumValueDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
+                    "This enum value has been marked as deprecated using proto enum value options.",
+                )
+                self._write_line(
+                    f"def {val.name}(self) -> {value_type}: {'' if self._has_comments(scl) else '...'}  # {val.number}",
+                )
+                with self._indent():
+                    self._write_comments(scl)
+            # Module level or non-deprecated class level
+            else:
+                self._write_line(
+                    f"{val.name}: {value_type}  # {val.number}",
+                )
+                self._write_comments(scl)
 
     def write_module_attributes(self) -> None:
         wl = self._write_line
@@ -533,6 +553,7 @@ class PkgWriter(object):
                     [(i, v) for i, v in enumerate(enum_proto.value) if v.name not in PROTO_ENUM_RESERVED],
                     value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
+                    class_attributes=True,
                 )
             wl("")
 
@@ -551,6 +572,7 @@ class PkgWriter(object):
                 if prefix == "":
                     wl("")
 
+            # Write the module level constants for enum values
             self.write_enum_values(
                 enumerate(enum_proto.value),
                 value_type_fq,
@@ -620,9 +642,33 @@ class PkgWriter(object):
                         continue
                     field_type = self.python_type(field)
                     if is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED:
-                        # Scalar non repeated fields are r/w
-                        wl(f"{field.name}: {field_type}")
-                        self._write_comments(scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx])
+                        # Scalar non repeated fields are r/w, generate getter and setter if deprecated
+                        scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
+                        deprecation_scl_field = scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER]
+                        if field.options.deprecated:
+                            wl(self._property())
+                            self._write_deprecation_warning(
+                                deprecation_scl_field,
+                                "This field has been marked as deprecated using proto field options.",
+                            )
+                            wl(f"def {field.name}(self) -> {field_type}:{' ...' if not self._has_comments(scl_field) else ''}")
+                            if self._has_comments(scl_field):
+                                with self._indent():
+                                    self._write_comments(scl_field)
+                                wl("")
+                            wl(f"@{field.name}.setter")
+                            self._write_deprecation_warning(
+                                deprecation_scl_field,
+                                "This field has been marked as deprecated using proto field options.",
+                            )
+                            wl(f"def {field.name}(self, value: {field_type}) -> None:{' ...' if not self._has_comments(scl_field) else ''}")
+                            if self._has_comments(scl_field):
+                                with self._indent():
+                                    self._write_comments(scl_field)
+                                wl("")
+                        else:
+                            wl(f"{field.name}: {field_type}")
+                            self._write_comments(scl_field)
 
                 for idx, field in enumerate(desc.field):
                     if field.name in PYTHON_RESERVED:
@@ -632,8 +678,12 @@ class PkgWriter(object):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         wl(self._property())
-                        body = " ..." if not self._has_comments(scl_field) else ""
-                        wl(f"def {field.name}(self) -> {field_type}:{body}")
+                        if field.options.deprecated:
+                            self._write_deprecation_warning(
+                                scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER],
+                                "This field has been marked as deprecated using proto field options.",
+                            )
+                        wl(f"def {field.name}(self) -> {field_type}:{' ...' if not self._has_comments(scl_field) else ''}")
                         if self._has_comments(scl_field):
                             with self._indent():
                                 self._write_comments(scl_field)
@@ -985,7 +1035,7 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
-    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, *, is_async: bool, both: bool = False, ignore_assignment_errors: bool = False) -> None:
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, *, is_async: bool, both: bool = False, ignore_type_error: bool = False) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -996,17 +1046,30 @@ class PkgWriter(object):
 
         for i, method in methods:
             scl = scl_prefix + [d.ServiceDescriptorProto.METHOD_FIELD_NUMBER, i]
+            is_deprecated = method.options.deprecated
+            has_comments = self._has_comments(scl)
+
+            # Generate type annotation once
             if both:
-                wl(
-                    "{}: {}[{}, {}]",
-                    method.name,
-                    self._import("typing", "Union"),
-                    type_str(method, is_async=False),
-                    type_str(method, is_async=True),
-                )
+                type_annotation = f"{self._import('typing', 'Union')}[{type_str(method, is_async=False)}, {type_str(method, is_async=True)}]"
             else:
-                wl("{}: {}{}", method.name, type_str(method, is_async=is_async), "" if not ignore_assignment_errors else "  # type: ignore[assignment]")
-            self._write_comments(scl)
+                type_annotation = type_str(method, is_async=is_async)
+
+            if is_deprecated:
+                wl(self._property())
+                self._write_deprecation_warning(
+                    scl + [d.MethodDescriptorProto.OPTIONS_FIELD_NUMBER, d.MethodOptions.DEPRECATED_FIELD_NUMBER],
+                    "This method has been marked as deprecated using proto method options.",
+                )
+                wl(f"def {method.name}(self) -> {type_annotation}:{' ...' if not has_comments else ''}{'  # type: ignore[override]' if ignore_type_error else ''}")
+
+                if has_comments:
+                    with self._indent():
+                        if not self._write_comments(scl):
+                            wl("...")
+            else:
+                wl(f"{method.name}: {type_annotation}{'  # type: ignore[assignment]' if ignore_type_error else ''}")
+                self._write_comments(scl)
 
     def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
         wl = self._write_line
@@ -1019,6 +1082,8 @@ class PkgWriter(object):
             input_type = self._servicer_input_type(method)
             output_type = self._servicer_output_type(method)
 
+            if method.options.deprecated:
+                self._write_deprecation_warning(scl, "This method has been marked as deprecated using proto method options.")
             if self.generate_concrete_servicer_stubs is False:
                 wl("@{}", self._import("abc", "abstractmethod"))
             wl("def {}(", method.name)
@@ -1127,7 +1192,7 @@ class PkgWriter(object):
                         if self._write_comments(scl):
                             wl("")
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
-                        self.write_grpc_stub_methods(service, scl, is_async=True, ignore_assignment_errors=True)
+                        self.write_grpc_stub_methods(service, scl, is_async=True, ignore_type_error=True)
                 else:
                     # ASYNC only - use Stub name (not AsyncStub) since there's only one type
                     wl("class {}:", class_name)
