@@ -78,6 +78,7 @@ exclude = [
     "**/*_pb2.py",
     "**/*_pb2_grpc.py",
     "test/test_concrete.py",
+    "test/**/*unittest*_pb2.pyi"
 ]
 
 executionEnvironments = [

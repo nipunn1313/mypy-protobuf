@@ -3,29 +3,29 @@
 isort:skip_file
 package test3"""
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from test import test_generated_mypy as _test_generated_mypy
+import builtins as _builtins
 import sys
-import test.test_generated_mypy
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _OuterEnum:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _OuterEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _OuterEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_OuterEnum.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     UNKNOWN: _OuterEnum.ValueType  # 0
     FOO3: _OuterEnum.ValueType  # 1
     BAR3: _OuterEnum.ValueType  # 2
@@ -35,34 +35,34 @@ class OuterEnum(_OuterEnum, metaclass=_OuterEnumEnumTypeWrapper): ...
 UNKNOWN: OuterEnum.ValueType  # 0
 FOO3: OuterEnum.ValueType  # 1
 BAR3: OuterEnum.ValueType  # 2
-Global___OuterEnum: typing_extensions.TypeAlias = OuterEnum
+Global___OuterEnum: _TypeAlias = OuterEnum  # noqa: Y015
 
-@typing.final
-class OuterMessage3(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class OuterMessage3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    A_STRING_FIELD_NUMBER: builtins.int
-    a_string: builtins.str
+    A_STRING_FIELD_NUMBER: _builtins.int
+    a_string: _builtins.str
     def __init__(
         self,
         *,
-        a_string: builtins.str = ...,
+        a_string: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a_string", b"a_string"]
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___OuterMessage3: typing_extensions.TypeAlias = OuterMessage3
+Global___OuterMessage3: _TypeAlias = OuterMessage3  # noqa: Y015
 
-@typing.final
-class SimpleProto3(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class SimpleProto3(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _InnerEnum:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _InnerEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SimpleProto3._InnerEnum.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _InnerEnumEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[SimpleProto3._InnerEnum.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         INNER1: SimpleProto3._InnerEnum.ValueType  # 0
         INNER2: SimpleProto3._InnerEnum.ValueType  # 1
 
@@ -70,153 +70,153 @@ class SimpleProto3(google.protobuf.message.Message):
     INNER1: SimpleProto3.InnerEnum.ValueType  # 0
     INNER2: SimpleProto3.InnerEnum.ValueType  # 1
 
-    @typing.final
-    class MapScalarEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class MapScalarEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.int
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.int
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.int = ...,
-            value: builtins.str = ...,
+            key: _builtins.int = ...,
+            value: _builtins.str = ...,
         ) -> None: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class MapMessageEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class MapMessageEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.int
-        @property
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.int
+        @_builtins.property
         def value(self) -> Global___OuterMessage3: ...
         def __init__(
             self,
             *,
-            key: builtins.int = ...,
+            key: _builtins.int = ...,
             value: Global___OuterMessage3 | None = ...,
         ) -> None: ...
-        _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["value", b"value"]
-        def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing.final
-    class EmailByUidEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class EmailByUidEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.int
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.int
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.int = ...,
-            value: builtins.str = ...,
+            key: _builtins.int = ...,
+            value: _builtins.str = ...,
         ) -> None: ...
-        _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["key", b"key", "value", b"value"]
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
         def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    A_STRING_FIELD_NUMBER: builtins.int
-    A_REPEATED_STRING_FIELD_NUMBER: builtins.int
-    A_OUTER_ENUM_FIELD_NUMBER: builtins.int
-    OUTER_MESSAGE_FIELD_NUMBER: builtins.int
-    INNER_ENUM_FIELD_NUMBER: builtins.int
-    A_ONEOF_1_FIELD_NUMBER: builtins.int
-    A_ONEOF_2_FIELD_NUMBER: builtins.int
-    OUTER_MESSAGE_IN_ONEOF_FIELD_NUMBER: builtins.int
-    OUTER_ENUM_IN_ONEOF_FIELD_NUMBER: builtins.int
-    INNER_ENUM_IN_ONEOF_FIELD_NUMBER: builtins.int
-    B_ONEOF_1_FIELD_NUMBER: builtins.int
-    B_ONEOF_2_FIELD_NUMBER: builtins.int
-    BOOL_FIELD_NUMBER: builtins.int
-    OUTERENUM_FIELD_NUMBER: builtins.int
-    OUTERMESSAGE3_FIELD_NUMBER: builtins.int
-    MAP_SCALAR_FIELD_NUMBER: builtins.int
-    MAP_MESSAGE_FIELD_NUMBER: builtins.int
-    AN_OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    EMAIL_FIELD_NUMBER: builtins.int
-    EMAIL_BY_UID_FIELD_NUMBER: builtins.int
-    a_string: builtins.str
+    A_STRING_FIELD_NUMBER: _builtins.int
+    A_REPEATED_STRING_FIELD_NUMBER: _builtins.int
+    A_OUTER_ENUM_FIELD_NUMBER: _builtins.int
+    OUTER_MESSAGE_FIELD_NUMBER: _builtins.int
+    INNER_ENUM_FIELD_NUMBER: _builtins.int
+    A_ONEOF_1_FIELD_NUMBER: _builtins.int
+    A_ONEOF_2_FIELD_NUMBER: _builtins.int
+    OUTER_MESSAGE_IN_ONEOF_FIELD_NUMBER: _builtins.int
+    OUTER_ENUM_IN_ONEOF_FIELD_NUMBER: _builtins.int
+    INNER_ENUM_IN_ONEOF_FIELD_NUMBER: _builtins.int
+    B_ONEOF_1_FIELD_NUMBER: _builtins.int
+    B_ONEOF_2_FIELD_NUMBER: _builtins.int
+    BOOL_FIELD_NUMBER: _builtins.int
+    OUTERENUM_FIELD_NUMBER: _builtins.int
+    OUTERMESSAGE3_FIELD_NUMBER: _builtins.int
+    MAP_SCALAR_FIELD_NUMBER: _builtins.int
+    MAP_MESSAGE_FIELD_NUMBER: _builtins.int
+    AN_OPTIONAL_STRING_FIELD_NUMBER: _builtins.int
+    USER_ID_FIELD_NUMBER: _builtins.int
+    EMAIL_FIELD_NUMBER: _builtins.int
+    EMAIL_BY_UID_FIELD_NUMBER: _builtins.int
+    a_string: _builtins.str
     a_outer_enum: Global___OuterEnum.ValueType
     inner_enum: Global___SimpleProto3.InnerEnum.ValueType
-    a_oneof_1: builtins.str
-    a_oneof_2: builtins.str
+    a_oneof_1: _builtins.str
+    a_oneof_2: _builtins.str
     outer_enum_in_oneof: Global___OuterEnum.ValueType
     inner_enum_in_oneof: Global___SimpleProto3.InnerEnum.ValueType
-    b_oneof_1: builtins.str
-    b_oneof_2: builtins.str
+    b_oneof_1: _builtins.str
+    b_oneof_2: _builtins.str
     OuterEnum: Global___OuterEnum.ValueType
     """Test having fieldname match messagename"""
-    an_optional_string: builtins.str
-    user_id: test.test_generated_mypy.UserId
-    email: test.test_generated_mypy.Email
-    @property
-    def a_repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    @property
+    an_optional_string: _builtins.str
+    user_id: _test_generated_mypy.UserId
+    email: _test_generated_mypy.Email
+    @_builtins.property
+    def a_repeated_string(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_builtins.property
     def outer_message(self) -> Global___OuterMessage3: ...
-    @property
+    @_builtins.property
     def outer_message_in_oneof(self) -> Global___OuterMessage3: ...
-    @property
+    @_builtins.property
     def bool(self) -> Global___OuterMessage3: ...
-    @property
+    @_builtins.property
     def OuterMessage3(self) -> Global___OuterMessage3: ...
-    @property
-    def map_scalar(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.str]:
+    @_builtins.property
+    def map_scalar(self) -> _containers.ScalarMap[_builtins.int, _builtins.str]:
         """Test generation of map"""
 
-    @property
-    def map_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, Global___OuterMessage3]: ...
-    @property
-    def email_by_uid(self) -> google.protobuf.internal.containers.ScalarMap[test.test_generated_mypy.UserId, test.test_generated_mypy.Email]: ...
+    @_builtins.property
+    def map_message(self) -> _containers.MessageMap[_builtins.int, Global___OuterMessage3]: ...
+    @_builtins.property
+    def email_by_uid(self) -> _containers.ScalarMap[_test_generated_mypy.UserId, _test_generated_mypy.Email]: ...
     def __init__(
         self,
         *,
-        a_string: builtins.str = ...,
-        a_repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
+        a_string: _builtins.str = ...,
+        a_repeated_string: _abc.Iterable[_builtins.str] | None = ...,
         a_outer_enum: Global___OuterEnum.ValueType = ...,
         outer_message: Global___OuterMessage3 | None = ...,
         inner_enum: Global___SimpleProto3.InnerEnum.ValueType = ...,
-        a_oneof_1: builtins.str = ...,
-        a_oneof_2: builtins.str = ...,
+        a_oneof_1: _builtins.str = ...,
+        a_oneof_2: _builtins.str = ...,
         outer_message_in_oneof: Global___OuterMessage3 | None = ...,
         outer_enum_in_oneof: Global___OuterEnum.ValueType = ...,
         inner_enum_in_oneof: Global___SimpleProto3.InnerEnum.ValueType = ...,
-        b_oneof_1: builtins.str = ...,
-        b_oneof_2: builtins.str = ...,
+        b_oneof_1: _builtins.str = ...,
+        b_oneof_2: _builtins.str = ...,
         bool: Global___OuterMessage3 | None = ...,
         OuterEnum: Global___OuterEnum.ValueType = ...,
         OuterMessage3: Global___OuterMessage3 | None = ...,
-        map_scalar: collections.abc.Mapping[builtins.int, builtins.str] | None = ...,
-        map_message: collections.abc.Mapping[builtins.int, Global___OuterMessage3] | None = ...,
-        an_optional_string: builtins.str | None = ...,
-        user_id: test.test_generated_mypy.UserId = ...,
-        email: test.test_generated_mypy.Email = ...,
-        email_by_uid: collections.abc.Mapping[test.test_generated_mypy.UserId, test.test_generated_mypy.Email] | None = ...,
+        map_scalar: _abc.Mapping[_builtins.int, _builtins.str] | None = ...,
+        map_message: _abc.Mapping[_builtins.int, Global___OuterMessage3] | None = ...,
+        an_optional_string: _builtins.str | None = ...,
+        user_id: _test_generated_mypy.UserId = ...,
+        email: _test_generated_mypy.Email = ...,
+        email_by_uid: _abc.Mapping[_test_generated_mypy.UserId, _test_generated_mypy.Email] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["OuterMessage3", b"OuterMessage3", "_an_optional_string", b"_an_optional_string", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "an_optional_string", b"an_optional_string", "b_oneof", b"b_oneof", "b_oneof_1", b"b_oneof_1", "b_oneof_2", b"b_oneof_2", "bool", b"bool", "inner_enum_in_oneof", b"inner_enum_in_oneof", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message", b"outer_message", "outer_message_in_oneof", b"outer_message_in_oneof"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["OuterEnum", b"OuterEnum", "OuterMessage3", b"OuterMessage3", "_an_optional_string", b"_an_optional_string", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_outer_enum", b"a_outer_enum", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "an_optional_string", b"an_optional_string", "b_oneof", b"b_oneof", "b_oneof_1", b"b_oneof_1", "b_oneof_2", b"b_oneof_2", "bool", b"bool", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "map_message", b"map_message", "map_scalar", b"map_scalar", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message", b"outer_message", "outer_message_in_oneof", b"outer_message_in_oneof", "user_id", b"user_id"]
+    _HasFieldArgType: _TypeAlias = _typing.Literal["OuterMessage3", b"OuterMessage3", "_an_optional_string", b"_an_optional_string", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "an_optional_string", b"an_optional_string", "b_oneof", b"b_oneof", "b_oneof_1", b"b_oneof_1", "b_oneof_2", b"b_oneof_2", "bool", b"bool", "inner_enum_in_oneof", b"inner_enum_in_oneof", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message", b"outer_message", "outer_message_in_oneof", b"outer_message_in_oneof"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["OuterEnum", b"OuterEnum", "OuterMessage3", b"OuterMessage3", "_an_optional_string", b"_an_optional_string", "a_oneof", b"a_oneof", "a_oneof_1", b"a_oneof_1", "a_oneof_2", b"a_oneof_2", "a_outer_enum", b"a_outer_enum", "a_repeated_string", b"a_repeated_string", "a_string", b"a_string", "an_optional_string", b"an_optional_string", "b_oneof", b"b_oneof", "b_oneof_1", b"b_oneof_1", "b_oneof_2", b"b_oneof_2", "bool", b"bool", "email", b"email", "email_by_uid", b"email_by_uid", "inner_enum", b"inner_enum", "inner_enum_in_oneof", b"inner_enum_in_oneof", "map_message", b"map_message", "map_scalar", b"map_scalar", "outer_enum_in_oneof", b"outer_enum_in_oneof", "outer_message", b"outer_message", "outer_message_in_oneof", b"outer_message_in_oneof", "user_id", b"user_id"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
-    _WhichOneofReturnType__an_optional_string: typing_extensions.TypeAlias = typing.Literal["an_optional_string"]
-    _WhichOneofArgType__an_optional_string: typing_extensions.TypeAlias = typing.Literal["_an_optional_string", b"_an_optional_string"]
-    _WhichOneofReturnType_a_oneof: typing_extensions.TypeAlias = typing.Literal["a_oneof_1", "a_oneof_2", "outer_message_in_oneof", "outer_enum_in_oneof", "inner_enum_in_oneof"]
-    _WhichOneofArgType_a_oneof: typing_extensions.TypeAlias = typing.Literal["a_oneof", b"a_oneof"]
-    _WhichOneofReturnType_b_oneof: typing_extensions.TypeAlias = typing.Literal["b_oneof_1", "b_oneof_2"]
-    _WhichOneofArgType_b_oneof: typing_extensions.TypeAlias = typing.Literal["b_oneof", b"b_oneof"]
-    @typing.overload
+    _WhichOneofReturnType__an_optional_string: _TypeAlias = _typing.Literal["an_optional_string"]  # noqa: Y015
+    _WhichOneofArgType__an_optional_string: _TypeAlias = _typing.Literal["_an_optional_string", b"_an_optional_string"]  # noqa: Y015
+    _WhichOneofReturnType_a_oneof: _TypeAlias = _typing.Literal["a_oneof_1", "a_oneof_2", "outer_message_in_oneof", "outer_enum_in_oneof", "inner_enum_in_oneof"]  # noqa: Y015
+    _WhichOneofArgType_a_oneof: _TypeAlias = _typing.Literal["a_oneof", b"a_oneof"]  # noqa: Y015
+    _WhichOneofReturnType_b_oneof: _TypeAlias = _typing.Literal["b_oneof_1", "b_oneof_2"]  # noqa: Y015
+    _WhichOneofArgType_b_oneof: _TypeAlias = _typing.Literal["b_oneof", b"b_oneof"]  # noqa: Y015
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType__an_optional_string) -> _WhichOneofReturnType__an_optional_string | None: ...
-    @typing.overload
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType_a_oneof) -> _WhichOneofReturnType_a_oneof | None: ...
-    @typing.overload
+    @_typing.overload
     def WhichOneof(self, oneof_group: _WhichOneofArgType_b_oneof) -> _WhichOneofReturnType_b_oneof | None: ...
 
-Global___SimpleProto3: typing_extensions.TypeAlias = SimpleProto3
+Global___SimpleProto3: _TypeAlias = SimpleProto3  # noqa: Y015

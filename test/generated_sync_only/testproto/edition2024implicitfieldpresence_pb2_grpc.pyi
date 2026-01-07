@@ -3,7 +3,7 @@
 isort:skip_file
 Edition version of proto2 file"""
 
-import collections.abc
+from collections import abc as _abc
 
 
 GRPC_GENERATED_VERSION: str

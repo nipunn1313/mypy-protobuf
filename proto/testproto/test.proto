@@ -3,8 +3,10 @@ syntax = "proto2";
 
 package test;
 
+import "google/protobuf/empty.proto";
 import "mypy_protobuf/extensions.proto";
 import "testproto/inner/inner.proto";
+import "testproto/inner/test3.proto";
 import "testproto/nested/nested.proto";
 import "testproto/nopackage.proto";
 import "testproto/test3.proto";
@@ -73,6 +75,13 @@ message Simple1 {
     (mypy_protobuf.keytype)="test/test_generated_mypy.UserId",
     (mypy_protobuf.valuetype)="test/test_generated_mypy.Email"
   ];
+
+  optional string property = 24;
+  optional string collections = 25;
+  optional string testproto = 26;
+
+  optional .google.protobuf.Empty empty = 27;
+  optional string sys = 28;
 
   extensions 1000 to max;
 }
@@ -195,4 +204,8 @@ enum DeprecatedEnum {
 
     DEPRECATED_ONE = 1;
     DEPRECATED_TWO = 2;
+}
+
+message TestDuplicatePackageMessage {
+  required inner.DuplicatePackageMessage msg = 1;
 }

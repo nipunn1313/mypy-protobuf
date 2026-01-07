@@ -22,3 +22,4 @@ __pycache__/
 .DS_Store
 /venv_*
 /protoc_*
+/third_party

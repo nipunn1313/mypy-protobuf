@@ -32,22 +32,22 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.well_known_types
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import well_known_types as _well_known_types
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class Duration(google.protobuf.message.Message, google.protobuf.internal.well_known_types.Duration):
+@_typing.final
+class Duration(_message.Message, _well_known_types.Duration):
     """A Duration represents a signed, fixed-length span of time represented
     as a count of seconds and fractions of seconds at nanosecond
     resolution. It is independent of any calendar and concepts like "day"
@@ -108,16 +108,16 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     microsecond should be expressed in JSON format as "3.000001s".
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SECONDS_FIELD_NUMBER: builtins.int
-    NANOS_FIELD_NUMBER: builtins.int
-    seconds: builtins.int
+    SECONDS_FIELD_NUMBER: _builtins.int
+    NANOS_FIELD_NUMBER: _builtins.int
+    seconds: _builtins.int
     """Signed seconds of the span of time. Must be from -315,576,000,000
     to +315,576,000,000 inclusive. Note: these bounds are computed from:
     60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
     """
-    nanos: builtins.int
+    nanos: _builtins.int
     """Signed fractions of a second at nanosecond resolution of the span
     of time. Durations less than one second are represented with a 0
     `seconds` field and a positive or negative `nanos` field. For durations
@@ -128,10 +128,10 @@ class Duration(google.protobuf.message.Message, google.protobuf.internal.well_kn
     def __init__(
         self,
         *,
-        seconds: builtins.int = ...,
-        nanos: builtins.int = ...,
+        seconds: _builtins.int = ...,
+        nanos: _builtins.int = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["nanos", b"nanos", "seconds", b"seconds"]
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["nanos", b"nanos", "seconds", b"seconds"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Duration: typing_extensions.TypeAlias = Duration
+Global___Duration: _TypeAlias = Duration  # noqa: Y015

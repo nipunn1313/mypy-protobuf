@@ -350,7 +350,7 @@ protoc --python_out=output/location --mypy_grpc_out=generate_concrete_servicer_s
 
 ### `sync_only/async_only`
 
-By default, generated GRPC stubs are compatible with both sync and async variants. If you only 
+By default, generated GRPC stubs are compatible with both sync and async variants. If you only
 want sync or async GRPC stubs, use this option:
 
 ```
@@ -457,6 +457,10 @@ mypy --target-version=2.7 {files}
 8. `uv pip install --upgrade twine`
 9. `uv run twine upload --repository testpypi dist/*`
 10. `uv run twine upload dist/*`
+
+## 3rd Party Tests
+
+3rd Party proto files can be added in `run_tests.sh`, they should be cloned in, generated, type checked, then cleaned up.
 
 ## Contributing
 

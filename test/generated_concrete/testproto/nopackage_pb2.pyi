@@ -3,52 +3,52 @@
 isort:skip_file
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.message
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class NoPackage(google.protobuf.message.Message):
+@_typing.final
+class NoPackage(_message.Message):
     """Intentionally don't set a package - just to make sure we can handle it."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     def __init__(
         self,
     ) -> None: ...
 
-Global___NoPackage: typing_extensions.TypeAlias = NoPackage
+Global___NoPackage: _TypeAlias = NoPackage  # noqa: Y015
 
-@typing.final
-class NoPackage2(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class NoPackage2(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NP_FIELD_NUMBER: builtins.int
-    NP_REP_FIELD_NUMBER: builtins.int
-    @property
+    NP_FIELD_NUMBER: _builtins.int
+    NP_REP_FIELD_NUMBER: _builtins.int
+    @_builtins.property
     def np(self) -> Global___NoPackage: ...
-    @property
-    def np_rep(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[Global___NoPackage]: ...
+    @_builtins.property
+    def np_rep(self) -> _containers.RepeatedCompositeFieldContainer[Global___NoPackage]: ...
     def __init__(
         self,
         *,
         np: Global___NoPackage | None = ...,
-        np_rep: collections.abc.Iterable[Global___NoPackage] | None = ...,
+        np_rep: _abc.Iterable[Global___NoPackage] | None = ...,
     ) -> None: ...
-    _HasFieldArgType: typing_extensions.TypeAlias = typing.Literal["np", b"np"]
-    def HasField(self, field_name: _HasFieldArgType) -> builtins.bool: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["np", b"np", "np_rep", b"np_rep"]
+    _HasFieldArgType: _TypeAlias = _typing.Literal["np", b"np"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["np", b"np", "np_rep", b"np_rep"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___NoPackage2: typing_extensions.TypeAlias = NoPackage2
+Global___NoPackage2: _TypeAlias = NoPackage2  # noqa: Y015

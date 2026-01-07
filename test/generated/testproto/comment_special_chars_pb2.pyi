@@ -3,57 +3,57 @@
 isort:skip_file
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class Test(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Test(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    A_FIELD_NUMBER: builtins.int
-    B_FIELD_NUMBER: builtins.int
-    C_FIELD_NUMBER: builtins.int
-    D_FIELD_NUMBER: builtins.int
-    E_FIELD_NUMBER: builtins.int
-    F_FIELD_NUMBER: builtins.int
-    G_FIELD_NUMBER: builtins.int
-    H_FIELD_NUMBER: builtins.int
-    I_FIELD_NUMBER: builtins.int
-    J_FIELD_NUMBER: builtins.int
-    K_FIELD_NUMBER: builtins.int
-    a: builtins.str
+    A_FIELD_NUMBER: _builtins.int
+    B_FIELD_NUMBER: _builtins.int
+    C_FIELD_NUMBER: _builtins.int
+    D_FIELD_NUMBER: _builtins.int
+    E_FIELD_NUMBER: _builtins.int
+    F_FIELD_NUMBER: _builtins.int
+    G_FIELD_NUMBER: _builtins.int
+    H_FIELD_NUMBER: _builtins.int
+    I_FIELD_NUMBER: _builtins.int
+    J_FIELD_NUMBER: _builtins.int
+    K_FIELD_NUMBER: _builtins.int
+    a: _builtins.str
     """Ending with " """
-    b: builtins.str
+    b: _builtins.str
     """Ending with "" """
-    c: builtins.str
+    c: _builtins.str
     """Ending with \"\"\" """
-    d: builtins.str
+    d: _builtins.str
     """Ending with \\ """
-    e: builtins.str
+    e: _builtins.str
     """Containing bad escape: \\x"""
-    f: builtins.str
+    f: _builtins.str
     """Containing \"\"\"" quadruple"""
-    g: builtins.str
+    g: _builtins.str
     """Containing \"\"\""" quintuple"""
-    h: builtins.str
+    h: _builtins.str
     """Containing \"\"\"\"\"\" sextuple"""
-    i: builtins.str
+    i: _builtins.str
     """\"\"\" Multiple \"\"\" triples \"\"\" """
-    j: builtins.str
+    j: _builtins.str
     """"quotes" can be a problem in comments.
     \"\"\"Triple quotes\"\"\" just as well
     """
-    k: builtins.str
+    k: _builtins.str
     """\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"
     "                                              "
     " Super Duper comments with surrounding edges! "
@@ -65,19 +65,19 @@ class Test(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        a: builtins.str = ...,
-        b: builtins.str = ...,
-        c: builtins.str = ...,
-        d: builtins.str = ...,
-        e: builtins.str = ...,
-        f: builtins.str = ...,
-        g: builtins.str = ...,
-        h: builtins.str = ...,
-        i: builtins.str = ...,
-        j: builtins.str = ...,
-        k: builtins.str = ...,
+        a: _builtins.str = ...,
+        b: _builtins.str = ...,
+        c: _builtins.str = ...,
+        d: _builtins.str = ...,
+        e: _builtins.str = ...,
+        f: _builtins.str = ...,
+        g: _builtins.str = ...,
+        h: _builtins.str = ...,
+        i: _builtins.str = ...,
+        j: _builtins.str = ...,
+        k: _builtins.str = ...,
     ) -> None: ...
-    _ClearFieldArgType: typing_extensions.TypeAlias = typing.Literal["a", b"a", "b", b"b", "c", b"c", "d", b"d", "e", b"e", "f", b"f", "g", b"g", "h", b"h", "i", b"i", "j", b"j", "k", b"k"]
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a", b"a", "b", b"b", "c", b"c", "d", b"d", "e", b"e", "f", b"f", "g", b"g", "h", b"h", "i", b"i", "j", b"j", "k", b"k"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-Global___Test: typing_extensions.TypeAlias = Test
+Global___Test: _TypeAlias = Test  # noqa: Y015

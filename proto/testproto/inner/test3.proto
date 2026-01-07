@@ -1,0 +1,8 @@
+/*
+* Example to test the handling of import name collision
+*/
+syntax = "proto3";
+
+package inner;
+
+message DuplicatePackageMessage {};

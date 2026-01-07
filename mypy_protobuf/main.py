@@ -16,7 +16,6 @@ from typing import (
     List,
     Optional,
     Sequence,
-    Set,
     Tuple,
 )
 
@@ -165,6 +164,92 @@ class GRPCType(enum.Enum):
         return self in (GRPCType.ASYNC, GRPCType.BOTH)
 
 
+class Imports:
+    # Set of {x: (a, b, c) that maps to either `from {a} import {b} as {c}` or `import {b} as {c}`
+    _imports: Dict[str, Tuple[Optional[str], Optional[str], str]]
+    # Set of imported names, if the same name is imported more than once it gets formatted as _{name}_{count}
+    _imported_names: Dict[str, int] = defaultdict(int)
+    # Set of imported typing statements, form of {<name>: <alias>}
+    _typing_imports: Dict[str, str]
+
+    def __init__(self) -> None:
+        self._imports = {}
+        self._imported_names = defaultdict(int)
+        self._typing_imports = {}
+
+    @property
+    def statements(self) -> List[str]:
+        """Returns a list of import tuples.
+
+            0: From statement, optional
+            1: Import name
+            2: Alias
+
+        Example:
+            self._import("grpc.aio", "Channel") -> ("grpc", "aio", "_aio") -> from grpc import aio as _aio
+            self._import("grpc", "Channel") -> (None, "grpc", "_grpc") -> import grpc as _grpc
+
+        """
+        statements = []
+        for _, (frm, alias, original) in self._imports.items():
+            if frm is None:
+                if alias is None:
+                    statements.append(f"import {original}")
+                else:
+                    statements.append(f"import {original} as {alias}")
+            else:
+                statements.append(f"from {frm} import {original} as {alias}")
+
+        return statements
+
+    @property
+    def typing_statements(self) -> List[str]:
+        """Return a dictionary of typing imports with their aliases."""
+        statements = []
+        for orig, alias in self._typing_imports.items():
+            statements.append(f"{orig} as {alias}")
+        return statements
+
+    def _name_alias(self, name: str, mangle: bool = True) -> str:
+        if f"{name}" in self._imported_names:
+            count = self._imported_names[name] + 1
+            self._imported_names[name] = count
+            return f"{'_' if mangle else ''}{name}_{count}"
+        else:
+            self._imported_names[name] = 0
+            return f"{'_' if mangle else ''}{name}"
+
+    def add_import(self, path: str, name: Optional[str] = None, mangle: bool = True) -> str:
+        """Add an import and return the name used for it
+
+        Examples:
+            add_import("collections.abc.Iterable", "Iterable") -> _abc.Iterable
+
+        """
+        if not name:
+            self._imports[path] = (None, None, path)
+            return path
+        if imp := self._imports.get(path):
+            _alias = imp[1]
+        else:
+            parts = path.rsplit(".", 1)
+            if len(parts) > 1:
+                _alias = self._name_alias(parts[-1], mangle=mangle)
+                self._imports[path] = (parts[0], _alias, parts[-1])
+            elif len(parts) == 1:
+                _alias = self._name_alias(parts[0], mangle=mangle)
+                self._imports[path] = (None, _alias, parts[0])
+            else:
+                raise RuntimeError("Package import string cannot be empty")
+
+        return f"{_alias}.{name}"
+
+    def add_typing_import(self, name: str) -> str:
+        if name not in self._typing_imports:
+            self._typing_imports[name] = self._name_alias(name)
+        return self._typing_imports[name]
+
+
 class PkgWriter(object):
     """Writes a single pyi file"""
 
@@ -190,40 +275,45 @@ class PkgWriter(object):
         self.lines: List[str] = []
         self.indent = ""
 
-        # Set of {x}, where {x} corresponds to to `import {x}`
-        self.imports: Set[str] = set()
-        # dictionary of x->(y,z) for `from {x} import {y} as {z}`
-        # if {z} is None, then it shortens to `from {x} import {y}`
-        self.from_imports: Dict[str, Set[Tuple[str, str | None]]] = defaultdict(set)
+        # Set of {x: y}, where {x} corresponds to to `from {x} import {y} as _{y}`
+        self.imports = Imports()
         self.typing_extensions_min: Optional[Tuple[int, int]] = None
         self.deprecated_min: Optional[Tuple[int, int]] = None
 
         # Comments
         self.source_code_info_by_scl = {tuple(location.path): location for location in fd.source_code_info.location}
 
+    @property
+    def _deprecated_name(self) -> str:
+        return "_deprecated"
+
     def _import(self, path: str, name: str) -> str:
         """Imports a stdlib path and returns a handle to it
         eg. self._import("typing", "Literal") -> "Literal"
+
+        If alias is true, then it will prefix the import with an underscore to prevent conflicts with builtin names
         """
         if path == "typing_extensions":
-            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12)}
+            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12), "Self": (3, 11)}
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
-            return "typing_extensions." + name
+            return self.imports.add_typing_import(name)
 
         if path == "warnings" and name == "deprecated":
             if not self.deprecated_min or self.deprecated_min < (3, 11):
                 self.deprecated_min = (3, 13)
-            return name
+            return self._deprecated_name
 
         imp = path.replace("/", ".")
         if self.readable_stubs:
-            self.from_imports[imp].add((name, None))
-            return name
+            # Do not mangle if readable stubs is set. This can cause conflicts
+            return self.imports.add_import(imp, name, mangle=False)
         else:
-            self.imports.add(imp)
-            return imp + "." + name
+            return self.imports.add_import(imp, name)
+
+    def _property(self) -> str:
+        return f"@{self._import('builtins', 'property')}"
 
     def _import_message(self, name: str) -> str:
         """Import a referenced message and return a handle"""
@@ -427,7 +517,7 @@ class PkgWriter(object):
                     self._builtin("int"),
                 )
                 # Alias to the classic shorter definition "V"
-                wl("V: {} = ValueType", self._import("typing_extensions", "TypeAlias"))
+                wl("V: {} = ValueType  # noqa: Y015", self._import("typing_extensions", "TypeAlias"))
             wl("")
             wl(
                 "class {}({}[{}], {}):",
@@ -467,7 +557,7 @@ class PkgWriter(object):
                 scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
             )
             if prefix == "" and not self.readable_stubs:
-                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
+                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}  # noqa: Y015")
             wl("")
 
     def write_messages(
@@ -541,7 +631,7 @@ class PkgWriter(object):
                     if not (is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
-                        wl("@property")
+                        wl(self._property())
                         body = " ..." if not self._has_comments(scl_field) else ""
                         wl(f"def {field.name}(self) -> {field_type}:{body}")
                         if self._has_comments(scl_field):
@@ -577,7 +667,7 @@ class PkgWriter(object):
 
             if prefix == "" and not self.readable_stubs:
                 wl("")
-                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}")
+                wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}  # noqa: Y015")
             wl("")
 
     @staticmethod
@@ -608,13 +698,13 @@ class PkgWriter(object):
             return
 
         if hf_fields:
-            wl("_HasFieldArgType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
+            wl("_HasFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
             wl(
                 "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
                 self._builtin("bool"),
             )
         if cf_fields:
-            wl("_ClearFieldArgType: {} = {}[{}]", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
+            wl("_ClearFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
             wl(
                 "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
             )
@@ -622,7 +712,7 @@ class PkgWriter(object):
         # Write type aliases first so overloads are not interrupted
         for wo_field, members in sorted(wo_fields.items()):
             wl(
-                "_WhichOneofReturnType_{}: {} = {}[{}]",
+                "_WhichOneofReturnType_{}: {} = {}[{}]  # noqa: Y015",
                 wo_field,
                 self._import("typing_extensions", "TypeAlias"),
                 self._import("typing", "Literal"),
@@ -630,7 +720,7 @@ class PkgWriter(object):
                 ", ".join(f'"{m}"' for m in members),
             )
             wl(
-                "_WhichOneofArgType_{}: {} = {}[{}]",
+                "_WhichOneofArgType_{}: {} = {}[{}]  # noqa: Y015",
                 wo_field,
                 self._import("typing_extensions", "TypeAlias"),
                 self._import("typing", "Literal"),
@@ -811,27 +901,40 @@ class PkgWriter(object):
         return result
 
     def _servicer_output_type(self, method: d.MethodDescriptorProto) -> str:
-        result = self._import_message(method.output_type)
+        msg = self._import_message(method.output_type)
+
+        # Don't actually call _import until the end. Otherwise we get unnecessary imports
         if method.server_streaming:
             # Union[Iterator[Resp], AsyncIterator[Resp]] is subtyped by Iterator[Resp] and AsyncIterator[Resp].
             # So both can be used in the covariant function return position.
-            sync = f"{self._import('collections.abc', 'Iterator')}[{result}]"
-            a_sync = f"{self._import('collections.abc', 'AsyncIterator')}[{result}]"
-            result = f"{self._import('typing', 'Union')}[{sync}, {a_sync}]"
+            def sync() -> str:
+                return f"{self._import('collections.abc', 'Iterator')}[{msg}]"
+
+            def a_sync() -> str:
+                return f"{self._import('collections.abc', 'AsyncIterator')}[{msg}]"
+
+            def result() -> str:
+                return f"{self._import('typing', 'Union')}[{sync()}, {a_sync()}]"
+
         else:
             # Union[Resp, Awaitable[Resp]] is subtyped by Resp and Awaitable[Resp].
             # So both can be used in the covariant function return position.
             # Awaitable[Resp] is equivalent to async def.
-            sync = result
-            a_sync = f"{self._import('collections.abc', 'Awaitable')}[{result}]"
-            result = f"{self._import('typing', 'Union')}[{sync}, {a_sync}]"
+            def sync() -> str:
+                return msg
+
+            def a_sync() -> str:
+                return f"{self._import('collections.abc', 'Awaitable')}[{msg}]"
+
+            def result() -> str:
+                return f"{self._import('typing', 'Union')}[{sync()}, {a_sync()}]"
 
         if self.grpc_type == GRPCType.SYNC:
-            return sync
+            return sync()
         elif self.grpc_type == GRPCType.ASYNC:
-            return a_sync
+            return a_sync()
         else:
-            return result
+            return result()
 
     def write_grpc_iterator_type(self) -> None:
         wl = self._write_line
@@ -856,7 +959,7 @@ class PkgWriter(object):
     def get_servicer_context_type(self, input_: str, output: str) -> str:
         """Get the type to use for the context parameter in servicer methods."""
         if self.grpc_type == GRPCType.ASYNC:
-            return self._import("grpc.aio", f"ServicerContext[{input_}, {output}]")
+            return f"{self._import('grpc.aio', 'ServicerContext')}[{input_}, {output}]"
         elif self.grpc_type == GRPCType.SYNC:
             return self._import("grpc", "ServicerContext")
         else:
@@ -936,15 +1039,19 @@ class PkgWriter(object):
             wl("")
 
     def make_server_type(self) -> str:
-        server = self._import("grpc", "Server")
-        aserver = self._import("grpc.aio", "Server")
+        # Don't call the _import call yet, otherwise we get unnecessary imports
+        def server() -> str:
+            return self._import("grpc", "Server")
+
+        def aserver() -> str:
+            return self._import("grpc.aio", "Server")
 
         if self.grpc_type == GRPCType.BOTH:
-            return f"{self._import('typing', 'Union')}[{server}, {aserver}]"
+            return f"{self._import('typing', 'Union')}[{server()}, {aserver()}]"
         elif self.grpc_type == GRPCType.ASYNC:
-            return aserver
+            return aserver()
         elif self.grpc_type == GRPCType.SYNC:
-            return server
+            return server()
         else:
             raise RuntimeError(f"Impossible, {self.grpc_type=}")
 
@@ -987,7 +1094,7 @@ class PkgWriter(object):
                         wl(
                             "def __new__(cls, channel: {}) -> {}: ...",
                             self._import("grpc", "Channel"),
-                            class_name,
+                            self._import("typing_extensions", "Self"),
                         )
 
                         # Write async overload
@@ -1168,34 +1275,27 @@ class PkgWriter(object):
             names = [m.name for m in reexport_fd.message_type] + [m.name for m in reexport_fd.enum_type] + [v.name for m in reexport_fd.enum_type for v in m.value] + [m.name for m in reexport_fd.extension]
 
             if names:
-                # n,n to force a reexport (from x import y as y)
-                self.from_imports[reexport_imp].update((n, n) for n in names)
+                # Add the rexported imports as individual imports to preserve names. Do not mangle
+                [self.imports.add_import(f"{reexport_imp}.{n}", n, mangle=False) for n in names]
 
         if self.typing_extensions_min or self.deprecated_min:
-            self.imports.add("sys")
-        for pkg in sorted(self.imports):
-            self._write_line(f"import {pkg}")
+            # Special case for `sys` as it is needed for version checks
+            self.imports.add_import("sys")
+        for statement in sorted(self.imports.statements):
+            self._write_line(statement)
         if self.typing_extensions_min:
             self._write_line("")
             self._write_line(f"if sys.version_info >= {self.typing_extensions_min}:")
-            self._write_line("    import typing as typing_extensions")
+            self._write_line(f"    from typing import {', '.join(self.imports.typing_statements)}")
             self._write_line("else:")
-            self._write_line("    import typing_extensions")
+            self._write_line(f"    from typing_extensions import {', '.join(self.imports.typing_statements)}")
         if self.deprecated_min:
             self._write_line("")
             self._write_line(f"if sys.version_info >= {self.deprecated_min}:")
-            self._write_line("    from warnings import deprecated")
+            self._write_line(f"    from warnings import deprecated as {self._deprecated_name}")
             self._write_line("else:")
-            self._write_line("    from typing_extensions import deprecated")
+            self._write_line(f"    from typing_extensions import deprecated as {self._deprecated_name}")
 
-        for pkg, items in sorted(self.from_imports.items()):
-            self._write_line(f"from {pkg} import (")
-            for name, reexport_name in sorted(items):
-                if reexport_name is None:
-                    self._write_line(f"    {name},")
-                else:
-                    self._write_line(f"    {name} as {reexport_name},")
-            self._write_line(")")
         self._write_line("")
 
         # restore module content
