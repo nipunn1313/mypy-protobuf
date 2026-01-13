@@ -1,4 +1,4 @@
-## Upcoming
+## 5.0.0
 
 - Use `builtins.property` to handle conflicts with fields named `property`
 - Mangle all non provided message type imports, this prevents conflicts with field names like `collections`, `builtins`, etc.
