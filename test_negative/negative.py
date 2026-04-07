@@ -385,3 +385,13 @@ test_whichoneof_alias(SimpleProto3(), "not_a_oneof")  # E:3.8
 # Make sure new overloads for stubs are working
 dummy_pb2_grpc.DummyServiceStub()  # E:3.8
 dummy_pb2_grpc.DummyServiceStub("notachannel")  # E:3.8
+
+
+inner_msg = Simple1.InnerMessage()
+inner_msg.WhichOneof("garbage")  # E:3.8
+inner_msg.HasField("garbage")  # E:3.8
+inner_msg.ClearField("garbage")  # E:3.8
+
+outer_msg = OuterMessage3()
+outer_msg.HasField("a_string")  # E:3.8
+outer_msg.ClearField("a_string")
