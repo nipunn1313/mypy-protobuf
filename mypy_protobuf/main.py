@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs."""
+
 from __future__ import annotations
 
 import ast
@@ -559,7 +560,7 @@ class PkgWriter(object):
                     [(i, v) for i, v in enumerate(enum_proto.value) if v.name not in PROTO_ENUM_RESERVED],
                     value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
-                        file_deprecated=file_deprecated,
+                    file_deprecated=file_deprecated,
                     class_attributes=True,
                 )
             wl("")
@@ -1453,7 +1454,7 @@ def generate_mypy_stubs(
 
         pkg_writer.write_module_attributes()
         pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER], fd.options.deprecated)
-        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER], fd.options.deprecated,fd.options.features.field_presence)
+        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER], fd.options.deprecated, fd.options.features.field_presence)
         pkg_writer.write_extensions(fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER])
 
         assert name == fd.name

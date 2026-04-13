@@ -13,6 +13,19 @@ import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
 from testproto.edition2024_pb2 import Editions2024SubMessage, Editions2024Test
 from testproto.grpc import dummy_pb2_grpc
+from testproto.grpc.deprecated_pb2 import (  # E:3.8
+    DEPRECATED_VALUE,
+    NON_DEPRECATED_VALUE,
+    DeprecatedFileDeprecatedEnum,
+    DeprecatedFileDeprecatedMessage,
+    DeprecatedFileNonDeprecatedEnum,
+    DeprecatedFileNonDeprecatedMessage,
+)
+from testproto.grpc.deprecated_pb2_grpc import (  # E:3.8
+    DeprecatedFileDeprecatedServiceServicer,
+    DeprecatedFileDeprecatedServiceStub,
+    add_DeprecatedFileDeprecatedServiceServicer_to_server,
+)
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
     DummyReply,
@@ -38,20 +51,6 @@ from testproto.test_pb2 import (  # E:3.8
     PythonReservedKeywords,
     Simple1,
     Simple2,
-)
-
-from testproto.grpc.deprecated_pb2 import (  # E:3.8
-    DeprecatedFileDeprecatedEnum,
-    DeprecatedFileDeprecatedMessage,
-    DeprecatedFileNonDeprecatedMessage,
-    DeprecatedFileNonDeprecatedEnum,
-    NON_DEPRECATED_VALUE,
-    DEPRECATED_VALUE
-)
-from testproto.grpc.deprecated_pb2_grpc import (  # E:3.8
-    DeprecatedFileDeprecatedServiceServicer,
-    DeprecatedFileDeprecatedServiceStub,
-    add_DeprecatedFileDeprecatedServiceServicer_to_server,
 )
 
 s = Simple1()
