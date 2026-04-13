@@ -747,7 +747,7 @@ class PkgWriter(object):
         if hf_fields:
             wl("_HasFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
         else:
-            wl("_HasFieldArgType: {} = {} # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
+            wl("_HasFieldArgType: {} = {}  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
         wl(
             "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
             self._builtin("bool"),
@@ -755,7 +755,7 @@ class PkgWriter(object):
         if cf_fields:
             wl("_ClearFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
         else:
-            wl("_ClearFieldArgType: {} = {} # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
+            wl("_ClearFieldArgType: {} = {}  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
         wl(
             "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
         )
