@@ -40,6 +40,20 @@ from testproto.test_pb2 import (  # E:3.8
     Simple2,
 )
 
+from testproto.grpc.deprecated_pb2 import (  # E:3.8
+    DeprecatedFileDeprecatedEnum,
+    DeprecatedFileDeprecatedMessage,
+    DeprecatedFileNonDeprecatedMessage,
+    DeprecatedFileNonDeprecatedEnum,
+    NON_DEPRECATED_VALUE,
+    DEPRECATED_VALUE
+)
+from testproto.grpc.deprecated_pb2_grpc import (  # E:3.8
+    DeprecatedFileDeprecatedServiceServicer,
+    DeprecatedFileDeprecatedServiceStub,
+    add_DeprecatedFileDeprecatedServiceServicer_to_server,
+)
+
 s = Simple1()
 s.a_string = "Hello"
 
