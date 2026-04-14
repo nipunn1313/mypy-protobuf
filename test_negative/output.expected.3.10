@@ -179,4 +179,15 @@ test_negative/negative.py:404: error: Argument 1 to "WhichOneof" of "InnerMessag
 test_negative/negative.py:405: error: Argument 1 to "HasField" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
 test_negative/negative.py:406: error: Argument 1 to "ClearField" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
 test_negative/negative.py:409: error: Argument 1 to "HasField" of "OuterMessage3" has incompatible type "str"; expected "Never"  [arg-type]
-Found 142 errors in 6 files (checked 4 source files)
+test_negative/negative.py:412: error: All overload variants of "DeprecatedFileDeprecatedServiceStub" require at least one argument  [call-overload]
+test_negative/negative.py:412: note: Possible overload variants:
+test_negative/negative.py:412: note:     def __new__(cls, channel: Channel) -> DeprecatedFileDeprecatedServiceStub
+test_negative/negative.py:412: note:     def __new__(cls, channel: Channel) -> DeprecatedFileDeprecatedServiceAsyncStub
+test_negative/negative.py:424: error: Cannot instantiate abstract class "DeprecatedFileNonDeprecatedServicer" with abstract attribute "DeprecatedFileDeprecatedMethod"  [abstract]
+test_negative/negative.py:426: error: function testproto.grpc.deprecated_pb2._DeprecatedFileDeprecatedEnumEnumTypeWrapper.DEPRECATED_VALUE is deprecated: This enum value has been marked as deprecated using proto enum value options.  [deprecated]
+test_negative/negative.py:426: error: Incompatible types in assignment (expression has type "testproto.grpc.deprecated_pb2._DeprecatedFileDeprecatedEnum.ValueType", variable has type "testproto.test3_pb2._OuterEnum.ValueType")  [assignment]
+test_negative/negative.py:427: error: Incompatible types in assignment (expression has type "testproto.grpc.deprecated_pb2._DeprecatedFileNonDeprecatedEnum.ValueType", variable has type "testproto.test3_pb2._OuterEnum.ValueType")  [assignment]
+test_negative/negative.py:428: error: Incompatible types in assignment (expression has type "testproto.grpc.deprecated_pb2._DeprecatedFileDeprecatedEnum.ValueType", variable has type "testproto.test3_pb2._OuterEnum.ValueType")  [assignment]
+test_negative/negative.py:429: error: function testproto.grpc.deprecated_pb2._DeprecatedFileNonDeprecatedEnumEnumTypeWrapper.NON_DEPRECATED_VALUE is deprecated: This enum value is within a file that has been marked as deprecated using proto file options.  [deprecated]
+test_negative/negative.py:429: error: Incompatible types in assignment (expression has type "testproto.grpc.deprecated_pb2._DeprecatedFileNonDeprecatedEnum.ValueType", variable has type "testproto.test3_pb2._OuterEnum.ValueType")  [assignment]
+Found 150 errors in 6 files (checked 4 source files)
