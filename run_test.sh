@@ -240,6 +240,7 @@ for PY_VER in $PY_VER_UNIT_TESTS; do
     # Generate GRPC protos for mypy / tests
     (
         source "$UNIT_TESTS_VENV"/bin/activate
+        echo "Running command: find proto/testproto/grpc -name \"*.proto\" -print0 | xargs -0 python -m grpc_tools.protoc \"${PROTOC_ARGS[@]}\" --grpc_python_out=test/generated"
         find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated
         find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated_sync_only
         find proto/testproto/grpc -name "*.proto" -print0 | xargs -0 python -m grpc_tools.protoc "${PROTOC_ARGS[@]}" --grpc_python_out=test/generated_async_only

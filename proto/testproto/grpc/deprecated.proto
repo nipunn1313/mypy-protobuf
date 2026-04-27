@@ -1,0 +1,38 @@
+// Proto 3 test file.
+syntax = "proto3";
+
+package deprecated;
+
+option deprecated = true;
+
+enum DeprecatedFileNonDeprecatedEnum {
+    NON_DEPRECATED_VALUE = 0;
+}
+
+message DeprecatedFileNonDeprecatedMessage {
+    string non_deprecated_field = 1;
+    DeprecatedFileNonDeprecatedEnum non_deprecated_enum = 2;
+}
+
+enum DeprecatedFileDeprecatedEnum {
+    option deprecated = true; // This enum is deprecated
+
+    DEPRECATED_VALUE = 0 [deprecated = true]; // This enum value is deprecated
+}
+
+message DeprecatedFileDeprecatedMessage {
+    option deprecated = true; // This message is deprecated
+
+    string deprecated_field = 1 [deprecated = true]; // This field is deprecated
+}
+
+service DeprecatedFileNonDeprecatedService {
+    rpc DeprecatedFileNonDeprecatedMethod(DeprecatedFileNonDeprecatedMessage) returns (DeprecatedFileNonDeprecatedMessage) {}
+}
+
+service DeprecatedFileDeprecatedService {
+    option deprecated = true; // This service is deprecated
+    rpc DeprecatedFileDeprecatedMethod(DeprecatedFileDeprecatedMessage) returns (DeprecatedFileDeprecatedMessage) {
+        option deprecated = true; // This method is deprecated
+    }
+}

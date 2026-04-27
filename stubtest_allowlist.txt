@@ -37,6 +37,8 @@ testproto.nested.nested_pb2.AnotherNested.INVALID
 testproto.test_pb2.DEPRECATED_ONE
 testproto.test_pb2.DEPRECATED_TWO
 testproto.test_pb2.NOT_DEPRECATED
+testproto.grpc.deprecated_pb2.DEPRECATED_VALUE
+testproto.grpc.deprecated_pb2.NON_DEPRECATED_VALUE
 
 # Our enum types and helper types aren't there at runtime (Dynamic EnumTypeWrapper at runtime)
 # .*\..*EnumTypeWrapper$
@@ -51,6 +53,8 @@ testproto.readme_enum_pb2._?MyEnum(EnumTypeWrapper)?
 testproto.nested.nested_pb2.AnotherNested._?NestedEnum(EnumTypeWrapper)?
 testproto.nested.nested_pb2.AnotherNested.NestedMessage._?NestedEnum2(EnumTypeWrapper)?
 testproto.test_pb2._?DeprecatedEnum(EnumTypeWrapper)?
+testproto.grpc.deprecated_pb2._?DeprecatedFileDeprecatedEnum(EnumTypeWrapper)?
+testproto.grpc.deprecated_pb2._?DeprecatedFileNonDeprecatedEnum(EnumTypeWrapper)?
 
 # Part of an "EXPERIMENTAL API" according to comment. Not documented.
 testproto.grpc.dummy_pb2_grpc.DummyService
@@ -58,6 +62,9 @@ testproto.grpc.dummy_pb2_grpc.DeprecatedService
 testproto.grpc.import_pb2_grpc.SimpleService
 testproto.grpc.dummy_pb2_grpc.ManyRPCsService
 testproto.grpc.dummy_pb2_grpc.EmptyService
+testproto.grpc.deprecated_pb2_grpc.DeprecatedFileDeprecatedService
+testproto.grpc.deprecated_pb2_grpc.DeprecatedFileNonDeprecatedService
+
 
 # global prefix globals are generated, but aren't used at runtime
 # using `__` would be preferable, but Y047 will detect unused names.
@@ -105,6 +112,9 @@ testproto.test_pb2.Simple1.empty
 testproto.edition2024_pb2.Editions2024Test.message_field
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceTest.message_field
 testproto.test_pb2.TestDuplicatePackageMessage.msg
+testproto.grpc.deprecated_pb2.DeprecatedFileDeprecatedMessage.deprecated_field
+testproto.grpc.deprecated_pb2.DeprecatedFileNonDeprecatedMessage.non_deprecated_field
+testproto.grpc.deprecated_pb2.DeprecatedFileNonDeprecatedMessage.non_deprecated_enum
 
 # All messages now fail with something like this:
 # error: testproto.nested.nested_pb2.Nested is inconsistent, metaclass differs
@@ -162,6 +172,8 @@ testproto.inner.test3_pb2.DESCRIPTOR
 testproto.inner.test3_pb2.DuplicatePackageMessage
 testproto.test_pb2.TestDuplicatePackageMessage
 testproto.test_pb2.TestDuplicatePackageMessage.DESCRIPTOR
+testproto.grpc.deprecated_pb2.DeprecatedFileDeprecatedMessage
+testproto.grpc.deprecated_pb2.DeprecatedFileNonDeprecatedMessage
 
 # All messages now fail with something like this:
 # error: testproto.nopackage_pb2.NoPackage2.DESCRIPTOR variable differs from runtime type google._upb._message.Descriptor
@@ -231,6 +243,9 @@ testproto.comment_special_chars_pb2.DESCRIPTOR
 testproto.Capitalized.Capitalized_pb2.DESCRIPTOR
 testproto.test_extensions3_pb2.DESCRIPTOR
 testproto.inner.test3_pb2.DuplicatePackageMessage.DESCRIPTOR
+testproto.grpc.deprecated_pb2.DeprecatedFileNonDeprecatedMessage.DESCRIPTOR
+testproto.grpc.deprecated_pb2.DeprecatedFileDeprecatedMessage.DESCRIPTOR
+testproto.grpc.deprecated_pb2.DESCRIPTOR
 
 # All messages now fail with something like this:
 # error: testproto.test_extensions2_pb2.SeparateFileExtension.ext variable differs from runtime type google._upb._message.FieldDescriptor
@@ -266,6 +281,8 @@ testproto.grpc.dummy_pb2_grpc.DummyServiceStub.*
 testproto.grpc.dummy_pb2_grpc.ManyRPCsServiceStub.*
 testproto.grpc.import_pb2_grpc.SimpleServiceStub.*
 testproto.grpc.dummy_pb2_grpc.EmptyServiceStub.__init__
+testproto.grpc.deprecated_pb2_grpc.DeprecatedFileDeprecatedServiceStub.*
+testproto.grpc.deprecated_pb2_grpc.DeprecatedFileNonDeprecatedServiceStub.*
 
 # Because we generate message fields as properties when deprecated they do not exist at runtime
 testproto.grpc.dummy_pb2.DeprecatedRequest.old_field

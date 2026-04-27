@@ -13,6 +13,19 @@ import grpc.aio
 from testproto.dot.com.test_pb2 import TestMessage
 from testproto.edition2024_pb2 import Editions2024SubMessage, Editions2024Test
 from testproto.grpc import dummy_pb2_grpc
+from testproto.grpc.deprecated_pb2 import (  # E:3.8
+    DEPRECATED_VALUE,
+    NON_DEPRECATED_VALUE,
+    DeprecatedFileDeprecatedEnum,
+    DeprecatedFileDeprecatedMessage,
+    DeprecatedFileNonDeprecatedEnum,
+    DeprecatedFileNonDeprecatedMessage,
+)
+from testproto.grpc.deprecated_pb2_grpc import (  # E:3.8
+    DeprecatedFileDeprecatedServiceServicer,
+    DeprecatedFileDeprecatedServiceStub,
+    add_DeprecatedFileDeprecatedServiceServicer_to_server,
+)
 from testproto.grpc.dummy_pb2 import (  # E:3.8
     DeprecatedRequest,
     DummyReply,
@@ -395,3 +408,23 @@ inner_msg.ClearField("garbage")  # E:3.8
 outer_msg = OuterMessage3()
 outer_msg.HasField("a_string")  # E:3.8
 outer_msg.ClearField("a_string")
+# use the code from deprecated file
+deprecated_stub = DeprecatedFileDeprecatedServiceStub()  # E:3.8
+
+
+class DeprecatedFileNonDeprecatedServicer(DeprecatedFileDeprecatedServiceServicer):
+    def DeprecatedFileNonDeprecatedMethod(
+        self,
+        request: DeprecatedFileNonDeprecatedMessage,
+        context: grpc.ServicerContext,
+    ) -> DeprecatedFileNonDeprecatedMessage:
+        return DeprecatedFileNonDeprecatedMessage()
+
+
+add_DeprecatedFileDeprecatedServiceServicer_to_server(DeprecatedFileNonDeprecatedServicer(), server)  # E:3.8
+
+enum = DeprecatedFileDeprecatedEnum.DEPRECATED_VALUE  # E:3.8
+enum = NON_DEPRECATED_VALUE  # E:3.8
+enum = DEPRECATED_VALUE  # E:3.8
+enum = DeprecatedFileNonDeprecatedEnum.NON_DEPRECATED_VALUE  # E:3.8
+message = DeprecatedFileDeprecatedMessage()

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Protoc Plugin to generate mypy stubs."""
+
 from __future__ import annotations
 
 import ast
@@ -482,6 +483,7 @@ class PkgWriter(object):
         value_type: str,
         scl_prefix: SourceCodeLocation,
         *,
+        file_deprecated: bool,
         class_attributes: bool = False,
     ) -> None:
         for i, val in values:
@@ -490,11 +492,15 @@ class PkgWriter(object):
 
             scl = scl_prefix + [i]
             # Class level
-            if class_attributes and val.options.deprecated:
+            if class_attributes and (val.options.deprecated or file_deprecated):
                 self._write_line(self._property())
+                if val.options.deprecated:
+                    fallback_message = "This enum value has been marked as deprecated using proto enum value options."
+                else:
+                    fallback_message = "This enum value is within a file that has been marked as deprecated using proto file options."
                 self._write_deprecation_warning(
                     scl + [d.EnumValueDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
-                    "This enum value has been marked as deprecated using proto enum value options.",
+                    fallback_message,
                 )
                 self._write_line(
                     f"def {val.name}(self) -> {value_type}: {'' if self._has_comments(scl) else '...'}  # {val.number}",
@@ -519,6 +525,7 @@ class PkgWriter(object):
         enums: Iterable[d.EnumDescriptorProto],
         prefix: str,
         scl_prefix: SourceCodeLocation,
+        file_deprecated: bool,
     ) -> None:
         wl = self._write_line
         for i, enum_proto in enumerate(enums):
@@ -553,14 +560,19 @@ class PkgWriter(object):
                     [(i, v) for i, v in enumerate(enum_proto.value) if v.name not in PROTO_ENUM_RESERVED],
                     value_type_helper_fq,
                     scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
+                    file_deprecated=file_deprecated,
                     class_attributes=True,
                 )
             wl("")
 
-            if enum_proto.options.deprecated:
+            if enum_proto.options.deprecated or file_deprecated:
+                if enum_proto.options.deprecated:
+                    fallback_message = "This enum has been marked as deprecated using proto enum options."
+                else:
+                    fallback_message = "This enum is within a file that has been marked as deprecated using proto file options."
                 self._write_deprecation_warning(
                     scl + [d.EnumDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.EnumOptions.DEPRECATED_FIELD_NUMBER],
-                    "This enum has been marked as deprecated using proto enum options.",
+                    fallback_message,
                 )
             if self._has_comments(scl):
                 wl(f"class {class_name}({enum_helper_class}, metaclass={etw_helper_class}):")
@@ -577,6 +589,7 @@ class PkgWriter(object):
                 enumerate(enum_proto.value),
                 value_type_fq,
                 scl + [d.EnumDescriptorProto.VALUE_FIELD_NUMBER],
+                file_deprecated=file_deprecated,
             )
             if prefix == "" and not self.readable_stubs:
                 wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}  # noqa: Y015")
@@ -587,6 +600,7 @@ class PkgWriter(object):
         messages: Iterable[d.DescriptorProto],
         prefix: str,
         scl_prefix: SourceCodeLocation,
+        file_deprecated: bool,
         file_field_presence: d.FeatureSet.FieldPresence.ValueType = d.FeatureSet.FieldPresence.FIELD_PRESENCE_UNKNOWN,
     ) -> None:
         wl = self._write_line
@@ -609,10 +623,14 @@ class PkgWriter(object):
 
             class_name = desc.name if desc.name not in PYTHON_RESERVED else "_r_" + desc.name
             message_class = self._import("google.protobuf.message", "Message")
-            if desc.options.deprecated:
+            if desc.options.deprecated or file_deprecated:
+                if desc.options.deprecated:
+                    fallback_message = "This message has been marked as deprecated using proto message options."
+                else:
+                    fallback_message = "This message is within a file that has been marked as deprecated using proto file options."
                 self._write_deprecation_warning(
                     scl_prefix + [i] + [d.DescriptorProto.OPTIONS_FIELD_NUMBER] + [d.MessageOptions.DEPRECATED_FIELD_NUMBER],
-                    "This message has been marked as deprecated using proto message options.",
+                    fallback_message,
                 )
             wl("@{}", self._import("typing", "final"))
             wl(f"class {class_name}({message_class}{addl_base}):")
@@ -630,8 +648,9 @@ class PkgWriter(object):
                     desc.enum_type,
                     qualified_name + ".",
                     scl + [d.DescriptorProto.ENUM_TYPE_FIELD_NUMBER],
+                    file_deprecated=file_deprecated,
                 )
-                self.write_messages(desc.nested_type, qualified_name + ".", scl + [d.DescriptorProto.NESTED_TYPE_FIELD_NUMBER], file_field_presence=file_field_presence)
+                self.write_messages(desc.nested_type, qualified_name + ".", scl + [d.DescriptorProto.NESTED_TYPE_FIELD_NUMBER], file_deprecated=file_deprecated, file_field_presence=file_field_presence)
 
                 # integer constants  for field numbers
                 for f in desc.field:
@@ -645,11 +664,16 @@ class PkgWriter(object):
                         # Scalar non repeated fields are r/w, generate getter and setter if deprecated
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         deprecation_scl_field = scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER]
-                        if field.options.deprecated:
+                        if field.options.deprecated or file_deprecated:
+                            if field.options.deprecated:
+                                fallback_message = "This field has been marked as deprecated using proto field options."
+                            else:
+                                fallback_message = "This field is within a file that has been marked as deprecated using proto file options."
+
                             wl(self._property())
                             self._write_deprecation_warning(
                                 deprecation_scl_field,
-                                "This field has been marked as deprecated using proto field options.",
+                                fallback_message,
                             )
                             wl(f"def {field.name}(self) -> {field_type}:{' ...' if not self._has_comments(scl_field) else ''}")
                             if self._has_comments(scl_field):
@@ -659,7 +683,7 @@ class PkgWriter(object):
                             wl(f"@{field.name}.setter")
                             self._write_deprecation_warning(
                                 deprecation_scl_field,
-                                "This field has been marked as deprecated using proto field options.",
+                                fallback_message,
                             )
                             wl(f"def {field.name}(self, value: {field_type}) -> None:{' ...' if not self._has_comments(scl_field) else ''}")
                             if self._has_comments(scl_field):
@@ -678,10 +702,14 @@ class PkgWriter(object):
                         # r/o Getters for non-scalar fields and scalar-repeated fields
                         scl_field = scl + [d.DescriptorProto.FIELD_FIELD_NUMBER, idx]
                         wl(self._property())
-                        if field.options.deprecated:
+                        if field.options.deprecated or file_deprecated:
+                            if field.options.deprecated:
+                                fallback_message = "This field has been marked as deprecated using proto field options."
+                            else:
+                                fallback_message = "This field is within a file that has been marked as deprecated using proto file options."
                             self._write_deprecation_warning(
                                 scl_field + [d.FieldDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.FieldOptions.DEPRECATED_FIELD_NUMBER],
-                                "This field has been marked as deprecated using proto field options.",
+                                fallback_message,
                             )
                         wl(f"def {field.name}(self) -> {field_type}:{' ...' if not self._has_comments(scl_field) else ''}")
                         if self._has_comments(scl_field):
@@ -1042,7 +1070,7 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
-    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, *, is_async: bool, both: bool = False, ignore_type_error: bool = False) -> None:
+    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, *, is_async: bool, file_deprecated: bool, both: bool = False, ignore_type_error: bool = False) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -1062,11 +1090,15 @@ class PkgWriter(object):
             else:
                 type_annotation = type_str(method, is_async=is_async)
 
-            if is_deprecated:
+            if is_deprecated or file_deprecated:
+                if is_deprecated:
+                    fallback_message = "This method has been marked as deprecated using proto method options."
+                else:
+                    fallback_message = "This method is within a file that has been marked as deprecated using proto file options."
                 wl(self._property())
                 self._write_deprecation_warning(
                     scl + [d.MethodDescriptorProto.OPTIONS_FIELD_NUMBER, d.MethodOptions.DEPRECATED_FIELD_NUMBER],
-                    "This method has been marked as deprecated using proto method options.",
+                    fallback_message,
                 )
                 wl(f"def {method.name}(self) -> {type_annotation}:{' ...' if not has_comments else ''}{'  # type: ignore[override]' if ignore_type_error else ''}")
 
@@ -1078,7 +1110,7 @@ class PkgWriter(object):
                 wl(f"{method.name}: {type_annotation}{'  # type: ignore[assignment]' if ignore_type_error else ''}")
                 self._write_comments(scl)
 
-    def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation) -> None:
+    def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, file_deprecated: bool) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -1089,8 +1121,12 @@ class PkgWriter(object):
             input_type = self._servicer_input_type(method)
             output_type = self._servicer_output_type(method)
 
-            if method.options.deprecated:
-                self._write_deprecation_warning(scl, "This method has been marked as deprecated using proto method options.")
+            if method.options.deprecated or file_deprecated:
+                if method.options.deprecated:
+                    fallback_message = "This method has been marked as deprecated using proto method options."
+                else:
+                    fallback_message = "This method is within a file that has been marked as deprecated using proto file options."
+                self._write_deprecation_warning(scl, fallback_message)
             if self.generate_concrete_servicer_stubs is False:
                 wl("@{}", self._import("abc", "abstractmethod"))
             wl("def {}(", method.name)
@@ -1131,6 +1167,7 @@ class PkgWriter(object):
         self,
         services: Iterable[d.ServiceDescriptorProto],
         scl_prefix: SourceCodeLocation,
+        file_deprecated: bool,
     ) -> None:
         wl = self._write_line
         wl("GRPC_GENERATED_VERSION: str")
@@ -1147,10 +1184,14 @@ class PkgWriter(object):
 
             # The stub client
             if self.grpc_type.supports_sync:
-                if service.options.deprecated:
+                if service.options.deprecated or file_deprecated:
+                    if service.options.deprecated:
+                        fallback_message = "This stub has been marked as deprecated using proto service options."
+                    else:
+                        fallback_message = "This stub is within a file that has been marked as deprecated using proto file options."
                     self._write_deprecation_warning(
                         scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
-                        "This stub has been marked as deprecated using proto service options.",
+                        fallback_message,
                     )
                 wl(
                     "class {}:",
@@ -1180,7 +1221,7 @@ class PkgWriter(object):
                         # SYNC only - simple __init__
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc", "Channel"))
 
-                    self.write_grpc_stub_methods(service, scl, is_async=False)
+                    self.write_grpc_stub_methods(service, scl, is_async=False, file_deprecated=file_deprecated)
                     wl("")
 
             # Write AsyncStub
@@ -1199,7 +1240,7 @@ class PkgWriter(object):
                         if self._write_comments(scl):
                             wl("")
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
-                        self.write_grpc_stub_methods(service, scl, is_async=True, ignore_type_error=True)
+                        self.write_grpc_stub_methods(service, scl, is_async=True, ignore_type_error=True, file_deprecated=file_deprecated)
                 else:
                     # ASYNC only - use Stub name (not AsyncStub) since there's only one type
                     wl("class {}:", class_name)
@@ -1207,14 +1248,18 @@ class PkgWriter(object):
                         if self._write_comments(scl):
                             wl("")
                         wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
-                        self.write_grpc_stub_methods(service, scl, is_async=True)
+                        self.write_grpc_stub_methods(service, scl, is_async=True, file_deprecated=file_deprecated)
                 wl("")
 
             # The service definition interface
-            if service.options.deprecated:
+            if service.options.deprecated or file_deprecated:
+                if service.options.deprecated:
+                    fallback_message = "This servicer has been marked as deprecated using proto service options."
+                else:
+                    fallback_message = "This servicer is within a file that has been marked as deprecated using proto file options."
                 self._write_deprecation_warning(
                     scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
-                    "This servicer has been marked as deprecated using proto service options.",
+                    fallback_message,
                 )
             if self.generate_concrete_servicer_stubs is False:
                 wl(
@@ -1230,11 +1275,15 @@ class PkgWriter(object):
             with self._indent():
                 if self._write_comments(scl):
                     wl("")
-                self.write_grpc_methods(service, scl)
-            if service.options.deprecated:
+                self.write_grpc_methods(service, scl, file_deprecated=file_deprecated)
+            if service.options.deprecated or file_deprecated:
+                if service.options.deprecated:
+                    fallback_message = "This servicer has been marked as deprecated using proto service options."
+                else:
+                    fallback_message = "This servicer is within a file that has been marked as deprecated using proto file options."
                 self._write_deprecation_warning(
                     scl + [d.ServiceDescriptorProto.OPTIONS_FIELD_NUMBER] + [d.ServiceOptions.DEPRECATED_FIELD_NUMBER],
-                    "This servicer has been marked as deprecated using proto service options.",
+                    fallback_message,
                 )
 
             wl(
@@ -1404,8 +1453,8 @@ def generate_mypy_stubs(
         )
 
         pkg_writer.write_module_attributes()
-        pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER])
-        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER], fd.options.features.field_presence)
+        pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER], fd.options.deprecated)
+        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER], fd.options.deprecated, fd.options.features.field_presence)
         pkg_writer.write_extensions(fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER])
 
         assert name == fd.name
@@ -1440,7 +1489,7 @@ def generate_mypy_grpc_stubs(
         )
         pkg_writer.write_grpc_iterator_type()
         pkg_writer.write_grpc_servicer_context()
-        pkg_writer.write_grpc_services(fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER])
+        pkg_writer.write_grpc_services(fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER], fd.options.deprecated)
 
         assert name == fd.name
         assert fd.name.endswith(".proto")
