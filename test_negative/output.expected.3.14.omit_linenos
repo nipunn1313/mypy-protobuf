@@ -149,4 +149,8 @@ test_negative/negative.py: error: No overload variant of "DummyServiceStub" matc
 test_negative/negative.py: note: Possible overload variants:
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
 test_negative/negative.py: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 114 errors in 4 files (checked 4 source files)
+test_negative/negative.py: error: Argument 1 to "WhichOneof" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
+test_negative/negative.py: error: Argument 1 to "HasField" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
+test_negative/negative.py: error: Argument 1 to "ClearField" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
+test_negative/negative.py: error: Argument 1 to "HasField" of "OuterMessage3" has incompatible type "str"; expected "Never"  [arg-type]
+Found 118 errors in 4 files (checked 4 source files)

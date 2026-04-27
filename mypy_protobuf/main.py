@@ -294,7 +294,7 @@ class PkgWriter(object):
         If alias is true, then it will prefix the import with an underscore to prevent conflicts with builtin names
         """
         if path == "typing_extensions":
-            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12), "Self": (3, 11)}
+            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12), "Self": (3, 11), "Never": (3, 11)}
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
@@ -744,46 +744,53 @@ class PkgWriter(object):
         hf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in hf_fields))
         cf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in cf_fields))
 
-        if not hf_fields and not cf_fields and not wo_fields:
-            return
-
         if hf_fields:
             wl("_HasFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
-            wl(
-                "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
-                self._builtin("bool"),
-            )
+        else:
+            wl("_HasFieldArgType: {} = {}  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
+        wl(
+            "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
+            self._builtin("bool"),
+        )
         if cf_fields:
             wl("_ClearFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
-            wl(
-                "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
-            )
+        else:
+            wl("_ClearFieldArgType: {} = {}  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
+        wl(
+            "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
+        )
 
         # Write type aliases first so overloads are not interrupted
-        for wo_field, members in sorted(wo_fields.items()):
+        if wo_fields:
+            for wo_field, members in sorted(wo_fields.items()):
+                wl(
+                    "_WhichOneofReturnType_{}: {} = {}[{}]  # noqa: Y015",
+                    wo_field,
+                    self._import("typing_extensions", "TypeAlias"),
+                    self._import("typing", "Literal"),
+                    # Returns `str`
+                    ", ".join(f'"{m}"' for m in members),
+                )
+                wl(
+                    "_WhichOneofArgType_{}: {} = {}[{}]  # noqa: Y015",
+                    wo_field,
+                    self._import("typing_extensions", "TypeAlias"),
+                    self._import("typing", "Literal"),
+                    # Accepts both str and bytes
+                    f'"{wo_field}", b"{wo_field}"',
+                )
+            for wo_field, _ in sorted(wo_fields.items()):
+                if len(wo_fields) > 1:
+                    wl("@{}", self._import("typing", "overload"))
+                wl(
+                    "def WhichOneof(self, oneof_group: {}) -> {} | None: ...",
+                    f"_WhichOneofArgType_{wo_field}",
+                    f"_WhichOneofReturnType_{wo_field}",
+                )
+        else:
             wl(
-                "_WhichOneofReturnType_{}: {} = {}[{}]  # noqa: Y015",
-                wo_field,
-                self._import("typing_extensions", "TypeAlias"),
-                self._import("typing", "Literal"),
-                # Returns `str`
-                ", ".join(f'"{m}"' for m in members),
-            )
-            wl(
-                "_WhichOneofArgType_{}: {} = {}[{}]  # noqa: Y015",
-                wo_field,
-                self._import("typing_extensions", "TypeAlias"),
-                self._import("typing", "Literal"),
-                # Accepts both str and bytes
-                f'"{wo_field}", b"{wo_field}"',
-            )
-        for wo_field, _ in sorted(wo_fields.items()):
-            if len(wo_fields) > 1:
-                wl("@{}", self._import("typing", "overload"))
-            wl(
-                "def WhichOneof(self, oneof_group: {}) -> {} | None: ...",
-                f"_WhichOneofArgType_{wo_field}",
-                f"_WhichOneofReturnType_{wo_field}",
+                "def WhichOneof(self, oneof_group: {}) -> None: ...",
+                self._import("typing_extensions", "Never"),
             )
 
     def write_extensions(

@@ -1,4 +1,4 @@
-test/generated/testproto/grpc/dummy_pb2.pyi:76: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/grpc/dummy_pb2.pyi:85: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi:109: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceAsyncStub is deprecated: This service is deprecated  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi:112: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test/generated/testproto/grpc/dummy_pb2_grpc.pyi:120: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
@@ -15,8 +15,8 @@ test/generated/testproto/test_pb2.pyi:98: error: class testproto.test_pb2.Deprec
 "Quotes in comments"
 and 'single quotes'
 Trailing comment  [deprecated]
-test/generated/testproto/test_pb2.pyi:492: error: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
-test/generated/testproto/test_pb2.pyi:511: error: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
+test/generated/testproto/test_pb2.pyi:507: error: class testproto.test_pb2.DeprecatedMessage is deprecated: This message is deprecated  [deprecated]
+test/generated/testproto/test_pb2.pyi:527: error: class testproto.test_pb2.DeprecatedMessageBadComment is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test_negative/negative.py:16: error: class testproto.grpc.dummy_pb2.DeprecatedRequest is deprecated: This message has been marked as deprecated using proto message options.  [deprecated]
 test_negative/negative.py:21: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceServicer is deprecated: This service is deprecated  [deprecated]
 test_negative/negative.py:21: error: class testproto.grpc.dummy_pb2_grpc.DeprecatedServiceStub is deprecated: This service is deprecated  [deprecated]
@@ -149,4 +149,8 @@ test_negative/negative.py:387: error: No overload variant of "DummyServiceStub" 
 test_negative/negative.py:387: note: Possible overload variants:
 test_negative/negative.py:387: note:     def __new__(cls, channel: Channel) -> DummyServiceStub
 test_negative/negative.py:387: note:     def __new__(cls, channel: Channel) -> DummyServiceAsyncStub
-Found 114 errors in 4 files (checked 4 source files)
+test_negative/negative.py:391: error: Argument 1 to "WhichOneof" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
+test_negative/negative.py:392: error: Argument 1 to "HasField" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
+test_negative/negative.py:393: error: Argument 1 to "ClearField" of "InnerMessage" has incompatible type "str"; expected "Never"  [arg-type]
+test_negative/negative.py:396: error: Argument 1 to "HasField" of "OuterMessage3" has incompatible type "str"; expected "Never"  [arg-type]
+Found 118 errors in 4 files (checked 4 source files)
