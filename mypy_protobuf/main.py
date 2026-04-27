@@ -27,7 +27,7 @@ from google.protobuf.internal.well_known_types import WKTBASES
 
 from . import extensions_pb2
 
-__version__ = "5.0.0"
+__version__ = "5.1.0"
 
 # SourceCodeLocation is defined by `message Location` here
 # https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/descriptor.proto

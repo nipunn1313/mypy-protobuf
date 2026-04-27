@@ -1,3 +1,8 @@
+## 5.1.0
+
+- On fields without presence and non-oneofs, override typing for Has/ClearField and WhichOneof
+- If file is deprecated, deprecate all messages, enums, services, fields
+
 ## 5.0.0
 
 - Use `builtins.property` to handle conflicts with fields named `property`
