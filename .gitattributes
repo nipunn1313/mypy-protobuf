@@ -1,2 +1,8 @@
 test_negative/output.expected.2.7 linguist-generated=true
 test_negative/output.expected.3.8 linguist-generated=true
+.gitattributes text eol=lf
+test_negative/output.expected.* text eol=lf
+*.proto text eol=lf
+*.py text eol=lf
+*.pyi text eol=lf
+*.sh text eol=lf
