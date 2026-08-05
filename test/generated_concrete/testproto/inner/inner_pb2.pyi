@@ -3,6 +3,7 @@
 isort:skip_file
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from testproto import test3_pb2 as _test3_pb2
@@ -19,7 +20,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Inner(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     a: _test3_pb2.OuterEnum.ValueType

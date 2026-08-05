@@ -3,6 +3,7 @@
 isort:skip_file
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import extension_dict as _extension_dict
@@ -20,7 +21,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class SeparateFileExtension(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     FLAG_FIELD_NUMBER: _builtins.int
     flag: _builtins.bool

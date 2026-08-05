@@ -3,6 +3,7 @@
 isort:skip_file
 Edition version of proto2 file"""
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 import builtins as _builtins
@@ -18,7 +19,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Editions2024ImplicitFieldPresenceSubMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     THING_FIELD_NUMBER: _builtins.int
     thing: _builtins.str
@@ -37,7 +38,7 @@ Global___Editions2024ImplicitFieldPresenceSubMessage: _TypeAlias = Editions2024I
 
 @_typing.final
 class Editions2024ImplicitFieldPresenceTest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     LEGACY_FIELD_NUMBER: _builtins.int
     EXPLICIT_SINGULAR_FIELD_NUMBER: _builtins.int

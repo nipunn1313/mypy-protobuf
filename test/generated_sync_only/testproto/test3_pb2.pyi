@@ -4,6 +4,7 @@ isort:skip_file
 package test3"""
 
 from collections import abc as _abc
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import containers as _containers
@@ -39,7 +40,7 @@ Global___OuterEnum: _TypeAlias = OuterEnum  # noqa: Y015
 
 @_typing.final
 class OuterMessage3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     A_STRING_FIELD_NUMBER: _builtins.int
     a_string: _builtins.str
@@ -58,7 +59,7 @@ Global___OuterMessage3: _TypeAlias = OuterMessage3  # noqa: Y015
 
 @_typing.final
 class SimpleProto3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     class _InnerEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -75,7 +76,7 @@ class SimpleProto3(_message.Message):
 
     @_typing.final
     class MapScalarEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -95,7 +96,7 @@ class SimpleProto3(_message.Message):
 
     @_typing.final
     class MapMessageEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -116,7 +117,7 @@ class SimpleProto3(_message.Message):
 
     @_typing.final
     class EmailByUidEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int

@@ -3,6 +3,7 @@
 isort:skip_file
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
@@ -20,7 +21,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Nested(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     a: _test3_pb2.OuterEnum.ValueType
@@ -39,7 +40,7 @@ Global___Nested: _TypeAlias = Nested  # noqa: Y015
 
 @_typing.final
 class AnotherNested(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     class _NestedEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -58,7 +59,7 @@ class AnotherNested(_message.Message):
 
     @_typing.final
     class NestedMessage(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
         class _NestedEnum2:
             ValueType = _typing.NewType("ValueType", _builtins.int)

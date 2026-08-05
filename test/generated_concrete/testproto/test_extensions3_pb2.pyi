@@ -3,6 +3,7 @@
 isort:skip_file
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pb2 as _descriptor_pb2
 from google.protobuf import message as _message
@@ -22,7 +23,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class MessageOptionsTestMsg(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     def __init__(
         self,

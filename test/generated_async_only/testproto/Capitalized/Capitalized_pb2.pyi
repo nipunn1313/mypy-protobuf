@@ -3,6 +3,7 @@
 isort:skip_file
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 import builtins as _builtins
@@ -18,7 +19,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class lower(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     A_FIELD_NUMBER: _builtins.int
     a: _builtins.int
@@ -37,7 +38,7 @@ Global___lower: _TypeAlias = lower  # noqa: Y015
 
 @_typing.final
 class Upper(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     LOWER_FIELD_NUMBER: _builtins.int
     @_builtins.property
@@ -57,7 +58,7 @@ Global___Upper: _TypeAlias = Upper  # noqa: Y015
 
 @_typing.final
 class lower2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     UPPER_FIELD_NUMBER: _builtins.int
     @_builtins.property

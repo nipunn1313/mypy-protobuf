@@ -32,6 +32,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import well_known_types as _well_known_types
@@ -108,7 +109,7 @@ class Duration(_message.Message, _well_known_types.Duration):
     microsecond should be expressed in JSON format as "3.000001s".
     """
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     SECONDS_FIELD_NUMBER: _builtins.int
     NANOS_FIELD_NUMBER: _builtins.int

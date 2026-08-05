@@ -4,6 +4,7 @@ isort:skip_file
 """
 
 from collections import abc as _abc
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import containers as _containers
@@ -22,7 +23,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class NoPackage(_message.Message):
     """Intentionally don't set a package - just to make sure we can handle it."""
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     def __init__(
         self,
@@ -37,7 +38,7 @@ Global___NoPackage: _TypeAlias = NoPackage  # noqa: Y015
 
 @_typing.final
 class NoPackage2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     NP_FIELD_NUMBER: _builtins.int
     NP_REP_FIELD_NUMBER: _builtins.int

@@ -6,6 +6,7 @@ This file is used to test an import without a parent
 import x instead of from x import y
 """
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 import base_import_pb2 as _base_import_pb2
@@ -22,7 +23,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Test(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     MSG_FIELD_NUMBER: _builtins.int
     @_builtins.property

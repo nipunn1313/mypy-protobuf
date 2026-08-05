@@ -14,7 +14,8 @@ from typing import Any, Generator, NewType, Protocol, Tuple, Type, Union
 
 import pytest
 import testproto.test_pb2 as test_pb2
-from google.protobuf.descriptor import FieldDescriptor
+from google._upb._message import Descriptor as UpbDescriptor
+from google.protobuf.descriptor import Descriptor, FieldDescriptor
 from google.protobuf.internal import api_implementation
 from google.protobuf.internal.containers import ScalarMap
 from google.protobuf.message import Message
@@ -33,12 +34,7 @@ from testproto.test_extensions3_pb2 import (
     repeated_scalar_option,
     scalar_option,
 )
-from testproto.test_pb2 import (
-    DESCRIPTOR,
-    FOO,
-    Extensions1,
-    Extensions2,
-)
+from testproto.test_pb2 import DESCRIPTOR, FOO, Extensions1, Extensions2
 from testproto.test_pb2 import Name as NamingConflicts_Name
 from testproto.test_pb2 import (
     NamingConflicts,
@@ -55,6 +51,11 @@ from typing_extensions import assert_type
 CPP_IMPL = api_implementation.Type() == "cpp"
 
 UserId = NewType("UserId", int)
+
+
+# Keep generated message descriptors compatible with the current types-protobuf
+# base declaration for google.protobuf.message.Message.
+assert_type(SimpleProto3.DESCRIPTOR, Union[Descriptor, UpbDescriptor])
 
 
 class Email(str):

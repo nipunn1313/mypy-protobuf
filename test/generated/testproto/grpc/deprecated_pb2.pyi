@@ -3,6 +3,7 @@
 isort:skip_file
 Proto 3 test file."""
 
+from google._upb import _message as __message
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
@@ -59,7 +60,7 @@ Global___DeprecatedFileDeprecatedEnum: _TypeAlias = DeprecatedFileDeprecatedEnum
 @_deprecated("""This message is within a file that has been marked as deprecated using proto file options.""")
 @_typing.final
 class DeprecatedFileNonDeprecatedMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     NON_DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
     NON_DEPRECATED_ENUM_FIELD_NUMBER: _builtins.int
@@ -92,7 +93,7 @@ Global___DeprecatedFileNonDeprecatedMessage: _TypeAlias = DeprecatedFileNonDepre
 @_deprecated("""This message is deprecated""")
 @_typing.final
 class DeprecatedFileDeprecatedMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor | __message.Descriptor
 
     DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property

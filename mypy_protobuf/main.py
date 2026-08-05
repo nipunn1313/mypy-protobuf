@@ -640,7 +640,8 @@ class PkgWriter(object):
                     wl("")
 
                 desc_type = self._import("google.protobuf.descriptor", "Descriptor")
-                wl(f"DESCRIPTOR: {desc_type}")
+                upb_desc_type = self._import("google._upb._message", "Descriptor")
+                wl(f"DESCRIPTOR: {desc_type} | {upb_desc_type}")
                 wl("")
 
                 # Nested enums/messages
