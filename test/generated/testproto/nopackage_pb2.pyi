@@ -22,7 +22,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class NoPackage(_message.Message):
     """Intentionally don't set a package - just to make sure we can handle it."""
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     def __init__(
         self,
@@ -37,7 +37,7 @@ Global___NoPackage: _TypeAlias = NoPackage  # noqa: Y015
 
 @_typing.final
 class NoPackage2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     NP_FIELD_NUMBER: _builtins.int
     NP_REP_FIELD_NUMBER: _builtins.int

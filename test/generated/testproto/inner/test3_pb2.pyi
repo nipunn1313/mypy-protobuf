@@ -20,7 +20,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class DuplicatePackageMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     def __init__(
         self,

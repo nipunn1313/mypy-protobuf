@@ -59,7 +59,7 @@ Global___DeprecatedFileDeprecatedEnum: _TypeAlias = DeprecatedFileDeprecatedEnum
 @_deprecated("""This message is within a file that has been marked as deprecated using proto file options.""")
 @_typing.final
 class DeprecatedFileNonDeprecatedMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     NON_DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
     NON_DEPRECATED_ENUM_FIELD_NUMBER: _builtins.int
@@ -92,7 +92,7 @@ Global___DeprecatedFileNonDeprecatedMessage: _TypeAlias = DeprecatedFileNonDepre
 @_deprecated("""This message is deprecated""")
 @_typing.final
 class DeprecatedFileDeprecatedMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property

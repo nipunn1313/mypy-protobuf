@@ -640,7 +640,7 @@ class PkgWriter(object):
                     wl("")
 
                 desc_type = self._import("google.protobuf.descriptor", "Descriptor")
-                wl(f"DESCRIPTOR: {desc_type}")
+                wl(f"DESCRIPTOR: {desc_type}  # pyright: ignore[reportIncompatibleVariableOverride]")
                 wl("")
 
                 # Nested enums/messages

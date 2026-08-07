@@ -18,7 +18,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Simple3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     a_string: _builtins.str

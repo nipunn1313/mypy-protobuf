@@ -39,7 +39,7 @@ Global___OuterEnum: _TypeAlias = OuterEnum  # noqa: Y015
 
 @_typing.final
 class OuterMessage3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     a_string: _builtins.str
@@ -58,7 +58,7 @@ Global___OuterMessage3: _TypeAlias = OuterMessage3  # noqa: Y015
 
 @_typing.final
 class SimpleProto3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     class _InnerEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -75,7 +75,7 @@ class SimpleProto3(_message.Message):
 
     @_typing.final
     class MapScalarEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -95,7 +95,7 @@ class SimpleProto3(_message.Message):
 
     @_typing.final
     class MapMessageEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -116,7 +116,7 @@ class SimpleProto3(_message.Message):
 
     @_typing.final
     class EmailByUidEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int

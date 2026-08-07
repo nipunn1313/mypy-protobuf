@@ -20,7 +20,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class SeparateFileExtension(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
 
     FLAG_FIELD_NUMBER: _builtins.int
     flag: _builtins.bool
