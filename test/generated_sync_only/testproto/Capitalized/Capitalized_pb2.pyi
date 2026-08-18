@@ -18,7 +18,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class lower(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_FIELD_NUMBER: _builtins.int
     a: _builtins.int
@@ -37,7 +37,7 @@ Global___lower: _TypeAlias = lower  # noqa: Y015
 
 @_typing.final
 class Upper(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     LOWER_FIELD_NUMBER: _builtins.int
     @_builtins.property
@@ -57,7 +57,7 @@ Global___Upper: _TypeAlias = Upper  # noqa: Y015
 
 @_typing.final
 class lower2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     UPPER_FIELD_NUMBER: _builtins.int
     @_builtins.property

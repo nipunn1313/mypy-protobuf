@@ -108,7 +108,7 @@ class Duration(_message.Message, _well_known_types.Duration):
     microsecond should be expressed in JSON format as "3.000001s".
     """
 
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     SECONDS_FIELD_NUMBER: _builtins.int
     NANOS_FIELD_NUMBER: _builtins.int

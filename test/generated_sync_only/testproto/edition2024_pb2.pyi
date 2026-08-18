@@ -18,7 +18,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Editions2024SubMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     THING_FIELD_NUMBER: _builtins.int
     thing: _builtins.str
@@ -37,7 +37,7 @@ Global___Editions2024SubMessage: _TypeAlias = Editions2024SubMessage  # noqa: Y0
 
 @_typing.final
 class Editions2024Test(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     LEGACY_FIELD_NUMBER: _builtins.int
     EXPLICIT_SINGULAR_FIELD_NUMBER: _builtins.int

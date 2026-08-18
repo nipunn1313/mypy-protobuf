@@ -20,7 +20,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class FieldOptions(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     CASTTYPE_FIELD_NUMBER: _builtins.int
     KEYTYPE_FIELD_NUMBER: _builtins.int

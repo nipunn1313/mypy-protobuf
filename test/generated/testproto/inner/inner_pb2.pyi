@@ -19,7 +19,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Inner(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor  # pyright: ignore[reportIncompatibleVariableOverride]
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_FIELD_NUMBER: _builtins.int
     a: _test3_pb2.OuterEnum.ValueType
