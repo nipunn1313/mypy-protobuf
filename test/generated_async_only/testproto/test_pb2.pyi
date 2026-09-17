@@ -101,7 +101,7 @@ Global___DeprecatedEnum: _TypeAlias = DeprecatedEnum  # noqa: Y015
 class Simple1(_message.Message):
     """Message with one of everything"""
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     class _InnerEnum:
         ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -124,7 +124,7 @@ class Simple1(_message.Message):
 
     @_typing.final
     class InnerMessage(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
         def __init__(
             self,
@@ -137,7 +137,7 @@ class Simple1(_message.Message):
 
     @_typing.final
     class EmailByUidEntry(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
         KEY_FIELD_NUMBER: _builtins.int
         VALUE_FIELD_NUMBER: _builtins.int
@@ -266,7 +266,7 @@ Global___Simple1: _TypeAlias = Simple1  # noqa: Y015
 
 @_typing.final
 class Simple2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     a_string: _builtins.str
@@ -285,7 +285,7 @@ Global___Simple2: _TypeAlias = Simple2  # noqa: Y015
 
 @_typing.final
 class Extensions1(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     EXT1_STRING_FIELD_NUMBER: _builtins.int
     ext1_string: _builtins.str
@@ -307,7 +307,7 @@ Global___Extensions1: _TypeAlias = Extensions1  # noqa: Y015
 
 @_typing.final
 class Extensions2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     FLAG_FIELD_NUMBER: _builtins.int
     flag: _builtins.bool
@@ -329,7 +329,7 @@ Global___Extensions2: _TypeAlias = Extensions2  # noqa: Y015
 
 @_typing.final
 class _r_None(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     VALID_FIELD_NUMBER: _builtins.int
     valid: _builtins.int
@@ -348,7 +348,7 @@ Global____r_None: _TypeAlias = _r_None  # noqa: Y015
 
 @_typing.final
 class PythonReservedKeywords(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     class _finally:
         ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -363,7 +363,7 @@ class PythonReservedKeywords(_message.Message):
 
     @_typing.final
     class _r_lambda(_message.Message):
-        DESCRIPTOR: _descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
         CONTINUE_FIELD_NUMBER: _builtins.int
         VALID_FIELD_NUMBER: _builtins.int
@@ -432,7 +432,7 @@ Global___PythonReservedKeywords: _TypeAlias = PythonReservedKeywords  # noqa: Y0
 class PythonReservedKeywordsSmall(_message.Message):
     """Do one with just one arg - to make sure it's syntactically correct"""
 
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     FROM_FIELD_NUMBER: _builtins.int
     def __init__(
@@ -448,7 +448,7 @@ Global___PythonReservedKeywordsSmall: _TypeAlias = PythonReservedKeywordsSmall  
 
 @_typing.final
 class SelfField(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     SELF_FIELD_NUMBER: _builtins.int
     self: _builtins.int
@@ -469,7 +469,7 @@ Global___SelfField: _TypeAlias = SelfField  # noqa: Y015
 @_deprecated("""This message is deprecated""")
 @_typing.final
 class DeprecatedMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
@@ -509,7 +509,7 @@ Global___DeprecatedMessage: _TypeAlias = DeprecatedMessage  # noqa: Y015
 @_deprecated("""This message has been marked as deprecated using proto message options.""")
 @_typing.final
 class DeprecatedMessageBadComment(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     a_string: _builtins.str
@@ -528,7 +528,7 @@ Global___DeprecatedMessageBadComment: _TypeAlias = DeprecatedMessageBadComment  
 
 @_typing.final
 class TestDuplicatePackageMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     MSG_FIELD_NUMBER: _builtins.int
     @_builtins.property

@@ -18,7 +18,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Message(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     MSG_FIELD_NUMBER: _builtins.int
     msg: _builtins.str

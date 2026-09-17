@@ -23,7 +23,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class DummyRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.str
@@ -42,7 +42,7 @@ Global___DummyRequest: _TypeAlias = DummyRequest  # noqa: Y015
 
 @_typing.final
 class DummyReply(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     VALUE_FIELD_NUMBER: _builtins.int
     value: _builtins.str
@@ -62,7 +62,7 @@ Global___DummyReply: _TypeAlias = DummyReply  # noqa: Y015
 @_deprecated("""This message has been marked as deprecated using proto message options.""")
 @_typing.final
 class DeprecatedRequest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     OLD_FIELD_FIELD_NUMBER: _builtins.int
     @_builtins.property
@@ -86,7 +86,7 @@ Global___DeprecatedRequest: _TypeAlias = DeprecatedRequest  # noqa: Y015
 
 @_typing.final
 class ManyRequest1(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -101,7 +101,7 @@ Global___ManyRequest1: _TypeAlias = ManyRequest1  # noqa: Y015
 
 @_typing.final
 class ManyResponse1(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -116,7 +116,7 @@ Global___ManyResponse1: _TypeAlias = ManyResponse1  # noqa: Y015
 
 @_typing.final
 class ManyRequest2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -131,7 +131,7 @@ Global___ManyRequest2: _TypeAlias = ManyRequest2  # noqa: Y015
 
 @_typing.final
 class ManyResponse2(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -146,7 +146,7 @@ Global___ManyResponse2: _TypeAlias = ManyResponse2  # noqa: Y015
 
 @_typing.final
 class ManyRequest3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -161,7 +161,7 @@ Global___ManyRequest3: _TypeAlias = ManyRequest3  # noqa: Y015
 
 @_typing.final
 class ManyResponse3(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -176,7 +176,7 @@ Global___ManyResponse3: _TypeAlias = ManyResponse3  # noqa: Y015
 
 @_typing.final
 class ManyRequest4(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -191,7 +191,7 @@ Global___ManyRequest4: _TypeAlias = ManyRequest4  # noqa: Y015
 
 @_typing.final
 class ManyResponse4(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -206,7 +206,7 @@ Global___ManyResponse4: _TypeAlias = ManyResponse4  # noqa: Y015
 
 @_typing.final
 class ManyRequest5(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -221,7 +221,7 @@ Global___ManyRequest5: _TypeAlias = ManyRequest5  # noqa: Y015
 
 @_typing.final
 class ManyResponse5(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -236,7 +236,7 @@ Global___ManyResponse5: _TypeAlias = ManyResponse5  # noqa: Y015
 
 @_typing.final
 class ManyRequest6(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -251,7 +251,7 @@ Global___ManyRequest6: _TypeAlias = ManyRequest6  # noqa: Y015
 
 @_typing.final
 class ManyResponse6(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -266,7 +266,7 @@ Global___ManyResponse6: _TypeAlias = ManyResponse6  # noqa: Y015
 
 @_typing.final
 class ManyRequest7(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -281,7 +281,7 @@ Global___ManyRequest7: _TypeAlias = ManyRequest7  # noqa: Y015
 
 @_typing.final
 class ManyResponse7(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -296,7 +296,7 @@ Global___ManyResponse7: _TypeAlias = ManyResponse7  # noqa: Y015
 
 @_typing.final
 class ManyRequest8(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -311,7 +311,7 @@ Global___ManyRequest8: _TypeAlias = ManyRequest8  # noqa: Y015
 
 @_typing.final
 class ManyResponse8(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -326,7 +326,7 @@ Global___ManyResponse8: _TypeAlias = ManyResponse8  # noqa: Y015
 
 @_typing.final
 class ManyRequest9(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -341,7 +341,7 @@ Global___ManyRequest9: _TypeAlias = ManyRequest9  # noqa: Y015
 
 @_typing.final
 class ManyResponse9(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -356,7 +356,7 @@ Global___ManyResponse9: _TypeAlias = ManyResponse9  # noqa: Y015
 
 @_typing.final
 class ManyRequest10(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -371,7 +371,7 @@ Global___ManyRequest10: _TypeAlias = ManyRequest10  # noqa: Y015
 
 @_typing.final
 class ManyResponse10(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -386,7 +386,7 @@ Global___ManyResponse10: _TypeAlias = ManyResponse10  # noqa: Y015
 
 @_typing.final
 class ManyRequest11(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -401,7 +401,7 @@ Global___ManyRequest11: _TypeAlias = ManyRequest11  # noqa: Y015
 
 @_typing.final
 class ManyResponse11(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -416,7 +416,7 @@ Global___ManyResponse11: _TypeAlias = ManyResponse11  # noqa: Y015
 
 @_typing.final
 class ManyRequest12(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -431,7 +431,7 @@ Global___ManyRequest12: _TypeAlias = ManyRequest12  # noqa: Y015
 
 @_typing.final
 class ManyResponse12(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -446,7 +446,7 @@ Global___ManyResponse12: _TypeAlias = ManyResponse12  # noqa: Y015
 
 @_typing.final
 class ManyRequest13(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -461,7 +461,7 @@ Global___ManyRequest13: _TypeAlias = ManyRequest13  # noqa: Y015
 
 @_typing.final
 class ManyResponse13(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -476,7 +476,7 @@ Global___ManyResponse13: _TypeAlias = ManyResponse13  # noqa: Y015
 
 @_typing.final
 class ManyRequest14(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -491,7 +491,7 @@ Global___ManyRequest14: _TypeAlias = ManyRequest14  # noqa: Y015
 
 @_typing.final
 class ManyResponse14(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -506,7 +506,7 @@ Global___ManyResponse14: _TypeAlias = ManyResponse14  # noqa: Y015
 
 @_typing.final
 class ManyRequest15(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -521,7 +521,7 @@ Global___ManyRequest15: _TypeAlias = ManyRequest15  # noqa: Y015
 
 @_typing.final
 class ManyResponse15(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -536,7 +536,7 @@ Global___ManyResponse15: _TypeAlias = ManyResponse15  # noqa: Y015
 
 @_typing.final
 class ManyRequest16(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -551,7 +551,7 @@ Global___ManyRequest16: _TypeAlias = ManyRequest16  # noqa: Y015
 
 @_typing.final
 class ManyResponse16(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -566,7 +566,7 @@ Global___ManyResponse16: _TypeAlias = ManyResponse16  # noqa: Y015
 
 @_typing.final
 class ManyRequest17(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -581,7 +581,7 @@ Global___ManyRequest17: _TypeAlias = ManyRequest17  # noqa: Y015
 
 @_typing.final
 class ManyResponse17(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -596,7 +596,7 @@ Global___ManyResponse17: _TypeAlias = ManyResponse17  # noqa: Y015
 
 @_typing.final
 class ManyRequest18(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -611,7 +611,7 @@ Global___ManyRequest18: _TypeAlias = ManyRequest18  # noqa: Y015
 
 @_typing.final
 class ManyResponse18(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -626,7 +626,7 @@ Global___ManyResponse18: _TypeAlias = ManyResponse18  # noqa: Y015
 
 @_typing.final
 class ManyRequest19(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -641,7 +641,7 @@ Global___ManyRequest19: _TypeAlias = ManyRequest19  # noqa: Y015
 
 @_typing.final
 class ManyResponse19(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -656,7 +656,7 @@ Global___ManyResponse19: _TypeAlias = ManyResponse19  # noqa: Y015
 
 @_typing.final
 class ManyRequest20(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -671,7 +671,7 @@ Global___ManyRequest20: _TypeAlias = ManyRequest20  # noqa: Y015
 
 @_typing.final
 class ManyResponse20(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -686,7 +686,7 @@ Global___ManyResponse20: _TypeAlias = ManyResponse20  # noqa: Y015
 
 @_typing.final
 class ManyRequest21(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -701,7 +701,7 @@ Global___ManyRequest21: _TypeAlias = ManyRequest21  # noqa: Y015
 
 @_typing.final
 class ManyResponse21(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -716,7 +716,7 @@ Global___ManyResponse21: _TypeAlias = ManyResponse21  # noqa: Y015
 
 @_typing.final
 class ManyRequest22(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -731,7 +731,7 @@ Global___ManyRequest22: _TypeAlias = ManyRequest22  # noqa: Y015
 
 @_typing.final
 class ManyResponse22(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -746,7 +746,7 @@ Global___ManyResponse22: _TypeAlias = ManyResponse22  # noqa: Y015
 
 @_typing.final
 class ManyRequest23(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -761,7 +761,7 @@ Global___ManyRequest23: _TypeAlias = ManyRequest23  # noqa: Y015
 
 @_typing.final
 class ManyResponse23(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -776,7 +776,7 @@ Global___ManyResponse23: _TypeAlias = ManyResponse23  # noqa: Y015
 
 @_typing.final
 class ManyRequest24(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -791,7 +791,7 @@ Global___ManyRequest24: _TypeAlias = ManyRequest24  # noqa: Y015
 
 @_typing.final
 class ManyResponse24(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -806,7 +806,7 @@ Global___ManyResponse24: _TypeAlias = ManyResponse24  # noqa: Y015
 
 @_typing.final
 class ManyRequest25(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -821,7 +821,7 @@ Global___ManyRequest25: _TypeAlias = ManyRequest25  # noqa: Y015
 
 @_typing.final
 class ManyResponse25(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -836,7 +836,7 @@ Global___ManyResponse25: _TypeAlias = ManyResponse25  # noqa: Y015
 
 @_typing.final
 class ManyRequest26(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -851,7 +851,7 @@ Global___ManyRequest26: _TypeAlias = ManyRequest26  # noqa: Y015
 
 @_typing.final
 class ManyResponse26(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -866,7 +866,7 @@ Global___ManyResponse26: _TypeAlias = ManyResponse26  # noqa: Y015
 
 @_typing.final
 class ManyRequest27(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -881,7 +881,7 @@ Global___ManyRequest27: _TypeAlias = ManyRequest27  # noqa: Y015
 
 @_typing.final
 class ManyResponse27(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -896,7 +896,7 @@ Global___ManyResponse27: _TypeAlias = ManyResponse27  # noqa: Y015
 
 @_typing.final
 class ManyRequest28(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -911,7 +911,7 @@ Global___ManyRequest28: _TypeAlias = ManyRequest28  # noqa: Y015
 
 @_typing.final
 class ManyResponse28(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -926,7 +926,7 @@ Global___ManyResponse28: _TypeAlias = ManyResponse28  # noqa: Y015
 
 @_typing.final
 class ManyRequest29(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -941,7 +941,7 @@ Global___ManyRequest29: _TypeAlias = ManyRequest29  # noqa: Y015
 
 @_typing.final
 class ManyResponse29(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -956,7 +956,7 @@ Global___ManyResponse29: _TypeAlias = ManyResponse29  # noqa: Y015
 
 @_typing.final
 class ManyRequest30(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -971,7 +971,7 @@ Global___ManyRequest30: _TypeAlias = ManyRequest30  # noqa: Y015
 
 @_typing.final
 class ManyResponse30(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -986,7 +986,7 @@ Global___ManyResponse30: _TypeAlias = ManyResponse30  # noqa: Y015
 
 @_typing.final
 class ManyRequest31(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1001,7 +1001,7 @@ Global___ManyRequest31: _TypeAlias = ManyRequest31  # noqa: Y015
 
 @_typing.final
 class ManyResponse31(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1016,7 +1016,7 @@ Global___ManyResponse31: _TypeAlias = ManyResponse31  # noqa: Y015
 
 @_typing.final
 class ManyRequest32(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1031,7 +1031,7 @@ Global___ManyRequest32: _TypeAlias = ManyRequest32  # noqa: Y015
 
 @_typing.final
 class ManyResponse32(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1046,7 +1046,7 @@ Global___ManyResponse32: _TypeAlias = ManyResponse32  # noqa: Y015
 
 @_typing.final
 class ManyRequest33(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1061,7 +1061,7 @@ Global___ManyRequest33: _TypeAlias = ManyRequest33  # noqa: Y015
 
 @_typing.final
 class ManyResponse33(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1076,7 +1076,7 @@ Global___ManyResponse33: _TypeAlias = ManyResponse33  # noqa: Y015
 
 @_typing.final
 class ManyRequest34(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1091,7 +1091,7 @@ Global___ManyRequest34: _TypeAlias = ManyRequest34  # noqa: Y015
 
 @_typing.final
 class ManyResponse34(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1106,7 +1106,7 @@ Global___ManyResponse34: _TypeAlias = ManyResponse34  # noqa: Y015
 
 @_typing.final
 class ManyRequest35(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1121,7 +1121,7 @@ Global___ManyRequest35: _TypeAlias = ManyRequest35  # noqa: Y015
 
 @_typing.final
 class ManyResponse35(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1136,7 +1136,7 @@ Global___ManyResponse35: _TypeAlias = ManyResponse35  # noqa: Y015
 
 @_typing.final
 class ManyRequest36(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1151,7 +1151,7 @@ Global___ManyRequest36: _TypeAlias = ManyRequest36  # noqa: Y015
 
 @_typing.final
 class ManyResponse36(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1166,7 +1166,7 @@ Global___ManyResponse36: _TypeAlias = ManyResponse36  # noqa: Y015
 
 @_typing.final
 class ManyRequest37(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1181,7 +1181,7 @@ Global___ManyRequest37: _TypeAlias = ManyRequest37  # noqa: Y015
 
 @_typing.final
 class ManyResponse37(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1196,7 +1196,7 @@ Global___ManyResponse37: _TypeAlias = ManyResponse37  # noqa: Y015
 
 @_typing.final
 class ManyRequest38(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1211,7 +1211,7 @@ Global___ManyRequest38: _TypeAlias = ManyRequest38  # noqa: Y015
 
 @_typing.final
 class ManyResponse38(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1226,7 +1226,7 @@ Global___ManyResponse38: _TypeAlias = ManyResponse38  # noqa: Y015
 
 @_typing.final
 class ManyRequest39(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1241,7 +1241,7 @@ Global___ManyRequest39: _TypeAlias = ManyRequest39  # noqa: Y015
 
 @_typing.final
 class ManyResponse39(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1256,7 +1256,7 @@ Global___ManyResponse39: _TypeAlias = ManyResponse39  # noqa: Y015
 
 @_typing.final
 class ManyRequest40(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1271,7 +1271,7 @@ Global___ManyRequest40: _TypeAlias = ManyRequest40  # noqa: Y015
 
 @_typing.final
 class ManyResponse40(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1286,7 +1286,7 @@ Global___ManyResponse40: _TypeAlias = ManyResponse40  # noqa: Y015
 
 @_typing.final
 class ManyRequest41(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1301,7 +1301,7 @@ Global___ManyRequest41: _TypeAlias = ManyRequest41  # noqa: Y015
 
 @_typing.final
 class ManyResponse41(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1316,7 +1316,7 @@ Global___ManyResponse41: _TypeAlias = ManyResponse41  # noqa: Y015
 
 @_typing.final
 class ManyRequest42(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1331,7 +1331,7 @@ Global___ManyRequest42: _TypeAlias = ManyRequest42  # noqa: Y015
 
 @_typing.final
 class ManyResponse42(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1346,7 +1346,7 @@ Global___ManyResponse42: _TypeAlias = ManyResponse42  # noqa: Y015
 
 @_typing.final
 class ManyRequest43(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1361,7 +1361,7 @@ Global___ManyRequest43: _TypeAlias = ManyRequest43  # noqa: Y015
 
 @_typing.final
 class ManyResponse43(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1376,7 +1376,7 @@ Global___ManyResponse43: _TypeAlias = ManyResponse43  # noqa: Y015
 
 @_typing.final
 class ManyRequest44(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1391,7 +1391,7 @@ Global___ManyRequest44: _TypeAlias = ManyRequest44  # noqa: Y015
 
 @_typing.final
 class ManyResponse44(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1406,7 +1406,7 @@ Global___ManyResponse44: _TypeAlias = ManyResponse44  # noqa: Y015
 
 @_typing.final
 class ManyRequest45(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1421,7 +1421,7 @@ Global___ManyRequest45: _TypeAlias = ManyRequest45  # noqa: Y015
 
 @_typing.final
 class ManyResponse45(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1436,7 +1436,7 @@ Global___ManyResponse45: _TypeAlias = ManyResponse45  # noqa: Y015
 
 @_typing.final
 class ManyRequest46(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1451,7 +1451,7 @@ Global___ManyRequest46: _TypeAlias = ManyRequest46  # noqa: Y015
 
 @_typing.final
 class ManyResponse46(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1466,7 +1466,7 @@ Global___ManyResponse46: _TypeAlias = ManyResponse46  # noqa: Y015
 
 @_typing.final
 class ManyRequest47(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1481,7 +1481,7 @@ Global___ManyRequest47: _TypeAlias = ManyRequest47  # noqa: Y015
 
 @_typing.final
 class ManyResponse47(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1496,7 +1496,7 @@ Global___ManyResponse47: _TypeAlias = ManyResponse47  # noqa: Y015
 
 @_typing.final
 class ManyRequest48(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1511,7 +1511,7 @@ Global___ManyRequest48: _TypeAlias = ManyRequest48  # noqa: Y015
 
 @_typing.final
 class ManyResponse48(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1526,7 +1526,7 @@ Global___ManyResponse48: _TypeAlias = ManyResponse48  # noqa: Y015
 
 @_typing.final
 class ManyRequest49(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1541,7 +1541,7 @@ Global___ManyRequest49: _TypeAlias = ManyRequest49  # noqa: Y015
 
 @_typing.final
 class ManyResponse49(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1556,7 +1556,7 @@ Global___ManyResponse49: _TypeAlias = ManyResponse49  # noqa: Y015
 
 @_typing.final
 class ManyRequest50(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1571,7 +1571,7 @@ Global___ManyRequest50: _TypeAlias = ManyRequest50  # noqa: Y015
 
 @_typing.final
 class ManyResponse50(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1586,7 +1586,7 @@ Global___ManyResponse50: _TypeAlias = ManyResponse50  # noqa: Y015
 
 @_typing.final
 class ManyRequest51(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1601,7 +1601,7 @@ Global___ManyRequest51: _TypeAlias = ManyRequest51  # noqa: Y015
 
 @_typing.final
 class ManyResponse51(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1616,7 +1616,7 @@ Global___ManyResponse51: _TypeAlias = ManyResponse51  # noqa: Y015
 
 @_typing.final
 class ManyRequest52(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1631,7 +1631,7 @@ Global___ManyRequest52: _TypeAlias = ManyRequest52  # noqa: Y015
 
 @_typing.final
 class ManyResponse52(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1646,7 +1646,7 @@ Global___ManyResponse52: _TypeAlias = ManyResponse52  # noqa: Y015
 
 @_typing.final
 class ManyRequest53(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1661,7 +1661,7 @@ Global___ManyRequest53: _TypeAlias = ManyRequest53  # noqa: Y015
 
 @_typing.final
 class ManyResponse53(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1676,7 +1676,7 @@ Global___ManyResponse53: _TypeAlias = ManyResponse53  # noqa: Y015
 
 @_typing.final
 class ManyRequest54(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1691,7 +1691,7 @@ Global___ManyRequest54: _TypeAlias = ManyRequest54  # noqa: Y015
 
 @_typing.final
 class ManyResponse54(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1706,7 +1706,7 @@ Global___ManyResponse54: _TypeAlias = ManyResponse54  # noqa: Y015
 
 @_typing.final
 class ManyRequest55(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1721,7 +1721,7 @@ Global___ManyRequest55: _TypeAlias = ManyRequest55  # noqa: Y015
 
 @_typing.final
 class ManyResponse55(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1736,7 +1736,7 @@ Global___ManyResponse55: _TypeAlias = ManyResponse55  # noqa: Y015
 
 @_typing.final
 class ManyRequest56(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1751,7 +1751,7 @@ Global___ManyRequest56: _TypeAlias = ManyRequest56  # noqa: Y015
 
 @_typing.final
 class ManyResponse56(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1766,7 +1766,7 @@ Global___ManyResponse56: _TypeAlias = ManyResponse56  # noqa: Y015
 
 @_typing.final
 class ManyRequest57(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1781,7 +1781,7 @@ Global___ManyRequest57: _TypeAlias = ManyRequest57  # noqa: Y015
 
 @_typing.final
 class ManyResponse57(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1796,7 +1796,7 @@ Global___ManyResponse57: _TypeAlias = ManyResponse57  # noqa: Y015
 
 @_typing.final
 class ManyRequest58(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1811,7 +1811,7 @@ Global___ManyRequest58: _TypeAlias = ManyRequest58  # noqa: Y015
 
 @_typing.final
 class ManyResponse58(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1826,7 +1826,7 @@ Global___ManyResponse58: _TypeAlias = ManyResponse58  # noqa: Y015
 
 @_typing.final
 class ManyRequest59(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1841,7 +1841,7 @@ Global___ManyRequest59: _TypeAlias = ManyRequest59  # noqa: Y015
 
 @_typing.final
 class ManyResponse59(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1856,7 +1856,7 @@ Global___ManyResponse59: _TypeAlias = ManyResponse59  # noqa: Y015
 
 @_typing.final
 class ManyRequest60(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1871,7 +1871,7 @@ Global___ManyRequest60: _TypeAlias = ManyRequest60  # noqa: Y015
 
 @_typing.final
 class ManyResponse60(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1886,7 +1886,7 @@ Global___ManyResponse60: _TypeAlias = ManyResponse60  # noqa: Y015
 
 @_typing.final
 class ManyRequest61(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1901,7 +1901,7 @@ Global___ManyRequest61: _TypeAlias = ManyRequest61  # noqa: Y015
 
 @_typing.final
 class ManyResponse61(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1916,7 +1916,7 @@ Global___ManyResponse61: _TypeAlias = ManyResponse61  # noqa: Y015
 
 @_typing.final
 class ManyRequest62(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1931,7 +1931,7 @@ Global___ManyRequest62: _TypeAlias = ManyRequest62  # noqa: Y015
 
 @_typing.final
 class ManyResponse62(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1946,7 +1946,7 @@ Global___ManyResponse62: _TypeAlias = ManyResponse62  # noqa: Y015
 
 @_typing.final
 class ManyRequest63(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1961,7 +1961,7 @@ Global___ManyRequest63: _TypeAlias = ManyRequest63  # noqa: Y015
 
 @_typing.final
 class ManyResponse63(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1976,7 +1976,7 @@ Global___ManyResponse63: _TypeAlias = ManyResponse63  # noqa: Y015
 
 @_typing.final
 class ManyRequest64(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -1991,7 +1991,7 @@ Global___ManyRequest64: _TypeAlias = ManyRequest64  # noqa: Y015
 
 @_typing.final
 class ManyResponse64(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2006,7 +2006,7 @@ Global___ManyResponse64: _TypeAlias = ManyResponse64  # noqa: Y015
 
 @_typing.final
 class ManyRequest65(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2021,7 +2021,7 @@ Global___ManyRequest65: _TypeAlias = ManyRequest65  # noqa: Y015
 
 @_typing.final
 class ManyResponse65(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2036,7 +2036,7 @@ Global___ManyResponse65: _TypeAlias = ManyResponse65  # noqa: Y015
 
 @_typing.final
 class ManyRequest66(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2051,7 +2051,7 @@ Global___ManyRequest66: _TypeAlias = ManyRequest66  # noqa: Y015
 
 @_typing.final
 class ManyResponse66(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2066,7 +2066,7 @@ Global___ManyResponse66: _TypeAlias = ManyResponse66  # noqa: Y015
 
 @_typing.final
 class ManyRequest67(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2081,7 +2081,7 @@ Global___ManyRequest67: _TypeAlias = ManyRequest67  # noqa: Y015
 
 @_typing.final
 class ManyResponse67(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2096,7 +2096,7 @@ Global___ManyResponse67: _TypeAlias = ManyResponse67  # noqa: Y015
 
 @_typing.final
 class ManyRequest68(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2111,7 +2111,7 @@ Global___ManyRequest68: _TypeAlias = ManyRequest68  # noqa: Y015
 
 @_typing.final
 class ManyResponse68(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2126,7 +2126,7 @@ Global___ManyResponse68: _TypeAlias = ManyResponse68  # noqa: Y015
 
 @_typing.final
 class ManyRequest69(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2141,7 +2141,7 @@ Global___ManyRequest69: _TypeAlias = ManyRequest69  # noqa: Y015
 
 @_typing.final
 class ManyResponse69(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2156,7 +2156,7 @@ Global___ManyResponse69: _TypeAlias = ManyResponse69  # noqa: Y015
 
 @_typing.final
 class ManyRequest70(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2171,7 +2171,7 @@ Global___ManyRequest70: _TypeAlias = ManyRequest70  # noqa: Y015
 
 @_typing.final
 class ManyResponse70(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2186,7 +2186,7 @@ Global___ManyResponse70: _TypeAlias = ManyResponse70  # noqa: Y015
 
 @_typing.final
 class ManyRequest71(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2201,7 +2201,7 @@ Global___ManyRequest71: _TypeAlias = ManyRequest71  # noqa: Y015
 
 @_typing.final
 class ManyResponse71(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2216,7 +2216,7 @@ Global___ManyResponse71: _TypeAlias = ManyResponse71  # noqa: Y015
 
 @_typing.final
 class ManyRequest72(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2231,7 +2231,7 @@ Global___ManyRequest72: _TypeAlias = ManyRequest72  # noqa: Y015
 
 @_typing.final
 class ManyResponse72(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2246,7 +2246,7 @@ Global___ManyResponse72: _TypeAlias = ManyResponse72  # noqa: Y015
 
 @_typing.final
 class ManyRequest73(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2261,7 +2261,7 @@ Global___ManyRequest73: _TypeAlias = ManyRequest73  # noqa: Y015
 
 @_typing.final
 class ManyResponse73(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2276,7 +2276,7 @@ Global___ManyResponse73: _TypeAlias = ManyResponse73  # noqa: Y015
 
 @_typing.final
 class ManyRequest74(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2291,7 +2291,7 @@ Global___ManyRequest74: _TypeAlias = ManyRequest74  # noqa: Y015
 
 @_typing.final
 class ManyResponse74(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2306,7 +2306,7 @@ Global___ManyResponse74: _TypeAlias = ManyResponse74  # noqa: Y015
 
 @_typing.final
 class ManyRequest75(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2321,7 +2321,7 @@ Global___ManyRequest75: _TypeAlias = ManyRequest75  # noqa: Y015
 
 @_typing.final
 class ManyResponse75(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2336,7 +2336,7 @@ Global___ManyResponse75: _TypeAlias = ManyResponse75  # noqa: Y015
 
 @_typing.final
 class ManyRequest76(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2351,7 +2351,7 @@ Global___ManyRequest76: _TypeAlias = ManyRequest76  # noqa: Y015
 
 @_typing.final
 class ManyResponse76(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2366,7 +2366,7 @@ Global___ManyResponse76: _TypeAlias = ManyResponse76  # noqa: Y015
 
 @_typing.final
 class ManyRequest77(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2381,7 +2381,7 @@ Global___ManyRequest77: _TypeAlias = ManyRequest77  # noqa: Y015
 
 @_typing.final
 class ManyResponse77(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2396,7 +2396,7 @@ Global___ManyResponse77: _TypeAlias = ManyResponse77  # noqa: Y015
 
 @_typing.final
 class ManyRequest78(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2411,7 +2411,7 @@ Global___ManyRequest78: _TypeAlias = ManyRequest78  # noqa: Y015
 
 @_typing.final
 class ManyResponse78(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2426,7 +2426,7 @@ Global___ManyResponse78: _TypeAlias = ManyResponse78  # noqa: Y015
 
 @_typing.final
 class ManyRequest79(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2441,7 +2441,7 @@ Global___ManyRequest79: _TypeAlias = ManyRequest79  # noqa: Y015
 
 @_typing.final
 class ManyResponse79(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2456,7 +2456,7 @@ Global___ManyResponse79: _TypeAlias = ManyResponse79  # noqa: Y015
 
 @_typing.final
 class ManyRequest80(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2471,7 +2471,7 @@ Global___ManyRequest80: _TypeAlias = ManyRequest80  # noqa: Y015
 
 @_typing.final
 class ManyResponse80(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2486,7 +2486,7 @@ Global___ManyResponse80: _TypeAlias = ManyResponse80  # noqa: Y015
 
 @_typing.final
 class ManyRequest81(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2501,7 +2501,7 @@ Global___ManyRequest81: _TypeAlias = ManyRequest81  # noqa: Y015
 
 @_typing.final
 class ManyResponse81(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2516,7 +2516,7 @@ Global___ManyResponse81: _TypeAlias = ManyResponse81  # noqa: Y015
 
 @_typing.final
 class ManyRequest82(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2531,7 +2531,7 @@ Global___ManyRequest82: _TypeAlias = ManyRequest82  # noqa: Y015
 
 @_typing.final
 class ManyResponse82(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2546,7 +2546,7 @@ Global___ManyResponse82: _TypeAlias = ManyResponse82  # noqa: Y015
 
 @_typing.final
 class ManyRequest83(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2561,7 +2561,7 @@ Global___ManyRequest83: _TypeAlias = ManyRequest83  # noqa: Y015
 
 @_typing.final
 class ManyResponse83(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2576,7 +2576,7 @@ Global___ManyResponse83: _TypeAlias = ManyResponse83  # noqa: Y015
 
 @_typing.final
 class ManyRequest84(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2591,7 +2591,7 @@ Global___ManyRequest84: _TypeAlias = ManyRequest84  # noqa: Y015
 
 @_typing.final
 class ManyResponse84(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2606,7 +2606,7 @@ Global___ManyResponse84: _TypeAlias = ManyResponse84  # noqa: Y015
 
 @_typing.final
 class ManyRequest85(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2621,7 +2621,7 @@ Global___ManyRequest85: _TypeAlias = ManyRequest85  # noqa: Y015
 
 @_typing.final
 class ManyResponse85(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2636,7 +2636,7 @@ Global___ManyResponse85: _TypeAlias = ManyResponse85  # noqa: Y015
 
 @_typing.final
 class ManyRequest86(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2651,7 +2651,7 @@ Global___ManyRequest86: _TypeAlias = ManyRequest86  # noqa: Y015
 
 @_typing.final
 class ManyResponse86(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2666,7 +2666,7 @@ Global___ManyResponse86: _TypeAlias = ManyResponse86  # noqa: Y015
 
 @_typing.final
 class ManyRequest87(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2681,7 +2681,7 @@ Global___ManyRequest87: _TypeAlias = ManyRequest87  # noqa: Y015
 
 @_typing.final
 class ManyResponse87(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2696,7 +2696,7 @@ Global___ManyResponse87: _TypeAlias = ManyResponse87  # noqa: Y015
 
 @_typing.final
 class ManyRequest88(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2711,7 +2711,7 @@ Global___ManyRequest88: _TypeAlias = ManyRequest88  # noqa: Y015
 
 @_typing.final
 class ManyResponse88(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2726,7 +2726,7 @@ Global___ManyResponse88: _TypeAlias = ManyResponse88  # noqa: Y015
 
 @_typing.final
 class ManyRequest89(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2741,7 +2741,7 @@ Global___ManyRequest89: _TypeAlias = ManyRequest89  # noqa: Y015
 
 @_typing.final
 class ManyResponse89(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2756,7 +2756,7 @@ Global___ManyResponse89: _TypeAlias = ManyResponse89  # noqa: Y015
 
 @_typing.final
 class ManyRequest90(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2771,7 +2771,7 @@ Global___ManyRequest90: _TypeAlias = ManyRequest90  # noqa: Y015
 
 @_typing.final
 class ManyResponse90(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2786,7 +2786,7 @@ Global___ManyResponse90: _TypeAlias = ManyResponse90  # noqa: Y015
 
 @_typing.final
 class ManyRequest91(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2801,7 +2801,7 @@ Global___ManyRequest91: _TypeAlias = ManyRequest91  # noqa: Y015
 
 @_typing.final
 class ManyResponse91(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2816,7 +2816,7 @@ Global___ManyResponse91: _TypeAlias = ManyResponse91  # noqa: Y015
 
 @_typing.final
 class ManyRequest92(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2831,7 +2831,7 @@ Global___ManyRequest92: _TypeAlias = ManyRequest92  # noqa: Y015
 
 @_typing.final
 class ManyResponse92(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2846,7 +2846,7 @@ Global___ManyResponse92: _TypeAlias = ManyResponse92  # noqa: Y015
 
 @_typing.final
 class ManyRequest93(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2861,7 +2861,7 @@ Global___ManyRequest93: _TypeAlias = ManyRequest93  # noqa: Y015
 
 @_typing.final
 class ManyResponse93(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2876,7 +2876,7 @@ Global___ManyResponse93: _TypeAlias = ManyResponse93  # noqa: Y015
 
 @_typing.final
 class ManyRequest94(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2891,7 +2891,7 @@ Global___ManyRequest94: _TypeAlias = ManyRequest94  # noqa: Y015
 
 @_typing.final
 class ManyResponse94(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2906,7 +2906,7 @@ Global___ManyResponse94: _TypeAlias = ManyResponse94  # noqa: Y015
 
 @_typing.final
 class ManyRequest95(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2921,7 +2921,7 @@ Global___ManyRequest95: _TypeAlias = ManyRequest95  # noqa: Y015
 
 @_typing.final
 class ManyResponse95(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2936,7 +2936,7 @@ Global___ManyResponse95: _TypeAlias = ManyResponse95  # noqa: Y015
 
 @_typing.final
 class ManyRequest96(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2951,7 +2951,7 @@ Global___ManyRequest96: _TypeAlias = ManyRequest96  # noqa: Y015
 
 @_typing.final
 class ManyResponse96(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2966,7 +2966,7 @@ Global___ManyResponse96: _TypeAlias = ManyResponse96  # noqa: Y015
 
 @_typing.final
 class ManyRequest97(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2981,7 +2981,7 @@ Global___ManyRequest97: _TypeAlias = ManyRequest97  # noqa: Y015
 
 @_typing.final
 class ManyResponse97(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -2996,7 +2996,7 @@ Global___ManyResponse97: _TypeAlias = ManyResponse97  # noqa: Y015
 
 @_typing.final
 class ManyRequest98(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -3011,7 +3011,7 @@ Global___ManyRequest98: _TypeAlias = ManyRequest98  # noqa: Y015
 
 @_typing.final
 class ManyResponse98(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -3026,7 +3026,7 @@ Global___ManyResponse98: _TypeAlias = ManyResponse98  # noqa: Y015
 
 @_typing.final
 class ManyRequest99(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,
@@ -3041,7 +3041,7 @@ Global___ManyRequest99: _TypeAlias = ManyRequest99  # noqa: Y015
 
 @_typing.final
 class ManyResponse99(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,

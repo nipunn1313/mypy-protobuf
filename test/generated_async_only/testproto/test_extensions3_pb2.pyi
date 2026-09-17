@@ -22,7 +22,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class MessageOptionsTestMsg(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     def __init__(
         self,

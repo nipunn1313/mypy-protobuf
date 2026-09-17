@@ -18,7 +18,7 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 @_typing.final
 class Editions2024ImplicitFieldPresenceSubMessage(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     THING_FIELD_NUMBER: _builtins.int
     thing: _builtins.str
@@ -37,7 +37,7 @@ Global___Editions2024ImplicitFieldPresenceSubMessage: _TypeAlias = Editions2024I
 
 @_typing.final
 class Editions2024ImplicitFieldPresenceTest(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     LEGACY_FIELD_NUMBER: _builtins.int
     EXPLICIT_SINGULAR_FIELD_NUMBER: _builtins.int
