@@ -85,7 +85,7 @@ jobs:
           uv venv -p ${{ matrix.python-version }}
           uv pip install -r test_requirements.txt
       - name: Run Pyright
-        uses: jakebailey/pyright-action@v2
+        uses: jakebailey/pyright-action@v3
         with:
           version: "${{ steps.read_versions.outputs.PYRIGHT_VERSION }}"
           python-path: .venv/bin/python3
