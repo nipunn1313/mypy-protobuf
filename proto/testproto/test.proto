@@ -189,6 +189,19 @@ message DeprecatedMessage {
     optional string deprecated_field_with_comment = 3 [deprecated = true];
 }
 
+message MessageWithDeprecatedFields {
+    // The message itself is not deprecated - only some of its fields are, so the
+    // constructor gets a pair of overloads.
+    optional string a_string = 1;
+    optional string deprecated_field = 2 [deprecated = true];
+    repeated string deprecated_repeated_field = 3 [deprecated = true];
+}
+
+message MessageWithOneDeprecatedField {
+    optional string a_string = 1;
+    optional string deprecated_field = 2 [deprecated = true];
+}
+
 message DeprecatedMessageBadComment {
     // This message is deprecated
     // """ triple quotes in comment

@@ -48,6 +48,8 @@ from testproto.test_pb2 import (  # E:3.8
     DeprecatedMessage,
     Extensions1,
     Extensions2,
+    MessageWithDeprecatedFields,
+    MessageWithOneDeprecatedField,
     PythonReservedKeywords,
     Simple1,
     Simple2,
@@ -216,6 +218,14 @@ a_string = PythonReservedKeywords().valid  # E:3.8
 deprecated_message = DeprecatedMessage()
 deprecated_field = deprecated_message.deprecated_field
 deprecated_message.deprecated_field = "test"  # E:3.8
+
+# Constructing with a deprecated field picks the @deprecated overload
+MessageWithDeprecatedFields(a_string="test")
+MessageWithDeprecatedFields(deprecated_field="test")  # E:3.8
+MessageWithDeprecatedFields(a_string="test", deprecated_field="test")  # E:3.8
+MessageWithDeprecatedFields(deprecated_repeated_field=["test"])  # E:3.8
+MessageWithOneDeprecatedField(a_string="test")
+MessageWithOneDeprecatedField(deprecated_field="test")  # E:3.8
 
 stub0 = DummyServiceStub()  # E:3.8
 channel = grpc.insecure_channel("127.0.0.1:8080")
