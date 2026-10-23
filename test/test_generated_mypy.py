@@ -96,6 +96,47 @@ def test_generate_mypy_matches() -> None:
     assert len(failure_check_results) == len(pyi_files)
 
 
+def test_deprecated_field_constructor_overloads() -> None:
+    """A message with deprecated fields gets a non-deprecated __init__ overload
+    omitting them, plus a @deprecated one accepting them.
+
+    Asserted against the generated stub rather than test_negative, because mypy
+    renders the echoed signature's unions differently depending on which python
+    mypy itself runs under (Union[x, None] on 3.9 vs x | None on 3.10+), which a
+    single expected-output file can't encode.
+    """
+    with open("test/generated/testproto/test_pb2.pyi") as f:
+        stub = f.read()
+
+    body = stub.split("class MessageWithDeprecatedFields(")[1].split("\nclass ")[0]
+    assert (
+        """    @_typing.overload
+    def __init__(
+        self,
+        *,
+        a_string: _builtins.str | None = ...,
+    ) -> None: ...
+    @_typing.overload
+    @_deprecated(\"\"\"This constructor uses fields marked as deprecated using proto field options: deprecated_field, deprecated_repeated_field.\"\"\")
+    def __init__(
+        self,
+        *,
+        a_string: _builtins.str | None = ...,
+        deprecated_field: _builtins.str | None = ...,
+        deprecated_repeated_field: _abc.Iterable[_builtins.str] | None = ...,
+    ) -> None: ..."""
+        in body
+    )
+
+    # Singular phrasing when only one field is deprecated
+    one = stub.split("class MessageWithOneDeprecatedField(")[1].split("\nclass ")[0]
+    assert "uses a field marked as deprecated using proto field options: deprecated_field." in one
+
+    # A message that is itself deprecated relies on the class-level warning instead
+    dep = stub.split("class DeprecatedMessage(")[1].split("\nclass ")[0]
+    assert "@_typing.overload" not in dep
+
+
 def test_generate_negative_matches() -> None:
     """Confirm that the test_negative expected file matches an error for each line"""
 
@@ -121,7 +162,7 @@ def test_generate_negative_matches() -> None:
     assert errors_39 == expected_errors_39
 
     # Some sanity checks to make sure we don't mess this up. Please update as necessary.
-    assert len(errors_39) == 112
+    assert len(errors_39) == 108
 
 
 def test_func() -> None:
