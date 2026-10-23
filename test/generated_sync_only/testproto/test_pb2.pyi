@@ -508,7 +508,7 @@ Global___DeprecatedMessage: _TypeAlias = DeprecatedMessage  # noqa: Y015
 
 @_typing.final
 class MessageWithDeprecatedFields(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
@@ -551,7 +551,7 @@ Global___MessageWithDeprecatedFields: _TypeAlias = MessageWithDeprecatedFields  
 
 @_typing.final
 class MessageWithOneDeprecatedField(_message.Message):
-    DESCRIPTOR: _descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
 
     A_STRING_FIELD_NUMBER: _builtins.int
     DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
