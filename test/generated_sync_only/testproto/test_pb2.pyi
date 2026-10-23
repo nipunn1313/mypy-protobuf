@@ -506,6 +506,84 @@ class DeprecatedMessage(_message.Message):
 
 Global___DeprecatedMessage: _TypeAlias = DeprecatedMessage  # noqa: Y015
 
+@_typing.final
+class MessageWithDeprecatedFields(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
+
+    A_STRING_FIELD_NUMBER: _builtins.int
+    DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
+    DEPRECATED_REPEATED_FIELD_FIELD_NUMBER: _builtins.int
+    a_string: _builtins.str
+    """The message itself is not deprecated - only some of its fields are, so the
+    constructor gets a pair of overloads.
+    """
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self) -> _builtins.str: ...
+    @deprecated_field.setter
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self, value: _builtins.str) -> None: ...
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_repeated_field(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]: ...
+    @_typing.overload
+    def __init__(
+        self,
+        *,
+        a_string: _builtins.str | None = ...,
+    ) -> None: ...
+    @_typing.overload
+    @_deprecated("""This constructor uses fields marked as deprecated using proto field options: deprecated_field, deprecated_repeated_field.""")
+    def __init__(
+        self,
+        *,
+        a_string: _builtins.str | None = ...,
+        deprecated_field: _builtins.str | None = ...,
+        deprecated_repeated_field: _abc.Iterable[_builtins.str] | None = ...,
+    ) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field", "deprecated_repeated_field", b"deprecated_repeated_field"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
+
+Global___MessageWithDeprecatedFields: _TypeAlias = MessageWithDeprecatedFields  # noqa: Y015
+
+@_typing.final
+class MessageWithOneDeprecatedField(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor  # type: ignore[assignment, unused-ignore]  # pyright: ignore[reportIncompatibleVariableOverride]  # ty: ignore[invalid-assignment]
+
+    A_STRING_FIELD_NUMBER: _builtins.int
+    DEPRECATED_FIELD_FIELD_NUMBER: _builtins.int
+    a_string: _builtins.str
+    @_builtins.property
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self) -> _builtins.str: ...
+    @deprecated_field.setter
+    @_deprecated("""This field has been marked as deprecated using proto field options.""")
+    def deprecated_field(self, value: _builtins.str) -> None: ...
+    @_typing.overload
+    def __init__(
+        self,
+        *,
+        a_string: _builtins.str | None = ...,
+    ) -> None: ...
+    @_typing.overload
+    @_deprecated("""This constructor uses a field marked as deprecated using proto field options: deprecated_field.""")
+    def __init__(
+        self,
+        *,
+        a_string: _builtins.str | None = ...,
+        deprecated_field: _builtins.str | None = ...,
+    ) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["a_string", b"a_string", "deprecated_field", b"deprecated_field"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
+
+Global___MessageWithOneDeprecatedField: _TypeAlias = MessageWithOneDeprecatedField  # noqa: Y015
+
 @_deprecated("""This message has been marked as deprecated using proto message options.""")
 @_typing.final
 class DeprecatedMessageBadComment(_message.Message):

@@ -164,6 +164,8 @@ testproto.test_pb2.Simple1.InnerMessage
 testproto.test_pb2.Simple2
 testproto.test_pb2.DeprecatedMessage
 testproto.test_pb2.DeprecatedMessageBadComment
+testproto.test_pb2.MessageWithDeprecatedFields
+testproto.test_pb2.MessageWithOneDeprecatedField
 testproto.edition2024_pb2.Editions2024SubMessage
 testproto.edition2024_pb2.Editions2024Test
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceSubMessage
@@ -221,6 +223,8 @@ testproto.test_pb2.Simple1.InnerMessage.DESCRIPTOR
 testproto.test_pb2.Simple2.DESCRIPTOR
 testproto.test_pb2.DeprecatedMessage.DESCRIPTOR
 testproto.test_pb2.DeprecatedMessageBadComment.DESCRIPTOR
+testproto.test_pb2.MessageWithDeprecatedFields.DESCRIPTOR
+testproto.test_pb2.MessageWithOneDeprecatedField.DESCRIPTOR
 testproto.edition2024_pb2.Editions2024SubMessage.DESCRIPTOR
 testproto.edition2024_pb2.Editions2024Test.DESCRIPTOR
 testproto.edition2024implicitfieldpresence_pb2.Editions2024ImplicitFieldPresenceSubMessage.DESCRIPTOR
@@ -288,3 +292,6 @@ testproto.grpc.deprecated_pb2_grpc.DeprecatedFileNonDeprecatedServiceStub.*
 testproto.grpc.dummy_pb2.DeprecatedRequest.old_field
 testproto.test_pb2.DeprecatedMessage.deprecated_field
 testproto.test_pb2.DeprecatedMessage.deprecated_field_with_comment
+testproto.test_pb2.MessageWithDeprecatedFields.deprecated_field
+testproto.test_pb2.MessageWithDeprecatedFields.deprecated_repeated_field
+testproto.test_pb2.MessageWithOneDeprecatedField.deprecated_field
