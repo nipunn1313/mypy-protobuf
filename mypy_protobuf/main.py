@@ -295,7 +295,13 @@ class PkgWriter(object):
         If alias is true, then it will prefix the import with an underscore to prevent conflicts with builtin names
         """
         if path == "typing_extensions":
-            stabilization = {"TypeAlias": (3, 10), "TypeVar": (3, 13), "type_check_only": (3, 12), "Self": (3, 11), "Never": (3, 11)}
+            stabilization = {
+                "TypeAlias": (3, 10),
+                "TypeVar": (3, 13),
+                "type_check_only": (3, 12),
+                "Self": (3, 11),
+                "Never": (3, 11),
+            }
             assert name in stabilization
             if not self.typing_extensions_min or self.typing_extensions_min < stabilization[name]:
                 self.typing_extensions_min = stabilization[name]
@@ -416,7 +422,10 @@ class PkgWriter(object):
                 ast.parse(f'"""{joined}"""')
                 msg = joined
             except SyntaxError as e:
-                print(f"Warning: Deprecation comment {joined} could not be parsed as a python string literal. Using default deprecation message. {e}", file=sys.stderr)
+                print(
+                    f"Warning: Deprecation comment {joined} could not be parsed as a python string literal. Using default deprecation message. {e}",
+                    file=sys.stderr,
+                )
                 pass
         return msg
 
@@ -544,7 +553,10 @@ class PkgWriter(object):
                     self._builtin("int"),
                 )
                 # Alias to the classic shorter definition "V"
-                wl("V: {} = ValueType  # noqa: Y015", self._import("typing_extensions", "TypeAlias"))
+                wl(
+                    "V: {} = ValueType  # noqa: Y015",
+                    self._import("typing_extensions", "TypeAlias"),
+                )
             wl("")
             wl(
                 "class {}({}[{}], {}):",
@@ -651,7 +663,13 @@ class PkgWriter(object):
                     scl + [d.DescriptorProto.ENUM_TYPE_FIELD_NUMBER],
                     file_deprecated=file_deprecated,
                 )
-                self.write_messages(desc.nested_type, qualified_name + ".", scl + [d.DescriptorProto.NESTED_TYPE_FIELD_NUMBER], file_deprecated=file_deprecated, file_field_presence=file_field_presence)
+                self.write_messages(
+                    desc.nested_type,
+                    qualified_name + ".",
+                    scl + [d.DescriptorProto.NESTED_TYPE_FIELD_NUMBER],
+                    file_deprecated=file_deprecated,
+                    file_field_presence=file_field_presence,
+                )
 
                 # integer constants  for field numbers
                 for f in desc.field:
@@ -721,26 +739,31 @@ class PkgWriter(object):
                 self.write_extensions(desc.extension, scl + [d.DescriptorProto.EXTENSION_FIELD_NUMBER])
 
                 # Constructor
-                wl("def __init__(")
-                with self._indent():
-                    if any(f.name == "self" for f in desc.field):
-                        wl("self_,  # pyright: ignore[reportSelfClsParameterName]")
-                    else:
-                        wl("self,")
-                with self._indent():
-                    constructor_fields = [f for f in desc.field if f.name not in PYTHON_RESERVED]
-                    if len(constructor_fields) > 0:
-                        # Only positional args allowed
-                        # See https://github.com/nipunn1313/mypy-protobuf/issues/71
-                        wl("*,")
-                    for field in constructor_fields:
-                        implicit_presence = self.get_field_presence(file_field_presence, field.options.features) == d.FeatureSet.FieldPresence.IMPLICIT
-                        field_type = self.python_type(field, generic_container=True)
-                        if (implicit_presence and self.fd.syntax == "editions") or (self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional):
-                            wl(f"{field.name}: {field_type} = ...,")
-                        else:
-                            wl(f"{field.name}: {field_type} | None = ...,")
-                wl(") -> None: ...")
+                constructor_fields = [f for f in desc.field if f.name not in PYTHON_RESERVED]
+                # Deprecated fields are only called out separately when the message itself
+                # isn't already deprecated - otherwise the class-level warning covers them.
+                deprecated_constructor_fields = [] if (desc.options.deprecated or file_deprecated) else [f for f in constructor_fields if f.options.deprecated]
+                if deprecated_constructor_fields:
+                    # Emit a pair of overloads rather than one per combination of deprecated
+                    # fields - all proto fields are optional, so the latter is 2**n signatures.
+                    # The non-deprecated overload omits them, so only calls that actually pass
+                    # a deprecated field fall through to the @deprecated one.
+                    wl("@{}", self._import("typing", "overload"))
+                    self.write_constructor_signature(
+                        desc,
+                        [f for f in constructor_fields if not f.options.deprecated],
+                        file_field_presence,
+                    )
+                    wl("@{}", self._import("typing", "overload"))
+                    names = ", ".join(f.name for f in deprecated_constructor_fields)
+                    plural = "uses fields" if len(deprecated_constructor_fields) > 1 else "uses a field"
+                    self._write_line(
+                        '@{}("""This constructor {} marked as deprecated using proto field options: {}.""")',
+                        self._import("warnings", "deprecated"),
+                        plural,
+                        names,
+                    )
+                self.write_constructor_signature(desc, constructor_fields, file_field_presence)
 
                 self.write_stringly_typed_fields(desc, file_field_presence)
 
@@ -749,14 +772,48 @@ class PkgWriter(object):
                 wl(f"{_mangle_global_identifier(class_name)}: {self._import('typing_extensions', 'TypeAlias')} = {class_name}  # noqa: Y015")
             wl("")
 
+    def write_constructor_signature(
+        self,
+        desc: d.DescriptorProto,
+        constructor_fields: Sequence[d.FieldDescriptorProto],
+        file_field_presence: d.FeatureSet.FieldPresence.ValueType,
+    ) -> None:
+        wl = self._write_line
+        wl("def __init__(")
+        with self._indent():
+            if any(f.name == "self" for f in desc.field):
+                wl("self_,  # pyright: ignore[reportSelfClsParameterName]")
+            else:
+                wl("self,")
+        with self._indent():
+            if len(constructor_fields) > 0:
+                # Only positional args allowed
+                # See https://github.com/nipunn1313/mypy-protobuf/issues/71
+                wl("*,")
+            for field in constructor_fields:
+                implicit_presence = self.get_field_presence(file_field_presence, field.options.features) == d.FeatureSet.FieldPresence.IMPLICIT
+                field_type = self.python_type(field, generic_container=True)
+                if (implicit_presence and self.fd.syntax == "editions") or (self.fd.syntax == "proto3" and is_scalar(field) and field.label != d.FieldDescriptorProto.LABEL_REPEATED and not self.relax_strict_optional_primitives and not field.proto3_optional):
+                    wl(f"{field.name}: {field_type} = ...,")
+                else:
+                    wl(f"{field.name}: {field_type} | None = ...,")
+        wl(") -> None: ...")
+
     @staticmethod
-    def get_field_presence(file_field_presence: d.FeatureSet.FieldPresence.ValueType, field_feature_set: d.FeatureSet) -> d.FeatureSet.FieldPresence.ValueType:
+    def get_field_presence(
+        file_field_presence: d.FeatureSet.FieldPresence.ValueType,
+        field_feature_set: d.FeatureSet,
+    ) -> d.FeatureSet.FieldPresence.ValueType:
         presence = file_field_presence
         if field_feature_set.HasField("field_presence"):
             presence = field_feature_set.field_presence
         return presence
 
-    def write_stringly_typed_fields(self, desc: d.DescriptorProto, file_field_presence: d.FeatureSet.FieldPresence.ValueType) -> None:
+    def write_stringly_typed_fields(
+        self,
+        desc: d.DescriptorProto,
+        file_field_presence: d.FeatureSet.FieldPresence.ValueType,
+    ) -> None:
         """Type the stringly-typed methods as a Union[Literal, Literal ...]"""
         wl = self._write_line
         # HasField, ClearField, WhichOneof accepts both bytes/str
@@ -774,17 +831,35 @@ class PkgWriter(object):
         cf_fields_text = ", ".join(sorted(f'"{name}", b"{name}"' for name in cf_fields))
 
         if hf_fields:
-            wl("_HasFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), hf_fields_text)
+            wl(
+                "_HasFieldArgType: {} = {}[{}]  # noqa: Y015",
+                self._import("typing_extensions", "TypeAlias"),
+                self._import("typing", "Literal"),
+                hf_fields_text,
+            )
         else:
-            wl("_HasFieldArgType: {} = {}  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
+            wl(
+                "_HasFieldArgType: {} = {}  # noqa: Y015",
+                self._import("typing_extensions", "TypeAlias"),
+                self._import("typing_extensions", "Never"),
+            )
         wl(
             "def HasField(self, field_name: _HasFieldArgType) -> {}: ...",
             self._builtin("bool"),
         )
         if cf_fields:
-            wl("_ClearFieldArgType: {} = {}[{}]  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing", "Literal"), cf_fields_text)
+            wl(
+                "_ClearFieldArgType: {} = {}[{}]  # noqa: Y015",
+                self._import("typing_extensions", "TypeAlias"),
+                self._import("typing", "Literal"),
+                cf_fields_text,
+            )
         else:
-            wl("_ClearFieldArgType: {} = {}  # noqa: Y015", self._import("typing_extensions", "TypeAlias"), self._import("typing_extensions", "Never"))
+            wl(
+                "_ClearFieldArgType: {} = {}  # noqa: Y015",
+                self._import("typing_extensions", "TypeAlias"),
+                self._import("typing_extensions", "Never"),
+            )
         wl(
             "def ClearField(self, field_name: _ClearFieldArgType) -> None: ...",
         )
@@ -941,13 +1016,19 @@ class PkgWriter(object):
     ) -> Tuple[str, str]:
         oldstyle_keytype = map_field.options.Extensions[extensions_pb2.keytype]
         if oldstyle_keytype:
-            print(f"Warning: Map Field {map_field.name}: (mypy_protobuf.keytype) is deprecated. Prefer (mypy_protobuf.options).keytype", file=sys.stderr)
+            print(
+                f"Warning: Map Field {map_field.name}: (mypy_protobuf.keytype) is deprecated. Prefer (mypy_protobuf.options).keytype",
+                file=sys.stderr,
+            )
         key_casttype = map_field.options.Extensions[extensions_pb2.options].keytype or oldstyle_keytype
         ktype = self._import_casttype(key_casttype) if key_casttype else self.python_type(key_field)
 
         oldstyle_valuetype = map_field.options.Extensions[extensions_pb2.valuetype]
         if oldstyle_valuetype:
-            print(f"Warning: Map Field {map_field.name}: (mypy_protobuf.valuetype) is deprecated. Prefer (mypy_protobuf.options).valuetype", file=sys.stderr)
+            print(
+                f"Warning: Map Field {map_field.name}: (mypy_protobuf.valuetype) is deprecated. Prefer (mypy_protobuf.options).valuetype",
+                file=sys.stderr,
+            )
         value_casttype = map_field.options.Extensions[extensions_pb2.options].valuetype or map_field.options.Extensions[extensions_pb2.valuetype]
         vtype = self._import_casttype(value_casttype) if value_casttype else self.python_type(value_field)
 
@@ -975,9 +1056,9 @@ class PkgWriter(object):
         if method.client_streaming:
             # See write_grpc_iterator_type().
             if self.grpc_type == GRPCType.SYNC:
-                result = f'{self._import("collections.abc", "Iterator")}[{result}]'
+                result = f"{self._import('collections.abc', 'Iterator')}[{result}]"
             elif self.grpc_type == GRPCType.ASYNC:
-                result = f'{self._import("collections.abc", "AsyncIterator")}[{result}]'
+                result = f"{self._import('collections.abc', 'AsyncIterator')}[{result}]"
             else:
                 result = f"_MaybeAsyncIterator[{result}]"
         return result
@@ -1071,7 +1152,16 @@ class PkgWriter(object):
             wl("...")
         wl("")
 
-    def write_grpc_stub_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, *, is_async: bool, file_deprecated: bool, both: bool = False, ignore_type_error: bool = False) -> None:
+    def write_grpc_stub_methods(
+        self,
+        service: d.ServiceDescriptorProto,
+        scl_prefix: SourceCodeLocation,
+        *,
+        is_async: bool,
+        file_deprecated: bool,
+        both: bool = False,
+        ignore_type_error: bool = False,
+    ) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -1098,7 +1188,11 @@ class PkgWriter(object):
                     fallback_message = "This method is within a file that has been marked as deprecated using proto file options."
                 wl(self._property())
                 self._write_deprecation_warning(
-                    scl + [d.MethodDescriptorProto.OPTIONS_FIELD_NUMBER, d.MethodOptions.DEPRECATED_FIELD_NUMBER],
+                    scl
+                    + [
+                        d.MethodDescriptorProto.OPTIONS_FIELD_NUMBER,
+                        d.MethodOptions.DEPRECATED_FIELD_NUMBER,
+                    ],
                     fallback_message,
                 )
                 wl(f"def {method.name}(self) -> {type_annotation}:{' ...' if not has_comments else ''}{'  # type: ignore[override]' if ignore_type_error else ''}")
@@ -1111,7 +1205,12 @@ class PkgWriter(object):
                 wl(f"{method.name}: {type_annotation}{'  # type: ignore[assignment]' if ignore_type_error else ''}")
                 self._write_comments(scl)
 
-    def write_grpc_methods(self, service: d.ServiceDescriptorProto, scl_prefix: SourceCodeLocation, file_deprecated: bool) -> None:
+    def write_grpc_methods(
+        self,
+        service: d.ServiceDescriptorProto,
+        scl_prefix: SourceCodeLocation,
+        file_deprecated: bool,
+    ) -> None:
         wl = self._write_line
         methods = [(i, m) for i, m in enumerate(service.method) if m.name not in PYTHON_RESERVED]
         if not methods:
@@ -1135,7 +1234,10 @@ class PkgWriter(object):
                 wl("self,")
                 input_name = "request_iterator" if method.client_streaming else "request"
                 wl(f"{input_name}: {input_type},")
-                wl("context: {},", self.get_servicer_context_type(input_type, output_type))
+                wl(
+                    "context: {},",
+                    self.get_servicer_context_type(input_type, output_type),
+                )
             wl(
                 ") -> {}:{}",
                 output_type,
@@ -1220,7 +1322,10 @@ class PkgWriter(object):
                         )
                     else:
                         # SYNC only - simple __init__
-                        wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc", "Channel"))
+                        wl(
+                            "def __init__(self, channel: {}) -> None: ...",
+                            self._import("grpc", "Channel"),
+                        )
 
                     self.write_grpc_stub_methods(service, scl, is_async=False, file_deprecated=file_deprecated)
                     wl("")
@@ -1240,15 +1345,27 @@ class PkgWriter(object):
                     with self._indent():
                         if self._write_comments(scl):
                             wl("")
-                        wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
-                        self.write_grpc_stub_methods(service, scl, is_async=True, ignore_type_error=True, file_deprecated=file_deprecated)
+                        wl(
+                            "def __init__(self, channel: {}) -> None: ...",
+                            self._import("grpc.aio", "Channel"),
+                        )
+                        self.write_grpc_stub_methods(
+                            service,
+                            scl,
+                            is_async=True,
+                            ignore_type_error=True,
+                            file_deprecated=file_deprecated,
+                        )
                 else:
                     # ASYNC only - use Stub name (not AsyncStub) since there's only one type
                     wl("class {}:", class_name)
                     with self._indent():
                         if self._write_comments(scl):
                             wl("")
-                        wl("def __init__(self, channel: {}) -> None: ...", self._import("grpc.aio", "Channel"))
+                        wl(
+                            "def __init__(self, channel: {}) -> None: ...",
+                            self._import("grpc.aio", "Channel"),
+                        )
                         self.write_grpc_stub_methods(service, scl, is_async=True, file_deprecated=file_deprecated)
                 wl("")
 
@@ -1305,7 +1422,10 @@ class PkgWriter(object):
         """
         oldstyle_casttype = field.options.Extensions[extensions_pb2.casttype]
         if oldstyle_casttype:
-            print(f"Warning: Field {field.name}: (mypy_protobuf.casttype) is deprecated. Prefer (mypy_protobuf.options).casttype", file=sys.stderr)
+            print(
+                f"Warning: Field {field.name}: (mypy_protobuf.casttype) is deprecated. Prefer (mypy_protobuf.options).casttype",
+                file=sys.stderr,
+            )
         casttype = field.options.Extensions[extensions_pb2.options].casttype or oldstyle_casttype
         if casttype:
             return self._import_casttype(casttype)
@@ -1454,8 +1574,19 @@ def generate_mypy_stubs(
         )
 
         pkg_writer.write_module_attributes()
-        pkg_writer.write_enums(fd.enum_type, "", [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER], fd.options.deprecated)
-        pkg_writer.write_messages(fd.message_type, "", [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER], fd.options.deprecated, fd.options.features.field_presence)
+        pkg_writer.write_enums(
+            fd.enum_type,
+            "",
+            [d.FileDescriptorProto.ENUM_TYPE_FIELD_NUMBER],
+            fd.options.deprecated,
+        )
+        pkg_writer.write_messages(
+            fd.message_type,
+            "",
+            [d.FileDescriptorProto.MESSAGE_TYPE_FIELD_NUMBER],
+            fd.options.deprecated,
+            fd.options.features.field_presence,
+        )
         pkg_writer.write_extensions(fd.extension, [d.FileDescriptorProto.EXTENSION_FIELD_NUMBER])
 
         assert name == fd.name
@@ -1490,7 +1621,11 @@ def generate_mypy_grpc_stubs(
         )
         pkg_writer.write_grpc_iterator_type()
         pkg_writer.write_grpc_servicer_context()
-        pkg_writer.write_grpc_services(fd.service, [d.FileDescriptorProto.SERVICE_FIELD_NUMBER], fd.options.deprecated)
+        pkg_writer.write_grpc_services(
+            fd.service,
+            [d.FileDescriptorProto.SERVICE_FIELD_NUMBER],
+            fd.options.deprecated,
+        )
 
         assert name == fd.name
         assert fd.name.endswith(".proto")
