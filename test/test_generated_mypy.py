@@ -105,7 +105,7 @@ def test_deprecated_field_constructor_overloads() -> None:
     mypy itself runs under (Union[x, None] on 3.9 vs x | None on 3.10+), which a
     single expected-output file can't encode.
     """
-    with open("test/generated/testproto/test_pb2.pyi") as f:
+    with open("test/generated_concrete/testproto/test_pb2.pyi") as f:
         stub = f.read()
 
     body = stub.split("class MessageWithDeprecatedFields(")[1].split("\nclass ")[0]
